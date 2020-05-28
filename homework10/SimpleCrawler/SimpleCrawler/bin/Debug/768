@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="ASM也是字节码编辑库，如果我们的目的仅仅是为目标类添加某些功能，也可以考虑动态代理，但是动态代理是面向接口的，因为proxy.newinstance实际上是对某个接口定义一个invocaionHan" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java ASM学习(1) - tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12721677.html">Java ASM学习(1)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>ASM也是字节码编辑库，如果我们的目的仅仅是为目标类添加某些功能，也可以考虑动态代理，但是动态代理是面向接口的，因为proxy.newinstance实际上是对某个接口定义一个invocaionHandler，那么这样限制就比较大，并且对代理的每一次函数调用都将被invocationHandler处理，加上handlder中反射的应用，因此动态代理整体来说和直接改变目标class的内部结构来说性能并没有太多优势</p>
+<p>ASM采用树这种结构来描述字节码，通过push模型（访问者模式）遍历树的过程中对字节码进行修改,ASM提供classReader可以从字节数组或者class文件中去获得字节码，如何访问字节码中所表示的类结构：</p>
+<p>通过调用该类的accept方法传入一个classVisitor的实例来进行class字节码的访问，另一个参数就是解析选项，定义在解析class过程中是否跳过某些区域的解析</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422174453265-121056988.png" alt="" width="986" height="208"></p>
+<p>&nbsp;接着在accept方法中调用传入的classsVisitor接口的各个方法，把字节码中不同的区域想成树上不同的位置，每个位置都有对应的visitor，我们只需要提供不同的visitor就能访问字节码不同偏移位置的所实际代表的成员变量、方法、修饰符等，如下图所示第一步将解析class源码<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422175937598-2114638868.png" alt=""></p>
+<p>比如可以用ClassVistor、AnnotationVistor、FieldVistor、MethodVistor(都是抽象类)对不同区域做处理，classReader解析到不同位置时，将自动调用这些vistor，这里接用绿盟的一张字节码解析流程：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422182025084-451336834.png" alt="" width="726" height="387"></p>
+<p>其中通过classAdaptor类实现Classvistor中定义的函数，因为处理class是有顺序的，因此在声明classAdaptor时传入下一个访问区域的visitor，这里把这种机制成为责任链，所以定义责任链的时候从后往前声明</p>
+<p>比如：</p>
+<div class="cnblogs_code">
+<pre>ClassWriter  classWriter = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassWriter(ClassWriter.COMPUTE_MAXS); 
+ClassAdaptor delLoginClassAdaptor </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> DelLoginClassAdapter(classWriter); 
+ClassAdaptor accessClassAdaptor </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> AccessClassAdaptor(delLoginClassAdaptor); 
+ClassReader classReader </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassReader(strFileName); 
+classReader.accept(accessClassAdapter, ClassReader.SKIP_DEBUG);</span></pre>
+</div>
+<p>classWrite作为责任链的最后一部分，其中每一步的ClassAdaptor都是链接起来的(通过转发ClassVisitor方法的调用)，asm提供的toByteArray就能转为字节数组存入class文件实现hotspot或者直接返回(结合插桩agentmain)，如下图的时序图，从左到右，就可以看到第一步是ClassReader-&gt;ClassReader.accept(av)-&gt;av(av是个classAdaptor，接着依次读取class字节码文件所构成的那颗树的不同区域，我们复写了哪个访问方法就调用我们的方法去访问某个区域)-&gt;cw(责任链最后一步份)，整个这样设计的话我们就不用去管class字节码文件到底是某个偏移具体是什么含义，只需要根据需要用ClassAdaptor中来重写ClassVistor的某个方法即可，如果选择不转发ClassVisitor的某些方法(也就是想直接删除类中的某些块，则可以重写置空某些方法)，比如不转发visitSource，那么最后ClassWriter就收不到visitSouce所代表的部分：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> visitSource(String s, String s1) { //直接置空不进行任何操作
+
+    }</span></pre>
+</div>
+<p>删除field或者method：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">    @Override
+    </span><span style="color: #0000ff;">public</span> MethodVisitor visitMethod(<span style="color: #0000ff;">int</span><span style="color: #000000;"> var1, String var2, String var3, String var4, String[] var5) {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+    }</span></pre>
+</div>
+<p>&nbsp;或者直接想删除某个类的继承关系，那么直接重写visit方法，让其表示父类的那个参数为null，然后再委托给下一个访问者</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422215150128-1941056949.png" alt="" width="496" height="737"></p>
+<p>&nbsp;people.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> people {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> eat(){
+        System.out.println(</span>"i like eat"<span style="color: #000000;">);
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        people w </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> people();
+        w.eat();
+    }
+}</span></pre>
+</div>
+<p>drink.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> drink {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> appale(){
+        System.out.println(</span>"add appale"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>如果目前需要在eat方法中添加调用drink.appale的话，则需要修改peope.class对应的字节码，并到eat对应的方法区修改其方法块代码，所以根据上面的学习，要继承ClassAdaptor重写其visitMethod方法</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422224252971-1546209269.png" alt="" width="1150" height="93"></p>
+<p>其返回的是一个MethodVisitor，默认情况下这里调用this.cv的visitMethod，那么这里的this.cv就是传入的信任链的下一个节点，即传入的ClassWriter(ClassWriter也是继承自ClassVistor)</p>
+<p>asmtest.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.ClassAdapter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.ClassReader;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.ClassWriter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.File;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileInputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> asmTest {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+    FileInputStream fi </span>= <span style="color: #0000ff;">new</span> FileInputStream(System.getProperty("user.dir")+"/target/classes/asm/people.class"<span style="color: #000000;">);
+    </span><span style="color: #0000ff;">byte</span>[] fib = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[fi.available()];
+    fi.read(fib);
+    ClassReader clar </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassReader(fib);
+    ClassWriter claw </span>=  <span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassWriter(ClassWriter.COMPUTE_MAXS); //ClassWriter.COMPUTE_MAXS表示自动计算局部变量表和操作数栈
+    ClassAdapter clap </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> asmadd(claw);
+    clar.accept(clap,ClassReader.SKIP_DEBUG);
+    </span><span style="color: #0000ff;">byte</span>[] fo =<span style="color: #000000;"> claw.toByteArray();
+    File file;
+    file </span>= <span style="color: #0000ff;">new</span> File("people1.class"<span style="color: #000000;">);
+    FileOutputStream fof </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> FileOutputStream(file);
+    fof.write(fo);
+    fof.close();
+
+    }
+}</span></pre>
+</div>
+<p>那么原始的this.cv.visitMethod实际是来自ClassVisitor，先看该方法的作用即访问一个类的方法区，该方法返回一个CodeVistor实例或null（返回null，即当前访问者并不想进一步访问该方法区的具体代码块）,这里返回的必须是之前未返回的visitor，因此这样规定说明实际上责任链逻辑上是一定顺序的。access：方法的访问标识符(public protected private etc.)，以及当前方法区的名字(有了这个就能精确的匹配并修改某个方法了)，desc即方法描述符即返回值类型包括其参数类型都能进行精准匹配，还有exceptions异常和attrs</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422230547916-252266693.png" alt="" width="1137" height="363"></p>
+<p>所以目前就要定义我们自己的ClassAdaptor去匹配eat方法，然后进一步访问其代码块，此时访问代码块使用MethodAdaptor是实现了MethodVistor接口，使用该Adaptor就能重写visitCode在eat方法中添加代码块</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422233820889-1399001815.png" alt="" width="643" height="112"></p>
+<p>由其构造方法看所以此时传入的也应该是MethodVistor，即已经匹配到的方法，把其当作树中的某一个父节点，那么此时进入其子节点，通过MethodAdaptor的visitcode就可以访问方法体，所以在这里面加入调用drink.apple的代码即可</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422234341376-1855856201.png" alt=""></p>
+<p>asmadd.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.ClassAdapter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.ClassVisitor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.MethodVisitor;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> asmadd <span style="color: #0000ff;">extends</span><span style="color: #000000;"> ClassAdapter {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> asmadd(ClassVisitor cv) {
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(cv);
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span> MethodVisitor visitMethod(<span style="color: #0000ff;">int</span><span style="color: #000000;"> access, String name, String desc, String signature, String[] exceptions) {
+        MethodVisitor mv </span>= <span style="color: #0000ff;">this</span><span style="color: #000000;">.cv.visitMethod(access, name, desc, signature, exceptions);
+        MethodVisitor mvwrapper </span>=<span style="color: #000000;"> mv;
+        </span><span style="color: #0000ff;">if</span>(name.equals("eat"<span style="color: #000000;">)){
+             mvwrapper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> methodWrapper(mv);
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> mvwrapper;
+    }
+}</span></pre>
+</div>
+<p>methodWrapper.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.MethodAdapter;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.MethodVisitor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.objectweb.asm.Opcodes;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> methodWrapper <span style="color: #0000ff;">extends</span><span style="color: #000000;"> MethodAdapter {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> methodWrapper(MethodVisitor mv) {
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(mv);
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> visitCode(){
+    visitMethodInsn(Opcodes.INVOKESTATIC,</span>"drink","eat","()V"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422234419623-1418241738.png" alt="" width="650" height="200"></p>
+<p>植入代码块用的api为visitMethodInsn，即调用某个类的某个方法，比如这里调用的类名为drink，方法名为eat，描述符为void，opcode为invokestatic</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200422235033677-1032422992.png" alt="" width="1163" height="326"></p>
+<p>因为此时desc是个字符串，因此在Type类中就定义了如何去扫描给定的字符串来判断目标方法的参数类型以及返回值类型&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423001217463-1308840056.png" alt="" width="705" height="128"></p>
+<p>跟一下整个过程：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423162647658-1302051823.png" alt="" width="850" height="167"></p>
+<p>首先加载classReader，先从appclassloader到extclassloader中找，再从extclassloader到bootstrapclassloader中找，boot没找到，ext没找到，则到app中findclass，利用URLClasspath中存储的jar包来进行查找，这里就包括maven中引入的class文件，找到之后就defineclass来生成一个class类型的实例了，最后再将其放入保护域中，后面几个new依然进行相同操作，</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423164247792-1489815669.png" alt="" width="729" height="368"></p>
+<p>直到调用ClassReader的accept方法，里面具体的asm处理过程比如如何扫描指定的()V来确定type貌似跟进不去（不过要是处理过程是对我们可见的，那就可以自己改写处理过程构造了）</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423171020625-221539866.png" alt=""></p>
+<p>所以按照asm操作指南中说明的来定义，我们要调用的目标eat方法的desc描述包括方法的参数类型和返回类型，参数无，返回为void，所以这里就对应的为()V，其他的情况根据指南直接对应构造即可</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423174533992-1766221321.png" alt="" width="746" height="605"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200423173942218-82236397.png" alt="" width="541" height="214"></p>
+<h1>ASM指南记录：</h1>
+<p>接口ClassVisitor中每个方法都能访问下图中class字节码结构的某一个部分</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200426224206832-1955705561.png" alt="" width="574" height="570"></p>
+<p>ClassVisitor中方法的访问顺序：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200426230644262-893338831.png" alt=""></p>
+<p>visit：主要包括class头部的一些信息</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> visit(<span style="color: #0000ff;">int</span><span style="color: #000000;"> version, //类的版本信息
+                  </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> access,
+                  String name, //类名
+                  String signature,
+                  String superName,
+                  String[] interfaces)</span></pre>
+</div>
+<p>&nbsp;visitField：访问某个字段时调用</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> FieldVisitor visitField(<span style="color: #0000ff;">int</span><span style="color: #000000;"> access,
+                               String name,
+                               String desc,
+                               String signature, //泛型
+                               Object value)</span></pre>
+</div>
+<p>返回一个Visitor去具体实现对字段的访问操作(或者为null，跳过)</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> MethodVisitor visitMethod(<span style="color: #0000ff;">int</span><span style="color: #000000;"> access,
+                                 String name,
+                                 String desc,
+                                 String signature,
+                                 String[] exceptions) //该方法抛出的异常，也是全限定名</span></pre>
+</div>
+<p>通过MethodVisitor来对方法的字节码进行访问</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> visitSource(String s, String s1) {
+
+    }</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>总结</h1>
+<p>核心还是理解好asm处理字节码的过程以及信任链如何构造，然后再根据需求去找asm具体操作的api，对着asm指南编写代码。</p>
+<h1>参考</h1>
+<p>https://www.ibm.com/developerworks/cn/java/j-lo-asm30/index.html</p>
+<p><a href="http://blog.nsfocus.net/rasp-tech/">http://blog.nsfocus.net/rasp-tech/</a></p>
+<p><a href="https://docs.oracle.com/cd/E17904_01/apirefs.1111/b32476/oracle/toplink/libraries/asm/ClassAdapter.html#visitMethod(int,%20java.lang.String,%20java.lang.String,%20java.lang.String[],%20oracle.toplink.libraries.asm.Attribute)">https://docs.oracle.com/cd/E17904_01/apirefs.1111/b32476/oracle/toplink/libraries/asm/ClassAdapter.html#visitMethod(int,%20java.lang.String,%20java.lang.String,%20java.lang.String[],%20oracle.toplink.libraries.asm.Attribute)</a></p>
+<p><a href="http://www.blogjava.net/DLevin/archive/2014/06/25/414292.html">http://www.blogjava.net/DLevin/archive/2014/06/25/414292.html</a></p>
+<p><a href="https://www.cnblogs.com/liuling/archive/2013/05/25/asm.html">https://www.cnblogs.com/liuling/archive/2013/05/25/asm.html</a></p>
+<p><a href="http://www.blogjava.net/DLevin/archive/2014/06/25/414292.html">http://www.blogjava.net/DLevin/archive/2014/06/25/414292.html</a>&nbsp;asm处理过程说得很细</p>
+<p><a href="https://javadoc.io/doc/org.ow2.asm/asm/5.2/org/objectweb/asm/ClassVisitor.html">https://javadoc.io/doc/org.ow2.asm/asm/5.2/org/objectweb/asm/ClassVisitor.html</a></p>
+<p>&nbsp;</p>
+<p></p>
+<p><audio controls="controls" style="display: none;"></audio></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-23 18:16</span>&nbsp;
+<a href="https://www.cnblogs.com/tr1ple/">tr1ple</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12721677" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12721677);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 316934, cb_blogApp = 'tr1ple', cb_blogUserGuid = 'f3d76e0f-51aa-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12721677, cb_entryCreatedDate = '2020-04-23 18:16', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="学爬虫不会xpath解析数据？ 今天老师带你一堂课带你从零开始精通xpath，从此轻松提取网页信息。 我们在爬虫的过程中，经常会遇到html字符串数据，很多我们需要的数据不是作为标签的文本就是作标签的" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>一篇文章掌握网页解析神器——xpath - 其实还好啦 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=pdMIVgsH8kXt-vOWnlL0N20TlHt3UyP9HzGgocfsP4s" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=na9bpAY4yh7uEWCcrXj3vfJM3VBse8YtU6-5fUUQPz0" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/python0921/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/python0921/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/python0921/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 589469;
+        var currentBlogApp = 'python0921';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'coffee';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <img src="https://files.cnblogs.com/files/python0921/123.gif" width="150px" height="150px"><br>
+<b>加群免费送资料哟</b>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/python0921/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/python0921/">其实还好啦</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/python0921/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%85%B6%E5%AE%9E%E8%BF%98%E5%A5%BD%E5%95%A6">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/python0921/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/python0921/rss/">
+    <img src="/skins/coffee/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<!--done-->
+随笔- 
+172&nbsp;
+文章- 
+7&nbsp;
+评论- 
+15&nbsp;
+
+
+
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/python0921/p/12789215.html">一篇文章掌握网页解析神器——xpath</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<div class="article-content">
+<div class="pgc-img"><img src="http://p1.pstatp.com/large/dfic-imagehandler/2141b243-32ba-4997-8606-2c51ac6cdea5" alt="一篇文章掌握网页解析神器——xpath">
+<p class="pgc-img-caption">&nbsp;</p>
+</div>
+<p>&nbsp;</p>
+<p>学爬虫不会xpath解析数据？</p>
+<p>今天老师带你一堂课带你从零开始精通xpath，从此轻松提取网页信息。</p>
+<p>我们在爬虫的过程中，经常会遇到html字符串数据，很多我们需要的数据不是作为标签的文本就是作标签的属性值那么这些隐藏在标签中我们需要的数据可以通过xpath语法给解析出来</p>
+<p>PS：如果你处于想学Python或者正在学习Python，Python的教程不少了吧，但是是最新的吗？说不定你学了可能是两年前人家就学过的内容，在这小编分享一波2020最新的Python教程。获取方式，私信小编 &ldquo; 资料 &rdquo;，即可免费获取哦！</p>
+<h1 class="pgc-h-arrow-right">环境介绍：</h1>
+<p>python 3.6</p>
+<p>pycharm</p>
+<p>parsel(xpath)</p>
+<h1 class="pgc-h-arrow-right">爬虫数据解析的方法</h1>
+<p>正则表达式</p>
+<p>使用场景:数据量相对较少，或者你要提取的诗句类型单一</p>
+<p>转没人能用于从字符串里面提取数据</p>
+<p>CSS选择器</p>
+<p>使用场景：适合在HTML标签当中进行提取数据</p>
+<p>css是叠层样示表，专门用于控制网页的颜色、样式与动画。而css选择器就是专门用来选择HTML的标签，进而进行数据提取</p>
+<p>xpath</p>
+<p>使用场景：合适在HTML标签当中进行数据提取</p>
+<p>路径选择器，最早是提取xml文件，因为简单易学，在提取网页方面应用比较多</p>
+<h1 class="pgc-h-arrow-right">xpath中节点之间的关系</h1>
+<p>节点是什么东西？</p>
+<p>每个html的标签我们都称之为节点。（根节点、子节点、同级节点）</p>
+<p>&nbsp;</p>
+<div class="pgc-img"><img src="http://p1.pstatp.com/large/pgc-image/09814f9a259248f4a1cc5454fdc4f1eb" alt="一篇文章掌握网页解析神器——xpath">
+<p class="pgc-img-caption">&nbsp;</p>
+</div>
+<h1 class="pgc-h-arrow-right">xpath语法</h1>
+<p>xpath使用路径表达式来选取xml文档中的节点或者节点集。这些路径表达式和我们在常规的电脑文件系统中看到的表达式非常相似</p>
+<p>表达式</p>
+<p>| nodename | ：选中该元素。</p>
+<p>| / | ：从根节点选取、或者是元素和元素间的过渡。</p>
+<p>| // | ：从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。跨节点获取标签</p>
+<p>| . |： 选取当前节点。</p>
+<p>| .. | ：选取当前节点的父节点。</p>
+<p>| @ |： 选取属性。</p>
+<p>| text() | ：选取文本。</p>
+<p>选取未知节点</p>
+<p>&nbsp;</p>
+<p>| * | ：匹配任何元素节点。</p>
+<p>| @* | ：匹配任何属性节点。</p>
+<p>| node() |： 匹配任何类型的节点。</p>
+<p>| /div/* | ：选取 div元素的所有子元素。</p>
+<p>| //* | ：选取文档中的所有元素。</p>
+<p>| //title[@*] |： 选取所有带有属性的 title 元素。</p>
+<h1 class="pgc-h-arrow-right">案例</h1>
+<p>str --&gt; Selector对象 具有xpath方法 提取到的数据返回一个列表</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> parsel  
+html_str </span>= <span style="color: #800000;">"""</span><span style="color: #800000;">
+        &lt;div&gt; 
+            &lt;ul&gt; 
+                &lt;li class="item-1"&gt;
+                    &lt;a href="link1.html"&gt;第一个&lt;/a&gt;
+                &lt;/li&gt; 
+                
+                &lt;li class="item-2"&gt;
+                    &lt;a href="link2.html"&gt;第二个&lt;/a&gt;
+                &lt;/li&gt; 
+                
+                &lt;li class="item-3"&gt;
+                    &lt;a href="link3.html"&gt;第三个&lt;/a&gt;
+                &lt;/li&gt; 
+                
+                &lt;li class="item-4"&gt;
+                    &lt;a href="link4.html"&gt;第四个&lt;/a&gt;
+                &lt;/li&gt; 
+                
+                &lt;li class="item-5"&gt;
+                    &lt;a href="link5.html"&gt;第五个&lt;/a&gt; 
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    </span><span style="color: #800000;">"""</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><code>&nbsp;</code></pre>
+<p>1、转换数据类型</p>
+<div class="cnblogs_code">
+<pre>data = parsel.Selector(html_str).extract()  <span style="color: #008000;">#</span><span style="color: #008000;"> parsel能够把缺失的html标签补充完成</span>
+data = parsel.Selector(html_str)  <span style="color: #008000;">#</span><span style="color: #008000;"> parsel能够把缺失的html标签补充完成</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>2、解析数据--list类型</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">print</span>(data)</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、1 从根节点开始，获取所有&lt;a&gt;标签</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">/html/body/div/ul/li/a</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、2 跨节点获取所有&lt;a&gt;标签</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//a</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、3 选取当前节点 使用场景：需要对选取的标签的下一级标签进行多次提取</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//ul</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+result2 </span>= result.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">./li</span><span style="color: #800000;">'</span>).extract()    <span style="color: #008000;">#</span><span style="color: #008000;"> 提取当前节点下的&lt;li&gt;标签</span>
+result3 = result.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">./li/a</span><span style="color: #800000;">'</span>).extract()  <span style="color: #008000;">#</span><span style="color: #008000;"> 提取当前节点下的&lt;a&gt;标签</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><code>&nbsp;</code></pre>
+<p>2、4 选取当前节点的父节点,获取父节点的class属性值</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//a</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+result4 </span>= result.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">../@class</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、5 获取第三个&lt;li&gt;标签的节点（两种方法）</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li[3]</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+result </span>= data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li</span><span style="color: #800000;">'</span>)[2].extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、6 通过定位属性的方法获取第四个&lt;a&gt;标签</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//a[@href="link4.html"]</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、7 用属性定位标签，获取第四个&lt;a&gt;标签包裹的文本内容</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//a[@href="link4.html"]/text()</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>2、8 获取第五个&lt;a&gt;标签的href属性值</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li[5]/a/@href</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>了解 模糊查询</p>
+<div class="cnblogs_code">
+<pre>result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li[contains(@class,"it")]</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<p>同时获取&lt;li&gt;标签的属性以及&lt;a&gt;标签的文本</p>
+<div class="cnblogs_code">
+<pre> result = data.xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li/@class|//a/text()</span><span style="color: #800000;">'</span>).extract()</pre>
+</div>
+<p>&nbsp;</p>
+<h1 class="pgc-h-arrow-right">总结</h1>
+<p>1. xpath的概述XPath (XML Path Language),解析查找提取信息的语言</p>
+<p>2. xpath的节点关系:根节点,子节点,同级节点</p>
+<p>3. xpath的重点语法获取任意节点:`//`</p>
+<p>4. xpath的重点语法根据属性获取节点:`标签[@属性 = '值']`</p>
+<p>5. xpath中获取节点的文本：`text（）`</p>
+<p>6. xpath的获取节点属性值:`@属性名`</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div class="bui-box article-tag">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2020-04-27 19:26</span>&nbsp;
+<a href="https://www.cnblogs.com/python0921/">其实还好啦</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12789215" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12789215);return false;">收藏</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 589469, cb_blogApp = 'python0921', cb_blogUserGuid = 'c52fa2da-36f7-4e4e-15dd-08d7cc05a3a0';
+    var cb_entryId = 12789215, cb_entryCreatedDate = '2020-04-27 19:26', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 其实还好啦
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

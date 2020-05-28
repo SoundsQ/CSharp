@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_二B方案程序员</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=666</id>
+  <updated>2020-04-28T13:39:35Z</updated>
+  <author>
+    <name>二B方案程序员</name>
+    <uri>http://www.cnblogs.com/twoBcoder/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12797427.html</id>
+    <title type="text">[Abp vNext 入坑分享] - 4.JWT授权的接入 - 二B方案程序员</title>
+    <summary type="text">一、感想 在写这一系列文章之前，本来以为写这个之前已经搭建好的框架描述会比较简单，但是慢慢写下来才发现。写这个真的不简单额，本来以为图文一起，一个晚上应该能输出一篇吧。。。结果：现实真的骨感，一个星期能输出两篇都不错了。。 1.之前没有写过整体系列类的文章，从高考之后就基本上没有写长篇的文章了。 2</summary>
+    <published>2020-04-28T13:37:00Z</published>
+    <updated>2020-04-28T13:37:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12797427.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12797427.html" />
+    <content type="html">【摘要】一、感想 在写这一系列文章之前，本来以为写这个之前已经搭建好的框架描述会比较简单，但是慢慢写下来才发现。写这个真的不简单额，本来以为图文一起，一个晚上应该能输出一篇吧。。。结果：现实真的骨感，一个星期能输出两篇都不错了。。 1.之前没有写过整体系列类的文章，从高考之后就基本上没有写长篇的文章了。 2 &lt;a href="http://www.cnblogs.com/twoBcoder/p/12797427.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12763931.html</id>
+    <title type="text">[Abp vNext 入坑分享] - 3.简单的用户模块功能开发 - 二B方案程序员</title>
+    <summary type="text">一、简要说明 本篇文章开始进行业务模块的开发模拟，借助user模块来进行业务开发，主要是用户相关的基础操作。主要是先使用Users来体验整个开发的流程。主要是先把一个基础流程跑顺利，在这里我并不会过于追求让所有属性都只能通过方法进去赋值这种写法，我觉得绝大部分项目并没有必要写到这样。虽然借助代码生成</summary>
+    <published>2020-04-24T00:21:00Z</published>
+    <updated>2020-04-24T00:21:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12763931.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12763931.html" />
+    <content type="html">【摘要】一、简要说明 本篇文章开始进行业务模块的开发模拟，借助user模块来进行业务开发，主要是用户相关的基础操作。主要是先使用Users来体验整个开发的流程。主要是先把一个基础流程跑顺利，在这里我并不会过于追求让所有属性都只能通过方法进去赋值这种写法，我觉得绝大部分项目并没有必要写到这样。虽然借助代码生成 &lt;a href="http://www.cnblogs.com/twoBcoder/p/12763931.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12756094.html</id>
+    <title type="text">[Abp vNext 入坑分享] - 2.简化项目结构 - 二B方案程序员</title>
+    <summary type="text">一、简要说明 本篇文章根据我自己的需要对项目结果进行简化，让项目结构更符合我自己的要求,同时让项目跑起来。仅供参考 源代码地址：https://github.com/lcjyslqyy/AbpVnextLearn 二、具体步骤 2.1卸载掉对我来说目前使用不上的项目，identityserver,m</summary>
+    <published>2020-04-22T14:52:00Z</published>
+    <updated>2020-04-22T14:52:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12756094.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12756094.html" />
+    <content type="html">【摘要】一、简要说明 本篇文章根据我自己的需要对项目结果进行简化，让项目结构更符合我自己的要求,同时让项目跑起来。仅供参考 源代码地址：https://github.com/lcjyslqyy/AbpVnextLearn 二、具体步骤 2.1卸载掉对我来说目前使用不上的项目，identityserver,m &lt;a href="http://www.cnblogs.com/twoBcoder/p/12756094.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12748037.html</id>
+    <title type="text">[Abp vNext 入坑分享] - 1.创建初始的项目 - 二B方案程序员</title>
+    <summary type="text">一、简要说明 本篇文章主要是跟着官方的文档把项目安装好先，同时了解一下大概的项目结构。 二、具体步骤 2.1全局安装ABP CLI，直接在cmd中安装即可。如果你之前安装过，这里可以略过： dotnet tool install -g Volo.Abp.Cli 2.2转到你要保存项目的路径中输入cm</summary>
+    <published>2020-04-22T00:18:00Z</published>
+    <updated>2020-04-22T00:18:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12748037.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12748037.html" />
+    <content type="html">【摘要】一、简要说明 本篇文章主要是跟着官方的文档把项目安装好先，同时了解一下大概的项目结构。 二、具体步骤 2.1全局安装ABP CLI，直接在cmd中安装即可。如果你之前安装过，这里可以略过： dotnet tool install -g Volo.Abp.Cli 2.2转到你要保存项目的路径中输入cm &lt;a href="http://www.cnblogs.com/twoBcoder/p/12748037.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12747440.html</id>
+    <title type="text">[Abp vNext 入坑分享] - 前言 - 二B方案程序员</title>
+    <summary type="text">一·背景 Abp vnext是 ABP 框架作者所发起一个完全基于 ASP .NET Core框架，截至2020年4月份已经升级到2.5.0版本，根据经验2.0版本以后可以放心的使用在生产环境。类似asp.net core一样，ABP vNext 比原来的ABP zero更加精简且可控性更强，你可以</summary>
+    <published>2020-04-21T13:35:00Z</published>
+    <updated>2020-04-21T13:35:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12747440.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12747440.html" />
+    <content type="html">【摘要】一·背景 Abp vnext是 ABP 框架作者所发起一个完全基于 ASP .NET Core框架，截至2020年4月份已经升级到2.5.0版本，根据经验2.0版本以后可以放心的使用在生产环境。类似asp.net core一样，ABP vNext 比原来的ABP zero更加精简且可控性更强，你可以 &lt;a href="http://www.cnblogs.com/twoBcoder/p/12747440.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/twoBcoder/p/12725017.html</id>
+    <title type="text">腾讯云集群服务部署mysql并挂载到服务器 - 二B方案程序员</title>
+    <summary type="text">一、背景 由于现在大部分的应用都是运行在云服务器上的，而现在大多数文章都是主要写如何在服务器上使用docker去运行mysql，比较少有介绍云服务器上的。再加上现在k8s比较火爆，而云厂商大多数都提供了k8s 集群服务且master免费，我们只需要使用就行了，更深一级的运维的事情就交给云厂商处理吧。</summary>
+    <published>2020-04-21T12:18:00Z</published>
+    <updated>2020-04-21T12:18:00Z</updated>
+    <author>
+      <name>二B方案程序员</name>
+      <uri>http://www.cnblogs.com/twoBcoder/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/twoBcoder/p/12725017.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/twoBcoder/p/12725017.html" />
+    <content type="html">【摘要】一、背景 由于现在大部分的应用都是运行在云服务器上的，而现在大多数文章都是主要写如何在服务器上使用docker去运行mysql，比较少有介绍云服务器上的。再加上现在k8s比较火爆，而云厂商大多数都提供了k8s 集群服务且master免费，我们只需要使用就行了，更深一级的运维的事情就交给云厂商处理吧。 &lt;a href="http://www.cnblogs.com/twoBcoder/p/12725017.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 wait和notify必须在synchronized块中，否则会抛出IllegalMonitorStateException。 原因 代码示例 代码示例的问题所在 一个消费者调用take，发现b" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>为什么wait和notify只能在synchronized中？ - 经典鸡翅 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jichi/custom.css?v=6wtfTBGNfhWFL7iH6gCJo&#x2B;5x&#x2B;js=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jichi/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jichi/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jichi/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 474324;
+        var currentBlogApp = 'jichi';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jichi/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jichi/">经典鸡翅</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jichi/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%BB%8F%E5%85%B8%E9%B8%A1%E7%BF%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/jichi/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+175&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+54</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jichi/p/12694173.html">为什么wait和notify只能在synchronized中？</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h3 id="前言">前言</h3>
+<p>wait和notify必须在synchronized块中，否则会抛出IllegalMonitorStateException。</p>
+<h3 id="原因">原因</h3>
+<h4 id="代码示例">代码示例</h4>
+<pre><code>class BlockingQueue {
+    Queue&lt;String&gt; buffer = new LinkedList&lt;String&gt;();
+
+    public void give(String data) {
+        buffer.add(data);
+        notify();                   
+    }
+
+    public String take() throws InterruptedException {
+        while (buffer.isEmpty())    
+            wait();
+        return buffer.remove();
+    }
+}
+</code></pre>
+<h4 id="代码示例的问题所在">代码示例的问题所在</h4>
+<p>一个消费者调用take，发现buffer.isEmpty。<br>
+在消费者调用wait之前，由于cpu的调度，消费者线程被挂起，生产者调用give，然后notify。<br>
+然后消费者调用wait (注意，由于错误的条件判断，导致wait调用在notify之后，这是关键)。<br>
+如果很不幸的话，生产者产生了一条消息后就不再生产消息了，那么消费者就会一直挂起，无法消费，造成死锁。</p>
+<h4 id="关键">关键</h4>
+<p>总是让give/notify和take/wait为原子操作。wait/notify是线程之间的通信，他们存在竞态，我们必须保证在满足条件的情况下才进行wait。换句话说，如果不加锁的话，那么wait被调用的时候可能wait的条件已经不满足了(如上述)。由于错误的条件下进行了wait，那么就有可能永远不会被notify到，所以我们需要强制wait/notify在synchronized中。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-13 21:46</span>&nbsp;
+<a href="https://www.cnblogs.com/jichi/">经典鸡翅</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12694173" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12694173);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 474324, cb_blogApp = 'jichi', cb_blogUserGuid = '116b895e-1033-4dd3-9e2a-08d644494d24';
+    var cb_entryId = 12694173, cb_entryCreatedDate = '2020-04-13 21:46', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 经典鸡翅
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第4页 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=3">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+    4
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=5">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/12/04.html">2019年12月4日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11980790.html">
+    【翻译】.NET Core3.1发布
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：.NET Core3.1发布 我们很高兴宣布.NET Core 3.1的发布。实际上，这只是对我们两个多月前发布的.NET Core 3.0的一小部分修复和完善。最重要的是.NET Core 3.1是长期支持（LTS）版本，并且将支持三年。和过去一样，我们希望花一些时间来发布下一个LTS版本。额外的            <a href="https://www.cnblogs.com/yyfh/p/11980790.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-04 09:16 HueiFeng 阅读 (6664) 评论 (44)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11980790" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11980645.html">
+    ASP.NET Core 中的 ObjectPool 对象重用（二）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 上一篇文章主要介绍了ObjectPool的理论知识，再来介绍一下Microsoft.Extensions.ObjectPool是如何实现的. 核心组件 ObjectPool ObjectPool 是一个泛型抽象接口，他抽象了两个方法Get和Return Get方法用于从对象池获取到可用对象，如            <a href="https://www.cnblogs.com/yyfh/p/11980645.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-04 08:21 HueiFeng 阅读 (335) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11980645" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/12/03.html">2019年12月3日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11974574.html">
+    ASP.NET Core 中的 ObjectPool 对象重用（一）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 对象池是一种设计模式，一个对象池包含一组已经初始化过且可以使用的对象，而可以在有需求时创建和销毁对象。池的对象可以从池中取得对象，对其进行操作处理，并在不需要时归还给池子而非直接销毁他，他是一种特殊的工厂对象。 若初始化、实例化的代价高，且有需求需要经常实例化，但每次实例化的数量较小的情况下，            <a href="https://www.cnblogs.com/yyfh/p/11974574.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-03 08:24 HueiFeng 阅读 (1527) 评论 (16)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11974574" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/11/29.html">2019年11月29日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11958182.html">
+    【翻译】Orleans 3.0 发布
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：这是Orleans团队的帖子。Orleans是用于使用.NET构建分布式应用程序的跨平台框架。有关更多信息，请参见 &quot;https://github.com/dotnet/orleans&quot; 。 我们很高兴宣布Orleans 3.0版本。自Orleans 2.0以来，进行了大量改进和修复，并提供了一些新            <a href="https://www.cnblogs.com/yyfh/p/11958182.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-29 15:45 HueiFeng 阅读 (1402) 评论 (8)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11958182" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/11/14.html">2019年11月14日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11855862.html">
+    ASP.NET Core主机地址过滤HostFiltering
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 在ASP.Net Core2.X调用的CreateWebHostBuilder和3.X的主要区别在于WebHost的调用,CreateDefaultBuilder被Host替换,另一个区别是对ConfigureWebHostDefaults()的调用; 由于新的主机生成器是通用主机生成器，因此            <a href="https://www.cnblogs.com/yyfh/p/11855862.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-14 11:27 HueiFeng 阅读 (350) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11855862" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/11/12.html">2019年11月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11843358.html">
+    ASP.NET Core 3.x 并发限制
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 Microsoft.AspNetCore.ConcurrencyLimiter AspNetCore3.0后增加的,用于传入的请求进行排队处理,避免线程池的不足. 我们日常开发中可能常做的给某web服务器配置连接数以及,请求队列大小,那么今天我们看看如何在通过中间件形式实现一个并发量以及队列长            <a href="https://www.cnblogs.com/yyfh/p/11843358.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-12 17:14 HueiFeng 阅读 (4891) 评论 (14)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11843358" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/11/05.html">2019年11月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11796421.html">
+    ASP.NET Core如何使用压缩中间件提高Web应用程序性能
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 压缩可以大大的降低我们Web服务器的响应速度,压缩从而提高我们网页的加载速度,以及节省一定的带宽. 何时使用相应压缩中间件 在IIS，Apache，Nginx中使用基于服务端的响应压缩技术。中间件的执行可能和服务端模块不匹配。HTTP.sys 和Kestrel server目前没有提供内置的压            <a href="https://www.cnblogs.com/yyfh/p/11796421.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-05 09:23 HueiFeng 阅读 (1686) 评论 (5)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11796421" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/11/03.html">2019年11月3日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11787434.html">
+    .Net Core实现健康检查
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：ASP.NET Core 提供运行状况检查中间件和库，以用于报告应用基础结构组件的运行状况。 运行状况检查由应用程序作为 HTTP 终结点公开。 可以为各种实时监视方案配置运行状况检查终结点： 运行状况探测可以由容器业务流程协调程和负载均衡器用于检查应用的状态。 例如，容器业务流程协调程序可以通过停            <a href="https://www.cnblogs.com/yyfh/p/11787434.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-03 16:41 HueiFeng 阅读 (3490) 评论 (9)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11787434" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/10/29.html">2019年10月29日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11757976.html">
+    SqlException:ConnectionTimeout Expired. The timeout period elapsed during the post-login phase
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：linux系统部署.netcore程序后,访问某台sqlserver 2008 R2数据库 `` Connection Timeout Expired. The timeout period elapsed during the post login phase. The connection co            <a href="https://www.cnblogs.com/yyfh/p/11757976.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-10-29 12:03 HueiFeng 阅读 (235) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11757976" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/10/22.html">2019年10月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11719959.html">
+    .NET北京俱乐部，技术的饕餮盛宴，不枉此行
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在19年年尾，我们相约于.NET北京俱乐部 DNT精英论坛暨.NET北京俱乐部是由资深.NET专家和社区活跃分子发起的技术论坛，以“分享、成长、合作、共赢”为原则，致力于打造一个领先的技术分享平台和成长交流生态。 第三期沙龙分享话题： 移植现有的.NET Core App到.NET Core 3.0            <a href="https://www.cnblogs.com/yyfh/p/11719959.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-10-22 15:58 HueiFeng 阅读 (276) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11719959" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=3">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+    4
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=5">下一页</a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

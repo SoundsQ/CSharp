@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="本文图例所引用的图片和文字均出自互联网公开内容，仅供运维人员和研发人员参考。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>5&#183;12和6&#183;17两知名网站域名被劫持事件实施过程回放 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/dns.html">5&#183;12和6&#183;17两知名网站域名被劫持事件实施过程回放</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>汇总</p>
+<p>本文图例所引用的图片和文字均出自互联网公开内容，仅供运维人员和研发人员参考。</p>
+<p>2013年5月12日<a class="a_topic" href="http://huati.weibo.com/k/%E5%9C%9F%E8%B1%86%E7%BD%91%E5%9F%9F%E5%90%8D%E8%A2%AB%E5%8A%AB%E6%8C%81?from=501">#土豆网域名被劫持#</a>记录（含实施过程还原），如图所示，其中有两个Web开发经典错误，小洞洞也能引发大事件。</p>
+<p><a href="http://weibo.com/1655253920/zD6YEkHNA" target="_blank"><img src="http://ww1.sinaimg.cn/mw1024/62a92ba0jw1e60s94vm36j210r2ci4ih.jpg" alt="http://ww1.sinaimg.cn/mw1024/62a92ba0jw1e60s94vm36j210r2ci4ih.jpg" /></a></p>
+<p>&nbsp;</p>
+<p>2013年6月17日<a class="a_topic" href="http://huati.weibo.com/k/%E7%82%B9%E8%AF%84%E7%BD%91%E5%9F%9F%E5%90%8D%E8%A2%AB%E5%8A%AB%E6%8C%81?from=501">#点评网域名被劫持#</a>记录（含实施过程还原），如图所示，新网在5月12日兄弟公司新网互联那么大漏洞暴露、土豆网域名被劫持之后仍忽略乌云上自己的漏洞，确实难辞其咎，有洞不补大洞受苦。</p>
+<p><a href="http://weibo.com/1655253920/zD71ggeFC" target="_blank"><img src="http://ww1.sinaimg.cn/mw1024/62a92ba0jw1e60sg9b1ttj20re1j57h1.jpg" alt="http://ww1.sinaimg.cn/mw1024/62a92ba0jw1e60sg9b1ttj20re1j57h1.jpg" /></a></p>
+<hr />
+<p>&nbsp;</p>
+<p>赠图一枚：</p>
+<p>RT @一蚊丁：有个今年毕业的学弟最近在投简历，刚才他发这张短信截图哭着问我，大学生已经掉价到这个地步了吗？</p>
+<p><img class="decoded" src="http://ww2.sinaimg.cn/mw1024/679074b3jw1e5zl6ak20yj20c106ldge.jpg" alt="http://ww2.sinaimg.cn/mw1024/679074b3jw1e5zl6ak20yj20c106ldge.jpg" /></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2013-06-26 00:03</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3155851" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3155851);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3155851, cb_entryCreatedDate = '2013-06-26 00:03', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

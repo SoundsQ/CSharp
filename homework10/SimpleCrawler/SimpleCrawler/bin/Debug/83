@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="我们先从第一个例子开始分析，然后再列出不同线程状态的含义以及注意事项，最后再补充两个实例。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>三个实例演示 Java Thread Dump 日志分析 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/01/06/dumpanalysis.html">三个实例演示 Java Thread Dump 日志分析</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="color: #ff0000; font-size: medium;"><strong style="background-color: yellow;">jstack Dump 日志文件中的线程状态</strong></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">dump 文件里，值得关注的线程状态有：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><ol>
+<li><span style="font-family: 'Microsoft Yahei';">死锁，</span><span style="color: #ff0000;"><strong><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Deadlock</span><span style="font-family: 'Microsoft Yahei';">（重点关注）</span><span style="font-family: 'Microsoft Yahei';" lang="EN-US">&nbsp;</span></strong></span></li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">执行中，</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">Runnable</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">&nbsp; &nbsp;</span></li>
+<li><span style="font-family: 'Microsoft Yahei';">等待资源，</span><strong><span style="color: #ff0000;"><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Waiting on condition</span><span style="font-family: 'Microsoft Yahei';">（重点关注）</span></span></strong><span style="font-family: 'Microsoft Yahei';" lang="EN-US">&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">等待获取监视器，</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US"><span style="color: #ff0000;"><strong>Waiting on monitor entry（重点关注）</strong></span></span></li>
+<li><span style="font-family: 'Microsoft Yahei';">暂停，</span><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Suspended</span></li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">对象等待中，</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">Object.wait() 或 TIMED_WAITING</span></li>
+<li><span style="font-family: 'Microsoft Yahei';">阻塞，</span><span style="color: #ff0000;"><strong><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Blocked</span><span style="font-family: 'Microsoft Yahei';">（重点关注）</span><span style="font-family: 'Microsoft Yahei';" lang="EN-US">&nbsp;&nbsp;</span></strong></span></li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">停止，</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">Parked</span></li>
+</ol>
+<p>下面我们先从第一个例子开始分析，然后再列出不同线程状态的含义以及注意事项，最后再补充两个实例。</p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="background-color: yellow; font-size: medium;"><span style="font-family: 'Microsoft Yahei'; text-indent: -28px;">综合</span>示范一：</span></strong><strong><span style="background-color: yellow; font-size: medium;"><span style="font-family: 'Microsoft Yahei'; text-indent: -28px;">Waiting to lock 和 Blocked</span></span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>实例如下：</div>
+<div><span style="color: #0000ff;">"RMI TCP Connection(267865)-172.16.5.25" daemon prio=10 tid=0x00007fd508371000 nid=0x55ae</span><span style="color: #800080;"><strong><span class="Apple-converted-space">&nbsp;</span><span style="text-decoration: underline;">waiting for monitor entry</span><span class="Apple-converted-space">&nbsp;</span></strong></span><span style="color: #0000ff;">[</span><span style="color: #808000;">0x00007fd4f8684000</span><span style="color: #0000ff;">]</span></div>
+<div><span style="color: #0000ff;">&nbsp; &nbsp;java.lang.Thread.State:<span class="Apple-converted-space">&nbsp;</span></span><span style="text-decoration: underline;"><span style="color: #a52a2a;"><strong>BLOCKED (on object monitor)</strong></span></span></div>
+<div><span style="color: #0000ff;">at org.apache.log4j.Category.callAppenders(Category.java:201)</span></div>
+<div><span style="color: #0000ff;">-<span class="Apple-converted-space">&nbsp;</span></span><span style="text-decoration: underline;"><span style="color: #ff0000;"><strong>waiting to lock &lt;0x00000000acf4d0c0&gt;</strong></span></span><span style="color: #0000ff;"><span class="Apple-converted-space">&nbsp;</span>(a org.apache.log4j.Logger)</span></div>
+<div><span style="color: #0000ff;">at org.apache.log4j.Category.forcedLog(Category.java:388)</span></div>
+<div><span style="color: #0000ff;">at org.apache.log4j.Category.log(Category.java:853)</span></div>
+<div><span style="color: #0000ff;">at org.apache.commons.logging.impl.Log4JLogger.warn(Log4JLogger.java:234)</span></div>
+<div><span style="color: #0000ff;">at com.tuan.core.common.lang.cache.remote.SpyMemcachedClient.get(SpyMemcachedClient.java:110)</span></div>
+<div><span style="color: #0000ff;">&hellip;&hellip;</span></div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）线程状态是<span class="Apple-converted-space">&nbsp;</span><strong>Blocked</strong>，阻塞状态。说明线程等待资源超时！</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）&ldquo;<span class="Apple-converted-space">&nbsp;</span><span style="text-decoration: underline;"><span style="color: #ff0000;">waiting to lock &lt;0x00000000acf4d0c0&gt;</span></span>&rdquo;指，线程在等待给这个&nbsp;0x00000000acf4d0c0 地址上锁（英文可描述为：trying to obtain&nbsp;&nbsp;0x00000000acf4d0c0&nbsp;lock）。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）在 dump 日志里查找字符串&nbsp;0x00000000acf4d0c0，发现<span style="color: #ff0000;">有大量线程都在等待给这个地址上锁</span>。如果能在日志里找到谁获得了这个锁（如locked &lt;&nbsp;0x00000000acf4d0c0&nbsp;&gt;），就可以顺藤摸瓜了。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）&ldquo;<strong style="color: #800080;"><span style="text-decoration: underline;">waiting for monitor entry</span></strong>&rdquo;说明此线程通过 synchronized(obj) {&hellip;&hellip;} 申请进入了临界区，从而进入了下图1中的&ldquo;Entry Set&rdquo;队列，但该 obj 对应的 monitor 被其他线程拥有，所以本线程在 Entry Set 队列中等待。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">5）第一行里，<span style="color: #0000ff;">"RMI TCP Connection(267865)-172.16.5.25"</span>是&nbsp;Thread Name&nbsp;。tid指Java Thread id。nid指native线程的id。prio是线程优先级。<span style="color: #0000ff;">[</span><span style="color: #808000;">0x00007fd4f8684000</span><span style="color: #0000ff;">]</span>是线程栈起始地址。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="color: #ff0000; font-size: medium;"><strong style="background-color: yellow;">Dump文件中的线程状态含义及注意事项</strong></span></div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<p style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US">含义如下所示：</span></p>
+<ul style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<li><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Deadlock</span><span style="font-family: 'Microsoft Yahei';">：死锁线程，一般指多个线程调用间，进入相互资源占用，导致一直等待无法释放的情况。</span></li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">Runnable</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">：一般指该线程正在执行状态中，该线程占用了资源，正在处理某个请求，有可能正在传递</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">SQL</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">到数据库执行，有可能在对某个文件操作，有可能进行数据类型等转换。</span></li>
+<li><span style="font-family: 'Microsoft Yahei';" lang="EN-US">Waiting on condition</span><span style="font-family: 'Microsoft Yahei';">：等待资源，或等待某个条件的发生。具体原因需结合 stacktrace来分析。</span>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';">如果堆栈信息明确是应用代码，则证明该线程正在等待资源。一般是大量读取某资源，且该资源采用了资源锁的情况下，线程进入等待状态，等待资源的读取。</span></li>
+<li><span style="font-family: 'Microsoft Yahei';">又或者，正在等待其他线程的执行等。</span></li>
+<li><span style="font-family: 'Microsoft Yahei';">如果发现有大量的线程都在处在 Wait on condition，从线程 stack看，正等待网络读写，这可能是一个网络瓶颈的征兆。因为网络阻塞导致线程无法执行。</span>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';">一种情况是网络非常忙，几乎消耗了所有的带宽，仍然有大量数据等待网络读写；</span></li>
+<li><span style="font-family: 'Microsoft Yahei';">另一种情况也可能是网络空闲，但由于路由等问题，导致包无法正常的到达。</span></li>
+</ul>
+</li>
+<li><span style="font-family: 'Microsoft Yahei';">另外一种出现 Wait on condition的常见情况是该线程在 sleep，等待 sleep的时间到了时候，将被唤醒。</span></li>
+</ul>
+</li>
+<li><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;" lang="EN-US">Blocked</span><span style="font-family: 'Microsoft Yahei'; text-indent: -21pt;">：线程阻塞，是指当前线程执行过程中，所需要的资源长时间等待却一直未能获取到，被容器的线程管理器标识为阻塞状态，可以理解为等待资源超时的线程。</span></li>
+<li><span style="text-indent: -21pt;"><span style="font-family: 'Microsoft Yahei';">Waiting for monitor entry 和 in Object.wait()：</span></span>Monitor是 Java中用以实现线程之间的互斥与协作的主要手段，它可以看成是对象或者 Class的锁。每一个对象都有，也仅有一个 monitor。从下图1中可以看出，每个 Monitor在某个时刻，只能被一个线程拥有，该线程就是 &ldquo;Active Thread&rdquo;，而其它线程都是 &ldquo;Waiting Thread&rdquo;，分别在两个队列 &ldquo; Entry Set&rdquo;和 &ldquo;Wait Set&rdquo;里面等候。在 &ldquo;Entry Set&rdquo;中等待的线程状态是 &ldquo;Waiting for monitor entry&rdquo;，而在 &ldquo;Wait Set&rdquo;中等待的线程状态是 &ldquo;in Object.wait()&rdquo;。</li>
+</ul>
+<p style="text-align: center;"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20%E5%89%AF%E6%9C%AC039.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20%E5%89%AF%E6%9C%AC039.png" /></p>
+<p style="text-align: center;"><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">图1 A Java Monitor</span></p>
+<p>&nbsp;</p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="background-color: yellow; font-size: medium;"><span style="text-indent: -28px;"><span style="font-family: 'Microsoft Yahei';">综合</span></span>示范二：</span></strong><strong><span style="background-color: yellow; font-size: medium;"><span style="font-family: 'Microsoft Yahei'; text-indent: -28px;">W</span></span></strong><span style="font-family: 'Microsoft Yahei'; font-size: medium;"><strong style="background-color: yellow;">aiting on condition</strong></span><strong><span style="background-color: yellow; font-size: medium;"><span style="text-indent: -28px;"><span style="font-family: 'Microsoft Yahei';">&nbsp;和&nbsp;TIMED_WAITING</span></span></span></strong></div>
+<div>
+<div>实例如下：</div>
+</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><span style="color: #0000ff;">"RMI TCP Connection(idle)" daemon prio=10 tid=0x00007fd50834e800 nid=0x56b2<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #800000;"><strong>waiting on condition</strong></span><span style="color: #0000ff;"><span class="Apple-converted-space">&nbsp;</span>[0x00007fd4f1a59000]</span></div>
+<div><span style="color: #0000ff;">&nbsp; &nbsp;java.lang.Thread.State:<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #a52a2a;"><strong>TIMED_WAITING (parking)</strong></span></div>
+<div><span style="color: #0000ff;">at sun.misc.Unsafe.park(Native Method)</span></div>
+<div><span style="color: #0000ff;">-<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #ff0000;"><strong>parking to wait for &nbsp;&lt;0x00000000acd84de8&gt;</strong></span><span style="color: #0000ff;"><span class="Apple-converted-space">&nbsp;</span>(a java.util.concurrent.SynchronousQueue$TransferStack)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:198)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.SynchronousQueue$TransferStack.awaitFulfill(SynchronousQueue.java:424)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.SynchronousQueue$TransferStack.transfer(SynchronousQueue.java:323)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:874)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:945)</span></div>
+<div><span style="color: #0000ff;">at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)</span></div>
+<div><span style="color: #0000ff;">at java.lang.Thread.run(Thread.java:662)</span></div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）&ldquo;<strong style="color: #a52a2a;">TIMED_WAITING (parking)</strong>&rdquo;中的 timed_waiting 指等待状态，但这里指定了时间，到达指定的时间后自动退出等待状态；parking指线程处于挂起中。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br />2）&ldquo;<strong style="color: #800000;">waiting on condition</strong>&rdquo;需要与堆栈中的&ldquo;<span style="color: #ff0000;"><strong>parking to wait for &nbsp;&lt;0x00000000acd84de8&gt;</strong></span><span style="color: #0000ff;">&nbsp;(a java.util.concurrent.SynchronousQueue$TransferStack)</span>&rdquo;结合来看。首先，本线程肯定是在等待某个条件的发生，来把自己唤醒。其次，SynchronousQueue 并不是一个队列，只是线程之间移交信息的机制，当我们把一个元素放入到 SynchronousQueue 中时必须有另一个线程正在等待接受移交的任务，因此这就是本线程在等待的条件。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）别的就看不出来了。</div>
+<p><strong><span style="background-color: yellow; font-size: medium;"><span style="text-indent: -28px;"><span style="font-family: 'Microsoft Yahei';">综合</span></span>示范三：in Obejct.wait()</span></strong><strong><span style="background-color: yellow; font-size: medium;"><span style="text-indent: -28px;"><span style="font-family: 'Microsoft Yahei';">&nbsp;和&nbsp;TIMED_WAITING</span></span></span></strong></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div>实例如下： </div>
+
+</div>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><span style="color: #0000ff;">"</span><span style="color: #ff0000;">RMI RenewClean-[172.16.5.19:28475]</span><span style="color: #0000ff;">" daemon prio=10 tid=0x0000000041428800 nid=0xb09<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #a52a2a;"><strong>in Object.wait()</strong></span><span style="color: #0000ff;"><span class="Apple-converted-space">&nbsp;</span>[0x00007f34f4bd0000]</span></div>
+<div><span style="color: #0000ff;">&nbsp; &nbsp;java.lang.Thread.State:<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #800080;"><strong>TIMED_WAITING (on object monitor)</strong></span></div>
+<div><span style="color: #0000ff;">at java.lang.Object.wait(Native Method)</span></div>
+<div><span style="color: #0000ff;">-<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #008000;"><strong>waiting on &lt;0x00000000aa672478&gt; (a java.lang.ref.ReferenceQueue$Lock)</strong></span></div>
+<div><span style="color: #0000ff;">at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:118)</span></div>
+<div><span style="color: #0000ff;">-<span class="Apple-converted-space">&nbsp;</span></span><span style="color: #ff00ff;"><strong>locked &lt;0x00000000aa672478&gt; (a java.lang.ref.ReferenceQueue$Lock)</strong></span></div>
+<div><span style="color: #0000ff;">at sun.rmi.transport.DGCClient$EndpointEntry$RenewCleanThread.run(DGCClient.java:516)</span></div>
+<div><span style="color: #0000ff;">at java.lang.Thread.run(Thread.java:662)</span> </div>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）&ldquo;<strong style="color: #800080;">TIMED_WAITING (on object monitor)</strong>&rdquo;，对于本例而言，是因为本线程调用了&nbsp;java.lang.Object.wait(long timeout) 而进入等待状态。<br /><br /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）&ldquo;Wait Set&rdquo;中等待的线程状态就是&ldquo;<span class="Apple-converted-space">&nbsp;</span><strong style="color: #a52a2a;">in&nbsp;Object.wait()</strong>&nbsp;&rdquo;。当线程获得了 Monitor，进入了临界区之后，如果发现线程继续运行的条件没有满足，它则调用对象（一般就是被 synchronized 的对象）的 wait() 方法，放弃了 Monitor，进入 &ldquo;Wait Set&rdquo;队列。只有当别的线程在该对象上调用了 notify() 或者 notifyAll() ，&ldquo; Wait Set&rdquo;队列中线程才得到机会去竞争，但是只有一个线程获得对象的 Monitor，恢复到运行态。 <br /><br /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）RMI RenewClean 是 DGCClient 的一部分。<a style="cursor: pointer;" href="http://doc.java.sun.com/DocWeb/api/java.rmi.dgc.DGC?lang=zh_cn&amp;mode=Read">DGC</a>&nbsp;指的是 Distributed GC，即分布式垃圾回收。<br /><br /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）请注意，是先&nbsp;<strong style="color: #ff00ff;">locked &lt;0x00000000aa672478&gt;</strong>，后&nbsp;<strong style="color: #008000;">waiting on &lt;0x00000000aa672478&gt;</strong>，之所以先锁再等同一个对象，请看下面它的代码实现：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">static private class &nbsp;Lock { };</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">private Lock lock = new Lock();</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">public Reference&lt;? extends T&gt;<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/ref/ReferenceQueue.java">remove</a>(long timeout)</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">{</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp;&nbsp;synchronized (lock) {</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Reference&lt;?&nbsp;<span class="kw">extends</span>&nbsp;T&gt;&nbsp;<span class="mark-21#0">r</span>&nbsp;=&nbsp;<a style="cursor: pointer;" title="java.lang.ref.ReferenceQueue.reallyPoll() : Reference" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/ref/ReferenceQueue.java#ReferenceQueue.reallyPoll%28%29">reallyPoll</a>();</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="kw">if</span>&nbsp;(<span class="mark-21#1">r</span>&nbsp;!=&nbsp;<span class="kw">null</span>)&nbsp;<span class="kw">return</span>&nbsp;<span class="mark-21#1">r</span>;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="kw">for</span>&nbsp;(;;)&nbsp;{</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="background-color: yellow;"><span class="mark-9#1"><a class="hidden" style="cursor: pointer;" title="Lock lock" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/ref/ReferenceQueue.java#ReferenceQueue.0lock">lock</a></span>.<a style="cursor: pointer;" title="java.lang.Object.wait(long) : void" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/Object.java#Object.wait%28long%29">wait</a>(<span class="mark-20#1">timeout</span>);</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span class="mark-21#0">r</span>&nbsp;=&nbsp;<a style="cursor: pointer;" title="java.lang.ref.ReferenceQueue.reallyPoll() : Reference" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/lang/ref/ReferenceQueue.java#ReferenceQueue.reallyPoll%28%29">reallyPoll</a>();</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &hellip;&hellip;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp; &nbsp; &nbsp; &nbsp;}</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">}</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即，线程的执行中，先用 synchronized 获得了这个对象的 Monitor（对应于&nbsp;<span class="Apple-converted-space">&nbsp;</span><strong style="color: #ff00ff;">locked &lt;0x00000000aa672478&gt;</strong>&nbsp;）；当执行到 lock.wait(timeout);，线程就放弃了 Monitor 的所有权，进入&ldquo;Wait Set&rdquo;队列（对应于&nbsp;<span class="Apple-converted-space">&nbsp;</span><strong style="color: #008000;">waiting on &lt;0x00000000aa672478&gt;</strong>&nbsp;）。<br /> </div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">5）从堆栈信息看，是正在清理 remote references to remote objects ，引用的租约到了，分布式垃圾回收在逐一清理呢。</div>
+<p>&nbsp;</p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>参考资源：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）CUBRID，2012，<a style="cursor: pointer;" href="http://www.cubrid.org/blog/dev-platform/how-to-analyze-java-thread-dumps/">How to Analyze Java Thread Dumps</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）iteye，2012，<a style="cursor: pointer;" href="http://huoyanxueren.iteye.com/blog/1673894">虚拟机stack全分析</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）iteye，2008，<a style="cursor: pointer;" href="http://sesame.iteye.com/blog/428012">如何分析Java虚拟机死锁</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）csdn，2012，<a style="cursor: pointer;" href="http://blog.csdn.net/a43350860/article/details/8134234">java stack dump中JVM运行过程中产生的一些常见线程介绍和解释</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">5）2009，<a style="cursor: pointer;" href="http://www.linuxidc.com/Linux/2009-01/18171.htm">Java线程dump的分析</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">6）jiacheo，2012，<a style="cursor: pointer;" href="http://www.jiacheo.org/blog/279">tomcat thread dump 分析</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">spymemcached 相关文章：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）<a class="titlelink" href="http://www.cnblogs.com/zhengyun_ustc/archive/2013/01/04/nagle.html">spymemcached 的 useNagle 问题与 TCP/IP延迟发送数据</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）<a class="titlelink" href="http://www.cnblogs.com/zhengyun_ustc/archive/2013/01/05/spy_reconnect.html">spymemcached ：某个mc节点操作连续超时超过998次就 Auto-Reconnect 的特性</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" href="http://www.cnblogs.com/zhengyun_ustc/archive/2013/01/05/getbulk.html">关于 Multiget hole：spymemcached对此的实现方法</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html">55最佳实践系列：MongoDB最佳实践</a><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 15:48)<br /><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 16:43)</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html">最佳实践系列：前端代码标准和最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-19 23:33)</span> </div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">赠图一枚：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://movie.douban.com/doulist/1077170/" target="_blank"><img class="decoded" src="http://ww4.sinaimg.cn/bmiddle/62a92ba0jw1e0ilunhrwlj.jpg" alt="http://ww4.sinaimg.cn/bmiddle/62a92ba0jw1e0ilunhrwlj.jpg" /></a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<p>&nbsp;</p>
+
+
+</div>
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2013-01-06 23:16</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2848445" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2848445);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2848445, cb_entryCreatedDate = '2013-01-06 23:16', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

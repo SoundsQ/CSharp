@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManage(winform)", "OrderManage(winform)\OrderManage(winform).csproj", "{A82440AE-2F53-41BF-9349-317BFE95BA6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManage2", "..\OrderManage2\OrderManage2\OrderManage2.csproj", "{DA7BF104-B0BD-4C97-87E0-41DF872EC2BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A82440AE-2F53-41BF-9349-317BFE95BA6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82440AE-2F53-41BF-9349-317BFE95BA6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82440AE-2F53-41BF-9349-317BFE95BA6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82440AE-2F53-41BF-9349-317BFE95BA6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA7BF104-B0BD-4C97-87E0-41DF872EC2BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA7BF104-B0BD-4C97-87E0-41DF872EC2BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA7BF104-B0BD-4C97-87E0-41DF872EC2BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA7BF104-B0BD-4C97-87E0-41DF872EC2BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93463988-4B77-417D-8FCA-D54275645FE6}
+	EndGlobalSection
+EndGlobal

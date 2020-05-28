@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 本篇博客来自&amp;#160;https://www.cnblogs.com/clover-forever/p/12616869.html 自己在此记录一下，方便日后复习。 虚假唤醒的概念 jdk官方" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>java中wait和notify的虚假唤醒问题 - 经典鸡翅 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jichi/custom.css?v=6wtfTBGNfhWFL7iH6gCJo&#x2B;5x&#x2B;js=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jichi/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jichi/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jichi/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 474324;
+        var currentBlogApp = 'jichi';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jichi/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jichi/">经典鸡翅</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jichi/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%BB%8F%E5%85%B8%E9%B8%A1%E7%BF%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/jichi/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+175&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+54</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jichi/p/12694260.html">java中wait和notify的虚假唤醒问题</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h2>前言</h2>
+<p>本篇博客来自&nbsp;<a href="https://www.cnblogs.com/clover-forever/p/12616869.html">https://www.cnblogs.com/clover-forever/p/12616869.html</a></p>
+<p>自己在此记录一下，方便日后复习。</p>
+<h2>虚假唤醒的概念</h2>
+<p>jdk官方文档解释：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1524509/202004/1524509-20200401230358436-2025708080.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>所以说在wait和notify一块使用时，<strong>如果使用if作为条件时，会有虚假唤醒的情况发生，所以必须使用while作为循环条件</strong>。下面来举例实验：</p>
+<p>首先，创建一个资源类：（在多线程中，一般都是资源类和线程操作解耦，不放在用同一个类中，只有在线程操作资源类时，才会创建资源类的对象）</p>
+<pre><strong>package com.test;</strong><br /><br /><strong>/**</strong><br /><strong> * 资源类</strong><br /><strong> * @author Huxudong</strong><br /><strong> * @createTime 2020-04-01 21:57:39</strong><br /><strong> **/</strong><br /><strong>public class Resource {</strong><br /><strong>    /** 产品数 */</strong><br /><strong>    private int product = 0;</strong><br /><br /><strong>    /** 进货 */</strong><br /><strong>    public synchronized void get() {</strong><br /><strong>        if(product &gt;= 10) {</strong><br /><strong>            System.out.println(Thread.currentThread().getName()+":"+"产品已满!");</strong><br /><strong>            /** 当商品已经满的时候，进货线程挂起 */</strong><br /><strong>            try {</strong><br /><strong>                this.wait();</strong><br /><strong>            } catch (InterruptedException e) {</strong><br /><strong>                e.printStackTrace();</strong><br /><strong>            }</strong><br /><strong>        }</strong><br /><br /><strong>        /** 进货 */</strong><br /><strong>        System.out.println(Thread.currentThread().getName()+":"+ ++product);</strong><br /><strong>        /** 唤醒其他线程 */</strong><br /><strong>        this.notifyAll();</strong><br />        <br /><strong>    }</strong><br /><br /><strong>    /** 售货 */</strong><br /><strong>    public synchronized void sale() {</strong><br /><strong>        if(product &lt;= 0) {</strong><br /><strong>            System.out.println(Thread.currentThread().getName()+":"+"产品已空");</strong><br /><strong>            try {</strong><br /><strong>                this.wait();</strong><br /><strong>            } catch (InterruptedException e) {</strong><br /><strong>                e.printStackTrace();</strong><br /><strong>            }</strong><br /><strong>        }</strong><br /><br /><strong>        /** 售货 */</strong><br /><strong>        System.out.println(Thread.currentThread().getName()+":"+ --product);</strong><br /><strong>        /** 唤醒其他线程 */</strong><br /><strong>        this.notify();</strong><br /><strong>    }</strong><br /><strong>}</strong><br /><br />然后再创建线程来操作我们的资源类（通过java8新特性Lambda表达式直接创建）<br /><br /></pre>
+<pre><strong>package com.test;</strong><br /><br /><strong>import java.util.concurrent.TimeUnit;</strong><br /><br /><strong>/**</strong><br /><strong> * 线程操作资源类，实现线程与资源类的解耦合</strong><br /><strong> * @author Huxudong</strong><br /><strong> * @createTime 2020-04-01 23:13:54</strong><br /><strong> **/</strong><br /><strong>public class TestPc {</strong><br /><strong>    public static void main(String[] args) {</strong><br /><strong>        Resource resource = new Resource();</strong><br /><strong>        new Thread(()-&gt;{</strong><br /><strong>            for (int i = 0; i &lt; 20; i++) {</strong><br /><strong>                try {</strong><br /><strong>                    /** 睡眠，便于观察结果 */</strong><br /><strong>                    TimeUnit.SECONDS.sleep(2);</strong><br /><strong>                } catch (InterruptedException e) {</strong><br /><strong>                    e.printStackTrace();</strong><br /><strong>                }</strong><br /><strong>                resource.get();</strong><br /><strong>            }</strong><br /><strong>        },"生产者A").start();</strong><br /><br /><br /><br /><strong>        new Thread(()-&gt;{</strong><br /><strong>            for (int i = 0; i &lt; 20; i++) {</strong><br /><strong>                resource.sale();</strong><br /><strong>            }</strong><br /><br /><strong>        },"消费者C").start();</strong><br /><br /><strong>        new Thread(()-&gt;{</strong><br /><strong>            for (int i = 0; i &lt; 20; i++) {</strong><br /><br /><strong>                resource.get();</strong><br /><strong>            }</strong><br /><br /><strong>        },"生产者B").start();</strong><br /><br /><strong>        new Thread(()-&gt;{</strong><br /><strong>            for (int i = 0; i &lt; 20; i++) {</strong><br /><strong>                resource.sale();</strong><br /><strong>            }</strong><br /><br /><strong>        },"消费者D").start();</strong><br /><strong>    }</strong><br /><strong>}<br /><br /></strong>先来看看如果使用if条件会发生什么：</pre>
+<p><img src="https://img2020.cnblogs.com/blog/1524509/202004/1524509-20200401231954339-1442597512.png" alt=""></p>
+<p>&nbsp;</p>
+<pre></pre>
+<p>对，你没看错，怎么可能会出现负数呢，这肯定是不对的。冷静下来分析一下，还是有点头绪，知道哪里出现了问题的（那你是一个处事不惊的人，很厉害）。</p>
+<p>来，分析一下，一开始先调用了消费者C,D线程（因为我们写了睡眠在生产者中），消费者此时发现此时product资源为0，所以，消费者C,D这两个兄弟，没办法只能调用wait方法，睡眠了，并且释放了锁。</p>
+<p>但是此时第一个消费者已经苏醒了，发动机开始生产产品了，并且生产之后，又唤醒了所有等待的消费者线程。这消费者C,D两兄弟终于苏醒了，D哥们先获得了锁，所以就先消费了一个产品，然后就又发现没有产品了，又伤心的休眠去了，但是不要忘了，此时还有一个C哥们被唤醒了啊，你唤醒了人家，人家总的干点什么事情吧，不然这多难受，刚好不巧的是，此时的判断条件是if，所以此时C哥们便不受条件的约束，接着上面自己睡眠的代码处执行，毅然决然的又去消费了一个产品，原来D哥们消费后，就已经为0了，这个C哥们再去消费减一，不就是-1了吗，以此类推分析。发现如果判断条件用不好，此时唤醒的C哥们就相当于虚假唤醒的了，会给程序带来不可预估的错误。所以在这里判断必须要使用while，先来看看把if换成while的结果。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1524509/202004/1524509-20200401233400859-649058211.png" alt=""></p>
+<p>&nbsp;这回结果就比较正常了，为什么使用while就可以呢，因为像上文所说，即使唤醒了所有的消费者线程，此时会不停while循环判断，如果此时条件是为0，那么C哥们就不能出while，那么他也就不回执行下面消费产品的减减操作了，那么就会避免了这种错误。这也是官方提倡的在使用wait&nbsp; 和notifyAll的时候，必须使用while循环条件判断。</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-13 21:58</span>&nbsp;
+<a href="https://www.cnblogs.com/jichi/">经典鸡翅</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12694260" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12694260);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 474324, cb_blogApp = 'jichi', cb_blogUserGuid = '116b895e-1033-4dd3-9e2a-08d644494d24';
+    var cb_entryId = 12694260, cb_entryCreatedDate = '2020-04-13 21:58', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 经典鸡翅
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

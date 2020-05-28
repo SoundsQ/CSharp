@@ -1,0 +1,907 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="JDBC驱动的加载注册，本身就已经很自动化了，但是4.0版本后更加的智能化，可以完全自动，越是自动化的东西，我们越是需要对他进行深入了解，因为如果不懂原理自动化只会把很多开发人员变成傻子。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JDBC驱动程序注册  JDBC简介（二） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10270107.html">JDBC驱动程序注册  JDBC简介（二）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        JDBC驱动的加载注册，本身就已经很自动化了，但是4.0版本后更加的智能化，可以完全自动，越是自动化的东西，我们越是需要对他进行深入了解，因为如果不懂原理自动化只会把很多开发人员变成傻子。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 15px;">使用JDBC进行数据库操作的第一步就是驱动注册（当然你得先导入JAR）。</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 15px;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">驱动注册有多种方式，第一步必然是获得正确的驱动名称与URL格式</span> </span></div>
+<div style="line-height: 200%;">
+<h3><span style="font-size: 18px;">驱动名称与URL格式</span></h3>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 600pt; color: #424242; line-height: 200%; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">RDBMS </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">驱动程序名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">URL格式 </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%; background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">MySQL </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">com.mysql.jdbc.Driver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">jdbc:mysql://hostname/databaseName </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">ORACLE </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">oracle.jdbc.driver.OracleDriver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;"> jdbc:oracle:thin:@hostname:portNumber:databaseName </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%; background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">PostgreSQL </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">org.postgresql.Driver </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">jdbc:postgresql://hostname:port/dbname </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">DB2 </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">com.ibm.db2.jdbc.net.DB2Driver </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">jdbc:db2:hostname:port Number/databaseName </span></td>
+</tr>
+<tr style="line-height: 200%; background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">Sybase </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">com.sybase.jdbc.SybDriver </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">jdbc:sybase:Tds:hostname: portNumber/databaseName </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">常用的驱动程序名称与URL格式如上表所示</span>，<span style="color: #000000; font-size: 13.5pt;"><strong>随着版本变化，会存在些许变动，如有不对，还需重新查验</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>比如MYSQL中5与6 ，</strong></span><span style="color: #0000ff; font-size: 13.5pt;"><strong>mysql5用的驱动是com.mysql.jdbc.Driver，mysql6以后用的是com.mysql.cj.jdbc.Driver</strong></span></div>
+</div>
+<h4><span style="font-size: 16px;">MYSQL的驱动下载 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">MYSQL的connector下载地址 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">https://dev.mysql.com/downloads/connector/ </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091021037-891489901.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_5605" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091021632-271905029.png" alt="image_5c3d32d7_5605" width="644" height="514" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外还有完整的文档 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://dev.mysql.com/doc/index-connectors.html">https://dev.mysql.com/doc/index-connectors.html</a> </span></div>
+<h4><span style="font-size: 16px;">oracle驱动下载 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091022113-640832267.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_74d8" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091022423-1065839136.png" alt="image_5c3d32d7_74d8" width="801" height="543" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">驱动注册 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在通过驱动管理器创建连接前需要进行驱动注册 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">驱动注册有三种形式 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; Class.forName("com.mysql.jdbc.Driver"); </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; DriverManager.registerDriver(new com.mysql.jdbc.Driver()); </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; System.setProperty("jdbc.drivers","com.mysql.jdbc.Driver"); </span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可以查看mysql-connector中的源码 </span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.mysql.jdbc;
+
+
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.SQLException;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Driver <span style="color: #0000ff;">extends</span> NonRegisteringDriver <span style="color: #0000ff;">implements</span><span style="color: #000000;"> java.sql.Driver {
+
+</span><span style="color: #008000;">//</span>
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> Register ourselves with the DriverManager
+
+</span><span style="color: #008000;">//
+</span>
+<span style="color: #0000ff;">static</span><span style="color: #000000;"> {
+
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+
+java.sql.DriverManager.registerDriver(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Driver());
+
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (SQLException E) {
+
+</span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> RuntimeException("Can't register driver!"<span style="color: #000000;">);
+
+}
+
+}
+
+
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+
+* Construct a new driver and register it with DriverManager
+
+*
+
+* </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> SQLException
+
+* if a database error occurs.
+
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">public</span> Driver() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> SQLException {
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Required for Class.forName().newInstance()</span>
+<span style="color: #000000;">
+}
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><span style="color: #ff0000; font-size: 13.5pt;"><strong>类加载时，会执行&lt;clinit&gt;方法，在jvm第一次加载class文件时调用，包括静态变量初始化语句和静态块的执行 。</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以Class.forName("com.mysql.jdbc.Driver");会调用java.sql.DriverManager.registerDriver(new Driver());&nbsp; 完成了驱动的注册</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以直接调用java.sql.DriverManager.registerDriver(new Driver()); 也是可以的</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">驱动管理器类加载时，也会从系统属性"jdbc.drivers" 中获取数据 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以，在驱动管理器加载之前，可以使用&nbsp;&nbsp;&nbsp; System.setProperty("jdbc.drivers","com.mysql.jdbc.Driver"); 进行设置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也可以同时设置多个比如System.setProperty("jdbc.drivers","XXXDriver:XXXDriver:XXXDriver"); </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091022811-677231551.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_5ea7" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091023171-954308201.png" alt="image_5c3d32d7_5ea7" width="788" height="480" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>
+<div>
+<ul>
+<li><span style="font-size: 15px;">DriverManager.registerDriver(new com.mysql.jdbc.Driver());&nbsp; 依赖具体，没有面向抽象编程，不推荐 </span></li>
+<li style="line-height: 200%;"><span style="font-size: 15px;">System.setProperty("jdbc.drivers","com.mysql.jdbc.Driver"); DriverManager加载前有用，不够灵活方便 </span></li>
+<li style="line-height: 200%;"><span style="font-size: 15px;">Class.forName("com.mysql.jdbc.Driver"); 通常使用 </span></li>
+</ul>
+</div>
+<h4><span style="font-size: 16px;">自动加载的4.0时代 </span></h4>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">从JDBC4.0开始，就不在需要主动的显式加载，对应JDK6 </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 15px;">在调用 getConnection 方法时，DriverManager 会试着从初始化时加载的那些驱动程序以及使用与当前 applet 或应用程序相同的类加载器显式加载的那些驱动程序中查找合适的驱动程序。 </span></div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091023555-1345809604.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_2d14" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091023926-197383756.png" alt="image_5c3d32d7_2d14" width="1005" height="402" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>JDBC 4.0 的规范规定，所有 JDBC 4.0 的驱动 jar 文件必须包含一个 java.sql.Driver，它位于 jar 文件的 META-INF/services 目录下。这个文件里每一行便描述了一个对应的驱动类</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>在启动项目或是服务时，会判断当前classspath中的所的jar包，并检查他们META-INF目录下，是否包含services文件夹，如果包含，就会将里面的配置加载成相应的服务。</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">META-INF/services/jdbc.sql.Driver文件内容为需要加载的驱动，如下图所示 </span></div>
+<div><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091024209-1347873514.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_4233" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091024448-12746605.png" alt="image_5c3d32d7_4233" width="421" height="287" border="0" /></a> </span></div>
+<div><span style="font-size: 15px;">可以打印出所有的已经加载的驱动程序，如下图所示，与上图文件中的不谋而合 </span></div>
+<div><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091024635-731987583.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_55d0" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091024857-1876723446.png" alt="image_5c3d32d7_55d0" width="539" height="379" border="0" /></a> </span></div>
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">所以，对于4.0前，使用Class.forName </span></div>
+<div><span style="font-size: 15px;">4.0后我们只需要将JAR包管理好就足够了，这一切都会有人帮我们完成(当然前提是需要使用配套的驱动Jar包） </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">完整的loadInitialDrivers方法 </span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> loadInitialDrivers() {
+
+String drivers;
+
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">获取环境变量中jdbc.drivers的列表</span>
+<span style="color: #000000;">
+drivers </span>= AccessController.doPrivileged(<span style="color: #0000ff;">new</span> PrivilegedAction&lt;String&gt;<span style="color: #000000;">() {
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String run() {
+
+</span><span style="color: #0000ff;">return</span> System.getProperty("jdbc.drivers"<span style="color: #000000;">);
+
+}
+
+});
+
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception ex) {
+
+drivers </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+
+}
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果按照规范在jar包中的META-INF/services设置了文件,将会加载为服务
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> If the driver is packaged as a Service Provider, load it.
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Get all the drivers through the classloader
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> exposed as a java.sql.Driver.class service.
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> ServiceLoader.load() replaces the sun.misc.Providers()</span>
+<span style="color: #000000;">
+
+
+AccessController.doPrivileged(</span><span style="color: #0000ff;">new</span> PrivilegedAction&lt;Void&gt;<span style="color: #000000;">() {
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Void run() {
+
+
+
+ServiceLoader</span>&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+
+Iterator</span>&lt;Driver&gt; driversIterator =<span style="color: #000000;"> loadedDrivers.iterator();
+
+
+
+</span><span style="color: #008000;">/*</span><span style="color: #008000;"> Load these drivers, so that they can be instantiated.
+
+* It may be the case that the driver class may not be there
+
+* i.e. there may be a packaged driver with the service class
+
+* as implementation of java.sql.Driver but the actual class
+
+* may be missing. In that case a java.util.ServiceConfigurationError
+
+* will be thrown at runtime by the VM trying to locate
+
+* and load the service.
+
+*
+
+* Adding a try catch block to catch those runtime errors
+
+* if driver not available in classpath but it's
+
+* packaged as service and that service is there in classpath.
+
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">try</span><span style="color: #000000;">{
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">依次加载所有驱动,访问过后不就加载了嘛</span>
+
+<span style="color: #0000ff;">while</span><span style="color: #000000;">(driversIterator.hasNext()) {
+
+driversIterator.next();
+
+}
+
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;">(Throwable t) {
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> Do nothing</span>
+<span style="color: #000000;">
+}
+
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+
+}
+
+});
+
+
+
+println(</span>"DriverManager.initialize: jdbc.drivers = " +<span style="color: #000000;"> drivers);
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果环境变量中没有设置的驱动程序,就可以结束了
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">否则就将环境变量中的驱动程序加载一下</span>
+
+<span style="color: #0000ff;">if</span> (drivers == <span style="color: #0000ff;">null</span> || drivers.equals(""<span style="color: #000000;">)) {
+
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+
+}
+
+String[] driversList </span>= drivers.split(":"<span style="color: #000000;">);
+
+println(</span>"number of Drivers:" +<span style="color: #000000;"> driversList.length);
+
+</span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (String aDriver : driversList) {
+
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+
+println(</span>"DriverManager.Initialize: loading " +<span style="color: #000000;"> aDriver);
+
+Class.forName(aDriver, </span><span style="color: #0000ff;">true</span><span style="color: #000000;">,
+
+ClassLoader.getSystemClassLoader());
+
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception ex) {
+
+println(</span>"DriverManager.Initialize: load failed: " +<span style="color: #000000;"> ex);
+
+}
+
+}
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">简言之,loadInitialDrivers主要做了两件事情：</span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 15px;">读取系统属性jdbc.drivers，如果为空就拉到，如果存在将会进行加载。</span></li>
+<li><span style="font-size: 15px;">检查jar包中的META-INF/services，如果有那么会自动注册，服务注册依赖的是ServiceLoader</span></li>
+</ul>
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">对于加载的驱动程序，在前面已经说过，静态代码块中，会完成注册，而注册就是添加到CopyOnWriteArrayList&lt;DriverInfo&gt; registeredDrivers中 </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091025102-1419519446.png"><img style="display: inline; background-image: none;" title="image_5c3d32d7_657a" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091025355-476160814.png" alt="image_5c3d32d7_657a" width="986" height="593" border="0" /></a></div>
+<div>&nbsp;</div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 15px;">驱动注册就是加载数据库的驱动程序，是使用JDBC进行数据库操作的第一步。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">JDBC的桥接模式，提供给应用程序开发者的API是抽象，这个驱动程序就是实现，如果不能进行成功注册，就没办法提供后续的服务了，所以驱动注册很重要。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">以 JDBC4.0为分水岭 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果按照JDBC4.0后的规范，在jar包中设置了META-INF/services/jdbc.sql.Driver文件，并且写入了驱动，那么会自动加载 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果是之前的，则需要使用Class.forName()进行显式加载。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">自动加载依赖ServiceLoader.load(Driver.class);，其中关于目录的设置是写死的PREFIX = "META-INF/services/"，想要深入研究可以翻阅ServiceLoader </span></div>
+<div><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091025651-876658207.png"><img style="display: inline; background-image: none;" title="image_5c3d32d8_4ca9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190115091025972-2123143465.png" alt="image_5c3d32d8_4ca9" width="685" height="134" border="0" /></a> </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10270107.html" target="_blank">JDBC驱动程序注册 JDBC简介（二）</a></span></div>
+<div>&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-15 09:17</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10270107" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10270107);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10270107, cb_entryCreatedDate = '2019-01-15 09:17', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

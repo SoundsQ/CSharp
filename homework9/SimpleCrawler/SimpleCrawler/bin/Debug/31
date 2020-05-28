@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="通用浏览器架构 它可以是一个具有许多不同线程的进程，也可以是具有几个通过IPC进行通信的多个线程的进程。 一个具有许多不同线程的进程 通过IPC进行通信的多个线程的进程 注意 这些不同的体系结构是实现" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Chrome浏览器架构 - 一只菜鸟攻城狮啊 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/suihang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/suihang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/suihang/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 450240;
+        var currentBlogApp = 'suihang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        Heading for the future
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/suihang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/suihang/">一只菜鸟攻城狮啊</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/suihang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%B8%80%E5%8F%AA%E8%8F%9C%E9%B8%9F%E6%94%BB%E5%9F%8E%E7%8B%AE%E5%95%8A">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/suihang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+183&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+127</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/suihang/p/12718528.html">Chrome浏览器架构</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h2 id="1OF7m" data-lake-id="0ae94b394c68d71bce1cd43ba344f922">通用浏览器架构</h2>
+<p data-lake-id="d848938beb27234076cfacfbc8523c20">它可以是一个具有许多不同线程的进程，也可以是具有几个通过IPC进行通信的多个线程的进程。</p>
+<h3 id="QRUto" data-lake-id="4c6f3e18e18ade811977874664bdfde4">一个具有许多不同线程的进程</h3>
+<h4 id="GGeCL" data-lake-id="f1999341ffcbe96664fa82c8e493ce73">&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587001258862-bd53930c-e0ec-42a5-b324-e962b3a80e4a.png%22%2C%22originWidth%22%3A394%2C%22originHeight%22%3A250%2C%22name%22%3A%22image.png%22%2C%22size%22%3A26312%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A141.24478%2C%22y%22%3A28.285742%2C%22width%22%3A106.12221%2C%22height%22%3A13.370961999999999%2C%22text%22%3A%22BrowserProcess%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22BrowserProcess%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A504%2C%22height%22%3A320%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001258862-bd53930c-e0ec-42a5-b324-e962b3a80e4a.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001258862-bd53930c-e0ec-42a5-b324-e962b3a80e4a.png" /></span></h4>
+<h3 id="7NzTl" data-lake-id="48d57ca4fd7d6c662a7fcde1a90e809b">通过IPC进行通信的多个线程的进程</h3>
+<p data-lake-id="6d08438b57356b66b50fa55b0b3ccc2c">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587001309934-bdcc0231-49b1-4ef2-8cf5-293dbb56733b.png%22%2C%22originWidth%22%3A440%2C%22originHeight%22%3A256%2C%22name%22%3A%22image.png%22%2C%22size%22%3A42697%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A328.2458%2C%22y%22%3A17.384756%2C%22width%22%3A60.34730000000002%2C%22height%22%3A13.875034%2C%22text%22%3A%22UIProcess%22%7D%2C%7B%22x%22%3A21.13663%2C%22y%22%3A18.301172%2C%22width%22%3A95.69106000000001%2C%22height%22%3A12.220510999999998%2C%22text%22%3A%22NetworkProcess%22%7D%2C%7B%22x%22%3A170.1062%2C%22y%22%3A18.48976%2C%22width%22%3A90.11520000000002%2C%22height%22%3A10.588031%2C%22text%22%3A%22BrowserProcess%22%7D%2C%7B%22x%22%3A50.723103%2C%22y%22%3A40.76671%2C%22width%22%3A36.423897000000004%2C%22height%22%3A13.928129999999996%2C%22text%22%3A%2227%22%7D%2C%7B%22x%22%3A47.619328%2C%22y%22%3A56.29569%2C%22width%22%3A43.665122000000004%2C%22height%22%3A8.821840000000002%2C%22text%22%3A%22%E5%AE%9D%E5%AE%9D%E5%AE%B9%E5%9F%BA%22%7D%2C%7B%22x%22%3A322.18805%2C%22y%22%3A97.37522%2C%22width%22%3A71.37259%2C%22height%22%3A12.645920000000004%2C%22text%22%3A%22GPUProcess%22%7D%2C%7B%22x%22%3A23.848871%2C%22y%22%3A97.73578%2C%22width%22%3A91.433359%2C%22height%22%3A14.394749999999988%2C%22text%22%3A%22StorageProcess%22%7D%2C%7B%22x%22%3A27.6789%2C%22y%22%3A179.68669%2C%22width%22%3A82.85635500000001%2C%22height%22%3A11.627890000000008%2C%22text%22%3A%22DeviceProcess%22%7D%2C%7B%22x%22%3A159.57666%2C%22y%22%3A179.7826%2C%22width%22%3A95.20808%2C%22height%22%3A11.314490000000006%2C%22text%22%3A%22RendererProcess%22%7D%2C%7B%22x%22%3A318.5523%2C%22y%22%3A179.82245%2C%22width%22%3A78.59638000000001%2C%22height%22%3A11.662350000000004%2C%22text%22%3A%22PluginProcess%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22UIProcess%20NetworkProcess%20BrowserProcess%2027%20%E5%AE%9D%E5%AE%9D%E5%AE%B9%E5%9F%BA%20GPUProcess%20StorageProcess%20DeviceProcess%20RendererProcess%20PluginProcess%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A556%2C%22height%22%3A323%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001309934-bdcc0231-49b1-4ef2-8cf5-293dbb56733b.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001309934-bdcc0231-49b1-4ef2-8cf5-293dbb56733b.png" /></span></p>
+<h3 id="tguaF" data-lake-id="57bbc392765c8b2b9277f91861bcbb32">注意</h3>
+<p data-lake-id="ddf667a849fa3285753f63f1c3040541"><strong>这些不同的体系结构是实现细节。没有关于如何构建网络浏览器的标准规范。一种浏览器的方法可能与另一种完全不同</strong></p>
+<p data-lake-id="585d6b29849a9aa0e027032cced0cca7">&nbsp;</p>
+<h2 id="ARTuI" data-lake-id="855814d6954d27558a92a613ae26f53b">Chrome浏览器架构</h2>
+<h3 id="3dNIO" data-lake-id="00a18c66ad058265243fc84a439faebe"><strong>&nbsp;Chrome官网的架构图（18年）</strong></h3>
+<p data-lake-id="ef38199a3e356c3966e08931c140d4e9">&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587001609881-962903ff-4a2e-4d9d-a0d6-4e3b1bc8349a.png%22%2C%22originWidth%22%3A865%2C%22originHeight%22%3A499%2C%22name%22%3A%22image.png%22%2C%22size%22%3A80916%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A561.1376%2C%22y%22%3A34.26403%2C%22width%22%3A155.98343%2C%22height%22%3A29.03183%2C%22text%22%3A%22UtilityProcess%22%7D%2C%7B%22x%22%3A169.67278%2C%22y%22%3A39.163094%2C%22width%22%3A176.54335000000003%2C%22height%22%3A20.919666%2C%22text%22%3A%22BrowserProcess%22%7D%2C%7B%22x%22%3A661.0223%2C%22y%22%3A190.51888%2C%22width%22%3A136.75070000000005%2C%22height%22%3A26.481580000000008%2C%22text%22%3A%22GPUProcess%22%7D%2C%7B%22x%22%3A82.69285%2C%22y%22%3A292.0499%2C%22width%22%3A188.23152999999996%2C%22height%22%3A24.53520000000003%2C%22text%22%3A%22RendererProcess%22%7D%2C%7B%22x%22%3A532.249%2C%22y%22%3A352.77377%2C%22width%22%3A154.08839999999998%2C%22height%22%3A23.024130000000014%2C%22text%22%3A%22PluginProcess%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22UtilityProcess%20BrowserProcess%20GPUProcess%20RendererProcess%20PluginProcess%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A590%2C%22height%22%3A340%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001609881-962903ff-4a2e-4d9d-a0d6-4e3b1bc8349a.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587001609881-962903ff-4a2e-4d9d-a0d6-4e3b1bc8349a.png" /><strong><br /></strong></span></p>
+<h3 id="n9HNV" data-lake-id="4fe420d083eb145afb4d59a0d93e5693">&nbsp;chrome最新的架构图（19年）</h3>
+<p data-lake-id="ac153f013467f5a93c1c1b88d2f04ec2"><span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587002081118-6475b0e9-4ba3-446f-98eb-294c4df3ff36.png%22%2C%22originWidth%22%3A1142%2C%22originHeight%22%3A494%2C%22name%22%3A%22image.png%22%2C%22size%22%3A129311%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A177.88193%2C%22y%22%3A55.19763%2C%22width%22%3A112.74352999999996%2C%22height%22%3A27.466470000000008%2C%22text%22%3A%22%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A638.5965%2C%22y%22%3A58.46371%2C%22width%22%3A110.99615000000006%2C%22height%22%3A25.991059999999997%2C%22text%22%3A%22%E6%8F%92%E4%BB%B6%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A150.22398%2C%22y%22%3A91.23987%2C%22width%22%3A167.36738999999997%2C%22height%22%3A23.065600000000003%2C%22text%22%3A%22(RenderProcess)%22%7D%2C%7B%22x%22%3A618.5852%2C%22y%22%3A93.41459%2C%22width%22%3A151.02717000000007%2C%22height%22%3A20.413473999999994%2C%22text%22%3A%22(PluginProcess)%22%7D%2C%7B%22x%22%3A728.02606%2C%22y%22%3A184.74608%2C%22width%22%3A108.26603999999998%2C%22height%22%3A26.90081999999998%2C%22text%22%3A%22GPU%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A116.50706%2C%22y%22%3A186.23735%2C%22width%22%3A108.94004000000001%2C%22height%22%3A25.959580000000017%2C%22text%22%3A%22%E7%BD%91%E7%BB%9C%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A81.93627%2C%22y%22%3A222.50294%2C%22width%22%3A175.59797000000003%2C%22height%22%3A22.106880000000018%2C%22text%22%3A%22(NetworkProcess)%22%7D%2C%7B%22x%22%3A391.3284%2C%22y%22%3A222.32573%2C%22width%22%3A173.41116%2C%22height%22%3A28.448679999999996%2C%22text%22%3A%22%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A716.47107%2C%22y%22%3A224.26971%2C%22width%22%3A134.50145999999995%2C%22height%22%3A21.744129999999984%2C%22text%22%3A%22(GPUProcess)%22%7D%2C%7B%22x%22%3A392.03748%2C%22y%22%3A256.50015%2C%22width%22%3A177.22791999999998%2C%22height%22%3A25.11811%2C%22text%22%3A%22(BrowserProcess)%22%7D%2C%7B%22x%22%3A674.9095%2C%22y%22%3A282.14017%2C%22width%22%3A214.40465000000006%2C%22height%22%3A19.717129999999997%2C%22text%22%3A%22%E4%BB%8E%E6%B6%A6%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A9%B6%E4%B8%AD%E6%A3%89%E7%AB%8B%E5%87%BA%E6%9D%A5%E7%9A%84%22%7D%2C%7B%22x%22%3A62.552723%2C%22y%22%3A282.9639%2C%22width%22%3A214.45362699999998%2C%22height%22%3A17.97832999999997%2C%22text%22%3A%22%E4%BB%8E%E6%B5%8E%E8%B4%A7%E5%99%A8%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%8B%AC%E7%AB%8B%E5%87%BA%3A%E6%9D%A5%E7%9A%84%22%7D%2C%7B%22x%22%3A996.799%2C%22y%22%3A369.80914%2C%22width%22%3A82.56529999999998%2C%22height%22%3A22.46463%2C%22text%22%3A%22Sandbox%22%7D%2C%7B%22x%22%3A1006.88403%2C%22y%22%3A417.45807%2C%22width%22%3A120.29756999999984%2C%22height%22%3A22.536099999999976%2C%22text%22%3A%22%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%22%7D%2C%7B%22x%22%3A1027.4657%2C%22y%22%3A451.84186%2C%22width%22%3A78.13229999999999%2C%22height%22%3A15.607689999999991%2C%22text%22%3A%22sandbox%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%20%E6%8F%92%E4%BB%B6%E8%BF%9B%E7%A8%8B%20(RenderProcess)%20(PluginProcess)%20GPU%E8%BF%9B%E7%A8%8B%20%E7%BD%91%E7%BB%9C%E8%BF%9B%E7%A8%8B%20(NetworkProcess)%20%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%20(GPUProcess)%20(BrowserProcess)%20%E4%BB%8E%E6%B6%A6%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A9%B6%E4%B8%AD%E6%A3%89%E7%AB%8B%E5%87%BA%E6%9D%A5%E7%9A%84%20%E4%BB%8E%E6%B5%8E%E8%B4%A7%E5%99%A8%E8%BF%9B%E7%A8%8B%E4%B8%AD%E7%8B%AC%E7%AB%8B%E5%87%BA%3A%E6%9D%A5%E7%9A%84%20Sandbox%20%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%20sandbox%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A1142%2C%22height%22%3A494%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587002081118-6475b0e9-4ba3-446f-98eb-294c4df3ff36.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587002081118-6475b0e9-4ba3-446f-98eb-294c4df3ff36.png" /><strong><br /></strong></span></p>
+<h3 id="IEi1C" data-lake-id="d50950f2e160d22b62217253a55bb43a">多进程模型优缺点</h3>
+<h4 id="OraiR" data-lake-id="b6c9556ad704553f72e2455af001eeff">优点</h4>
+<ul data-lake-id="53cc52aed2a746360cc702e7ecda129c">
+<li data-lake-id="5a768a5a35c99cd05fd2b1329d652f85">稳定性，一个页面崩溃不会影响到其他页面，因为使用了不同渲染进程</li>
+<li data-lake-id="37e95ea2b98e303b6093edfe1b43c0bc">安全性和沙箱处理，浏览器可以从某些功能中沙漏某些进程。例如，Chrome浏览器限制了处理诸如渲染器进程之类的任意用户输入的进程的任意文件访问。</li>
+
+</ul>
+<h4 id="tmSqr" data-lake-id="ce79ec53b6cd830149c87b346be4d556">缺点</h4>
+<ul data-lake-id="471914e0b0890004bfdb673a39725736">
+<li data-lake-id="341eccbe0584274d3e1066936e965b2d">更高的资源占用。因为每个进程都会包含公共基础结构的副本（例如V8，这是Chrome的JavaScript引擎），这就意味着浏览器会消耗更多的内存资源。</li>
+<li data-lake-id="8bedc5c7f48bdf7e4dce76d52287e8cc">更复杂的体系架构。浏览器各模块之间耦合性高、扩展性差等问题</li>
+
+</ul>
+<p data-lake-id="98efcac3c0979d095790219ae5c4a5bc">&nbsp;</p>
+<h2 id="saving_more_memory_-_servicification_in_chrome" data-lake-id="07ddde3746db61930168b8b8d080e2b7">面向服务的架构</h2>
+<p data-lake-id="ec80a21719ba166eed0bf9f1164f2d01">为了解决之前架构带来的一系列问题，早在 2016 年，Chrome 官方团队使用&ldquo;面向服务的架构&rdquo;（Services Oriented Architecture，简称 SOA）的思想设计了新的 Chrome 架构。原来的各种模块会被重构成独立的服务（Service），访问服务（Service）必须使用定义好的接口，通过 IPC 来通信，每个服务（Service）都可以在独立的进程中运行，并且可以轻松拆分为不同的进程或聚合为一个进程。当Chrome在功能强大的硬件上运行时，它可能会将每个服务拆分为不同的进程以提供更高的稳定性，但是如果是在资源受限的设备上，Chrome会将服务整合到一个进程中以节省内存。</p>
+<h3 id="HrolE" data-lake-id="5b18349faca14214bbf8d6051db1df1b">官网服务化架构图（18年）</h3>
+<h3 id="Agcle" data-lake-id="36de0cfe76f634c9435b3fa842987d11"><span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587086486945-2a42f018-d486-4138-8814-8b7ddd0dedac.png%22%2C%22originWidth%22%3A950%2C%22originHeight%22%3A310%2C%22name%22%3A%22image.png%22%2C%22size%22%3A69464%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A838.6138%2C%22y%22%3A43.0124%2C%22width%22%3A59.711400000000026%2C%22height%22%3A15.094846000000004%2C%22text%22%3A%22UIProcess%22%7D%2C%7B%22x%22%3A529.426%2C%22y%22%3A43.47003%2C%22width%22%3A94.03255999999999%2C%22height%22%3A14.161431999999998%2C%22text%22%3A%22NetworkProcess%22%7D%2C%7B%22x%22%3A290.81488%2C%22y%22%3A43.481533%2C%22width%22%3A78.99201999999997%2C%22height%22%3A13.332134000000003%2C%22text%22%3A%22UtilityProcess%22%7D%2C%7B%22x%22%3A89.15476%2C%22y%22%3A43.6291%2C%22width%22%3A92.7041%2C%22height%22%3A14.297997000000002%2C%22text%22%3A%22BrowserProcess%22%7D%2C%7B%22x%22%3A679.80634%2C%22y%22%3A44.964443%2C%22width%22%3A91.37506000000008%2C%22height%22%3A13.239632%2C%22text%22%3A%22BrowserProcess%22%7D%2C%7B%22x%22%3A559.04816%2C%22y%22%3A65.30561%2C%22width%22%3A38.618889999999965%2C%22height%22%3A23.744959999999992%2C%22text%22%3A%228%22%7D%2C%7B%22x%22%3A69.40815%2C%22y%22%3A78.33913%2C%22width%22%3A43.03712399999999%2C%22height%22%3A15.011040000000008%2C%22text%22%3A%22%E5%93%81%22%7D%2C%7B%22x%22%3A343.17792%2C%22y%22%3A123.55969%2C%22width%22%3A69.42438000000004%2C%22height%22%3A12.531239999999983%2C%22text%22%3A%22GPUProcess%22%7D%2C%7B%22x%22%3A833.5796%2C%22y%22%3A125.934944%2C%22width%22%3A71.0204%2C%22height%22%3A11.240715999999992%2C%22text%22%3A%22GPUProcess%22%7D%2C%7B%22x%22%3A533.068%2C%22y%22%3A127.020836%2C%22width%22%3A89.25646000000006%2C%22height%22%3A12.289663999999988%2C%22text%22%3A%22StorageProcess%22%7D%2C%7B%22x%22%3A45.23305%2C%22y%22%3A174.67754%2C%22width%22%3A96.92042000000001%2C%22height%22%3A12.168000000000006%2C%22text%22%3A%22RendererProcess%22%7D%2C%7B%22x%22%3A274.7849%2C%22y%22%3A204.02306%2C%22width%22%3A81.71028000000001%2C%22height%22%3A14.103980000000007%2C%22text%22%3A%22PluginProcess%22%7D%2C%7B%22x%22%3A666.64465%2C%22y%22%3A206.40083%2C%22width%22%3A98.06735000000003%2C%22height%22%3A14.274619999999999%2C%22text%22%3A%22RendererProcess%22%7D%2C%7B%22x%22%3A534.56433%2C%22y%22%3A206.9784%2C%22width%22%3A84.97966999999994%2C%22height%22%3A12.520960000000002%2C%22text%22%3A%22DeviceProcess%22%7D%2C%7B%22x%22%3A827.56226%2C%22y%22%3A208.75212%2C%22width%22%3A80.82463999999993%2C%22height%22%3A14.344450000000023%2C%22text%22%3A%22PluginProcess%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22UIProcess%20NetworkProcess%20UtilityProcess%20BrowserProcess%20BrowserProcess%208%20%E5%93%81%20GPUProcess%20GPUProcess%20StorageProcess%20RendererProcess%20PluginProcess%20RendererProcess%20DeviceProcess%20PluginProcess%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A950%2C%22height%22%3A310%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587086486945-2a42f018-d486-4138-8814-8b7ddd0dedac.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587086486945-2a42f018-d486-4138-8814-8b7ddd0dedac.png" />Chrome&ldquo;面向服务的架构&rdquo;的进程模型图（最新）</span></h3>
+<p data-lake-id="e71a10bc79f87c2c4c997eb27fcc2c6c"><span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587089161937-7fcfe494-bed3-45e9-bc2b-a7f60781f21d.png%22%2C%22originWidth%22%3A1142%2C%22originHeight%22%3A582%2C%22name%22%3A%22image.png%22%2C%22size%22%3A136514%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A827.6892%2C%22y%22%3A48.352467%2C%22width%22%3A162.84019999999998%2C%22height%22%3A25.97899300000001%2C%22text%22%3A%22%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A539.16785%2C%22y%22%3A48.667397%2C%22width%22%3A105.67174999999997%2C%22height%22%3A23.298377999999992%2C%22text%22%3A%22%E6%8F%92%E4%BB%B7%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A162.07735%2C%22y%22%3A54.715042%2C%22width%22%3A108.19284999999999%2C%22height%22%3A25.189037999999996%2C%22text%22%3A%22%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A467.64127%2C%22y%22%3A142.20874%2C%22width%22%3A196.90249%2C%22height%22%3A28.451539999999994%2C%22text%22%3A%22Chrome%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1%22%7D%2C%7B%22x%22%3A856.7987%2C%22y%22%3A218.36409%2C%22width%22%3A105.6294999999999%2C%22height%22%3A25.157389999999992%2C%22text%22%3A%22GPU%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A513.1759%2C%22y%22%3A220.1147%2C%22width%22%3A77.55960000000005%2C%22height%22%3A26.75949%2C%22text%22%3A%22UI%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A145.45137%2C%22y%22%3A220.82422%2C%22width%22%3A136.58003000000002%2C%22height%22%3A25.81479999999999%2C%22text%22%3A%22Profile%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A852.8735%2C%22y%22%3A305.99268%2C%22width%22%3A109.79055999999991%2C%22height%22%3A26.731220000000008%2C%22text%22%3A%22%E8%AE%BE%E5%A4%87%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A500.08807%2C%22y%22%3A307.02972%2C%22width%22%3A105.74302999999998%2C%22height%22%3A25.03897999999998%2C%22text%22%3A%22%E6%96%87%E6%80%A7%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A160.4379%2C%22y%22%3A307.8661%2C%22width%22%3A106.37469999999996%2C%22height%22%3A22.610340000000008%2C%22text%22%3A%22%E7%BD%91%E7%BB%9C%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A491.6701%2C%22y%22%3A391.68726%2C%22width%22%3A123.0102%2C%22height%22%3A30.419920000000047%2C%22text%22%3A%22Video%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A152.26692%2C%22y%22%3A394.967%2C%22width%22%3A121.49033999999997%2C%22height%22%3A25.44210000000004%2C%22text%22%3A%22Audio%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A990.31085%2C%22y%22%3A511.4452%2C%22width%22%3A117.61495000000002%2C%22height%22%3A20.643850000000043%2C%22text%22%3A%22%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%22%7D%2C%7B%22x%22%3A751.95435%2C%22y%22%3A528.0694%2C%22width%22%3A77.91275000000007%2C%22height%22%3A16.56720000000007%2C%22text%22%3A%22sandbox%22%7D%2C%7B%22x%22%3A1008.35754%2C%22y%22%3A542.2818%2C%22width%22%3A79.25315999999998%2C%22height%22%3A15.430500000000052%2C%22text%22%3A%22sandbox%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%20%E6%8F%92%E4%BB%B7%E8%BF%9B%E7%A8%8B%20%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%20Chrome%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1%20GPU%E8%BF%9B%E7%A8%8B%20UI%E8%BF%9B%E7%A8%8B%20Profile%E8%BF%9B%E7%A8%8B%20%E8%AE%BE%E5%A4%87%E8%BF%9B%E7%A8%8B%20%E6%96%87%E6%80%A7%E8%BF%9B%E7%A8%8B%20%E7%BD%91%E7%BB%9C%E8%BF%9B%E7%A8%8B%20Video%E8%BF%9B%E7%A8%8B%20Audio%E8%BF%9B%E7%A8%8B%20%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%20sandbox%20sandbox%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A1142%2C%22height%22%3A582%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587089161937-7fcfe494-bed3-45e9-bc2b-a7f60781f21d.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587089161937-7fcfe494-bed3-45e9-bc2b-a7f60781f21d.png" /></span></p>
+<h3 id="6SHc6" data-lake-id="86616ebeaf841f0c4de0baf1f10337e7">Chrome&ldquo;面向服务的架构&rdquo;的进程模型图（在资源受限的设备）<span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587089219133-0c7ec32f-b773-4164-b450-cc13ffa8b000.png%22%2C%22originWidth%22%3A1142%2C%22originHeight%22%3A630%2C%22name%22%3A%22image.png%22%2C%22size%22%3A227670%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A905.1673%2C%22y%22%3A54.16654%2C%22width%22%3A109.26970000000006%2C%22height%22%3A27.177970000000002%2C%22text%22%3A%22GPU%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A659.08936%2C%22y%22%3A59.159634%2C%22width%22%3A110.99077999999997%2C%22height%22%3A24.738521000000006%2C%22text%22%3A%22%E6%8F%92%E4%BB%B6%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A368.36777%2C%22y%22%3A60.202736%2C%22width%22%3A113.06356999999997%2C%22height%22%3A26.505303999999995%2C%22text%22%3A%22%E6%BB%A8%E6%9F%93%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A639.61865%2C%22y%22%3A93.06191%2C%22width%22%3A147.66778999999997%2C%22height%22%3A22.00670000000001%2C%22text%22%3A%22(PluginProcess)%22%7D%2C%7B%22x%22%3A893.8661%2C%22y%22%3A94.67085%2C%22width%22%3A133.48990000000003%2C%22height%22%3A21.192324%2C%22text%22%3A%22(GPUProcess)%22%7D%2C%7B%22x%22%3A342.5011%2C%22y%22%3A97.28687%2C%22width%22%3A164.20135%2C%22height%22%3A22.700410000000005%2C%22text%22%3A%22RenderProcess)%22%7D%2C%7B%22x%22%3A596.3416%2C%22y%22%3A173.73206%2C%22width%22%3A173.6404%2C%22height%22%3A33.17721%2C%22text%22%3A%22%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A596.5424%2C%22y%22%3A215.73477%2C%22width%22%3A173.66932999999995%2C%22height%22%3A19.221180000000004%2C%22text%22%3A%22BrowserProcess%22%7D%2C%7B%22x%22%3A390.44116%2C%22y%22%3A295.36737%2C%22width%22%3A82.64643999999998%2C%22height%22%3A25.94753000000003%2C%22text%22%3A%22UI%E6%A8%A1%E5%9D%97%22%7D%2C%7B%22x%22%3A896.81885%2C%22y%22%3A295.38885%2C%22width%22%3A108.88435000000004%2C%22height%22%3A32.08404999999999%2C%22text%22%3A%22%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97%22%7D%2C%7B%22x%22%3A635.1048%2C%22y%22%3A295.79297%2C%22width%22%3A113.52575000000002%2C%22height%22%3A26.37115%2C%22text%22%3A%22%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9D%97%22%7D%2C%7B%22x%22%3A36.540527%2C%22y%22%3A331.7076%2C%22width%22%3A185.331973%2C%22height%22%3A19.83472999999998%2C%22text%22%3A%22%E5%86%85%E5%AD%98%E4%B8%8D%E5%A4%9F%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%AD%2C%22%7D%2C%7B%22x%22%3A38.071854%2C%22y%22%3A364.83057%2C%22width%22%3A200.024626%2C%22height%22%3A19.368560000000002%2C%22text%22%3A%22%E4%BC%9A%E6%8A%8A%E7%9B%B8%E5%85%B3%E7%9A%84%E8%BF%9B%E7%A8%8B%E9%83%BD%E5%90%88%22%7D%2C%7B%22x%22%3A38.03296%2C%22y%22%3A396.33658%2C%22width%22%3A136.42761%2C%22height%22%3A20.14116999999999%2C%22text%22%3A%22%E5%B9%B6%E5%88%B0%E4%B8%BB%E8%BF%9B%E7%A8%8B%E4%B8%AD%22%7D%2C%7B%22x%22%3A628.0604%2C%22y%22%3A397.43323%2C%22width%22%3A141.80020000000002%2C%22height%22%3A29.400300000000016%2C%22text%22%3A%22Profile%E6%A8%A1%E5%9D%97%22%7D%2C%7B%22x%22%3A375.15732%2C%22y%22%3A399.47772%2C%22width%22%3A113.38399999999996%2C%22height%22%3A27.926240000000007%2C%22text%22%3A%22%E8%AE%BE%E5%A4%87%E6%A8%A1%E5%9D%97%22%7D%2C%7B%22x%22%3A980.13055%2C%22y%22%3A511.37192%2C%22width%22%3A80.01755000000014%2C%22height%22%3A16.84603999999996%2C%22text%22%3A%22sandbox%22%7D%2C%7B%22x%22%3A987.98975%2C%22y%22%3A554.4726%2C%22width%22%3A120.27845000000002%2C%22height%22%3A23.14763999999991%2C%22text%22%3A%22%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%22%7D%2C%7B%22x%22%3A1007.6519%2C%22y%22%3A587.2137%2C%22width%22%3A80.37860000000012%2C%22height%22%3A14.832139999999981%2C%22text%22%3A%22sandbox%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22GPU%E8%BF%9B%E7%A8%8B%20%E6%8F%92%E4%BB%B6%E8%BF%9B%E7%A8%8B%20%E6%BB%A8%E6%9F%93%E8%BF%9B%E7%A8%8B%20(PluginProcess)%20(GPUProcess)%20RenderProcess)%20%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B%20BrowserProcess%20UI%E6%A8%A1%E5%9D%97%20%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97%20%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9D%97%20%E5%86%85%E5%AD%98%E4%B8%8D%E5%A4%9F%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%B8%AD%2C%20%E4%BC%9A%E6%8A%8A%E7%9B%B8%E5%85%B3%E7%9A%84%E8%BF%9B%E7%A8%8B%E9%83%BD%E5%90%88%20%E5%B9%B6%E5%88%B0%E4%B8%BB%E8%BF%9B%E7%A8%8B%E4%B8%AD%20Profile%E6%A8%A1%E5%9D%97%20%E8%AE%BE%E5%A4%87%E6%A8%A1%E5%9D%97%20sandbox%20%E9%83%A8%E5%88%86%E7%B3%BB%E7%BB%9F%E6%94%AF%E6%8C%81%20sandbox%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A1142%2C%22height%22%3A630%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587089219133-0c7ec32f-b773-4164-b450-cc13ffa8b000.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587089219133-0c7ec32f-b773-4164-b450-cc13ffa8b000.png" /></span></h3>
+<h3 id="29o0H" data-lake-id="56ff77afc2a0b9bf18ed25873636155f">Chrome的进程</h3>
+<h4 id="nk8mv" data-lake-id="6726c25d3ee56ab26d6d3f91ee32c231">主要进程</h4>
+<p data-lake-id="fff1aca5b62506e58298544e3bf27655"><span class="lake-fontsize-12"><strong>浏览器进程，渲染进程，GPU进程，网络进程，插件进程</strong></span></p>
+<p data-lake-id="59c34307ba1d14edc4ffa086c1385029"><span class="lake-fontsize-12"><strong>&nbsp;</strong></span></p>
+<ul data-lake-id="2b4afbf9139593d38594a9b1b8a0a9af">
+<li data-lake-id="01cc600952753607b1775405f35aa072"><strong><span class="lake-fontsize-12">浏览器进程</span></strong></li>
+
+</ul>
+<p data-lake-id="75823c7ca307b6ffef26a51c641ca58b">主要负责界面显示、用户交互、子进程管理，同时提供存储等功能。控制应用程序的&ldquo; chrome&rdquo;部分，包括&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;地址栏，书签，后退和前进按钮, 还处理Web浏览器的隐形，特权部分，例如网络请求和文件访问。</p>
+<ul data-lake-id="e61a2ded3b544e57792414fc3b7b3eeb">
+<li data-lake-id="8253ed50a8895c2606b37dcacf96c8d5"><strong><span class="lake-fontsize-12">渲染进程</span></strong></li>
+
+</ul>
+<p data-lake-id="823679bc09e21f9c890eecf9c4463c37">核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。出于安全考虑，渲染进程都是运行在沙箱模式下。</p>
+<ul data-lake-id="c061df381899c8e35a34eb32f3ecf348">
+<li data-lake-id="0f257e24370d222b2da99326223ada43"><strong><span class="lake-fontsize-12">GPU 进程</span></strong></li>
+
+</ul>
+<p data-lake-id="7d04233200cfbdd797be0efa3f4c3526">其实，Chrome 刚开始发布的时候是没有 GPU 进程的。而 GPU 的使用初衷是为了实现 3D CSS 的效果是&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制，这使得 GPU 成为浏览器普遍的需求。最后，&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Chrome 在其多进程架构上也引入了 GPU 进程。</p>
+<ul data-lake-id="b9a6aa2cca8d6487a1a9ac6a88b33d57">
+<li data-lake-id="e83da8883d6fa6e1d0df741b8e18b607"><strong><span class="lake-fontsize-12">网络进程</span></strong></li>
+
+</ul>
+<p data-lake-id="7a9fef01f4cd04994f5e46067f18b3ce">主要负责页面的网络资源加载，之前是作为一个模块运行在浏览器进程里面的，直至最近才独立出来，成为&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;一个单独的进程。</p>
+<ul data-lake-id="bacd1f2fb03409c31a623a14ee6a649a">
+<li data-lake-id="8541465e5e603d82b3c66b442db843fb"><strong><span class="lake-fontsize-12">插件进程</span></strong></li>
+
+</ul>
+<p data-lake-id="81b4d5f21c43035e68a8ef4b33fb2f29">主要是负责插件的运行，因插件易崩溃，所以需要通过插件进程来隔离，以保证插件进程崩溃不会对浏览器&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;和页面造成影响。</p>
+<ul data-lake-id="46ef0ca5f74a8999d1e85727e89a64c7">
+<li data-lake-id="bee8e00d5a0bc472e5e5f8f45597b497"><span class="lake-fontsize-12"><strong>utility进程</strong></span></li>
+
+</ul>
+<p data-lake-id="8a68e01cd6e9e90035752273e10f5e12">有时候浏览器主进程需要做一些&ldquo;危险&rdquo;的事情，比如图片解码、文件解压缩。如果这些&ldquo;危险&rdquo;的操作发生了失败，会导致整个主进程发生异常崩溃，这是我们不愿意看到的。因此Chromium设计出了一个utility进程的机制。主进程临时需要做一些不方便的任务的情况下，可以启动一个utility进程来代替主进程执行，主进程与utility进程之间通过IPC消息来通信。</p>
+<p data-lake-id="e8002be9e9dae2f70e0e850b652cd714">如果当前在<strong>资源充足</strong>的环境下还会有如下其他进程</p>
+<ul data-lake-id="0ec8ba5b071e85748e73f7a77c513fec">
+<li data-lake-id="c71acdec399c828e6b493c9f6eaca9eb"><span class="lake-fontsize-12"><strong>UI进程</strong></span></li>
+<li data-lake-id="2ce78d55cd32b62279a20ff696484574"><span class="lake-fontsize-12"><strong>存储进程</strong></span></li>
+<li data-lake-id="b33c612193ac9b3f144264ab744b9d14"><span class="lake-fontsize-12"><strong>设备进程</strong></span></li>
+<li data-lake-id="db65e2c4329999f80a9488a8e5ef11d9"><span class="lake-fontsize-12"><strong>Audio进程</strong></span></li>
+<li data-lake-id="82ff23ee767bfa475b71533ffb7ea8cb"><span class="lake-fontsize-12"><strong>Video进程</strong></span></li>
+<li data-lake-id="253efa45311039839d2a66076c93062a"><span class="lake-fontsize-12"><strong>Profile进程</strong></span></li>
+<li data-lake-id="5b28009ab965ac0afb85c8fb2fb26b14">........</li>
+
+</ul>
+<h2 id="5B8MK" data-lake-id="d2e07701b89052ea6612a1da51213330">发展</h2>
+<p data-lake-id="74daf58b66be4c8f260de487811169ce"><span class="lake-fontsize-12">鉴于目前架构的复杂性，要完整过渡到面向服务架构，估计还需要好几年时间才能完成。不过 Chrome 开发是一个渐进的过程，新的特性会一点点加入进来，这也意味着我们随时能看到 Chrome 新的变化。</span></p>
+<h2 id="mdbtW" data-lake-id="159fc191e0d562f41fe42010309d6f16">注意</h2>
+<p data-lake-id="9573111910798a9e97c1af69a2ebd94f">⚠️当前最新Chrome浏览器已经在面向服务的架构上了，我们可以打开Chrome对的任务管理器看一下</p>
+<p data-lake-id="d0f7654690eb6104e373f573bd34bbff"><span class="lake-card-margin-top lake-card-margin-bottom lake-selected" data-card-type="inline" data-lake-card="image" data-card-value="data:%7B%22src%22%3A%22https%3A%2F%2Fcdn.nlark.com%2Fyuque%2F0%2F2020%2Fpng%2F305942%2F1587091462508-c0bd9b05-cde7-4d02-b165-bd9623d6433e.png%22%2C%22originWidth%22%3A812%2C%22originHeight%22%3A238%2C%22name%22%3A%22image.png%22%2C%22size%22%3A57674%2C%22display%22%3A%22inline%22%2C%22align%22%3A%22left%22%2C%22linkTarget%22%3A%22_blank%22%2C%22status%22%3A%22done%22%2C%22ocrLocations%22%3A%5B%7B%22x%22%3A316.31226%2C%22y%22%3A0.59194523%2C%22width%22%3A179.32028000000003%2C%22height%22%3A15.29373577%2C%22text%22%3A%22%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8-GOOgLeChrome%22%7D%2C%7B%22x%22%3A21.189413%2C%22y%22%3A40.419212%2C%22width%22%3A26.983097000000004%2C%22height%22%3A15.285058%2C%22text%22%3A%22%E4%BB%BB%E5%8A%A1%22%7D%2C%7B%22x%22%3A738.6334%2C%22y%22%3A41.850185%2C%22width%22%3A39.19136999999989%2C%22height%22%3A14.242332999999995%2C%22text%22%3A%22%E8%BF%9B%E7%A8%8BID%22%7D%2C%7B%22x%22%3A680.24036%2C%22y%22%3A41.946278%2C%22width%22%3A26.374540000000025%2C%22height%22%3A14.054412%2C%22text%22%3A%22%E7%BD%91%E7%BB%9C%22%7D%2C%7B%22x%22%3A482.55963%2C%22y%22%3A41.559185%2C%22width%22%3A70.24024000000003%2C%22height%22%3A14.062919999999998%2C%22text%22%3A%22%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4%22%7D%2C%7B%22x%22%3A590.01666%2C%22y%22%3A42.29167%2C%22width%22%3A26.63833999999997%2C%22height%22%3A11.88552%2C%22text%22%3A%22CPU%22%7D%2C%7B%22x%22%3A39.368565%2C%22y%22%3A62.563416%2C%22width%22%3A36.002975%2C%22height%22%3A13.706164000000008%2C%22text%22%3A%22%E6%B5%8F%E8%A7%88%E5%99%A8%22%7D%2C%7B%22x%22%3A520.1676%2C%22y%22%3A62.65288%2C%22width%22%3A44.22739999999999%2C%22height%22%3A12.57376%2C%22text%22%3A%22370MB%22%7D%2C%7B%22x%22%3A607.89606%2C%22y%22%3A63.579994%2C%22width%22%3A19.184689999999932%2C%22height%22%3A10.248322000000002%2C%22text%22%3A%225.8%22%7D%2C%7B%22x%22%3A765.63245%2C%22y%22%3A63.79409%2C%22width%22%3A23.39898000000005%2C%22height%22%3A11.027569999999997%2C%22text%22%3A%22310%22%7D%2C%7B%22x%22%3A519.6431%2C%22y%22%3A78.983444%2C%22width%22%3A45.95345999999995%2C%22height%22%3A12.580355999999995%2C%22text%22%3A%22490MB%22%7D%2C%7B%22x%22%3A38.620163%2C%22y%22%3A80.02961%2C%22width%22%3A55.76676200000001%2C%22height%22%3A12.487944999999996%2C%22text%22%3A%22GPU%E8%BF%9B%E7%A8%8B%22%7D%2C%7B%22x%22%3A764.9093%2C%22y%22%3A80.67697%2C%22width%22%3A23.932739999999967%2C%22height%22%3A11.330650000000006%2C%22text%22%3A%22392%22%7D%2C%7B%22x%22%3A607.36536%2C%22y%22%3A81.20268%2C%22width%22%3A19.40886999999998%2C%22height%22%3A10.40737%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A516.5133%2C%22y%22%3A97.25603%2C%22width%22%3A47.633500000000026%2C%22height%22%3A11.648470000000003%2C%22text%22%3A%2238.9MB%22%7D%2C%7B%22x%22%3A36.959934%2C%22y%22%3A97.4947%2C%22width%22%3A147.853236%2C%22height%22%3A12.357070000000007%2C%22text%22%3A%22%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F%3ANetworkService%22%7D%2C%7B%22x%22%3A606.49725%2C%22y%22%3A98.06127%2C%22width%22%3A21.580510000000004%2C%22height%22%3A10.49255500000001%2C%22text%22%3A%220.2%22%7D%2C%7B%22x%22%3A765.0294%2C%22y%22%3A98.11344%2C%22width%22%3A24.340839999999957%2C%22height%22%3A10.681570000000008%2C%22text%22%3A%22394%22%7D%2C%7B%22x%22%3A518.7595%2C%22y%22%3A114.11436%2C%22width%22%3A45.30636000000004%2C%22height%22%3A11.983739999999997%2C%22text%22%3A%2210.1MB%22%7D%2C%7B%22x%22%3A765.48096%2C%22y%22%3A114.29155%2C%22width%22%3A24.30024000000003%2C%22height%22%3A11.709816000000004%2C%22text%22%3A%22722%22%7D%2C%7B%22x%22%3A36.548397%2C%22y%22%3A114.711296%2C%22width%22%3A134.80219300000002%2C%22height%22%3A13.519214000000005%2C%22text%22%3A%22%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F%3AAUdioService%22%7D%2C%7B%22x%22%3A607.4888%2C%22y%22%3A114.92035%2C%22width%22%3A19.298740000000066%2C%22height%22%3A10.69377%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A750.393%2C%22y%22%3A130.6537%2C%22width%22%3A39.041939999999954%2C%22height%22%3A11.882280000000009%2C%22text%22%3A%2233950%22%7D%2C%7B%22x%22%3A518.15485%2C%22y%22%3A131.10056%2C%22width%22%3A46.18762000000004%2C%22height%22%3A11.213480000000004%2C%22text%22%3A%2216.7MB%22%7D%2C%7B%22x%22%3A36.65409%2C%22y%22%3A131.41046%2C%22width%22%3A143.82330000000002%2C%22height%22%3A14.944780000000009%2C%22text%22%3A%22%E5%AE%9E%E7%94%A8%E6%A5%BC%E5%BA%8F%3ATracingService%22%7D%2C%7B%22x%22%3A607.1756%2C%22y%22%3A131.88622%2C%22width%22%3A20.08886999999993%2C%22height%22%3A10.718869999999981%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A521.38043%2C%22y%22%3A148.28052%2C%22width%22%3A41.861209999999915%2C%22height%22%3A11.510009999999994%2C%22text%22%3A%22197MB%22%7D%2C%7B%22x%22%3A750.5644%2C%22y%22%3A148.28078%2C%22width%22%3A39.09739999999999%2C%22height%22%3A11.523740000000004%2C%22text%22%3A%2231182%22%7D%2C%7B%22x%22%3A607.1621%2C%22y%22%3A148.43587%2C%22width%22%3A19.803049999999985%2C%22height%22%3A11.243570000000005%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A707.11237%2C%22y%22%3A148.71848%2C%22width%22%3A10.651479999999992%2C%22height%22%3A10.651479999999992%2C%22text%22%3A%220%22%7D%2C%7B%22x%22%3A38.15824%2C%22y%22%3A149.91978%2C%22width%22%3A372.58086000000003%2C%22height%22%3A11.679429999999996%2C%22text%22%3A%22%E4%BD%A0%E9%87%91%E8%B4%9DDevioois30.43149yispiiw%22%7D%2C%7B%22x%22%3A704.9835%2C%22y%22%3A164.53716%2C%22width%22%3A13.207499999999982%2C%22height%22%3A13.207499999999982%2C%22text%22%3A%220%22%7D%2C%7B%22x%22%3A516.19025%2C%22y%22%3A165.27528%2C%22width%22%3A47.018800000000056%2C%22height%22%3A11.528049999999979%2C%22text%22%3A%2259.7MB%22%7D%2C%7B%22x%22%3A30.412685%2C%22y%22%3A165.31314%2C%22width%22%3A186.26915499999998%2C%22height%22%3A14.090069999999997%2C%22text%22%3A%22%E5%B0%9A%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F%3AReactDeveloperTools%22%7D%2C%7B%22x%22%3A750.56024%2C%22y%22%3A165.6547%2C%22width%22%3A38.85852%2C%22height%22%3A11.005560000000003%2C%22text%22%3A%2229144%22%7D%2C%7B%22x%22%3A606.28375%2C%22y%22%3A165.70122%2C%22width%22%3A21.393749999999955%2C%22height%22%3A11.019849999999991%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A38.94797%2C%22y%22%3A181.58647%2C%22width%22%3A175.78873000000002%2C%22height%22%3A12.955110000000019%2C%22text%22%3A%22%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3AReactDeveloperTools%22%7D%2C%7B%22x%22%3A516.42145%2C%22y%22%3A199.10587%2C%22width%22%3A46.59184999999991%2C%22height%22%3A11.274819999999977%2C%22text%22%3A%2222.9MB%22%7D%2C%7B%22x%22%3A750.2118%2C%22y%22%3A199.7195%2C%22width%22%3A38.09782999999993%2C%22height%22%3A10.790279999999996%2C%22text%22%3A%2229145%22%7D%2C%7B%22x%22%3A38.890373%2C%22y%22%3A199.85242%2C%22width%22%3A141.29452700000002%2C%22height%22%3A11.485579999999999%2C%22text%22%3A%22%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3ARoduxDevTools%22%7D%2C%7B%22x%22%3A608.01416%2C%22y%22%3A199.89232%2C%22width%22%3A19.117040000000088%2C%22height%22%3A10.207339999999988%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A516.7979%2C%22y%22%3A215.59924%2C%22width%22%3A46.29549999999995%2C%22height%22%3A11.875379999999979%2C%22text%22%3A%2221.2MB%22%7D%2C%7B%22x%22%3A39.023064%2C%22y%22%3A216.22162%2C%22width%22%3A138.981986%2C%22height%22%3A12.71848%2C%22text%22%3A%22%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3AVue.jsdevtools%22%7D%2C%7B%22x%22%3A608.05255%2C%22y%22%3A216.7114%2C%22width%22%3A18.958650000000034%2C%22height%22%3A10.96101999999999%2C%22text%22%3A%220.0%22%7D%2C%7B%22x%22%3A751.04803%2C%22y%22%3A216.81018%2C%22width%22%3A37.39536999999996%2C%22height%22%3A10.754529999999988%2C%22text%22%3A%2229146%22%7D%5D%2C%22style%22%3A%22none%22%2C%22search%22%3A%22%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8-GOOgLeChrome%20%E4%BB%BB%E5%8A%A1%20%E8%BF%9B%E7%A8%8BID%20%E7%BD%91%E7%BB%9C%20%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4%20CPU%20%E6%B5%8F%E8%A7%88%E5%99%A8%20370MB%205.8%20310%20490MB%20GPU%E8%BF%9B%E7%A8%8B%20392%200.0%2038.9MB%20%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F%3ANetworkService%200.2%20394%2010.1MB%20722%20%E5%AE%9E%E7%94%A8%E7%A8%8B%E5%BA%8F%3AAUdioService%200.0%2033950%2016.7MB%20%E5%AE%9E%E7%94%A8%E6%A5%BC%E5%BA%8F%3ATracingService%200.0%20197MB%2031182%200.0%200%20%E4%BD%A0%E9%87%91%E8%B4%9DDevioois30.43149yispiiw%200%2059.7MB%20%E5%B0%9A%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F%3AReactDeveloperTools%2029144%200.0%20%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3AReactDeveloperTools%2022.9MB%2029145%20%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3ARoduxDevTools%200.0%2021.2MB%20%E8%BE%85%E5%8A%A9%E6%A1%86%E6%9E%B6%3AVue.jsdevtools%200.0%2029146%22%2C%22margin%22%3A%7B%22top%22%3Atrue%2C%22bottom%22%3Atrue%7D%2C%22width%22%3A812%2C%22height%22%3A238%7D"><img class="image lake-drag-image" title="image.png" src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587091462508-c0bd9b05-cde7-4d02-b165-bd9623d6433e.png" alt="image.png" data-role="image" data-raw-src="https://cdn.nlark.com/yuque/0/2020/png/305942/1587091462508-c0bd9b05-cde7-4d02-b165-bd9623d6433e.png" /></span></p>
+<blockquote>
+<p data-lake-id="5bcb4448765503b4fffa4cdb411c01fa">参考链接</p>
+<p data-lake-id="350a6143df5f3d07d8a25175a5004db5">极客时间浏览器工作原理与时间</p>
+<p data-lake-id="a00099ae632daee33f1614a73f0d0a7d">Chrome官网&nbsp;<a href="https://developers.google.com/web/updates/2018/09/inside-browser-part1" target="_blank">https://developers.google.com/web/updates/2018/09/inside-browser-part1</a></p>
+
+</blockquote>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 11:08</span>&nbsp;
+<a href="https://www.cnblogs.com/suihang/">一只菜鸟攻城狮啊</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12718528" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12718528);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 450240, cb_blogApp = 'suihang', cb_blogUserGuid = 'f36e5b00-3bbf-4c4d-a26a-08d5f8345f42';
+    var cb_entryId = 12718528, cb_entryCreatedDate = '2020-04-17 11:08', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 一只菜鸟攻城狮啊
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 随机数 随机数在科学研究与工程实" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ThreadLocalRandom——Random在大并发环境下的替代者 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/12294994.html">ThreadLocalRandom——Random在大并发环境下的替代者</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<h2 id="随机数">随机数</h2>
+<p>随机数在科学研究与工程实际中有着极其重要的应用！</p>
+<p>简单来说，<strong>随机数就是一个数列</strong>，这个数列可能满足一定的概率分布，又获取其满足的分布并不为我们所知。</p>
+<p>数学方法产生随机数应该称之为“伪随机数”，只有使用物理方法才能得到真正的随机数！因此我们使用计算机产生的随机数都是&quot;伪随机数&quot;。那么计算机到底是怎么产生随机数的呢？这时就要提到随机数发生器了。</p>
+<h3 id="随机数发生器">随机数发生器</h3>
+<p>我们高中的时候都学过数列的知识，上面提到随机数可以看成是一个数列，那么我们可以将随机数发生器看成是一个数列表达式。比如现在有下面两个随机说发生器</p>
+<pre><code>//发生器1
+X（n+1）= a * X(n) + b
+
+//发生器2
+X（n+1）= a * X(n)
+
+</code></pre>
+<p>当然还有很多随机数发生器，现实生产中使用的发生器也并不是像上面的那么简单，这边只是为了说明随机数发生器到底是什么列了两个例子。</p>
+<h3 id="随机数种子">随机数种子</h3>
+<p>我们在产生随机数的时候经常会听到随机数种子这个名词，那随机数种子到底是什么？我们还是以上面的发生器为例。</p>
+<pre><code>//发生器1
+X（n+1）= a * X(n) + b
+
+</code></pre>
+<p>显然通过上式我们能够得到一个数列，前提是X(0)应该给出，依次我们就可以算出X(1),X(2)...；当然不同的X(0)就会得到不同的数列。</p>
+<p>可以说X(0)的值就是随机数的种子，只要这个种子给的一样，产生的随机数序列就是一样的。下面给出一个使用Java中￿￿<code>Random</code>产生随机数的列子证明下这个说法。</p>
+<pre><code class="language-java">Random random1 = new Random(100);
+for (int i = 0; i &lt; 10 ; i++) {
+    System.out.println(random1.nextInt(5));
+}
+
+System.out.println(&quot;-------------&quot;);
+
+Random random2 = new Random(100);
+for (int i = 0; i &lt; 10 ; i++) {
+    System.out.println(random2.nextInt(5));
+}
+</code></pre>
+<p>执行结果如下：</p>
+<pre><code>0
+0
+4
+3
+1
+1
+1
+3
+3
+3
+-------------
+0
+0
+4
+3
+1
+1
+1
+3
+3
+3
+--------------
+</code></pre>
+<p>上面代码中新建了两个随机数发生器，都设置了同样的随机数种子100，产生10个随机数。从上面的结果中可以看出两个发生器产生的序列是一样的。</p>
+<p>对于一个应用级的伪随机数发生器，所有的“伪随机数”，均匀的分布于一个“轨道”上，几乎所有的数都可以做为种子。数字“0”，有时是一个特例，不能作为种子，当然它取决于你使用的随机数发生器！</p>
+<h2 id="random类的局限性">Random类的局限性</h2>
+<p>Random类是JDK提供的一个随机数发生器。 我们看下Random类中nextInt方法的源代码：</p>
+<pre><code class="language-java">
+public int nextInt(int bound) {
+        if (bound &lt;= 0)
+            throw new IllegalArgumentException(BadBound);
+        //关键代码点，这边会根据老的随机数种子生成新的随机数种子，然后会根据新生成的随机数种子生成随机数
+        int r = next(31);
+        int m = bound - 1;
+        if ((bound &amp; m) == 0)  // i.e., bound is a power of 2
+            r = (int)((bound * (long)r) &gt;&gt; 31);
+        else {
+            for (int u = r;
+                 u - (r = u % bound) + m &lt; 0;
+                 u = next(31))
+                ;
+        }
+        return r;
+    }
+
+</code></pre>
+<p>那我们看下上面的next方法到底是怎样生成新的随机数种子的。</p>
+<pre><code class="language-java">
+protected int next(int bits) {
+    long oldseed, nextseed;
+    AtomicLong seed = this.seed;
+    do {
+        oldseed = seed.get();
+        //根据旧值计算新的种子
+        nextseed = (oldseed * multiplier + addend) &amp; mask;
+    } while (!seed.compareAndSet(oldseed, nextseed));
+    return (int)(nextseed &gt;&gt;&gt; (48 - bits));
+}
+
+</code></pre>
+<p>上面代码中，首先获取当前原子变量种子的值，然后根据当前种子值计算新的种子。再然后使用CAS机制更新种子的值，保证多线程竞争的情况下只有一个能更新成功。最后使用固定算法根据新的种子计算随机数。</p>
+<p>每个Random实例里面都有一个原子性的种子变量用来记录当前的种子值，当要生成新的随机数时需要根据当前种子计算新的种子并更新回原子变量。在多线程下使用单个Random实例生成随机数时，当多个线程同时计算随机数来计算新的种子时，多个线程会竞争同一个原子变量的更新操作，由于原子变量的更新是CAS操作，同时只有一个线程会成功，所以会造成大量线程进行自旋重试，这会降低并发性能。</p>
+<p><strong>分析到这里我们可以看出Random的局限性并不是线程安全的问题，而是在大量线程并发的时候，通过CAS机制更新<code>随机数种子</code>会导致大量线程自旋，耗费CPU性能，导致系统吞吐量下降。</strong></p>
+<h2 id="threadlocalrandom">ThreadLocalRandom</h2>
+<p>ThreadLocalRandom类是JDK 7在JUC包下新增的随机数生成器，它弥补了Random类在多线程下的缺陷。下面来分析下ThreadLocalRandom的实现原理。</p>
+<p>从名字上看它会让我们联想到ThreadLocal。ThreadLocal通过让每一个线程复制一份变量，使得在每个线程对变量进行操作时实际是操作自己本地内存里面的副本，从而避免了对共享变量进行同步。<br>
+实际上ThreadLocalRandom的实现也是这个原理，Random的缺点是多个线程会使用同一个原子性种子变量，从而导致对原子变量更新的竞争。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/202002/1775037-20200211143222658-662392421.png" alt=""></p>
+<p>那么，如果每个线程都维护一个种子变量，则每个线程生成随机数时都根据自己老的种子计算新的种子，并使用新种子更新老的种子，再根据新种子计算随机数，就不会存在竞争问题了，这会大大提高并发性能。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/202002/1775037-20200211143247739-1771064494.png" alt=""></p>
+<p>ThreadLocalRandom提升性能的原理就是这样的。具体的源代码也比较简单，这边就不贴代码了。感兴趣的可以自己看下。下面贴下ThreadLocalRandom的简单使用方法</p>
+<pre><code class="language-java">ThreadLocalRandom random = ThreadLocalRandom.current();
+random.nextInt();
+</code></pre>
+<h2 id="参考">参考</h2>
+<ul>
+<li>《Java并发编程之美》</li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-02-11 14:33</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12294994" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12294994);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 12294994, cb_entryCreatedDate = '2020-02-11 14:33', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

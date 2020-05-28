@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="王者荣耀 去年我有幸被老领导邀请以系统架构师的岗位带技术团队，并对公司项目以微服务进行了实施。无论是技术团队还是技术架构都是由我亲自的从0到1的选型与招聘成型的，此过程让我受益良多，因此也希望在接下来" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>.Net微服务实战之技术选型篇 - 陈珙 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/skychen1218/custom.css?v=tJ3WDojS8VDnASSOKCki1PFtrJM=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/moonlightink/bundle-moonlightink-mobile.min.css?v=DtT6aFEL2E0nUaFINFlRXOfBp0MkOV1AK7GFtAkKKbo" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/skychen1218/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/skychen1218/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/skychen1218/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 167340;
+        var currentBlogApp = 'skychen1218';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'MoonlightInk';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/hafiz/feedback.css">
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/skychen1218/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/skychen1218/">陈珙</a>
+</h1>
+<h2>
+不积跬步,无以至千里
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/skychen1218/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E9%99%88%E7%8F%99">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/skychen1218/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+50&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+745</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/skychen1218/p/12531412.html">.Net微服务实战之技术选型篇</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>王者荣耀　</h1>
+<p>　　去年我有幸被老领导邀请以系统架构师的岗位带技术团队，并对公司项目以微服务进行了实施。无论是技术团队还是技术架构都是由我亲自的从0到1的选型与招聘成型的，此过程让我受益良多，因此也希望在接下来的系列博文尽可能的与大家分享我的经验。</p>
+<p>　　古人有云：将军难打无兵之仗。想要把微服务很好的实施也并非能一个人可以完成的事，一来需要有出色的运维提供支持，二来需要花时间做技术选型与攻关，三来还要开发兄弟们配合实施。因此，这次能顺利实施并不是一个人的王者，而是团队的荣耀。</p>
+<p>　　框架源码：https://github.com/SkyChenSky/Sikiro （文末有说明）</p>
+<h1>工欲善其事，必先利其器</h1>
+<p><a href="https://naotu.baidu.com/file/015ba779a5efb6ac30f31390eaa4724d" target="_blank"><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200320104930402-1427668903.png" alt="" /></a></p>
+<p>　　以上是我们公司的技术栈（点击图片可在浏览器打开），除了统一配置中心没有服务器资源和Hangfire还没场景使用外，其他都已经上线使用了。　　</p>
+<p>　　俗话说得好：<strong>工欲善其事，必先利其器</strong>。一个优秀的工程师应该善于使用框架和工具，在微服务这一块的技术栈选型并非一蹴而就，也是我多次对比验证后，并良好的集成到公司项目然后落地实施。这系列框架单纯这么去用其实是可以无缝集成的，但是在落实项目的时候，我为了集成得更加友好和使用上更加便利，在基础上做了扩展，例如SkyWalking添加Request和Response，CAP与Chloe.ORM的集成等，下文我会逐个分享。</p>
+<p>　　有需要的朋友可以参照我这套去实施，这样大家就可以花更多的时间把精力放在业务、调优、拆分、设计等方面。</p>
+<p>　　此外大家看得出，我所有的技术栈基本上找的都是开源社区的比较出名的项目，没有一个属于自研的。这样做的原因：</p>
+<ul>
+<li>　　快速搭建</li>
+<li>　　降低成本</li>
+<li>　　社区支持维护</li>
+<li>　　利于人才引进</li>
+</ul>
+<p>　　其实可以看出.Net不缺优秀的开源项目，那么实施这么久让我唯一觉得深刻的印象是：<strong>缺少整合。</strong></p>
+<p><strong>　　</strong>之前我也跟不少同行讨论过甚至在面试的时候，他们觉得应该自己造一个轮子，原因各种各样，但唯独缺少了<strong>希望在开源项目基础上完善下</strong>这个原因。我也理解他们的心理，因为&ldquo;优秀&rdquo;的工程师应该自己写一套证明下自己。其实我认为这也许是<strong>包容心</strong>的在作祟，我们应当<strong>求同存异</strong>，学会接受已经检验过的轮子，在基础上完善您的需要，有必要还可以给社区做贡献，双赢。</p>
+<h1>原则</h1>
+<p>　　我做技术选型的时候，坚持着三大原则，<strong>简单、适合、运维优先</strong>。</p>
+<p>　　在满足需求的情况下，优先选择轻量级的框架，因为轻量级总比重量级的易学习，易于扩展，易于理解源码。试想一下，有个框架什么都很齐全，但是学习曲线高，在写一个demo的时候各种踩&ldquo;坑&rdquo;找原因，还有可能出了问题不知道怎么解决，除了开始你初认识该框架觉得他很厉害之外，后面使用每走一步都是阻碍和吐槽。</p>
+<p>　　在有限的资源、人力、时间，我们更新技术的同时还要保证业务的正常开展，我会优先选择我比较熟悉的技术，我会将他们进行封装、优化、集成，尽可能的<strong>减少开发人员对技术细节的认知负担，</strong>尽可能以他们最熟悉的使用方式提供。此外，我们团队是有运维岗，如果问题由运维解决更快、更方便则优先交给运维，尽可能让开发关注数据流转与业务流程。</p>
+<p>　　<strong><span style="color: #ff0000;">PS：我选型的时候不是一蹴而就的，下文可能我会提到某些框架工具我没有去选择原因，并不是否认它们存在的价值，而绝大问题是这些不适用于我们团队。最后我向伟大的开源项目与其作者致敬。</span></strong></p>
+<p>　　</p>
+<h1>微服务</h1>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200324130922912-1892804135.png" alt="" /></p>
+<p>　　有一条盛传于我们行业的公式：<strong>软件 = 程序 + 软件工程</strong>。</p>
+<p>　　程序就是我们经常产出的算法、数据结构、脚本、框架、架构等。</p>
+<p>　　为什么称之为软件工程？因为这是具有科学方法论引导的、多人协作、有明确目标、有阶段性的。从以前瀑布开发再到10年前盛行的敏捷开发最后到最近几年流行的DevOps，可见开发模式也随着技术架构更新也不停的演进。我们团队选用了原型模式+DevOps模式来应对我们的微服务架构的开发。</p>
+<p>　　书本的教条主义我就不多说了，我对微服务的理解分为<strong>微</strong>和<strong>服务</strong>。</p>
+<h2>微</h2>
+<p>　　如何微？微到什么程度？我借助两样东西，合理的<strong>系统架构分层</strong>与<strong>DDD思想</strong>，两者分别管理架构的纵向拆分与横向拆分。</p>
+<p>　　架构分层，我采用了前后端分离+多层架构，自顶向下的依赖，各司其职。</p>
+<p>　　DDD在最近几年非常流行，然而这并非新的技术，十几年前就已经它的出现了。随着微服务盛行，DDD的划分域的<strong>化繁为简</strong>的思想与微服务的本质-<strong>拆</strong>不谋而合，因此DDD也随之热门起来。</p>
+<p>　　下面是我们的架构图，这个话题在下一篇《<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/skychen1218/p/12653155.html">.Net微服务实战之技术架构分层篇</a>》重点再讨论。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200320140737191-169593220.jpg" alt="" width="1034" height="969" /></p>
+<h2>服务</h2>
+<p>　　我接下来用一段话描述一下服务化的需要。首先<strong>API网关</strong>作为我们请求流量的入口，隔离了外网与内网的作用。接着开发人员得知道如何调用服务，那么可以从<strong>注册中心</strong>发现已注册的服务的IP地址、端口的列表，这就是<strong>服务的注册与发现；</strong>接着我们需要知道服务下接口路径、请求与响应的格式，因此我们需要<strong>服务描述。</strong>满足前面两个条件后，我们就可以进行调用服务了，因此我们需要<strong>RPC框架</strong>进行<strong>服务通信</strong>。当服务运作后，我们需要<strong>服务监控</strong>来监控服务的运行情况以此方便调优。随着服务拆分得越细、跨度越大，服务出问题的时候不容易定位，因此我们需要<strong>服务跟踪</strong>进行问题定位。</p>
+<p>　　由上述可见组件主要包括以下6点：</p>
+<ul>
+<li>　　API网关</li>
+<li>　　服务描述</li>
+<li>　　服务注册中心</li>
+<li>　　RPC框架</li>
+<li>　　服务监控</li>
+<li>　　分布式链路跟踪</li>
+</ul>
+<h1>API网关</h1>
+<p>　　API网关主要起到了隔离内外网、身份验证、路由、限流等作用。我用一个生活的例子搭地铁比喻来描述下：过闸前我们需要经过安检保证客流的<strong>安全性，</strong>上下班高峰期还会排队进行<strong>限流，</strong>我们还可以通过看指示牌或者询问工作人员了解到应该往什么方向走，这就是<strong>路由。</strong></p>
+<p><strong>　　</strong>我们团队选型了Kong和KongA作为我们的API网关，Kong是一个在Nginx运行的Lua应用程序，由lua-nginx-module实现。Kong和OpenResty一起打包发行，其中已经包含了lua-nginx-module。基本功能有路由、负载均衡、基本认证、限流、跨域、日志等功能，其他功能例如jwt认证可以通过插件进行扩展。</p>
+<p>　　有人会问为什么不用Ocelot？回答这个问题之前，我首先声明我尊敬Ocelot项目与其开发者。</p>
+<p>　　1.易用性。需要二次开发，虽然对.Net开发者来说能接受，但不利于运维。</p>
+<p>　　2.性能。社区很多测试数据，据我了解就是kong 11K，Ocelot 3.5K，四舍五入3倍性能差，作为流量的入口，性能这块我还是比较注重的。</p>
+<p>　　3.可扩展性，Kong很多功能可以通过插件式按需使用与开发。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200324224801256-1357037884.png" alt="" width="988" height="631" /></p>
+<p>&nbsp;</p>
+<h1>服务描述</h1>
+<p>　　我们团队采用了Swagger，以此来衔接前后端开发的接口对接，省去了编写接口文档的成本，此外也支持接口调试，让开发效率提高不少。我们的服务都是以HTTP协议提供，对外API用RESTful风格，对内统一以POST的RPC风格提供。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200325113428412-1267964826.png" alt="" width="1176" height="724" /></p>
+<h1>服务注册中心</h1>
+<p>　　服务注册，服务在发布后自动把<strong>IP地址与端口</strong>注册进<strong>服务中心；</strong>服务发现，通过调用服务中心的接口获取到某服务<strong>IP地址与端口的</strong>列表。我们团队选用Consul+Consul Tamplate+nginx，Consul是基于GO语言开发的开源工具，主要面向分布式，服务化的系统提供服务注册、服务发现和配置管理的功能。Consul的核心功能包括：服务注册/发现、健康检查、Key/Value存储、多数据中心和分布式一致性保证等特性。</p>
+<p>　　Consul作为服务注册中心的存在，但是我们服务发现只能拿到IP列表，我们使用RPC调用时还是得做负载均衡算法，于是使用了Consul Tamplate把服务列表同步到nginx的配置，那么RPC框架就无需集成负载均衡算法经过nginx路由。</p>
+<p>　　开始选型我并没有选择Consul Tamplate，而是选择了fabio的这个中间件。fabio是一个应用于Consul的轻量级、零配置负载均衡路由器，开始用的时候部署起来很方便、很简单。后来上了Skywalking分布式链路跟踪系统，只要经过fabio路由的都无法把调用链串起来，虽然将就的用是没什么问题，但是Skywalking的调用链日志无法很好的展示出来就会影响日后的问题排查。我当时花了两天时间研究与issue提问，并没有很好的结果，所以最后另外选择了Consul Tamplate+nginx。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200325120209619-1292653020.png" alt="" width="1171" height="632" /></p>
+<h1>服务通信</h1>
+<p>　　RPC框架主要三大核心，序列化、通信细节隐藏、代理。协议支持分TCP和HTTP，当然还有两者兼容+集成MQ的。我们选择了WebApiClient做客户端，服务端仍是.Net Core WebAPI，主要考虑到WebAPIClient的轻量、易用，而且和Skywalking、Consul集成方便。我当时用的时候时.Net Core 2.2版本，gRPC并没有集成进来。</p>
+<p>　　此外我也选择过ServiceStack，ServiceStack的技术栈很全，缺点是依赖得很深，当时试用的时候，它所以依赖的一个底层包ServiceStack.Common的某个类与WebAPI冲突了，所以对于不熟悉该框架的我断定存在依赖污染，无论我需要还是不需要都统统依赖进来了，然而我只是希望要一个简单的RPC框架。此外还需要破解。</p>
+<p>　　Surging也作为我当时选型的目标，开始也是我抱着最大希望的，因为描述得很牛逼，什么都是全得。然而深入去用的时候，没有一个完整的文档，入门demo也不友好，说实话我驾驭不住只能放弃。</p>
+<h1>服务跟踪</h1>
+<p>　　市面上的分布式链路跟踪系统基本上都是根据谷歌的dapper论文实现的，基本上都分三大块，UI、收集器、代理（探针），原理大概是把涉及的服务链路的RequestID串起来。</p>
+<p>　　我们团队选择了SkyWalking作为了项目的分布式链路跟踪系统，原因很简单：易用，无侵入，集成良好。</p>
+<p>　　实施到我们项目的时候我做了点扩展，把Reqeust、Response、Header、异常给记录了下来，并过滤了部分不需要记录的路径。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200325134026072-1039371991.png" alt="" width="1389" height="758" /></p>
+<h1>分布式事务</h1>
+<p>　　只要在分布式系统，分布式事务必不可缺。</p>
+<table style="height: 86px; width: 813px;" border="0" align="left"><caption><strong>分布式事务</strong></caption>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>分类</strong></td>
+<td style="text-align: center;"><strong>理论</strong></td>
+<td style="text-align: center;"><strong>案例</strong></td>
+<td style="text-align: center;"><strong>中间件</strong></td>
+</tr>
+<tr>
+<td>强一致性</td>
+<td>ACID</td>
+<td>二阶段提交</td>
+<td>msdtc</td>
+</tr>
+<tr>
+<td>最终一致性</td>
+<td>BASE</td>
+<td>本地消息表</td>
+<td>CAP</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">　　<strong>本地消息表</strong>是eBay在N年前提出的方案，而CAP以该思想实现的一门框架，原理大概是，本地业务表与消息凭据表作为一个事务持久化，通过各种补偿手段保证MQ消息的可靠性，包括MQ正常发布与消费。</p>
+<p style="text-align: left;">　　我花了多天的时间专门测试了该框架可靠性，的确有保证。然而有个地方我认为可以优化，Retry的查询语句条件可以更加严谨点，只需要负责相应的Group进行Retry就好，没必要全部都查询出来，因为这个问题我在测试环境与本地环境共同调试时，刚好两个环境的Group不一致，导致会Retry失败的问题。</p>
+<h1 style="text-align: left;">限流与熔断</h1>
+<p>　　我的架构图有两个网关：<strong>入站API网关 </strong>和 <strong><strong>出站API网关</strong></strong></p>
+<p>　　<strong>限流</strong>是针对外部流量的控制，<strong>保护了下游服务避免了流量冲击后雪崩</strong>，可以通过<strong>入站API网关</strong>的限流开关与策略控制。</p>
+<p>　　<strong>熔断</strong>是保护上游服务避免因为下游的异常而且拖垮，更多是针对不可控的第三方依赖，例如微信、支付宝等。可以通过<strong>出站API网关</strong>的熔断开关与策略控制。</p>
+<h1 style="text-align: left;">框架源码</h1>
+<p>　　写到这里，本篇的分享差不多要结束了，我将开源我们公司的工具库，有需要的朋友可以去使用。</p>
+<ul>
+<li>　　Sikiro.Tookits&nbsp;-公共基础库</li>
+<li>　　Sikiro.Nosql.Redis-StackExchange.Redis的基本封装</li>
+<li>　　Sikiro.Nosql.Mongo-mongodb驱动封装更新、排序等支持lambda</li>
+<li>　　Sikiro.MicroService.Extension-RPC注册,微服务框架-服务注册,终端跟踪忽略</li>
+<li>　　Sikiro.Chloe.Extension-支持多数据、事务封装、分页、IOC</li>
+<li>　　Sikiro.Chloe.Cap-把Chloe,ORM与CAP整合</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SkyApm.Diagnostics.AspNetCore|SkyApm.Diagnostics.HttpClient&nbsp; 修改了两个库的-XXXXXTracingDiagnosticProcessor的代码，主要增加request、response、header的记录。</li>
+</ul>
+<p>　　额外说明下DotNetCore.CAP.MySql，这个是我从CAP源码拷贝过来然后改了MySql.Data的依赖，原本CAP.MySql是用的MySqlConnector，和我的Chloe.ORM冲突了。</p>
+<p>　　开源项目的库使用：保证包名不修改的前提下，增加版本号引入项目就可以覆盖。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202003/488722-20200326103912615-299449142.png" alt="" /></p>
+<p>　　</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-25 14:37</span>&nbsp;
+<a href="https://www.cnblogs.com/skychen1218/">陈珙</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12531412" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12531412);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 167340, cb_blogApp = 'skychen1218', cb_blogUserGuid = 'b13ccbd6-e95b-e211-aa8f-842b2b196315';
+    var cb_entryId = 12531412, cb_entryCreatedDate = '2020-03-25 14:37', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 陈珙
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+
+$(function () {
+    $('#blogTitle h1').addClass('bounceInLeft animated');
+    $('#blogTitle h2').addClass('bounceInRight animated');
+    $("#blogTitle").prepend("<a class='git-link' href='https://github.com/SkyChenSky' target='blank'><img src='https://images.cnblogs.com/cnblogs_com/jackson0714/779808/o_github.png'></a>");
+
+    // 删除反对按钮
+    $('.buryit').remove();
+    initCommentData();
+    $('#div_digg').prepend('<div style="padding-bottom: 5px"><a onclick="cnblogs.UserManager.FollowBlogger(\'b13ccbd6-e95b-e211-aa8f-842b2b196315\');" href="javascript:void(0);" style="font-weight: bold; padding-left:5px;">关注我</a> </div>');
+});
+function initCommentData() {
+    $('.feedbackItem').each(function () {
+        var text = $(this).find('.feedbackListSubtitle .layer').text();
+        // 将楼层信息放到data里面
+        // $(this).find('.blog_comment_body').attr('data-louceng', text.replace(/^#/g, ''));
+        if ($(this).find('.feedbackListSubtitle .louzhu').length > 0) $(this).addClass('myself');
+        var avatar = $(this).find('> .feedbackCon > span').html() || 'http://pic.cnitblog.com/face/sample_face.gif';
+        $(this).find('> .feedbackCon > .blog_comment_body').append('<img class="user-avatar" src="' + avatar + '"/>')
+    });
+}
+
+$(document).ajaxComplete(function (event, xhr, settings) {
+    // 监听获取评论ajax事件
+    if (settings.url.indexOf('/mvc/blog/GetComments.aspx') >= 0) {
+        initCommentData();
+    }
+});
+
+</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://files.cnblogs.com/files/skychen1218/marvin.nav.my1502.css" rel="stylesheet">
+<script type="text/javascript" src="https://files.cnblogs.com/files/skychen1218/marvin.cnblogs.js"></script>
+<script type="text/javascript" src="https://files.cnblogs.com/files/skychen1218/marvin.nav.my1502.js"></script>
+    </div>
+</body>
+</html>

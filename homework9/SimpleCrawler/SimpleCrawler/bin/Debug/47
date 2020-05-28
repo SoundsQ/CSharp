@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="前言 之前已经简单介绍了MySQL的优化步骤，那么接下来自然而是就是常用的SQL优化，比如inseer、group by等常用SQL的优化，会涉及SQL语句内部细节（这正是我缺乏的）。最后希望自己能记" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MySQL优化(2)--------常用优化 - JJian - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=4KE41eS1YQSSwl64fGzzTUj6ijs-YQFat4AaN-g_jxc" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=0pGk3D9Ik_jI4q1TALBT2ybOjIePHS_80_0J4DDOQiY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jian0110/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jian0110/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jian0110/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 445573;
+        var currentBlogApp = 'jian0110';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'darkgreentrip';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jian0110/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jian0110/">Jian</a>
+</h1>
+<h2>
+我是一个木得感情，木得钱，木得...头发的杀手！
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jian0110/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/JJian">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+36&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+82</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jian0110/p/9410981.html">MySQL优化(2)--------常用优化</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h2>前言</h2>
+<blockquote>
+<p>　　之前已经简单介绍了MySQL的优化步骤，那么接下来自然而是就是常用的SQL优化，比如inseer、group by等常用SQL的优化，会涉及SQL语句内部细节（这正是我缺乏的）。最后希望自己能记录完成的一套MySQL优化博文！</p>
+<p>　<strong>　注：其中部分我并没有全部实验（并不代表是错的），这里只相当于记录下，接下来会慢慢补充！</strong></p>
+<p>　　<strong>参考资料：《深入浅出MySQL》（有需要PDF电子书的伙伴可以评论或者私信我）</strong></p>
+</blockquote>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2>1、大批量插入数据优化</h2>
+<p>（1）对于<span style="color: #ff0000;"><span style="font-family: Calibri;">MyISAM</span>存储引擎的表，可以使用：DISABLE KEYS 和 ENABLE KEYS 用来打开或者关闭 MyISAM 表非唯一索引的更新</span>。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">ALTER</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> tbl_name DISABLE KEYS;
+loading the data
+</span><span style="color: #0000ff;">ALTER</span> <span style="color: #0000ff;">TABLE</span> tbl_name ENABLE KEYS;</pre>
+</div>
+<p>（2）对于InnoDB引擎，有以下几种优化措施：</p>
+<p>　　①&nbsp;<span style="color: #ff0000;">导入的数据按照主键的顺序保存</span>：这是因为InnoDB引擎表示按照主键顺序保存的，如果能将插入的数据提前按照排序好自然能省去很多时间。</p>
+<p>　　比如bulk_insert.txt文件是以表user主键的顺序存储的，导入的时间为15.23秒</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">load</span> data infile <span style="color: #ff0000;">'</span><span style="color: #ff0000;">mysql/bulk_insert.txt</span><span style="color: #ff0000;">'</span> <span style="color: #0000ff;">into</span> <span style="color: #0000ff;">table</span><span style="color: #000000;"> user;
+Query OK, </span><span style="color: #800000; font-weight: bold;">126732</span> rows affected (<span style="color: #800000; font-weight: bold;">15.23</span><span style="color: #000000;"> sec)
+Records: </span><span style="color: #800000; font-weight: bold;">126732</span> Deleted: <span style="color: #800000; font-weight: bold;">0</span> Skipped: <span style="color: #800000; font-weight: bold;">0</span> Warnings: <span style="color: #800000; font-weight: bold;">0</span></pre>
+</div>
+<p>　　没有按照主键排序的话，时间为：26.54秒</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">load</span> data infile <span style="color: #ff0000;">'</span><span style="color: #ff0000;">mysql/bulk_insert.txt</span><span style="color: #ff0000;">'</span> <span style="color: #0000ff;">into</span> <span style="color: #0000ff;">table</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;">;
+Query OK, </span><span style="color: #800000; font-weight: bold;">126732</span> rows affected (<span style="color: #800000; font-weight: bold;">26.54</span><span style="color: #000000;"> sec)
+Records: </span><span style="color: #800000; font-weight: bold;">126732</span> Deleted: <span style="color: #800000; font-weight: bold;">0</span> Skipped: <span style="color: #800000; font-weight: bold;">0</span> Warnings: <span style="color: #800000; font-weight: bold;">0</span></pre>
+</div>
+<p>　　②&nbsp;<span style="color: #ff0000;">导入数据前执行SET UNIQUE_CHECKS=0，关闭唯一性校验，带导入之后再打开设置为1</span>：校验会消耗时间，在数据量大的情况下需要考虑。</p>
+<p>　　③<span style="color: #ff0000;">&nbsp;</span><span style="color: #ff0000;">导入前设置SET AUTOCOMMIT=0，关闭自动提交，导入后结束再设置为1：</span>这是因为自动提交会消耗部分时间与资源，虽然消耗不是很大，但是在数据量大的情况下还是得考虑。</p>
+<h2>2、INSERT的优化</h2>
+<p>（1）<span style="color: #ff0000;">尽量使用多个值表的 INSERT 语句，这种方式将大大缩减客户端与数据库之间的连接、关闭等消耗。</span>（同一客户的情况下），即：</p>
+<div class="cnblogs_code">
+<pre>　<span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> tablename <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #800000; font-weight: bold;">2</span>),(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #800000; font-weight: bold;">3</span>),(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #800000; font-weight: bold;">4</span>)</pre>
+</div>
+<p>实验：插入8条数据到user表中（使用navicat客户端工具）</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">2</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">3</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">4</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">5</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">6</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">7</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+</span><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">8</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span>));</pre>
+</div>
+<p>得到反馈：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> <span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.033s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">2</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.034s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">3</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.056s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">4</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.008s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">5</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.008s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">6</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.024s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">7</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">.004s
+</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> 
+<span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">8</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span>.004s</pre>
+</div>
+<p>总共的时间为0.171秒，接下来使用多值表形式：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span><span style="color: #000000;">
+(</span><span style="color: #800000; font-weight: bold;">9</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">10</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">11</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">12</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">13</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">14</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">15</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">16</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span>));</pre>
+</div>
+<p>得到反馈：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #ff0000;">[</span><span style="color: #ff0000;">SQL</span><span style="color: #ff0000;">]</span> <span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span><span style="color: #000000;">
+(</span><span style="color: #800000; font-weight: bold;">9</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">10</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">11</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">12</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">13</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">14</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">15</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">)),
+(</span><span style="color: #800000; font-weight: bold;">16</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">test</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(uuid(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+受影响的行: </span><span style="color: #800000; font-weight: bold;">8</span><span style="color: #000000;">
+时间: </span><span style="color: #800000; font-weight: bold;">0</span>.038s</pre>
+</div>
+<p>得到时间为0.038，这样一来可以很明显节约时间优化SQL</p>
+<p>（2）如果在不同客户端插入很多行，<span style="color: #ff0000;">可使用INSERT DELAYED语句得到更高的速度，DELLAYED含义是让INSERT语句马上执行</span>，<span style="color: #3366ff;">其实数据都被放在内存的队列中。并没有真正写入磁盘</span>。LOW_PRIORITY刚好相反。</p>
+<p>（3）<span style="color: #ff0000;">将索引文件和数据文件分在不同的磁盘上存放</span>（<span style="color: #3366ff;">InnoDB引擎是在同一个表空间的</span>）。</p>
+<p>（4）如果<span style="color: #ff0000;">批量插入，则可以增加bluk_insert_buffer_size变量值提供速度</span>（<span style="color: #3366ff;">只对MyISAM有用</span>）</p>
+<p>（5）<span style="color: #ff0000;">当从一个文本文件装载一个表时，使用LOAD DATA INFILE，通常比INSERT语句快20倍</span>。</p>
+<h2>3、GROUP BY的优化</h2>
+<p align="justify"><span>　　在默认情况下，<span style="color: #ff0000;">MySQL中的GROUP BY语句会对其后出现的字段进行默认排序（非主键情况）</span>，就好比我们使用ORDER BY col1,col2,col3...所以我们在后面跟上具有相同列（与GROUP BY后出现的col1,col2,col3...相同）ORDER BY子句并没有影响该SQL的实际执行性能。</span></p>
+<p align="justify"><span>　　那么就会有这样的情况出现，我们对查询到的结果是否已经排序不在乎时，<span style="color: #ff0000;">可以使用ORDER BY NULL禁止排序达到优化目的</span>。下面使用EXPLAIN命令分析SQL。</span></p>
+<p>　　在user_1中执行select id, sum(money) form user_1 group by name时，会默认排序（<span style="color: #3366ff;">注意group by后的column是非index才会体现group by的排序，如果是primary key，那之前说过了InnoDB默认是按照主键index排好序的</span>）</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span><span style="color: #000000;"> user_1;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+-------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> name     <span style="color: #808080;">|</span> <span style="color: #0000ff;">money</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+-------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> Zhangsan <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">32</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> Lisi     <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">65</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> Wangwu   <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">44</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> Lijian   <span style="color: #808080;">|</span>   <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+-------+</span>
+<span style="color: #800000; font-weight: bold;">4</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>不禁止排序，即不使用ORDER BY NULL时：有明显的Using filesort。</p>
+<p><img src="data:image/png;base64,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" alt="" width="624" height="258" />　　</p>
+<p>当使用ORDER BY NULL禁止排序后，Using filesort不存在</p>
+<p><img src="data:image/png;base64,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" alt="" /></p>
+<h2>4、ORDER BY 的优化　　</h2>
+<p align="justify"><span><span style="color: #ff0000;">MySQL可以使用一个索引来满足ORDER BY 子句的排序，而不需要额外的排序，</span>但是需要满足以下几个条件：</span></p>
+<p align="justify"><span>（1）WHERE 条件和OREDR BY 使用相同的索引：即key_part1与key_part2是复合索引，where中使用复合索引中的key_part1</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">WHERE</span> key_part1<span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">1</span> <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key_part1 <span style="color: #0000ff;">DESC</span>, key_part2 <span style="color: #0000ff;">DESC</span>;</pre>
+</div>
+<p align="justify"><span>（2）而且ORDER BY顺序和索引顺序相同：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key_part1, key_part2;</pre>
+</div>
+<p align="justify"><span>（3）并且要么都是升序要么都是降序：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key_part1 <span style="color: #0000ff;">DESC</span>, key_part2 <span style="color: #0000ff;">DESC</span>;</pre>
+</div>
+<p align="justify"><span>但以下几种情况则不使用索引：</span></p>
+<p align="justify"><span>（1）ORDER BY中混合ASC和DESC：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key_part1 <span style="color: #0000ff;">DESC</span>, key_part2 <span style="color: #0000ff;">ASC</span>;</pre>
+</div>
+<p align="justify"><span>（2）查询行的关键字与ORDER BY所使用的不相同，即WHERE 后的字段与ORDER BY 后的字段是不一样的</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">WHERE</span> key2 <span style="color: #808080;">=</span> &lsquo;xxx&rsquo; <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key1;</pre>
+</div>
+<p align="justify"><span>（3）ORDER BY</span>对不同的关键字使用，即ORDER BY后的关键字不相同<span style="font-family: 宋体;"><br /></span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">SELECT</span><span style="color: #808080;">*</span><span style="color: #0000ff;">FROM</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">ORDER</span> <span style="color: #0000ff;">BY</span> key1, key2;</pre>
+</div>
+<h2>5、OR的优化</h2>
+<p align="justify"><span style="color: #ff0000;">当MySQL使用OR查询时，如果要利用索引的话，必须每个条件列都使独立索引，而不是复合索引（多列索引），才能保证使用到查询的时候使用到索引。</span></p>
+<p align="justify">比如我们新建一张用户信息表user_info</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span><span style="color: #000000;"> user_info;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------+--------+----------+-----------+</span>
+<span style="color: #808080;">|</span> <span style="color: #ff00ff;">user_id</span> <span style="color: #808080;">|</span> idcard <span style="color: #808080;">|</span> name     <span style="color: #808080;">|</span> address    <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------+--------+----------+-----------+</span>
+<span style="color: #808080;">|</span>       <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">111111</span> <span style="color: #808080;">|</span> Zhangsan <span style="color: #808080;">|</span> Kunming   <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>       <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">222222</span> <span style="color: #808080;">|</span> Lisi     <span style="color: #808080;">|</span> Beijing   <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>       <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">333333</span> <span style="color: #808080;">|</span> Wangwu   <span style="color: #808080;">|</span> Shanghai  <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>       <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">444444</span> <span style="color: #808080;">|</span> Lijian   <span style="color: #808080;">|</span> Guangzhou <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------+--------+----------+-----------+</span>
+<span style="color: #800000; font-weight: bold;">4</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">之后创建ind_name_id(user_id, name)复合索引、id_index(id_index)独立索引，idcard主键索引三个索引。</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show <span style="color: #0000ff;">index</span> <span style="color: #0000ff;">from</span><span style="color: #000000;"> user_info;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> <span style="color: #0000ff;">Table</span>     <span style="color: #808080;">|</span> Non_unique <span style="color: #808080;">|</span> Key_name    <span style="color: #808080;">|</span> Seq_in_index <span style="color: #808080;">|</span> Column_name <span style="color: #808080;">|</span> Collation <span style="color: #808080;">|</span> Cardinality <span style="color: #808080;">|</span> Sub_part <span style="color: #808080;">|</span> Packed <span style="color: #808080;">|</span> <span style="color: #0000ff;">Null</span> <span style="color: #808080;">|</span> Index_type <span style="color: #808080;">|</span> Comment <span style="color: #808080;">|</span> Index_comment <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">0</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">PRIMARY</span>     <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> idcard      <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span>      <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> ind_name_id <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user_id</span>     <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span>      <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> ind_name_id <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> name        <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id_index    <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user_id</span>     <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span>      <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #800000; font-weight: bold;">4</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">测试一：<span style="color: #ff0000;">OR连接两个有单独索引的字段，整个SQL查询才会用到索引(index_merge)，</span>并且我们知道OR实际上是把每个结果最后UNION一起的。</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">or</span> idcard<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">222222</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------------+------------------------------+---------------------+---------+------+------+----------+----------------------------------------------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type        <span style="color: #808080;">|</span> possible_keys                <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>                 <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra                                              <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------------+------------------------------+---------------------+---------+------+------+----------+----------------------------------------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #ff0000;">index_merge</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">PRIMARY</span>,ind_name_id,id_index <span style="color: #808080;">|</span> ind_name_id,<span style="color: #0000ff;">PRIMARY</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">4</span>,<span style="color: #800000; font-weight: bold;">62</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> <span style="color: #ff0000;">Using sort_union(ind_name_id,PRIMARY)</span>; Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------------+------------------------------+---------------------+---------+------+------+----------+----------------------------------------------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">测试二：<span style="color: #ff0000;">OR使用复合索引的字段name，与没有索引的address，整个SQL都是ALL全表扫描的</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">where</span> name<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">Zhangsan</span><span style="color: #ff0000;">'</span> <span style="color: #808080;">or</span> address<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">Beijing</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #ff0000;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">43.75</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>交换OR位置并且使用另外的复合索引的列，也是ALL全表扫描：</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">where</span> address<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">Beijing</span><span style="color: #ff0000;">'</span> <span style="color: #808080;">or</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys        <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> ind_name_id,id_index <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">43.75</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<h2><span>6、<strong>优化嵌套查询</strong></span></h2>
+<p align="justify"><span><span style="color: #ff0000;">使用嵌套查询有时候可以使用更有效的JOIN连接代替，这是因为MySQL中不需要在内存中创建临时表完成SELECT子查询与主查询两部分查询工作</span>。但是并不是所有的时候都成立，最好是在on关键字后面的列有索引的话，效果会更好！</span></p>
+<p align="justify"><span>比如在表major中major_id是有索引的：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select </span><span style="color: #808080;">* </span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">student </span>u <span style="color: #808080;">left</span> <span style="color: #808080;">join</span> major m <span style="color: #0000ff;">on</span> u.major_id<span style="color: #808080;">=</span>m.major_id <span style="color: #0000ff;">where</span> m.major_id <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">null</span>;</pre>
+</div>
+<p>而通过嵌套查询时，<span>在内存中创建临时表完成SELECT子查询与主查询两部分查询工作，会有一定的消耗</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select </span><span style="color: #808080;">* </span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">student </span>u <span style="color: #0000ff;">where</span> major_id <span style="color: #808080;">not</span> <span style="color: #808080;">in</span> (<span style="color: #0000ff;">select</span> major_id <span style="color: #0000ff;">from</span> major);</pre>
+</div>
+<h2 align="justify">7、<strong>使用SQL提示</strong></h2>
+<p align="justify"><span style="color: #ff0000;">SQL提示（SQL HINT）是优化数据库的一个重要手段，就是往SQL语句中加入一些人为的提示来达到优化目的</span>。下面是一些常用的SQL提示：</p>
+<p align="justify">（1）USE INDEX：使用USE INDEX是希望MySQL去参考索引列表，就可以让MySQL不需要考虑其他可用索引，其实也就是possible_keys属性下参考的索引值</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">use</span> <span style="color: #ff0000;">index(id_index,ind_name_id)</span> <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">&gt;</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> <span style="color: #ff0000;">possible_keys       </span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #ff0000;">ind_name_id,id_index</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">use</span> <span style="color: #ff0000;">index(id_index)</span> <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">&gt;</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> <span style="color: #ff0000;">possible_keys</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #ff0000;">id_index     </span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">（2）IGNORE INDEX忽略索引</p>
+<p align="justify">我们使用user_id判断，用不到其他索引时，可以忽略索引。即与USE INDEX相反，从possible_keys中减去不需要的索引，但是实际环境中很少使用。</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_info ignore <span style="color: #ff0000;">index(primary,ind_name_id,id_index)</span> <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">&gt;</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> <span style="color: #ff0000;">possible_keys</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #ff0000;">NULL</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">33.33</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">（3）FORCE INDEX强制索引</p>
+<p align="justify">比如where user_id &gt; 0，但是user_id在表中都是大于0的，自然就会进行ALL全表搜索，但是使用FORCE INDEX虽然执行效率不是最高（where user_id &gt; 0条件决定的）但MySQL还是使用索引。</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_info <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">&gt;</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys        <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> ind_name_id,id_index <span style="color: #808080;">|</span> <span style="color: #ff0000;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+------+----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p align="justify">之后强制使用独立索引id_index(user_id)：</p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_info <span style="color: #ff0000;">force index(id_index)</span> <span style="color: #0000ff;">where</span> <span style="color: #ff00ff;">user_id</span><span style="color: #808080;">&gt;</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>     <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type  <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>      <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra                 <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_info <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> range <span style="color: #808080;">|</span> id_index      <span style="color: #808080;">|</span> <span style="color: #ff0000;">id_index</span> <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">4</span>       <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">index</span> condition <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-----------+------------+-------+---------------+----------+---------+------+------+----------+-----------------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>&nbsp;</p>
+<hr />
+<p align="justify">&nbsp;</p>
+<h2 align="justify">总结</h2>
+<p>　　（1）<span style="color: #ff0000;">很多时候数据库的性能是由于不合适（是指效率不高，可能会导致锁表等）的SQL语句造成</span>，本篇博文只是介绍简单的SQL优化</p>
+<p>　　（2）其中有些优化在真正开发中是用不到的，但是一旦出问题性能下降的时候需要去一一分析。</p>
+<p>&nbsp;</p>
+<p align="justify">&nbsp;</p>
+<p>&nbsp;</p>
+<p align="justify">&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-08-03 00:10</span>&nbsp;
+<a href="https://www.cnblogs.com/jian0110/">JJian</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9410981" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9410981);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 445573, cb_blogApp = 'jian0110', cb_blogUserGuid = '5e6d02e5-8d13-4ad6-9b8d-08d5866282ce';
+    var cb_entryId = 9410981, cb_entryCreatedDate = '2018-08-03 00:10', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 JJian
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

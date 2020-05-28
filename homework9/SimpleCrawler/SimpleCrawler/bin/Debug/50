@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 现在基本上各种手机 注册都会用到手机验证码，包括一些 端网站也会使用手机号作为唯一标识验证！ 恰巧，小明的老板，让其开发一个用户注册的功能，并且强制用户注册绑定手机，美其名曰为了提升安全性，呵呵" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>臭名昭著的手机验证码功能是如何实现的 - 小柒2012 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/smallSevens/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/smallSevens/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/smallSevens/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 296554;
+        var currentBlogApp = 'smallSevens';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/smallSevens/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/smallSevens/">小柒2012</a>
+</h1>
+<h2>
+其实我们每个人的生活都是一个世界， 即使最平凡的人也要为他生活的那个世界努力。
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/smallSevens/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%B0%8F%E6%9F%922012">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/smallSevens/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+112&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+1442</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/smallSevens/p/12719356.html">臭名昭著的手机验证码功能是如何实现的</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <p><img src="https://img2020.cnblogs.com/blog/109211/202004/109211-20200417132929450-424522346.png" alt=""></p>
+<h2 id="前言">前言</h2>
+<p>现在基本上各种手机<code>APP</code>注册都会用到手机验证码，包括一些<code>PC</code>端网站也会使用手机号作为唯一标识验证！</p>
+<p>恰巧，小明的老板，让其开发一个用户注册的功能，并且强制用户注册绑定手机，美其名曰为了提升安全性，呵呵哒，就是为了多撸一点用户信息。</p>
+<h2 id="案例">案例</h2>
+<p>一般来说，发送手机验证码不能过于频繁，前端发送按钮点击后一般会有一个<code>60</code>秒倒计时的功能。也就是说，如果用户点击发送一直没有收到验证码，只能60秒之后才可以进行重发。</p>
+<p>那么问题来了，如果用户绕过前端，直接向后台<code>API</code>发送短信请求，然后写个无限循环脚本，相信不久你的短信账户就会发来预警提示短信(一般来说大的短信商都有预警设置功能)。</p>
+<p>其实很简单，你只需要<code>F12</code>，查看发送请求就可以查找出后台请求地址，然后你可以在控制台输入相关<code>JS</code>代码，执行个十万遍，是不是很爽？</p>
+<p>这里以七牛云为测试案例，打开注册页面，F12进入调试模式，输入手机号，手动点击发送，获取其短信发送后台请求地址。下面是七牛云的一个短信发送请求，撸主测试了一下，显然没有达到撸主的预期，毕竟是大厂，防御措施还是做的很牛逼的。</p>
+<p>以下是<code>JS</code>脚本，复制粘贴到控制台回车就可以执行：</p>
+<pre><code>var data = {&quot;operation&quot;:1,&quot;is_voice&quot;:false,&quot;mobile_number&quot;:&quot;17762018888&quot;,&quot;captcha_type&quot;:2};
+for (var i = 0; i &lt; 10; i++) {
+    $.ajax({
+        type: 'POST',
+		contentType: 'application/json;charset=UTF-8',
+        data:JSON.stringify(data),
+        url: 'https://portal.qiniu.com/api/gaea/verification/sms/send',
+        success: function(data) {
+            console.log(data)
+        }
+    });
+}
+</code></pre>
+<p>控制台返回以下信息，前三次请求成功，后面的就出现了验证码校验并进行了限流操作。</p>
+<pre><code>{&quot;code&quot;:200,&quot;message&quot;:&quot;&quot;}
+{&quot;code&quot;:200,&quot;message&quot;:&quot;&quot;}
+{&quot;code&quot;:200,&quot;message&quot;:&quot;&quot;}
+{&quot;code&quot;: 7209,&quot;message&quot;:&quot;captcha required&quot;}
+{&quot;code&quot;: 7209,&quot;message&quot;:&quot;captcha required&quot;}
+{&quot;code&quot;: 429,&quot;message&quot;:&quot;too many requests&quot;}
+{&quot;code&quot;: 429,&quot;message&quot;:&quot;too many requests&quot;}
+{&quot;code&quot;: 429,&quot;message&quot;:&quot;too many requests&quot;}
+{&quot;code&quot;: 429,&quot;message&quot;:&quot;too many requests&quot;}
+{&quot;code&quot;: 7209,&quot;message&quot;:&quot;captcha required&quot;}
+</code></pre>
+<p>撸主尝试刷新页面，随便输了一个手机号，再次点击发送，提示用户输入验证码，显然是加强了防备，触发了恶意请求认证拦截机制。</p>
+<h2 id="安全机制">安全机制</h2>
+<p>对于开发者来说，他们不仅要考虑用户正常获取验证码的体验还要考虑短信接口的安全性，撸主总结了以下几点，希望对大家有所帮助。</p>
+<ul>
+<li>后台请求限流，对单位时间内发送频率做限制。</li>
+<li>验证码机制，切记不要一开始就限制验证码，体验及其不友好，触发限流以后开启验证码校验。</li>
+<li>监控日发送短信数量，触发一定的阈值做相应的处理，根据实际业务需求。</li>
+<li>验证码存储一定要保证<code>key</code>为手机号，切记不要以其它标识作为<code>key</code>，比如<code>sessionId</code>。</li>
+<li>一定要设置验证码失效时间，比如五分钟，或者更短。</li>
+<li>验证码尽量保证短小精悍，四到六位即可。</li>
+<li>如果后台不做限制，切记前台一定要做个倒计时的限制，至少过滤一部分小白用户。</li>
+</ul>
+<h2 id="代码案例">代码案例</h2>
+<p>给小伙伴分享一个简单的验证码生成、存储、失效代码案例：</p>
+<pre><code>import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+public class Mobile {
+    /**
+     * 测试方便，这里设置了3秒失效
+     */
+    private static LoadingCache&lt;String, String&gt; caches = CacheBuilder.newBuilder()
+            .maximumSize(1000)
+            .expireAfterWrite(3, TimeUnit.SECONDS)
+            .build(new CacheLoader&lt;String, String&gt;() {
+                @Override
+                public String load(String mobile) {
+                    return &quot;&quot;;
+                }
+            });
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Integer code = (int)((Math.random()*9+1)*100000);
+        caches.put(&quot;17762018888&quot;,code.toString());
+        System.out.println(caches.get(&quot;17762018888&quot;));
+        Thread.sleep(4000);
+        System.out.println(&quot;是不是没了:&quot;+caches.get(&quot;17762018888&quot;));
+    }
+}
+</code></pre>
+<h2 id="小结">小结</h2>
+<p>重要的功能必须进行前后端校验，必要的时候一定要做好限流、黑名单等骚操作！！！</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 13:32</span>&nbsp;
+<a href="https://www.cnblogs.com/smallSevens/">小柒2012</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12719356" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12719356);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 296554, cb_blogApp = 'smallSevens', cb_blogUserGuid = 'c009a665-72ff-de11-ba8f-001cf0cd104b';
+    var cb_entryId = 12719356, cb_entryCreatedDate = '2020-04-17 13:32', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 小柒2012
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="ASP.NET团队如期3.16在官方博客发布了 Blazor WebAssembly 3.2.0 Preview 4：https://devblogs.microsoft.com/aspnet/bla" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Blazor WebAssembly 3.2.0 Preview 4 如期发布 - 张善友 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/shanyou/custom.css?v=tQPA0OKk2/yQPSHwVOdthseLOZA=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bluesky/bundle-bluesky-mobile.min.css?v=s2piIyFV3NYqZWTmizb6uafQjmZFRhUBr8YMAdV85mA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/shanyou/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/shanyou/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/shanyou/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 782;
+        var currentBlogApp = 'shanyou';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BlueSky';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <style type="text/css">     
+    .First
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        text-align: left;
+        padding: 6px 20px;
+        color:#fff;
+        background: #888888;
+        font-size: 20px;
+        border-radius: 4px;
+        clear: both;
+    }
+   .Second
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        padding: 6px 20px;
+        background: #999999;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Third
+    {
+        margin: 10px 0;
+        padding: 6px 20px;
+        font-family: 'Microsoft Yahei';
+        margin: 15px 0;
+        font-size: 16px;
+        color: fff;
+        background: #CCCCCC;
+        border-radius: 4px;
+        clear: both;
+    }
+    .note
+    {
+        margin: 10px 0;
+        padding: 15px 20px 15px 60px;
+        font-size: 15px;
+        font-family: 'Microsoft Yahei';
+        box-shadow: 0 0 8px #aaa;
+        clear: both;
+    }
+</style>
+<a href="https://github.com/geffzhang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/shanyou/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/shanyou/">自由、创新、研究、探索</a>
+</h1>
+<h2>
+Linux/Windows .NET Core
+             [ Open Source .NET Development/
+使用开源工具进行DotNet软件开发]
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/shanyou/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%BC%A0%E5%96%84%E5%8F%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/shanyou/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+1773&nbsp; </span>
+<span id="stats_article_count">文章 - 
+57&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+9981</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/shanyou/p/12717318.html">Blazor WebAssembly 3.2.0 Preview 4 如期发布</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>ASP.NET团队如期3.16在官方博客发布了 Blazor WebAssembly 3.2.0 Preview 4：<a href="https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/">https://devblogs.microsoft.com/aspnet/blazor-webassembly-3-2-0-preview-4-release-now-available/</a> ，同时在twitter上发了一条信息带上了下面这张图，这张图很形象的说明了Blazor Webassembly 正在进行最后的准备发射，按照开发计划，将在下周4.23 发布Blazor WebAssembly 3.2.0 Preview 5， 完成功能特性的开发，接下来就是5月初发布Blazor WebAssembly 3.2.0 RC了，将在5.19 的微软Build大会正式发射升空，进入使用C#进行前端开发旅程。</p>
+<p><img src="https://pbs.twimg.com/card_img/1250271384535592962/AZRVW8H6?format=png&amp;name=240x240" alt="" width="573" height="369" /></p>
+<p>Blazor WebAssembly 3.2.0 Preview 4新增功能：</p>
+<ul>
+<li>启动期间访问主机环境：在<code>WebAssemblyHostBuilder通过</code><code>IWebAssemblyHostEnvironment的</code><code>HostEnvironment</code>属性公开，在应用环境中的启动过程中区分（开发，分期，生产等）的细节。如果该应用程序托管在ASP.NET Core应用程序中，则该环境将反映ASP.NET Core环境，因此ASP.NET Core肯定是最佳开发环境，毕竟是亲儿子，当然也很乐意成为其他环境下的干儿子，不管你是使用Java，PHP，NodeJs还是go，Blazor可以作为前后端分离的前端框架让你使用C#写前端逻辑。</li>
+<li>日志改进：在<code>WebAssemblyHostBuilder</code>现在公开一个<code>Logging</code>类型的属性<code>ILoggingBuilder</code>，可以用于配置日志记录应用程序，类似于你会如何配置<a href="https://docs.microsoft.com/aspnet/core/fundamentals/logging">在ASP.NET Core 应用记录</a>在服务器上，也就是把Microsoft.Extensions.Logging 带给了前端，还剩一个中的配置框架要等到下周发布Preview 5了</li>
+<li>Brotli 预压缩： 当发布Blazor WebAssembly应用程序时，已使用最高级别的Brotli预压缩，以进一步减小应用程序的大小并消除对运行时压缩的需求。ASP.NET Core托管的应用程序已经无缝地利用了这些预压缩的文件。对于独立应用程序，您可以配置主机服务器以将请求重定向到预压缩文件。使用预压缩的文件，已发布的Blazor WebAssembly现在为1.8MB，低于之前预览中的2MB。没有Bootstrap CSS的最小应用程序减小到1.6MB。</li>
+<li>并行加载程序集和运行时：Blazor WebAssembly应用程序现在可以并行加载程序集和运行时，从而节省了应用程序加载时间的宝贵时间。</li>
+<li>简化应用程序的IL链接器配置：Blazor WebAssembly应用程序<a href="https://docs.microsoft.com/aspnet/core/host-and-deploy/blazor/configure-linker?#control-linking-with-a-configuration-file">提供.NET IL链接器配置文件</a>，以自定义链接器的行为</li>
+<li>本地化支持：Blazor WebAssembly应用程序现在支持使用.NET资源文件（.resx）和附属程序集进行本地化。</li>
+<li>智能提示中的获得各种Blazor WebAssembly 的API文档</li>
+</ul>
+<p>目前Blazor 存在的主要问题就是调试支持，虽然目前对调试的支持有一些进展，但是在Visual Studio和Visual Studio Code中的当前调试经验仍然存在许多限制。我们可以在Mono的Webassembly的开发问题列表里看到大量的都是Debugger支持问题<a href="https://github.com/mono/mono/milestone/17">https://github.com/mono/mono/milestone/17</a>：</p>
+<p><a href="https://img2020.cnblogs.com/blog/510/202004/510-20200417072729298-8741050.png"><img style="display: inline; background-image: none;" title="image" src="https://img2020.cnblogs.com/blog/510/202004/510-20200417072729956-1586513910.png" alt="image" width="599" height="386" border="0" /></a></p>
+<p><strong>为什么会出现Blazor？</strong></p>
+<p>现代浏览器都支持WebAssembly，WebAssembly是一种新的编码方式，可以在现代的网络浏览器中运行二进制格式文件，以接近原生的性能运行。Blazor 尝试使用WebAssembly和Mono将.NET带回到浏览器。除了用C#来开发之外，还可以让C#运行在浏览器（使用WebAssembly）上，这样dotnet的众多api我们都可以在浏览器使用了。</p>
+<p><a href="https://img2020.cnblogs.com/blog/510/202004/510-20200417072730386-972196954.png"><img style="display: inline; background-image: none;" title="image" src="https://img2020.cnblogs.com/blog/510/202004/510-20200417072730906-663649928.png" alt="image" width="616" height="445" border="0" /></a></p>
+<p>Blazor文档相对齐全：<a href="https://docs.microsoft.com/zh-cn/aspnet/core/blazor/get-started">https://docs.microsoft.com/zh-cn/aspnet/core/blazor/get-started</a> ，官方团队正在加强这文档，在github 有个issue 在追踪 <a href="https://github.com/dotnet/aspnetcore/issues/20890">https://github.com/dotnet/aspnetcore/issues/20890</a>，欢迎大家参与。</p>
+<p>目前我们在开发一个开源项目 ant-design-blazor，目标是成为Ant Design官方认可的Blazor实现，并丰富Blazor生态。现在刚起步，需要有兴趣的同学一起参与。</p>
+<p>Github：<a href="https://github.com/ElderJames/ant-design-blazor">https://github.com/ElderJames/ant-design-blazor</a><br />
+Demo：<br />
+<a href="https://ant-design-blazor.gitee.io">https://ant-design-blazor.gitee.io</a><br />
+开发文档：<br />
+<a href="https://github.com/ElderJames/ant-design-blazor/wiki">https://github.com/ElderJames/ant-design-blazor/wiki</a><br />
+Blazor文档：<a href="https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-3.1">https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-3.1</a></p>
+<p>欢迎任何形式的issue和PR</p>
+<p>国内社区还有几个Blazor相关的库：</p>
+<p>1、Bootstrap 是 Blazor<a href="%20http://blazor.sdgxgz.com" target="_blank">&nbsp;</a>基于Bootstrap ，这个UI库目前只有服务器端，客户端wasm模式等正式版出来会搞， 仓库地址：https://gitee.com/LongbowEnterprise/BootstrapBlazor ，演示地址：<a href="%20http://blazor.sdgxgz.com" target="_blank">blazor.sdgxgz.com</a>&nbsp;</p>
+<p>2、Blazui&nbsp;&nbsp;是 Element UI 的 CSS 和 HTML 结构 仓库地址：<a href="https://github.com/wzxinchen/Blazui">https://github.com/wzxinchen/Blazui</a>&nbsp;，演示地址&nbsp;<a href="http://blazui.com:9000/">http://blazui.com:9000</a></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 07:28</span>&nbsp;
+<a href="https://www.cnblogs.com/shanyou/">张善友</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12717318" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12717318);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 782, cb_blogApp = 'shanyou', cb_blogUserGuid = '007f310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 12717318, cb_entryCreatedDate = '2020-04-17 07:28', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 张善友
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script charset="gbk" src="http://p.tanx.com/ex?i=mm_10008835_128899_13114429"></script>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-887470-1";
+urchinTracker();
+</script>
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=16626562" charset="UTF-8"></script>
+    </div>
+</body>
+</html>

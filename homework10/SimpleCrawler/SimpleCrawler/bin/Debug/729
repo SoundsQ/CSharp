@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - 白露非霜 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/nijunyang/custom.css?v=A9u7xVfhSJoTmppKz90WY0xn/08=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nijunyang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nijunyang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nijunyang/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 372735;
+        var currentBlogApp = 'nijunyang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/nijunyang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/nijunyang/">bluedarkni</a>
+</h1>
+<h2>
+笨鸟也要飞，蜗牛也要爬呀...
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nijunyang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%99%BD%E9%9C%B2%E9%9D%9E%E9%9C%9C">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nijunyang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+89&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+13</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=9">9</a>
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=3">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/05.html">2020年4月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12640062.html">
+    数据结构---队列及简单实现有界队列
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：队列也是一种特殊的线性表，它只允许在两端进行操作，插入或者取出，不允许操作中间的数据。比如只允许在对头出队，队尾入队。这样就具有先进先出的特性（first in first out-FIFO）。就像排队买东西一样，不允许插队，先排先买。 队列分为单向队列（有序队列），就是上面所说的排队模型，先进先出            <a href="https://www.cnblogs.com/nijunyang/p/12640062.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-05 23:55 白露非霜 阅读 (34) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12640062" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/02.html">2020年4月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12623863.html">
+    数据结构---栈及四则运算实现
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：假设我们要求输入类似这样一个表达式：9+(3-1)*3+10/2，输出结果。我们知道先括号，再乘除，最后加减，中学时候使用的科学计算器，是允许输入这样的表达式计算结果的，那么计算机怎么知道这个串里面先算括号再算乘除呢？我们先来介绍下栈这种数据结构，再来解决这个问题。 前面已经说过数组的连表，现在来说            <a href="https://www.cnblogs.com/nijunyang/p/12623863.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-02 23:33 白露非霜 阅读 (132) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12623863" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/31.html">2020年3月31日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12609554.html">
+    数据结构---链表及约瑟夫环问题带来的思考
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：链表和数组一样也是线性表的一种。和数组不同，它不需要再内存中开辟连续的空间。 链表通过指针将一组零散的内存块连接在一起。我们把内存块称为链表的“结点”（是节点还是结点，结点连接起来打个结所以叫“结点”？开个玩笑），也就是说这些结点可以在内存的任意地方，只要有其他的结点的指针指向这个位置就可以。 链表            <a href="https://www.cnblogs.com/nijunyang/p/12609554.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-31 23:23 白露非霜 阅读 (168) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12609554" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12602418.html">
+    数据结构---数组
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：线性表，顾名思义就像一条线一样，线性表是有序的，这个“有序”不是从小到大之类的概念。当然与之对应就是散列表，散就是乱的，无序的。Java中List和Set，我们遍历List每次结果都是一样，这就是所谓的有序，遍历Set，每次出来的结果可能都不一样，这就是无序的。 数组是一种相同数据类型的元素组成的集            <a href="https://www.cnblogs.com/nijunyang/p/12602418.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-31 08:04 白露非霜 阅读 (28) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12602418" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/29.html">2020年3月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12591355.html">
+    时间复杂度和空间复杂度
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：时间复杂度和空间复杂度是我们算法效率的度量方法。 时间复杂度我们用大O表示法，比如O(1),O(n),O(logn),O(n2)等，那么这个是怎么计算出来的呢。 简单来说就是看某段代码的执行次数。 注意： 1.如果是常数级别的都是O(1)，这里的常数是指的我们已经很确定这段代码执行多少次，不存在变化            <a href="https://www.cnblogs.com/nijunyang/p/12591355.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-29 11:24 白露非霜 阅读 (34) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12591355" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/28.html">2020年3月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12587429.html">
+    Redis缓存设计与性能优化
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Redis我们一般是用作缓存，扛并发；或者用于某些特定的业务场景，比如前面说到redis各种数据类型的使用场景以及redis的哨兵和集群模式。 这里主要整理了下redis用作缓存，存在的一些问题，以及改善方案。 简单的流程就像这个样子，一般请先到缓存区获取，如果缓存没有再到后端的数据库去查询。 1.            <a href="https://www.cnblogs.com/nijunyang/p/12587429.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-28 23:58 白露非霜 阅读 (273) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12587429" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/26.html">2020年3月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12577110.html">
+    Springboot+ELK实现日志系统简单搭建
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前面简单介绍了ELK三剑客中的其中两个Elasticsearch和Kibana的简单使用，如果对这两个不了解，可以看下下面的 Centos7安装Elasticsearch和Kibana 搜索引擎基础 分词和倒排索引简述 Elasticsearch基础入门 现在来看看这最后一个Logstash 还是这            <a href="https://www.cnblogs.com/nijunyang/p/12577110.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-26 22:21 白露非霜 阅读 (92) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12577110" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/22.html">2020年3月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12546319.html">
+    Elasticsearch基础入门
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Centos7安装Elasticsearch和Kibana 搜索引擎基础 分词和倒排索引简述 此前的es和kibana安装 Elasticsearch是什么？ ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索，基于RESTful web接口。也就说            <a href="https://www.cnblogs.com/nijunyang/p/12546319.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-22 22:47 白露非霜 阅读 (202) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12546319" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12544481.html">
+    搜索引擎基础---分词和倒排索引简述
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：搜索引擎是什么？ 所谓搜索引擎，就是根据用户需求与一定算法，运用特定策略从互联网检索出制定信息反馈给用户的一门检索技术。搜索引擎依托于多种技术，如网络爬虫技术、检索排序技术、网页处理技术、大数据处理技术、自然语言处理技术等，为信息检索用户提供快速、高相关性的信息服务。搜索引擎技术的核心模块一般包括爬            <a href="https://www.cnblogs.com/nijunyang/p/12544481.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-22 10:55 白露非霜 阅读 (34) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12544481" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/03/21.html">2020年3月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12541542.html">
+    Centos7安装Elasticsearch和Kibana
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：这里使用的6.6.0版本，ES需要JDK环境，对应1.8 Elasticsearch安装： 1.下载：https://elasticsearch.cn/download/ 2.解压: 3.修改配置：jvm.options和elasticsearch.yml 因为默认的jvm参数-Xms和Xmx都是1            <a href="https://www.cnblogs.com/nijunyang/p/12541542.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-21 23:28 白露非霜 阅读 (116) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12541542" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/nijunyang/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=9">9</a>
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=3">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 白露非霜
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+<span class="id_cnzz_stat_icon" id="id_cnzz_stat_icon_1278726400">访问量</span>
+
+</div>
+    </div>
+</body>
+</html>

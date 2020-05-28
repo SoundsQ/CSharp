@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>白露非霜 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/nijunyang/custom.css?v=A9u7xVfhSJoTmppKz90WY0xn/08=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nijunyang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nijunyang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nijunyang/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 372735;
+        var currentBlogApp = 'nijunyang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/nijunyang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/nijunyang/">bluedarkni</a>
+</h1>
+<h2>
+笨鸟也要飞，蜗牛也要爬呀...
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nijunyang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%99%BD%E9%9C%B2%E9%9D%9E%E9%9C%9C">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nijunyang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+89&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+13</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12798951.html">
+    高级数据结构---赫(哈)夫曼树及java代码实现
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：我们经常会用到文件压缩，压缩之后文件会变小，便于传输，使用的时候又将其解压出来。为什么压缩之后会变小，而且压缩和解压也不会出错。赫夫曼编码和赫夫曼树了解一下。 赫夫曼树： 它是一种的叶子结点带有权重的特殊二叉树，也叫最优二叉树。既然出现最优两个字肯定就不是随便一个叶子结点带有权重的二叉树都叫做赫夫曼            <a href="https://www.cnblogs.com/nijunyang/p/12798951.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 23:33 白露非霜 阅读 (35) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12798951" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/27.html">2020年4月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12783768.html">
+    域名和服务器绑定及https协议更换
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：服务器是之前已经购买了的 1.腾讯云产品中搜索域名注册（产品太多了懒得找，直接搜索来得快些） 2.进去之后可以选择各种后缀的域名，输入自己喜欢的，看看哪些后缀是没有被注册的。自己挑选一个就可以，按照指导给付钱就行了。看见有个xyz后缀的，刚好是三维坐标系，就随手搜了下三维时代，然后就注册了这个。 3            <a href="https://www.cnblogs.com/nijunyang/p/12783768.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-27 00:38 白露非霜 阅读 (21) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12783768" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/25.html">2020年4月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12771835.html">
+    高级数据结构---B树和B+树及mysql索引分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：mysql索引数据结构：https://www.cnblogs.com/nijunyang/p/11406688.html 几种树结构的对比： 二叉查找树：二叉搜索树，二叉排序树，优点查找快，但是在某些情况下会退化成链表，它是所有高效查找树的基础 红黑树：内存查找高效树，不适合大数据量 也不适合磁盘            <a href="https://www.cnblogs.com/nijunyang/p/12771835.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-25 10:34 白露非霜 阅读 (8) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12771835" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/23.html">2020年4月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12764632.html">
+    高级数据结构---红黑树及其插入左旋右旋代码java实现
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前面我们说到的二叉查找树，可以看到根结点是初始化之后就是固定了的，后续插入的数如果都比它大，或者都比它小，那么这个时候它就退化成了链表了，查询的时间复杂度就变成了O(n),而不是理想中O(logn),就像这个样子 如果我们有一个平衡机制，让这棵树可以动起来，比如将4变成根结点，是不是查询效率又可以提            <a href="https://www.cnblogs.com/nijunyang/p/12764632.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-23 23:24 白露非霜 阅读 (51) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12764632" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/20.html">2020年4月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12740751.html">
+    高级数据结构---二叉查找树及其增删改查实现
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：二叉树查找树： 二叉查找树也叫二叉搜索树，二叉排序树。它也是一种特殊的二叉树， 它具有以下特点 1.如果它的左子树不为空，则左子树上结点的值都小于根结点。 2.如果它的右子树不为空，则右子树上结点的值都大于根结点。 3.子树的子树同样也要遵循以上两点 为什么又叫做二叉排序树，因为具有这种特殊特点的二            <a href="https://www.cnblogs.com/nijunyang/p/12740751.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-20 21:39 白露非霜 阅读 (45) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12740751" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/19.html">2020年4月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12731223.html">
+    高级数据结构---二叉树
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：树是一种一对多的数据结构，之前的数组，栈这些都是一对一的数据结构。 树是n个结点的有限集。n=0称空树。在任意一棵非空树中：有且仅有一个根（root）结点；n&gt;1时，其余结点可分为m个互不相交的的有限集，其中每个集合又是一棵树，称为根的子树。 前面三个都是树，最后一个不是树，因为最后一个的数据相交了            <a href="https://www.cnblogs.com/nijunyang/p/12731223.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-19 13:33 白露非霜 阅读 (33) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12731223" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/18.html">2020年4月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12725011.html">
+    算法---贪心算法和动态规划
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：贪心算法顾名思义在一个贪字上面，它在解决某个问题的时候，总是先从眼前利益出发。也就是说只顾眼前，不顾大局，所以它是局部最优解。它的核心的就是局部最优推出全局最优。 比如公司只有一个会议室，明天有几场同样的重要的会议要开，怎么安排会议才能尽可能的多开会。 如果我们将所有会议的结束时间从小到大排序。然后            <a href="https://www.cnblogs.com/nijunyang/p/12725011.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-18 12:08 白露非霜 阅读 (214) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12725011" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/15.html">2020年4月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12709548.html">
+    算法---排序
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：排序过程详细的动态图可参考https://www.cnblogs.com/onepixel/articles/7674659.html 1.插入排序 稳定O(n^2) 稳定的意思是a=b，原本a在b前面，排序完成后a也在b前面。 插入排序的思路就是将数组逻辑上分成两段，一段是排好序的，一段是未排序的            <a href="https://www.cnblogs.com/nijunyang/p/12709548.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-15 23:32 白露非霜 阅读 (40) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12709548" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/09.html">2020年4月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12669989.html">
+    算法---递归及尾递归
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：什么叫递归？举个例子，我们排队，想知道自己排在第几个，那么我们可以问前面的那个人，前面的人继续问前面，直到问到第一个人，这就是传递的过程。然后再从第一个人回来，这就是归（回溯）的过程。传递过去再回归回来，这就是递归。第一个人就是我们所说的递归出口，也就是说到哪个点应该回归了，如果没有出口，那么就会死            <a href="https://www.cnblogs.com/nijunyang/p/12669989.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-09 22:09 白露非霜 阅读 (31) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12669989" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/nijunyang/archive/2020/04/07.html">2020年4月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12657039.html">
+    ScheduledThreadPoolExecutor之remove方法
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：之前用定时任务的线程池，设置了个任务，但是突然今天产品说，某些个操作需要中断某些任务（如果任务还没有执行），使其不能再到点执行了。于是查了API果然有这样一个方法。 一看API，需要移除的是一个Runnable对象，想当然的就把任务调度的传入的Runable对象保留下来，然后进行删除。简要代码如下             <a href="https://www.cnblogs.com/nijunyang/p/12657039.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-07 23:21 白露非霜 阅读 (89) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12657039" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/nijunyang/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 白露非霜
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+<span class="id_cnzz_stat_icon" id="id_cnzz_stat_icon_1278726400">访问量</span>
+
+</div>
+    </div>
+</body>
+</html>

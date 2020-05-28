@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>justisme - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/justisme/custom.css?v=7rnz5TtMcHt9VmgMA7H/K8T8fSI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/justisme/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/justisme/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/justisme/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 597589;
+        var currentBlogApp = 'justisme';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/justisme/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/justisme/">justisme</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/justisme/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/justisme">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/justisme/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+3&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+0</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/justisme/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/justisme/p/12797955.html">
+    MySQL基础知识和常用命令总结
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：检索数据
+ 排序检索数据
+ 过滤数据
+使用通配符过滤
+使用正则表达式进行搜索
+ 创建计算字段
+ 使用数据处理函数
+ 汇总数据
+分组数据
+ 使用子查询
+联结表
+ 创建高级联结
+组合查询
+ 全文本搜索
+ 插入数据
+更新和删除数据
+ 创建和操纵表
+ 使用视图
+  使用存储过程
+  使用游标
+  使用触发器
+ 管理事务处理
+  全球化和本地化            <a href="https://www.cnblogs.com/justisme/p/12797955.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 22:38 justisme 阅读 (50) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12797955" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/justisme/p/12791346.html">
+    支持向量机SVM知识梳理和在sklearn库中的应用
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：线性SVM=线性分类器+最大间隔
+间隔的形式化描述
+SVM通过最大化`M`来求解参数`W`和`b`的，目标函数如下
+拉格朗日乘数法，
+软间隔：加入容错量
+非线性SVM:特征空间。
+常用的核函数            <a href="https://www.cnblogs.com/justisme/p/12791346.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 00:39 justisme 阅读 (17) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12791346" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/justisme/archive/2020/04/19.html">2020年4月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/justisme/p/12731233.html">
+    spark2.4.5计算框架中各模块的常用实例
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Spark Core
+RDD以及Pair RDD的常用算子
+Spark SQL
+RDD转换为DataFrame
+DataFrame与MySQL的交互
+Spark MLlib
+流水线pipeline的基本用法
+决策树
+K均值 K-means
+逻辑回归 LogisticRegression
+超参优化 网格搜索
+Spark Streaming
+spark书籍(电子版、可直接下载)            <a href="https://www.cnblogs.com/justisme/p/12731233.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-19 13:29 justisme 阅读 (30) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12731233" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 justisme
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

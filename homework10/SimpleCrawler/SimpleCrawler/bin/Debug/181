@@ -1,0 +1,451 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="我们经常会用到文件压缩，压缩之后文件会变小，便于传输，使用的时候又将其解压出来。为什么压缩之后会变小，而且压缩和解压也不会出错。赫夫曼编码和赫夫曼树了解一下。 赫夫曼树： 它是一种的叶子结点带有权重的" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>高级数据结构---赫(哈)夫曼树及java代码实现 - 白露非霜 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/nijunyang/custom.css?v=A9u7xVfhSJoTmppKz90WY0xn/08=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nijunyang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nijunyang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nijunyang/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 372735;
+        var currentBlogApp = 'nijunyang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/nijunyang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/nijunyang/">bluedarkni</a>
+</h1>
+<h2>
+笨鸟也要飞，蜗牛也要爬呀...
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nijunyang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%99%BD%E9%9C%B2%E9%9D%9E%E9%9C%9C">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nijunyang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+89&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+13</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12798951.html">高级数据结构---赫(哈)夫曼树及java代码实现</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p align="justify"><span style="font-family: 宋体;">我们经常会用到文件压缩，压缩之后文件会变小，便于传输，使用的时候又将其解压出来。为什么压缩之后会变小，而且压缩和解压也不会出错。赫夫曼编码和赫夫曼树了解一下。</span></p>
+<p align="justify"><span style="font-size: 16px; color: #ff0000;"><strong><span style="font-family: 宋体;">赫夫曼树：</span></strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">它是一种的叶子结点带有权重的特殊二叉树，也叫最优二叉树。既然出现最优两个字肯定就不是随便一个叶子结点带有权重的二叉树都叫做赫夫曼树了。</span></p>
+<p align="justify"><span style="font-family: 宋体;">赫夫曼树中有一个很重要的概念就是带权路径，带权路径最小的才是赫夫曼树。</span></p>
+<p align="justify"><span style="font-family: 宋体;">树的路径长度是从根结点到每一个结点的长度之和，带权路径就是每一个结点的长度都乘以自己权重，记做</span>WPL<span style="font-family: 宋体;">。</span></p>
+<p><span style="font-family: 宋体;">假设有</span>abcd<span style="font-family: 宋体;">数据，权重分别是</span><span style="font-family: Calibri;">7 5 2 4</span><span style="font-family: 宋体;">。下面构建出来的三棵带权二叉树。</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200428232311755-1329087156.png" alt=""></span></p>
+<p align="justify">A<span style="font-family: 宋体;">树：</span><span style="font-family: Calibri;">WPL=7*2+5*2+2*2+4*2=36</span></p>
+<p align="justify">B<span style="font-family: 宋体;">树：</span><span style="font-family: Calibri;">WPL=7*3+5*3+2*1+4*2=46</span></p>
+<p align="justify">C<span style="font-family: 宋体;">树：</span><span style="font-family: Calibri;">WPL=7*1+5*2+2*3+4*3=35</span></p>
+<p align="justify"><span style="font-family: 宋体;">显然</span>C<span style="font-family: 宋体;">树的带权是最小的。而且无构建出比它更小的了。所以</span><span style="font-family: Calibri;">C</span><span style="font-family: 宋体;">树就是赫夫曼树</span></p>
+<p><span style="font-family: 宋体;">我们从</span>C<span style="font-family: 宋体;">树发现了一个问题，就是要使得树的带权路径最小，那么权重越大的就应该离根结点越近。所以如果要构建一棵赫夫曼树，首先一定要将数据按权重排序。这是不是就是之前提到的贪心算法，一定有排序，从局部最优到整体最优。</span></p>
+<p>&nbsp;</p>
+<p align="justify"><span style="font-size: 16px;"><strong><span style="font-family: 宋体; color: #ff0000;">赫夫曼编码：</span></strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">我们都知道以前的地下党发送电报。都是加密了发送，然后使用密码本来解密。</span></p>
+<p align="justify"><span style="font-family: 宋体;">我们还是发送上面的</span>abcd</p>
+<p align="justify"><span style="font-family: 宋体;">显然计算机的世界都是</span>0<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">1</span><span style="font-family: 宋体;">，假设我们用三位来表示上面的字符。也就相当于制作一个密码本</span></p>
+<p align="justify">a:000</p>
+<p align="justify">b:001</p>
+<p align="justify">c:010</p>
+<p align="justify">d:011</p>
+<p><span style="font-family: 宋体;">那么我要传输的就变成了</span>000001010011<span style="font-family: 宋体;">，然后收到之后按照三位一分来解密就可以了。但是如果数据很多之后。我们可能就不能不用</span><span style="font-family: Calibri;">3</span><span style="font-family: 宋体;">位来表示了，可能是</span><span style="font-family: Calibri;">8</span><span style="font-family: 宋体;">位，</span><span style="font-family: Calibri;">10</span><span style="font-family: 宋体;">位之类了的，那么这个二进制串的长度也相当可怕了。</span></p>
+<p><span style="font-family: 宋体;">再看赫夫曼树，如果我们将上面的</span>C<span style="font-family: 宋体;">图的每一个左分支表示</span><span style="font-family: Calibri;">0</span><span style="font-family: 宋体;">，右分支表示</span><span style="font-family: Calibri;">1</span></p>
+<p><span style="font-family: Calibri;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200428232410068-1969408398.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p align="justify"><span style="font-family: 宋体;">那么现在表示</span>abcd<span style="font-family: 宋体;">就可以用每个结点长度路径上的值来表示了</span></p>
+<p align="justify">a:0</p>
+<p align="justify">b:10</p>
+<p align="justify">c:110</p>
+<p align="justify">d:111</p>
+<p align="justify">abcd<span style="font-family: 宋体;">就可以表示为</span><span style="font-family: Calibri;">010110111</span><span style="font-family: 宋体;">，就从刚才的</span><span style="font-family: Calibri;">000001010011</span><span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">12</span><span style="font-family: 宋体;">位缩减到了</span><span style="font-family: Calibri;">9</span><span style="font-family: 宋体;">位，如果数据量大，这个减少的位数是很可观的。</span></p>
+<p><span style="font-family: 宋体;">但是又有一个问题了，这样出来的编码长度不等，其实很容易混淆，所以要设计这种长短不等的编码，必须任意字符的编码都不是另一个字符编码的前缀，这种编码称做前缀编码。显然通过二叉树这样构造出来的编码，每个叶子结点都不同的编码。而这棵赫夫曼树就是我们的密码本。也就是说编码于解码都需要用同样结构的赫夫曼树。</span></p>
+<p align="justify"><span style="font-size: 16px;"><strong><span style="font-family: 宋体; color: #ff0000;">解码：</span></strong></span></p>
+<p align="justify"><span style="font-family: 宋体;">每次从根开始寻找，找到叶子结点为止，然后又从根开始寻找，比如</span>010110111，</p>
+<p align="justify">0<span style="font-family: 宋体;">走左边，左边第一个就是叶子结点，所以找到</span>a<span style="font-family: 宋体;">，</span></p>
+<p align="justify"><span style="font-family: 宋体;">回到根继续寻找，编码串还剩下</span>10110111，</p>
+<p align="justify">1<span style="font-family: 宋体;">走右边，</span><span style="font-family: Calibri;">0</span><span style="font-family: 宋体;">走左边找到</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">110 -&gt;c, 111-&gt;d</span></p>
+<p><span style="font-family: 宋体;">一般来说设要编码的字符集</span>{c1,c2,c3...},<span style="font-family: 宋体;">设置各个字符出现的频率</span><span style="font-family: Calibri;">{w1,w2,w3...}</span><span style="font-family: 宋体;">，以各字符作为叶子结点，以相应的频率作为权重来构造赫夫曼树。</span></p>
+<p>&nbsp;</p>
+<p align="justify"><span style="font-family: 宋体;"><span style="font-size: 16px;"><strong><span style="color: #ff0000;">赫夫曼树的构建</span></strong></span>：</span></p>
+<p align="justify"><span style="font-family: 宋体;">以我们上面的</span>a:7 b:5 c:4 d:2<span style="font-family: 宋体;">为例。</span></p>
+<p align="justify">1.<span style="font-family: 宋体;">上面从树的特点来看，首先我们需要按照权重从小到大排序，注意赫夫曼树的构建是逆向构建的，就是说是从叶子结点往根结点构建。排序：</span><span style="font-family: Calibri;">d:2&nbsp; c:4&nbsp; b:5&nbsp; a:7</span></p>
+<p align="justify">2.<span style="font-family: 宋体;">取前面两个权值最小结点作为新结点</span><span style="font-family: Calibri;">n1</span><span style="font-family: 宋体;">的两个子结点，注意二叉树的左小右大规则。新结点的权重为两孩子权重之和，将操作过的结点从数据中移除，新结点放进去继续操作：</span></p>
+<p align="justify">n1<span style="font-family: 宋体;">的权重是 </span><span style="font-family: Calibri;">cd</span><span style="font-family: 宋体;">权重之和为</span><span style="font-family: Calibri;">6</span><span style="font-family: 宋体;">，</span><span style="font-family: 宋体;">新的排序：</span>b:5&nbsp; n1:6&nbsp; a:7</p>
+<p><span style="font-family: 宋体;">3.</span><span style="font-family: 宋体;">取出</span>b<span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">n1</span><span style="font-family: 宋体;">构成新作为新结点</span><span style="font-family: Calibri;">n2</span><span style="font-family: 宋体;">的两个子结点剩余。 新的排序：</span><span style="font-family: Calibri;">a:7&nbsp; n2:11</span></p>
+<p><span style="font-family: Calibri;">直到操作到最后两个结点结束。</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200428232824979-354154476.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p align="justify"><span style="font-family: 宋体;">如果遇到操作的两个结点在已有的数上面还没有，那就另开一个子树，等到操作这个新子树的根结点的时候，再把这棵子树直接移植过去，比如这个数据来构建</span>a:3 b:24 c:6 d:20 e:34 f:4 g:12</p>
+<p align="justify"><span style="font-family: 宋体;">排序：</span>a:3 &nbsp;f:4 &nbsp;c:6 &nbsp;g:12 &nbsp;d:20 &nbsp;b:24 &nbsp;e:34</p>
+<p>d:20 <span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">b:24 </span><span style="font-family: 宋体;">构造出来的子树就是后面移植上去的</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200428232910241-1707059311.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong><span style="color: #ff0000;">代码实现：</span></strong></span></p>
+<p><span style="font-family: 宋体;">现在就按照上面的逻辑，代码实现赫夫曼树的构建和编码解码，对比上面的第二个数据验证结果</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.nijunyang.algorithm.tree;
+
+</span><span style="color: #0000ff;">import</span> java.util.*<span style="color: #000000;">;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * Description: 哈夫曼树
+ * Created by nijunyang on 2020/4/28 21:43
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> HuffmanTree {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">byte</span> ZERO = 0<span style="color: #000000;">;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">byte</span> ONE = 1<span style="color: #000000;">;
+    HuffmanNode root;
+    Map</span>&lt;Character, Integer&gt; weightMap; <span style="color: #008000;">//</span><span style="color: #008000;">字符对应的权重</span>
+    List&lt;HuffmanNode&gt; leavesList; <span style="color: #008000;">//</span><span style="color: #008000;"> 叶子</span>
+    Map&lt;Character, String&gt; leavesCodeMap; <span style="color: #008000;">//</span><span style="color: #008000;"> 叶子结点的编码</span>
+
+    <span style="color: #0000ff;">public</span> HuffmanTree(Map&lt;Character, Integer&gt;<span style="color: #000000;"> weightMap) {
+        </span><span style="color: #0000ff;">this</span>.weightMap =<span style="color: #000000;"> weightMap;
+        </span><span style="color: #0000ff;">this</span>.leavesList = <span style="color: #0000ff;">new</span> ArrayList&lt;&gt;<span style="color: #000000;">(weightMap.size());
+        </span><span style="color: #0000ff;">this</span>.leavesCodeMap = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">(weightMap.size());
+        creatTree();
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        Map</span>&lt;Character, Integer&gt; weightMap = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">a:3  f:4  c:6  g:12  d:20  b:24  e:34</span>
+        weightMap.put('a', 3<span style="color: #000000;">);
+        weightMap.put(</span>'b', 24<span style="color: #000000;">);
+        weightMap.put(</span>'c', 6<span style="color: #000000;">);
+        weightMap.put(</span>'d', 20<span style="color: #000000;">);
+        weightMap.put(</span>'e', 34<span style="color: #000000;">);
+        weightMap.put(</span>'f', 4<span style="color: #000000;">);
+        weightMap.put(</span>'g', 12<span style="color: #000000;">);
+        HuffmanTree huffmanTree </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> HuffmanTree(weightMap);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">abcd: 1011001101000</span>
+        String code = huffmanTree.encode("abcd"<span style="color: #000000;">);
+        System.out.println(code);
+        System.out.println(</span>"1011001101000"<span style="color: #000000;">.equals(code));
+        String msg </span>=<span style="color: #000000;"> huffmanTree.decode(code);
+        System.out.println(msg);
+
+    }
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 构造树结构
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> creatTree() {
+        PriorityQueue</span>&lt;HuffmanNode&gt; priorityQueue = <span style="color: #0000ff;">new</span> PriorityQueue&lt;&gt;<span style="color: #000000;">();
+        weightMap.forEach((k,v) </span>-&gt;<span style="color: #000000;"> {
+            HuffmanNode huffmanNode </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> HuffmanNode(k, v);
+            priorityQueue.add(huffmanNode);
+            leavesList.add(huffmanNode);
+        });
+        </span><span style="color: #0000ff;">int</span> len = priorityQueue.size();<span style="color: #008000;">//</span><span style="color: #008000;">先把长度取出来，因为等下取数据队列长度会变化
+
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">HuffmanNode实现了Comparable接口，优先队列会帮我们排序，我们只需要每次弹出两个元素就可以了</span>
+        <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; len - 1; i++<span style="color: #000000;">) {
+            HuffmanNode huffmanNode1 </span>=<span style="color: #000000;"> priorityQueue.poll();
+            HuffmanNode huffmanNode2 </span>=<span style="color: #000000;"> priorityQueue.poll();
+            </span><span style="color: #0000ff;">int</span> weight12 = huffmanNode1.weight +<span style="color: #000000;"> huffmanNode2.weight;
+
+            HuffmanNode parent12 </span>= <span style="color: #0000ff;">new</span> HuffmanNode(<span style="color: #0000ff;">null</span>, weight12); <span style="color: #008000;">//</span><span style="color: #008000;">父结点不需要数据直接传个null</span>
+            parent12.left = huffmanNode1;  <span style="color: #008000;">//</span><span style="color: #008000;">建立父子关系，因为排好序的，所以1肯定是在左边，2肯定是右边</span>
+            parent12.right =<span style="color: #000000;"> huffmanNode2;
+            huffmanNode1.parent </span>=<span style="color: #000000;"> parent12;
+            huffmanNode2.parent </span>=<span style="color: #000000;"> parent12;
+            priorityQueue.add(parent12);  </span><span style="color: #008000;">//</span><span style="color: #008000;">父结点入队</span>
+<span style="color: #000000;">        }
+        root </span>= priorityQueue.poll(); <span style="color: #008000;">//</span><span style="color: #008000;">队列里面的最后一个即是我们的根结点</span>
+
+
+        <span style="color: #008000;">/**</span><span style="color: #008000;">
+         * 遍历叶子结点获取叶子结点数据对应编码存放起来，编码时候直接拿出来用
+         </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+        leavesList.forEach(e </span>-&gt;<span style="color: #000000;"> {
+            HuffmanNode current </span>=<span style="color: #000000;"> e;
+            StringBuilder code </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StringBuilder();
+            </span><span style="color: #0000ff;">do</span><span style="color: #000000;"> {
+                </span><span style="color: #0000ff;">if</span> (current.parent != <span style="color: #0000ff;">null</span> &amp;&amp; current == current.parent.left) { <span style="color: #008000;">//</span><span style="color: #008000;"> 说明当前点是左边</span>
+                    code.append(ZERO); <span style="color: #008000;">//</span><span style="color: #008000;">左边0</span>
+                } <span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+                    code.append(ONE);</span><span style="color: #008000;">//</span><span style="color: #008000;">左边1</span>
+<span style="color: #000000;">                }
+                current </span>=<span style="color: #000000;"> current.parent;
+            }</span><span style="color: #0000ff;">while</span> (current.parent != <span style="color: #0000ff;">null</span>); <span style="color: #008000;">//</span><span style="color: #008000;">父结点null是根结点</span>
+            code.reverse(); <span style="color: #008000;">//</span><span style="color: #008000;">因为我们是从叶子找回去的 ，所以最后需要将编码反转下</span>
+<span style="color: #000000;">            leavesCodeMap.put(e.data, code.toString());
+        });
+    }
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 编码
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> String encode(String msg) {
+        </span><span style="color: #0000ff;">char</span>[] chars =<span style="color: #000000;"> msg.toCharArray();
+        StringBuilder code </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StringBuilder();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; chars.length; i++<span style="color: #000000;">) {
+            code.append(leavesCodeMap.get(chars[i]));
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> code.toString();
+    }
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 解码
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> String decode(String code) {
+        </span><span style="color: #0000ff;">char</span>[] chars =<span style="color: #000000;"> code.toCharArray();
+        Queue</span>&lt;Byte&gt; queue = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ArrayDeque();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; chars.length; i++<span style="color: #000000;">) {
+            queue.add(Byte.parseByte(String.valueOf(chars[i])));
+        }
+        HuffmanNode current </span>=<span style="color: #000000;"> root;
+        StringBuilder sb </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> StringBuilder();
+        </span><span style="color: #0000ff;">while</span> (!<span style="color: #000000;">queue.isEmpty() ){
+            Byte aByte </span>=<span style="color: #000000;"> queue.poll();
+            </span><span style="color: #0000ff;">if</span> (aByte ==<span style="color: #000000;"> ZERO) {
+                current </span>=<span style="color: #000000;"> current.left;
+            }
+            </span><span style="color: #0000ff;">if</span> (aByte ==<span style="color: #000000;"> ONE) {
+                current </span>=<span style="color: #000000;"> current.right;
+            }
+            </span><span style="color: #0000ff;">if</span> (current.right == <span style="color: #0000ff;">null</span> &amp;&amp; current.left == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+                sb.append(current.data);
+                current </span>=<span style="color: #000000;"> root;
+            }
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sb.toString();
+    }
+
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 结点 实现Comparable接口 方便使用优先队列（PriorityQueue）排序
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">class</span> HuffmanNode <span style="color: #0000ff;">implements</span> Comparable&lt;HuffmanNode&gt;<span style="color: #000000;">{
+
+        Character data;        </span><span style="color: #008000;">//</span><span style="color: #008000;">字符</span>
+        <span style="color: #0000ff;">int</span> weight;        <span style="color: #008000;">//</span><span style="color: #008000;">权重</span>
+<span style="color: #000000;">        HuffmanNode left;
+        HuffmanNode right;
+        HuffmanNode parent;
+
+        @Override
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> compareTo(HuffmanNode o) {
+            </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span>.weight -<span style="color: #000000;"> o.weight;
+        }
+        </span><span style="color: #0000ff;">public</span> HuffmanNode(Character data, <span style="color: #0000ff;">int</span><span style="color: #000000;"> weight) {
+            </span><span style="color: #0000ff;">this</span>.data =<span style="color: #000000;"> data;
+            </span><span style="color: #0000ff;">this</span>.weight =<span style="color: #000000;"> weight;
+        }
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 23:33</span>&nbsp;
+<a href="https://www.cnblogs.com/nijunyang/">白露非霜</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12798951" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12798951);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 372735, cb_blogApp = 'nijunyang', cb_blogUserGuid = 'e0b913ba-3f74-49c4-685c-08d49c352df3';
+    var cb_entryId = 12798951, cb_entryCreatedDate = '2020-04-28 23:33', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 白露非霜
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+<span class="id_cnzz_stat_icon" id="id_cnzz_stat_icon_1278726400">访问量</span>
+
+</div>
+    </div>
+</body>
+</html>

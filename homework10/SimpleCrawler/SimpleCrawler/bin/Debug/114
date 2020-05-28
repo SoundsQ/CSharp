@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="在上篇《非阻塞同步算法与CAS(Compare and Swap)无锁算法》中讲到在Java中long赋值不是原子操作，因为先写32位，再写后32位，分两步操作，而AtomicLong赋值是原子操作，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>为什么volatile不能保证原子性而Atomic可以？ - Mainz - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cleargertrude/bundle-cleargertrude.min.css?v=qOcerEQTAHF_YZGWYnXIdOZ3zf__fQbjAsaHzX-kpoo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/Mainz/custom.css?v=RRQcvEwXOGRoPdOn6UmQX&#x2B;ykq5M=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cleargertrude/bundle-cleargertrude-mobile.min.css?v=3HpAq_t-Lu45yjUl-6Fzi0TYj4q-B2F0BQkiWtjIP9Y" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Mainz/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Mainz/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Mainz/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 31859;
+        var currentBlogApp = 'Mainz';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'ClearGertrude';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    <div id="header">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Mainz/">{var x NullPointerException}</a>
+</h1>
+<p id="tagline">
+<font size="1">mainz's blog</font>
+</p>
+
+</div>
+<div id="main">
+	<div id="post_detail">
+	<div class="post">
+		<h2>
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/Mainz/p/3556430.html">为什么volatile不能保证原子性而Atomic可以？</a>
+
+		</h2>
+		<div class="postText">
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>在上篇《<a href="http://www.cnblogs.com/Mainz/p/3546347.html" target="_blank">非阻塞同步算法与CAS(Compare and Swap)无锁算法</a>》中讲到在Java中long赋值不是原子操作，因为先写32位，再写后32位，分两步操作，而AtomicLong赋值是原子操作，为什么？为什么volatile能替代简单的锁，却不能保证原子性？这里面涉及volatile，是java中的一个我觉得这个词在Java规范中从未被解释清楚的神奇关键词，在Sun的JDK官方文档是这样形容volatile的：</p>
+<p>The Java programming language provides a second mechanism, volatile fields, that is more convenient than locking for some purposes. A field may be declared volatile, in which case the Java Memory Model ensures that all threads see a consistent value for the variable.</p>
+<p>意思就是说，如果一个变量加了volatile关键字，就会告诉编译器和JVM的内存模型：这个变量是对所有线程共享的、可见的，每次jvm都会读取最新写入的值并使其最新值在所有CPU可见。<strong>volatile似乎是有时候可以代替简单的锁，似乎加了volatile关键字就省掉了锁。但又说volatile不能保证原子性（java程序员很熟悉这句话：volatile仅仅用来保证该变量对所有线程的可见性，但不保证原子性）</strong>。这不是互相矛盾吗？</p>
+<h4>不要将volatile用在getAndOperate场合，仅仅set或者get的场景是适合volatile的</h4>
+<p><strong>不要将volatile用在getAndOperate场合（这种场合不原子，需要再加锁），仅仅set或者get的场景是适合volatile的</strong>。</p>
+<h4>volatile没有原子性举例：AtomicInteger自增</h4>
+<p>例如你让一个volatile的integer自增（i++），其实要分成3步：1）读取volatile变量值到local； 2）增加变量的值；3）把local的值写回，让其它的线程可见。这3步的jvm指令为：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">mov    0xc(%r10),%r8d ; Load
+inc    %r8d           ; Increment
+mov    %r8d,0xc(%r10) ; Store
+lock addl $0x0,(%rsp) ; StoreLoad Barrier</pre>
+<p>注意最后一步是内存屏障。</p>
+<h4>什么是内存屏障（Memory Barrier）？</h4>
+<p>内存屏障（<a href="http://en.wikipedia.org/wiki/Memory_barrier" target="_blank">memory barrier</a>）是一个CPU指令。基本上，它是这样一条指令： a) 确保一些特定操作执行的顺序； b) 影响一些数据的可见性(可能是某些指令执行后的结果)。编译器和CPU可以在保证输出结果一样的情况下对指令重排序，使性能得到优化。插入一个内存屏障，相当于告诉CPU和编译器先于这个命令的必须先执行，后于这个命令的必须后执行。内存屏障另一个作用是强制更新一次不同CPU的缓存。例如，一个写屏障会把这个屏障前写入的数据刷新到缓存，这样任何试图读取该数据的线程将得到最新值，而不用考虑到底是被哪个cpu核心或者哪颗CPU执行的。</p>
+<p>内存屏障（<a href="http://en.wikipedia.org/wiki/Memory_barrier" target="_blank">memory barrier</a>）和volatile什么关系？上面的虚拟机指令里面有提到，如果你的字段是volatile，Java内存模型将在写操作后插入一个写屏障指令，在读操作前插入一个读屏障指令。这意味着如果你对一个volatile字段进行写操作，你必须知道：1、一旦你完成写入，任何访问这个字段的线程将会得到最新的值。2、在你写入前，会保证所有之前发生的事已经发生，并且任何更新过的数据值也是可见的，因为内存屏障会把之前的写入值都刷新到缓存。</p>
+<h4>volatile为什么没有原子性?</h4>
+<p>明白了内存屏障（<a href="http://en.wikipedia.org/wiki/Memory_barrier" target="_blank">memory barrier</a>）这个CPU指令，回到前面的JVM指令：从Load到store到内存屏障，一共4步，其中最后一步jvm让这个最新的变量的值在所有线程可见，也就是最后一步让所有的CPU内核都获得了最新的值，但<strong>中间的几步（从Load到Store）</strong>是不安全的，中间如果其他的CPU修改了值将会丢失。下面的测试代码可以实际测试voaltile的自增没有原子性：</p>
+<pre class="brush: java; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">    private static volatile long _longVal = 0;
+    
+	private static class LoopVolatile implements Runnable {
+		public void run() {
+			long val = 0;
+			while (val &lt; 10000000L) {
+				_longVal++;
+				val++;
+			}
+		}
+	}
+	
+	private static class LoopVolatile2 implements Runnable {
+		public void run() {
+			long val = 0;
+			while (val &lt; 10000000L) {
+				_longVal++;
+				val++;
+			}
+		}
+	}
+	
+	private  void testVolatile(){
+	    Thread t1 = new Thread(new LoopVolatile());
+		t1.start();
+		
+		Thread t2 = new Thread(new LoopVolatile2());
+		t2.start();
+		
+        while (t1.isAlive() || t2.isAlive()) {
+	    }
+
+		System.out.println("final val is: " + _longVal);
+	}
+
+Output:-------------
+	
+final val is: 11223828
+final val is: 17567127
+final val is: 12912109</pre>
+<h4>volatile没有原子性举例：singleton单例模式实现</h4>
+<p>这是一段线程不安全的singleton（单例模式）实现，尽管使用了volatile：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">public class wrongsingleton {
+	private static volatile wrongsingleton _instance = null; 
+
+	private wrongsingleton() {}
+
+	public static wrongsingleton getInstance() {
+
+		if (_instance == null) {
+			_instance = new wrongsingleton();
+		}
+
+		return _instance;
+	}
+}</pre>
+<p>下面的测试代码可以测试出是线程不安全的：</p>
+<pre class="brush: java; auto-links: true; collapse: true; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">public class wrongsingleton {
+	private static volatile wrongsingleton _instance = null; 
+
+	private wrongsingleton() {}
+
+	public static wrongsingleton getInstance() {
+
+		if (_instance == null) {
+			_instance = new wrongsingleton();
+			System.out.println("--initialized once.");
+		}
+
+		return _instance;
+	}
+}
+
+private static void testInit(){
+		
+		Thread t1 = new Thread(new LoopInit());
+		Thread t2 = new Thread(new LoopInit2());
+		Thread t3 = new Thread(new LoopInit());
+		Thread t4 = new Thread(new LoopInit2());
+		t1.start();
+		t2.start();
+		t3.start();
+		t4.start();
+		
+        while (t1.isAlive() || t2.isAlive() || t3.isAlive()|| t4.isAlive()) {
+			
+        }
+
+	}
+输出：有时输出"--initialized once."一次，有时输出好几次</pre>
+<p>原因自然和上面的例子是一样的。因为<strong>volatile保证变量对线程的可见性，但不保证原子性</strong>。</p>
+<p>附：正确线程安全的单例模式写法：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">@ThreadSafe 
+public class SafeLazyInitialization { 
+   private static Resource resource; 
+   public synchronized static Resource getInstance() { 
+      if (resource == null) 
+          resource = new Resource(); 
+      return resource; 
+    } 
+} </pre>
+<p>另外一种写法：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">@ThreadSafe 
+public class EagerInitialization { 
+  private static Resource resource = new Resource(); 
+  public static Resource getResource() { return resource; } 
+}</pre>
+<p>延迟初始化的写法：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">@ThreadSafe 
+public class ResourceFactory { 
+	private static class ResourceHolder { 
+		public static Resource resource = new Resource(); 
+	} 
+	public static Resource getResource() { 
+		return ResourceHolder.resource ; 
+	} 
+}</pre>
+<p>二次检查锁定/Double Checked Locking的写法（反模式）</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">public class SingletonDemo {
+	private static volatile SingletonDemo instance = null;//注意需要volatile
+ 
+	private SingletonDemo() {	}
+ 
+	public static SingletonDemo getInstance() {
+		if (instance == null) { //二次检查，比直接用独占锁效率高
+               synchronized (SingletonDemo .class){
+			        if (instance == null) {
+                               instance = new SingletonDemo (); 
+                    }
+             }
+		}
+		return instance;
+	}
+}</pre>
+<h4>为什么AtomicXXX具有原子性和可见性？</h4>
+<p>就拿AtomicLong来说，它既解决了上述的volatile的原子性没有保证的问题，又具有可见性。它是如何做到的？当然就是上文《<a href="http://www.cnblogs.com/Mainz/p/3546347.html" target="_blank">非阻塞同步算法与CAS(Compare and Swap)无锁算法</a>》提到的CAS（比较并交换）指令。 其实AtomicLong的源码里也用到了volatile，但只是用来读取或写入，见源码：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">public class AtomicLong extends Number implements java.io.Serializable {
+    private volatile long value;
+
+    /**
+     * Creates a new AtomicLong with the given initial value.
+     *
+     * @param initialValue the initial value
+     */
+    public AtomicLong(long initialValue) {
+        value = initialValue;
+    }
+
+    /**
+     * Creates a new AtomicLong with initial value {@code 0}.
+     */
+    public AtomicLong() {
+    }</pre>
+<p>其CAS源码核心代码为：</p>
+<pre class="brush: csharp; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">int compare_and_swap (int* reg, int oldval, int newval) 
+{
+  ATOMIC();
+  int old_reg_val = *reg;
+  if (old_reg_val == oldval) 
+     *reg = newval;
+  END_ATOMIC();
+  return old_reg_val;
+}</pre>
+<p>虚拟机指令为：</p>
+<pre class="brush: java; auto-links: true; collapse: false; first-line: 1; gutter: true; html-script: false; light: false; ruler: false; smart-tabs: true; tab-size: 4; toolbar: true;">mov    0xc(%r11),%eax       ; Load
+mov    %eax,%r8d            
+inc    %r8d                 ; Increment
+lock cmpxchg %r8d,0xc(%r11) ; Compare and exchange</pre>
+<p>因为CAS是基于乐观锁的，也就是说当写入的时候，如果寄存器旧值已经不等于现值，说明有其他CPU在修改，那就继续尝试。所以这就保证了操作的原子性。</p>
+<p><a href="https://images0.cnblogs.com/blog/28306/201402/191824486252285.png"><img style="display: inline; border: 0px;" title="ConcurrencyCAS" src="https://images0.cnblogs.com/blog/28306/201402/191824497484728.png" alt="ConcurrencyCAS" width="320" height="171" border="0" /></a></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div></div>
+		<p class="postfoot">
+			posted on 
+<span id="post-date">2014-02-19 18:25</span>&nbsp;
+<a href="https://www.cnblogs.com/Mainz/">Mainz</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3556430" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3556430);return false;">收藏</a>
+		</p>
+	</div>
+	
+	
+	
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 31859, cb_blogApp = 'Mainz', cb_blogUserGuid = '76883d0b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3556430, cb_entryCreatedDate = '2014-02-19 18:25', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+<li>
+</li>
+<li>
+
+</li>
+<li>
+
+
+</li>
+<li>
+</li>
+<li>
+
+</li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+					
+		<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		<h3>统计</h3>
+<ul>
+	<li>随笔 - 
+297</li>
+	<li>文章 - 
+61</li>
+	<li>评论 - 
+672</li>
+	<li>引用 - 
+99</li>
+ </ul>
+
+
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+		<div id="footer">
+	Powered by: 
+	<br />
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 Mainz
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</div>
+
+
+	
+</div>			
+			
+	
+
+
+    <div id="page_end_html">
+        <script language="javascript">
+$.fn.followTo = function ( pos ) {
+    var $this = this,
+        $window = $('window');
+
+    $window.scroll(function(e){
+        if ($window.scrollTop() > pos) {
+            $this.css({
+                position: 'absolute',
+                top: pos
+            });
+        } else {
+            $this.css({
+                position: 'fixed',
+                top: 0
+            });
+        }
+    });
+};
+$(document).ready(function(){
+$('#header').followTo(250);
+$('#rightmenu h3:first').remove();
+$('#rightmenu ul:first').remove();
+$('#rightmenu h3:first').remove();
+});
+</script>
+<!--<script type="text/javascript" src="https://files.cnblogs.com/lloydsheng/lighter.js"></script>
+<script type="text/javascript">
+$("#styles li").click(function(){ 
+    var style = $(this).attr("id"); 
+    if( style == "default")
+	   $("#header h1").css("background-color","#6994B0");
+	else if ( style == "gray")
+	   $("#header h1").css("background-color","#545867 ");
+	else if ( style == "dark_blue")
+	  $("#header h1").css("background-color","#10577D");
+	else if ( style == "light_blue")
+	  $("#header h1").css("background-color","#578AA6");
+	else if ( style == "black")
+	  $("#header h1").css("background-color","#030303");
+	else if ( style == "red")
+	  $("#header h1").css("background-color","#B02121");
+	else if ( style == "dark_green")
+	  $("#header h1").css("background-color","#6A946C");
+	else if ( style == "grass_green")
+	  $("#header h1").css("background-color","#81922A");
+	else
+	  $("#header h1").css("background-color","#6994B0");
+    setCookie('m_cur_theme',style);
+}); 
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+<script language="javascript">
+$(document).ready(function(){
+   /* $("body").prepend($("#div_digg").css({
+        "position" : "fixed", "right" : "40px", "bottom" : "10px", "z-index" : "10", "background-color" : "transparent", "margin" : "10px", "padding" : "10px", "border" : "1px dashed silver"}));*/
+   addSilverlightTag();
+});
+</script>
+<script type="text/javascript" src="https://files.cnblogs.com/Mainz/jquery.lazyload.js"></script>-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="接到一个任务，将攻击转移矩阵进行可视化，生成攻击转移概率图，便尝试用python实现一下。 查阅资料，看大家都在用networkx和matplotlib进行可视化，便边学边做，记录一下学习笔记。 任务" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>networkx学习与攻击转移图可视化 - 李小隐 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=MH15aYd6DmX-6TABpA2xkiKENy3GAhiM2dh5rOPH89I" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=X7swQJ1TyCJAf6FMVjDPbYhUAiMdNFddEy1-m0_TbFQ" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lixiaoyin502/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lixiaoyin502/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lixiaoyin502/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 508301;
+        var currentBlogApp = 'lixiaoyin502';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleBlue';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lixiaoyin502/">李小隐</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lixiaoyin502/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%9D%8E%E5%B0%8F%E9%9A%90">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/lixiaoyin502/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+1&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/lixiaoyin502/p/12719181.html">networkx学习与攻击转移图可视化</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 15px;">接到一个任务，将攻击转移矩阵进行可视化，生成攻击转移概率图，便尝试用python实现一下。</span></p>
+<p><span style="font-size: 15px;">查阅资料，看大家都在用networkx和matplotlib进行可视化，便边学边做，记录一下学习笔记。</span></p>
+<p><span style="font-size: 15px;">任务：将手里了多个攻击过程，如图1所示，生成为攻击转移模型，如图2所示</span></p>
+<p><span style="font-size: 15px;">图1：</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 15px;"><img src="https://img2020.cnblogs.com/blog/1657844/202004/1657844-20200417113209855-435861429.png" alt="" width="1280" height="90" />图2：</span></p>
+<p><span style="font-size: 15px;"><img style="float: left;" src="https://img2020.cnblogs.com/blog/1657844/202004/1657844-20200417113340869-1091564933.png" alt="" width="603" height="452" /><br /></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 15px;">由于直接画图节点过多，于是对节点进行了映射。</span></p>
+<p><span style="font-size: 18pt;"><strong>过程</strong></span></p>
+<p><span style="font-size: 15px;">首先读取文件</span><span style="font-size: 15px;">并以列表的形式表示：</span></p>
+<div class="cnblogs_code">
+<pre>f1 = open(path,<span style="color: #800000;">'</span><span style="color: #800000;">r</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+list_lines </span>=<span style="color: #000000;"> []
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    line </span>=<span style="color: #000000;"> f1.readline()
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> line:
+        list_line </span>= line[0:-1].split(<span style="color: #800000;">'</span><span style="color: #800000;">,</span><span style="color: #800000;">'</span>)<span style="color: #008000;">#</span><span style="color: #008000;">去掉回车符'\n'</span>
+<span style="color: #000000;">        list_lines.append(list_line)
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>然后读取映射文件，用字典存储，方便后面的映射：</p>
+<p>其格式如图</p>
+<p><img src="https://img2020.cnblogs.com/blog/1657844/202004/1657844-20200417114437510-1345770750.png" alt="" /></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">读取对应文件</span>
+fk = open(<span style="color: #800000;">'</span><span style="color: #800000;">./killlinesort.txt</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">r</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+dict_kill </span>=<span style="color: #000000;"> {}
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    linek </span>=<span style="color: #000000;"> fk.readline()
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> linek:
+        spilt_line </span>= linek.split(<span style="color: #800000;">'</span><span style="color: #800000;"> level</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        dict_kill[spilt_line[0]] </span>= spilt_line[1].split(<span style="color: #800000;">'</span><span style="color: #800000;">,</span><span style="color: #800000;">'</span>)[1][0:-1<span style="color: #000000;">]
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break<br /></span></pre>
+</div>
+<p style="text-align: left;"><span style="font-size: 15px;">现在初始化转移矩阵并统计转移次数，最终得到转移概率矩阵，这一步便开始进行映射</span></p>
+<p style="text-align: left;">&nbsp;</p>
+<div class="cnblogs_code">
+<pre>attack =<span style="color: #000000;"> []
+</span><span style="color: #0000ff;">for</span> key <span style="color: #0000ff;">in</span><span style="color: #000000;"> dict_kill:
+    </span><span style="color: #0000ff;">if</span> dict_kill[key] <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> attack:
+        attack.append(dict_kill[key])
+Matrix_tmp </span>= pd.DataFrame(0, columns=attack, index=attack)</pre>
+<pre>#计算转移次数<br />for i in list_lines:  #读取攻击过程<br />    for index in range(len(i)-1):<br />        fT = dict_kill[i[index]]<br />        nT = dict_kill[i[index+1]]<br />        if fT == nT:<br />            continue<br />        else:<br />            Matrix_tmp[nT][fT] = Matrix_tmp[nT][fT] + 1<br />Matrix_P = Matrix_tmp.div((Matrix_tmp.apply(sum,axis=1)),axis=0).fillna(0)#计算转移概率</pre>
+</div>
+<p style="text-align: left;">&nbsp;</p>
+<p>由于我的映射文件中的攻击名称比，要分析的那几个攻击过程中的攻击名称多，，有些节点之间没有关系，所以要去掉孤立的节点</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">去掉孤立的节点</span>
+attack1 =<span style="color: #000000;"> []
+</span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> attack:
+    row </span>=<span style="color: #000000;"> Matrix_P.loc[:,i].values[0:]
+    columns1 </span>=<span style="color: #000000;"> Matrix_P.loc[i,:].values[0:]
+    </span><span style="color: #0000ff;">if</span> sum(row) == 0 <span style="color: #0000ff;">and</span> sum(columns1) ==<span style="color: #000000;"> 0:
+        </span><span style="color: #0000ff;">continue</span>
+    <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        attack1.append(i)#其中是映射完并去掉孤立节点以后的攻击节点</span></pre>
+</div>
+<p>为了方便接下来节点与边进行对应，并且存储转移概率，用字典进行存储源节点，目的节点，概率</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">将转移概率矩阵转换成三元组用字典存储</span>
+dict_tup =<span style="color: #000000;"> {}
+final_attack </span>= []<span style="color: #008000;">#</span><span style="color: #008000;">最后一步攻击</span>
+<span style="color: #0000ff;">for</span> fattack <span style="color: #0000ff;">in</span> attack1:  <span style="color: #008000;">#</span><span style="color: #008000;"> lines是行名也是源节点</span>
+    Max_P_Array =<span style="color: #000000;"> Matrix_P.loc[fattack].values[0:]
+    </span><span style="color: #0000ff;">if</span> sum(Max_P_Array) ==<span style="color: #000000;"> 0:
+        final_attack.append(fattack)</span><span style="color: #008000;">#</span><span style="color: #008000;">记录下每个攻击过程的最后一步攻击，作为广度优先遍历的起始点</span>
+    col_list =<span style="color: #000000;"> Matrix_P.columns.values.tolist()
+    count </span>=<span style="color: #000000;"> 0
+    </span><span style="color: #0000ff;">for</span> values <span style="color: #0000ff;">in</span><span style="color: #000000;"> Max_P_Array:
+        </span><span style="color: #0000ff;">if</span> values &lt;= 0:<span style="color: #008000;">#</span><span style="color: #008000;">筛选边</span>
+            count += 1
+            <span style="color: #0000ff;">continue</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            columns </span>= col_list[count]<span style="color: #008000;">#</span><span style="color: #008000;">目的节点</span>
+            count += 1<span style="color: #000000;">
+            key </span>= fattack + <span style="color: #800000;">'</span><span style="color: #800000;">,</span><span style="color: #800000;">'</span> + columns<span style="color: #008000;">#</span><span style="color: #008000;">结构为{&lsquo;源攻击节点，目的攻击节点&rsquo;：转移概率}</span>
+            dict_tup[key] = values</pre>
+</div>
+<p>通过上述的数据处理和简单的分析，得到需要的三元组，接下来将三元组进行可视化</p>
+<p><span style="font-size: 18pt;">可视化</span></p>
+<p><span style="font-size: 15px;">在可视化的任务中，由于边和点的数量比较多，在尝试了自带的几种布局之后效果很差，于是决定自己定位每个节点的位置</span></p>
+<p><span style="font-size: 15px;">通过不断不断不断不断不断的尝试，根据攻击过程多步转移的特点，最终采用广度优先遍历节点，为节点在图中安放位置，将每轮遍历的节点放在同一层</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">遍历有所节点</span>
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> findallnode(node_list,Matrix_P,pos_num):
+    before_nodes </span>= []<span style="color: #008000;">#</span><span style="color: #008000;">上一步的攻击节点</span>
+    row_num = 1<span style="color: #000000;">
+    pos_count </span>= 1
+    <span style="color: #0000ff;">for</span> n <span style="color: #0000ff;">in</span><span style="color: #000000;"> node_list:
+        tran_p </span>=<span style="color: #000000;"> Matrix_P.loc[:,n].values[0:]
+        count </span>=<span style="color: #000000;"> 0
+        </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> tran_p:
+            </span><span style="color: #0000ff;">if</span> i &lt;=<span style="color: #000000;"> 0:
+                count </span>+= 1
+                <span style="color: #0000ff;">continue</span>
+            <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                before </span>=<span style="color: #000000;"> attack[count]
+                count </span>+= 1
+                <span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> before <span style="color: #0000ff;">in</span><span style="color: #000000;"> G.nodes:
+                    before_nodes.append(before)
+                    G.add_node(before,pos </span>= (pos_count*5,(pos_num*5+((-1)**row_num)*3<span style="color: #000000;">)))
+                    </span><span style="color: #008000;">#</span><span style="color: #008000;">pos的位置可以认为是一个坐标，同层节点之间间隔5，由于有些同层节点之间也有关系，担心重合遮挡，所以y轴坐标进行错位</span>
+                    row_num += 1<span style="color: #000000;">
+                    pos_count </span>+= 1<span style="color: #000000;">
+    pos_num </span>+= 1
+    <span style="color: #008000;">#</span><span style="color: #008000;">进行迭代，直到所有的节点都被遍历，G.node的类型是list</span>
+    <span style="color: #0000ff;">if</span> (len(list(set(attack1)-set(G.nodes))) !=<span style="color: #000000;"> 0):
+        findallnode(before_nodes, Matrix_P, pos_num)
+
+num </span>= 1<br />#确定初始参数
+<span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> final_attack:
+    G.add_node(i,pos </span>= (num*10<span style="color: #000000;">,0))
+    num</span>+=1<span style="color: #000000;">
+findallnode(final_attack,Matrix_P,pos_num</span>=1)</pre>
+</div>
+<p>确定完节点位置之后将边添加进去，对之前生成的字典进行遍历，为每个边添加概率值</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">添加有向边</span>
+<span style="color: #0000ff;">for</span> key <span style="color: #0000ff;">in</span><span style="color: #000000;"> dict_tup:
+    value </span>= round(dict_tup[key],3<span style="color: #000000;">)
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">print(value)</span>
+    list_key = key.split(<span style="color: #800000;">'</span><span style="color: #800000;">,</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    list_key.append(value)
+    tup </span>= tuple(list_key)<span style="color: #008000;">#</span><span style="color: #008000;">得到三元组</span>
+    G.add_edge(str(tup[0]),str(tup[1]),p=tup[2])</pre>
+</div>
+<div class="cnblogs_code">
+<pre>pos=nx.get_node_attributes(G,<span style="color: #800000;">'</span><span style="color: #800000;">pos</span><span style="color: #800000;">'</span>)<span style="color: #008000;">#</span><span style="color: #008000;">这个函数能一字典的形式存储每个节点的坐标</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#pos</span><span style="color: #008000;">结果为</span>
+{<span style="color: #800000;">'</span><span style="color: #800000;">DOWNLOAD FILE</span><span style="color: #800000;">'</span>: (10, 0), <span style="color: #800000;">'</span><span style="color: #800000;">keep connect</span><span style="color: #800000;">'</span>: (20, 0), <span style="color: #800000;">'</span><span style="color: #800000;">DIRECTORY discovery</span><span style="color: #800000;">'</span>: (5, 2), <span style="color: #800000;">'</span><span style="color: #800000;">FILE OPERATION</span><span style="color: #800000;">'</span>: (10, 8), <span style="color: #800000;">'</span><span style="color: #800000;">Password attacks</span><span style="color: #800000;">'</span>: (15, 2), <br /><span style="color: #800000;">'</span><span style="color: #800000;">Vulnerability exploit</span><span style="color: #800000;">'</span>: (20, 8), <span style="color: #800000;">'</span><span style="color: #800000;">Initial Access</span><span style="color: #800000;">'</span>: (25, 2), <span style="color: #800000;">'</span><span style="color: #800000;">UPLOAD FILE</span><span style="color: #800000;">'</span>: (30, 8), <span style="color: #800000;">'</span><span style="color: #800000;">WEBSHELL</span><span style="color: #800000;">'</span>: (35, 2), <span style="color: #800000;">'</span><span style="color: #800000;">DDOS</span><span style="color: #800000;">'</span>: (5, 7), <span style="color: #800000;">'</span><span style="color: #800000;">Command and Control</span><span style="color: #800000;">'</span>: (10, 13), <br /><span style="color: #800000;">'</span><span style="color: #800000;">INFORMATION DISCLOSURE</span><span style="color: #800000;">'</span>: (15, 7), <span style="color: #800000;">'</span><span style="color: #800000;">ERROR OCCUR</span><span style="color: #800000;">'</span>: (5, 12), <span style="color: #800000;">'</span><span style="color: #800000;">.</span><span style="color: #800000;">'</span>: (0, 0)}</pre>
+</div>
+<p>接着就是作图，将节点和边都画出来</p>
+<div class="cnblogs_code">
+<pre>nx.draw_networkx_nodes(G, pos, node_size=50, node_color=<span style="color: #800000;">'</span><span style="color: #800000;">gray</span><span style="color: #800000;">'</span>)<span style="color: #008000;">#</span><span style="color: #008000;">将节点画出，各个参数可以查询关方文档，选择需要的</span>
+nx.draw_networkx_edges(G, pos, width=1.5,arrowstyle=<span style="color: #800000;">'</span><span style="color: #800000;">-&gt;</span><span style="color: #800000;">'</span>,arrowsize=10,alpha=0.5,)<span style="color: #008000;">#</span><span style="color: #008000;">画出边</span>
+nx.draw_networkx_edge_labels(G,pos,label_pos=0.35,font_size=5,font_weight=<span style="color: #800000;">'</span><span style="color: #800000;">bold</span><span style="color: #800000;">'</span>)<span style="color: #008000;">#</span><span style="color: #008000;">label_pos是转移概率在边上的位置，font_weight中bold为加粗，默认是正常</span></pre>
+</div>
+<p>由于文字比较多，无法在节点中展示，所以在节点上面进行展示</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">由于pos中的坐标是以元组的形式展示，而元组不能修改，所以先转成list再进行替换</span>
+<span style="color: #0000ff;">for</span> key <span style="color: #0000ff;">in</span><span style="color: #000000;"> pos:
+    list_loc </span>=<span style="color: #000000;"> list(pos[key])
+    list_loc[</span>1] += .7<span style="color: #008000;">#</span><span style="color: #008000;">上移的值，根据实际情况修改</span>
+    pos[key] =<span style="color: #000000;"> tuple(list_loc)
+nx.draw_networkx_labels(G,pos,font_size</span>=8,alpha=0.8)<span style="color: #008000;">#</span><span style="color: #008000;">画出攻击类型名称</span></pre>
+</div>
+<p>最后，生成文件</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">plt.show()#show()和savefig不能同时存在，不然生成的文件是白板</span>
+<span style="color: #000000;">
+plt.savefig(</span><span style="color: #800000;">'</span><span style="color: #800000;">./****.png</span><span style="color: #800000;">'</span>,pad_inches=20,dpi=300)<span style="color: #008000;">#</span><span style="color: #008000;">具体参数可以上网查询</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>-----------------------------------------------------------------------------------------------------------------------------------------</p>
+<p>参考资料</p>
+<p><a href="https://zhuanlan.zhihu.com/p/36700425">https://zhuanlan.zhihu.com/p/36700425</a></p>
+<p><a href="https://www.osgeo.cn/networkx/auto_examples/drawing/plot_weighted_graph.html#sphx-glr-auto-examples-drawing-plot-weighted-graph-py">https://www.osgeo.cn/networkx/auto_examples/drawing/plot_weighted_graph.html#sphx-glr-auto-examples-drawing-plot-weighted-graph-py</a></p>
+<p>&nbsp;</p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: center;"><em id="__mceDel"><span style="font-size: 15px;">&nbsp;</span></em></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 12:57</span>&nbsp;
+<a href="https://www.cnblogs.com/lixiaoyin502/">李小隐</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12719181" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12719181);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 508301, cb_blogApp = 'lixiaoyin502', cb_blogUserGuid = '3b0cdac3-87ec-4748-4656-08d6bd0e9e22';
+    var cb_entryId = 12719181, cb_entryCreatedDate = '2020-04-17 12:57', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 李小隐
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

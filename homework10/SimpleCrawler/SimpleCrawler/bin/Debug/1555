@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="C/C&#x2B;&#x2B;、C 、JAVA(三)：字符串操作 [TOC] 定义字符串 C 语言中，没有字符串对象，是使用 来存储字符串。 C 语言中，字符串应当以 结尾。 定义数组时，必须多一位，用来存储 。 C&#x2B;&#x2B;" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>C/C++、C#、JAVA(三)：字符串操作 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12555265.html">C/C++、C#、JAVA(三)：字符串操作</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="cc、c、java三：字符串操作">C/C++、C#、JAVA(三)：字符串操作</h1>
+<p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="#cc、c、java三：字符串操作">C/C++、C#、JAVA(三)：字符串操作</a><ul><li><a href="#定义字符串">定义字符串</a><ul><li><a href="#c">C</a></li><li><a href="#c">C++</a></li><li><a href="#c">C#</a></li><li><a href="#java">JAVA</a></li><li><a href="#捕捉输入和输出">捕捉输入和输出</a></li></ul></li><li><a href="#等值比较">等值比较</a><ul><li><a href="#cc">C/C++</a></li><li><a href="#c">C#</a></li><li><a href="#java">JAVA</a></li></ul></li><li><a href="#字符串操作">字符串操作</a><ul><li><a href="#字符串搜索">字符串搜索</a><ul><li><a href="#c">C</a></li><li><a href="#c">C++</a></li><li><a href="#c">C#</a></li><li><a href="#java">JAVA</a></li></ul></li><li><a href="#字符串提取、插入、删除、替换">字符串提取、插入、删除、替换</a><ul><li><a href="#c">C</a></li><li><a href="#c-和-java">C++ 和 JAVA</a></li></ul></li></ul></li></ul></li></ul></div></p>
+<h2 id="定义字符串">定义字符串</h2>
+<h3 id="c">C</h3>
+<p>语言中，没有字符串对象，是使用 <code>char []</code> 来存储字符串。</p>
+<pre><code class="language-c">	char a[] = &quot;abcdef&quot;;
+    char c[6] = {'a', 'b', 'c', 'd', 'e', '\0'};
+	char* b = a;
+</code></pre>
+<p>C 语言中，字符串应当以 <code>\0</code> 结尾。</p>
+<p>定义数组时，必须多一位，用来存储 <code>\0</code> 。</p>
+<h3 id="c-2">C++</h3>
+<p>C++ 标准库中，使用 <strong>string</strong> 来表示字符串。string 对象可以直接相加连接。</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+ 
+using namespace std;
+ 
+int main ()
+{
+   string str1 = &quot;Hello&quot;;
+   string str2 = &quot;World&quot;;
+   string str3;
+   int  len ;
+ 
+   // 复制 str1 到 str3
+   str3 = str1;
+   cout &lt;&lt; &quot;str3 : &quot; &lt;&lt; str3 &lt;&lt; endl;
+ 
+   // 连接 str1 和 str2
+   str3 = str1 + str2;
+   cout &lt;&lt; &quot;str1 + str2 : &quot; &lt;&lt; str3 &lt;&lt; endl;
+ 
+   // 连接后，str3 的总长度
+   len = str3.size();
+   cout &lt;&lt; &quot;str3.size() :  &quot; &lt;&lt; len &lt;&lt; endl;
+ 
+   return 0;
+}
+// 示例来自 https://www.runoob.com/cplusplus/cpp-strings.html
+</code></pre>
+<h3 id="c-3">C#</h3>
+<p>C# 中，直接声明字符串就行</p>
+<pre><code>            string a = &quot;abcdef&quot;;
+</code></pre>
+<h3 id="java">JAVA</h3>
+<p>JAVA 中，使用 String 声明字符串。</p>
+<pre><code>        String a = &quot;1234&quot;;
+        String b = new String(&quot;1234&quot;);
+</code></pre>
+<h3 id="捕捉输入和输出">捕捉输入和输出</h3>
+<p>C 语言中，有多个函数可以从键盘获得用户输入，它们分别是：</p>
+<ul>
+<li><code>scanf()</code> 可以输入多种类型的数据，<code>printf()</code> 可以输出多种类型的数据；</li>
+<li><code>getchar()</code> 可以获取单个字符，<code>putchar()</code> 输出单个字符；</li>
+<li>gets()：获取一行数据，并作为字符串处理；<code>puts()</code> 输出一行字符串。</li>
+</ul>
+<p>C++ 中，可以使用 cin 获取输入字符串，；</p>
+<p>C# 中使用 <code>Console.ReadLine()</code> 获取字符串，<code>Console.ReadKey()</code> 获取按下的键。</p>
+<p>JAVA 可以使用<code> System.in</code> 类或 <code>Scanner</code> 类和 <code>BufferedReader</code> 类输入字符串，使用 <code>System.out</code> 类来输出字符串。</p>
+<p>在我学习 JAVA 是，百度了一下 JAVA　获取输入的方法，发现真鸡儿麻烦。下面示例可以看出各种语言获取输入的操作过程</p>
+<p>下面是各种语言的核心语法，请一定要牢记：</p>
+<p>C语言 版本</p>
+<pre><code class="language-c">	char a[10] = &quot;\0&quot;;
+	gets_s(a);		// VC中，gets 被更安全的 gets_s 代替了
+	puts(a);
+
+	scanf(&quot;%s&quot;, a);	// 加不加 &amp; 都行
+	printf(&quot;%s&quot;,a);
+</code></pre>
+<p>C++ 版本</p>
+<pre><code class="language-c++">	string a;
+	cin &gt;&gt; a;
+	cout &lt;&lt; a &lt;&lt; endl;
+</code></pre>
+<p>C# 版本</p>
+<pre><code class="language-c#">            string a;
+            a = Console.ReadLine();
+</code></pre>
+<p>JAVA 版本</p>
+<pre><code class="language-java">        String a;
+        Scanner input = new Scanner(System.in);
+        a = input.nextLine();
+        System.out.println(a);
+        input.close();
+</code></pre>
+<p>JAVA 用起来本人觉得麻烦。</p>
+<p>C，C++，C# 的方法，一看基本就学会，JAVA 还要引个 <code>import java.util.Scanner;</code> 包。</p>
+<h2 id="等值比较">等值比较</h2>
+<h3 id="cc">C/C++</h3>
+<p>我们来编写一个 C++ 程序</p>
+<pre><code class="language-c++">	string str1 = &quot;1&quot;;
+	string str2 = &quot;1&quot;;
+
+	cout &lt;&lt; (str1 == str2) &lt;&lt; endl;
+
+	char str3[] = &quot;1&quot;;
+	char str4[] = &quot;1&quot;;
+
+	cout &lt;&lt; (str1 == str2) &lt;&lt; endl;
+
+	char str5[] = { '1','\0' };
+	char str6[] = { '1','\0' };
+
+	cout &lt;&lt; (str5 == str6) &lt;&lt; endl;
+
+	cout &lt;&lt; (str1 == str3) &lt;&lt; endl;
+</code></pre>
+<p>结果是 <code>1,1,0,1</code>。</p>
+<p>str1,str2,str3,str4 之间是相互相等的，因为他们都是对常量 1 的调用。</p>
+<h3 id="c-4">C#</h3>
+<p>C# 中，strng 是引用类型。</p>
+<p><code>==</code> 对值类型来说，比较的是值是否相等；对引用类型来说，比较的是引用地址是否相等。</p>
+<p>由于 string 类型重写了操作符，因此 <code>==</code> 对于 string 来说，是比较字符串是否相同。</p>
+<pre><code>string a = &quot;abcd&quot;;
+string b = &quot;abcd&quot;;
+Console.WriteLine(a==b);
+</code></pre>
+<p>结果是 true。</p>
+<p>C# 中字符串的比较丰富十分丰富，对字符全球化的支持十分给力。</p>
+<p>这里就不对此进行讨论了。</p>
+<h3 id="java-2">JAVA</h3>
+<p>JAVA 中，我们发现 int -&gt; Integer，double -&gt; Double等，但是 String 只有一个。</p>
+<p>JAVA 中，String 未对 <code>==</code> 操作符进行重写，因此比较的还是引用地址。</p>
+<p>如果想比较字符串是否相同，可以使用 <code>equals</code> 。</p>
+<pre><code class="language-java">        String a = &quot;1234&quot;;
+        String b = new String(&quot;1234&quot;);
+
+        System.out.println(a == b);     // false
+
+        String c = &quot;1234&quot;;
+        System.out.println(a == c);     // true
+
+        System.out.println(a.equals(b));    // true
+
+        String d = &quot;abc&quot;;
+        String e = &quot;ABC&quot;;
+        System.out.println(d.equalsIgnoreCase(e));      // true，忽略大小写
+</code></pre>
+<h2 id="字符串操作">字符串操作</h2>
+<h3 id="字符串搜索">字符串搜索</h3>
+<h4 id="c-5">C</h4>
+<p>C语言中， <code>strchr</code> 用来区配字符串中首次出现指定字符的位置(碰到<code>\0</code> 会提前结束)。返回的是指针。</p>
+<p>我们可以使用以下方式转为索引位置</p>
+<pre><code class="language-C">char a[] = &quot;abcdefghijklmnopq&quot;;
+char* p = strchr(a, 'c');
+// 如果找不到会返回 NULL，请自行判断
+printf(&quot;%d&quot;, p - a);
+</code></pre>
+<p><code>memchr</code> 跟 <code>strchr</code> 作用差不多，但是碰到 <code>\0</code> 不会停。</p>
+<pre><code class="language-c">	char a[] = { 'a','\0','b','c','d' };
+	char* p = strchr(a, 'c');
+	if (p == NULL)
+		printf(&quot;找不到\n&quot;);
+	else
+		printf(&quot;索引位置为：%d&quot;, p - a + 1);
+
+	// memchar 返回的是 void*，需要转为 char*
+	p = (char *)memchr(a, 'c', sizeof(a));
+	if (p == NULL)
+		printf(&quot;找不到\n&quot;);
+	else
+		printf(&quot;索引位置为：%d&quot;, p - a + 1);
+</code></pre>
+<p><code>strstr()</code> 方法则可以搜索字符串的位置。</p>
+<pre><code class="language-c">	char a[] = &quot;Hello world!\0&quot;;
+	char* p = strstr(a, &quot;world&quot;);
+	if (p == NULL)
+		printf(&quot;找不到\n&quot;);
+	else
+		printf(&quot;索引位置为：%d&quot;, p - a + 1);
+</code></pre>
+<h4 id="c-6">C++</h4>
+<p>C++ 中，查找字符方式比较多，例如<code>find()</code> 和  <code>rfind()</code>  ，这里不详细讲述。</p>
+<p><code>find()</code> 和  <code>rfind()</code> 可以搜索字符和字符串。</p>
+<p>示例如下</p>
+<pre><code class="language-c++">	string a = &quot;my name is 痴者工良,hello,any boy~&quot;;
+	cout &lt;&lt; a.find('n') &lt;&lt; endl;
+	cout &lt;&lt; a.find(&quot;name&quot;) &lt;&lt; endl;
+	cout &lt;&lt; a.find(&quot;name&quot;, 8) &lt;&lt; endl;	// 从索引为8的位置开始查找
+	cout &lt;&lt; a.find(&quot;namez&quot;) &lt;&lt; endl;
+	// 上面这两个输出中，查找不到，会导致输出的值有问题
+
+	// 可以这样解决
+	// 如果查找不到，会输出 -1
+	string::size_type index = a.find(&quot;namez&quot;);
+	cout &lt;&lt; (int)index &lt;&lt; endl;
+</code></pre>
+<p><code>rfind()</code> 功能跟 <code>find()</code> 一样，但是 <code>rfind()</code> 是逆向查找。</p>
+<pre><code class="language-c++">	string a = &quot;my name is 痴者工良,hello,any boy~&quot;;
+	cout &lt;&lt; a.rfind('n') &lt;&lt; endl;
+	cout &lt;&lt; a.rfind(&quot;name&quot;) &lt;&lt; endl;
+	cout &lt;&lt; a.rfind(&quot;name&quot;, 8) &lt;&lt; endl;	// 从索引为8的位置开始查找
+	cout &lt;&lt; a.rfind(&quot;namez&quot;) &lt;&lt; endl;
+	// 上面这两个输出中，查找不到，会导致输出的值有问题
+
+	// 可以这样解决
+	// 如果查找不到，会输出 -1
+	string::size_type index = a.find(&quot;namez&quot;);
+	cout &lt;&lt; (int)index &lt;&lt; endl;
+</code></pre>
+<p><code>rfind()</code> 函数，从后面开始区配，查找成功会返回索引位置。</p>
+<p><code>find_first_of()</code> 函数和 <code>find_last_of()</code> 函数可以查找字符或字符串第一次出现的位置和最后出现的位置。</p>
+<p>可以 参考 <a href="http://c.biancheng.net/view/1453.html">http://c.biancheng.net/view/1453.html</a></p>
+<h4 id="c-7">C#</h4>
+<p>C# 的查找方法很多，而且使用方便。</p>
+<p>具体可以参考笔者的另一篇文章 <a href="https://www.cnblogs.com/whuanle/p/11967014.html#4-systemstring-%E5%AD%97%E7%AC%A6%E4%B8%B2">https://www.cnblogs.com/whuanle/p/11967014.html#4-systemstring-字符串</a>。</p>
+<p><code>StartsWith()</code> 和 <code>EndsWith()</code> 可以使用 StringComparison 比较方式、CultureInfo 控制文化相关规则。</p>
+<p><code>StartsWith()</code> ：字符串开头是否存在符合区配字符串</p>
+<p><code>EndsWith()</code>： 字符串结尾是否存在符合区配字符串</p>
+<p><code>Contains()</code>：	字符串任意位置是否存在区配字符串</p>
+<p><code>IndexOf</code>：	字符串或字符首次出现的索引位置，如果返回值为 <code>-1</code> 则表示无区配结果。</p>
+<p>使用示例</p>
+<pre><code class="language-c#">            string a = &quot;痴者工良(高级程序员劝退师)&quot;;
+            Console.WriteLine(a.StartsWith(&quot;高级&quot;));
+            Console.WriteLine(a.StartsWith(&quot;高级&quot;,StringComparison.CurrentCulture));
+            Console.WriteLine(a.StartsWith(&quot;高级&quot;,true, CultureInfo.CurrentCulture));
+            Console.WriteLine(a.StartsWith(&quot;痴者&quot;,StringComparison.CurrentCulture));
+            Console.WriteLine(a.EndsWith(&quot;劝退师)&quot;,true, CultureInfo.CurrentCulture));
+            Console.WriteLine(a.IndexOf(&quot;高级&quot;,StringComparison.CurrentCulture));
+</code></pre>
+<p>输出</p>
+<pre><code>False
+False
+False
+True
+True
+5
+</code></pre>
+<h4 id="java-3">JAVA</h4>
+<p>JAVA 中，string 的 <code>indexOf()</code> 方法返回字符串第一次出现的位置，<code>lastIndexof()</code> 返回最后一次出现的位置。</p>
+<p><code>startsWith</code> 查找是否以某个字符串开头。</p>
+<p><code>regionMatches</code> 则用于处理全球化的问题。</p>
+<p>示例就不写了，参考 C#的。</p>
+<h3 id="字符串提取、插入、删除、替换">字符串提取、插入、删除、替换</h3>
+<p>C#的我就不说了，请参考笔者的另一篇文章</p>
+<p><a href="https://www.cnblogs.com/whuanle/p/11967014.html#42-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8F%90%E5%8F%96%E3%80%81%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%E3%80%81%E6%9B%BF%E6%8D%A2">https://www.cnblogs.com/whuanle/p/11967014.html#42-字符串提取、插入、删除、替换</a></p>
+<h4 id="c-8">C</h4>
+<p><code>strncpy()</code> 函数可以复制目标字符串的多个字节到另一个字符串中。适合用来截取字符串，包含 <code>\0</code>。<code>strncpy()</code> 跟 <code>strcpy()</code> 一样，只是不包含 <code>\0</code>。</p>
+<p><code>strcpy</code> 是将一个字符串放到另一个字符串里，会覆盖另一个字符串。</p>
+<pre><code class="language-C">	char a[] = &quot;my name is 痴者工良,hello,any boy~\0&quot;;
+	char b[4] = { '1','1','1','\0' };
+
+	// b &lt;- a
+	strncpy(b, a, 3); // 截取前三位
+	printf(&quot;%s\n&quot;, b);
+
+	char aa[] = &quot;my name is 痴者工良,hello,any boy~\0&quot;;
+	char bb[4] = { '1','1','1','\0' };
+	strncpy(bb, aa + 5, 3); // 从第五位开始，截取三位
+	printf(&quot;%s\n&quot;, bb);
+
+	char c[] = &quot;123456&quot;;
+	char d[] = &quot;a&quot;;
+
+	// c &lt;- d
+	strcpy(c, d);
+
+	puts(d);
+	return 0;
+</code></pre>
+<p>可以参考 <a href="https://www.cnblogs.com/jixiaohua/p/11330096.html">https://www.cnblogs.com/jixiaohua/p/11330096.html</a></p>
+<p>C 语言中，对字符串的插入和删除、替换，没有或者有我不知道的官方支持函数😜。</p>
+<p>前面我们学习了 C 语言的字符串搜索函数 <code>strstr()</code> 我们可以使用这个来获取到字符串的起止位置，然后进行后续操作。</p>
+<h4 id="c-和-java">C++ 和 JAVA</h4>
+<p>C++、C#、JAVA 都有 <code>sub</code>方法，使用上也是差不多。</p>
+<pre><code class="language-c++">	string a = &quot;my name is 痴者工良,hello,any boy~&quot;;
+	cout &lt;&lt; a.substr(0,5) &lt;&lt; endl;	// 第0位开始，截取5个
+	cout &lt;&lt; a.substr(5, 5) &lt;&lt; endl;	// 第5位开始，截取5个
+</code></pre>
+<pre><code class="language-java">        String a = &quot;my name is 痴者工良,hello,any boy~&quot;;
+        System.out.println(a.substring(0,5));
+        System.out.println(a.substring(2,7));
+</code></pre>
+<p>C++ 和 C# 的 sub 方法，参数是差不多的，左侧参数代表开始索引，右侧参数代表截取的个数。</p>
+<p>JAVA 中，左参数代表开始索引，右侧参数代表结束索引。</p>
+<p>另外还有插入，删除，替换。。。我觉得我要疯了。。。</p>
+<p>当初立 flag 要写这四种语言的对比学习文章，大概当时是吃饱了撑的。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1315495/202003/1315495-20200323213721618-689303131.png" alt="这谁顶得住"></p>
+<p>精力有限，我要早点睡觉了，</p>
+<p>C++ 字符串操作，看↓</p>
+<p><a href="http://c.biancheng.net/view/1449.html">http://c.biancheng.net/view/1449.html</a></p>
+<p>JAVA 字符串操作，看↓</p>
+<p><a href="https://www.cnblogs.com/freeabyss/archive/2013/05/15/3187057.html">https://www.cnblogs.com/freeabyss/archive/2013/05/15/3187057.html</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-23 21:34</span>&nbsp;
+<a href="https://www.cnblogs.com/whuanle/">痴者工良</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12555265" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12555265);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 406195, cb_blogApp = 'whuanle', cb_blogUserGuid = 'b8263b87-b86b-4861-1de2-08d54dbac325';
+    var cb_entryId = 12555265, cb_entryCreatedDate = '2020-03-23 21:34', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

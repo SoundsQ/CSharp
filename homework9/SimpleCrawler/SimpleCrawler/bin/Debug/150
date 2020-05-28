@@ -1,0 +1,1397 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="spring整合mybatis mybatis所需要的jar包 mybatis配置文件 sql语句 mybatis应用" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>springmvc 项目完整示例04 整合mybatis mybatis所需要的jar包 mybatis配置文件 sql语句 mybatis应用 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/5213485.html">springmvc 项目完整示例04 整合mybatis mybatis所需要的jar包 mybatis配置文件 sql语句 mybatis应用</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        spring整合mybatis mybatis所需要的jar包 mybatis配置文件 sql语句 mybatis应用
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>百度百科:</p>
+<p>MyBatis 本是<a href="http://baike.baidu.com/view/28283.htm">apache</a>的一个开源项目<a href="http://baike.baidu.com/view/628102.htm">iBatis</a>, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。2013年11月迁移到Github。</p>
+<p>iBATIS一词来源于&ldquo;internet&rdquo;和&ldquo;abatis&rdquo;的组合，是一个基于Java的<a href="http://baike.baidu.com/view/198047.htm">持久层</a>框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAO）</p>
+<p><small>来源： <a href="http://baike.baidu.com/link?url=Z0he9EpOBOMlHLH_MpCWQ3Shojuzg0ixWNe6ILPwyMng98oskR_Cr9Nb5G3A3sqAJ4Y98XlUTNUuJ7y0V6e7Xa">http://baike.baidu.com/link?url=Z0he9EpOBOMlHLH_MpCWQ3Shojuzg0ixWNe6ILPwyMng98oskR_Cr9Nb5G3A3sqAJ4Y98XlUTNUuJ7y0V6e7Xa</a></small></p>
+<p>前面使用的是jdbcTemplate,不够方便,现在我们把他和mybatis整合</p>
+<p>需要的jar</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201602/897393-20160224163619177-2091387326.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="e6227cd6-2536-432d-8a79-e59b8127f3d3" src="https://images2015.cnblogs.com/blog/897393/201602/897393-20160224163619411-692566879.png" alt="e6227cd6-2536-432d-8a79-e59b8127f3d3" width="201" height="56" border="0" /></a></p>
+<p>一个用来和spring无缝对接,一个是mybatis的核心包</p>
+<p>首先需要增加配置文件</p>
+<p>&lt;!-- myBatis文件 --&gt;</p>
+<p>&lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;</p>
+<p>&lt;property name="dataSource" ref="dataSource" /&gt;</p>
+<p>&lt;!-- 自动扫描映射文件 --&gt;</p>
+<p>&lt;property name="mapperLocations"&gt;</p>
+<p>&lt;array&gt;</p>
+<p>&lt;value&gt;classpath:mapper/*.xml&lt;/value&gt;</p>
+<p>&lt;/array&gt;</p>
+<p>&lt;/property&gt;</p>
+<p>&lt;/bean&gt;</p>
+<p>&lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;</p>
+<p>&lt;property name="basePackage" value="com.bbs.dao.mapper" /&gt;</p>
+<p>&lt;property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" /&gt;</p>
+<p>&lt;/bean&gt;</p>
+<p>这一段是固定格式的哈, dataSource是我们的数据源也就是连接数据库用的,之前设置过来的</p>
+<p>使用mybatis一般我们需要两个文件,一个就是mapper映射接口,一个就是xml,里面写的sql</p>
+<p>说白了就是mybaits把xml中的sql,处理后,可以通过mapper中的接口调用</p>
+<p>注意,接口名字就是xml中的id</p>
+<p>所以说到这也可以明白了,上面的自动扫描映射文件的xml就是我们写sql的地方</p>
+<p>下面的就是mapper接口对应的包,它里面写的都是mapper接口</p>
+<p>所以你要用的话,copy过去,修改一下这两个位置就好了</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201602/897393-20160224163619740-1679243438.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="044ab169-e80c-45f6-bb34-c2ad78973330" src="https://images2015.cnblogs.com/blog/897393/201602/897393-20160224163620036-1159189362.png" alt="044ab169-e80c-45f6-bb34-c2ad78973330" width="569" height="257" border="0" /></a></p>
+<p><strong>还有就是要知道,对照eclipse的话,创建项目后src就是这个classpath的哈</strong></p>
+<p>具体的请仔细学习mybaits</p>
+<p>配置文件可以单独配置,也可以直接写道ApplicationContext,xml的,现在我们就是写在一起的</p>
+<p>然后就是在项目里面把文件新建一下</p>
+<p>新建一个包,com.bbs.dao.mapper&nbsp; 里面新建两个接口</p>
+<p>src下面新建一个文件夹,mapper,里面新建两个配置文件</p>
+<p>如下图所示</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201602/897393-20160224163620490-1936852983.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="192678e3-00e6-47a2-8273-b6c315dcae67" src="https://images2015.cnblogs.com/blog/897393/201602/897393-20160224163620771-1565311357.png" alt="192678e3-00e6-47a2-8273-b6c315dcae67" width="412" height="663" border="0" /></a></p>
+<p>配置文件设置好了之后,文件也都创建好了</p>
+<p>就是要写sql以及接口了</p>
+<p>sql自然是要按照人家的规则来写了</p>
+<p>UserMapper.xml</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" </span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="com.bbs.dao.mapper.UserMapper"</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="getMatchCount"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #ff0000;">
+
+resultType</span><span style="color: #0000ff;">="java.lang.Integer"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+SELECT count(*)
+
+FROM
+
+t_user
+
+WHERE
+
+user_name=#{userName}
+
+and password=#{password}
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="findUserByUserName"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #ff0000;">
+
+resultType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+SELECT
+
+t_user.user_id as userId,
+
+t_user.user_name as userName,
+
+t_user.credits as credits,
+
+t_user.password as password,
+
+t_user.last_ip as lastIp,
+
+t_user.last_visit as lastVisit
+
+ 
+
+ 
+
+FROM
+
+t_user
+
+WHERE
+
+user_name=#{userName}
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">update </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="updateLoginInfo"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+ 
+
+UPDATE t_user
+
+</span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="lastVisit !=null"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+last_visit = #{lastVisit},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="lastIp !=null and lastIp !=''"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+last_ip = #{lastIp},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="credits !=null and credits !=''"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+credits = #{credits},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+where user_id=#{userId}
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">update</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">insert </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="insertUser"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+insert into t_user(
+
+user_name,
+
+credits,
+
+password,
+
+last_ip,
+
+last_visit
+
+)
+
+values(
+
+#{userName},
+
+#{credits},
+
+#{password},
+
+#{lastIp},
+
+#{lastVisit}
+
+ 
+
+)
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">insert</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+ 
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">update </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="updateUserInfo"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+ 
+
+UPDATE t_user
+
+ 
+
+</span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="lastVisit !=null"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+last_visit = #{lastVisit},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="lastIp !=null and lastIp !=''"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+last_ip = #{lastIp},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">if </span><span style="color: #ff0000;">test</span><span style="color: #0000ff;">="credits !=null and credits !=''"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+credits = #{credits},
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">if</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+where user_id=#{userId}
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">update</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+ 
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>LoginLogMapper.xml</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" </span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="com.bbs.dao.mapper.LoginLogMapper"</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">insert </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="insertLoginLog"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="com.bbs.domain.LoginLog"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+insert into t_login_log(
+
+user_id,
+
+ip,
+
+login_datetime
+
+)
+
+values(
+
+#{userId},
+
+#{ip},
+
+#{loginDate}
+
+)
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">insert</span><span style="color: #0000ff;">&gt;</span>
+
+ 
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>说到这,说点常见的问题</strong></p>
+<p><strong>1,数据库中的字段名字和java代码中的名字,要注意,如果不一样记得select的时候要as一下为代码中的,不然人家怎么知道如何映射</strong></p>
+<p><strong>2,insert,update的时候,前面的是数据库的,后面的是java代码的</strong></p>
+<p><strong>3.使用if判断入参条件的时候要小心</strong></p>
+<p><strong><a href="http://images2015.cnblogs.com/blog/897393/201602/897393-20160224163620974-1251775777.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="a000604c-cb61-4741-9597-502a97718a82" src="https://images2015.cnblogs.com/blog/897393/201602/897393-20160224163621193-1519803184.png" alt="a000604c-cb61-4741-9597-502a97718a82" width="388" height="221" border="0" /></a><br /></strong></p>
+<p><strong>比如此处的lastVisit是数据库中datetime格式的,java代码中是Date(util)类型的,使用if的时候这个lastvisit就不能跟下面lastIp似得有一个什么and lastIp!='',因为是一个时间对象嘛,比较的时候当做字符串了,你要是用了就会报错,</strong></p>
+<p><code><strong>org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: </strong></code></p>
+<p><code><strong>### Error updating database.  Cause: java.lang.IllegalArgumentException: invalid comparison: java.util.Date and java.lang.String</strong></code></p>
+<p><code><strong>..........</strong></code></p>
+<p>就是sql嘛,注释也都没写,毕竟是简单的例子</p>
+<p>接着是跟xml映射的接口</p>
+<p>UserMapper.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.dao.mapper;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.User;
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> UserMapper {
+
+ 
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer getMatchCount(User user);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User findUserByUserName(User user);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> updateLoginInfo(User user);
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertUser(User user);
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> updateUserInfo(User user);
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>LoginLogMapper.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.dao.mapper;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.LoginLog;
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> LoginLogMapper {
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertLoginLog(LoginLog loginLog);
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>这样子就可以通过mapper接口执行sql了</p>
+<p>之前的时候我们的接口写的不怎么规范,我们现在规范一下</p>
+<p>把原来的userService.java拆分下</p>
+<p>拆解成</p>
+<p>UserService.java</p>
+<p>LoginLogService.java</p>
+<p>这两个接口</p>
+<p>实际使用的时候,使用他们的实现类</p>
+<p>面向接口的编程嘛,好处自行百度</p>
+<p>UserService.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.User;
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> UserService {
+
+ 
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Boolean hasMatchUser(User user);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User findUserByUserName(User user);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> loginSucess(User user);
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertUser(User user);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> UpdateUser(User user);
+
+ 
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>UserServiceImpl.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.beans.factory.annotation.Autowired;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.stereotype.Service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.dao.mapper.UserMapper;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.LoginLog;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.User;
+
+ 
+
+@Service
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> UserServiceImpl <span style="color: #0000ff;">implements</span><span style="color: #000000;"> UserService {
+
+ 
+
+@Autowired
+
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> UserMapper userMapper;
+
+@Autowired
+
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> LoginLogService loginLogService;
+
+ 
+
+@Override
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Boolean hasMatchUser(User user) {
+
+ 
+
+Integer matchCount </span>=<span style="color: #000000;"> userMapper.getMatchCount(user);
+
+</span><span style="color: #0000ff;">if</span>(matchCount &gt; 0<span style="color: #000000;">){
+
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+
+}</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+
+}
+
+ 
+
+ 
+
+}
+
+ 
+
+@Override
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User findUserByUserName(User user) {
+
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> userMapper.findUserByUserName(user);
+
+}
+
+ 
+
+@Override
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> loginSucess(User user) {
+
+ 
+
+user.setCredits(</span>5+<span style="color: #000000;">user.getCredits());
+
+user.setLastVisit(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Date());
+
+LoginLog loginLog </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LoginLog();
+
+ 
+
+loginLog.setUserId(user.getUserId());
+
+loginLog.setIp(user.getLastIp());
+
+loginLog.setLoginDate(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Date());
+
+ 
+
+ 
+
+userMapper.updateLoginInfo(user);
+
+loginLogService.insertLoginLog(loginLog);
+
+}
+
+ 
+
+@Override
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertUser(User user) {
+
+userMapper.insertUser(user);
+
+}
+
+ 
+
+@Override
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> UpdateUser(User user) {
+
+userMapper.updateUserInfo(user);
+
+}
+
+ 
+
+ 
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>LoginLogService.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.LoginLog;
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> LoginLogService {
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertLoginLog(LoginLog loginLog);
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>LoginLogServiceImpl.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.bbs.service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.beans.factory.annotation.Autowired;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.stereotype.Service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.dao.mapper.LoginLogMapper;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.LoginLog;
+
+ 
+
+@Service
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> LoginLogServiceImpl <span style="color: #0000ff;">implements</span><span style="color: #000000;"> LoginLogService {
+
+ 
+
+@Autowired
+
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> LoginLogMapper loginLogMapper;
+
+@Override
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertLoginLog(LoginLog loginLog) {
+
+loginLogMapper.insertLoginLog(loginLog);
+
+ 
+
+}
+
+ 
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>这样子接口和他的实现类都写好了</p>
+<p>要注意到,@service 和@Autowired哈</p>
+<p>那么到现在为止,项目的逻辑就是这样子的了</p>
+<p>spring+mybaits</p>
+<p>配置文件中配置了数据库等信息,配置了需要自动扫描的一些包,要扫描包中的注解嘛,重要的还整合了mybatis</p>
+<p>通过mybatis来操作数据库,mapper来直接调用</p>
+<p>改造成了面向接口的编程</p>
+<p>通过userService和LoginLogService来调用,实际上执行的还是实现类嘛</p>
+<p>实现类通过组合调用mapper提供的接口,来操作数据库,来操作数据</p>
+<p>项目的改造完成了</p>
+<p>测试也要修改一下了..</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> test.bbs.service;
+
+ 
+
+</span><span style="color: #0000ff;">import</span> <span style="color: #0000ff;">static</span> org.junit.Assert.*<span style="color: #000000;">;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Date;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.Test;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.runner.RunWith;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.beans.factory.annotation.Autowired;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.test.context.ContextConfiguration;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+ 
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.domain.User;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.bbs.service.UserService;
+
+ 
+
+@RunWith(SpringJUnit4ClassRunner.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">)
+
+@ContextConfiguration(locations</span>={"/applicationContext.xml"<span style="color: #000000;">})
+
+ 
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> TestUserService {
+
+ 
+
+@Autowired
+
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> UserService userService;
+
+ 
+
+@Test
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> hasMAtchUser(){
+
+User user1 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+User user2 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+ 
+
+user1.setUserName(</span>"admin"<span style="color: #000000;">);
+
+user1.setPassword(</span>"123456"<span style="color: #000000;">);
+
+ 
+
+user2.setUserName(</span>"admin"<span style="color: #000000;">);
+
+user2.setPassword(</span>"11111"<span style="color: #000000;">);
+
+ 
+
+ 
+
+</span><span style="color: #0000ff;">boolean</span> b1 =<span style="color: #000000;"> userService.hasMatchUser(user1);
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">boolean b2 = userService.hasMatchUser(user2);</span>
+<span style="color: #000000;">
+ 
+
+assertTrue(b1);
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">assertTrue(b2);</span>
+<span style="color: #000000;">
+ 
+
+}
+
+ 
+
+@Test
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> findUserByUserName(){
+
+User user </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+ 
+
+user.setUserName(</span>"admin"<span style="color: #000000;">);
+
+ 
+
+ 
+
+User user1 </span>=<span style="color: #000000;"> userService.findUserByUserName(user);
+
+System.out.println(user1.getUserName());
+
+assertEquals(user1.getUserName(),</span>"admin"<span style="color: #000000;">);
+
+}
+
+ 
+
+@Test
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> loginSucess(){
+
+ 
+
+User user </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+user.setUserName(</span>"admin"<span style="color: #000000;">);
+
+user</span>=<span style="color: #000000;"> userService.findUserByUserName(user);
+
+userService.loginSucess(user);
+
+ 
+
+}
+
+ 
+
+@Test
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> insertUser(){
+
+ 
+
+User user </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+user.setUserName(</span>"user1"<span style="color: #000000;">);
+
+user.setPassword(</span>"123456"<span style="color: #000000;">);
+
+user.setCredits(</span>0<span style="color: #000000;">);
+
+user.setLastIp(</span>"255.255.255.255"<span style="color: #000000;">);
+
+user.setLastVisit(</span><span style="color: #0000ff;">new</span> Date(0<span style="color: #000000;">) );
+
+ 
+
+userService.insertUser(user);
+
+ 
+
+ 
+
+ 
+
+}
+
+@Test
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> updateUserInfo(){
+
+ 
+
+User user </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+
+user.setUserId(</span>2<span style="color: #000000;">);
+
+user.setLastVisit(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Date() );
+
+user.setCredits(</span>5+<span style="color: #000000;">user.getCredits());
+
+ 
+
+ 
+
+userService.UpdateUser(user);
+
+ 
+
+ 
+
+ 
+
+}
+
+ 
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>目测都执行成功了哈</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201602/897393-20160224163621490-2031803998.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="ea157058-3572-4d54-bf11-da08e2094daa" src="https://images2015.cnblogs.com/blog/897393/201602/897393-20160224163621771-1991379257.png" alt="ea157058-3572-4d54-bf11-da08e2094daa" width="1291" height="119" border="0" /></a></p>
+<p>以上就是spring+mybatis的一个基本项目(后台)</p>
+<p>&nbsp;</p>
+<p>spring原理 实践解析-简单的helloworld</p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213217.html" target="_blank">spring原理案例-基本项目搭建 01 spring framework 下载 官网下载spring jar包</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213208.html" target="_blank">spring原理案例-基本项目搭建 02 spring jar包详解 spring jar包的用途</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213267.html" target="_blank">spring原理案例-基本项目搭建 03 创建工程运行测试 spring ioc原理实例示例</a></p>
+<p>springmvc整合mybatis完整项目示例</p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213447.html" target="_blank">springmvc 项目完整示例01 需求与数据库表设计 简单的springmvc应用实例 web项目</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213468.html" target="_blank">springmvc 项目完整示例02 项目创建-eclipse创建动态web项目 配置文件 junit单元测试</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213476.html" target="_blank">springmvc 项目完整示例03 小结</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213485.html" target="_blank">springmvc 项目完整示例04 整合mybatis mybatis所需要的jar包 mybatis配置文件 sql语句 mybatis应用</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213490.html" target="_blank">springmvc 项目完整示例05&nbsp; 日志 --log4j整合 配置 log4j属性设置 log4j 配置文件 log4j应用</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213502.html" target="_blank">springmvc 项目完整示例06 日志&ndash;log4j 参数详细解析 log4j如何配置</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213511.html" target="_blank">springmvc 项目完整示例07 设置配置整合springmvc springmvc所需jar包springmvc web.xml文件配置</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213520.html" target="_blank">springmvc 项目完整示例08 前台页面以及知识点总结</a></p>
+<p>maven项目整合springmvc整合mybatis</p>
+<p><a href="http://www.cnblogs.com/noteless/p/5213075.html" target="_blank">eclipse 创建maven 项目 动态web工程完整示例</a></p>
+<p><a href="http://www.cnblogs.com/noteless/p/5228083.html" target="_blank">eclipse 创建maven 项目 动态web工程完整示例 maven 整合springmvc整合</a></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2016-02-24 16:37</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=5213485" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(5213485);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 5213485, cb_entryCreatedDate = '2016-02-24 16:37', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

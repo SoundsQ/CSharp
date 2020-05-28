@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>2020 年 4月 21 日 随笔档案 - 二B方案程序员 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=vmUk-3Bh8LDsKXwjNHs2GDiFna-ZMTUgOJzjUaXTlPA" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=cJiDsI1JAuHHd-OAUWJeyE5JMXXsG4mmuUi2rVmEK1c" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/twoBcoder/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/twoBcoder/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/twoBcoder/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 312139;
+        var currentBlogApp = 'twoBcoder';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'AnotherEon001';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/twoBcoder/">二B方案程序员</a>
+</h1>
+<div id="subtitle">
+
+</div>
+</div>
+<div id="sub"><div class="BlogStats">随笔 - 
+6, 文章 - 
+1, 评论 - 
+5, 引用 - 
+0</div>
+
+</div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+        
+<p class="date">
+	<span>		  
+	<a>2020年4月21日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/twoBcoder/p/12747440.html">
+    [Abp vNext 入坑分享] - 前言
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：一&#183;背景 Abp vnext是 ABP 框架作者所发起一个完全基于 ASP .NET Core框架，截至2020年4月份已经升级到2.5.0版本，根据经验2.0版本以后可以放心的使用在生产环境。类似asp.net core一样，ABP vNext&#160;比原来的ABP zero更加精简且可控性更强，你可以            <a href="https://www.cnblogs.com/twoBcoder/p/12747440.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-04-21 21:35 二B方案程序员 阅读 (109) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12747440" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/twoBcoder/p/12725017.html">
+    腾讯云集群服务部署mysql并挂载到服务器
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：一、背景 由于现在大部分的应用都是运行在云服务器上的，而现在大多数文章都是主要写如何在服务器上使用docker去运行mysql，比较少有介绍云服务器上的。再加上现在k8s比较火爆，而云厂商大多数都提供了k8s 集群服务且master免费，我们只需要使用就行了，更深一级的运维的事情就交给云厂商处理吧。            <a href="https://www.cnblogs.com/twoBcoder/p/12725017.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-04-21 20:18 二B方案程序员 阅读 (22) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12725017" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+
+
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/twoBcoder/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%BA%8CB%E6%96%B9%E6%A1%88%E7%A8%8B%E5%BA%8F%E5%91%98">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/twoBcoder/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/twoBcoder/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 二B方案程序员
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+</body>
+</html>

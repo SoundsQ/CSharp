@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="sleep系统调用 我是一个线程，生活在Linux帝国。一直以来辛勤工作，日子过得平平淡淡，可今天早上发生了一件事让我回想起来都后怕。 早上，我还是如往常一样执行着人类编写的代码指令，不多时走到了一个" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>调用sleep后，我做了一个噩梦 - 轩辕之风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanyuan/custom.css?v=1KFqgc8N4u9cFrFdaEZzuOblzkw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanyuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanyuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanyuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 193695;
+        var currentBlogApp = 'xuanyuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanyuan/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanyuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BE%95%E4%B9%8B%E9%A3%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanyuan/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+42&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+220</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12758678.html">调用sleep后，我做了一个噩梦</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h2 id="sleep系统调用">sleep系统调用</h2>
+<p>我是一个线程，生活在Linux帝国。一直以来辛勤工作，日子过得平平淡淡，可今天早上发生了一件事让我回想起来都后怕。</p>
+<p>早上，我还是如往常一样执行着人类编写的代码指令，不多时走到了一个冷门的分支，一个<code>sleep()</code>函数调用摆在了我的面前。</p>
+<p>终于可以去休息了！听老一辈的线程们说，执行了这个函数就可以休息休息了。我瞄了一眼参数，足足有5秒钟的休息时间，我简直乐坏了，没有犹豫，赶紧执行了这个调用。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/4fe8534f-29d3-4fbf-81f6-c2d9468dda2d.png" alt=""></p>
+<p>进入<code>sleep()</code>函数后，又来到了<code>nano_sleep()</code>函数，接着看到了一个<code>syscall</code>系统调用指令，我继续执行，来到了内核空间。</p>
+<p>进入内核空间后，我接连穿过了</p>
+<ul>
+<li>--&gt; nano_sleep()</li>
+<li>--&gt; hrtimer_nanosleep()</li>
+<li>--&gt; do_nanosleep()</li>
+<li>--&gt; freezable_schedule()</li>
+</ul>
+<p>把我累得够呛，说好让我休息，没想到休息之前还有这么多事要做。</p>
+<p>终于，我来到了一个叫<code>schedule()</code>的函数面前。</p>
+<h2 id="线程调度">线程调度</h2>
+<p>进入<code>schedule()</code>后，迎面走来一位发须皆已花白的长者。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/b653ca8d-170b-49c5-8143-f0ddf1f0f422.png" alt=""></p>
+<p>“小伙子，这是要来休息了，我是负责线程调度的使者，让我看下你占用的CPU号码”，一边说一边查找着什么。</p>
+<p>“哦，是2号CPU，来，跟我到这边来”，在他的指引下，我又来到了一个函数面前。</p>
+<p>“你先去<code>pick_next_task()</code>找到一个接盘侠，哦不，找到下一个需要执行的线程，这是2号CPU的<code>就绪队列</code>，你可拿好了，等你办完回来我再带你去办理交接手续”，说完给我手里塞了一个参数<code>rq</code>，随即便离开了，留下我不知所措。</p>
+<p>我只好按他说的照办，迈进了<code>pick_next_task()</code>函数的大门，一位美女接待映入眼帘。</p>
+<p>“先生您好，您来此想必是要寻找接班线程吧”，见我到来，美女起身招呼。</p>
+<p>“你猜的不错，要麻烦你帮我处理一下，多谢了”</p>
+<p>“您别客气，把<strong>就绪队列</strong>给我看看吧”</p>
+<p>我先是愣了一下，反应过来后将手里的<code>rq</code>参数给了她。</p>
+<pre><code class="language-cpp">struct rq {
+    raw_spinlock_t lock;
+    ...
+    unsigned int nr_running;
+    ...
+    struct cfs_rq cfs;
+    struct rt_rq rt;
+    struct dl_rq dl;
+    ...
+    struct task_struct *curr, *idle, *stop;
+    ...
+    struct mm_struct *prev_mm;
+    ...
+    struct list_head cfs_tasks;
+};
+</code></pre>
+<p>美女拿着<code>rq</code>一阵端详，说到：“您运气不错哦，rq-&gt;nr_running和rq-&gt;cfs.h_nr_running相等，看来没有实时线程，全是普通线程，您直接去那边的公平调度CFS窗口<code>fair_sched_class</code>那里去办理吧。”</p>
+<p>我顺着美女指向的方向看去，那边一共有5个窗口：</p>
+<ul>
+<li><code>stop_sched_class</code></li>
+<li><code>dl_sched_class</code></li>
+<li><code>rt_sched_class</code></li>
+<li><code>fair_sched_class</code></li>
+<li><code>idle_sched_class</code></li>
+</ul>
+<p>“唉，美女，那要是不相等该去哪个窗口办理呢？你告诉我一下，下次来我就知道了”</p>
+<p>“不相等的话那就说明就绪队列里除了普通线程还有其他优先级更高的线程，就得按照优先级从<code>stop_sched_class</code>窗口挨个向后询问，直到找到一个线程。不过我在这干了这么久，就实时线程所在的<code>rt_sched_class</code>窗口和普通线程所在的<code>fair_sched_class</code>最常用”，美女耐心的给我解释到。</p>
+<p>听了她的解释，我想到了一个问题：“那要是都找不到线程需要执行怎么办，比如他们都在等待IO事件之类的？那我怎么交差啊”</p>
+<p>“放心吧，最后那个<code>idle_sched_class</code>窗口绝对不会让你空手而归的”，美女笑着说。</p>
+<p>原来如此，我点了点头。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/2709aa5e-bf8d-4037-b080-52b639b6d8d6.png" alt=""></p>
+<p>来到<code>fair_sched_class</code>窗口的旁边，递交了我的<code>rq</code>参数，只见工作人员取出了其中的<code>cfs_rq</code>：</p>
+<pre><code class="language-cpp">struct cfs_rq {
+	struct load_weight load;
+	unsigned int nr_running, h_nr_running;
+	...
+	struct rb_root tasks_timeline;
+	struct rb_node *rb_leftmost;
+	...
+	struct sched_entity *curr, *next, *last, *skip;
+	...
+	struct rq *rq;
+};
+</code></pre>
+<p>我这才注意到，原来这个<code>cfs_rq</code>中指向了一棵红黑树，再仔细一看，这树上的每个节点都是一个线程<code>task_struct</code>。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/d01c8ff0-6545-45f1-936b-fadbf7bdeaeb.png" alt=""></p>
+<p>工作人员很快就取出了一个<code>task_struct</code>交给我，一个年纪轻轻的线程小T，我带着小T告别了美女接待，回到了<code>schedule()</code>。</p>
+<h2 id="context_switch">context_switch</h2>
+<p>看到我回来，长者起身言道：“小伙子，回来啦，走，带你们去<code>context_switch()</code>”</p>
+<p>进入这个<code>context_switch()</code>之后，长者又带着我又做了一些准备工作，比如把当前的进程地址空间换成了小T的，最终我们来到了一个叫<code>switch_to</code>的地方。</p>
+<p>“小伙子，再往前走几步就是换班的地方了，就可以休息了，我就不送你了，感谢你这段时间的辛苦工作”，长者一边说一边拍拍我的肩膀。</p>
+<p>告别了长者，我和小T踏上了这神秘的<code>switch_to</code>，跟随着一步一步的指令，我把自己线程上下文的寄存器都保存到了我的内核栈上面，然后将栈指针指向了小T的内核栈，最后把小T保存在他内核栈的指令地址加载进指令寄存器，终于完成了交接工作。</p>
+<p>“小T，接下来就该你工作了，我要去休息了”，我和小T握手告别，来到旁边准备眯一会儿。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/9ace1160-a5f1-410a-9aba-c8633e43fe01.png" alt=""></p>
+<h2 id="神秘的唤醒">神秘的唤醒</h2>
+<p>“醒醒，醒醒”，睡梦中听到有人唤我。</p>
+<p>我揉揉睡眼，看了下时间，这才睡了2s，时间还没到，难道现在是在做梦？</p>
+<p>“总算把你叫醒了，快起来，换班时间到了，该你上了”，我抬起头才发现另外一个线程小H站在面前。</p>
+<p>“我休息时间还没够啊，怎么选中了我啊，让我再睡会儿”，说罢我就要躺下。</p>
+<p>小H一把拉住了我，“别磨叽了，就是你，快走”。</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/f8b152ee-8809-4c68-a307-3d71acb14ca6.png" alt=""></p>
+<p>在小H的带领下，我们又来到了那个叫<code>switch_to</code>地方，只不过这一次我的角色变了。</p>
+<p>小H一顿和我之前一样的操作，把执行流程交给了我。</p>
+<p>我再次获得了执行代码的能力，随后回到了<code>context_switch()</code>，又回到了<code>schedule()</code>，看到了熟悉的长者。</p>
+<p>我和长者再次告了别，继续返回，最后通过<code>sysret</code>虫洞，回到了用户态空间。</p>
+<p>不过我马上意识到事情不对劲，这里并不是我最开始调用<code>sleep()</code>的地方，而是一片完全陌生的区域，难道哪里出了问题，我这是到了哪里？</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/fe8ea5d3-e785-4e87-bd06-57a63a7ce778.png" alt=""></p>
+<p>这一定是在做梦，我还在<code>sleep()</code>呢，时间还没够，我只好这样安慰自己。</p>
+<p>我小心翼翼的执行了这里的代码，只是简单输出了一行日志，然后来到了一个叫<code>__restore_rt()</code>的函数，又一条<code>syscall</code>指令摆在了我的面前，我没有犹豫再一次一头扎进了内核空间。</p>
+<p>经过一番折腾，又来到了<code>sysret</code>虫洞面前，不知道这一次又将带我去到哪里。我闭上了眼睛跳了进去···</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/95fabc66-daa5-4dfe-99e3-da9f3e9d69f6.png" alt=""></p>
+<p>等我睁开眼睛，竟然奇迹般的回到了最开始调用<code>sleep()</code>的地方，这场梦终于醒了，庆幸我回到了这里。</p>
+<p>我看了一眼<code>sleep()</code>的返回值，竟然是3。我又看了一眼日志文件，竟看到了梦里输出的那一行日志。</p>
+<p>难道那不是梦？这究竟是怎么一回事？</p>
+<p><strong>未完待续······</strong></p>
+<h2 id="彩蛋">彩蛋</h2>
+<blockquote>
+<p>“奇怪，这个TCP数据包的ACK和SEQ怎么和刚才那个一样，估计是重传了吧”，帝国网络部的小Q丢掉了这个重复的数据包。</p>
+<p>不过，同样的事情接二连三的出现，经历了上次那件事的小Q不敢大意，赶紧向安全部长汇报了情况。</p>
+<p><em>预知后事如何，请关系后续精彩······</em></p>
+</blockquote>
+<hr>
+<h2 id="本文关联前作">本文关联前作</h2>
+<p><a href="https://mp.weixin.qq.com/s/esc9gWg42vyPkT58HCKNgg">内核地址空间大冒险1:系统调用</a></p>
+<p><a href="https://mp.weixin.qq.com/s/0b5e1_vwyvw8WOOHbVcQyQ">内核地址空间大冒险2:中断与异常</a></p>
+<p><a href="https://mp.weixin.qq.com/s/WkQ5mVZrF7V2GrU-rsPOdQ">内核地址空间大冒险3:权限管理</a></p>
+<hr>
+<h2 id="往期热门回顾">往期热门回顾</h2>
+<p><a href="https://mp.weixin.qq.com/s/XrtH9-Eo7pzJu-Fzt89voQ">震撼！全网第一张源码分析全景图揭秘Nginx</a></p>
+<p><a href="https://mp.weixin.qq.com/s/gZPxqZzY2rnngxvvzexWTw">一个整数＋1引发的灾难</a></p>
+<p><a href="https://mp.weixin.qq.com/s/V7wBdl-5W4ehTAnACQFjGQ">一网打尽！每个程序猿都该了解的黑客技术大汇总</a></p>
+<p><a href="https://mp.weixin.qq.com/s/Bb2ugXYPR6r11QaGKbNBSw">看过无数Java GC文章，这5个问题你也未必知道！</a></p>
+<p><a href="https://mp.weixin.qq.com/s/xp2S4_3UQTZ0TOIlVqM8uw">一个Java对象的回忆录：垃圾回收</a></p>
+<p><a href="https://mp.weixin.qq.com/s/lxpHhHVIh6DktoHzrRLaKA">谁动了你的HTTPS流量？</a></p>
+<p><a href="https://mp.weixin.qq.com/s/7gM31s4-hTJTprJnxsHgEA">路由器里的广告秘密</a></p>
+<p><a href="https://mp.weixin.qq.com/s/JTr1-5nPtseAYXfvJdamVg">DDoS攻击：无限战争</a></p>
+<p><a href="https://mp.weixin.qq.com/s/lerhjpAEdp4RiwsmetyqPg">一条SQL注入引出的惊天大案</a></p>
+<p><a href="https://mp.weixin.qq.com/s/suzicCzb2g5b8NN71S5Ngw">一个HTTP数据包的奇幻之旅</a></p>
+<p><a href="https://mp.weixin.qq.com/s/_TOFIPGIeMHhVxIVToxmiQ">一个DNS数据包的惊险之旅</a></p>
+<p><a href="https://mp.weixin.qq.com/s/-ggUa3aWkjjHjr9VwQL9TQ">我是一个流氓软件线程</a></p>
+<h3 id="扫码关注，更多精彩"><center>扫码关注，更多精彩</center></h3>
+<hr>
+<p><img src="https://imgkr.cn-bj.ufileos.com/5de7751a-9e38-4718-994a-6136f7804ae5.png" alt=""></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-23 09:42</span>&nbsp;
+<a href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12758678" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12758678);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 193695, cb_blogApp = 'xuanyuan', cb_blogUserGuid = '8508cac9-f21a-e411-8d02-90b11c0b17d6';
+    var cb_entryId = 12758678, cb_entryCreatedDate = '2020-04-23 09:42', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 轩辕之风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

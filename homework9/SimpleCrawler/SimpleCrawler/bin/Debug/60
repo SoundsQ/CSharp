@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; Thread类简介 类是Java" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【并发编程】Thread类的详细介绍 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/11935365.html">【并发编程】Thread类的详细介绍</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<h2 id="thread类简介">Thread类简介</h2>
+<p><code>Thread</code>类是Java中实现多线程编程的基础类。本篇博客就来介绍下<code>Thread</code>类的常用API和常见用法。</p>
+<p><code>Thread</code>类常用的方法如下：</p>
+<ul>
+<li>Thread.activeCount()：这个方法用于返回当前线程的线程组中活动线程的数量，返回的值只是一个估计值，因为当此方法遍历内部数据结构时，线程数可能会动态更改。）。</li>
+<li>Thread.checkAccess(): 检验当前正在执行的线程是否有权限修改thread的属性，这个方法我们一般不自己进行调用，Thread类的set方法在进行属性修改时都会先调用这个方法。</li>
+<li>Thread.currentThread()：获取当前正在运行的线程。</li>
+<li>Thread.dumpStack():输出线程栈，一般在debug的时候调用。</li>
+<li>Thread.enumerate(Thread tarray[]):??使用场景。</li>
+<li>Thread.getAllStackTraces():获取系统中所有线程的线程栈信息。</li>
+<li>thread.getName()：获取线程的名字。</li>
+<li>thread.getPriority()：获取线程的优先级。</li>
+<li>thread.getStackTrace():获取堆栈信息。</li>
+<li>thread.getState():获取线程状态。</li>
+<li>thread.getThreadGroup()：获取线程所在线程组。</li>
+<li>thread.interrupt()：使得指定线程中断阻塞状态，并将阻塞标志位置为true。</li>
+<li>thread.interrupted():测试当前线程是否被中断。</li>
+<li>thread.isAlive()：判断线程是否还存活着。</li>
+<li>thread.isDaemon()：判断线程是否是守护线程。</li>
+<li>thread.join()：在当前线程中加入指定线程，使得当前线程必须等待指定线程运行结束之后，才能结束。可以理解成线程插队、等待该线程终止。</li>
+<li>Thread.sleep(long)：强制线程睡眠一段时间。</li>
+<li>thread.start()：启动一个线程。</li>
+<li>thread.setName(name)：设置线程的名字。</li>
+<li>thread.setPriority(priority)：设置线程的优先级。</li>
+<li>thread.setDaemon(true)：将指定线程设置为守护线程。</li>
+<li>thread.yield()：使得当前线程退让出CPU资源，把CPU调度机会分配给同样线程优先级的线程。</li>
+<li>object.wait()、object.notify()、object.notifyAll()：Object类提供的线程等待和线程唤醒方法。</li>
+</ul>
+<p>还有<code>Thread</code>类提供了功能丰富的构造函数，大家可以选合适的使用</p>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/201912/1775037-20191206162420769-289893141.png" alt=""></p>
+<h2 id="示例代码">示例代码</h2>
+<pre><code class="language-java">
+public class MyThread  {
+
+    public static void main(String[] args) {
+          Thread thread = Thread.currentThread();
+        
+                //这个方法返回的是当前线程所在线程组以及这个线程组的子线程组内活动的线程数
+                //这个值是一个估计值，所以这个方法的应用场景不大
+                int activeCount = Thread.activeCount();
+                System.out.println(&quot;当前系统中活动线程数[&quot;+activeCount+&quot;]&quot;);
+        
+                //向标准错误输出流输出当前的线程栈,不会阻断程序的继续执行
+                Thread.dumpStack();
+        
+                //获取所有线程栈信息
+                Map&lt;Thread, StackTraceElement[]&gt; allStackTraces = Thread.getAllStackTraces();
+        
+                //获取类加载器
+                ClassLoader contextClassLoader = thread.getContextClassLoader();
+        
+                //获取当前线程名字
+                String threadName = thread.getName();
+                System.out.println(&quot;current thread name[&quot;+threadName+&quot;]&quot;);
+        
+                //获取当前线程ID
+                long threadId = thread.getId();
+                System.out.println(&quot;current thread id[&quot;+threadId+&quot;]&quot;);
+        
+                //获取当前线程的优先级，一共有1~10总共10个优先级，这个优先级并不是在
+                //所有平台都生效的
+                int priority = thread.getPriority();
+                System.out.println(&quot;current thread priority[&quot;+priority+&quot;]&quot;);
+        
+                StackTraceElement[] stackTrace = thread.getStackTrace();
+                System.out.println(&quot;-------------stackTrace info--------------&quot;);
+                for (int i = 0; i &lt; stackTrace.length; i++) {
+                    StackTraceElement element = stackTrace[i];
+                    System.out.println(&quot;className:[&quot;+element.getClassName()+&quot;]&quot;);
+                    System.out.println(&quot;fileName：[&quot;+element.getFileName()+&quot;]&quot;);
+                    System.out.println(&quot;line nunber：[&quot;+element.getLineNumber()+&quot;]&quot;);
+                    System.out.println(&quot;method name:[&quot;+element.getMethodName()+&quot;]&quot;);
+                    System.out.println(&quot;is native method:[&quot;+element.isNativeMethod()+&quot;]&quot;);
+                    System.out.println(&quot;------------------------------------------&quot;);
+                }
+        
+                Thread.State state = thread.getState();
+                System.out.println(&quot;thread state:[&quot;+state+&quot;]&quot;);
+        
+                ThreadGroup threadGroup = thread.getThreadGroup();
+                String threadGroupName = threadGroup.getName();
+                System.out.println(&quot;thread group name:[&quot;+threadGroupName+&quot;]&quot;);
+        
+                //线程睡眠,调用sleep方法会使得线程进入timed_waiting状态，如果线程已经
+                //获得了锁资源，调用sleep方法是不会释放这个锁的
+                Thread.sleep(2000,500);
+                Thread.sleep(1000);
+                TimeUnit.SECONDS.sleep(2);
+        
+                Thread thread1 = new Thread(new Runnable() {
+                    @SneakyThrows
+                    @Override
+                    public void run() {
+                        TimeUnit.SECONDS.sleep(100);
+                    }
+                });
+                thread1.start();
+                thread1.join(50);
+
+    }
+
+
+}
+
+</code></pre>
+<h2 id="守护线程">守护线程</h2>
+<p><strong>守护线程</strong>可以理解为服务线程，他们的作用就是服务于其他用户线程。当系统中不存在其他用户线程时，这些守护线程也会自动消亡。比如JVM的垃圾清理线程就是守护线程。我们可以使用如下方法查看和设置线程是否是守护线程。</p>
+<pre><code class="language-java">thread.isDaemon();
+thread.setDaemon(true);
+</code></pre>
+<h2 id="sleep方法">sleep方法</h2>
+<p>Thread类中有一个静态的sleep方法，当一个执行中的线程调用了Thread的sleep方法后，调用线程会暂时让出指定时间的执行权，也就是在这期间不参与CPU的调度，但是该线程所拥有的监视器资源，比如锁还是持有不让出的。指定的睡眠时间到了后该函数会正常返回，线程就处于就绪状态，然后参与CPU的调度，获取到CPU资源后就可以继续运行了。如果在睡眠期间其他线程调用了该线程的interrupt（）方法中断了该线程，则该线程会在调用sleep方法的地方抛出InterruptedException异常而返回（<strong>进入waiting状态线程的interrupt方法被调用，则这个线程会抛出InterruptedException异常</strong>）。</p>
+<h2 id="join方法">join方法</h2>
+<p>开发过程中我们可能会有这样的需求：多个线程分别加载资源，等这些线程资源加载完毕之后对这些资源做统一汇总处理。<code>join</code>方法就能实现类似的功能。</p>
+<p>调用线程的join方法会使得调用线程进入waiting状态，直到被调用的线程执行结束，调用线程才会重新获得执行的机会。</p>
+<pre><code class="language-java">
+public class MyThread  {
+
+    public static void main(String[] args) throws Exception {
+    
+        Thread thread1 = new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                TimeUnit.SECONDS.sleep(100);
+            }
+        });
+        thread1.start();
+        thread1.join();
+        System.out.println(&quot;main thread end...&quot;);
+    }
+
+}
+
+</code></pre>
+<p>上面的代码中，main线程调用了thread1的join方法，main线程会被挂起进入waiting状态,直到thread1执行完毕之后，main线程才有机会重新获得执行机会。另外，如果main线程的interrupt方法被其他线程调用，那么main线程调用的join方法会抛出<code>InterruptedException</code>异常。</p>
+<p>join方法还有一个重载方法，这个方法可以指定超时时间。</p>
+<pre><code class="language-java">thread1.join(50);
+</code></pre>
+<p>如果thread1线程在50ms内还没执行完，main线程就可以重新获得执行机会。</p>
+<h2 id="yeild方法">yeild方法</h2>
+<p>线程调用yield方法（这个方法是Thread的静态方法）是在暗示让这个线程让出CPU资源，如果这个线程在执行一个CPU时间，已经执行到一半了，调用yield之后这个线程会放弃剩下的一半CPU时间回到就绪状态。但是需要注意的是线程可以完全忽略yield方法的调用，也就是yield方法并不是每次都调用成功的：</p>
+<ul>
+<li>退让成功时，退让线程会由Running(运行)转为Runnable(就绪)状态。</li>
+<li>退让了的线程，与其他同优先级级别的线程一样，同样有再次获取CPU使用权的机会。</li>
+</ul>
+<h2 id="中断">中断</h2>
+<p>先贴上一段<a href="https://blog.csdn.net/hanchao5272/article/details/79528463">网友</a>对线程中断的总结。</p>
+<ul>
+<li>如果线程不处于阻塞状态，那么调用interrupt()方法仅仅是将[中断标志位]将被置为true；</li>
+<li>如果当前线程处于blocked阻塞(因为调用wait、sleep和join造成的)状态时被interrupt了，那么[中断标志位]将被清除，也就是设置为false，并且收到一个InterruptedException异常。</li>
+<li>如果当前线程处于blocked阻塞(因为NIO的InterruptibleChannel进行的I/O操作造成的)状态时被interrupt了，则会关闭channel，[中断标志位]将会被置为true，并且当前线程会收到一个ClosedByInterruptException异常。</li>
+<li>如果当前线程处于blocked阻塞(因为NIO的Selector造成的)状态时被interrupt了，那么[中断标志位]将被置为true，然后当前线程会立即从选择器区域返回并返回值（可能为非零的值）。</li>
+</ul>
+<p>需要说明的是：interrupt()方法并不是中断线程，而是中断阻塞状态，也就是将线程的[中断标志位]置为true。中断后线程将继续执行。</p>
+<blockquote>
+<p>PS：事实上，interrupt方法只是改变目标线程的中断状态（interrupt status），而那些会抛出InterruptedException异常的方法，如wait、sleep、join等，都是在方法内部不断地检查中断状态的值。</p>
+</blockquote>
+<p>几个中断方法对比：</p>
+<ul>
+<li>public static boolean interrupted()：测试当前线程(这边要注意的是这个方法返回的是当前正在执行的线程的中断状态,注意和isInterrupted的区别)是否已经中断。线程的中断状态 由该方法清除。换句话说，如果连续两次调用该方法，则第二次调用将返回 false。</li>
+<li>public boolean isInterrupted()：测试线程是否已经中断。线程的中断状态 不受该方法的影响，也就是说不清除中断标志。</li>
+</ul>
+<pre><code class="language-java">public boolean isInterrupted() {
+        //传递false表示不清除标志位
+        return isInterrupted(false);
+    }
+
+</code></pre>
+<ul>
+<li>public void interrupt()：中断线程，例如，当线程A运行时，线程B可以调用线程A的interrupt（）方法来设置线程A的中断标志为true并立即返回。设置标志仅仅是设置标志，线程A实际并没有被中断，它会继续往下执行。如果线程A因为调用了wait系列函数、join方法或者sleep方法而被阻塞挂起，这时候若线程B调用线程A的interrupt（）方法，线程A会在调用这些方法的地方抛出InterruptedException异常而返回。</li>
+</ul>
+<p>当线程为了等待一些特定条件的到来时，一般会调用sleep函数、wait系列函数或者join（）函数来阻塞挂起当前线程。比如一个线程调用了Thread. sleep（3000），那么调用线程会被阻塞，直到3s后才会从阻塞状态变为激活状态。但是有可能在3s内条件已被满足，如果一直等到3s后再返回有点浪费时间，这时候可以调用该线程的interrupt（）方法，强制sleep方法抛出InterruptedException异常而返回，线程恢复到激活状态。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-12-06 14:58</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11935365" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11935365);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 11935365, cb_entryCreatedDate = '2019-12-06 14:58', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

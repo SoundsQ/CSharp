@@ -1,0 +1,1132 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="命令模式是行为型设计模式，本文对命令模式Command进行了简单介绍，深入的分析了命令模式的意图，以及演化逻辑，并且给出了命令模式的Java版示例，理解命令模式有利于理解面向对象的编程思想，一切皆是对" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>命令模式 Command 行为型 设计模式（十八） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10102153.html">命令模式 Command 行为型 设计模式（十八）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        命令模式是行为型设计模式，本文对命令模式Command进行了简单介绍，深入的分析了命令模式的意图，以及演化逻辑，并且给出了命令模式的Java版示例，理解命令模式有利于理解面向对象的编程思想，一切皆是对象，方法调用也是一种对象。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">命令模式（Command）</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144854718-459409006.png"><img style="display: inline; background-image: none;" title="image_5c0f5d4c_1248" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144855115-1853511670.png" alt="image_5c0f5d4c_1248" width="581" height="331" border="0" /></a></div>
+<div style="line-height: 200%;">请分析上图中这条命令的涉及到的角色以及执行过程，一种可能的理解方式是这样子的：</div>
+<div style="line-height: 200%;"><span style="line-height: 24px; border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">涉及角色为：大狗子和大狗子他妈</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">过程为：大狗子他妈角色 <span style="color: #000000; font-size: 13.5pt;"><strong>调用</strong></span> 大狗子的&ldquo;回家吃饭&rdquo;方法</div>
+<h3><span style="font-size: 18px;">引子</span></h3>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.origin;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> BigDog {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> goHomeForDinner() {
+System.out.println(</span>"回家吃饭"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.origin;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> BigDogMother {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+BigDog bigDog </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> BigDog();
+bigDog.goHomeForDinner();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">BigDog类拥有回家吃饭方法goHomeForDinner</div>
+<div style="line-height: 200%;">BigDogMother作为客户端调用BigDog的回家吃饭方法，完成了&ldquo;大狗子回家吃饭&rdquo;这个请求</div>
+<div style="line-height: 200%;">上面的示例中，<span style="color: #ff0000; font-size: 13.5pt;"><strong>通过对命令执行者的方法调用，完成了命令的下发，</strong></span><span style="color: #ff0000; font-size: large;"><strong>命令调用者与命令执行者之间是紧密耦合的</strong></span></div>
+<div style="line-height: 200%;">我们<span style="color: #0000ff; font-size: 13.5pt;"><strong>是否可以考虑换一种思维方式，将&ldquo;你妈喊你回家吃饭&rdquo;这一命令封装成为一个对象？</strong></span></div>
+<div style="line-height: 200%;">不再是大狗子他妈调用大狗子的回家吃饭方法</div>
+<div style="line-height: 200%;">而是大狗子他妈下发了一个命令，命令的内容是&ldquo;大狗子回家吃饭&rdquo;</div>
+<div style="line-height: 200%;">接下来是命令的执行</div>
+<div style="line-height: 200%;">这样的话，&ldquo;命令&rdquo;就不再是一种方法调用了，在大狗子妈和大狗子之间多了一个环节---&ldquo;命令&rdquo;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>看下代码演变</strong></span></div>
+<div style="line-height: 200%;">BigDog 没有变化</div>
+<div style="line-height: 200%;">新增加了命令类Command&nbsp; 使用对象的接受者BigDog 进行初始化</div>
+<div style="line-height: 200%;">命令的execute方法内部调用接受者BigDog的方法</div>
+<div style="line-height: 200%;">BigDogMother中下发了三个命令</div>
+<div style="line-height: 200%;">然后逐个执行这三个命令</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.origin;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> BigDog {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> goHomeForDinner() {
+System.out.println(</span>"回家吃饭"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.origin;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Command {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> BigDog bigDog;
+Command(BigDog bigDog) {
+</span><span style="color: #0000ff;">this</span>.bigDog =<span style="color: #000000;"> bigDog;
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+bigDog.goHomeForDinner();
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.origin;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> BigDogMother {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+BigDog bigDog </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> BigDog();
+Command command1 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Command(bigDog);
+Command command2 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Command(bigDog);
+Command command3 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Command(bigDog);
+
+command1.execute();
+command2.execute();
+command3.execute();
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">从上面的代码示例中看到，通过对&ldquo;请求&rdquo;也就是&ldquo;方法调用&rdquo;的封装，将请求转变成了一个个的命令对象&nbsp;</div>
+<div style="line-height: 200%;">命令对象本身内部封装了一个命令的执行者</div>
+<div style="line-height: 200%;">好处是：命令可以进行保存传递了，命令发出者与命令执行者之间完成了解耦，命令发出者甚至不知道具体的执行者到底是谁</div>
+<div style="line-height: 200%;">而且执行的过程也更加清晰了</div>
+<h3><span style="font-size: 18px;">意图</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">将一个请求封装为一个对象，从而使可用不同的请求对客户进行参数化；</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">对请求排队或者记录请求日志，以及支持可撤销的操作。</span></div>
+<div style="line-height: 200%;">别名 行为Action或者事物Transaction</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: large; font-weight: bold;">命令模式就是将方法调用这种命令行为或者说请求 进一步的抽象，封装为一个对象</span></div>
+<h3><span style="font-size: 18px;">结构</span></h3>
+<div style="line-height: 200%;">上面的&ldquo;大狗子你妈喊你回家吃饭&rdquo;的例子只是展示了对于&ldquo;命令&rdquo;的一个封装。只是命令模式的一部分。</div>
+<div style="line-height: 200%;">下面看下命令模式完整的结构</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144855386-10019274.png"><img style="display: inline; background-image: none;" title="image_5c0f5d4c_60a2" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144855624-1023765543.png" alt="image_5c0f5d4c_60a2" width="586" height="260" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff; font-size: 13.5pt;"><strong>命令角色Command</strong></span></div>
+<div style="line-height: 200%;">声明了一个给所有具体命令类的抽象接口</div>
+<div style="line-height: 200%;">做为抽象角色，通常是接口或者实现类</div>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>具体命令角色ConcreteCommand</strong></span><br />定义一个接受者和行为之间的弱耦合关系，实现execute（）方法<br />负责调用命令接受者的响相应操作</span>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>请求者角色Invoker</strong></span>
+	</div>
+<div style="line-height: 200%;">负责调用命令对象执行命令，相关的方法叫做行动action方法
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>接受者角色Receiver</strong></span>
+		</div>
+<div style="line-height: 200%;">负责具体实施和执行一个请求，任何一个类都可以成为接收者
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+	</div>
+
+
+
+</div>
+<div style="line-height: 200%;">Command角色封装了命令接收者并且内部的执行方法调用命令接收者的方法
+</div>
+<div style="line-height: 200%;">也就是一般形如：
+</div>
+<div style="line-height: 200%;">Command（Receiver receiver）{
+</div>
+<div style="line-height: 200%;">......
+</div>
+<div style="line-height: 200%;">execute（）{
+</div>
+<div style="line-height: 200%;">receiver.action（）；
+</div>
+<div style="line-height: 200%;">...
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">而Invoker角色接收Command，调用Command的execute方法
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>通过将&ldquo;命令&rdquo;这一行为抽象封装，命令的执行不再是请求者调用被请求者的方法这种强关联 ，而是可以进行分离</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>分离后，这一命令就可以像普通的对象一样进行参数传递等</strong></span>
+</div>
+<h3><span style="font-size: 18px;">结构代码示例
+</span></h3>
+<div style="line-height: 200%;">command角色
+</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Command {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> execute();
+}</span></pre>
+</div>
+<p>ConcreateCommand角色<br />内部拥有命令接收者，内部拥有execute方法</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateCommand <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Command {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Receiver receiver;
+ConcreateCommand(Receiver receiver) {
+</span><span style="color: #0000ff;">this</span>.receiver =<span style="color: #000000;"> receiver;
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+receiver.action();
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<div>Receiver命令接收者，实际执行命令的角色</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Receiver {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> action(){
+  System.out.println(</span>"command receiver do sth...."<span style="color: #000000;">);
+ }
+}</span></pre>
+</div>
+</div>
+<div>命令请求角色Invoker 用于处理命令，调用命令角色执行命令</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Invoker {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Command command;
+Invoker(Command command){
+</span><span style="color: #0000ff;">this</span>.command =<span style="color: #000000;"> command;
+}
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> action(){
+command.execute();
+}
+}</span></pre>
+</div>
+</div>
+<div>客户端角色</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Client {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+Receiver receiver </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Receiver();
+Command command </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreateCommand(receiver);
+Invoker invoker </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Invoker(command);
+invoker.action();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144855889-326401063.png"><img style="display: inline; background-image: none;" title="image_5c0f5d4c_13f0" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144856064-695074527.png" alt="image_5c0f5d4c_13f0" width="548" height="90" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">在客户端角色的测试代码中，我们创建了一个命令，指定了接收者（实际执行者）</div>
+<div style="line-height: 200%;">然后将命令传递给命令请求调用者</div>
+<div style="line-height: 200%;">虽然最终命令的接收者为receiver，但是很明显如果这个Command是作为参数传递进来的</div>
+<div style="line-height: 200%;">Client照样能够运行，他只需要借助于Invoker执行命令即可</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">命令模式关键在于：引入命令类对方法调用这一行为进行封装</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">命令类使的命令发送者与接收者解耦，命令请求者通过命令类来执行命令接收者的方法</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">而不在是直接请求命名接收者</span></div>
+<h3><span style="font-size: 18px;">代码示例 </span></h3>
+<div style="line-height: 200%;">
+<div>假设电视机只有三个操作：开机open 关机close和换台change channel。</div>
+<div style="line-height: 200%;">用户通过遥控器对电视机进行操作。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">电视机本身是命令接收者 Receiver</div>
+<div style="line-height: 200%;">遥控器是请求者角色Invoker</div>
+<div style="line-height: 200%;">用户是客户端角色Client</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">需要将用户通过遥控器下发命令的行为抽象为命令类Command</div>
+<div style="line-height: 200%;">Command有开机命令 关机命令和换台命令</div>
+<div style="line-height: 200%;">命令的执行需要借助于命令接收者</div>
+<div style="line-height: 200%;">Invoker 调用Command的开机命令 关机命令和换台命令</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;">电视类&nbsp; Tv</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Tv {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> turnOn(){
+System.out.println(</span>"打开电视"<span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> turnOff(){
+System.out.println(</span>"关闭电视"<span style="color: #000000;">);
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> changeChannel(){
+System.out.println(</span>"换台了"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+</div>
+<div>Command接口</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Command {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> execute();
+}</span></pre>
+</div>
+</div>
+<div>三个具体的命令类</div>
+<div>内部都保留着执行者，execute方法调用他们的对应方法</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> OpenCommand <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Command {
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Tv myTv;
+ 
+OpenCommand(Tv myTv) {
+</span><span style="color: #0000ff;">this</span>.myTv =<span style="color: #000000;"> myTv;
+}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+myTv.turnOn();
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> CloseCommand <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Command {
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Tv myTv;
+ 
+CloseCommand(Tv myTv) {
+</span><span style="color: #0000ff;">this</span>.myTv =<span style="color: #000000;"> myTv;
+}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+myTv.turnOff();
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ChangeChannelCommand <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Command {
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Tv myTv;
+ 
+ChangeChannelCommand(Tv myTv) {
+</span><span style="color: #0000ff;">this</span>.myTv =<span style="color: #000000;"> myTv;
+}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+myTv.changeChannel();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div>遥控器Controller</div>
+<div>拥有三个命令</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Controller {
+</span><span style="color: #0000ff;">private</span> Command openCommand = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> Command closeCommand = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> Command changeChannelCommand = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Controller(Command on， Command off， Command change) {
+openCommand </span>=<span style="color: #000000;"> on;
+closeCommand </span>=<span style="color: #000000;"> off;
+changeChannelCommand </span>=<span style="color: #000000;"> change;
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> turnOn() {
+openCommand.execute();
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> turnOff() {
+closeCommand.execute();
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> changeChannel() {
+changeChannelCommand.execute();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">用户类User&nbsp;</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command.tv;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> User {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+Tv myTv </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Tv();
+OpenCommand openCommand </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OpenCommand(myTv);
+CloseCommand closeCommand </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> CloseCommand(myTv);
+ChangeChannelCommand changeChannelCommand </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ChangeChannelCommand(myTv);
+Controller controller </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Controller(openCommand， closeCommand， changeChannelCommand);
+controller.turnOn();
+controller.turnOff();
+controller.changeChannel();
+}
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144856321-1739112525.png"><img style="display: inline; background-image: none;" title="image_5c0f5d4c_25a0" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144856542-1594201771.png" alt="image_5c0f5d4c_25a0" width="519" height="122" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">以上示例将电视机的三种功能开机、关机、换台 抽象为三种命令</div>
+<div style="line-height: 200%;">一个遥控器在初始化之后，就可以拥有开机、关机、换台的功能，但是却完全不知道底层的实际工作的电视。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px;">命令请求记录</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>一旦将&ldquo;发起请求&rdquo;这一行为进行抽象封装为命令对象</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>那么&ldquo;命令&rdquo;也就具有了一般对象的基本特性，比如，作为参数传递</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>比如使用容器存放进行存放</strong></span></div>
+<div style="line-height: 200%;">比如定义一个ArrayList&nbsp; 用于保存命令</div>
+<div style="line-height: 200%;">ArrayList&lt;Command&gt; commands = new ArrayList&lt;Command&gt;();</div>
+<div style="line-height: 200%;">这就形成了一个队列</div>
+<div style="line-height: 200%;">你可以动态的向队列中增加命令，也可以从队列中移除命令</div>
+<div style="line-height: 200%;">你还可以将这个队列保存起来，批处理的执行或者定时每天的去执行</div>
+<div style="line-height: 200%;">你还可以将这些命令请求持久化到文件中，因为这些命令、请求 也不过就是一个个的对象而已</div>
+<h3><span style="font-size: 18px;">请求命令队列</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>既然可以使用容器存放命令对象，我们可以实现一个命令队列，对命令进行批处理</strong></span></div>
+<div style="line-height: 200%;">新增加一个CommandQueue类，内部使用ArrayList存储命令</div>
+<div style="line-height: 200%;">execute（）方法，将内部的请求命令队列全部执行</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.ArrayList;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> CommandQueue {
+ 
+</span><span style="color: #0000ff;">private</span> ArrayList&lt;Command&gt; commands = <span style="color: #0000ff;">new</span> ArrayList&lt;Command&gt;<span style="color: #000000;">();
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> addCommand(Command command) {
+commands.add(command);
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> removeCommand(Command command) {
+commands.remove(command);
+}
+ 
+</span><span style="color: #008000;">//</span><span style="color: #008000;">执行队列内所有命令</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> execute() {
+</span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (Object command : commands) {
+((Command) command).execute();
+}
+}
+}</span></pre>
+</div>
+</div>
+<div>同时调整Invoker角色，使之可以获得请求命令队列，并且执行命令请求队列的方法</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> command;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Invoker {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Command command;
+Invoker(Command command) {
+</span><span style="color: #0000ff;">this</span>.command =<span style="color: #000000;"> command;
+}
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> action() {
+command.execute();
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">新增加命令队列</span>
+<span style="color: #0000ff;">private</span><span style="color: #000000;"> CommandQueue commandQueue;
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Invoker(CommandQueue commandQueue) {
+</span><span style="color: #0000ff;">this</span>.commandQueue =<span style="color: #000000;"> commandQueue;
+}
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 新增加队列批处理方法</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> batchAction() {
+commandQueue.execute();
+}
+}</span></pre>
+</div>
+</div>
+<div>从上面的示意代码可以看得出来，<span style="color: #ff0000; font-size: 13.5pt;"><strong>请求队列的关键就是命令类</strong></span></div>
+<div><span style="color: #0000ff; font-size: 13.5pt;"><strong><span style="line-height: 32px;">一旦创建了命令类，就解除了命令请求者与命令接收者之间耦合，</span><span style="line-height: 32px;">就可以把命令当做一个普通对象进行处理，调用他们的execute（）执行方法</span></strong></span></div>
+</div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;">所谓请求队列不就是使用容器把命令对象保存起来，然后调用他们的execute方法嘛</div>
+<div style="line-height: 200%;">所以说，<span style="color: #000000; font-size: large; font-weight: bold;">命令请求的对象化，可以实现对请求排队或者记录请求日志的目的，就是命令对象的队列</span></div>
+<div style="line-height: 200%;">
+<h4><span style="font-size: 16px;">宏命令 </span></h4>
+<div style="line-height: 32px;">计算机科学里的宏（Macro)，是一种批量批处理的称谓</div>
+<div style="line-height: 32px;">一旦请求命令"对象化"，就可以进行保存</div>
+<div style="line-height: 32px;">上面的请求队列就是如此，保存起来就可以实现批处理的功能，这就是命令模式的宏命令</div>
+</div>
+<h3><span style="font-size: 18px;">撤销操作 </span></h3>
+<div style="line-height: 200%;">在上面的例子中，我们没有涉及到撤销操作</div>
+<div style="line-height: 200%;">命令模式如何完成&ldquo;撤销&rdquo;这一行为呢？</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>命令是对于请求这一行为的封装抽象，每种ConcreteCommand都对应者接收者一种具体的行为方式</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>所以想要能够有撤销的行为，命令接收者（最终的执行者）必然需要有这样一个功能</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>如果Receiver提供了一个rollback方法</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>也就是说如果一个receiver有两个方法，action（）和rollback（）</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>当执行action方法后，调用rollback可以将操作进行回滚</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>那么，我们就可以给Command增加一个方法，recover（） 用于调用receiver 的rollback方法</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>这样一个命令对象就有了两种行为，执行execute和恢复recover</strong></span></div>
+<div style="line-height: 200%;">如果我们在每次的命令执行后，将所有的 执行过的 命令保存起来</div>
+<div style="line-height: 200%;">当需要回滚时，只需要逐个（或者按照执行的相反顺序）执行命令对象的recover方法即可</div>
+<div style="line-height: 200%;">这就很自然的完成了命令的撤销行为，而且还可以批量进行撤销</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>命令模式的撤销操作依赖于命令接收者本身的撤销行为，如果命令接收者本身不具备此类方法显然没办法撤销</strong></span></div>
+<div style="line-height: 200%;">另外就是依赖对执行过的命令的记录</div>
+<h3><span style="font-size: 18px;">使用场景 </span></h3>
+<div style="line-height: 200%;">对于&ldquo;大狗子你妈喊你回家吃饭&rdquo;的例子，我想你也会觉得大狗子妈直接调用大狗子的方法就好了</div>
+<div style="line-height: 200%;">脱裤子放屁，抽象出来一个命令对象有什么用呢？</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">对于简单的方法调用，个人也认为是自找麻烦</div>
+<div style="line-height: 200%;">命令模式是有其使用场景以及特点的，并不是说不分青红皂白的将请求处理都转换为命令对象</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">到底什么情况需要使用命令模式？</div>
+<div style="line-height: 200%;">通过上面的分析，如果你<span style="color: #ff0000; font-size: 13.5pt;"><strong>希望将请求进行排队处理，或者请求日志的记录</strong></span></div>
+<div style="line-height: 200%;">那么你就很可能需要命令模式，只有将请求转换为命令对象，这些行为才更易于实现</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果系统<span style="color: #ff0000; font-size: 13.5pt;"><strong>希望支持撤销操作</strong></span></div>
+<div style="line-height: 200%;">通过<span style="color: #0000ff; font-size: 13.5pt;"><strong>请求的对象化</strong></span>，<span style="color: #0000ff; font-size: 13.5pt;"><strong>可以方便的将命令的执行过程记录下来</strong></span>，就下来之后，就形成了&ldquo;操作记录&rdquo;</div>
+<div style="line-height: 200%;">拥有了操作记录，如果有撤销方法，就能够执行回滚撤销</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果希望<span style="color: #ff0000; font-size: 13.5pt;"><strong>命令能够被保存起来组成宏命令，重复执行</strong></span>或者定时执行等，就可以使用命令模式</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果希望将<span style="color: #ff0000; font-size: 13.5pt;"><strong>请求的调用者和请求的执行者进行解耦</strong></span>，使得请求的调用者和执行者并不直接接触</div>
+<div style="line-height: 200%;">命令对象封装了命令的接收者，请求者只关注命令对象，根本不知道命令的接收者</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果希望<span style="color: #ff0000; font-size: 13.5pt;"><strong>请求具有更长的生命周期</strong></span>，普通方法调用，命令发出者和命令执行者具有同样的生命周期</div>
+<div style="line-height: 200%;">命令模式下，命令对象封装了请求，完成了命令发出者与命令接收者的解耦</div>
+<div style="line-height: 200%;">命令对象创建后，只依赖命令接收者的执行，只要命令接收者存在，就仍旧可以执行，但是命令发出者可以消亡</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">总之命令模式的特点以及解决的问题，也正是他适用的场景</div>
+<div style="line-height: 200%;">这一点在其他模式上也一样</div>
+<div style="line-height: 200%;">特点以及解决的问题，也正是他适用的场景，适用场景也正是它能解决的问题</div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;">命令模式中对于场景中命令的提取，始终要注意它的核心&ldquo;<span style="color: #000000; font-size: 13.5pt;"><strong>对接收者行为的命令抽象</strong></span>&rdquo;</div>
+<div style="line-height: 200%;">比如，电视作为命令接收者，开机，关机，换台是他自身固有的方法属性，你的命令也就只能是与之对应的开机、关机、换台</div>
+<div style="line-height: 200%;">你不能打游戏，即使你能打游戏，电视也不会让你打游戏</div>
+<div style="line-height: 200%;">这是具体的命令对象ConcreteCommand的设计思路</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">Command提供抽象的execute方法，所有的命令都是这个方法</div>
+<div style="line-height: 200%;">调用者只需要执行Command的execute方法即可，不关注到底是什么命令，命令接收者是谁</div>
+<div style="line-height: 200%;">如果命令的接收者有撤销的功能，命令对象就可以也同样支持撤销操作</div>
+<div style="line-height: 200%;">关于如何抽取命令只需要记住:</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>命令模式中的命令对象是请求的封装，请求基本就是方法调用，方法调用就是需要方法的执行者，也就是命令的接收者有对应行为的方法</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">请求者和接收者通过命令对象进行解耦，降低了系统的耦合度</div>
+<div style="line-height: 200%;">命令的请求者Invoker与命令的接收者Receiver通过中间的Command进行连接，Command中的协议都是execute方法</div>
+<div style="line-height: 200%;">所以，如果新增加命令，命令的请求者Invoker完全不需要做任何更改，他仍旧是接收一个Command，然后调用他的execute方法</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>具有良好的扩展性，满足开闭原则</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144856832-784520869.png"><img style="display: inline; background-image: none;" title="image_5c0f5d4c_5994" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181211144857111-527070319.png" alt="image_5c0f5d4c_5994" width="626" height="174" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">回到刚才说的，具体的命令对象ConcreteCommand的设计思路</div>
+<div style="line-height: 200%;">需要与命令接收者的行为进行对应</div>
+<div style="line-height: 200%;">也就是<span style="color: #ff0000; font-size: 13.5pt;"><strong><span style="line-height: 24px;">针对每一个对请求接收者的调</span><span style="line-height: 24px;">用操作，都需要设计一个具体命令类，</span>可能会出现大量的命令类 </strong></span></div>
+<div style="line-height: 200%;">有一句话说得好，&ldquo;杀鸡焉用宰牛刀&rdquo;，所以使用命令模式一定要注意场景</div>
+<div style="line-height: 200%;">以免被别人说脱裤子放屁，为了用设计模式而用设计模式....</div>
+<div style="line-height: 200%;">&nbsp;原文地址:<a href="https://www.cnblogs.com/noteless/p/10102153.html" target="_blank">命令模式 Command 行为型 设计模式（十八）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-12-11 15:03</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10102153" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10102153);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10102153, cb_entryCreatedDate = '2018-12-11 15:03', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

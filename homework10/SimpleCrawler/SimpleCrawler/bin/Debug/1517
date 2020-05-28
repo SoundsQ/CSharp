@@ -1,0 +1,542 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第6页 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=9">9</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=10">10</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=7">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/20.html">2019年9月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11559795.html">
+    表达式树练习实践：C# 循环与循环控制
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：C 循环 [TOC] C 提供了以下几种循环类型。 | 循环类型 | 描述 | | : | : | | while 循环 | 当给定条件为真时，重复语句或语句组。它会在执行循环主体之前测试条件。 | | for/foreach 循环 | 多次执行一个语句序列，简化管理循环变量的代码            <a href="https://www.cnblogs.com/whuanle/p/11559795.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-20 20:49 痴者工良 阅读 (1290) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11559795" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/19.html">2019年9月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11552311.html">
+    表达式树练习实践：C#判断语句
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：C 判断语句 [TOC] 判断语句 C 提供了以下类型的判断语句： | 语句 | 描述 | | : | : | | if | 一个 if 语句 由一个布尔表达式后跟一个或多个语句组成。 | | if...else | 一个 if 语句 后可跟一个可选的 else 语句 ，else             <a href="https://www.cnblogs.com/whuanle/p/11552311.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-19 20:17 痴者工良 阅读 (596) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11552311" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/18.html">2019年9月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11545441.html">
+    表达式树练习实践：C# 五类运算符的表达式树表达
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：C 运算符 [TOC] 在 C 中，算术运算符，有以下类型 算术运算符 关系运算符 逻辑运算符 位运算符 赋值运算符 其他运算符 这些运算符根据参数的多少，可以分作一元运算符、二元运算符、三元运算符。本文将围绕这些运算符，演示如何使用表达式树进行操作。 对于一元运算符和二元运算符的            <a href="https://www.cnblogs.com/whuanle/p/11545441.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-18 21:22 痴者工良 阅读 (1042) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11545441" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/16.html">2019年9月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11530555.html">
+    表达式树练习实践：变量、常量与赋值
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：变量、常量与赋值 定义变量 用来创建变量、变量参数表达式。 在 C 中，变量分为以下几种类型： 值类型（Value types） 引用类型（Reference types） 指针类型（Pointer types） 一般上，只用到值类型和引用类型，这里不会说到指针类型。 C 的基本值            <a href="https://www.cnblogs.com/whuanle/p/11530555.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-16 21:56 痴者工良 阅读 (666) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11530555" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/08/28.html">2019年8月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11426310.html">
+    瞎折腾实录：构建 Armel 版本的 .NET Core 教程和资料资源
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 首先我要说明，我失败了~ 我把我的进度和经验放出来，希望能够帮助别人完成编译工作~ 背景：最近接手一个华为某型号的嵌入式设备，需要在上面搭建 .NET Core 环境。 设备是 Armel 架构的，Linux 内核 3.10；.NET Core ARM 只有 Armhf。 因此编译出来的            <a href="https://www.cnblogs.com/whuanle/p/11426310.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-28 20:28 痴者工良 阅读 (968) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11426310" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/08/21.html">2019年8月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11391356.html">
+    CZGL.Auth： ASP.NET Core Jwt角色授权快速配置库
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：CZGL.Auth 发现有Bug，会导致只能有一个用户登录，无法多个用户同时登录。 哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈。 打算好好优化一下，周六周日修改Bug，做好测试再放出来，哈哈哈哈哈哈哈哈哈哈哈哈哈。 新版本开源地址：https://github.com/whuanle/CZGL.Auth            <a href="https://www.cnblogs.com/whuanle/p/11391356.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-21 21:33 痴者工良 阅读 (515) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11391356" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/08/19.html">2019年8月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11377792.html">
+    ASP.NET Core 使用 JWT 自定义角色/策略授权需要实现的接口
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] ① 存储角色/用户所能访问的 API 例如 使用 存储角色的授权 API 列表。 可有可无。 可以把授权访问的 API 存放到 Token 中，Token 也可以只存放角色信息和用户身份信息。 ② 实现 IAuthorizationRequirement 接口 接口代表了用户的身份信息，            <a href="https://www.cnblogs.com/whuanle/p/11377792.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-19 20:26 痴者工良 阅读 (1927) 评论 (13)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11377792" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/08/15.html">2019年8月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11360468.html">
+    ASP.NET Core 使用 Redis 实现分布式缓存：Docker、IDistributedCache、StackExchangeRedis
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：ASP.NET Core 使用 Redis 实现分布式缓存：Docker、IDistributedCache、StackExchangeRedis 前提：一台 Linux 服务器、已安装 Docker。 一，Docker 中运行 Redis 拉取 Redis 镜像 查询镜像列表 运行 Redis的几            <a href="https://www.cnblogs.com/whuanle/p/11360468.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-15 20:47 痴者工良 阅读 (855) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11360468" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11360160.html">
+    基础查询-SQL和Linq相互化
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] SELECT SELECT 语句用于从表中选取数据，是 SQL 最基本的操作之一。 通过 SELECT 查询的结果被存储在一个结果表中（称为结果集）。 SQL SELECT 语法 只查询某个列的数据： 查询所有列的数据 SQL 查询所有数据 查询一列或多列 查询表达式 查询语句 SQL             <a href="https://www.cnblogs.com/whuanle/p/11360160.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-15 19:52 痴者工良 阅读 (148) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11360160" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/08/11.html">2019年8月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11334840.html">
+    小范的腾讯云云开发者培训体验心得
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：小范的腾讯云云开发者培训体验心得 [TOC] 一，概览 《腾讯云开发工程师培训》 于本月(2019年8月)重磅发布，并已上线腾讯云开发工程师认证。 小范受邀参加了 日为期 4 天的线下培训。 当今是云计算时代，云计算凝聚了各种优秀的开源项目和云计算厂商久经考验的大规模实践技术。 作为一个有思想、爱学            <a href="https://www.cnblogs.com/whuanle/p/11334840.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-08-11 14:00 痴者工良 阅读 (187) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11334840" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=9">9</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=10">10</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=7">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,853 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="TPL 数据流库向具有高吞吐量和低滞后时间的占用大量 CPU 和 I/O 操作的应用程序的并行化和消息传递提供了基础。 它还能显式控制缓存数据的方式以及在系统中移动的方式。 为了更好地了解数据流编程模" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>数据流（任务并行库 TPL） - yswenli - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/bluesky/bundle-bluesky.min.css?v=nIYPSqBALS6DuGAjaXk5hWfDv_C8bPXulypjfPAZ-d4" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/yswenli/custom.css?v=&#x2B;H0JAyxhfNTDOzlVb4BgC2Qlw3c=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bluesky/bundle-bluesky-mobile.min.css?v=s2piIyFV3NYqZWTmizb6uafQjmZFRhUBr8YMAdV85mA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yswenli/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yswenli/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yswenli/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 325467;
+        var currentBlogApp = 'yswenli';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BlueSky';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/hafiz/feedback.css">
+<link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/miangao/maodian.css">
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/yswenli/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yswenli/">yswenli</a>
+</h1>
+<h2>
+http://www.cnblogs.com/yswenli/
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yswenli/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/yswenli">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yswenli/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+68&nbsp; </span>
+<span id="stats_article_count">文章 - 
+3&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+252</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/yswenli/p/8042594.html">数据流（任务并行库 TPL）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span><span class="selflink">&nbsp; &nbsp; &nbsp; &nbsp; TPL 数据流库向具有高吞吐量和低滞后时间的占用大量 CPU 和 I/O 操作的应用程序的并行化和消息传递提供了基础。 它还能显式控制缓存数据的方式以及在系统中移动的方式。 为了更好地了解数据流编程模型，请考虑一个以异步方式从磁盘加载图像并创建复合图像的应用程序。 传统编程模型通常需要使用回调和同步对象（例如锁）来协调任务和访问共享数据。 通过使用数据流编程模型，您可以从磁盘读取时创建处理图像的数据流对象。 在数据流模型下，您可以声明当数据可用时的处理方式，以及数据之间的所有依赖项。 由于运行时管理数据之间的依赖项，因此通常可以避免这种要求来同步访问共享数据。 此外，因为运行时计划基于数据的异步到达，所以数据流可以通过有效管理基础线程提高响应能力和吞吐量。</span></span></p>
+<p><span><span class="selflink">&nbsp; &nbsp; &nbsp; &nbsp; System.Threading.Tasks.Dataflow&nbsp;命名空间提供基于角色的编程模型，用以支持粗粒度数据流和流水线操作任务的进程内消息传递。TDP的主要作用就是Buffering Data和Processing Data，在TDF中，有两个非常重要的接口，ISourceBlock&lt;T&gt; 和ITargetBlock&lt;T&gt;接口。继承于ISourceBlock&lt;T&gt;的对象时作为提供数据的数据源对象-生产者，而继承于ITargetBlock&lt;T&gt;接口类主要是扮演目标对象-消费者。在这个类库中，System.Threading.Tasks.Dataflow名称空间下，提供了很多以Block名字结尾的类，ActionBlock，BufferBlock，TransformBlock，BroadcastBlock等9个Block，我们在开发中通常使用单个或多个Block组合的方式来实现一些功能，以下逐个来简单介绍一下。</span></span></p>
+<p><strong>BufferBlock</strong></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; BufferBlock是TDF中最基础的Block。BufferBlock提供了一个有界限或没有界限的Buffer，该Buffer中存储T。该Block很像BlockingCollection&lt;T&gt;。可以用过Post往里面添加数据，也可以通过Receive方法阻塞或异步的的获取数据，数据处理的顺序是FIFO的。它也可以通过Link向其他Block输出数据。</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161517-1698f6ff49544813b6aebab2eb8f5b0b.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161517-0f5c7949243a4f9b995672da83950fb9.png" alt="image" width="429" height="109" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>简单的同步的生产者消费者代码示例：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>private static BufferBlock&lt;int&gt; m_buffer = new BufferBlock&lt;int&gt;();
+
+// Producer
+private static void Producer()
+{
+    while(true)
+    {
+        int item = Produce();
+        m_buffer.Post(item);
+    }
+}
+
+// Consumer
+private static void Consumer()
+{
+    while(true)
+    {
+        int item = m_buffer.Receive();
+        Process(item);
+    }
+}
+
+// Main
+public static void Main()
+{
+    var p = Task.Factory.StartNew(Producer);
+    var c = Task.Factory.StartNew(Consumer);
+    Task.WaitAll(p,c);
+}</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>ActionBlock</strong></p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ActionBlock实现ITargetBlock，说明它是消费数据的，也就是对输入的一些数据进行处理。它在构造函数中，允许输入一个委托，来对每一个进来的数据进行一些操作。如果使用Action(T)委托，那说明每一个数据的处理完成需要等待这个委托方法结束，如果使用了Func&lt;TInput, Task&gt;)来构造的话，那么数据的结束将不是委托的返回，而是Task的结束。默认情况下，ActionBlock会FIFO的处理每一个数据，而且一次只能处理一个数据，一个处理完了再处理第二个，但也可以通过配置来并行的执行多个数据。</p>
+<p>&nbsp;</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161518-2ca8fbd3236a4f80b77dbda515be5b77.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161519-5f62f15310e548b9a06f3fa9b603a149.png" alt="image" width="354" height="93" border="0" /></a></p>
+<p>先看一个例子：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public ActionBlock&lt;int&gt; abSync = new ActionBlock&lt;int&gt;((i) =&gt;
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine(i + " ThreadId:" + Thread.CurrentThread.ManagedThreadId + " Execute Time:" + DateTime.Now);
+            }
+        );
+
+        public void TestSync()
+        {
+            for (int i = 0; i &lt; 10; i++)
+            {
+                abSync.Post(i);
+            }
+
+            Console.WriteLine("Post finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>&nbsp;</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161522-afb3515970ed4176b6173e762c172b90.jpg"><img title="6{%7WGLQU90CW4[(OF)H6DC" src="https://images0.cnblogs.com/blog/15700/201303/01161524-b5276dfab96c4200aa72b906a3b4009b.jpg" alt="6{%7WGLQU90CW4[(OF)H6DC" width="672" height="198" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>可见，ActionBlock是顺序处理数据的，这也是ActionBlock一大特性之一。主线程在往ActionBlock中Post数据以后马上返回，具体数据的处理是另外一个线程来做的。数据是异步处理的，但处理本身是同步的，这样在一定程度上保证数据处理的准确性。下面的例子是使用async和await。</p>
+<div class="cnblogs_code">
+<pre>public ActionBlock&lt;int&gt; abSync2 = new ActionBlock&lt;int&gt;(async (i) =&gt;
+        {
+            await Task.Delay(1000);
+            Console.WriteLine(i + " ThreadId:" + Thread.CurrentThread.ManagedThreadId + " Execute Time:" + DateTime.Now);
+        }</pre>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161524-ad9e51265ceb4b8781d6798d5ace15d0.jpg"><img title="U55C4LS4`0SY0O)}[5W]{%C" src="https://images0.cnblogs.com/blog/15700/201303/01161525-ab3d15e3e91641be9a15988a88effddf.jpg" alt="U55C4LS4`0SY0O)}[5W]{%C" width="675" height="217" border="0" /></a></p>
+<p>虽然还是1秒钟处理一个数据，但是处理数据的线程会有不同。</p>
+<p>&nbsp;</p>
+<p>如果你想异步处理多个消息的话，ActionBlock也提供了一些接口，让你轻松实现。在ActionBlock的构造函数中，可以提供一个ExecutionDataflowBlockOptions的类型，让你定义ActionBlock的执行选项，在下面了例子中，我们定义了MaxDegreeOfParallelism选项，设置为3。目的的让ActionBlock中的Item最多可以3个并行处理。</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public ActionBlock&lt;int&gt; abAsync = new ActionBlock&lt;int&gt;((i) =&gt;
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine(i + " ThreadId:" + Thread.CurrentThread.ManagedThreadId + " Execute Time:" + DateTime.Now);
+        }
+        , new ExecutionDataflowBlockOptions() { MaxDegreeOfParallelism = 3 });
+
+public void TestAsync()
+        {
+            for (int i = 0; i &lt; 10; i++)
+            {
+                abAsync.Post(i);
+            }
+            Console.WriteLine("Post finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161529-f4224d307b054026b90872b43764f7e4.jpg"><img title="XVGW}JJK7YY7(%E}])11J7V" src="https://images0.cnblogs.com/blog/15700/201303/01161530-c51b7a2e84254edebe2d85a63e3bf576.jpg" alt="XVGW}JJK7YY7(%E}])11J7V" width="670" height="193" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>运行程序，我们看见，每3个数据几乎同时处理，并且他们的线程ID也是不一样的。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>ActionBlock也有自己的生命周期，所有继承IDataflowBlock的类型都有Completion属性和Complete方法。调用Complete方法是让ActionBlock停止接收数据，而Completion属性则是一个Task，是在ActionBlock处理完所有数据时候会执行的任务，我们可以使用Completion.Wait()方法来等待ActionBlock完成所有的任务，Completion属性只有在设置了Complete方法后才会有效。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public void TestAsync()
+        {
+            for (int i = 0; i &lt; 10; i++)
+            {
+                abAsync.Post(i);
+            }
+            abAsync.Complete();
+            Console.WriteLine("Post finished");
+            abAsync.Completion.Wait();
+            Console.WriteLine("Process finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161531-1ec41931311444deaad94dd29d1fe3eb.jpg"><img title="$WSKZ$6M1`[J7T_W@~Y~WZ3" src="https://images0.cnblogs.com/blog/15700/201303/01161531-151aebc85b31469894f4cae064eac264.jpg" alt="$WSKZ$6M1`[J7T_W@~Y~WZ3" width="649" height="224" border="0" /></a></p>
+<p>&nbsp;</p>
+<p><strong>TransformBlock</strong></p>
+<p>TransformBlock是TDF提供的另一种Block，顾名思义它常常在数据流中充当数据转换处理的功能。在TransformBlock内部维护了2个Queue，一个InputQueue，一个OutputQueue。InputQueue存储输入的数据，而通过Transform处理以后的数据则放在OutputQueue，OutputQueue就好像是一个BufferBlock。最终我们可以通过Receive方法来阻塞的一个一个获取OutputQueue中的数据。TransformBlock的Completion.Wait()方法只有在OutputQueue中的数据为0的时候才会返回。</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161533-5bbe0bd7d2b34d0982e1d071eeb14251.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161534-bdb94184e8814888b2fcc44c75c89a76.png" alt="image" width="530" height="94" border="0" /></a></p>
+<p>举个例子，我们有一组网址的URL，我们需要对每个URL下载它的HTML数据并存储。那我们通过如下的代码来完成：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public TransformBlock&lt;string, string&gt; tbUrl = new TransformBlock&lt;string, string&gt;((url) =&gt;
+        {
+            WebClient webClient = new WebClient();
+            return webClient.DownloadString(new Uri(url));
+        }
+
+        public void TestDownloadHTML()
+        {
+            tbUrl.Post("www.baidu.com");
+            tbUrl.Post("www.sina.com.cn");
+
+            string baiduHTML = tbUrl.Receive();
+            string sinaHTML = tbUrl.Receive();
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>当然，Post操作和Receive操作可以在不同的线程中进行，Receive操作同样也是阻塞操作，在OutputQueue中有可用的数据时，才会返回。</p>
+<p>&nbsp;</p>
+<p><strong>TransformManyBlock</strong></p>
+<p>TransformManyBlock和TransformBlock非常类似，关键的不同点是，TransformBlock对应于一个输入数据只有一个输出数据，而TransformManyBlock可以有多个，及可以从InputQueue中取一个数据出来，然后放多个数据放入到OutputQueue中。</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161535-88492a41b2ed4911930d5568ec34e1f3.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161536-f582de1c67994e409b4f7835251b3c53.png" alt="image" width="547" height="94" border="0" /></a></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>TransformManyBlock&lt;int, int&gt; tmb = new TransformManyBlock&lt;int, int&gt;((i) =&gt; { return new int[] { i, i + 1 }; });
+
+        ActionBlock&lt;int&gt; ab = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine(i));
+
+        public void TestSync()
+        {
+            tmb.LinkTo(ab);
+
+            for (int i = 0; i &lt; 4; i++)
+            {
+                tmb.Post(i);
+            }
+
+            Console.WriteLine("Finished post");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161541-668da8d8c6dd427099f49a588f10881a.jpg"><img title="GC(K]J4DB4UKP$S@8C9ZVMV" src="https://images0.cnblogs.com/blog/15700/201303/01161542-6d6c0dd2327a43f5982ad5405487b717.jpg" alt="GC(K]J4DB4UKP$S@8C9ZVMV" width="665" height="170" border="0" /></a></p>
+<p>&nbsp;</p>
+<p><strong>BroadcastBlock</strong></p>
+<p>BroadcastBlock的作用不像BufferBlock，它是使命是让所有和它相联的目标Block都收到数据的副本，这点从它的命名上面就可以看出来了。还有一点不同的是，BroadcastBlock并不保存数据，在每一个数据被发送到所有接收者以后，这条数据就会被后面最新的一条数据所覆盖。如没有目标Block和BroadcastBlock相连的话，数据将被丢弃。但BroadcastBlock总会保存最后一个数据，不管这个数据是不是被发出去过，如果有一个新的目标Block连上来，那么这个Block将收到这个最后一个数据。</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161543-566cec95739a4f15ab5688aded2a6cf7.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161543-bbfd0d43c8ad434f9af8dab2827c148c.png" alt="image" width="466" height="106" border="0" /></a></p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>        BroadcastBlock&lt;int&gt; bb = new BroadcastBlock&lt;int&gt;((i) =&gt; { return i; });
+
+        ActionBlock&lt;int&gt; displayBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Displayed " + i));
+
+        ActionBlock&lt;int&gt; saveBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Saved " + i));
+
+        ActionBlock&lt;int&gt; sendBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Sent " + i));
+
+        public void TestSync()
+        {
+            bb.LinkTo(displayBlock);
+            bb.LinkTo(saveBlock);
+            bb.LinkTo(sendBlock);
+
+            for (int i = 0; i &lt; 4; i++)
+            {
+                bb.Post(i);
+            }
+
+            Console.WriteLine("Post finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161544-e0ab399e540b47ed8b0de0f0b05e0a44.jpg"><img title="A][PVWN1@4UMGZ[YTEV$[E9" src="https://images0.cnblogs.com/blog/15700/201303/01161545-e9724f3e074644f5b5d756efe3ea4c02.jpg" alt="A][PVWN1@4UMGZ[YTEV$[E9" width="668" height="226" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>如果我们在Post以后再添加连接Block的话，那些Block就只会收到最后一个数据了。</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public void TestSync()
+        {
+            for (int i = 0; i &lt; 4; i++)
+            {
+                bb.Post(i);
+            }
+
+            Thread.Sleep(5000);
+
+            bb.LinkTo(displayBlock);
+            bb.LinkTo(saveBlock);
+            bb.LinkTo(sendBlock);
+            Console.WriteLine("Post finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>&nbsp;</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161546-50414ca420714dc4ba5bbf7fc76e01ae.jpg"><img title="AC}VT(NM__HO1@UJ948)$@W" src="https://images0.cnblogs.com/blog/15700/201303/01161546-3d0daae719b94dc18ec81fe2922298ca.jpg" alt="AC}VT(NM__HO1@UJ948)$@W" width="671" height="114" border="0" /></a></p>
+<p>&nbsp;</p>
+<p><strong>WriteOnceBlock</strong></p>
+<p>如果说BufferBlock是最基本的Block，那么WriteOnceBock则是最最简单的Block。它最多只能存储一个数据，一旦这个数据被发送出去以后，这个数据还是会留在Block中，但不会被删除或被新来的数据替换，同样所有的接收者都会收到这个数据的备份。</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161547-70a0a11536ff4a8e9a662b2be8cf0261.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161551-f163f3bb35014568ac90dd5d3175d7ee.png" alt="image" width="288" height="99" border="0" /></a></p>
+<p>和BroadcastBlock同样的代码，但是结果不一样：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>WriteOnceBlock&lt;int&gt; bb = new WriteOnceBlock&lt;int&gt;((i) =&gt; { return i; });
+
+        ActionBlock&lt;int&gt; displayBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Displayed " + i));
+
+        ActionBlock&lt;int&gt; saveBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Saved " + i));
+
+        ActionBlock&lt;int&gt; sendBlock = new ActionBlock&lt;int&gt;((i) =&gt; Console.WriteLine("Sent " + i));
+
+        public void TestSync()
+        {
+            bb.LinkTo(displayBlock);
+            bb.LinkTo(saveBlock);
+            bb.LinkTo(sendBlock);
+            for (int i = 0; i &lt; 4; i++)
+            {
+                bb.Post(i);
+            }
+
+            Console.WriteLine("Post finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161558-11b4d015e1af48388fc0f49060f67682.jpg"><img title="@2[203}OL`G6VH2K}}9}DNE" src="https://images0.cnblogs.com/blog/15700/201303/01161558-66b3a94704ba426385f65e0f0d78433e.jpg" alt="@2[203}OL`G6VH2K}}9}DNE" width="672" height="114" border="0" /></a></p>
+<p>WriteOnceBock只会接收一次数据。而且始终保留那个数据。</p>
+<p>同样使用Receive方法来获取数据也是一样的结果，获取到的都是第一个数据：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public void TestReceive()
+        {
+            for (int i = 0; i &lt; 4; i++)
+            {
+                bb.Post(i);
+            }
+            Console.WriteLine("Post finished");
+
+            Console.WriteLine("1st Receive:" + bb.Receive());
+            Console.WriteLine("2nd Receive:" + bb.Receive());
+            Console.WriteLine("3rd Receive:" + bb.Receive());
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161559-81cd4699ae8d42a0974b9b93c67ad47b.jpg"><img title="7M5Q]MH5K82OVQ}N]E(J8MV" src="https://images0.cnblogs.com/blog/15700/201303/01161605-e4ff0fa705c941059b3d0d6d0087eb25.jpg" alt="7M5Q]MH5K82OVQ}N]E(J8MV" width="676" height="91" border="0" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;<strong>BatchBlock</strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;<a href="https://images0.cnblogs.com/blog/15700/201303/01161609-b46421a6d9524b219057ce8dc4803a99.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161612-424f44c875a64999aa48d0a15a6d2f8a.png" alt="image" width="628" height="114" border="0" /></a></p>
+<p>BatchBlock提供了能够把多个单个的数据组合起来处理的功能，如上图。应对有些需求需要固定多个数据才能处理的问题。在构造函数中需要制定多少个为一个Batch，一旦它收到了那个数量的数据后，会打包放在它的OutputQueue中。当BatchBlock被调用Complete告知Post数据结束的时候，会把InputQueue中余下的数据打包放入OutputQueue中等待处理，而不管InputQueue中的数据量是不是满足构造函数的数量。</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>        BatchBlock&lt;int&gt; bb = new BatchBlock&lt;int&gt;(3);
+
+        ActionBlock&lt;int[]&gt; ab = new ActionBlock&lt;int[]&gt;((i) =&gt; 
+            {
+                string s = string.Empty;
+
+                foreach (int m in i)
+                {
+                    s += m + " ";
+                }
+                Console.WriteLine(s);
+            });
+
+        public void TestSync()
+        {
+            bb.LinkTo(ab);
+
+            for (int i = 0; i &lt; 10; i++)
+            {
+                bb.Post(i);
+            }
+            bb.Complete();
+
+            Console.WriteLine("Finished post");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161613-21ebb35abb6641ee9dd1a33a16bd8b33.jpg"><img title="@D__1{B5V72~T7`AGM74D_0" src="https://images0.cnblogs.com/blog/15700/201303/01161613-22d4c06138354a2db448bc5bfa3c9d6b.jpg" alt="@D__1{B5V72~T7`AGM74D_0" width="677" height="143" border="0" /></a></p>
+<p>BatchBlock执行数据有两种模式：贪婪模式和非贪婪模式。贪婪模式是默认的。贪婪模式是指任何Post到BatchBlock，BatchBlock都接收，并等待个数满了以后处理。非贪婪模式是指BatchBlock需要等到构造函数中设置的BatchSize个数的Source都向BatchBlock发数据，Post数据的时候才会处理。不然都会留在Source的Queue中。也就是说BatchBlock可以使用在每次从N个Source那个收一个数据打包处理或从1个Source那里收N个数据打包处理。这里的Source是指其他的继承ISourceBlock的，用LinkTo连接到这个BatchBlock的Block。</p>
+<p>在另一个构造参数中GroupingDataflowBlockOptions，可以通过设置Greedy属性来选择是否贪婪模式和MaxNumberOfGroups来设置最大产生Batch的数量，如果到达了这个数量，BatchBlock将不会再接收数据。</p>
+<p>&nbsp;</p>
+<p><strong>JoinBlock</strong></p>
+<p><strong><a href="https://images0.cnblogs.com/blog/15700/201303/01161617-fd5ef8fc6b264a76b3a6ec392466ba06.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161619-5805d12c170c4dd291897abe0fff07f6.png" alt="image" width="584" height="101" border="0" /></a></strong></p>
+<p>JoinBlock一看名字就知道是需要和两个或两个以上的Source Block相连接的。它的作用就是等待一个数据组合，这个组合需要的数据都到达了，它才会处理数据，并把这个组合作为一个Tuple传递给目标Block。举个例子，如果定义了JoinBlock&lt;int, string&gt;类型，那么JoinBlock内部会有两个ITargetBlock，一个接收int类型的数据，一个接收string类型的数据。那只有当两个ITargetBlock都收到各自的数据后，才会放到JoinBlock的OutputQueue中，输出。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>JoinBlock&lt;int, string&gt; jb = new JoinBlock&lt;int, string&gt;();
+        ActionBlock&lt;Tuple&lt;int, string&gt;&gt; ab = new ActionBlock&lt;Tuple&lt;int, string&gt;&gt;((i) =&gt;
+            {
+                Console.WriteLine(i.Item1 + " " + i.Item2);
+            });
+            
+        public void TestSync()
+        {
+            jb.LinkTo(ab);
+
+            for (int i = 0; i &lt; 5; i++)
+            {
+                jb.Target1.Post(i);
+            }
+
+            for (int i = 5; i &gt; 0; i--)
+            {
+                Thread.Sleep(1000);
+                jb.Target2.Post(i.ToString());
+            }
+
+            Console.WriteLine("Finished post");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161619-aa45e3957f0b4ec5be55aa719fef8a90.jpg"><img title=")DNMCJE%H41G[2YBPD%W4%B" src="https://images0.cnblogs.com/blog/15700/201303/01161623-de3f5cbecec145d88c3bc4ac70276026.jpg" alt=")DNMCJE%H41G[2YBPD%W4%B" width="679" height="158" border="0" /></a></p>
+<p>&nbsp;</p>
+<p><strong>BatchedJoinBlock</strong></p>
+<p><strong><a href="https://images0.cnblogs.com/blog/15700/201303/01161626-e49cfef4aaf3489eb27edb78781198b3.png"><img title="image" src="https://images0.cnblogs.com/blog/15700/201303/01161627-35dfb0f1f22448f6a68d78ea78e6012a.png" alt="image" width="536" height="101" border="0" /></a></strong></p>
+<p>BatchedJoinBlock一看就是BacthBlock和JoinBlick的组合。JoinBlick是组合目标队列的一个数据，而BatchedJoinBlock是组合目标队列的N个数据，当然这个N可以在构造函数中配置。如果我们定义的是BatchedJoinBlock&lt;int, string&gt;， 那么在最后的OutputQueue中存储的是Tuple&lt;IList&lt;int&gt;, IList&lt;string&gt;&gt;，也就是说最后得到的数据是Tuple&lt;IList&lt;int&gt;, IList&lt;string&gt;&gt;。它的行为是这样的，还是假设上文的定义，BatchedJoinBlock&lt;int, string&gt;， 构造BatchSize输入为3。那么在这个BatchedJoinBlock种会有两个ITargetBlock，会接收Post的数据。那什么时候会生成一个Tuple&lt;IList&lt;int&gt;，IList&lt;string&gt;&gt;到OutputQueue中呢，测试下来并不是我们想的需要有3个int数据和3个string数据，而是只要2个ITargetBlock中的数据个数加起来等于3就可以了。3和0,2和1，1和2或0和3的组合都会生成Tuple&lt;IList&lt;int&gt;，IList&lt;string&gt;&gt;到OutputQueue中。可以参看下面的例子：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>BatchedJoinBlock&lt;int, string&gt; bjb = new BatchedJoinBlock&lt;int, string&gt;(3);
+
+        ActionBlock&lt;Tuple&lt;IList&lt;int&gt;, IList&lt;string&gt;&gt;&gt; ab = new ActionBlock&lt;Tuple&lt;IList&lt;int&gt;, IList&lt;string&gt;&gt;&gt;((i) =&gt;
+            {
+                Console.WriteLine("-----------------------------");
+
+                foreach (int m in i.Item1)
+                {
+                    Console.WriteLine(m);
+                };
+
+                foreach (string s in i.Item2)
+                {
+                    Console.WriteLine(s);
+                };
+            });
+
+        public void TestSync()
+        {
+            bjb.LinkTo(ab);
+
+            for (int i = 0; i &lt; 5; i++)
+            {
+                bjb.Target1.Post(i);
+            }
+
+            for (int i = 5; i &gt; 0; i--)
+            {
+                bjb.Target2.Post(i.ToString());
+            }
+
+            Console.WriteLine("Finished post");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161627-810333a4e46f4b169db29bf44de8ccc4.jpg"><img title="GZ}X_[]DM}42_()PXL05A(T" src="https://images0.cnblogs.com/blog/15700/201303/01161631-152815cac25746c9a5a04d09bc7cf172.jpg" alt="GZ}X_[]DM}42_()PXL05A(T" width="669" height="222" border="0" /></a></p>
+<p>最后剩下的一个数据1，由于没有满3个，所以一直被保留在Target2中。</p>
+<p>&nbsp;</p>
+<p>TDF中最有用的功能之一就是多个Block之间可以组合应用。ISourceBlock可以连接ITargetBlock，一对一，一对多，或多对多。下面的例子就是一个TransformBlock和一个ActionBlock的组合。TransformBlock用来把数据*2，并转换成字符串，然后把数据扔到ActionBlock中，而ActionBlock则用来最后的处理数据打印结果。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public ActionBlock&lt;string&gt; abSync = new ActionBlock&lt;string&gt;((i) =&gt;
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine(i + " ThreadId:" + Thread.CurrentThread.ManagedThreadId + " Execute Time:" + DateTime.Now);
+        }
+);
+
+        public TransformBlock&lt;int, string&gt; tbSync = new TransformBlock&lt;int, string&gt;((i) =&gt;
+            {
+                i = i * 2;
+                return i.ToString();
+            }
+        );
+
+        public void TestSync()
+        {
+            tbSync.LinkTo(abSync);
+
+            for (int i = 0; i &lt; 10; i++)
+            {
+                tbSync.Post(i);
+            }
+            tbSync.Complete();
+            Console.WriteLine("Post finished");
+
+            tbSync.Completion.Wait();
+            Console.WriteLine("TransformBlock process finished");
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161632-38acac8fb25642bd9d9a0b6574243c85.jpg"><img title="7S`N)T79TI4~0X8${XF8[PB" src="https://images0.cnblogs.com/blog/15700/201303/01161632-f4dc0afbc9fa49b3a36336842ac52009.jpg" alt="7S`N)T79TI4~0X8${XF8[PB" width="673" height="225" border="0" /></a></p>
+<p>TDF提供的一些Block，通过对这些Block配置和组合，可以满足很多的数据处理的场景。这一篇将继续介绍与这些Block配置的相关类，和挖掘一些高级功能。</p>
+<p>&nbsp;</p>
+<p>在一些Block的构造函数中，我们常常可以看见需要你输入DataflowBlockOptions 类型或者它的两个派生类型ExecutionDataflowBlockOptions 和 GroupingDataflowBlockOptions。</p>
+<p><strong>DataflowBlockOptions</strong></p>
+<p>DataflowBlockOptions有五个属性：BoundedCapacity，CancellationToken，MaxMessagesPerTask，NameFormat和TaskScheduler。</p>
+<p><em><strong>用BoundedCapacity来限定容量</strong></em></p>
+<p>这个属性用来限制一个Block中最多可以缓存数据项的数量，大多数Block都支持这个属性，这个值默认是DataflowBlockOptions.Unbounded = -1，也就是说没有限制。开发人员可以制定这个属性设置数量的上限。那后面的新数据将会延迟。比如说用一个BufferBlock连接一个ActionBlock，如果在ActionBlock上面设置了上限，ActionBlock处理的操作速度比较慢，留在ActionBlock中的数据到达了上限，那么余下的数据将留在BufferBlock中，直到ActionBlock中的数据量低于上限。这种情况常常会发生在生产者生产的速度大于消费者速度的时候，导致的问题是内存越来越大，数据操作越来越延迟。我们可以通过一个BufferBlock连接多个ActionBlock来解决这样的问题，也就是负载均衡。一个ActionBlock满了，就会放到另外一个ActionBlock中去了。</p>
+<p>&nbsp;</p>
+<p><em><strong>用CancellationToken来取消操作</strong></em></p>
+<p>TPL中常用的类型。在Block的构造函数中放入CancellationToken，Block将在它的整个生命周期中全程监控这个对象，只要在这个Block结束运行（调用Complete方法）前，用CancellationToken发送取消请求，该Block将会停止运行，如果Block中还有没有处理的数据，那么将不会再被处理。</p>
+<p><strong><em>用MaxMessagesPerTask控制公平性</em></strong></p>
+<p>每一个Block内部都是异步处理，都是使用TPL的Task。TDF的设计是在保证性能的情况下，尽量使用最少的任务对象来完成数据的操作，这样效率会高一些，一个任务执行完成一个数据以后，任务对象并不会销毁，而是会保留着去处理下一个数据，直到没有数据处理的时候，Block才会回收掉这个任务对象。但是如果数据来自于多个Source，公平性就很难保证。从其他Source来的数据必须要等到早前的那些Source的数据都处理完了才能被处理。这时我们就可以通过MaxMessagesPerTask来控制。这个属性的默认值还是DataflowBlockOptions.Unbounded=-1，表示没有上限。假如这个数值被设置为1的话，那么单个任务只会处理一个数据。这样就会带来极致的公平性，但是将带来更多的任务对象消耗。</p>
+<p><strong><em>用NameFormat来定义Block名称</em></strong></p>
+<p>MSDN上说属性NameFormat用来获取或设置查询块的名称时要使用的格式字符串。</p>
+<p>Block的名字Name=string.format(NameFormat, block.GetType ().Name, block.Completion.Id)。所以当我们输入&rdquo;{0}&rdquo;的时候，名字就是block.GetType ().Name，如果我们数据的是&rdquo;{1}&rdquo;，那么名字就是block.Completion.Id。如果是&ldquo;{2}&rdquo;，那么就会抛出异常。</p>
+<p><strong><em>用TaskScheduler来调度Block行为</em></strong></p>
+<p>TaskScheduler是非常重要的属性。同样这个类型来源于TPL。每个Block里面都使用TaskScheduler来调度行为，无论是源Block和目标Block之间的数据传递，还是用户自定义的执行数据方法委托，都是使用的TaskScheduler。如果没有特别设置的话，将使用TaskScheduler.Default（System.Threading.Tasks.ThreadPoolTaskScheduler）来调度。我们可以使用其他的一些继承于TaskScheduler的类型来设置这个调度器，一旦设置了以后，Block中的所有行为都会使用这个调度器来执行。.Net Framework 4中内建了两个Scheduler，一个是默认的ThreadPoolTaskScheduler，另一个是用于UI线程切换的SynchronizationContextTaskScheduler。如果你使用的Block设计到UI的话，那可以使用后者，这样在UI线程切换上面将更加方便。</p>
+<p>.Net Framework 4.5 中，还有一个类型被加入到System.Threading.Tasks名称空间下：ConcurrentExclusiveSchedulerPair。这个类是两个TaskScheduler的组合。它提供两个TaskScheduler：ConcurrentScheduler和ExclusiveScheduler；我们可以把这两个TaskScheduler构造进要使用的Block中。他们保证了在没有排他任务的时候（使用ExclusiveScheduler的任务），其他任务（使用ConcurrentScheduler）可以同步进行，当有排他任务在运行的时候，其他任务都不能运行。其实它里面就是一个读写锁。这在多个Block操作共享资源的问题上是一个很方便的解决方案。</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public ActionBlock&lt;int&gt; readerAB1;
+
+        public ActionBlock&lt;int&gt; readerAB2;
+
+        public ActionBlock&lt;int&gt; readerAB3;
+
+        public ActionBlock&lt;int&gt; writerAB1;
+
+        public BroadcastBlock&lt;int&gt; bb = new BroadcastBlock&lt;int&gt;((i) =&gt; { return i; });
+
+        public void Test()
+        {
+            ConcurrentExclusiveSchedulerPair pair = new ConcurrentExclusiveSchedulerPair();
+
+            readerAB1 = new ActionBlock&lt;int&gt;((i) =&gt;
+                {
+                    Console.WriteLine("ReaderAB1 begin handling." + " Execute Time:" + DateTime.Now);
+                    Thread.Sleep(500);
+                }
+            , new ExecutionDataflowBlockOptions() { TaskScheduler = pair.ConcurrentScheduler });
+
+            readerAB2 = new ActionBlock&lt;int&gt;((i) =&gt;
+                {
+                    Console.WriteLine("ReaderAB2 begin handling." + " Execute Time:" + DateTime.Now);
+                    Thread.Sleep(500);
+                }
+            , new ExecutionDataflowBlockOptions() { TaskScheduler = pair.ConcurrentScheduler });
+
+            readerAB3 = new ActionBlock&lt;int&gt;((i) =&gt;
+                {
+                    Console.WriteLine("ReaderAB3 begin handling." + " Execute Time:" + DateTime.Now);
+                    Thread.Sleep(500);
+                }
+            , new ExecutionDataflowBlockOptions() { TaskScheduler = pair.ConcurrentScheduler });
+
+            writerAB1 = new ActionBlock&lt;int&gt;((i) =&gt;
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("WriterAB1 begin handling." + " Execute Time:" + DateTime.Now);
+                Console.ResetColor();
+                Thread.Sleep(3000);
+            }
+            , new ExecutionDataflowBlockOptions() { TaskScheduler = pair.ExclusiveScheduler });
+
+            bb.LinkTo(readerAB1);
+            bb.LinkTo(readerAB2);
+            bb.LinkTo(readerAB3);
+
+
+            Task.Run(() =&gt;
+                {
+                    while (true)
+                    {
+                        bb.Post(1);
+                        Thread.Sleep(1000);
+                    }
+                });
+
+            Task.Run(() =&gt;
+            {
+                while (true)
+                {
+                    Thread.Sleep(6000);
+                    writerAB1.Post(1);
+                }
+            });
+
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p>&nbsp;</p>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161455-b61a0edc69e34468a1c317af7aba7b6d.jpg"><img title="FXE@)NN3Q($(J$AXHGWOP~N" src="https://images0.cnblogs.com/blog/15700/201303/01161456-7b8227892cb14d20b5347fa310224619.jpg" alt="FXE@)NN3Q($(J$AXHGWOP~N" width="671" height="402" border="0" /></a></p>
+<p>&nbsp;</p>
+<p><strong><em>用MaxDegreeOfParallelism来并行处理</em></strong></p>
+<p>通常，Block中处理数据都是单线程的，一次只能处理一个数据，比如说ActionBlock中自定义的代理。使用MaxDegreeOfParallelism可以让你并行处理这些数据。属性的定义是最大的并行处理个数。如果定义成-1的话，那就是没有限制。用户需要在实际情况中选择这个值的大小，并不是越大越好。如果是平行处理的话，还应该考虑是否有共享资源。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>TDF中的负载均衡</strong></p>
+<p>我们可以使用Block很方便的构成一个生产者消费者的模式来处理数据。当生产者产生数据的速度快于消费者的时候，消费者Block的Buffer中的数据会越来越多，消耗大量的内存，数据处理也会延时。这时，我们可以用一个生产者Block连接多个消费者Block来解决这个问题。由于多个消费者Block一定是并行处理，所以对共享资源的处理一定要做同步处理。</p>
+<p><strong><em>使用BoundedCapacity属性来实现</em></strong></p>
+<p>当连接多个ActionBlock的时候，可以通过设置ActionBlock的BoundedCapacity属性。当第一个满了，就会放到第二个，第二个满了就会放到第三个。</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+<pre>public BufferBlock&lt;int&gt; bb = new BufferBlock&lt;int&gt;();
+
+        public ActionBlock&lt;int&gt; ab1 = new ActionBlock&lt;int&gt;((i) =&gt;
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine("ab1 handle data" + i + " Execute Time:" + DateTime.Now);
+            }
+        , new ExecutionDataflowBlockOptions() { BoundedCapacity = 2 });
+
+        public ActionBlock&lt;int&gt; ab2 = new ActionBlock&lt;int&gt;((i) =&gt;
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine("ab2 handle data" + i + " Execute Time:" + DateTime.Now);
+        }
+        , new ExecutionDataflowBlockOptions() { BoundedCapacity = 2 });
+
+        public ActionBlock&lt;int&gt; ab3 = new ActionBlock&lt;int&gt;((i) =&gt;
+        {
+            Thread.Sleep(1000);
+            Console.WriteLine("ab3 handle data:" + i + " Execute Time:" + DateTime.Now);
+        }
+        , new ExecutionDataflowBlockOptions() { BoundedCapacity = 2 });
+
+        public void Test()
+        {
+            bb.LinkTo(ab1);
+            bb.LinkTo(ab2);
+            bb.LinkTo(ab3);
+
+            for (int i = 0; i &lt; 9; i++)
+            {
+                bb.Post(i);
+            }
+        }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" /></a></span></div>
+</div>
+<p><a href="https://images0.cnblogs.com/blog/15700/201303/01161459-0b53a87052b845fd91f9b3e7d922e20b.jpg"><img title="PNQFKIK2OK)}SOWA]RF(~$M" src="https://images0.cnblogs.com/blog/15700/201303/01161504-e9c265982cb54d0eb844ee1a1be1e92d.jpg" alt="PNQFKIK2OK)}SOWA]RF(~$M" width="672" height="186" border="0" /></a></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2017-12-15 13:28</span>&nbsp;
+<a href="https://www.cnblogs.com/yswenli/">yswenli</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8042594" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(8042594);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 325467, cb_blogApp = 'yswenli', cb_blogUserGuid = '7d27c2fa-39de-e211-8d02-90b11c0b17d6';
+    var cb_entryId = 8042594, cb_entryCreatedDate = '2017-12-15 13:28', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 yswenli
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+    $(function () {
+        $('#blogTitle h1').addClass('bounceInLeft animated');
+        $('#blogTitle h2').addClass('bounceInRight animated');
+        // 删除反对按钮
+        $('.buryit').remove();
+        initCommentData();
+    });
+    function initCommentData() {
+        $('.feedbackItem').each(function () {
+            var text = $(this).find('.feedbackListSubtitle .layer').text();
+            // 将楼层信息放到data里面
+            // $(this).find('.blog_comment_body').attr('data-louceng', text.replace(/^#/g, ''));
+            if ($(this).find('.feedbackListSubtitle .louzhu').length > 0) $(this).addClass('myself');
+            var avatar = $(this).find('> .feedbackCon > span').html() || 'http://pic.cnitblog.com/face/sample_face.gif';
+            $(this).find('> .feedbackCon > .blog_comment_body').append('<img class="user-avatar" src="' + avatar + '"/>')
+        });
+    }
+
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        // 监听获取评论ajax事件
+        if (settings.url.indexOf('/mvc/blog/GetComments.aspx') >= 0) {
+            initCommentData();
+        }
+    });
+</script>
+<script src="https://files.cnblogs.com/files/miangao/bootstrap.min.js"></script>
+<script src="https://files.cnblogs.com/files/hafiz/jquery-migrate-1.2.1.js"></script>
+<div id="scrollTop" style="display:none;">
+      <div class="level-2"></div>
+      <div class="level-3"></div>
+</div>
+<script src="https://files.cnblogs.com/files/hafiz/scroll2top.js"></script>
+<script type="text/javascript">
+    UI.global_search();
+    var uvOptions = {};
+    // !important
+    (function() {
+        initScrollTop();
+    })();
+</script>
+    </div>
+</body>
+</html>

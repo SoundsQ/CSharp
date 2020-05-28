@@ -1,0 +1,619 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="在锁与监视器中我们对Object中的方法进行了简单介绍 以监视器原理为核心，三个方法：wait，notify、notifyAll，可以完成线程之间的通信 当然，不会像“语言”似的，有多种多样的沟通语句" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>java线程通信与协作小结 多线程中篇（十六） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10448211.html">java线程通信与协作小结 多线程中篇（十六）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">在锁与监视器中我们对Object中的方法进行了简单介绍</div>
+<div style="line-height: 200%;">以监视器原理为核心，三个方法：wait，notify、notifyAll，可以完成线程之间的通信</div>
+<div style="line-height: 200%;">当然，不会像&ldquo;语言&rdquo;似的，有多种多样的沟通语句</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>只有两个关键词：&ldquo;等待&rdquo;与&ldquo;唤醒&rdquo;</strong></span></div>
+<div style="line-height: 200%;">围绕着同一个监视器的等待与唤醒，就可以完成线程之间的协作</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>之所以这三个方法是Object中的，是因为在Java中，所有的Object都隐含一个内置的锁和与之关联的监视器</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>而对于线程自身的方法sleep、yield、join，则是线程的调度，是以线程为中心的</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>某个线程休眠一下、某个线程&ldquo;礼让&rdquo;一下其他线程，等待某个线程结束，是一种主动式的管控</strong></span></div>
+<div style="line-height: 200%;">管控的核心仍旧是&ldquo;等待&rdquo;，但是与wait又有不同：</div>
+<div style="line-height: 200%;">sleep是单纯的等一会儿，并不会释放监视器；</div>
+<div style="line-height: 200%;">yield是暂时的谦让一下，也有可能会等一会儿，也可能还是会继续执行（就好像我们平时的&ldquo;客气&rdquo;，你客气一下说我来买单，并不一定真的能买单成功）</div>
+<div style="line-height: 200%;">join底层依赖wait，内部通过同步以该线程对象为锁，进行等待，直到线程结束后获得通知（调用线程等待）</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">所以你看，以上的核心仍旧是&ldquo;等待&rdquo;与&ldquo;唤醒&rdquo;</div>
+<div style="line-height: 200%;">因为线程通信协作理论本质如此，并不像人与人之间的沟通那般多种多样，线程之间就是那么简单干脆，XXX你赶紧跟上，XXX你等一下，XXX你等YYY结束了你再弄...大抵如此</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">面对多线程引发的数据安全问题，大致分为三类：原子性、可见性、有序性</div>
+<div style="line-height: 200%;">Java从语言层面上提供synchronized以及volatile关键字进行保障</div>
+<div style="line-height: 200%;">等待与唤醒的通信方式也是基于同步的，所以wait、notify、notifyAll必须在同步中才能够使用</div>
+<div style="line-height: 200%;">sleep虽然本质也是等待，但是原理不是监视器，是基于线程的所以sleep不必须在synchronized内，yield更不需要了，只是跟其他线程客气下，具体还是要看CPU脸色</div>
+<div style="line-height: 200%;">synchronized可以对三大特性予以保障，从而可以保障线程的安全，volatile是轻量级的线程同步工具，一定程度（某些场景）也可以解决线程安全问题</div>
+<div style="line-height: 200%;">所以可以说，synchronized和volatile提供了解决线程安全问题的一般思路（那就是借助于同步），而对于线程之间的同步则提供了&ldquo;等待&rdquo;与&ldquo;唤醒&rdquo;机制</div>
+<div style="line-height: 200%;">同步是&ldquo;框架&rdquo;，等待与唤醒是框架内的手段，sleep、yield、join是对于线程的调度</div>
+<div style="line-height: 200%;">所以，你看，对于多线程编程问题，借助于关键字synchronized、volatile以及&ldquo;等待&rdquo;&ldquo;唤醒&rdquo;相关方法，在适当的时候也可以对线程间进行单独的调度，就能够很好地解决</div>
+<div style="line-height: 200%;">但是多线程编程就这么简单么？</div>
+<div style="line-height: 200%;">当然不是，这只是Java多线程编程解决方案中的最为核心的部分之一，是整个Java并发解决方案很小，但是却很重要的一部分底层建筑</div>
+<div style="line-height: 200%;">借助于这部分底层建筑或者这部分的核心理念，你可以构建出来更加高大上的并发工具</div>
+<div style="line-height: 200%;">而且</div>
+<div style="line-height: 200%;">在实际的项目中我们是不会直接创建线程的，也几乎不使用原始的调度、协作方法的。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-03-01 09:52</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10448211" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10448211);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10448211, cb_entryCreatedDate = '2019-03-01 09:52', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

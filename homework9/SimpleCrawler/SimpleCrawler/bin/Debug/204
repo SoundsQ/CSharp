@@ -1,0 +1,1299 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="进程同步就是临界资源的安全访问策略，同步是多进程乃至后续的多线程必须了解的理论知识" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>进程同步概念简介 多线程上篇（四） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10350253.html">进程同步概念简介 多线程上篇（四）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        进程同步就是临界资源的安全访问策略，同步是多进程乃至后续的多线程必须了解的理论知识
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3><span style="font-size: 18px;">进程同步概念</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;">
+<h4><span style="font-size: 16px;">临界资源</span></h4>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>一旦有对资源的共享，就必然涉及竞争限制</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">比如尽管有两个人去水井打水，但是水井却只有一个；合理安排的话刚好错开，但是如果安排不合理，那就会出现冲突，出现冲突怎么办？总有一个先来后到，等下就好了。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">这个水井就是一个临界资源 </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>临界资源用来表示一种公共资源或者说是共享数据，可以被多个线程使用。</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>但是每一次，只能有一个线程使用它，一旦临界资源被占用，其他线程要想使用这个资源，就必须等待。</strong></span></div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">当多进程访问临界资源时，比如打印机 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">假设A进程和B进程轮流获得CPU时间片执行，A打印数学，B打印英语，如果不进行任何的控制与限制，可能会打印出来一张纸上一道数学计算题，接下来是一段英语的情况。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以尽管A进程和B进程轮流获得时间片运行，但是当需要访问临界资源时，一旦有一个进程已经开始使用，另外的进程就不能进行使用，只能等待。 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">计算机就是那个计算机，硬盘就是那个硬盘，一段代码中的某个变量（共享变量）就是那个变量.....所有的一切都是只有一份，如果对于某个点多进程同时访问，必然要做一定的限制 </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: 16px;">进程同步的主要任务是对多个相关进程在执行次序上进行协调，以使并发执行的诸进程之间能有效地共享资源和相互合作，从而使程序的执行具有可再现性</span></div>
+</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">两种制约关系</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">既然资源访问有限制，到底有哪些场景是需要同步处理的?也就是何时会出现资源冲突？ </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133739822-1687398415.png"><img style="display: inline; background-image: none;" title="image_5c567cee_2c7a" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133740171-1543187152.png" alt="image_5c567cee_2c7a" width="975" height="191" border="0" /></a> </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">看得出来，其实同步要解决的问题根本就是竞争，间接关系是赤裸裸的的竞争，共享同一个I/O就是一种竞争，尽管他们看似好像没有什么关系 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">直接的制约关系，源于进程间的合作，某种程度上来说也是一种竞争，只不过是有条件的竞争，他们共享缓冲区，当缓冲区满时只能是消费者可以运行，生产者需要阻塞，这可以认为缓冲区满这种情况下，消费者独占了缓冲区，生产者不能使用了，不过这种情况下还是说成合作比较容易理解 </span></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>所以，要么是因为共享资源带来的竞争，要么就是相互合作带来的依赖。</strong></span></div>
+<div style="line-height: 32px;">
+<h4><span style="font-size: 16px;">临界区</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">有了临界资源的概念，就很容易理解临界区的概念，在程序中，所有的操作都是通过代码执行的，访问临界资源的那段代码就是临界区 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">以打水为例，所以在还没到井口，就要画一个大圈，不允许第二个人进入范围，&ldquo;请站在安全黄线内&rdquo;这句话熟悉么？ </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">这就是临界区。 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133740398-323590729.png"><img style="display: inline; background-image: none;" title="image_5c567cef_528a" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133740618-1424553536.png" alt="image_5c567cef_528a" width="431" height="303" border="0" /></a></div>
+<div style="line-height: 32px;">
+<h4><span style="font-size: 16px;">同步规则</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如何才能够合理处理竞争或者合作依赖导致的制约？ </span></div>
+<div style="line-height: 32px;">
+<ul>
+<li><span style="color: #ff0000; font-size: 18px;"><strong>空闲让进</strong></span></li>
+<li><span style="color: #ff0000; font-size: 18px;"><strong>忙则等待</strong></span></li>
+<li><span style="color: #ff0000; font-size: 18px;"><strong>有限等待</strong></span></li>
+<li><span style="color: #ff0000; font-size: 18px;"><strong>让权等待</strong></span></li>
+</ul>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">空闲让进和忙则等待很好理解，对于临界资源，如果空闲没有被使用，谁来了之后都可以使用；如果临界资源正在被使用，那么其他后来者就需要进行等待 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">有限等待是指，要求访问临界资源的进程，应保证有限时间内能进入自己的临界区，自己不能傻傻的等，傻傻等受伤的是自己 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">让权等待是指，如果无法进入自己的临界区时，应立即释放处理机，而不能占着CPU死等，你死等就算了，别人却也不能用了 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">有限等待和让权等待是两个维度 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">你不能为了一件事情不顾一切代价等个天荒地老，太伤身了； </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如果你非要花五块钱去苏宁买一台电视（等待事件发生），人家不卖给你（无法进入临界区），你就赖着不走（忙等），你就耽误别人做生意了（别的进程无法获得CPU） </span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>有限等待和让权等待的共同特性是必须保证有条件的退出以给其他进程提供运行的机会</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">简单说就是有限时间内你就要走开，你得不到更要走开，你即使能得到但是时间太久也得先让一下别人 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133740813-505236355.png"><img style="display: inline; background-image: none;" title="image_5c567cef_6f63" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133741071-401777812.png" alt="image_5c567cef_6f63" width="647" height="182" border="0" /></a> </span></div>
+</div>
+</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>临界区的设置就是安全黄线的设置，同步规则其实就是临界区两条黄线进出规则</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">对于临界区，还可以进一步细分出来进入区和退出区以及剩余区 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133741695-1644652383.png"><img style="display: inline; background-image: none;" title="image_5c567cef_1667" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133742126-1931427039.png" alt="image_5c567cef_1667" width="418" height="346" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">临界区算法</span></h3>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>Peterson算法</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以临界区方式解决同步问题就是借助于算法，合理的控制对于临界区的进入与退出，并且保障能够做到：空闲让进、忙则等待、有限等待、让权等待 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">一种有名的算法为 <span style="color: #000000; background-color: #ffffff; font-size: 18px;"><strong>Peterson</strong> </span></span></div>
+<div style="line-height: 32px;">
+<div><span style="font-size: 16px;">Peterson算法适用于两个进程在临界区与剩余区间交替执行。假设两个进程分别为p0 和 p1 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">为了表示方便，使用pi表示其中一个进程时，pj表示另外一个，显然有i = 1-j（j = 1-i） </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133742634-397669995.png"><img style="display: inline; background-image: none;" title="image_5c567cef_689f" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133742860-1618148418.png" alt="image_5c567cef_689f" width="443" height="281" border="0" /></a></div>
+<div><span style="font-size: 16px;">使用一个int类型变量turn 表示可以进入临界区的线程，如果turn == i，表示pi可以进入临界区 </span></div>
+<div><span style="font-size: 16px;">使用boolean 类型数组flag，总共两个进程，所以flag[2]，用来表示哪个进程想要进入临界区，如果flag[i] = true；表示进程pi想要进入临界区 </span></div>
+<div><span style="font-size: 16px;">上图红框内为进入区，蓝框内为退出区 </span></div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">为了进入临界区，进程pi首先设置flag[i]为true；并且设置turn为j； </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">显然，根据while的条件，只有flag[j] == false 或者turn == i 时，pi可以进入临界区 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">也就是如果我想进入的话，当对方不想进入或者当前允许我进入时，我就可以进入临界区 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">显然，如果只有一个进程想要进入，那么如上所述，对方不想进入时，可以进入临界区，符合空闲让进 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如果两个进程都想进入，不管经过多么激烈的竞争，当执行到while时flag[0] 和 flag[1] 都是true，也就是while内部的两个条件，条件1始终是true </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">但是turn只会有一个值，要么0 要么1，也就是说while的第2个条件决定了谁会被while阻塞，谁能够继续执行下去 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">这种情况下必然能够有一个进程会进入临界区，另外一个被while循环阻塞，所以符合空闲让进、忙则等待 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">当临界区内的进程执行结束后，会设置flag[] 标志位，如果此时另外的进程在等待，一旦设置后，其他进程就可以进入临界区（刚才已经说了，如果pi想进入，flag[j] == false 或者turn == i 时可以进入）也就是说当前进程结束后，下一个进程就能够进入了，所以满足有限等待 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>小结：</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">上面的算法，满足了通过进入区和退出区代码的设置，可以做到同步的规则 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如果只有一个想要进入临界区，可以直接进入，如果两个竞争进入，只有一个能够进入，另一个会被while循环阻塞 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">Peterson只是一种临界区算法，还有其他的</span></div>
+<h3><span style="font-size: 18px;">同步方式之信号量</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">1965年，荷兰学者Dijkstra 提出的信号量(Semaphores)机制是一种卓有成效的进程同步工具。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">临界区算法的原理可以让多进程对于临界区资源的访问串行化； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">信号量机制允许多个线程在同一时刻访问同一资源，但是需要限制在同一时刻访问此资源的最大线程数目。 </span></div>
+</div>
+<h4><span style="font-size: 16px;">整型信号量</span></h4>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>最初信号量机制被称之为整型信号量</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">最初由Dijkstra 把整型信号量定义为一个用于表示资源数目的整型量 S，它与一般整型量不同，除初始化外，仅能通过两个标准的原子操作(Atomic&nbsp; Operation)&nbsp; wait(S)和 signal(S)来访问。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">这两个操作一直被分别称为P、V操作（据说，据说因为Dijkstra是荷兰人。在最初论文以及大多数文献中，用P代表wait。用V代表signal。是荷兰语中高度 proberen 和增量verhogen） </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">Wait(S)和 signal(S)操作可描述为： </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre>   wait(S)：  <span style="color: #0000ff;">while</span> （S&lt;=0<span style="color: #000000;">）； 
+                  S:</span>=S-1<span style="color: #000000;">；
+  signal(S)：S:</span>=S+1； </pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>wait表示资源申请：如果S小于等于0（资源不足）等待，如果满足那么将会进行S-1，也就是申请资源</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>signal表示资源释放：每释放一次资源，资源数目 S+1</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">P、V操作也称之为操作原语，就是指原子操作 </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>原子性</strong></span><span style="font-size: 16px;">是指一个操作是不可中断的，要么全部执行成功要么全部执行失败(具体怎么保证的，此处可以不用关注）&nbsp; </span></div>
+</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133743053-970508681.png"><img style="display: inline; background-image: none;" title="image_5c567cef_1c60" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133743351-85337988.png" alt="image_5c567cef_1c60" width="556" height="212" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">多个线程并发的对资源进行访问时，借助于PV原语操作，可以有效地做到共享资源的限制访问。 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">但是，对于整型信号量，P操作也就是 wait(S) </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre>wait(S)：  <span style="color: #0000ff;">while</span> （S&lt;=0<span style="color: #000000;">）；
+                 S:</span>=S-1；</pre>
+</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>如果获取不到资源，将会持续while （S&lt;=0）；，将会永远等待，进程处于忙等状态</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>关于原语</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">wait(S)和 signal(S)这一原子操作叫做原语，原语是操作系统概念的术语，是由若干条指令组成的，用于完成一定功能的一个过程 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">是由若干个机器指令构成的完成某种特定功能的一段程序，具有不可分割性，即原语的执行必须是连续的，在执行过程中不允许被中断。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">原语是操作系统的核心部分组成，原语有不可中断性。它必须在管态(内核态，系统态)下执行，并且常驻内存，而个别系统有一部分不在管态下运行。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">可以简单的理解是具有指定功能的操作系统提供的一个API性质的一种东西</span></div>
+<h4><span style="font-size: 16px;">记录型信号量</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">鉴于整型信号量机制中的&ldquo;忙等&rdquo;情况，演化出来记录型信号量 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如果进程无法进入临界区，那么进入等待释放CPU资源，并且通过一个链表记录等待的进程。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">记录型信号量机制在整形信号量机制的基础上增加了进程链表指针L，这也是记录型信号量名称的由来 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">记录型信号量 semaphore 的结构如下： </span></div>
+<div style="line-height: 32px;">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">semaphore {
+value：</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> value;
+L：进程等待链表（集合）；
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">value相当于整型信号量中的S，L就是一个链表（集合） </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">简言之，将整形信号量中的整型S，演化为一个结构，这个结构包括一个整型值，还有一个等待的进程链表 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133743704-897643328.png"><img style="display: inline; background-image: none;" title="image_5c567cef_4151" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133744104-909932031.png" alt="image_5c567cef_4151" width="630" height="178" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">相对应整型信号量中的wait(S) 和 signal(S)可以描述为： </span></div>
+<div style="line-height: 32px;">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">wait(S)：
+var S </span>=<span style="color: #000000;"> semaphore；
+S.value</span>=S.value-1<span style="color: #000000;">；
+</span><span style="color: #0000ff;">if</span> S.value&lt;0<span style="color: #000000;"> then block(S.L)； 
+
+signal(S):
+var S </span>=<span style="color: #000000;"> semaphore；
+S.value</span>=S.value+1<span style="color: #000000;">；
+</span><span style="color: #0000ff;">if</span> S.value&lt;=0 then wakeup(S.L)；  </pre>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">上面的操作中，均定义了一个semaphore类型的变量S </span></div>
+<div style="line-height: 32px;">
+<ul>
+<li><span style="font-size: 16px;">如果执行 wait 操作，先执行资源减一，如果此时S.value&lt;0，说明在申请资源之前（S.value-1），原来的资源就是&lt;=0，那么该进程阻塞，加入等待队列L中 </span></li>
+<li><span style="font-size: 16px;">如果执行 signal 操作，先执行资源加一，如果此时S.value&lt;=0，说明在释放资源之前（），原来的资源是&lt;0的，那么将等待链表中的进程唤醒 </span></li>
+</ul>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">上面逻辑的关键之处在于：</span><br />
+<ul>
+<li><span style="font-size: 16px;">当申请资源时，先进行S.value-1，一旦资源出现负数，说明需要等待，S.value的绝对值就是等待进程的个数，也就是S.L的长度
+			</span></li>
+<li><span style="font-size: 16px;">当资源恢复时，先进行S.value+1，已经有人释放资源了然而资源个数还是小于等于0，说明原来就有人在等待，所以应该去唤醒
+			</span></li>
+
+
+
+		</ul>
+
+
+
+	</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">block 和 wakeup 也都是原语，也就是原子操作。
+	</span></div>
+<div style="line-height: 32px;">
+<div><span style="font-size: 16px;">block原语，进行自我阻塞，放弃处理机，并插入到信号量链表S.L 中
+		</span></div>
+
+
+
+	</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">wakeup原语，将S.L链表中的等待进程唤醒
+	</span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">如果 S.value的初值为 1，表示只允许一个进程访问临界资源，此时的信号量转化为互斥信号量，用于进程互斥。（效果就如同Peterson算法了）</span></div>
+<h4><span style="font-size: 16px;">AND 型信号量 
+	</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">针对于临界区算法或者是整型信号量或者是记录型信号量是针对各进程之间只共享一个临界资源而言的。
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">但是有些场景下，一个进程需要先获得两个或更多的共享资源后方能执行其任务。
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">假设A，B两个进程，均需要申请资源D，E
+	</span></div>
+
+
+
+</div>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">process A:&nbsp;&nbsp;&nbsp;&nbsp; process B: 
+			</span></div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">wait(D)；&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wait(E)； 
+			</span></div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">wait(E)；&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wait(D)；&nbsp; </span></div>
+
+
+
+		</div>
+
+
+
+	</div>
+
+
+
+</blockquote>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">假设交替执行顺序如下
+			</span></div>
+
+
+
+		</div>
+
+
+
+	</div>
+
+
+
+</div>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">process A: wait(D)； 于是D=0
+				</span></div>
+
+
+
+			</div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">process B: wait(E)； 于是E=0
+				</span></div>
+
+
+
+			</div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">process A: wait(E)； 于是E=-1 A阻塞
+				</span></div>
+
+
+
+			</div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">process B: wait(D)； 于是D=-1 B阻塞&nbsp; </span></div>
+
+
+
+			</div>
+
+
+
+		</div>
+
+
+
+	</div>
+
+
+
+</blockquote>
+<div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 16px;">最终A，B都被阻塞，如果没有外力作用下，两者都无法从阻塞状态释放出来，这就是死锁
+		</span></div>
+<h4><span style="font-size: 16px;">相关概念
+		</span></h4>
+<div>
+<div style="line-height: 24px;"><span style="color: #000000; font-size: 13.5pt;"><strong>锁</strong></span>
+			</div>
+<div style="line-height: 24px;"><span style="font-size: 16px;">对于一个水井，你在打水，另外的人就要等一等，这是人类大脑意识做出来的很基本的反应（人眼识别，大脑解析并且做出反应）
+			</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">但是计算机程序并没有这么智能，你需要对他进行某些处理，以限制别的线程的访问，比如你可以将&ldquo;安全黄线&rdquo;变成一个安全门，比如厕所，进去了之后把门关上。。。
+			</span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>这种概念就是锁，锁就是对资源施加控制，锁指的是一种控制权</strong></span>
+			</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">当进入临界区时，我们称之为获得锁，获得锁之后就可以访问临界资源；
+			</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">其他线程想要进入临界区，也需要先获得锁，显然，他们获取不到，因为此时，锁被当前正在执行的线程持有
+			</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">当前线程结束后，将会释放锁，别得线程就可以获取这个资源的锁，然后....
+			</span></div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>死锁</strong></span>
+			</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">锁表示一种控制权，对临界资源的访问权限，如果临界资源不止一个，就可能出现这种情况：
+			</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">需要先后访问两种临界资源A和B，thread1获得了A线程的锁之后，等待获得B的锁，但是thread2获得了资源B的锁，在等待A资源的锁，这就出现了互相等待的情况
+			</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">比如一条窄桥，同一时刻仅仅允许一辆车通过，如果一旦出现两辆车都走到桥的一半处，而且互不相让，怎么办？这就是死锁&nbsp; </span></div>
+
+
+
+		</div>
+
+
+
+	</div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>解决方案</strong></span>
+	</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">AND型信号量机制就是用于解决这种多共享资源下的同步问题的
+	</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>AND 同步机制的基本思想：</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>将进程在整个运行过程中需要的所有资源，一次性全部地分配给进程，待进程使用完后再一起释放。</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>只要尚有一个资源未能分配给进程，其它所有可能为之分配的资源也不分配给它。</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>也就是对若干个临界资源的分配，采取原子操作方式：要么把它所请求的资源全部分配到进程，要么一个也不分配。</strong></span>
+		</div>
+
+
+
+	</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">这种思维就是通过对&ldquo;若干个临界资源&ldquo;的原子分配，逻辑上就相当于一份共享资源，要么得到，也么得不到，所以就不会出现死锁
+	</span></div>
+<div style="line-height: 32px;">
+<div>
+<div><span style="font-size: 16px;">在 wait 操作中，增加了一个&ldquo;AND&rdquo;条件，所以被称为AND 同步，也被称为同时wait操作，即Swait(Simultaneous wait)，相应的signal被称为Ssignal(Simultaneous signal)
+			</span></div>
+
+
+
+		</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133744630-700977407.png"><img style="display: inline; background-image: none;" title="image_5c567cef_1391" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133744929-763665978.png" alt="image_5c567cef_1391" width="508" height="192" border="0" /></a>
+		</div>
+
+
+
+	</div>
+<div style="line-height: 32px;">Swait(S) 和 Ssignal(S)可以描述为：</div>
+<div style="line-height: 32px;">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">Swait(S1，S2，&hellip;，Sn)
+        </span><span style="color: #0000ff;">if</span>(Si&gt;=1 and &hellip;  and Sn&gt;=1<span style="color: #000000;">){
+          </span><span style="color: #0000ff;">for</span>( i=1<span style="color: #000000;"> to n){
+          Si</span>=Si-1<span style="color: #000000;">;
+          }
+        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+        将进程插入到第一个资源</span>&lt;1 的对应的S的队列中，并且程序计数器设置到Swait的开始(比如S1 S2 都大于等于1，但是 S3&lt;1<span style="color: #000000;">，那么就插入到S3.L中；从头再来就是为了整体分配)
+        }
+
+  Ssignal(S1，S2，&hellip;，Sn)
+          </span><span style="color: #0000ff;">for</span>(i=1<span style="color: #000000;"> to n){
+          Si</span>=Si+1<span style="color: #000000;">;
+          将与Si关联的所有进程从等待队列中删除，移入到就绪队列中
+          }</span></pre>
+</div>
+</div>
+<div style="line-height: 32px;">
+<div><span style="font-size: 16px;">AND型信号量机制借助于对于多个资源的&ldquo;批量处理&rdquo;的原子操作方式，将多资源的同步问题，转换为一个&ldquo;同一批资源&rdquo;的同步问题</span></div>
+</div>
+<h4><span style="font-size: 16px;">信号量集</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">记录型信号量机制中，只是对信号量加1（S+1 或者S.value+1） 或者 减1（S-1 或者S.value-1）操作，也就是只能获得或者释放一个单位的临界资源 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果想要一次申请N个呢？ </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果进行N次的资源申请怎么办，一种方式是可以使用多次Wait(S)操作，但是显然效率较低； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">另外有时候当资源数量低于某一下限值时，就不进行分配怎么办？需要在每次分配资源前检查资源的数量。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">为了解决这两个问题，对AND信号量机制进一步扩展，形成了一般化的&ldquo;信号量集&rdquo;机制。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 16px;">Swait操作可描述如下 </span></div>
+<div><span style="color: #ff0000; font-size: 13.5pt;"><strong>其中S为信号量，d为需求值，而 t为下限值。 </strong></span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">Swait(S1，t1，d1，&hellip;，Sn，tn，dn)
+  </span><span style="color: #0000ff;">if</span>( Si&gt;=t1 and &hellip;  and Sn&gt;=<span style="color: #000000;">tn){
+          </span><span style="color: #0000ff;">for</span>(i=1<span style="color: #000000;"> to n){
+                  Si</span>=Si-<span style="color: #000000;">di;
+          }
+  }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+          将进程插入到第一个资源Si</span>&lt;ti 的对应的S的队列中，并且程序计数器设置到Swait的开始(比如S1 S2 都大于等于t1,t2，但是 S3&lt;<span style="color: #000000;">t3，那么就插入到S3.L中；从头再来就是为了整体分配)    
+  }
+
+Ssignal(S1，d1，&hellip;，Sn，dn)
+         </span><span style="color: #0000ff;">for</span>(i=1<span style="color: #000000;"> to n){
+                  Si</span>=Si+<span style="color: #000000;">di;
+                将与Si关联的所有进程从等待队列中删除，移入到就绪队列中
+          }</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">信号量集就是AND型信号量机制将资源限制扩展到Ti </span></div>
+</div>
+<div>
+<div>
+<ul style="line-height: 32px;">
+<li><span style="font-size: 16px;">Swait(S，d，d)。此时在信号量集中只有一个信号量 S，但允许它每次申请 d 个资源，当现有资源数少于d时，不予分配。 </span></li>
+<li style="line-height: 200%;"><span style="font-size: 16px;">Swait(S，1，1)。此时的信号量集已蜕化为一般的记录型信号量(S&gt;1时)或互斥信号量(S=1 时)。 </span></li>
+<li style="line-height: 200%;"><span style="font-size: 16px;">Swait(S，1，0)。这是一种很特殊且很有用的信号量操作。当 S&ge;1 时，允许多个进程进入某特定区；当 S 变为 0 后，将阻止任何进程进入特定区。换言之，它相当于一个可控开关。 </span></li>
+</ul>
+<div><span style="line-height: 32px; font-size: 16px;">上面的格式为（s，t，d）也就是第一个为信号量，第二个为限制，第三个为需求量 </span></div>
+<div><span style="line-height: 32px; font-size: 16px;">所以Swait(S，1，0)可以用做开关，只要S&gt;=1，&gt;=1时可分配，每次分配0个，所以只要S&gt;=1，永远都进的来，一旦S&lt;1，也就是0往后，那么就不满足条件，就一个都进不去 </span></div>
+<div>&nbsp;</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">小结</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">临界区机制通过算法控制进程串行进入临界区，而信号量机制则是借助于原语操作（原子性）对临界资源进行访问控制 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">按照各种信号量机制对应的规则以及相应的原语操作，就可以做到对资源的共享同步访问，而不会出现问题 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">信号量机制总共有四种 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133745199-339354137.png"><img style="display: inline; background-image: none;" title="image_5c567cef_148c" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133746319-2137886652.png" alt="image_5c567cef_148c" width="670" height="161" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">整型信号量机制可以处理同一共享资源中，资源数目不止一个的情况 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">记录型信号量对整型信号量机制的&ldquo;忙等&rdquo;进行了优化，通过block以及weakup原语进行阻塞和通知 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">AND型信号量机制解决了对于多个共享资源的同步 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">信号量集是对AND的再一次优化，既能够处理多个共享资源同步的问题，还能够设置资源申请的下限，是一种更加通用的处理方式</span></div>
+<h3><span style="font-size: 18px;">信号量的应用</span></h3>
+<h4><span style="font-size: 16px;">实现资源互斥访问</span></h4>
+<div style="line-height: 32px;">
+<div>
+<div><span style="font-size: 16px;">为使多个进程能互斥地访问某临界资源，只须为该资源设置一互斥信号量 mutex，并设其初始值为1 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">然后将各进程访问该资源的临界区 CS置于 wait(mutex)和 signal(mutex)操作之间即可。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">这样，每个欲访问该临界资源的进程在进入临界区之前，都要先对 mutex 执行wait操作，若该资源此刻未被访问，本次wait操作必然成功，进程便可进入自己的临界区，否则进程将会阻塞。 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">步骤： </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 16px;">....... </span></div>
+<div><span style="font-size: 16px;">wait(mutex)； </span></div>
+<div><span style="font-size: 16px;">临界区 </span></div>
+<div><span style="font-size: 16px;">signal(mutex)； </span></div>
+<div><span style="font-size: 16px;">剩余区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">....... </span></div>
+<h4><span style="font-size: 16px;">实现前趋关系</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">前驱关系就是指执行顺序，比如要求语句S1执行结束之后才能执行语句S2 </span></div>
+<div style="line-height: 32px;">
+<div><span style="font-size: 16px;">在进程P1中： </span></div>
+<div><span style="font-size: 16px;">S1； </span></div>
+<div><span style="font-size: 16px;">signal(S)； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在进程P2中 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"> wait(S)； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">S2；&nbsp; </span></div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">显然，初始时将资源S设置为0，S2需要获取到资源才会执行，而S1执行后就会释放资源</span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">对于一个更加复杂的前驱关系图，如何实现？ </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133747606-47486040.png"><img style="display: inline; background-image: none;" title="image_5c567cef_399c" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133748125-1785800809.png" alt="image_5c567cef_399c" width="263" height="197" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">从图中可以看得出来，有S2和S3依赖S1 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S4 和 S5依赖S2，而S6依赖S3、S4、S5 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以，S1应该提供两个信号量，提供给S2和S3 使用 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S2 应该等待S1的信号量，并且提供两个信号量给S4 和 S5&nbsp; </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S3 应该等待S1的信号量，并且提供一个信号量给S6 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S4应该等待S2的信号量，并且提供一个给S6 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S5应该等待S2的信号量，并且提供一个给S6 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">S6应该等待S3、S4、S5 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以总共需要2+2+1+1+1 6个信号量，我们取名为a，b，c，d，e，f，g </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133748478-369983392.png"><img style="display: inline; background-image: none;" title="image_5c567cef_64d4" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133748870-1359989198.png" alt="image_5c567cef_64d4" width="259" height="197" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">那么过程如下： </span></div>
+<div style="line-height: 32px;">
+<div class="cnblogs_code">
+<pre>Var a,b,c,d,e,f,g：semaphore: =0,0,0,0,0,0,0<span style="color: #000000;">;
+P1{
+        S1;
+        signal(a);
+        signal(b);
+}
+P2{
+        wait(a);
+        S2;
+        signal(c);
+        signal(d);
+}
+P3{
+        wait(b);
+        S3;
+        signal(e);
+}
+P4{
+        wait(c);
+        S4;
+        signal(f);
+}
+P5{
+        wait(d);
+        S5; 
+        signal(g);
+}
+P6{
+        wait(e);
+        wait(f); 
+        wait(g);
+        S6;
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">有人可能会疑惑，这里的wait和signal又是什么？他就是信号量机制中的 wait 和 signal，他的内容是相当于下面的这些 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133749147-521442128.png"><img style="display: inline; background-image: none;" title="image_5c567cef_6edf" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133749344-114155864.png" alt="image_5c567cef_6edf" width="520" height="258" border="0" /></a></div>
+<h3><span style="font-size: 18px;">同步方式之管程</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div><span style="font-size: 16px;">虽然信号量机制是一种既方便、又有效的进程同步机制</span>，<span style="color: #000000; font-size: 13.5pt;"><strong>但每个要访问临界资源的进程都必须自备同步操作 wait(S)和 signal(S)，这就使大量的同步操作分散在各个进程中。</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">这不仅</span><span style="color: #000000; font-size: 13.5pt;"><strong>给系统的管理带来了麻烦，而且还会因同步操作的使用不当而导致系统死锁</strong></span>。</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在解决上述问题的过程中，便产生了一种新的进程同步工具&mdash;&mdash;管程(Monitors)。 </span></div>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以管程也可以这么理解：它能够确保临界资源的同步访问，并且还不用将大量的同步操作分散到各个进程中。</span></div>
+<h4><span style="font-size: 16px;">管程的定义</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong><span style="color: #0000ff;">系统中的各种硬件资源和软件资源，均可用</span><span style="color: #ff0000;">数据结构</span><span style="color: #0000ff;">抽象地描述其资源特性</span></strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">比如一个IO设备，有状态（空闲还是忙时？），以及可以对他采取的操作（读取还是写入？）以及等待该资源的进程队列来描述，所以就可以从这三个维度抽象描述一个IO设备，而不关注他们的内部细节 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133749516-570001096.png"><img style="display: inline; background-image: none;" title="image_5c567cef_5971" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133749716-936274317.png" alt="image_5c567cef_5971" width="430" height="182" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">又比如，一个集合，可以使用集合大小，类型，以及一组可执行操作来描述，比如Java中的ArrayList，有属性，还有方法 </span></div>
+</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133749953-1733405537.png"><img style="display: inline; background-image: none;" title="image_5c567cef_4b29" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133750485-1081468944.png" alt="image_5c567cef_4b29" width="968" height="395" border="0" /></a></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong><span style="color: #0000ff;">可以把对该共享数据结构实施的操作定义为一组</span><span style="color: #ff0000;">过程</span></strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">比如资源的请求和释放过程定义为request 和 release </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">进程对共享资源的申请、释放和其它操作，都是通过这组过程对共享数据结构的操作来实现的 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">类比到JavaBean的话，这些操作就如同setter和getter方法，所有对于指定对象的操作访问都需要通过getter和setter方法 ，类似，所有对共享数据结构实施的操作，都需要借助于这一组过程。 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133751081-2146398184.png"><img style="display: inline; background-image: none;" title="image_5c567cef_216b" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133753084-894473416.png" alt="image_5c567cef_216b" width="505" height="341" border="0" /></a></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">这组过程还可以根据资源的情况，或接受或阻塞进程的访问，确保每次仅有一个进程使用共享资源，这样就可以统一管理对共享资源的所有访问，实现进程互斥 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">还是类比到JavaBean，就是相当于又增加了几个方法，这些方法提供了更多的逻辑判断控制 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">代表共享资源的数据结构，以及由对该共享数据结构实施操作的一组过程所组成的资源管理程序，共同构成了一个操作系统的资源管理模块，我们称之为管程。 </span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>Dijkstra于1971年提出：</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>把所有进程对某一种临界资源的同步操作都集中起来，构成一个所谓的秘书进程。</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>凡要访问该临界资源的进程，都需先报告秘书，由秘书来实现诸进程对同一临界资源的互斥使用。</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程的概念经由Dijkstra提出的概念演化而来，由Hoare和Hanson于1973年提出。 </span></div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>定义如下</strong></span>：&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;"> 一组相关的数据结构和过程一并称为管程。&nbsp;&nbsp; </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;"> Hansan的定义：一个管程定义了一个数据结构和能为并发进程在该数据结构上所执行的一组操作，这组操作能同步进程和改变管程中的数据。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以管程的核心部分是对共享数据抽象描述的</span><span style="color: #000000; font-size: 13.5pt;"><strong>数据结构</strong></span><span style="font-size: 16px;">以及可以对该数据结构实施操作的一组</span><span style="color: #000000; font-size: 13.5pt;"><strong>过程</strong></span>。</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">使用数据结构对共享资源进行抽象描述，那么必然要初始化数据，比如一个队列Queue，有属性size，这是一个抽象的数据结构，那么一个具体的队列到底有多大？你需要设置size 的值，所以对于管程还包括</span><span style="color: #000000; font-size: 13.5pt;"><strong>初始化</strong></span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133753662-1014839462.png"><img style="display: inline; background-image: none;" title="image_5c567cef_1d53" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133754450-1736356759.png" alt="image_5c567cef_1d53" width="274" height="165" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">一个基本的管程定义如下： </span></div>
+<div style="line-height: 32px;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">Minitor{
+  管程内部的变量结构以及说明;
+  函数1(){
+
+  }
+  ......
+  函数N(){
+
+  }
+  init(){
+       对管程中的局部变量进行初始化;
+  }
+}</span></pre>
+</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">管程特点</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程就是管理进程，管程的概念就是设计模式中&ldquo;依赖倒置原则&rdquo;，依赖倒置原则是软件设计的一个理念，IOC的概念就是依赖倒置原则的一个具体的设计 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程将对共享资源的同步处理封闭在管程内，需要申请和释放资源的进程调用管程，这些进程不再需要自主维护同步。有了管程这个大管家（门面模式？）进程的同步任务将会变得更加简单。 </span></div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>管程是墙，过程是门，想要访问共享资源，必须通过管程的控制（通过城墙上的门，也就是经过管程的过程）</strong></span></div>
+<div><span style="font-size: 16px;">而管程每次只准许一个进程进入管程，从而实现了进程互斥 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133755353-392859849.png"><img style="display: inline; background-image: none;" title="image_5c567cef_6ac2" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133755656-1838030640.png" alt="image_5c567cef_6ac2" width="491" height="462" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>管程的核心理念就是相当于构造了一个管理进程同步的&ldquo;IOC&rdquo;容器。</strong></span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">
+<div><span style="color: #ff0000; font-size: 13.5pt;"><strong>管程是一个语言的组成成分（非操作系统支持部分），管程的互斥访问完全由编译程序在编译时自动添加上，无需程序员关心，而且保证正确</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>一般的 monitor 实现模式是编程语言在语法上提供语法糖，而如何实现 monitor 机制，则属于编译器的工作</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">比如，Java中使用synchronized时，这是不是一种管程理念？你只是写了一个synchronized关键字（语法糖），多线程的共享同步完全不用你操心了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">（注意：</span><span style="color: #000000; font-size: 13.5pt;"><strong>并不是所有的语言都支持管程的概念</strong></span>）</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133756495-876184343.png"><img style="display: inline; background-image: none;" title="image_5c567cef_476e" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203133757454-1146920135.png" alt="image_5c567cef_476e" width="771" height="478" border="0" /></a></div>
+</div>
+<h4><span style="font-size: 16px;">条件变量</span></h4>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程可以保证互斥，同一时刻仅有一个进程进入管程，所以他必然需要同步工具，如两个同步操作原语 wait和 signal，他还需要互斥量用以控制管程进入的同步 </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: 16px;">当某进程通过管程请求获得临界资源而未能满足时，管程便调用 wait 原语使该进程等待，并将其排在等待队列上 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">仅当另一进程访问完成并释放该资源之后，管程调用signal原语，唤醒等待队列中的队首进程&nbsp; </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">但是，仅仅这个互斥量是不够的 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">比如，如果需要处理之前提到过的&ldquo;执行顺序控制&rdquo;，如何控制前驱关系？ </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">当一个进程调用了管程，在管程中时被阻塞或挂起，直到阻塞或挂起的原因解除，而在此期间，如果该进程不释放管程，则其它进程无法进入管程，被迫长时间地等待。 </span></div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">所以还需要其他的信号量用于针对其他条件进行同步，这些就是条件变量，所以一个完整的管程定义为： </span></div>
+<div style="line-height: 32px;">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">Minitor{
+  管程内部的变量结构以及说明;
+  condition  条件变量列表;
+  函数1(){
+
+  }
+  ......
+  函数N(){
+
+  }
+  init(){
+          对管程中的局部变量进行初始化;
+  }
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">条件变量就是当调用管程过程的进程无法运行时，用于阻塞进程的一种信号量 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">
+<div><span style="font-size: 16px;">管程中对每个条件变量都须予以说明，其形式为：Var x，y：condition。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对条件变量的操作仅仅是wait和signal，条件变量也是一种抽象数据类型，每个条件变量保存了一个链表，用于记录因该条件变量而阻塞的所有进程，同时提供的两个操作即可表示为 x.wait和x.signal，其含义为：&nbsp; </span></div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">①&nbsp;&nbsp; x.wait：正在调用管程的进程因 x 条件需要被阻塞或挂起，则调用 x.wait 将自己插入到x条件的等待队列上，并释放管程，直到x条件变化。此时其它进程可以使用该管程。&nbsp;&nbsp; </span></div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">②&nbsp;&nbsp; x.signal：正在调用管程的进程发现 x 条件发生了变化，则调用 x.signal，重新启动一个因 x 条件而阻塞或挂起的进程。如果存在多个这样的进程，则选择其中的一个，如果没有，则继续执行原进程，而不产生任何结果。这与信号量机制中的 signal操作不同，因为后者总是要执行s:=s+1操作，因而总会改变信号量的状态。 </span></div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果有进程Q因x条件处于阻塞状态， 当正在调用管程的进程P执行了x.signal操作后，进程Q 被重新启动，此时两个进程 P和Q，如何确定哪个执行，哪个等待，可采用下述两种方式之一进行处理：<span style="line-height: 32px;">&nbsp;</span> </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">(1)&nbsp; P等待，直至Q 离开管程或等待另一条件。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">(2)&nbsp; Q等待，直至P离开管程或等待另一条件。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">采用哪种处理方式，当然是各执一词。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">Hoare 采用了第一种处理方式 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">而 Hansan 选择了两者的折衷，他规定管程中的过程所执行的signal&nbsp; 操作是过程体的最后一个操作，于是，进程P执行signal操作后立即退出管程，因而进程Q马上被恢复执行。&nbsp;</span></div>
+</div>
+<h3><span style="font-size: 18px;">总结</span></h3>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>进程控制是操作系统的一种硬性管理，是必须要有的，如果没有进程控制，就没办法合理安排运行进程， 根本无法完成状态的切换维护等。</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>进程的同步是一种软逻辑上的，如果不做，并不会导致系统出问题或者进程无法运行，但是如果不进行同步，结果却很可能是错误的，所以也是必须做的</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">类比装修的话，进程控制就是硬装，不装没法住，总归要水电搞搞好，进程同步就是家具家电和软装，硬装后住进去不会出现&ldquo;生存问题&rdquo;（至少有水喝有电用)，但是你要是连个热水壶都没有是打算要喝凉水么 </span></div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>进程同步的概念多很复杂抽象，因为毕竟是概念表述，没有涉及到具体的实现细节。</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>进程同步的核心是对于临界资源的访问控制，也就是对于临界区的访问。</strong></span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>不管是临界区算法还是信号量机制还是管程机制，终归也都是控制进入临界区的不同的实现思路。</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">每种不同的算法、机制都各自有各自的特色，场景。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">信号量机制将临界资源的访问的互斥，演化为可以多个进程访问资源（整型信号量），记录型信号量对整型信号量机制进行优化，处理了忙等的问题&nbsp; </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">然后继续演化出AND型，可以对不同的资源进行同步，而不仅仅是同一种资源 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">最后发展为信号量集的形式，可以对不同的资源、不同的个数、不同的限制进行处理，变得更为通用。 </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程更多的是一种设计思维，管程就是管理进程的程序，进程对于资源的同步操作全都依赖管程这一&ldquo;大管家&rdquo;，管程是编程语言级别的，不需要程序员进行过多的处理，一般会提供语法糖 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">需要注意并不是所有的语言都有管程的概念（Java是有的），管程让你从同步的细节中解放出来，可以在很多场景下简化同步的实现。 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">管程的概念是&ldquo;线程同步&rdquo;的&ldquo;IOC&rdquo;，大大简化了同步的代价。</span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>不管临界区算法还是信号量机制还是借助于管程，他们都是一种同步工具，可以认为他们就是一组&ldquo;方法&rdquo;，&ldquo;方法&rdquo;的逻辑就是本文前面介绍的原理</strong></span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">在需要进程同步问题的解决思路中，可以直接使用&ldquo;封装好的方法&rdquo; </span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">以上，尽管都是在说操作系统关于进程的同步的处理，其实，在同步问题上进程和线程的设计理念是相通的 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">因为这本质上都是在说并发----多道程序运行的操作系统，通常使用轮转时间片的方式并发的运行多个进程&nbsp; </span></div>
+<div style="line-height: 32px;"><span style="font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10350253.html" target="_blank">进程同步概念简介 多线程上篇（四）</a></span></div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-06 10:05</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10350253" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10350253);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10350253, cb_entryCreatedDate = '2019-02-06 10:05', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

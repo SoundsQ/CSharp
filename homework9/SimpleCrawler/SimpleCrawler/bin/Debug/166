@@ -1,0 +1,1254 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="建造者模式,也叫做生成器模式的简要介绍,从抽象工厂模式开始演进,简单叙述了建造者模式的意图,结构,java版本示例代码,对比了建造者模式与抽象工厂模式的差一点与联系,并且给出了使用场景的建议" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>建造者模式 生成器模式 创建型 设计模式(五) - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9958668.html">建造者模式 生成器模式 创建型 设计模式(五)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        建造者模式,也叫做生成器模式的简要介绍,从抽象工厂模式开始演进,简单叙述了建造者模式的意图,结构,java版本示例代码,对比了建造者模式与抽象工厂模式的差一点与联系,并且给出了使用场景的建议
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">建造者模式 Builder 也叫做生成器模式</div>
+<div style="line-height: 200%;">在正式开始建造者模式之前，先回顾下抽象工厂模式</div>
+<div style="line-height: 200%;">本人的所有系列文章都是自己学习的记录过程，均有比较严格的先后顺序，如果不清楚抽象工厂模式可以先往前翻翻</div>
+<h3><span style="font-size: 18px;">从抽象工厂演化</span></h3>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>抽象工厂模式是工厂模式的进一步抽象扩展</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>不仅仅可以创建某种等级结构的产品，可以创建一整个产品族的产品</strong></span></div>
+<div style="line-height: 200%;">如下图所示</div>
+<div style="line-height: 200%;">比如ConcreteCreator1可以创建ConcreteProductA1和ConcreteProductB1</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">比如ConcreteCreator2可以创建ConcreteProductA2和ConcreteProductB2</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;">一个产品族的两个产品，是相关联的或者有共同的约束，比如同一个厂家，运行在同一个平台下</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163107737-490105986.png"><img style="display: inline; background-image: none;" title="image_5bebdce6_4d96" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163108881-403906716.png" alt="image_5bebdce6_4d96" width="915" height="643" border="0" /></a></div>
+<h4 style="line-height: 200%;"><span style="font-size: 16px;"><strong><span style="color: #000000;">示例</span></strong></span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>考虑这样一种场景：</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>你是一个品牌电脑的组装厂家（组装代工厂），你拥有电脑的各种零部件（简单起见，仅仅以主板和显示器为例）</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>各种零部件都由多个厂家生产（简单起见，假设只有华硕和戴尔） </strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>请你根据用户需求提供一台&ldquo;品牌&rdquo;电脑</strong></span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>涉及到多个产品等级结构，而且购买品牌电脑，同一品牌就是同一厂家，这是共同限制，有产品族的概念，所以可以使用抽象工厂模式&nbsp; </strong></span></div>
+<div style="line-height: 200%;">工厂生产相关联的产品族下的产品，然后进行组装</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如下图所示</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163109783-65949736.png"><img style="display: inline; background-image: none;" title="image_5bebdce6_301a" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163110070-872458505.png" alt="image_5bebdce6_301a" width="620" height="423" border="0" /></a></div>
+<div style="line-height: 200%;">对于具体的工厂ConcreteCreator1可以创建华硕产品族的产品，主板和显示器</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">对于具体的工厂ConcreteCreator2可以创建戴尔产品族的产品，主板和显示器</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 16px;"><strong><span style="color: #000000;">代码</span></strong> </span></h4>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>主板产品等级结构</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163110771-699460016.png"><img style="display: inline; background-image: none;" title="image_5bebdce6_a12" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163111070-1772399934.png" alt="image_5bebdce6_a12" width="330" height="142" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> MainBoard {
+String desc();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> DellMainBoard <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MainBoard {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String desc() {
+</span><span style="color: #0000ff;">return</span> "DELL mainBoard"<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AsusMainBoard <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MainBoard {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String desc() {
+</span><span style="color: #0000ff;">return</span> "ASUS mainBoard"<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>显示器产品等级结构</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163111340-1262902311.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_a15" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163111861-15502160.png" alt="image_5bebdce7_a15" width="357" height="149" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> DisplayDevice {
+String Desc();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> DellDisplayDevice <span style="color: #0000ff;">implements</span><span style="color: #000000;"> DisplayDevice {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String Desc() {
+</span><span style="color: #0000ff;">return</span> "DELL display device"<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AsusDisplayDevice <span style="color: #0000ff;">implements</span><span style="color: #000000;"> DisplayDevice {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String Desc() {
+</span><span style="color: #0000ff;">return</span> "ASUS display device"<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>工厂体系结构</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163112060-1593682567.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_68fc" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163112289-1882288010.png" alt="image_5bebdce7_68fc" width="622" height="239" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Creator {
+MainBoard createMainBoard();
+DisplayDevice createDisplayDevice();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateCreatorDell <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Creator {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> MainBoard createMainBoard() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> DellMainBoard();
+}
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> DisplayDevice createDisplayDevice() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> DellDisplayDevice();
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateCreatorAsus <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Creator {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> MainBoard createMainBoard() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> AsusMainBoard();
+}
+
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> DisplayDevice createDisplayDevice() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> AsusDisplayDevice();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>电脑类Computer</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">用户需要的是一台电脑，电脑类为Computer</div>
+<div style="line-height: 200%;">Computer包含主板和显示器部件&nbsp;</div>
+<div style="line-height: 200%;">重写了toString方便查看信息，toString中调用了主板和显示器的desc（）方法</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Computer {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> MainBoard mainBoard;
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> DisplayDevice displayDevice;
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> MainBoard getMainBoard() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> mainBoard;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setMainBoard(MainBoard mainBoard) {
+</span><span style="color: #0000ff;">this</span>.mainBoard =<span style="color: #000000;"> mainBoard;
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> DisplayDevice getDisplayDevice() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> displayDevice;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setDisplayDevice(DisplayDevice displayDevice) {
+</span><span style="color: #0000ff;">this</span>.displayDevice =<span style="color: #000000;"> displayDevice;
+}
+
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String toString() {
+</span><span style="color: #0000ff;">final</span> StringBuilder sb = <span style="color: #0000ff;">new</span> StringBuilder("Computer{"<span style="color: #000000;">);
+sb.append(</span>"mainBoard="<span style="color: #000000;">).append(mainBoard.desc());
+sb.append(</span>", displayDevice="<span style="color: #000000;">).append(displayDevice.Desc());
+sb.append(</span>'}'<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sb.toString();
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>测试代码客户端</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163112536-1300539263.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_5564" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163112840-1057417472.png" alt="image_5bebdce7_5564" width="656" height="739" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+</div>
+<div style="line-height: 200%;">以上，我们就完成了需求</div>
+<div style="line-height: 200%;">根据用户的需求，创建指定的产品族的产品，并且将这一系列的产品进行组合生成最终的用户需要的产品&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-size: 16px;"><strong><span style="color: #000000;">抽象工厂的问题</span></strong> </span></h4>
+<div style="line-height: 200%;">通过，抽象工厂模式进行产品族零部件的生产，然后在客户端进行加工</div>
+<div style="line-height: 200%;">完成了我们的需求，但是这其中有明显的问题</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>整个的组装细节与过程，全部暴露在客户端程序</strong></span></div>
+<div style="line-height: 200%;">客户端程序知道你所有的零部件类型，也知道你所有零部件实现的细节</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">顾客只是想购买一台电脑而已，人家为什么要关心电脑到底有哪些部件，到底如何组装的？</div>
+<div style="line-height: 200%;">简言之，你自己隐私暴露，人家还不稀罕看，嫌烦！</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">而且，<span style="color: #ff0000; font-size: 13.5pt;"><strong>如果需要在多个场景中完成这个组装生成的过程，怎么办？将会出现大量的冗余代码</strong></span></div>
+<div style="line-height: 200%;">再者，<span style="color: #ff0000; font-size: 13.5pt;"><strong>如果组装逻辑发生变动，需要维护多个地方，难度非常大</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>所以一个很自然的想法就是将整个的组装逻辑进行封装</strong></span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><br /></span>
+</div>
+<div style="line-height: 200%;">为此，我们新增加一个组装电脑类AssembleComputer
+</div>
+<div style="line-height: 200%;">接受一个Creator 作为参数，借助于Creator进行零部件产品族的创建以及组装
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> AssembleComputer {
+Creator creator;
+AssembleComputer(Creator creator){
+</span><span style="color: #0000ff;">this</span>.creator =<span style="color: #000000;"> creator;
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Computer getComputer(){
+Computer computer </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Computer();
+MainBoard mainBoard </span>=<span style="color: #000000;"> creator.createMainBoard();
+DisplayDevice displayDevice </span>=<span style="color: #000000;"> creator.createDisplayDevice();
+computer.setMainBoard(mainBoard);
+computer.setDisplayDevice(displayDevice);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> computer;
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">测试代码</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163113143-1147950337.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_4302" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163113405-1137394834.png" alt="image_5bebdce7_4302" width="888" height="486" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">经过封装后，这段代码看起来清爽多了，组装的细节被封装到了组装类AssembleComputer之中</div>
+<div style="line-height: 200%;">客户端不在需要大量冗余的代码，而且后续扩展和维护也比较容易&nbsp;&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-size: 16px;"><strong><span style="color: #000000;">封装下的重构</span></strong></span></h4>
+<div style="line-height: 200%;">上面的封装的组装逻辑中，我们先把所有的零部件全部都生产出来，然后在一口气进行组装</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>虽然是把产品的组装细节对客户端程序隐藏了</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>但是，产品的表示生产和组装过程仍旧是耦合在一起的，都耦合在了getComputer（）方法中</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>是否还可以进一步的将Computer的各个组成部分与组装逻辑分离呢？</strong></span></div>
+<div style="line-height: 200%;">我们把工厂等级结构和组装电脑类重构下</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> CreatorRefactor {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleMainBoard();
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleDisplayDevice();
+Computer getComputer();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateCreatorDellRefactor <span style="color: #0000ff;">implements</span><span style="color: #000000;"> CreatorRefactor {
+</span><span style="color: #0000ff;">private</span> Computer computer = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Computer();
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleMainBoard() {
+computer.setMainBoard(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> DellMainBoard());
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleDisplayDevice() {
+computer.setDisplayDevice(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> DellDisplayDevice());
+}
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Computer getComputer() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> computer;
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateCreatorAsusRefactor <span style="color: #0000ff;">implements</span><span style="color: #000000;"> CreatorRefactor {
+</span><span style="color: #0000ff;">private</span> Computer computer = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Computer();
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleMainBoard() {
+computer.setMainBoard(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> AsusMainBoard());
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> assembleDisplayDevice() {
+computer.setDisplayDevice(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> AsusDisplayDevice());
+}
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Computer getComputer() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> computer;
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>可以看得出来重构之后的代码中</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>对于工厂角色来说，不仅仅是生产零部件，生产已经成为基础功能，还需要完成这一步骤的组装工作</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>并且提供最终返回完整产品的方法</strong></span></div>
+<div style="line-height: 200%;">具体的工厂中，创建了一个具体的产品引用，并且实现了抽象工厂的规定的协议--&gt;组装每个步骤以及最终返回具体产品</div>
+</div>
+<div style="line-height: 200%;">组装电脑类重构</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> builder;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> AssembleComputerRefactor {
+CreatorRefactor creatorRefactor;
+AssembleComputerRefactor(CreatorRefactor creatorRefactor){
+</span><span style="color: #0000ff;">this</span>.creatorRefactor =<span style="color: #000000;"> creatorRefactor;
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Computer getComputer(){
+creatorRefactor.assembleMainBoard();
+creatorRefactor.assembleDisplayDevice();
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> creatorRefactor.getComputer();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">重构后的代码，组装电脑类AssembleComputerRefactor不在涉及到具体零部件的生产了</div>
+<div style="line-height: 200%;">生产和每一个零件步骤的组装已经移交到抽象工厂角色中了</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>组装电脑类仅仅涉及的就是组装流程！流程！流程！ 完全不关注具体的到底是什么东西</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">测试代码</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163113669-1381500873.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_3714" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163114041-1791339849.png" alt="image_5bebdce7_3714" width="1102" height="484" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163114280-1520267209.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_43d6" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163114529-1638932142.png" alt="image_5bebdce7_43d6" width="805" height="259" border="0" /></a></div>
+<h4 style="line-height: 200%;"><span style="font-size: 16px;"><strong><span style="color: #000000;">小结</span></strong></span></h4>
+<div style="line-height: 200%;">最终重构后的代码形式中：</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>生产产品的构造工厂CreatorRefactor，规定了负责构建一个完整产品的所有的步骤，并且返回最终产品</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>实际负责生产的具体工厂角色，实现规定的每个步骤，并且返回最终的具体的产品</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>AssembleComputerRefactor仅仅包含产品的构建逻辑，也就是加工步骤</strong></span></div>
+<div style="line-height: 200%;">将生产产品的所有的步骤，合理的组织在一起</div>
+<div style="line-height: 200%;">也即是说，它所有的流程的每一个步骤的细节，都是工厂提供的，组装器这个流水线只是负责步骤的梳理安排</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">比如，穿衣服的所有步骤有：戴帽子，穿鞋子，穿袜子，穿裤子，穿内裤....</div>
+<div style="line-height: 200%;">那么，这个组装器 就是将这些步骤合理组织安排</div>
+<div style="line-height: 200%;">不能先穿鞋子在穿袜子的对吧，应该是 穿内裤，穿裤子，穿袜子，穿鞋子，戴帽子....</div>
+<div style="line-height: 200%;">你看，步骤都是一样的，但是顺序可能是有要求的，最终返回结果</div>
+<div style="line-height: 200%;">其实这就是建造者模式</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>将复杂产品的构建过程和具体的产品进行分离</strong></span></div>
+<div style="line-height: 200%;">管你到底是穿什么鞋子呢，反正你有穿鞋子这一步骤</div>
+<div style="line-height: 200%;">管你到底穿哪条裤子，反正你得穿裤子，而且穿衣服的场景下得是先穿裤子才能穿鞋子</div>
+<h3><span style="font-size: 18px;">意图</span></h3>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>将复杂对象的构建与他的表示进行分离，使得同样的构建过程可以创建不同的表示 </strong></span></span></div>
+<div style="line-height: 200%;">对象的构建与表示进行分离，就是类似组装过程与内部的零件的分离，一台电脑的内部表示是各种零件，构建就是组装的过程&nbsp;</div>
+<h3><span style="font-size: 18px;">结构</span></h3>
+<div style="line-height: 200%;">我们将前面的示例，转换为标准的建造者模式的称呼</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163114787-366174987.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_2e58" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163115027-1981248139.png" alt="image_5bebdce7_2e58" width="712" height="299" border="0" /></a></div>
+<div style="line-height: 200%;"><strong><span style="color: #000000; font-size: 13.5pt;">角色含义</span></strong></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>抽象建造者角色Builder</strong></span><br />给出一个抽象接口，以规范产品对象各个组成部分之间的构造<br />这个抽象的接口给出来构造一个产品的所有步骤以及最终产品的获取协议（就是其中定义的方法）（上面示例中的CreatorRefactor）</span>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>具体的建造者ConcreteBuilder</strong></span>
+	</div>
+<div style="line-height: 200%;">创建具体的产品的工厂、建造者
+	</div>
+<div style="line-height: 200%;">1.需要实现Builder中规定的产品创建的所有步骤
+	</div>
+<div style="line-height: 200%;">2.建造完成后，提供产品实例对象
+	</div>
+<div style="line-height: 200%;">（上面示例中的ConcreateCreatorDellRefactor 和 ConcreateCreatorAsusRefactor）
+	</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>指挥者、导演Director</strong></span><br />指挥产品的整个建造过程，不涉及具体产品的细节，只关注抽象建造者角色Builder定义的各个步骤的组织安排<br /></span></span>
+<div style="line-height: 200%;">具体的ConcreteBuilder 才会关注生产的细节（上面示例中的AssembleComputerRefactor）
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>产品 Product</strong></span>
+		</div>
+<div style="line-height: 200%;">最终创建起来的一个复杂的产品对象实例（上面示例中的Computer）</div>
+
+</div>
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px;">代码示例
+</span></h3>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163115237-324928923.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_574c" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163115433-1761249824.png" alt="image_5bebdce7_574c" width="219" height="113" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> buildPattern;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Builder {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> buildPart1();
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> buildPart2();
+Product buildProduct();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> buildPattern;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreateBuilder <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Builder {
+</span><span style="color: #0000ff;">private</span> Product product = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Product();
+ 
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> buildPart1() {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">...</span>
+<span style="color: #000000;">}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> buildPart2() {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">...</span>
+<span style="color: #000000;">}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Product buildProduct() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> product;
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> buildPattern;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Product {
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> buildPattern;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Director {
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Builder builder;
+ 
+Director(Builder builder) {
+</span><span style="color: #0000ff;">this</span>.builder =<span style="color: #000000;"> builder;
+}
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Product getProduct() {
+builder.buildPart1();
+builder.buildPart2();
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> builder.buildProduct();
+}
+}</span><code style="line-height: 200%;">&nbsp;</code></pre>
+</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">注意事项</span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">1. 上面示例中只有一个ConcreteBuilder，实际上当然可以有多个，他们都继承自抽象角色Builder&nbsp;&nbsp;&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">2. 示例中Product为一个具体的类，当然可以变为抽象角色，这样所有的产品都是属于Product的</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">3. Builder角色中，我们以组装电脑为例子，看起来好像必须是同一类产品,其实不是必然的</div>
+<div style="line-height: 200%;">Builder与具体的业务逻辑没关系，你可以把它简单的理解为步骤</div>
+<div style="line-height: 200%;">比如它定义了五个步骤buildPart1(); buildPart2();&nbsp; ........&nbsp;&nbsp; buildPart5();</div>
+<div style="line-height: 200%;">那么，比如汽车可能由五个生产步骤组成，比如房子可以有五个步骤建造&nbsp;</div>
+<div style="line-height: 200%;">Builder约定的只是流程，只是步骤，具体的细节由具体的实现工厂ConcreteBuilder决定了</div>
+<div style="line-height: 200%;">到底是五个盖房子的步骤，还是五个造车子的步骤，具体的ConcreteBuilder说了算</div>
+</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">4. 如果是非常抽象的几个步骤，完全都不是一个类型的东西，那么这个抽象的产品怎么办？他们都没有任何的共性</div>
+<div style="line-height: 200%;">你可以将返回结果产品的步骤，也就是最终的步骤，从抽象角色Builder中拿出来，每个ConcreteBuilder自己返回自己的产品</div>
+<div style="line-height: 200%;">或者</div>
+<div style="line-height: 200%;">你可以提供一个标记接口，标记接口，标记接口，什么都不做，你就说 房子，车子，都是一种Product~~这样也可以解决</div>
+</div>
+<h3><span style="font-size: 18px;">与抽象工厂对比 </span></h3>
+<div style="line-height: 200%;">最开始我们以抽象工厂模式引申出建造者模式</div>
+<div style="line-height: 200%;">在建造者模式中重要角色为Director和Builder，其实你会发现，其中的Builder与抽象工厂的Creator是有相似点的&nbsp;</div>
+<div style="line-height: 200%;">Director只不过是把ConcreteCreator中生产的产品族 进行组装</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">但是建造者模式中的Builder，重点不在于生产的零部件是什么，而是在于步骤的划分</div>
+<div style="line-height: 200%;">当然每个步骤可能也是需要&ldquo;生产&rdquo;的</div>
+<div style="line-height: 200%;">可以认为Builder是抽象工厂模式中的Creator的一个变种</div>
+<div style="line-height: 200%;">Director是抽象工厂模式生产产品后的进一步加工</div>
+<div style="line-height: 200%;">他的重点在于步骤的组织安排</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>抽象工厂模式仅仅关注到我生产出来了这一个产品族的各个产品</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>建造者模式则进一步关注这些东西怎么构成、组装成为一个更加复杂的产品的步骤</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;">如果以生产汽车为例</div>
+<div style="line-height: 200%;">抽象工厂模式在于产生某一产品族的零部件，比如 轮胎 发动机 底盘</div>
+<div style="line-height: 200%;">建造者模式在于安排建造的过程，安装底盘 安装轮胎 安装发动机</div>
+<div style="line-height: 200%;">建造者模式的组装的每个步骤中，可能需要先生产在组装，也可能只是多个加工步骤</div>
+<div style="line-height: 200%;">与抽象工厂模式的对比是为了加深理解，如果反倒容易混淆，可以无视</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px;">使用场景 </span></h3>
+<div style="line-height: 200%;">对于每种模式的使用场景，只需要理解透彻每种模式的意图即可</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>建造者模式的意图在于复杂对象的内部表示与创建过程进行分离</strong></span>，<span style="color: #0000ff; font-size: 13.5pt;"><strong>前提就是面对复杂对象的创建</strong></span>&nbsp;</div>
+<div style="line-height: 200%;">比如</div>
+<div style="line-height: 200%;">有很多品牌的笔记本电脑，电脑包括很多零部件 cpu 显卡 内存条 显示器等等&nbsp;</div>
+<div style="line-height: 200%;">有很多品牌的汽车，汽车包括很多零部件 底盘 发动机 轮胎 轮毂 等等</div>
+<div style="line-height: 200%;">游戏中有很多个人物角色 他们都有 性别 发型 肤色 衣服 皮肤 等等</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如何构造这些复杂的对象</div>
+<div style="line-height: 200%;">而且还能够容易新增加新品牌的笔记本电脑和汽车，增加新的人物角色，也就是扩展性好</div>
+<div style="line-height: 200%;">你就可以考虑建造者模式</div>
+<div style="line-height: 200%;">建造者模式中的Director作为指挥者、导演，仅仅关心步骤的顺序安排</div>
+<div style="line-height: 200%;">不管什么品牌的笔记本电脑，步骤都是一样的，安装cpu 安装显卡 安装内存条...等等</div>
+<div style="line-height: 200%;">不管是什么品牌的汽车，生产步骤是一样的，安装底盘，安装发动机...等等</div>
+<div style="line-height: 200%;">不管什么样子的人物角色，创建步骤是一样的，设置性别，设置肤色...等等</div>
+<div style="line-height: 200%;">具体的建造者ConcreteBuilder才会关心每个步骤到底做的是什么事情</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>将步骤与具体表示分离，当需要扩展时，Director部分完全不需要变动，只需要增加新的ConcreteBuilder 即可 </strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>通过新的ConcreteBuilder ， Director就可以创建出来新的产品、人物角色</strong></span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">建造者模式的关键就在于，复杂的对象，构建过程与内部表示的分离</div>
+<div style="line-height: 200%;">所以当有复杂的内部结构时，或者步骤之间具有严格的顺序关系就可以考虑建造者模式</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><strong><span style="color: #000000; font-size: 13.5pt;">步骤不一样是否可用？</span></strong></div>
+<div style="line-height: 200%;">上面反复强调，他们拥有相同的步骤</div>
+<div style="line-height: 200%;">那么，如果一个产品拥有三个步骤，另外一个产品拥有五个步骤</div>
+<div style="line-height: 200%;">是否还能够使用建造者模式呢？</div>
+<div style="line-height: 200%;">当然也是可以的</div>
+<div style="line-height: 200%;">在抽象的Builder角色中，你仍然需要设置五个步骤</div>
+<div style="line-height: 200%;">但是对于生产只需要三个步骤的产品的那个ConcreteBuilder</div>
+<div style="line-height: 200%;">你可以将 buildPart4()；buildPart5();</div>
+<div style="line-height: 200%;">实现为空方法即可</div>
+<div style="line-height: 200%;">比如&nbsp;</div>
+<div style="line-height: 200%;">void buildPart4（）{</div>
+<div style="line-height: 200%;">//什么都不做。。。。</div>
+<div style="line-height: 200%;">}</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">所以，假如说，你定义了一个抽象角色Builder，他有N个步骤，那么他就可以构造1~N个步骤下，可以实现的所有产品！！！</div>
+<div style="line-height: 200%;">细节由具体的ConcreteBuilder决定就好了，当然，一般你并不会那么做&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px;">简化形式 </span></h3>
+<div style="line-height: 200%;">设计模式都不是一成不变的，可以根据实际情况进行调整甚至变种</div>
+<div style="line-height: 200%;">如果确定系统中，只需要一个具体的建造者的话，那么就可以省略抽象的Builder角色</div>
+<div style="line-height: 200%;">抽象的Builder就是为了规范多个具体Builder建造者的行为，如果只有一个具体的建造者，则失去了意义</div>
+<div style="line-height: 200%;">此时，这个具体的建造者，也充当了抽象的Builder的角色</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163115694-668901036.png"><img style="display: inline; background-image: none;" title="image_5bebdce7_49b4" src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181114163115913-407635992.png" alt="image_5bebdce7_49b4" width="691" height="123" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果已经省略了抽象的Builder</div>
+<div style="line-height: 200%;">那么还可以继续省略Director角色</div>
+<div style="line-height: 200%;">ConcreteBuilder，也充当了这个Director角色</div>
+<div style="line-height: 200%;">ConcreteBuilder自己不仅仅实现所有步骤的细节,并且还负责组装</div>
+<div style="line-height: 200%;">说白了就是Director中的方法逻辑移植到ConcreteBuilder中, 客户端从ConcreteBuilder中获取产品&nbsp;&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="color: #000000; font-size: 16px;"><strong>建造者与构造方法</strong> </span></h4>
+<div style="line-height: 200%;">假设有一个MyObject类,他有很多属性,假定目前有v1~v7 ,总共7个</div>
+<div style="line-height: 200%;">其中v1 和 v2 是必选,其余为可选属性</div>
+<div style="line-height: 200%;">对于这种情况,我们经常使用层叠的构造方法</div>
+<div style="line-height: 200%;">层层嵌套调用</div>
+<div style="line-height: 200%;">但是这种方式不够清晰，比较容易犯错，而且，很多时候即使参数写颠倒了，也并不会一定导致编译器报错</div>
+<div style="line-height: 200%;">另外一种方式就是借助于建造者模式的简化形式</div>
+<div style="line-height: 200%;">如下面示例</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> simplebuilder;
+ 
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/17.
+* Description:假定有一个MyObject类,有7个属性前面两个v1 和 v2 是必选,其余可选
+*
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyObject {
+ 
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v1;<span style="color: #008000;">//</span><span style="color: #008000;">必选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v2;<span style="color: #008000;">//</span><span style="color: #008000;">必选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v3;<span style="color: #008000;">//</span><span style="color: #008000;">可选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v4;<span style="color: #008000;">//</span><span style="color: #008000;">可选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v5;<span style="color: #008000;">//</span><span style="color: #008000;">可选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v6;<span style="color: #008000;">//</span><span style="color: #008000;">可选</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v7;<span style="color: #008000;">//</span><span style="color: #008000;">可选</span>
+ 
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Builder {
+ 
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> v1;
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> v2;
+ 
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v3 = 0<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v4 = 0<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v5 = 0<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v6 = 0<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> v7 = 0<span style="color: #000000;">;
+ 
+</span><span style="color: #0000ff;">public</span> Builder(<span style="color: #0000ff;">int</span> v1, <span style="color: #0000ff;">int</span><span style="color: #000000;"> v2) {
+</span><span style="color: #0000ff;">this</span>.v1 =<span style="color: #000000;"> v1;
+</span><span style="color: #0000ff;">this</span>.v2 =<span style="color: #000000;"> v2;
+}
+ 
+</span><span style="color: #0000ff;">public</span> Builder setV3(<span style="color: #0000ff;">int</span><span style="color: #000000;"> v3) {
+</span><span style="color: #0000ff;">this</span>.v3 =<span style="color: #000000;"> v3;
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;
+}
+ 
+</span><span style="color: #0000ff;">public</span> Builder setV4(<span style="color: #0000ff;">int</span><span style="color: #000000;"> v4) {
+</span><span style="color: #0000ff;">this</span>.v4 =<span style="color: #000000;"> v4;
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;
+}
+ 
+</span><span style="color: #0000ff;">public</span> Builder setV5(<span style="color: #0000ff;">int</span><span style="color: #000000;"> v5) {
+</span><span style="color: #0000ff;">this</span>.v5 =<span style="color: #000000;"> v5;
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;
+}
+ 
+</span><span style="color: #0000ff;">public</span> Builder setV6(<span style="color: #0000ff;">int</span><span style="color: #000000;"> v6) {
+</span><span style="color: #0000ff;">this</span>.v6 =<span style="color: #000000;"> v6;
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;
+}
+ 
+</span><span style="color: #0000ff;">public</span> Builder setV7(<span style="color: #0000ff;">int</span><span style="color: #000000;"> v7) {
+</span><span style="color: #0000ff;">this</span>.v7 =<span style="color: #000000;"> v7;
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">;
+}
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> MyObject build() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span> MyObject(<span style="color: #0000ff;">this</span><span style="color: #000000;">);
+}
+}
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> MyObject(Builder builder) {
+v1 </span>=<span style="color: #000000;"> builder.v1;
+v2 </span>=<span style="color: #000000;"> builder.v2;
+v3 </span>=<span style="color: #000000;"> builder.v3;
+v4 </span>=<span style="color: #000000;"> builder.v4;
+v5 </span>=<span style="color: #000000;"> builder.v5;
+v6 </span>=<span style="color: #000000;"> builder.v6;
+v7 </span>=<span style="color: #000000;"> builder.v7;
+}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String toString() {
+</span><span style="color: #0000ff;">final</span> StringBuilder sb = <span style="color: #0000ff;">new</span> StringBuilder("MyObject{"<span style="color: #000000;">);
+sb.append(</span>"v1="<span style="color: #000000;">).append(v1);
+sb.append(</span>", v2="<span style="color: #000000;">).append(v2);
+sb.append(</span>", v3="<span style="color: #000000;">).append(v3);
+sb.append(</span>", v4="<span style="color: #000000;">).append(v4);
+sb.append(</span>", v5="<span style="color: #000000;">).append(v5);
+sb.append(</span>", v6="<span style="color: #000000;">).append(v6);
+sb.append(</span>", v7="<span style="color: #000000;">).append(v7);
+sb.append(</span>'}'<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sb.toString();
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+ 
+MyObject my </span>= <span style="color: #0000ff;">new</span> MyObject.Builder(1, 2<span style="color: #000000;">).
+setV3(</span>3).setV4(4).setV5(5).setV6(6).setV7(7<span style="color: #000000;">).build();
+System.out.println(my.toString());
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">省略了抽象的Builder，也省略了Director角色</div>
+<div style="line-height: 200%;">示例中的Builder 就是模式中的ConcreteBuilder角色</div>
+<div style="line-height: 200%;">他负责每一个步骤的实现细节，并且提供方法build()&nbsp; 获取最终的产品角色对象</div>
+<div style="line-height: 200%;">借助于简化的工厂模式进行构造方法的替换解决方案的巧妙之处在于:</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<p style="margin: 0px; line-height: 200%;"><span style="color: #8b008b; font-weight: 600;">public</span> MyObject build() {</p>
+<p style="margin: 0px; line-height: 200%;"><span style="color: #8b008b; font-weight: 600;">return</span> <span style="color: #8b008b; font-weight: 600;">new</span> MyObject(<span style="color: #8b008b; font-weight: 600;">this</span>);</p>
+<p style="margin: 0px; line-height: 200%;"><code style="line-height: 200%;"> }</code></p>
+</div>
+</div>
+<div style="line-height: 200%;">它借助于建造者模式将实现与过程进行分离</div>
+<div style="line-height: 200%;">但是在build() 方法中又并没有严格的规定步骤的过程</div>
+<div style="line-height: 200%;">只是在构造Builder时必须传递两个必须参数，其余的参数你可以设置，也可以不设置&nbsp;</div>
+<div style="line-height: 200%;">达到了多层嵌套构造方法的效果</div>
+<div style="line-height: 200%;">而且，还非常清晰，你不会那么轻易地就在设置参数时犯错，因为你需要调用指定的方法</div>
+<h3><span style="font-size: 18px;">总结</span></h3>
+<div style="line-height: 200%;">本文通过抽象工厂模式演化到建造者模式，看到了建造者模式与抽象工厂模式的细节差异</div>
+<div style="line-height: 200%;">建造者本身并不复杂，只需要理解本意即可&ldquo;复杂对象的构建过程与表示进行分离&rdquo;</div>
+<div style="line-height: 200%;">建造者模式是将&ldquo;步骤&rdquo;这一事物进行抽象化，抽象化为Builder，将事物的表示延迟到子类ConcreteBuilder中，并通过Director进行组装&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>核心就是将&ldquo;步骤&rdquo;这一事物抽象</strong></span></div>
+<div style="line-height: 200%;">对于涉及到复杂对象的表示的场景，都可以考虑建造者模式</div>
+<div style="line-height: 200%;">从抽象工厂的演进我们可以看得出来，建造者模式，可以借助于抽象工厂模式进行实现&nbsp;</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-11-14 16:51</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9958668" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9958668);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9958668, cb_entryCreatedDate = '2018-11-14 16:51', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,695 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="计算机只是逻辑电路 除了电路还是电路 计算机就是一堆逻辑电路 他并不知道你到底想要干什么,他也不会理解什么是文件,什么是进程 通电的瞬间,就好像你打开开关,灯泡发光一样 所有的一切都是通过通电来启动的" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>5.计算机发展个人理解-电路终究是电路   软件如何控制硬件 代码如何操作硬件  硬件是怎么执行代码  代码如何执行 软件与硬件如何交互 计算机思维 抽象 封装 规范 屏蔽 协议分层 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9243484.html">5.计算机发展个人理解-电路终究是电路   软件如何控制硬件 代码如何操作硬件  硬件是怎么执行代码  代码如何执行 软件与硬件如何交互 计算机思维 抽象 封装 规范 屏蔽 协议分层</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3><span style="font-size: medium;"><strong>计算机只是逻辑电路</strong></span></h3>
+<p><span style="font-size: medium;"><strong>除了电路还是电路</strong></span></p>
+<p><span style="font-size: medium;">计算机就是一堆逻辑电路</span></p>
+<p><span style="font-size: medium;">他并不知道你到底想要干什么,他也不会理解什么是文件,什么是进程</span></p>
+<p><span style="font-size: medium;">通电的瞬间,就好像你打开开关,灯泡发光一样</span></p>
+<p><span style="font-size: medium;">所有的一切都是通过通电来启动的&nbsp; start the world</span></p>
+<p><span style="font-size: medium;">计算机某些部件,具体到比如某个门电路,有电流通过</span></p>
+<p><span style="font-size: medium;">这个电流就是0或者1 进而会触发一系列内置的电路导致更大的模块进行电路的通断</span></p>
+<p><span style="font-size: medium;">他不知道你到底要干什么</span></p>
+<p><span style="font-size: medium;">只要电源不断开,那么就会有<em>心跳</em>,有心跳就会持续的读取指令</span></p>
+<p><span style="font-size: medium;">指令也不过就是一块固定格式的电路连接(或者是读取ROM)</span></p>
+<p><span style="font-size: medium;">将一堆输入线路的电压转换成另一种形式的输出</span></p>
+<p><span style="font-size: medium;">输出有可能连接着其他的电路模块的输入</span></p>
+<p><span style="font-size: medium;">所以他会永远的运行下去</span></p>
+<p><span style="font-size: medium;">只是恰好有了<strong>二进制数学</strong>,二进制数学又与逻辑建立起来<strong>数理逻辑</strong></span></p>
+<p><span style="font-size: medium;"><strong>数理逻辑又跟逻辑电路</strong>是相通的</span></p>
+<p><span style="font-size: medium;">那么我们就可以理解为这堆逻辑电路可以代表着我们想要实现的二进制计算</span></p>
+<p><span style="font-size: medium;">其实电路仍旧是电路</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">试想一个问题</span></p>
+<h3>软件到底是如何控制硬件的?</h3>
+<p><span style="font-size: medium;">你可能会想到,软件是用高级语言编写的,高级语言被翻译成汇编语言,汇编语言会翻译成机器可以是别的机器语言</span></p>
+<p><span style="font-size: medium;">这样计算机就可以执行了</span></p>
+<p><span style="font-size: medium;">但是到底是如何控制的?</span></p>
+<p><span style="font-size: medium;">之所以说软件控制硬件</span></p>
+<p><span style="font-size: medium;">是不是因为计算机程序作为计算机硬件的输入,然后计算机硬件看似可以理解为经过计算之后,可以得到输出?</span></p>
+<p><span style="font-size: medium;">看似是这样子的</span></p>
+<p><span style="font-size: medium;"><img src="data:image/png;base64,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tiAIgiCEw+HM404+n+/KlSt0h3STXMYH6HTtdCVQlmWz2VxwB6q8vPzp06dZw/S8dlGOYRnaU3bFtv02N698s1qtFy5ccLlcbAqJx+Opq6szGAy0TWEKyLeUh8EmvEWjUVql6C1btltlsBYDABzkW4YkYVdse1682Tml94AJIZIkra6uKhsWVSdeebplWb548eKDBw/q6+srKir8fj+vl2gqr8bj8QwfZ/4037CC3bhx49133809Pt2jSLQtUC7wMTU1df36dWVMPB4/efJk8raRSISOcdOhIdW/HKvVqmyAkjvCkiRlvmErCMI2c25nT5aew1TMZvP58+fPnTt38ODBgneilG++pev8sg4ya2oLyLeU7HY7Lb3BYJC2cbW1tbs8PUTPGVJYDhw8ePDcuXPnz583m80F72RnOZ3OXK6qU07AJoR0dXW53W7aNNlsNrfbTRSzx3VCi1O/DxZB7ujouHXrVi7/aJOX/2DvbGxsKBf4sFgsIyMjsiwfO3ZMdfA+ny/liWdPI83Pzycv35C1U7y8vPz2229n/RW2Q7ddY+0SaQdvqjG551skElEutbWxsbG8vExfR6NROkJICKFPsz158oQQUkC+McqOuclkevz4cXt7e11dXR6/247SbYYUkEj6uammohxR/P3338vKytLVsGRut1v1aGxfX19jY6Pf779+/bp+Zo4U3SLIhJBEInHixIkc7wSUlpaytsDr9XZ3d7Pm6cCBA2wn7IUgCKr2S5blUCik+jraeH377bcWi8VkMhXW31lbW8NqRjtlR6ZBppRvvtHFrsh/i1exUxwMBtlya0oF5Bt7XxV2+PBho9FICJEkCVP5C3Po0CFdTYNM5vF46BMmtA9H16ChT/ezmEAgoOrfyLLc2tqa/GylIAgzMzNdXV3l5eXd3d0cP86o98LW09Nz4cKFHIOVVc3n8925cyfHDWmuEELGx8eHhoaUH5nN5k8++aS6unpycrKzszO516B65kk5EU4URdppkiRJNbQVj8d9Ph9dPALy8uOPP2q38khe+caSQZKkrq6uHNcQIQXl29GjR+kLl8tFU85sNg8MDNDXXV1djY2Nr7/+eob/wgJUhoeH9b/ySCgUstlsqnsr1dXVGfpe9H5/uv87QhCEkZERm83m8/kyLO293+m9sJFUF6pvvPFGeXl5cmQ8Hl9ZWVlaWqqrq1NNFQmHw5kf2amurpYkid2hZTIsc5VIJGiHXfnMkzLhlK9VPSOTyeR0OltbWzs7O9MdEqRUX1+v6f5zzzdZlhcXF//++++ysjLVYiWhUCjzIGG++RaJROifsVjsxYsXylEHl8vldDrn5+fD4XBzc7NyK6vVmnzk6X6dYnPmzJm9PoTsUk4XUC6uRgipqqpSnlCLxZI84Ui50CghpKWlhe8BpJIMTwfv4Ii2coIi7Dj6Pxrv91lqyLf9onjyDYmktRz/hvM9p6/swKEBAADoBgobAABwBYUNAAC4gsIGAABcQWEDAACuoLABAABXUNgAAIArJbFYbBe+Bv+dpqboc0XJ/21K0UK+aap48g2JpLWSEk1q0D5YBBlypM9HXPcqDLSm21OPRNpftDinGIoEAACuoLABAABXUNgAAIArKGwAAMAVFDYAAOAKChsAAHAFhQ0AALiCwgYAAFxBYQMAAK6gsAEAAFdQ2AAAgCtYBJkHxbMobY6Qb5oqnnxDImkNiyBDFrpdRhZr13JJt6ceibS/YBFkAACALFDYAACAKyhsAADAFRQ2AADgCgobAABwBYUNAAC48uqufdPCwsKufVexefbs2V4fgu4g37RTVPmGRNqPdqmwNTc3f/nll6+99lrWyH///RdhBYTV19dnjSkeyDetw4ok39ra2pBImoY5HI6sMQXYpcI2OTmp52cw+QjLGlM8kG+7EJY1hgNjY2M6PwschGWNKQDusQEAAFdQ2AAAgCu7tAgyAADALnmZXiwWy/ApwhCGMIQhDGE6DMNQJAAAcAWFDQAAuILCBgAAXEFhAwAArqCwAQAAV1DYAACAKyhsAADAFRQ2AADgCgobAABwBYUNAAC4gsIGAABc+R/aDFFhsJM/WAAAAABJRU5ErkJggg==" alt="" /></span></p>
+<p><span style="font-size: medium;">但是到底是怎么控制的呢?</span></p>
+<p><span style="font-size: medium;">如果这么想我感觉想不通,软件怎么能控制硬件呢?</span></p>
+<p><span style="font-size: medium;">如果换一种思维方式或许更好理解</span></p>
+<p><span style="font-size: medium;"><img src="data:image/png;base64,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" alt="" /></span></p>
+<p><span style="font-size: medium;">其实跟上一个图是一样的,但是思维方式不一样</span></p>
+<p><span style="font-size: medium;">此处把计算机硬件作为中心,不是说你把程序输入,而是计算机硬件 读取了计算机程序&nbsp; 然后经过处理,产生了输出</span></p>
+<p><span style="font-size: medium;">看似一样的不都是计算机程序作为输入&nbsp;&nbsp;&nbsp; 经过计算机硬件产生输出吗</span></p>
+<p><span style="font-size: medium;">其实差别非常大</span></p>
+<p><span style="font-size: medium;">上面的图,你可能会理解为软件控制硬件,但是软件如何控制硬件?根本就没有办法控制</span></p>
+<p><span style="font-size: medium;">下面的图是硬件控制硬件,通过你告诉的方式(计算机程序)&nbsp; 我经过一系列的电路的通断,我产生了指定的结果,因为我本身就是一直在操作电路,硬件自然会产生变化</span></p>
+<p><span style="font-size: medium;">想一下计算机的启动过程,通电之后,是不是有了心跳之后,就不断地在执行运算,读取指令译码执行等等</span></p>
+<p><span style="font-size: medium;">最初启动的还不是硬件么</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">所以,个人理解</span></p>
+<p><span style="font-size: medium;"><strong>对于计算机来说,<span style="background-color: #ffff00;">不存在软件控制硬件</span></strong></span></p>
+<p><span style="font-size: medium;"><strong><span style="background-color: #ffff00;">而是硬件 读取了你给出来的指令&nbsp; 控制硬件</span>&nbsp;&nbsp; </strong></span></p>
+<p><strong><span style="font-size: medium;">软件不过是存储起来的指令,整个</span><span style="font-size: medium;">计算机只是逻辑电路和等待执行的指令</span></strong></p>
+<p><span style="font-size: medium;"><strong>电路上电之后,跟随频率不断地执行指令,软件就好像是一个无限的纸带,纸带上布满了指令</strong></span></p>
+<p><span style="font-size: medium;"><strong>计算机就这么一条条的不嫌累的执行着,软件只不过是人机交互的方式而已,计算机永远是那个计算机,你操作不了她</strong></span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<h3>计算机重要的思维方式</h3>
+<p><span style="font-size: medium;"><strong>这几个思维方式看似简单,但是却融入到无数的编写规范设计思维里面了</strong></span></p>
+<p><span style="font-size: medium;">抽象 封装 接口 规范 解耦&nbsp; </span></p>
+<p><strong>&nbsp;</strong></p>
+<p><span style="font-size: medium;"><strong>抽象</strong>将复杂物体的一个或者几个特性去掉,抽取他们共性的部分,这就是抽象</span></p>
+<p><span style="font-size: medium;">比如操作系统管理硬件资源,IO设备抽象为文件</span></p>
+<p><span style="font-size: medium;">比如下图,他们都是形状</span></p>
+<p><span style="font-size: medium;"><img src="data:image/png;base64,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" alt="" /></span></p>
+<p><strong><span style="font-size: medium;">抽象的形式是统一</span></strong></p>
+<p><strong><span style="font-size: medium;">抽象的目的是简化</span></strong></p>
+<p><span style="font-size: medium;">既然是去掉个性,保留抽取共性,所有的共性组合在一起也就是统一了形式</span></p>
+<p><span style="font-size: medium;">这种统一后的形式就是一种由各个共性的点组成的一类意识形态上的新事物</span></p>
+<p><span style="font-size: medium;">这个新事物就共性来说,与原有的事物放到一起进行抽象得到的抽象结果还是这个抽象后的事物本身,对吧</span></p>
+<p><span style="font-size: medium;">说起来绕口,其实就好像再说杯子和玻璃杯 瓷杯都是杯子一样,虽然这么说有点别扭</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">所以抽象的形式是统一,得到一种意识形态上的新事物</span></p>
+<p><span style="font-size: medium;">这些共性的点,对于抽象后的新事物是他的特性</span></p>
+<p><span style="font-size: medium;">但是这些特性不是具体的</span></p>
+<p><span style="font-size: medium;">在计算机的世界里面,抽象过后,还必要要实现,计算机不懂得自然语言也没有任何思想</span></p>
+<p><span style="font-size: medium;">负责抽象的人必须要提供具体的实现</span></p>
+<p><span style="font-size: medium;">比如操作系统把IO设备抽象为文件,那他就把共性的读写访问方法提供出来,假设是 read 和 write</span></p>
+<p><span style="font-size: medium;">不管到底是磁盘还是磁带,read就是读取内容,write就是写出内容,到底是怎么实现的,调用者不需要关注</span></p>
+<p><span style="font-size: medium;">所以抽象最终的目的就是简化</span></p>
+<p><span style="font-size: medium;">简化后你不用再关注IO设备具体是什么,哪个厂家生产的,使用了什么技术(去掉的特性)</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">也可以说是<strong>屏蔽</strong>了底层的实现细节</span></p>
+<p><span style="font-size: medium;">屏蔽的近义词可以说是封装,把底层的实现细节封装起来,提供统一的访问形式</span></p>
+<p><span style="font-size: medium;">封装后提供统一访问形式,也就是提供统一的接口 就像上面提到的read write方法</span></p>
+<p><span style="font-size: medium;">接口可以理解为对接的端口 就好像电脑上预留给投影仪使用的十五针VGA插口一样</span></p>
+<p><span style="font-size: medium;">既然形式上完成了统一</span></p>
+<p><span style="font-size: medium;">访问形式上也完成了统一</span></p>
+<p><span style="font-size: medium;">那么这就相当于一种<strong>规范</strong>化的形式</span></p>
+<p><span style="font-size: medium;">所以规范和接口 又有近似的意思</span></p>
+<p><span style="font-size: medium;">都可以理解为一种约定好的<strong>协议</strong>,约定好的形式,一种规矩,规矩就可以做到完全的解耦</span></p>
+<p><span style="font-size: medium;">接口提供访问的具体形式,但是不提供细节</span></p>
+<p><span style="font-size: medium;">规范指导实现的最终目的与要求,但是不提供细节</span></p>
+<p><span style="font-size: medium;">有了封装,规范,接口的概念,也就很大程度的完成了解耦</span></p>
+<p><span style="font-size: medium;">完成了解耦很多时候就可以把问题<strong>分层</strong>的处理对待</span></p>
+<p><span style="font-size: medium;">TCP/IP的分层概念就是如此,每一层封装上一层的信息</span></p>
+<p><span style="font-size: medium;">层与层之间按照约定的规范协议进行对接,各司其职,各层做各层的事情</span></p>
+<p><span style="font-size: medium;">这样既可以不再一条道走到黑,就好像你回家可能走几分钟坐公交然后坐地铁一样</span></p>
+<p><span style="font-size: medium;">这些概念</span></p>
+<p><strong><span style="font-size: medium;">抽象/封装/接口/规范/协议/屏蔽/分层</span></strong></p>
+<p><span style="font-size: medium;">贯穿了计算机整个的发展</span></p>
+<p><span style="font-size: medium;">抽象-&gt;统一形式-&gt;提供统一接口,进而隐藏底细节实现,从而简化了访问</span></p>
+<p><span style="font-size: medium;">抽象-&gt;统一形式-&gt;提供统一规范,进而可以解耦独立发展,而且还能够无缝对接</span></p>
+<p><span style="font-size: medium;">这两种模式最为常见</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">其实提供统一接口一般是指个体</span></p>
+<p><span style="font-size: medium;">如果是一个生态链(技术链)上所有的个体,都设定好了指定形式的接口</span></p>
+<p><span style="font-size: medium;">这就是规范了,有了规范,就很容易出现技术体系</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">编程语言的发展是不断地屏蔽底层,不断地进行封装</span></p>
+<p><span style="font-size: medium;">面向对象的程序设计语言中大多数时候你都在做抽象,事物抽象成类</span></p>
+<p><span style="font-size: medium;">面向接口的编程就是调用者与实现者进行解耦,通过接口进行对接</span></p>
+<p><span style="font-size: medium;">虚拟机规范只提供要求设计思路,但是不提供具体的实现要求,厂家可以自行定制</span></p>
+<p><span style="font-size: medium;">虚拟机规范提供了字节码规范,和虚拟机规范,相当于规定了输入和输出</span></p>
+<p><span style="font-size: medium;">只要按照规范的字节码都可以运行在虚拟机上正确运行,同样的字节码也必然有一致性的结果</span></p>
+<p><span style="font-size: medium;">servlet规范让servlet和servlet容器各自独立发展,纵然它们相互依存</span></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-06-29 14:59</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9243484" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9243484);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9243484, cb_entryCreatedDate = '2018-06-29 14:59', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

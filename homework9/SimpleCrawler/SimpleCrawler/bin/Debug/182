@@ -1,0 +1,761 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="Origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>最佳实践系列 - 随笔分类 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+
+<div class="entrylist">
+    <h1 class="entrylistTitle">
+        
+随笔分类 - 最佳实践系列
+
+    </h1>
+    <div class="entrylistDescription">
+        
+
+    </div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/whitepaper.html">禧云数芯大数据平台技术白皮书</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：白皮书首次完整介绍了我司数据中台的数据资产管理、数据开放共享、开发协作调度、数据采集与迁移管理、数据可视化及自助分析、平台运维管控六大技术领域，并从抽象出来的平台支撑、数据管理和数据产品三大体系逐一拆开讲解。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/whitepaper.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/whitepaper.html" title="permalink">2020-01-02 23:33</a>
+旁观者
+ 阅读 (324) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/whitepaper.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=12142805" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/datamdev.html">谈谈数据中台技术体系</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：我们的数据中台在最近两年发展得更有体系了，这与公司裂变、业务规模激增引发的，当然也跟我们高屋建瓴、高举高打分不开。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/datamdev.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/datamdev.html" title="permalink">2019-11-11 08:22</a>
+旁观者
+ 阅读 (1030) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/datamdev.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=11832735" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/10498110.html">异地双活的四个误区</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：切多活有什么常见误区呢？
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/10498110.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/10498110.html" title="permalink">2019-03-08 20:39</a>
+旁观者
+ 阅读 (962) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/10498110.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=10498110" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy5.html">研发哲学第五条：一定要有后备方案</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：结合研发哲学第三条：『这个世界没有什么救世主』，
+我们终于深刻地认识到研发哲学第五条：
+『一定要有后备方案。』
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy5.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy5.html" title="permalink">2018-11-12 20:45</a>
+旁观者
+ 阅读 (560) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy5.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=9948930" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/eight.html">新DevOps八荣八耻</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：“国王做梦，”他说，“首相筑梦。”
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/eight.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/eight.html" title="permalink">2018-10-03 01:30</a>
+旁观者
+ 阅读 (982) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/eight.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=9739026" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/refactoring.html">当我们谈重构的时候我们想谈什么？</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：你的业务已经完成了从0到1，正在从1走向10，或者从10走向100，请记住下面这些忠言。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/refactoring.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/refactoring.html" title="permalink">2018-04-16 11:51</a>
+旁观者
+ 阅读 (813) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/refactoring.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (9)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=8855175" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/7047366.html">我当初是怎么管理技术团队的</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：我们认为管理技术人才是一门学问，第一，外行不可能领导内行，第二，靠挖人，靠猎头，一朝一夕之间不可能组建一支能打硬仗的技术团队，那只能攒出乌合之众。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/7047366.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/7047366.html" title="permalink">2017-06-19 09:52</a>
+旁观者
+ 阅读 (3104) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/7047366.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (2)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7047366" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/kickoff.html">如何从零开始搭建一个技术平台？</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：如果让你把下面这套技术体系串联起来，从零开始构建一个技术平台，你如何做需求分析呢？要点就是顺着 场景——>故事——>信息架构——>业务流程——>版本以及版本包含的功能点捋。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/kickoff.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/kickoff.html" title="permalink">2016-04-14 18:27</a>
+旁观者
+ 阅读 (6777) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/kickoff.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (6)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5392201" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/rightThings.html">我们过去几年做对了哪些事</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：我们不能只是为了不白交学费而整理错题集，还需要梳理过去几年我们做对了哪些事情，让正确的行为一代一代传承下去。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/rightThings.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/rightThings.html" title="permalink">2015-06-26 09:40</a>
+旁观者
+ 阅读 (4821) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/rightThings.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (3)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4601548" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy.html">我们的研发哲学</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：1，Don't make me think；2，If it hurts, do it more and often；3，这个世界从来没有什么救世主；4，没有苦劳，只有功劳。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy.html" title="permalink">2015-04-09 20:00</a>
+旁观者
+ 阅读 (3144) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/philosophy.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4411393" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/tenpatterns.html">适用于研发基层员工的十个行为模式</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：<img src="http://ww1.sinaimg.cn/cmw205/62a92ba0tw1egeutof4i9j20p010a77d.jpg" class="desc_img"/>职场、研发、意识，都有模式。
+分歧升级模式任务已读回执模式大事件模式挑战应答模式分类处理模式等等。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/tenpatterns.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/tenpatterns.html" title="permalink">2014-05-15 18:09</a>
+旁观者
+ 阅读 (3004) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/tenpatterns.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3730579" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/Amoeba.html">研发阿米巴组织的运行逻辑</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：我们认为，数以百计人员组成的大型研发组织，或许可以划分为更小的“集团”，即子部门，这些组织的负责人可以推动自我进化自我迭代，在某种程度上属于阿米巴组织。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/Amoeba.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/Amoeba.html" title="permalink">2014-03-15 14:23</a>
+旁观者
+ 阅读 (4813) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/Amoeba.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3601989" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/rule2.html">Web开发基本准则-55实录-缓存策略</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：这里的“缓存”概念不只限于服务器端的“缓存”。关键词：会话串号，Cache-Control头域，缓存穿透，缓存集体失效，缓存重建，缓存雪崩，缓存永不过期，缓存计数器。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule2.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule2.html" title="permalink">2013-10-27 20:27</a>
+旁观者
+ 阅读 (9585) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule2.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (1)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3391189" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/rule1.html">Web开发基本准则-55实录-Web访问安全</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：Web开发工程师请阅读下面的前端开发准则，这是第一部分，强调了过去几年里我们注意到的Web工程师务须处理的Web访问安全基础点。尤其是一些从传统软件开发转入互联网开发的工程师，请仔细阅读，不要因为忽视这些基础点而制造一个又一个的漏洞或突发事件。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule1.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule1.html" title="permalink">2013-10-15 12:15</a>
+旁观者
+ 阅读 (8694) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/rule1.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (7)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3369977" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/p/7details.html">（研发系）职业化7个细节</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：继《职业化之可以固化的六个工作模式》之后，再放出职业化的7个细节。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/p/7details.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/p/7details.html" title="permalink">2013-07-10 18:45</a>
+旁观者
+ 阅读 (3742) |         <a href="https://www.cnblogs.com/zhengyun_ustc/p/7details.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3182647" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/05/09/frontendoptimize.html">前端工程打开速度优化的循序渐进总结</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：面向C开发的前端工程，当功能稳定之后，就需要持续优化打开速度，达到3.5秒以内的首页打开时间、1.5秒以内的首屏渲染时间。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/05/09/frontendoptimize.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/05/09/frontendoptimize.html" title="permalink">2013-05-09 16:20</a>
+旁观者
+ 阅读 (10559) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/05/09/frontendoptimize.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (5)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3069239" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/03/28/sixpattern.html">职业化之可以固化的六个工作模式</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：总有一些工作套路是可以带走的
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/03/28/sixpattern.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/03/28/sixpattern.html" title="permalink">2013-03-28 17:20</a>
+旁观者
+ 阅读 (4344) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/03/28/sixpattern.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2987161" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html">最佳实践系列：前端代码标准和最佳实践</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：关键词列表：
+渐进增强；Combo Handler；Quirks Mode；浏览器盒子模型；选择器特殊性；Spacer Image；CSS Sprites；PNG8；
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html" title="permalink">2012-12-19 23:33</a>
+旁观者
+ 阅读 (4820) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2825695" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：当线上出现诡异问题，
+当你意识到靠现有的日志无法定位问题时，
+当现象难以在你的开发环境重现时，
+请不要执著于枯坐肉眼看代码，因为：一）不一定是你代码逻辑问题，可能是脏数据造成的，是老业务数据造成的，是分布式环境造成的，是其他子系统造成的；二）线上业务处于不稳定中，条件不允许问题定位无限期。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html" title="permalink">2012-12-15 16:43</a>
+旁观者
+ 阅读 (4127) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2819450" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html">55最佳实践系列：MongoDB最佳实践</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：从Application Design、Implementation、Optimization、Data Safety and Consistency和Administration等角度汇总了mongodb的最佳实践。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html" title="permalink">2012-12-15 15:48</a>
+旁观者
+ 阅读 (10138) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (3)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2819392" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+            <div class="postSeparator"></div>
+        <div class="entrylistItem">
+            <div class="entrylistPosttitle">
+                
+<a class="entrylistItemTitle" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html">管理杂谈&#183;学习东北战争好榜样</a>
+
+            </div>
+            <div class="entrylistPostSummary">
+                
+<!--Post Text-->
+    <div class="c_b_p_desc">
+        摘要：从最开始出关的匆忙上阵、缺少武器弹药、节节败退、老底子被打光、成群结队开小差的逃兵、迷茫沮丧，到一年后数百万装备整齐、挑着狗皮帽子沿路炫耀武力的军团入关，这中间到底发生了什么？饭否时代某兴曾说过：“创业几年，我对1949年之前的共產党人越来越佩服。和政治理念无关，纯粹是对他们能在那种艰苦的环境下生存并壮大起来觉得简直不可思议”，确实是奇迹，但他们的成功绝非偶然。
+        <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+            </div>
+            <div class="entrylistItemPostDesc">
+                
+
+<!--Post Desc-->
+posted @ <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html" title="permalink">2012-05-01 23:11</a>
+旁观者
+ 阅读 (2711) |         <a href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html#FeedBack" title="comments, pingbacks, trackbacks">
+            评论 (0)
+        </a>
+    <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2478320" rel="nofollow">编辑</a>
+
+            </div>
+        </div>
+
+    <p>
+        
+
+
+
+    </p>
+</div>
+
+
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

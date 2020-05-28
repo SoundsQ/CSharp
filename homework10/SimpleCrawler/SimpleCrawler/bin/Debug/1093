@@ -1,0 +1,835 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第3页 - 经典鸡翅 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jichi/custom.css?v=6wtfTBGNfhWFL7iH6gCJo&#x2B;5x&#x2B;js=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jichi/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jichi/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jichi/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 474324;
+        var currentBlogApp = 'jichi';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jichi/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jichi/">经典鸡翅</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jichi/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%BB%8F%E5%85%B8%E9%B8%A1%E7%BF%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/jichi/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+175&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+54</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/jichi/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/jichi/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/jichi/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/jichi/default.html?page=9">9</a>
+    <a href="https://www.cnblogs.com/jichi/default.html?page=4">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2020/01/07.html">2020年1月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12163777.html">
+    SpringBoot集成Mybatis动态多数据源后，MybatisPlus的IPage失效的问题解决方案
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 之前做数据抽取的时候，搭了一个mybatis动态数据源切换的架子。方便他们写抽取的代码。今天同事问我，架子里面的mybatisplus的IPage失效了是什么问题。想了一下，应该是写动态数据源的时候，我自定义的mybatis的配置覆盖了已有的配置。于是我让他先把我写的配置进行删除，看是否正常。            <a href="https://www.cnblogs.com/jichi/p/12163777.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-07 21:15 经典鸡翅 阅读 (799) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12163777" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2020/01/06.html">2020年1月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12158537.html">
+    Java实现上传文件到指定服务器指定目录
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言需求 使用freemarker生成的静态文件，统一存储在某个服务器上。本来一开始打算使用ftp实现的，奈何老连接不上，改用jsch。毕竟有现成的就很舒服，在此介绍给大家。 具体实现 引入的pom 建立实体类 建立文件上传工具类 属性我都写在Spring的配置文件里面了。将这个类托管给spring            <a href="https://www.cnblogs.com/jichi/p/12158537.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-06 21:10 经典鸡翅 阅读 (1372) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12158537" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12158424.html">
+    SpringBoot中在普通类里面加载Spring容器中的类
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 在我们的工作中，经常会遇到需要在普通类中使用放在Spring容器中的类的情况。最常见的情况大概就是有一个类他的属性的是通过spring的配置文件读取的。这样这个类必然要交给Spring容器进行管理。这个时候如果我们在普通类中直接new这个类是不可以拿到的。属性值不会加载成功。下面介绍一个方法。            <a href="https://www.cnblogs.com/jichi/p/12158424.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-06 20:45 经典鸡翅 阅读 (254) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12158424" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2020/01/04.html">2020年1月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12142697.html">
+    重新精读《Java 编程思想》系列之final关键字
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在java中final关键字标识无法被修改。接下来从final修饰数据、方法和类进行介绍。 final数据 final用来告知编译器这一块数据是恒定不变的。数据恒定不变又如下作用： 1、一个永不改变的编译时常量。 2、一个在运行时被初始化的值，而你不希望他改变。 编译器常量的情况，编译器可以将常量值            <a href="https://www.cnblogs.com/jichi/p/12142697.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-04 21:53 经典鸡翅 阅读 (77) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12142697" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/22.html">2019年12月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12081210.html">
+    重新精读《Java 编程思想》系列之public，protected，private与无修饰符权限的区别
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 相信大家在平时的工作中对于public和private的修饰权限是用的比较多的。对于protected和无修饰符用的是比较少的。我也一样，在读书的时候，又看到了这个问题，于是，在此进行总结和详细的钻研，来认真区分这些修饰符。分享给大家，供大家参考。 导图 我们先来看一张总体的导图，对这几个访问            <a href="https://www.cnblogs.com/jichi/p/12081210.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-22 21:42 经典鸡翅 阅读 (65) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12081210" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/18.html">2019年12月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12064038.html">
+    重新精读《Java 编程思想》系列之向上转型与向下转型
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 今天重读了一下向上转型与向下转型，有些新的体会，了解了向上转型的好处，及如何向下转型。在此分享给大家。 向上转型 向上转型是用来表现新类和基类之间的关系。在传统中，由导出类转型成基类，在继承图中是向上移动的。因此称作向上转型。由于向上转型是从一个较专用类型向较通用类型转换，所以总是安全的。也就            <a href="https://www.cnblogs.com/jichi/p/12064038.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-18 22:13 经典鸡翅 阅读 (207) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12064038" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/16.html">2019年12月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12051979.html">
+    重新精读《Java 编程思想》系列之组合与继承
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java 复用代码的两种方式组合与继承。 组合 组合只需将对象引用置于新类中即可。 比如我们有一个B类，它具有一个say方法，我们在A类中使用B类的方法，就是组合。 在 java编程思想中，还介绍了四种初始化引用的方式。 1、在定义对象的地方。 2、在构造器中 3、在使用对象的时候，进行初始化，也叫            <a href="https://www.cnblogs.com/jichi/p/12051979.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-16 23:00 经典鸡翅 阅读 (61) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12051979" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/15.html">2019年12月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12045420.html">
+    重新精读《Java 编程思想》系列之类的访问权限
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java 中，我们用访问权限修饰词确定库中的哪些类对于使用者是可以使用的。 访问权限修饰词有 public，protected，private 和什么都不写。 那么对于类来说，我们只可以用 public 和什么都不写两种。 protected 和 private 是不可以直接修饰类的。 我们在编译器            <a href="https://www.cnblogs.com/jichi/p/12045420.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-15 21:10 经典鸡翅 阅读 (60) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12045420" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/13.html">2019年12月13日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12035170.html">
+    去掉 Idea 中注入 Mapper 警告的方法
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：使用 Idea 的时候，自动装配 Mybatis 的 mapper。会一直出现红色波浪线的警告。看着难受。下面提供几种方式 方式一 为 @Autowired 注解设置required = false 方式二 用 @Resource 替换 @Autowired 方式三 在Mapper接口上加上@Rep            <a href="https://www.cnblogs.com/jichi/p/12035170.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-13 15:06 经典鸡翅 阅读 (178) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12035170" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/12.html">2019年12月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12031279.html">
+    为什么说 Java 中只有值传递？
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：对于初学者来说，要想把这个问题回答正确，是比较难的。在第二天整理答案的时候，我发现我竟然无法通过简单的语言把这个事情描述的很容易理解，遗憾的是，我也没有在网上找到哪篇文章可以把这个事情讲解的通俗易懂。所以，就有了我写这篇文章的初衷。这篇文章中，我从什么是方法的实际参数和形式参数开始，给你讲解为什么说            <a href="https://www.cnblogs.com/jichi/p/12031279.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-12 19:56 经典鸡翅 阅读 (167) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12031279" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/10.html">2019年12月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12015254.html">
+    SpringBoot 发送邮件功能实现
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 有个小伙伴问我你以前发邮件功能怎么弄的。然后我就给他找了个demo，正好在此也写一下，分享给大家。 理清痛点 发送邮件，大家可以想一下，坑的地方在哪？ 我觉得是三个吧。 第一：邮件白名单问题。 第二：邮件超时问题。 第三：邮件带附件问题。 我下面的demo都会介绍这些问题及解决。 实现方案 准            <a href="https://www.cnblogs.com/jichi/p/12015254.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-10 10:45 经典鸡翅 阅读 (771) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12015254" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/09.html">2019年12月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/12013001.html">
+    SpringBoot+Mybatis 实现动态数据源切换方案
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 最近让我做一个大数据的系统，分析了一下，麻烦的地方就是多数据源切换抽取数据。考虑到可以跨服务器跨数据库抽数，再整理数据，就配置了这个动态数据源的解决方案。在此分享给大家。 实现方案 数据库配置文件 我们项目使用的是yml形式的配置文件，采用的是hikari的数据库连接池。第一步我们自然是配置多            <a href="https://www.cnblogs.com/jichi/p/12013001.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-09 19:33 经典鸡翅 阅读 (312) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12013001" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/02.html">2019年12月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11972929.html">
+    mySql的case when用法
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 有点忘了，记录下 写法一 写法二            <a href="https://www.cnblogs.com/jichi/p/11972929.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-02 19:57 经典鸡翅 阅读 (22) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11972929" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11972847.html">
+    mySql中The user specified as a definer (&#39;root&#39;@&#39;%&#39;) does not exist
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 最近往现场导了个库，发现功能报错，一看是视图报错，navicat一看，哎呦，直接报错。The user specified as a definer (&#39;root&#39;@&#39;%&#39;) does not exist。 解决办法 因为视图的人在创建的时候 他选择了定义者才能执行。于是当你切换到其他用户当然            <a href="https://www.cnblogs.com/jichi/p/11972847.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-02 19:41 经典鸡翅 阅读 (94) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11972847" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/12/01.html">2019年12月1日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11965106.html">
+    jquery获取表单中的数据
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：``` $(&amp;quot;#submitButton&amp;quot;).click(function(){ var data = {}; var t = $(&amp;#39;form&amp;#39;).serializeArray(); $.each(t, function() { data&amp;#160;[this.name] = this.value; }); alert(JSON.stringify(data)); }); ```            <a href="https://www.cnblogs.com/jichi/p/11965106.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-01 08:52 经典鸡翅 阅读 (34) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11965106" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/11/28.html">2019年11月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11952899.html">
+    antdesign的input增加自定义校验规则
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：``` rules: [ {required: true, message: &#39;请输入姓名&#39;}, {max: 16, message: &#39;姓名过长&#39;}, { validator: (rule, val, callback) = { var pattern = new RegExp(&quot;[`~!@ $^            <a href="https://www.cnblogs.com/jichi/p/11952899.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-28 18:50 经典鸡翅 阅读 (336) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11952899" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/11/25.html">2019年11月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11929617.html">
+    net.sf.json将string转为map
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景 改一个以前的项目，项目里只有这个包，虽然我想用gson或者fastjson，然而并不想引入新的jar。于是使用这个，特此记录，感觉贼不好用。 实现代码 entity.getData()的值：{aaa:bbb}            <a href="https://www.cnblogs.com/jichi/p/11929617.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-25 18:56 经典鸡翅 阅读 (287) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11929617" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11929560.html">
+    Js实现回车登录，监听回车事件
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：需求 项目有个回车登录功能，在此记录下 实现 我们应该监听当前登录页面的所有回车操作。            <a href="https://www.cnblogs.com/jichi/p/11929560.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-25 18:48 经典鸡翅 阅读 (373) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11929560" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11929523.html">
+    css实现图片动画效果
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：需求 项目里有个消息中心，当有消息的时候，小铃铛图标可以晃两下，提示当前有信息。 实现过程 书写css 使用css的keyframe属性，配合animation。 js配合 我们实现的效果应该是一进来的时候 晃两下，数据更新之后晃两下。js如下： 设置定时器的目的是让下次还能继续晃动，如果不拿掉，下            <a href="https://www.cnblogs.com/jichi/p/11929523.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-25 18:38 经典鸡翅 阅读 (339) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11929523" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/11/24.html">2019年11月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/11921541.html">
+    Freemarker + xml 实现Java导出word
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 最近做了一个调查问卷导出的功能，需求是将维护的题目，答案，导出成word，参考了几种方案之后，选择功能强大的freemarker+固定格式之后的wordxml实现导出功能。导出word的代码是可以直接复用的，于是在此贴出，并进行总结，方便大家拿走。 实现过程概览 先在word上，调整好自己想要            <a href="https://www.cnblogs.com/jichi/p/11921541.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-24 10:42 经典鸡翅 阅读 (293) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11921541" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/jichi/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/jichi/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/jichi/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/jichi/default.html?page=9">9</a>
+    <a href="https://www.cnblogs.com/jichi/default.html?page=4">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 经典鸡翅
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

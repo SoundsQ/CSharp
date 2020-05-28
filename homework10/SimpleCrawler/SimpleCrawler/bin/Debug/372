@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 最近被问到了线程池的相关问题。于是准备开始写一些多线程相关的文章。这篇将介绍一下线程池的基本使用。 Executors Executors是concurrent包下的一个类，为我们提供了创建线程" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java线程池详解及常用方法 - 经典鸡翅 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jichi/custom.css?v=6wtfTBGNfhWFL7iH6gCJo&#x2B;5x&#x2B;js=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jichi/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jichi/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jichi/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 474324;
+        var currentBlogApp = 'jichi';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jichi/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jichi/">经典鸡翅</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jichi/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%BB%8F%E5%85%B8%E9%B8%A1%E7%BF%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/jichi/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+175&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+54</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jichi/p/12560235.html">Java线程池详解及常用方法</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h3 id="前言">前言</h3>
+<p>最近被问到了线程池的相关问题。于是准备开始写一些多线程相关的文章。这篇将介绍一下线程池的基本使用。</p>
+<h3 id="executors">Executors</h3>
+<p>Executors是concurrent包下的一个类，为我们提供了创建线程池的简便方法。<br>
+Executors可以创建我们常用的四种线程池：<br>
+（1）newCachedThreadPool 创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。不设上限，提交的任务将立即执行。<br>
+（2）newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。<br>
+（3）newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。<br>
+（4）newSingleThreadExecutor 创建一个单线程化的线程池执行任务。</p>
+<h3 id="executors的坏处">Executors的坏处</h3>
+<p>正常来说，我们不应该使用这种方式创建线程池，应该使用ThreadPoolExecutor来创建线程池。Executors创建的线程池也是调用的ThreadPoolExcutor的构造函数。通过原来可以看出。<br>
+<img src="https://img2020.cnblogs.com/blog/1534147/202003/1534147-20200324142009400-236779916.png" alt=""><br>
+我们也看到了这里面的LinkedBlockingQueue并没有指定队列的大小是一个无界队列，这样可能会造成oom。所以我们要使用ThreadPoolExecutor这种方式。</p>
+<h3 id="threadpoolexecutor">ThreadPoolExecutor</h3>
+<p>通过源码看到ThreadPoolExecutor比较全的构造函数如下：</p>
+<pre><code>    public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue&lt;Runnable&gt; workQueue,
+                              ThreadFactory threadFactory,
+                              RejectedExecutionHandler handler) {
+        if (corePoolSize &lt; 0 ||
+            maximumPoolSize &lt;= 0 ||
+            maximumPoolSize &lt; corePoolSize ||
+            keepAliveTime &lt; 0)
+            throw new IllegalArgumentException();
+        if (workQueue == null || threadFactory == null || handler == null)
+            throw new NullPointerException();
+        this.corePoolSize = corePoolSize;
+        this.maximumPoolSize = maximumPoolSize;
+        this.workQueue = workQueue;
+        this.keepAliveTime = unit.toNanos(keepAliveTime);
+        this.threadFactory = threadFactory;
+        this.handler = handler;
+    }
+</code></pre>
+<p>分别解释一下参数的意义<br>
+corePoolSize：线程池长期维持的线程数，即使线程处于Idle状态，也不会回收。<br>
+maximumPoolSize：线程数的上限<br>
+keepAliveTime：空闲的时间，超过这个空闲时间，线程将被回收<br>
+unit：空闲时间的时间单位<br>
+workQueue：任务的排队队列，当线程都运行的时候，有空的线程将从队列汇总进行拿取<br>
+threadFactroy：当核心线程小于满线程的时候，又需要多加线程，则需要从工厂中获取线程<br>
+handler：拒绝策略，当线程过多的时候的策略</p>
+<h3 id="线程池针对于任务的执行顺序">线程池针对于任务的执行顺序</h3>
+<p>首先任务过来之后，看看corePoolSize是否有空闲的，有的话就执行。没有的话，放入任务队列里面。然后任务队列会通知线程工厂，赶紧造几个线程，来执行。当任务超过了最大的线程数，就执行拒绝策略，拒绝执行。</p>
+<h3 id="submit方法">submit方法</h3>
+<p>线程池建立完毕之后，我们就需要往线程池提交任务。通过线程池的submit方法即可。<br>
+submit方法接收两种Runable和Callable。<br>
+区别如下：<br>
+Runable是实现该接口的run方法，callable是实现接口的call方法。<br>
+callable允许使用返回值。<br>
+callable允许抛出异常。</p>
+<h4 id="提交任务的方式">提交任务的方式</h4>
+<p>Future<T> submit(Callable<T> task)：这种方式可以拿到返回的结果。<br>
+void execute(Runnable command)：这种方式拿不到。<br>
+Future&lt;?&gt; submit(Runnable task)：这种方式可以get，但是永远是null。</p>
+<h3 id="blockqueue的限制">blockqueue的限制</h3>
+<p>我们在创建线程池的时候，如果使用Executors。创建的是无界队列，容易造成oom。所以我们要自己执行queue的大小。</p>
+<pre><code>BlockingQueue queue = new ArrayBlockingQueue&lt;&gt;(512)
+</code></pre>
+<h3 id="拒绝策略">拒绝策略</h3>
+<p>当任务队列的queue满了的时候，在提交任务，就要触发拒绝策略。队列中默认的拒绝策略是 AbortPolicy。是直接抛出异常的一种策略。<br>
+如果是想实现自定义的策略，可以实现RejectedExecutionHandler 接口。<br>
+线程池提供了如下的几种策略供选择。<br>
+AbortPolicy：默认策略，抛出RejectedExecutionException<br>
+DiscardPolicy：忽略当前提交的任务<br>
+DiscardOldestPolicy：丢弃任务队列中最老的任务，给新任务腾出地方<br>
+CallerRunsPolicy：由提交任务者执行这个任务</p>
+<pre><code>ExecutorService executorService = new ThreadPoolExecutor(2, 2, 
+				0, TimeUnit.SECONDS, 
+				new ArrayBlockingQueue&lt;&gt;(512), 
+				new ThreadPoolExecutor.DiscardPolicy());
+</code></pre>
+<h3 id="捕捉异常">捕捉异常</h3>
+<p>如之前所说Callable接口的实现，可以获取到结果和异常。通过返回的Future的get方法即可拿到。</p>
+<pre><code>ExecutorService executorService = Executors.newFixedThreadPool(5);
+Future&lt;Object&gt; future = executorService.submit(new Callable&lt;Object&gt;() {
+        @Override
+        public Object call() throws Exception {
+            throw new RuntimeException(&quot;exception&quot;);// 该异常会在调用Future.get()时传递给调用者
+        }
+    });
+	
+try {
+  Object result = future.get();
+} catch (InterruptedException e) {
+} catch (ExecutionException e) {
+  e.printStackTrace();
+}
+</code></pre>
+<h3 id="正确构造线程池的方式">正确构造线程池的方式</h3>
+<pre><code>int poolSize = Runtime.getRuntime().availableProcessors() * 2;
+BlockingQueue&lt;Runnable&gt; queue = new ArrayBlockingQueue&lt;&gt;(512);
+RejectedExecutionHandler policy = new ThreadPoolExecutor.DiscardPolicy();
+executorService = new ThreadPoolExecutor(poolSize, poolSize,
+    0, TimeUnit.SECONDS,
+            queue,
+            policy);
+</code></pre>
+<h4 id="获取单个结果">获取单个结果</h4>
+<p>通过submit提交一个任务后，可以获取到一个future，调用get方法会阻塞并等待执行结果。get(long timeout, TimeUnit unit)可以指定等待的超时时间。</p>
+<h4 id="获取多个结果">获取多个结果</h4>
+<p>可以使用循环依次调用，也可以使用ExecutorCompletionService。该类的take方式，会阻塞等待某一任务完成。向CompletionService批量提交任务后，只需调用相同次数的CompletionService.take()方法，就能获取所有任务的执行结果，获取顺序是任意的，取决于任务的完成顺序。</p>
+<pre><code>void solve(Executor executor, Collection&lt;Callable&lt;Result&gt;&gt; solvers)
+   throws InterruptedException, ExecutionException {
+   
+   CompletionService&lt;Result&gt; ecs = new ExecutorCompletionService&lt;Result&gt;(executor);// 构造器
+   
+   for (Callable&lt;Result&gt; s : solvers)// 提交所有任务
+       ecs.submit(s);
+	   
+   int n = solvers.size();
+   for (int i = 0; i &lt; n; ++i) {// 获取每一个完成的任务
+       Result r = ecs.take().get();
+       if (r != null)
+           use(r);
+   }
+}
+</code></pre>
+<p>这个类是对线程池的一个包装，包装完后，听过他进行submit和take。</p>
+<h4 id="单个任务超时">单个任务超时</h4>
+<p>Future.get(long timeout, TimeUnit unit)。方法可以指定等待的超时时间，超时未完成会抛出TimeoutException。</p>
+<h4 id="多个任务超时">多个任务超时</h4>
+<p>等待多个任务完成，并设置最大等待时间，可以通过CountDownLatch完成：</p>
+<pre><code>public void testLatch(ExecutorService executorService, List&lt;Runnable&gt; tasks) 
+	throws InterruptedException{
+      
+    CountDownLatch latch = new CountDownLatch(tasks.size());
+      for(Runnable r : tasks){
+          executorService.submit(new Runnable() {
+              @Override
+              public void run() {
+                  try{
+                      r.run();
+                  }finally {
+                      latch.countDown();// countDown
+                  }
+              }
+          });
+      }
+	  latch.await(10, TimeUnit.SECONDS); // 指定超时时间
+  }
+</code></pre>
+<p>await是总的时间，即使100个任务，需要跑20分钟。我10s超时了 也停止了。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-24 17:21</span>&nbsp;
+<a href="https://www.cnblogs.com/jichi/">经典鸡翅</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12560235" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12560235);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 474324, cb_blogApp = 'jichi', cb_blogUserGuid = '116b895e-1033-4dd3-9e2a-08d644494d24';
+    var cb_entryId = 12560235, cb_entryCreatedDate = '2020-03-24 17:21', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 经典鸡翅
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

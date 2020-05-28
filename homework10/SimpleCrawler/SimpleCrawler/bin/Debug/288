@@ -1,0 +1,525 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="在前几讲里，我们逐渐实现了自己小模块的新闻列表展示、新闻详情展示功能，现在您已经初步有能力开发一个phpWeChat小模块了，本文将在已开发的hello world模块基础上，增加一个新的功能——新闻" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>10天学会phpWeChat——第五天：实现新闻投稿功能 - phpWeChat开发教程 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/phpwechat/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/phpwechat/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/phpwechat/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 325015;
+        var currentBlogApp = 'phpwechat';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/phpwechat/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/phpwechat/">phpWeChat教程</a>
+</h1>
+<h2>
+教你10天学会phpWechat，快速开发PC网站+微信公共号
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/phpwechat/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/phpWeChat%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/phpwechat/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+61&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+4</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6229845.html">10天学会phpWeChat——第五天：实现新闻投稿功能</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        在前几讲里，我们逐渐实现了自己小模块的新闻列表展示、新闻详情展示功能，现在您已经初步有能力开发一个phpWeChat小模块了，本文将在已开发的hello world模块基础上，增加一个新的功能——新闻投稿。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>在前几讲里，我们逐渐实现了自己小模块的新闻列表展示、新闻详情展示功能，现在您已经初步有能力开发一个phpWeChat小模块了，本文将在已开发的hello world模块基础上，增加一个新的功能&mdash;&mdash;新闻投稿。</p>
+<p>今天我们进入《10天学会phpWeChat》系列教程的第五天：实现新闻投稿功能，通过今天的学习，希望大家对phpWeChat的表单提交、数据入库有个清晰的认识。</p>
+<p>我们定义，投稿的链接为：http://www.example.com/index.php?m=hello&amp;a=tougao，如同以前的情况，目前直接访问改地址，肯定是报模板不存在的错误的，针对这个链接我们需要建立对应的模型处理函数、控制器路由以及对应的视图文件。</p>
+<p>1、创建投稿视图文件 template/default/tougao.html</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201612/1087254-20161228154304976-174207156.png" alt="" /></p>
+<p style="text-align: left;">在视图文件里，我们创建一个表单用来提交文章数据</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 2</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://www.w3.org/1999/xhtml"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 3</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 4</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="Content-Type"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="text/html; charset=utf-8"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;"> 5</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>投稿<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 6</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 7</span> 
+<span style="color: #008080;"> 8</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 9</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">form </span><span style="color: #ff0000;">action</span><span style="color: #0000ff;">="{U('hello','tougaosave')}"</span><span style="color: #ff0000;"> method</span><span style="color: #0000ff;">="post"</span><span style="color: #ff0000;"> name</span><span style="color: #0000ff;">="tougaoform"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">10</span>     标题：<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="text"</span><span style="color: #ff0000;"> name</span><span style="color: #0000ff;">="info[title]"</span><span style="color: #ff0000;"> size</span><span style="color: #0000ff;">="36"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;">11</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;">12</span>     内容：<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">textarea </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="info[content]"</span><span style="color: #ff0000;"> cols</span><span style="color: #0000ff;">="55"</span><span style="color: #ff0000;"> rows</span><span style="color: #0000ff;">="5"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">textarea</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">13</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">br </span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;">14</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="submit"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="投稿"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;">15</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">form</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">16</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">17</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>访问http://www.example.com/index.php?m=hello&amp;a=tougao，效果如下：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201612/1087254-20161228155325023-1117079647.png" alt="" /></p>
+<p style="text-align: left;">在以上的视图表单代码中，我们定义了form提交后的action为http://www.example.com/index.php?m=hello&amp;a=tougaosave。因此我们需要在控制器里添加这个case 'tougaosave'：路由来实现对应的数据保存逻辑。</p>
+<p style="text-align: left;">2、编辑前端控制器文件index.php</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 9</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">11</span> 
+<span style="color: #008080;">12</span>     !<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span>     <span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">16</span>         <span style="color: #0000ff;">case</span> 'index':
+<span style="color: #008080;">17</span>             <span style="color: #008000;">//</span><span style="color: #008000;">从数据表读取数据并赋给数组$data</span>
+<span style="color: #008080;">18</span>             <span style="color: #800080;">$data</span>=Hello::<span style="color: #000000;">dataList();
+</span><span style="color: #008080;">19</span> 
+<span style="color: #008080;">20</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">21</span>         <span style="color: #0000ff;">case</span> 'detail':
+<span style="color: #008080;">22</span>             <span style="color: #800080;">$data</span>=Hello::dataGet(<span style="color: #800080;">$id</span>); <span style="color: #008000;">//</span><span style="color: #008000;">$id 可以改成$_GET['id']</span>
+<span style="color: #008080;">23</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">24</span>         <span style="color: #0000ff;">case</span> 'tougao':
+<span style="color: #008080;">25</span>             
+<span style="color: #008080;">26</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">27</span>         <span style="color: #0000ff;">case</span> 'tougaosave':
+<span style="color: #008080;">28</span>             <span style="color: #008080;">print_r</span>(<span style="color: #800080;">$info</span><span style="color: #000000;">);
+</span><span style="color: #008080;">29</span>             <span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+</span><span style="color: #008080;">30</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">31</span>         <span style="color: #008000;">//</span><span style="color: #008000;">以下 case 条件仅为 示例。您可以根据业务逻辑自由修改和拓展
+</span><span style="color: #008080;">32</span> 
+<span style="color: #008080;">33</span> <span style="color: #008000;">        //case 'index':
+</span><span style="color: #008080;">34</span> 
+<span style="color: #008080;">35</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=index 时的逻辑
+</span><span style="color: #008080;">36</span> 
+<span style="color: #008080;">37</span> <span style="color: #008000;">            //break;
+</span><span style="color: #008080;">38</span> 
+<span style="color: #008080;">39</span> <span style="color: #008000;">        //case 'list':
+</span><span style="color: #008080;">40</span> 
+<span style="color: #008080;">41</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=list 时的逻辑
+</span><span style="color: #008080;">42</span> 
+<span style="color: #008080;">43</span> <span style="color: #008000;">            //break;
+</span><span style="color: #008080;">44</span> 
+<span style="color: #008080;">45</span> <span style="color: #008000;">        //以此类推...
+</span><span style="color: #008080;">46</span> 
+<span style="color: #008080;">47</span> <span style="color: #008000;">        //case '...':
+</span><span style="color: #008080;">48</span> 
+<span style="color: #008080;">49</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=... 时的逻辑
+</span><span style="color: #008080;">50</span> 
+<span style="color: #008080;">51</span> <span style="color: #008000;">            //break;</span>
+<span style="color: #008080;">52</span> 
+<span style="color: #008080;">53</span>         <span style="color: #0000ff;">default</span>:
+<span style="color: #008080;">54</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">55</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">56</span> ?&gt;</pre>
+</div>
+<p>在以上的控制器中，我们通过</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #0000ff;">case</span> 'tougaosave':
+<span style="color: #008080;">2</span>             <span style="color: #008080;">print_r</span>(<span style="color: #800080;">$info</span><span style="color: #000000;">);
+</span><span style="color: #008080;">3</span>             <span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+</span><span style="color: #008080;">4</span>             <span style="color: #0000ff;">break</span>;</pre>
+</div>
+<p>来实现提交的数据处理。这里暂时只打印下数据。</p>
+<p>效果如下：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201612/1087254-20161228155633242-225159733.png" alt="" /></p>
+<p style="text-align: left;">3、编辑模型类文件（include/hello.class.php），增加处理方法来实现数据真正入库</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span> <span style="color: #008000;">//</span><span style="color: #008000;"> +----------------------------------------------------------------------
+</span><span style="color: #008080;"> 3</span> <span style="color: #008000;">// | phpWeChat hello 操作类 Last modified 2016-12-28 00:02:22
+</span><span style="color: #008080;"> 4</span> <span style="color: #008000;">// +----------------------------------------------------------------------
+</span><span style="color: #008080;"> 5</span> <span style="color: #008000;">// | Copyright (c) 2009-2016 phpWeChat http://www.phpwechat.com All rights reserved.
+</span><span style="color: #008080;"> 6</span> <span style="color: #008000;">// +----------------------------------------------------------------------
+</span><span style="color: #008080;"> 7</span> <span style="color: #008000;">// | Author: 骑马的少年 &lt;phpwechat@126.com&gt; &lt;http://www.phpwechat.com&gt;
+</span><span style="color: #008080;"> 8</span> <span style="color: #008000;">// +----------------------------------------------------------------------</span>
+<span style="color: #008080;"> 9</span> <span style="color: #000000;">namespace wechat\Hello;
+</span><span style="color: #008080;">10</span> 
+<span style="color: #008080;">11</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;">12</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;">13</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;">14</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\DataInput;
+</span><span style="color: #008080;">15</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\DataList;
+</span><span style="color: #008080;">16</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;">17</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;">18</span> <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;">19</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">20</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">21</span> 
+<span style="color: #008080;">22</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Hello
+</span><span style="color: #008080;">23</span> <span style="color: #000000;">{
+</span><span style="color: #008080;">24</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #800080;">$mPageString</span>=''; <span style="color: #008000;">//</span><span style="color: #008000;"> 这个静态成员是系统自带，请勿删除</span>
+<span style="color: #008080;">25</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #800080;">$mArticleTable</span>='wechat_hello_article'<span style="color: #000000;">;
+</span><span style="color: #008080;">26</span>     
+<span style="color: #008080;">27</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> dataList()
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">29</span>         <span style="color: #008000;">//</span><span style="color: #008000;">DB_PRE常量是phpWeChat自带常量，指数据表前缀。</span>
+<span style="color: #008080;">30</span> 
+<span style="color: #008080;">31</span>         <span style="color: #800080;">$data</span>=<span style="color: #008080;">MySql</span>::fetchAll("SELECT * FROM `".DB_PRE.self::<span style="color: #800080;">$mArticleTable</span>."` ORDER BY `id` DESC"<span style="color: #000000;">);
+</span><span style="color: #008080;">32</span> 
+<span style="color: #008080;">33</span>         <span style="color: #0000ff;">return</span> <span style="color: #800080;">$data</span><span style="color: #000000;">;
+</span><span style="color: #008080;">34</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">35</span> 
+<span style="color: #008080;">36</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">function</span> dataGet(<span style="color: #800080;">$id</span><span style="color: #000000;">)
+</span><span style="color: #008080;">37</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">38</span>         <span style="color: #008000;">//</span><span style="color: #008000;">DB_PRE常量是phpWeChat自带常量，指数据表前缀。</span>
+<span style="color: #008080;">39</span> 
+<span style="color: #008080;">40</span>         <span style="color: #800080;">$id</span>=<span style="color: #008080;">intval</span>(<span style="color: #800080;">$id</span><span style="color: #000000;">);
+</span><span style="color: #008080;">41</span> 
+<span style="color: #008080;">42</span>         <span style="color: #800080;">$data</span>=<span style="color: #008080;">MySql</span>::fetchOne("SELECT * FROM `".DB_PRE.self::<span style="color: #800080;">$mArticleTable</span>."` WHERE `id` =".<span style="color: #800080;">$id</span><span style="color: #000000;">);
+</span><span style="color: #008080;">43</span> 
+<span style="color: #008080;">44</span>         <span style="color: #0000ff;">return</span> <span style="color: #800080;">$data</span><span style="color: #000000;">;
+</span><span style="color: #008080;">45</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">46</span> 
+<span style="color: #008080;">47</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">function</span> dataInsert(<span style="color: #800080;">$data</span><span style="color: #000000;">)
+</span><span style="color: #008080;">48</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">49</span>         <span style="color: #0000ff;">return</span> <span style="color: #008080;">MySql</span>::insert(DB_PRE.self::<span style="color: #800080;">$mArticleTable</span>,<span style="color: #800080;">$data</span><span style="color: #000000;">);
+</span><span style="color: #008080;">50</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">51</span> <span style="color: #000000;">}
+</span><span style="color: #008080;">52</span> ?&gt;</pre>
+</div>
+<p>在模型文件中，我们定义了dataInsert()方法来实现数据的数据库插入，此时我们正式修正控制器的操作：</p>
+<p>4、最终的前端控制器文件index.php</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 9</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">11</span> 
+<span style="color: #008080;">12</span>     !<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span>     <span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+</span><span style="color: #008080;">15</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">16</span>         <span style="color: #0000ff;">case</span> 'index':
+<span style="color: #008080;">17</span>             <span style="color: #008000;">//</span><span style="color: #008000;">从数据表读取数据并赋给数组$data</span>
+<span style="color: #008080;">18</span>             <span style="color: #800080;">$data</span>=Hello::<span style="color: #000000;">dataList();
+</span><span style="color: #008080;">19</span> 
+<span style="color: #008080;">20</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">21</span>         <span style="color: #0000ff;">case</span> 'detail':
+<span style="color: #008080;">22</span>             <span style="color: #800080;">$data</span>=Hello::dataGet(<span style="color: #800080;">$id</span>); <span style="color: #008000;">//</span><span style="color: #008000;">$id 可以改成$_GET['id']</span>
+<span style="color: #008080;">23</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">24</span>         <span style="color: #0000ff;">case</span> 'tougao':
+<span style="color: #008080;">25</span> 
+<span style="color: #008080;">26</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">27</span>         <span style="color: #0000ff;">case</span> 'tougaosave':
+<span style="color: #008080;">28</span>             <span style="color: #008000;">//</span><span style="color: #008000;">print_r($info);</span>
+<span style="color: #008080;">29</span> 
+<span style="color: #008080;">30</span>             <span style="color: #800080;">$op</span>=Hello::dataInsert(<span style="color: #800080;">$info</span><span style="color: #000000;">);
+</span><span style="color: #008080;">31</span> 
+<span style="color: #008080;">32</span>             <span style="color: #0000ff;">if</span>(<span style="color: #800080;">$op</span><span style="color: #000000;">)
+</span><span style="color: #008080;">33</span> <span style="color: #000000;">            {
+</span><span style="color: #008080;">34</span>                 <span style="color: #0000ff;">echo</span> '文章投稿成功，ID为'.<span style="color: #800080;">$op</span><span style="color: #000000;">;
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">36</span>             <span style="color: #0000ff;">else</span>
+<span style="color: #008080;">37</span> <span style="color: #000000;">            {
+</span><span style="color: #008080;">38</span>                 <span style="color: #0000ff;">echo</span> '文章投稿失败'<span style="color: #000000;">;
+</span><span style="color: #008080;">39</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">40</span>             <span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+</span><span style="color: #008080;">41</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">42</span>         <span style="color: #008000;">//</span><span style="color: #008000;">以下 case 条件仅为 示例。您可以根据业务逻辑自由修改和拓展
+</span><span style="color: #008080;">43</span> 
+<span style="color: #008080;">44</span> <span style="color: #008000;">        //case 'index':
+</span><span style="color: #008080;">45</span> 
+<span style="color: #008080;">46</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=index 时的逻辑
+</span><span style="color: #008080;">47</span> 
+<span style="color: #008080;">48</span> <span style="color: #008000;">            //break;
+</span><span style="color: #008080;">49</span> 
+<span style="color: #008080;">50</span> <span style="color: #008000;">        //case 'list':
+</span><span style="color: #008080;">51</span> 
+<span style="color: #008080;">52</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=list 时的逻辑
+</span><span style="color: #008080;">53</span> 
+<span style="color: #008080;">54</span> <span style="color: #008000;">            //break;
+</span><span style="color: #008080;">55</span> 
+<span style="color: #008080;">56</span> <span style="color: #008000;">        //以此类推...
+</span><span style="color: #008080;">57</span> 
+<span style="color: #008080;">58</span> <span style="color: #008000;">        //case '...':
+</span><span style="color: #008080;">59</span> 
+<span style="color: #008080;">60</span> <span style="color: #008000;">            //在此写 index.php?m=hello&amp;a=... 时的逻辑
+</span><span style="color: #008080;">61</span> 
+<span style="color: #008080;">62</span> <span style="color: #008000;">            //break;</span>
+<span style="color: #008080;">63</span> 
+<span style="color: #008080;">64</span>         <span style="color: #0000ff;">default</span>:
+<span style="color: #008080;">65</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">66</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">67</span> ?&gt;</pre>
+</div>
+<p>此时提交表单，提示如下图所示：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201612/1087254-20161228160148226-1758869117.png" alt="" /></p>
+<p style="text-align: left;">我们访问：http://www.example.com/index.php?m=hello&amp;a=index 模块首页链接，则刚才投稿的文章已经显示出来：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201612/1087254-20161228160241023-1513435882.png" alt="" /></p>
+<p style="text-align: left;">&nbsp;</p>
+<p style="text-align: left;">至此，一个带有前端投稿功能的小模块顺利完成。我们离毕业已经越来越近了！：）</p>
+<p style="text-align: left;">&nbsp;</p>
+<h3 class="myposts_title">《10天学会phpWeChat》系列教程传送门：</h3>
+<div class="PostList">
+<div class="postTitl2">
+<div class="PostList">
+<div class="postTitl2">
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_0" href="http://www.cnblogs.com/phpwechat/p/6287608.html">10天学会phpWeChat&mdash;&mdash;第十天：phpWeChat的会员注册、登录以及微信网页开发</a><span class="postDesc2">&nbsp;&nbsp;</span></div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_1" href="http://www.cnblogs.com/phpwechat/p/6287448.html">10天学会phpWeChat&mdash;&mdash;第九天：数据库增、删、改、查(CRUD)操作</a></div>
+<div class="postTitl2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_2" href="http://www.cnblogs.com/phpwechat/p/6287330.html">10天学会phpWeChat&mdash;&mdash;第八天：Form类，丰富表单提交的字段类型</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_3" href="http://www.cnblogs.com/phpwechat/p/6255929.html">10天学会phpWeChat&mdash;&mdash;第七天：创建一个自适应PC网站+H5移动端的模块</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_4" href="http://www.cnblogs.com/phpwechat/p/6238489.html">10天学会phpWeChat&mdash;&mdash;第六天：实现新闻的后台管理</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_5" href="http://www.cnblogs.com/phpwechat/p/6229845.html">10天学会phpWeChat&mdash;&mdash;第五天：实现新闻投稿功能</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_6" href="http://www.cnblogs.com/phpwechat/p/6229143.html">10天学会phpWeChat&mdash;&mdash;第四天：大U函数U()的使用</a></div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_7" href="http://www.cnblogs.com/phpwechat/p/6228058.html">10天学会phpWeChat&mdash;&mdash;第三天：从数据库读取数据到视图</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_8" href="http://www.cnblogs.com/phpwechat/p/6228007.html">10天学会phpWeChat&mdash;&mdash;第二天：hello world！我的第一个功能模块</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_9" href="http://www.cnblogs.com/phpwechat/p/6227036.html">10天学会phpWeChat&mdash;&mdash;第一天：核心框架的目录结构</a>&nbsp;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2016-12-28 16:06</span>&nbsp;
+<a href="https://www.cnblogs.com/phpwechat/">phpWeChat开发教程</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6229845" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(6229845);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 325015, cb_blogApp = 'phpwechat', cb_blogUserGuid = 'be81a4a9-0ecc-e611-845c-ac853d9f53ac';
+    var cb_entryId = 6229845, cb_entryCreatedDate = '2016-12-28 16:06', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 phpWeChat开发教程
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+</body>
+</html>

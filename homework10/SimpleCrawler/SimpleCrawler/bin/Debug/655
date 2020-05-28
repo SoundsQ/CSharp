@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - 宇的季节 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismore/bundle-lessismore.min.css?v=zbVMf2M2JAlJ02H61dM8SlvD_g-Qf1GNTSQ53ByHeUE" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/chenkeyu/custom.css?v=PWorSHehbhqUHKV6xDqPdT&#x2B;w/4Q=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismore/bundle-lessismore-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenkeyu/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenkeyu/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenkeyu/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 347497;
+        var currentBlogApp = 'chenkeyu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'LessIsMore';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <style type="text/css">
+    .Abstract
+    {
+        padding: 15px;
+        border: dotted 2px #999;
+        color: #999;
+        font-family: 'Microsoft Yahei';
+        border-radius: 4px;
+    }
+        
+    .First
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        text-align: left;
+        padding: 6px 20px;
+        color: #fff;
+        background: #55895B;
+        font-size: 20px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Second
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        padding: 6px 20px;
+        background: #93C8A2;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Third
+    {
+        margin: 10px 0;
+        padding: 6px 20px;
+        font-family: 'Microsoft Yahei';
+        margin: 15px 0;
+        font-size: 16px;
+        color: fff;
+        background: #C6EFD2;
+        color: #999;
+        border-radius: 4px;
+        clear: both;
+    }
+    .note
+    {
+        margin: 10px 0;
+        padding: 15px 20px 15px 60px;
+        background: #FCFAA9 url('http://images.cnblogs.com/cnblogs_com/libaoheng/305804/o_yellow-pin.png') no-repeat 20px 0;
+        font-size: 15px;
+        font-family: 'Microsoft Yahei';
+        box-shadow: 0 0 8px #aaa;
+        clear: both;
+    }
+        
+    .demo
+    {
+        text-align: left;
+        padding: 6px 20px;
+        overflow: auto;
+        border-radius: 4px;
+        background: orange;
+        color: #fff;
+        font-size: 16px;
+        clear: both;
+    }
+        
+    .cnblogs_Highlighter
+    {
+        border: solid 1px #ccc;
+        clear: both;
+    }
+        
+    .cnblogs_code
+    {
+        background: #EFFFF4;
+        border: solid 0px #939393;
+        font-size: 14px;
+        clear: both;
+        padding: 10px 20px;
+    }
+    .cnblogs_code pre
+    {
+        font-size: 14px;
+    }
+    .cnblogs_code span
+    {
+        font-family: Courier New;
+        font-size: 14px;
+    }
+</style>
+    </div>
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenkeyu/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%AE%87%E7%9A%84%E5%AD%A3%E8%8A%82">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/chenkeyu/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+141&nbsp;</span>
+<span id="stats_article_count">文章 - 
+1&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+40</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=15">15</a>
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=3">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/05/01.html">2019年5月1日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10801197.html">
+    Webpack &amp; The Hot Module Replacement热模块替换原理解析
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Webpack &amp; The Hot Module Replacement热模块替换原理解析 The Hot Module Replacement(HMR)俗称热模块替换。主要用来当代码产生变化后，可以在不刷新游览器的情况下对局部代码块进行替换更新。这在很多情况下都很有用，例如在处理弹出框时，使用HM            <a href="https://www.cnblogs.com/chenkeyu/p/10801197.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-05-01 23:13 宇的季节 阅读 (576) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10801197" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/03/14.html">2019年3月14日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10534258.html">
+    mysql 通过binlog 查看执行日志
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：环境：linux deepin15.7 mysql 5.7 1.开启binlog vim&#160;/etc/mysql/mysql.conf.d/mysqld.cnf 添加 log_bin =&#160;/var/log/mysql/mysql-bin.log 添加 server-id = 1 2.重启 mysql             <a href="https://www.cnblogs.com/chenkeyu/p/10534258.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-03-14 23:00 宇的季节 阅读 (943) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10534258" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/02/26.html">2019年2月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10440798.html">
+    git 指定要提交的ssh key
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：问题描述 ssh具有-i选项，用于告知在验证时使用哪个私钥文件： -i&#160;identity_file Selects a file from which the identity (private key) for RSA or DSA authentication is read. The defa            <a href="https://www.cnblogs.com/chenkeyu/p/10440798.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-02-26 22:51 宇的季节 阅读 (1747) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10440798" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/02/24.html">2019年2月24日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10425742.html">
+    react  为元素添加自定义事件监听器
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：https://zhenyong.github.io/react/tips/dom-event-listeners.html            <a href="https://www.cnblogs.com/chenkeyu/p/10425742.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-02-24 11:50 宇的季节 阅读 (2570) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10425742" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/02/06.html">2019年2月6日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10353395.html">
+    Ubuntu 16.04 安装Shadowsocket服务
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Shadowsocket 安装 #如果报错(locale.Error: unsupported locale setting) #export LC_ALL=C #升级PIP pip install --upgrade pip #如果报错(Please install setuptools.) #p            <a href="https://www.cnblogs.com/chenkeyu/p/10353395.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-02-06 01:50 宇的季节 阅读 (5) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10353395" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/01/20.html">2019年1月20日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10296588.html">
+    spring-boot-devtools 实现热部署
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：1.devtools spring为开发者提供了一个名为spring-boot-devtools的模块来使Spring Boot应用支持热部署，提高开发者的开发效率，无需手动重启Spring Boot应用。 2.项目搭建 本文是采用IDEA搭建的Spring Boot应用，通过spring-boot            <a href="https://www.cnblogs.com/chenkeyu/p/10296588.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-01-20 23:00 宇的季节 阅读 (12916) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10296588" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/12/08.html">2018年12月8日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10087319.html">
+    如何在一台主机上管理自己的多个git repository
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在使用git时,通常是直接ssh-keygen生成默认秘钥.然后将共钥添加到远程仓库,就可以访问了. 但是,当我们有多个repository时,这种方式就不适用了,因为一个秘钥只能关联一个远程仓库. 如果想同时管理多个repository,这时就需要生成多个秘钥,然后配置秘钥和远程仓库的关联. 步骤            <a href="https://www.cnblogs.com/chenkeyu/p/10087319.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-12-08 12:44 宇的季节 阅读 (135) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10087319" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/10/22.html">2018年10月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/9830387.html">
+    Linux deepin 中Jetbrain Idea等软件中文显示异常
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：解决方案：安装常用的中文字体 # 文鼎宋体[推荐] sudo apt install fonts-arphic-uming # 文鼎楷体[推荐] sudo apt install fonts-arphic-ukai # 思源宋体[推荐] sudo apt install fonts-adobe-so            <a href="https://www.cnblogs.com/chenkeyu/p/9830387.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-10-22 15:36 宇的季节 阅读 (656) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9830387" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/09/26.html">2018年9月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/9710603.html">
+    rvm 安装ruby环境报错curl: (35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：很可能是rvm仓库版本过低,运行以下命令: rvm get head            <a href="https://www.cnblogs.com/chenkeyu/p/9710603.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-09-26 22:56 宇的季节 阅读 (175) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9710603" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/08/05.html">2018年8月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/9420788.html">
+    IDEA，RubyMine等JetBrains系列软件通用破解教程
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：此教程不光适用于IDEA，还可以在RubyMine等JetBrains系列软件使用，亲测可用。 （1）下载安装你需要的JetBrains系列软件，安装完最好不要打开，直接finish，断开网络。 （2）下载最新的JetBrains Crack.jar包 例如：http://idea.lanyus.c            <a href="https://www.cnblogs.com/chenkeyu/p/9420788.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-08-05 01:07 宇的季节 阅读 (233) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9420788" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/chenkeyu/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=15">15</a>
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=3">下一页</a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 宇的季节
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

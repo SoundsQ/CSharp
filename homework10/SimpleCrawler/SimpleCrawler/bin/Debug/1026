@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第5页 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=4">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+    5
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=6">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/10/04.html">2019年10月4日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11622851.html">
+    asp.netcore 自动挡Docker Nginx Redis(滴滴滴,自动挡)
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 上一章介绍了Docker通过多条命令创建启动运行Docker容器,由此可见这样一个个去创建单独的容器也是相当麻烦的,比如要在某个复杂项目中用DB、缓存、消息等等,这样我们还要去一个个再创建,为此这时候需要用上我们三剑客中的一员大将自动挡的( DockerCompose ). Compose 是            <a href="https://www.cnblogs.com/yyfh/p/11622851.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-10-04 19:00 HueiFeng 阅读 (649) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11622851" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/30.html">2019年9月30日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11613763.html">
+    asp.netcore 3.0 Docker Nginx(震惊，原来docker是这样的！)
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：引言 Docker发布于2013年,Docker是dotCloud公司创始人在法国期间发起的一个公司内部项目,他是dotCloud多年云技术的一个革新.Docker在容器基础上进行了一步的封装,从网络进程到网络互连到进程隔离极大的减少了容器的创建和维护,Docker比虚拟机技术更加便捷. Docke            <a href="https://www.cnblogs.com/yyfh/p/11613763.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-30 18:06 HueiFeng 阅读 (1865) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11613763" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/29.html">2019年9月29日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11605832.html">
+    asp.net core IdentityServer4 实现 implicit(隐式许可)实现第三方登录
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 OAuth 2.0默认四种授权模式(GrantType) 授权码模式（authorization_code） &quot;简化模式（ implicit ）&quot; &quot;密码模式（resource owner password） credentials）&quot; &quot;客户端模式（client_credentials）&quot;             <a href="https://www.cnblogs.com/yyfh/p/11605832.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-29 09:34 HueiFeng 阅读 (667) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11605832" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/28.html">2019年9月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11601903.html">
+    asp.net core IdentityServer4 实现 resource owner password credentials(密码凭证)
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 OAuth 2.0默认四种授权模式(GrantType) 授权码模式（authorization_code） &quot;简化模式（implicit）&quot; &quot;密码模式（ resource owner password credentials ）&quot; &quot;客户端模式（client_credentials）&quot; 本            <a href="https://www.cnblogs.com/yyfh/p/11601903.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-28 10:34 HueiFeng 阅读 (562) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11601903" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/27.html">2019年9月27日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11595658.html">
+    asp.net core IdentityServer4 实现 Client credentials(客户端凭证)
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 OAuth 2.0默认四种授权模式(GrantType) 授权码模式（authorization_code） &quot;简化模式（implicit）&quot; &quot;密码模式（resource owner password credentials）&quot; &quot;客户端模式（ client_credentials ）&quot; 本            <a href="https://www.cnblogs.com/yyfh/p/11595658.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-27 09:11 HueiFeng 阅读 (594) 评论 (5)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11595658" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/26.html">2019年9月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11590383.html">
+    asp.net core IdentityServer4 概述
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：概览 现代应用程序看上去大都是这样的: 最常见的交互是： 浏览器与Web应用程序通信 Web应用程序与Web API通信（有时是独立的，有时是代表用户的） 基于浏览器的应用程序与Web API通信 本机应用程序与Web API通信 基于服务器的应用程序与Web API通信 Web API与Web A            <a href="https://www.cnblogs.com/yyfh/p/11590383.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-26 13:27 HueiFeng 阅读 (791) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11590383" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/19.html">2019年9月19日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11548776.html">
+    asp.net core 使用HttpClientFactory Polly实现熔断降级
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 在 NET Core2.1 后也是增加更新了很多东西,当然 HttpClientFactory 更新中的一部分.虽然说 HttpClient 这个实现了 disposable ,但使用它的时候用using包装块的方式通常不是最好的选择。处理 HttpClient ,底层 socket 套接字不            <a href="https://www.cnblogs.com/yyfh/p/11548776.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-19 13:13 HueiFeng 阅读 (2482) 评论 (14)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11548776" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/18.html">2019年9月18日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11541067.html">
+    asp.net core razor自定义taghelper
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：又一个新的名词(taghelper),通过taghelper是可以操作html标签、条件输出、更是自由添加内外元素。当然也内置了挺多的asp 开头的taghelper。 下面文章中也简单的带大家实现一个taghelper; 创建自定义html元素 创建一个类ButtonTagHelper tagNa            <a href="https://www.cnblogs.com/yyfh/p/11541067.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-18 12:10 HueiFeng 阅读 (633) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11541067" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/09/10.html">2019年9月10日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11496033.html">
+    dotnetcore实现Aop
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Asp.NetCore实现Aop,AspectCore实现Aop            <a href="https://www.cnblogs.com/yyfh/p/11496033.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-10 10:34 HueiFeng 阅读 (435) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11496033" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/08/31.html">2019年8月31日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11438500.html">
+    ASP.NET Core实现对象自动映射-AgileMapper
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：我们为什么要在对象之间做映射 处于耦合性或者安全性考虑或者性能考虑我们不希望将Model模型传递给他们,我们会在项目中创建一些DTO(Data transfer object数据传输对象),进行数据的传输. 概述 AgileMapper是一个零配置、高度可配置的对象-对象映射器,具有可查看的执行计划            <a href="https://www.cnblogs.com/yyfh/p/11438500.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-08-31 11:56 HueiFeng 阅读 (569) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11438500" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=4">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+    5
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=6">下一页</a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

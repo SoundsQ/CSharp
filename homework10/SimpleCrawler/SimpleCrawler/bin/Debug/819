@@ -1,0 +1,615 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - 烟花易冷人憔悴 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/FireworksEasyCool/custom.css?v=Ky6CidIH9BKKNCAIC11URez935A=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/FireworksEasyCool/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/FireworksEasyCool/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/FireworksEasyCool/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 481645;
+        var currentBlogApp = 'FireworksEasyCool';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/FireworksEasyCool/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/FireworksEasyCool/">烟花易冷人憔悴</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/FireworksEasyCool/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+</li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/FireworksEasyCool/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+33&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+101</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/FireworksEasyCool/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/FireworksEasyCool/default.html?page=1">1</a>
+    2
+    
+    
+    
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/07/04.html">2019年7月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/11133827.html">
+    Spring Boot使用MyBatis Generator、Swagger
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：MyBatis是Java目前主流的ORM框架，在Spring Boot中使用MyBatis可以参考这篇文章：http://www.ityouknow.com/springboot/2016/11/06/spring-boot-mybatis.html 这篇文章来将介绍MyBatis Generato            <a href="https://www.cnblogs.com/FireworksEasyCool/p/11133827.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-07-04 21:31 烟花易冷人憔悴 阅读 (982) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11133827" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/06/26.html">2019年6月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/11093466.html">
+    如何使用VS Code编写Spring Boot
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本篇文章将教你如何使用VS Code编写Spring Boot程序。你不需要用Eclipse，也不需要用IDEA。已经习惯了VS，其他的IDE…… 但不得不说VS Code很厉害，一用就喜欢。微软给VS Code提供了编写Java的插件，你可以在VS Code上愉快地写Java。 一、环境搭建 （1            <a href="https://www.cnblogs.com/FireworksEasyCool/p/11093466.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-06-26 19:50 烟花易冷人憔悴 阅读 (2028) 评论 (17)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11093466" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/03/22.html">2019年3月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10576911.html">
+    IdentityServer4-前后端分离之Vue（七）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 之前文章讲到如何使用Node.js+Express构建JavaScript客户端，实现前后端分离。本节将介绍如何使用Vue实现前后端分离，文中介绍Vue的知识比较基础，适合新手学习。 一、搭建Vue项目 前提条件：安装nodejs、webpack和vue-cli。这个网上很多教程，这里不多说。            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10576911.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-03-22 11:10 烟花易冷人憔悴 阅读 (1682) 评论 (9)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10576911" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/03/20.html">2019年3月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10562753.html">
+    RabbitMQ实战经验分享
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 最近在忙一个高考项目，看着系统顺利完成了这次高考，终于可以松口气了。看到那些即将参加高考的学生，也想起当年高三的自己。 下面分享下RabbitMQ实战经验，希望对大家有所帮助： 一、生产消息 关于RabbitMQ的基础使用，这里不再介绍了，项目中使用的是Exchange中的topic模式。 先            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10562753.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-03-20 09:05 烟花易冷人憔悴 阅读 (1075) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10562753" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/01/28.html">2019年1月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10330225.html">
+    RabbitMQ消息可靠性分析和应用
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：RabbitMQ流程简介（带Exchange） RabbitMQ使用一些机制来保证可靠性，如持久化、消费确认及发布确认等。 先看以下这个图： P为生产者，X为中转站（Exchange），红色部分为消息队列，C1、C2为消费者。 整个流程分成三部分：第一，生产者生产消息，发送到中转站；第二，中转站按定            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10330225.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-28 14:56 烟花易冷人憔悴 阅读 (755) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10330225" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2019/01/04.html">2019年1月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10221299.html">
+    Docker镜像优化
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 上篇博文说到使用Visual Studio Tools for Docker帮助我们生成Dockerfile，现在我们讨论下生成的Dockerfile的优劣。 一、以往Dockerfile构建模式 （1）发布API项目 新建Web API项目，项目名称为API 在项目所在目录输入指令：dotn            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10221299.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-04 17:41 烟花易冷人憔悴 阅读 (708) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10221299" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10218384.html">
+    .NET Core中使用Docker
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Docker简介 Docker是基于Linux容器技术（LXC），使用Go语言实现的开源项目，诞生于2013年，遵循Apache2.0协议。Docker自开源后，受到广泛的关注和讨论。 Docker在开发和运维中的优势： （1）更快的交付和部署。 使用Docker，开发人员可以使用镜像来快速构建            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10218384.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-04 10:23 烟花易冷人憔悴 阅读 (320) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10218384" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/29.html">2018年12月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10197620.html">
+    IdentityServer4-前后端分离的授权验证（六）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：上两节介绍完Hybrid模式在MVC下的使用，包括验证从数据获取的User和Claim对MVC的身份授权。本节将介绍Implicit模式在JavaScript应用程序中的使用，使用Node.js+Express构建JavaScript客户端，实现前后端分离。本节授权服务和资源服务器基于第四和第五节。            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10197620.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-29 19:15 烟花易冷人憔悴 阅读 (1683) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10197620" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/27.html">2018年12月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10181681.html">
+    IdentityServer4-从数据库获取User进行授权验证（五）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本节将在第四节基础上介绍如何实现IdentityServer4从数据库获取User进行验证，并对Claim进行权限设置。 一、新建Web API资源服务，命名为ResourceAPI （1）新建API项目，用来进行user的身份验证服务。 （2）配置端口为5001 安装Microsoft.Entit            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10181681.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-27 08:56 烟花易冷人憔悴 阅读 (2579) 评论 (17)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10181681" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/26.html">2018年12月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10181525.html">
+    IdentityServer4-MVC+Hybrid实现Claims授权验证（四）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：上节以对话形式，大概说了几种客户端授权模式的原理，这节重点介绍Hybrid模式在MVC下的使用。且为实现IdentityServer4从数据库获取User进行验证，并对Claim进行权限设置打下基础（第五节介绍）。 本节内容比较多，且涉及一、二节的内容，如有不懂，可先熟悉一、二节知识。 一、新建授权            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10181525.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-26 20:21 烟花易冷人憔悴 阅读 (1278) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10181525" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/19.html">2018年12月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10142321.html">
+    IdentityServer4-客户端的授权模式原理分析（三）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在学习其他应用场景前，需要了解几个客户端的授权模式。首先了解下本节使用的几个名词 Resource Owner：资源拥有者，文中称“user”； Client为第三方客户端； Authorization server为授权服务器； redirection URI：简单理解为取数据的地址； User             <a href="https://www.cnblogs.com/FireworksEasyCool/p/10142321.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-19 12:04 烟花易冷人憔悴 阅读 (968) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10142321" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/18.html">2018年12月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10137011.html">
+    IdentityServer4-EF动态配置Client和对Claims授权（二）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本节介绍Client的ClientCredentials客户端模式，先看下画的草图： 一、在Server上添加动态新增Client的API 接口。 为了方便测试，在Server服务端中先添加swagger，添加流程可参考：https://www.cnblogs.com/suxinlcq/p/6757            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10137011.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-18 14:51 烟花易冷人憔悴 阅读 (1510) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10137011" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/FireworksEasyCool/archive/2018/12/17.html">2018年12月17日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/FireworksEasyCool/p/10132356.html">
+    IdentityServer4-用EF配置Client（一）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、背景 IdentityServer4的介绍将不再叙述，百度下可以找到，且官网的快速入门例子也有翻译的版本。这里主要从Client应用场景方面介绍对IdentityServer4的应用。 首先简要介绍ID Token和Access Token： Access Token是授权第三方客户端访问受保护            <a href="https://www.cnblogs.com/FireworksEasyCool/p/10132356.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-17 16:44 烟花易冷人憔悴 阅读 (2232) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10132356" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/FireworksEasyCool/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/FireworksEasyCool/default.html?page=1">1</a>
+    2
+    
+    
+    
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 烟花易冷人憔悴
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

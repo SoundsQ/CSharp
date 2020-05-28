@@ -1,0 +1,682 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="DriverManager是JDBC的驱动管理，主要负责驱动的加载，本文对其进行了简单的介绍。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DriverManager 驱动管理器类简介   JDBC简介（三） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10275323.html">DriverManager 驱动管理器类简介   JDBC简介（三）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        DriverManager是JDBC的驱动管理，主要负责驱动的加载，本文对其进行了简单的介绍。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 24pt;">驱动程序管理器是负责管理驱动程序的，驱动注册以后，会保存在DriverManager中的已注册列表中</div>
+<div style="line-height: 24pt;">后续的处理就可以对这个列表进行操作</div>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093512179-1681637865.png"><img style="border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_2da8" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093512485-1406737846.png" alt="image_5c3e8a21_2da8" width="1005" height="112" border="0" /></a></div>
+<div style="line-height: 24pt;">简言之，驱动管理器，就是字面含义，主要负责就是<span><strong><span style="font-size: 13.5pt;">管理 驱动</span></strong></span></div>
+<h3><span style="font-size: 18px;">概述</span></h3>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093512653-729868350.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_4776" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093512836-315910140.png" alt="image_5c3e8a21_4776" width="253" height="115" border="0" /></a></div>
+<div style="line-height: 24pt;">提供管理一组 JDBC 驱动程序的基本服务。</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">驱动注册中提到过，拥有初始化方法&nbsp; loadInitialDrivers();</div>
+<div style="line-height: 24pt;">主要两件事情：</div>
+<div style="line-height: 24pt;"><span><strong><span style="font-size: 13.5pt;">读取jdbc.drivers系统属性加载以及查询符合4.0规范的驱动程序加载。</span></strong></span></div>
+<div style="line-height: 24pt;">DriverManager 类会尝试加载在 "jdbc.drivers" 系统属性中引用的驱动程序类。</div>
+<div style="line-height: 24pt;">这允许用户定制由他们的应用程序使用的 JDBC Driver。例如，可以在properties 文件中，指定：</div>
+<div style="line-height: 24pt;">jdbc.drivers=foo.bah.Driver:wombat.sql.Driver:bad.taste.ourDriver</div>
+<div style="line-height: 24pt;">JDBC 4.0 Drivers 必须包括 META-INF/services/java.sql.Driver 文件。此文件包含 java.sql.Driver 的 JDBC 驱动程序实现的名称。</div>
+<div style="line-height: 24pt;">例如，要加载 my.sql.Driver 类，META-INF/services/java.sql.Driver 文件需要包含下面的条目：</div>
+<div style="line-height: 24pt;">my.sql.Driver</div>
+<div style="line-height: 24pt;">应用程序不再需要使用 Class.forName() 显式地加载 JDBC 驱动程序。</div>
+<div style="line-height: 24pt;">当前使用 Class.forName() 加载 JDBC 驱动程序的现有程序将在不作修改的情况下继续工作。</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">在调用 getConnection 方法时，DriverManager 会试着从初始化时加载的那些驱动程序以及使用与当前 applet 或应用程序相同的类加载器显式加载的那些驱动程序中查找合适的驱动程序。</div>
+<div style="line-height: 24pt;">
+<div>
+<h3><span style="font-size: 18px;">创建连接 </span></h3>
+</div>
+<div style="line-height: 32px;">DriverManager负责驱动程序管理，数据库驱动则是为了应用程序服务的，所以DriverManager的重要任务就是提供连接的获取。</div>
+<div style="line-height: 32px;">通过DriverManager获得连接，对应用程序开发者是非常重要的一件事情。</div>
+<div style="line-height: 32px;">通过getConnection方法获得Connection对象</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093513093-1624579948.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_7cc8" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093513335-1002498920.png" alt="image_5c3e8a21_7cc8" width="739" height="704" border="0" /></a></div>
+<div style="line-height: 32px;">可以看得出来，三个公共的getConnection方法并没有什么太多逻辑，只是参数形式的适配，方法内部调用的都是私有的getConnection方法</div>
+<div style="line-height: 32px;">在方法内部主要就是循环遍历所有的已注册的驱动程序，尝试建立连接</div>
+<div style="line-height: 32px;">如果建立连接成功，就返回这个连接</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093513584-1552023317.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_6912" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093513801-1327239144.png" alt="image_5c3e8a21_6912" width="856" height="460" border="0" /></a></div>
+</div>
+<h3><span style="font-size: 18px;">驱动程序查找 </span></h3>
+<div style="line-height: 24pt;">DriverManager管理驱动程序，不仅仅提供了借助于驱动程序创建连接的能力</div>
+<div style="line-height: 24pt;">还能够返回给定的Driver或者Driver 列表</div>
+<div style="line-height: 24pt;">
+<div>&nbsp;&nbsp;&nbsp; public static Driver getDriver(String url) throws SQLException&nbsp;&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp; public static java.util.Enumeration&lt;Driver&gt; getDrivers()&nbsp;&nbsp;</div>
+</div>
+<div style="line-height: 24pt;"><span><strong><span style="font-size: 13.5pt;">getDriver</span></strong></span></div>
+<div style="line-height: 24pt;">给定一个URL，查找能理解给定 URL 的驱动程序。DriverManager 试图从已注册的 JDBC 驱动程序集中选择一个适当的驱动程序。&nbsp;</div>
+<div style="line-height: 24pt;">如果不存在throw new SQLException("No suitable driver", "08001");</div>
+<div style="line-height: 24pt;"><span><strong><span style="font-size: 13.5pt;">getDrivers</span></strong></span></div>
+<div style="line-height: 24pt;">getDrivers 返回的是一个枚举&nbsp; java.util.Enumeration&lt;Driver&gt;</div>
+<h3><span style="font-size: 18px;">注册与卸载 </span></h3>
+<div style="line-height: 24pt;">如同仓库，有进货和出货，DriverManager作为驱动程序管理器，需要提供注册和卸载的能力。</div>
+<div style="line-height: 24pt;">相关的方法为registerDriver和deregisterDriver</div>
+<div style="line-height: 24pt;">注册和卸载应用程序开发者不需要过多关注&nbsp;</div>
+<div style="line-height: 24pt;"><span><strong><span style="font-size: 13.5pt;">注册</span></strong></span></div>
+<div style="line-height: 24pt;">有两个版本的注册方法，核心是一样的，都是用于将驱动程序记录在案，保存在容器中</div>
+<div style="line-height: 24pt;">新加载的驱动程序类应该调用 registerDriver 方法让 DriverManager 知道自己</div>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093514223-165989475.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_222" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093514597-811958353.png" alt="image_5c3e8a21_222" width="673" height="440" border="0" /></a></div>
+<div style="line-height: 24pt;">两个方法的区别在于new DriverInfo(driver, da)的第二个参数，类型为DriverAction</div>
+<div style="line-height: 24pt;">当驱动程序想要被驱动管理器通知时必须实现的接口。</div>
+<div style="line-height: 24pt;">JDBC驱动程序的静态初始化块中使用双参数版本的注册方法时，当驱动程序被卸载时，会被调用。</div>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093514770-1535988755.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a21_551a" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093514978-798815698.png" alt="image_5c3e8a21_551a" width="869" height="620" border="0" /></a></div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;"><span><strong><span style="font-size: 13.5pt;">卸载</span></strong></span></div>
+<div style="line-height: 24pt;">
+<div>public static void deregisterDriver(Driver driver)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws SQLException</div>
+</div>
+<div style="line-height: 24pt;">从DriverManager的注册驱动程序列表中移除指定的驱动程序。</div>
+<div style="line-height: 24pt;">如果参数为NULL，什么都不做</div>
+<div style="line-height: 24pt;">如果存在安全管理器且它的checkPermission拒绝权限，则会抛出SecurityException。</div>
+<div style="line-height: 24pt;">如果在注册的驱动程序列表中没有找到指定的驱动程序，什么都不做；如果找到驱动程序，它将从注册驱动程序列表中删除。</div>
+<div style="line-height: 24pt;">如果在注册JDBC驱动程序时指定了DriverAction ，那么在从注册驱动程序列表中删除驱动程序之前，将调用他的deregister方法。</div>
+<h3><span style="font-size: 18px;">连接超时设置</span></h3>
+<div style="line-height: 24pt;">驱动程序试图连接到某一数据库时的最大等待时长<strong>loginTimeout</strong>，以秒为单位，可以对这个数值进行设置和读取。</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">public static void setLoginTimeout(int seconds)</div>
+</div>
+<div style="line-height: 24pt;">public static int getLoginTimeout()</div>
+<h3><span style="font-size: 18px;">日志 </span></h3>
+<div style="line-height: 24pt;">DriverManager内部有一个PrintWriter</div>
+<div style="line-height: 24pt;">这个PrintWriter 是DriverManager 和所有驱动程序使用的日志/追踪 对象</div>
+<div style="line-height: 24pt;">提供了set和get方法</div>
+<div style="line-height: 24pt;">public static void setLogWriter(java.io.PrintWriter out)</div>
+<div style="line-height: 24pt;">public static java.io.PrintWriter getLogWriter()&nbsp;</div>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093515177-1646257296.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a22_19e8" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093515746-678597990.png" alt="image_5c3e8a22_19e8" width="655" height="501" border="0" /></a></div>
+<div style="line-height: 24pt;">
+<div>&nbsp;</div>
+<div>除了能够对日志、追踪对象进行设置和获取外</div>
+<div>还有日志记录方法，借助于logWriter进行写入，然后刷新</div>
+<div>public&nbsp; static void println(String message)</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093516004-2080288028.png"><img style="border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5c3e8a22_9c9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190116093516193-1804602700.png" alt="image_5c3e8a22_9c9" width="767" height="320" border="0" /></a>&nbsp;</div>
+</div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 24pt;">DriverManager用于管理驱动程序以及驱动程序的注册相关，应用程序开发者主要关注于借助于驱动程序管理器创建指定的连接</div>
+<div style="line-height: 24pt;">也就是说重点关注于getConnection方法，所有后续的数据库操作都要基于这个连接进行，其他的一些方法了解下即可，开发环境中是基本不会直接接触的</div>
+<div style="line-height: 24pt;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10275323.html" target="_blank">DriverManager 驱动管理器类简介 JDBC简介（三）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-16 10:37</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10275323" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10275323);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10275323, cb_entryCreatedDate = '2019-01-16 10:37', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

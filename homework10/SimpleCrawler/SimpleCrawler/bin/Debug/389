@@ -1,0 +1,648 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="通过前面的系列教程，我们系统的讲解了phpWeChat从视图端、控制器端到模型端的操作流程；熟悉了phpWeChat的目录结构；掌握了视图端模板如何创建一个丰富的表单和模型端如何操作数据库。这一切都是" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>10天学会phpWeChat——第十天：phpWeChat的会员注册、登录以及微信网页开发 - phpWeChat开发教程 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/phpwechat/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/phpwechat/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/phpwechat/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 325015;
+        var currentBlogApp = 'phpwechat';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/phpwechat/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/phpwechat/">phpWeChat教程</a>
+</h1>
+<h2>
+教你10天学会phpWechat，快速开发PC网站+微信公共号
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/phpwechat/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/phpWeChat%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/phpwechat/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+61&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+4</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6287608.html">10天学会phpWeChat——第十天：phpWeChat的会员注册、登录以及微信网页开发</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        通过前面的系列教程，我们系统的讲解了phpWeChat从视图端、控制器端到模型端的操作流程；熟悉了phpWeChat的目录结构；掌握了视图端模板如何创建一个丰富的表单和模型端如何操作数据库。这一切都是传统Web以及现代H5开发的核心。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>通过前面的系列教程，我们系统的讲解了phpWeChat从视图端、控制器端到模型端的操作流程；熟悉了phpWeChat的目录结构；掌握了视图端模板如何创建一个丰富的表单和模型端如何操作数据库。这一切都是传统Web以及现代H5开发的核心。</p>
+<p>我们今天进行《10天学会phpWeChat》教程的最后一讲，phpWeChat的微信网页开发。在这一讲里，我们将重点讲解在微信网页开发中几个常见参数的获取和一个微信扫一扫的实例。</p>
+<h2><strong>一、微信网页开发中的几个重要参数（文档参考：<a href="https://mp.weixin.qq.com/wiki" target="_blank">https://mp.weixin.qq.com/wiki</a>）</strong></h2>
+<p>如果您熟读过微信官方的公众号开发文档，您应该会清楚，在微信网页开发中，有几个参数是常见且重要的。</p>
+<p>1、access_token：微信网页授权是通过OAuth2.0机制实现的，在用户授权给公众号后，公众号可以获取到一个网页授权特有的接口调用凭证（网页授权access_token），通过网页授权access_token可以进行授权后接口调用，如获取用户基本信息，phpWeChat框架默认集成了access_token的获取，您无需自己写代码或者关心其他，只需在需要使用access_token的地方使用PHP常量WECHAT_ACCESS_TOKEN即可获取。</p>
+<p>实例：</p>
+<div class="cnblogs_code">
+<pre>&lt;?<span style="color: #000000;">php
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">自适应模块的PC前端控制器</span>
+    <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+    </span><span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+
+    </span>!<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+
+    </span><span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">case</span> 'index':
+            <span style="color: #0000ff;">echo</span><span style="color: #000000;"> WECHAT_ACCESS_TOKEN;
+
+            </span><span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        
+        </span><span style="color: #0000ff;">default</span>:
+            <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+</span>?&gt;</pre>
+</div>
+<p>效果（请在<a href="https://mp.weixin.qq.com/wiki?action=doc&amp;id=mp1455784140&amp;t=0.9000155627267032" target="_blank">微信web开发者工具</a>里进行打开URL）：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201701/1087254-20170115181830447-1993958359.jpg" alt="" /></p>
+<p style="text-align: left;">2、openid：openid是用户针对某个公众号的一个唯一身份标识。在关注者与公众号产生消息交互后，公众号可获得关注者的OpenID（加密后的微信号，每个用户对每个公众号的OpenID是唯一的。对于不同公众号，同一用户的openid不同）。公众号可通过本接口来根据OpenID获取用户基本信息，包括昵称、头像、性别、所在城市、语言和关注时间。phpWeChat框架默认集成了OpenID的获取，您无需自己写代码或者关心其他，只需在需要使用OpenID的地方使用WeChat::getOpenID()即可获取。</p>
+<p style="text-align: left;">由于phpWeChat使用了命名空间，所以请在需要获取openid的文件头部加上</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">use</span> WeChat\WeChat;</pre>
+</div>
+<p>示例：</p>
+<div class="cnblogs_code">
+<pre>&lt;?<span style="color: #000000;">php
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">自适应模块的PC前端控制器</span>
+    <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+    </span><span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+    </span><span style="color: #0000ff;">use</span><span style="color: #000000;"> WeChat\WeChat;
+
+    </span>!<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+
+    </span><span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">case</span> 'index':
+            <span style="color: #0000ff;">echo</span> WeChat::<span style="color: #000000;">getOpenID();
+
+            </span><span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        
+        </span><span style="color: #0000ff;">default</span>:
+            <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+    }
+</span>?&gt;</pre>
+</div>
+<p>效果：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201701/1087254-20170115182535463-138665838.jpg" alt="" /></p>
+<p style="text-align: left;">3、jsapi_ticket：jsapi_ticket是公众号用于调用微信JS接口的临时票据。正常情况下，jsapi_ticket的有效期为7200秒，通过access_token来获取。phpWeChat框架默认集成了jsapi_ticket的获取，您无需自己写代码或者关心其他，只需在需要使用jsapi_ticket的地方使用PHP常量WECHAT_JSAPI_TICKET即可获取。</p>
+<p style="text-align: left;">示例同获取access_token，不再赘述。</p>
+<p style="text-align: left;">4、微信JS-SDK几个常用参数的生成</p>
+<p>所有需要使用JS-SDK的页面必须先注入配置信息，否则将无法调用（详见微信官方文档：<a href="https://mp.weixin.qq.com/wiki?action=doc&amp;id=mp1421141115&amp;t=0.701470327053836" target="_blank">https://mp.weixin.qq.com/wiki?action=doc&amp;id=mp1421141115&amp;t=0.701470327053836</a>）。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;">wx.config({
+</span><span style="color: #008080;">2</span> debug: <span style="color: #0000ff;">true</span>, <span style="color: #008000;">//</span><span style="color: #008000;"> 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span>
+<span style="color: #008080;">3</span> appId: '', <span style="color: #008000;">//</span><span style="color: #008000;"> 必填，公众号的唯一标识</span>
+<span style="color: #008080;">4</span> timestamp: , <span style="color: #008000;">//</span><span style="color: #008000;"> 必填，生成签名的时间戳</span>
+<span style="color: #008080;">5</span> nonceStr: '', <span style="color: #008000;">//</span><span style="color: #008000;"> 必填，生成签名的随机串</span>
+<span style="color: #008080;">6</span> signature: '',<span style="color: #008000;">//</span><span style="color: #008000;"> 必填，签名，见附录1</span>
+<span style="color: #008080;">7</span> jsApiList: [] <span style="color: #008000;">//</span><span style="color: #008000;"> 必填，需要使用的JS接口列表，所有JS接口列表见附录2</span>
+<span style="color: #008080;">8</span> });</pre>
+</div>
+<p>以下代码提供了以上几个参数的生成方法，并赋给了一个数组。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span> <span style="color: #008000;">//</span><span style="color: #008000;">jsapipara</span>
+<span style="color: #008080;"> 3</span> <span style="color: #800080;">$jsapipara</span>=<span style="color: #0000ff;">array</span><span style="color: #000000;">();
+</span><span style="color: #008080;"> 4</span> 
+<span style="color: #008080;"> 5</span> <span style="color: #800080;">$jsapipara</span>['appid']=<span style="color: #000000;">WECHAT_APPID;
+</span><span style="color: #008080;"> 6</span> <span style="color: #800080;">$jsapipara</span>['noncestr']=create_rand(16<span style="color: #000000;">);
+</span><span style="color: #008080;"> 7</span> <span style="color: #800080;">$jsapipara</span>['timestamp']=<span style="color: #000000;">CLIENT_TIME;
+</span><span style="color: #008080;"> 8</span> 
+<span style="color: #008080;"> 9</span> <span style="color: #800080;">$str</span>=<span style="color: #0000ff;">array</span><span style="color: #000000;">();
+</span><span style="color: #008080;">10</span> 
+<span style="color: #008080;">11</span> <span style="color: #800080;">$str</span>[0]='noncestr='.<span style="color: #800080;">$jsapipara</span>['noncestr'<span style="color: #000000;">];
+</span><span style="color: #008080;">12</span> <span style="color: #800080;">$str</span>[1]='jsapi_ticket='.<span style="color: #000000;">WECHAT_JSAPI_TICKET;
+</span><span style="color: #008080;">13</span> <span style="color: #800080;">$str</span>[2]='timestamp='.<span style="color: #800080;">$jsapipara</span>['timestamp'<span style="color: #000000;">];
+</span><span style="color: #008080;">14</span> <span style="color: #800080;">$str</span>[3]='url='.<span style="color: #000000;">format_url(get_current_url());
+</span><span style="color: #008080;">15</span> 
+<span style="color: #008080;">16</span> <span style="color: #008080;">sort</span>(<span style="color: #800080;">$str</span>,<span style="color: #000000;"> SORT_STRING);
+</span><span style="color: #008080;">17</span> 
+<span style="color: #008080;">18</span> <span style="color: #800080;">$jsapipara</span>['signature']=<span style="color: #008080;">sha1</span>(<span style="color: #008080;">implode</span>('&amp;',<span style="color: #800080;">$str</span><span style="color: #000000;">));
+</span><span style="color: #008080;">19</span> 
+<span style="color: #008080;">20</span> <span style="color: #008080;">print_r</span>(<span style="color: #800080;">$jsapipara</span><span style="color: #000000;">);
+</span><span style="color: #008080;">21</span> ?&gt;</pre>
+</div>
+<p>以上代码生成了一个$jsapipara一维数组，其键值对应jssdk对应的config的几个参数。</p>
+<h2><strong>二、微信公众号端用户的注册登录和自动登录</strong></h2>
+<p>1、在phpWeChat的系统里，默认集成了用户登录、注册、找回密码的操作。访问地址分别如下：</p>
+<blockquote>
+<p>会员登录：http://www.example.com/index.php?m=member&amp;a=login</p>
+<p>会员注册：http://www.example.com/index.php?m=member&amp;a=register</p>
+<p>找回密码：http://www.example.com/index.php?m=member&amp;a=getpwd</p>
+</blockquote>
+<p>在用户登录后，系统会自动生成一个变量$_userid和$PW['memberlogin']，这两个变量分别的意思是：</p>
+<blockquote>
+<p>$_userid：未登录状态下，该变量永远为0，登录状态下，该变量的值为用户的会员ID（pw_member表的userid字段）；</p>
+<p>我们常用判断$_userid是否为0来判断当前用户是否处于登录状态。</p>
+<p>$PW['memberlogin']：未登录状态下，该变量为一个空数组，登录状态下，改变量则存储了登录用户的全部信息（如登录事件，注册事件，头像等）；</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>2、如果不借助于公众号，我们无论在PC端还是在公众号端，都需要用访问以上地址的方法来进行注册、登录。但是在借助公众号的openid的情况下，我们可以通过以下代码实现用户的自动登录：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span>     <span style="color: #008000;">//</span><span style="color: #008000;">自适应模块的PC前端控制器</span>
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;"> 9</span>     <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">11</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">12</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> WeChat\WeChat;
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span>     !<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+</span><span style="color: #008080;">15</span> 
+<span style="color: #008080;">16</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码开始 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">17</span>     <span style="color: #0000ff;">if</span>(!<span style="color: #800080;">$_SESSION</span>['openid'<span style="color: #000000;">])
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">19</span>         <span style="color: #800080;">$_SESSION</span>['openid']=WeChat::<span style="color: #000000;">getOpenID();
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">21</span> 
+<span style="color: #008080;">22</span>     Member::createRandAccount();<span style="color: #008000;">//</span><span style="color: #008000;">这个方法是自动创建会员ID</span>
+<span style="color: #008080;">23</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码结束 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">24</span> 
+<span style="color: #008080;">25</span>     <span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">27</span>         <span style="color: #0000ff;">case</span> 'test':
+<span style="color: #008080;">28</span>             <span style="color: #0000ff;">echo</span> <span style="color: #800080;">$_userid</span><span style="color: #000000;">;
+</span><span style="color: #008080;">29</span> 
+<span style="color: #008080;">30</span>             <span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+</span><span style="color: #008080;">31</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">32</span>         
+<span style="color: #008080;">33</span>         <span style="color: #0000ff;">default</span>:
+<span style="color: #008080;">34</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">36</span> ?&gt;</pre>
+</div>
+<p>访问后输出了11（自动为我创建的会员ID），在这个过程里，我没有进行任何注册的操作，系统便通过示例中的代码完成了自动注册、自动登录的2个连续操作。</p>
+<blockquote>
+<p>小贴士：您可以熟记这个自动登录代码，因为它很实用。</p>
+</blockquote>
+<p>此时打印$PW['memberlogin']，也输出了包含我信息的数组。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span>     <span style="color: #008000;">//</span><span style="color: #008000;">自适应模块的PC前端控制器</span>
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;"> 9</span>     <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">11</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">12</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> WeChat\WeChat;
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span>     !<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+</span><span style="color: #008080;">15</span> 
+<span style="color: #008080;">16</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码开始 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">17</span>     <span style="color: #0000ff;">if</span>(!<span style="color: #800080;">$_SESSION</span>['openid'<span style="color: #000000;">])
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">19</span>         <span style="color: #800080;">$_SESSION</span>['openid']=WeChat::<span style="color: #000000;">getOpenID();
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">21</span> 
+<span style="color: #008080;">22</span>     Member::createRandAccount();<span style="color: #008000;">//</span><span style="color: #008000;">这个方法是自动创建会员ID</span>
+<span style="color: #008080;">23</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码结束 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">24</span> 
+<span style="color: #008080;">25</span>     <span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">27</span>         <span style="color: #0000ff;">case</span> 'test':
+<span style="color: #008080;">28</span>             <span style="color: #0000ff;">echo</span> <span style="color: #800080;">$_userid</span><span style="color: #000000;">;
+</span><span style="color: #008080;">29</span>             <span style="color: #008080;">print_r</span>(<span style="color: #800080;">$PW</span>['memberlogin'<span style="color: #000000;">]);
+</span><span style="color: #008080;">30</span>             <span style="color: #0000ff;">exit</span><span style="color: #000000;">();
+</span><span style="color: #008080;">31</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">32</span>         
+<span style="color: #008080;">33</span>         <span style="color: #0000ff;">default</span>:
+<span style="color: #008080;">34</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">35</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">36</span> ?&gt;</pre>
+</div>
+<p>我们可以把当前登录的信息传给模板视图文件，例如将头像传给会员中心的&lt;img&gt;标签。</p>
+<h2><strong>三、示例：通过jssdk调用微信扫一扫接口</strong></h2>
+<p>1、我们首先在控制器端获取jssdk所需的参数</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> &lt;?<span style="color: #000000;">php
+</span><span style="color: #008080;"> 2</span>     <span style="color: #008000;">//</span><span style="color: #008000;">自适应模块的PC前端控制器</span>
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> wechat\hello\hello;
+</span><span style="color: #008080;"> 4</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Area;
+</span><span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\CaChe;
+</span><span style="color: #008080;"> 6</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Config;
+</span><span style="color: #008080;"> 7</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Member;
+</span><span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Module;
+</span><span style="color: #008080;"> 9</span>     <span style="color: #0000ff;">use</span> phpWeChat\<span style="color: #008080;">MySql</span><span style="color: #000000;">;
+</span><span style="color: #008080;">10</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Order;
+</span><span style="color: #008080;">11</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> phpWeChat\Upload;
+</span><span style="color: #008080;">12</span>     <span style="color: #0000ff;">use</span><span style="color: #000000;"> WeChat\WeChat;
+</span><span style="color: #008080;">13</span> 
+<span style="color: #008080;">14</span>     !<span style="color: #008080;">defined</span>('IN_APP') &amp;&amp; <span style="color: #0000ff;">exit</span>('Access Denied!'<span style="color: #000000;">);
+</span><span style="color: #008080;">15</span> 
+<span style="color: #008080;">16</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码开始 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">17</span>     <span style="color: #0000ff;">if</span>(!<span style="color: #800080;">$_SESSION</span>['openid'<span style="color: #000000;">])
+</span><span style="color: #008080;">18</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">19</span>         <span style="color: #800080;">$_SESSION</span>['openid']=WeChat::<span style="color: #000000;">getOpenID();
+</span><span style="color: #008080;">20</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">21</span> 
+<span style="color: #008080;">22</span>     Member::createRandAccount();<span style="color: #008000;">//</span><span style="color: #008000;">这个方法是自动创建会员ID</span>
+<span style="color: #008080;">23</span>     <span style="color: #008000;">/*</span><span style="color: #008000;">******** H5公众号端自动登录代码结束 *********</span><span style="color: #008000;">*/</span>
+<span style="color: #008080;">24</span> 
+<span style="color: #008080;">25</span>     <span style="color: #0000ff;">switch</span>(<span style="color: #800080;">$action</span><span style="color: #000000;">)
+</span><span style="color: #008080;">26</span> <span style="color: #000000;">    {
+</span><span style="color: #008080;">27</span>         <span style="color: #0000ff;">case</span> 'test':
+<span style="color: #008080;">28</span>             <span style="color: #008000;">//</span><span style="color: #008000;">jsapipara</span>
+<span style="color: #008080;">29</span>             <span style="color: #800080;">$jsapipara</span>=<span style="color: #0000ff;">array</span><span style="color: #000000;">();
+</span><span style="color: #008080;">30</span> 
+<span style="color: #008080;">31</span>             <span style="color: #800080;">$jsapipara</span>['appid']=<span style="color: #000000;">WECHAT_APPID;
+</span><span style="color: #008080;">32</span>             <span style="color: #800080;">$jsapipara</span>['noncestr']=create_rand(16<span style="color: #000000;">);
+</span><span style="color: #008080;">33</span>             <span style="color: #800080;">$jsapipara</span>['timestamp']=<span style="color: #000000;">CLIENT_TIME;
+</span><span style="color: #008080;">34</span> 
+<span style="color: #008080;">35</span>             <span style="color: #800080;">$str</span>=<span style="color: #0000ff;">array</span><span style="color: #000000;">();
+</span><span style="color: #008080;">36</span> 
+<span style="color: #008080;">37</span>             <span style="color: #800080;">$str</span>[0]='noncestr='.<span style="color: #800080;">$jsapipara</span>['noncestr'<span style="color: #000000;">];
+</span><span style="color: #008080;">38</span>             <span style="color: #800080;">$str</span>[1]='jsapi_ticket='.<span style="color: #000000;">WECHAT_JSAPI_TICKET;
+</span><span style="color: #008080;">39</span>             <span style="color: #800080;">$str</span>[2]='timestamp='.<span style="color: #800080;">$jsapipara</span>['timestamp'<span style="color: #000000;">];
+</span><span style="color: #008080;">40</span>             <span style="color: #800080;">$str</span>[3]='url='.<span style="color: #000000;">format_url(get_current_url());
+</span><span style="color: #008080;">41</span> 
+<span style="color: #008080;">42</span>             <span style="color: #008080;">sort</span>(<span style="color: #800080;">$str</span>,<span style="color: #000000;"> SORT_STRING);
+</span><span style="color: #008080;">43</span> 
+<span style="color: #008080;">44</span>             <span style="color: #800080;">$jsapipara</span>['signature']=<span style="color: #008080;">sha1</span>(<span style="color: #008080;">implode</span>('&amp;',<span style="color: #800080;">$str</span><span style="color: #000000;">));
+</span><span style="color: #008080;">45</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">46</span>         
+<span style="color: #008080;">47</span>         <span style="color: #0000ff;">default</span>:
+<span style="color: #008080;">48</span>             <span style="color: #0000ff;">break</span><span style="color: #000000;">;
+</span><span style="color: #008080;">49</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">50</span> ?&gt;</pre>
+</div>
+<p>2、我们在视图端发起调用</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 2</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://www.w3.org/1999/xhtml"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 3</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 4</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">http-equiv</span><span style="color: #0000ff;">="Content-Type"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="text/html; charset=utf-8"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;"> 5</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">language</span><span style="color: #0000ff;">="javascript"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="text/javascript"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 6</span>    <span style="background-color: #f5f5f5; color: #0000ff;">var</span><span style="background-color: #f5f5f5; color: #000000;"> PW_PATH</span><span style="background-color: #f5f5f5; color: #000000;">=</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">{__PW_PATH__}</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">;
+</span><span style="color: #008080;"> 7</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 8</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="{__PW_PATH__}statics/jquery/jquery-1.12.2.min.js"</span><span style="color: #ff0000;"> language</span><span style="color: #0000ff;">="javascript"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 9</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">src</span><span style="color: #0000ff;">="{__PW_PATH__}statics/core.js"</span><span style="color: #ff0000;"> language</span><span style="color: #0000ff;">="javascript"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">10</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>jssdk示例<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">11</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">12</span> 
+<span style="color: #008080;">13</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">14</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="button"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="点我发起扫一扫"</span><span style="color: #ff0000;"> id</span><span style="color: #0000ff;">="saoyisao"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008080;">15</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">language</span><span style="color: #0000ff;">="javascript"</span><span style="color: #ff0000;"> src</span><span style="color: #0000ff;">="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">16</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">17</span> <span style="background-color: #f5f5f5; color: #000000;">    wx.config({
+</span><span style="color: #008080;">18</span> <span style="background-color: #f5f5f5; color: #000000;">      debug: </span><span style="background-color: #f5f5f5; color: #0000ff;">false</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">19</span> <span style="background-color: #f5f5f5; color: #000000;">      appId: </span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">{$jsapipara[</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">appid</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">]}</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">20</span> <span style="background-color: #f5f5f5; color: #000000;">      timestamp: {$jsapipara[</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">timestamp</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">]},
+</span><span style="color: #008080;">21</span> <span style="background-color: #f5f5f5; color: #000000;">      nonceStr: </span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">{$jsapipara[</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">noncestr</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">]}</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">22</span> <span style="background-color: #f5f5f5; color: #000000;">      signature: </span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">{$jsapipara[</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">signature</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">]}</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">23</span> <span style="background-color: #f5f5f5; color: #000000;">      jsApiList: [
+</span><span style="color: #008080;">24</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">checkJsApi</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">25</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onMenuShareTimeline</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">26</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onMenuShareAppMessage</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">27</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onMenuShareQQ</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">28</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onMenuShareWeibo</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">29</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onMenuShareQZone</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">30</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">hideMenuItems</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">31</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">showMenuItems</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">32</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">hideAllNonBaseMenuItem</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">33</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">showAllNonBaseMenuItem</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">34</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">translateVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">35</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">startRecord</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">36</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">stopRecord</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">37</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onVoiceRecordEnd</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">38</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">playVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">39</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">onVoicePlayEnd</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">40</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">pauseVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">41</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">stopVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">42</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">uploadVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">43</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">downloadVoice</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">44</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">chooseImage</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">45</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">previewImage</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">46</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">uploadImage</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">47</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">downloadImage</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">48</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">getNetworkType</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">49</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">openLocation</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">50</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">getLocation</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">51</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">hideOptionMenu</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">52</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">showOptionMenu</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">53</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">closeWindow</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">54</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">scanQRCode</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">55</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">chooseWXPay</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">56</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">openProductSpecificView</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">57</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">addCard</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">58</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">chooseCard</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">,
+</span><span style="color: #008080;">59</span>         <span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">openCard</span><span style="background-color: #f5f5f5; color: #000000;">'</span>
+<span style="color: #008080;">60</span> <span style="background-color: #f5f5f5; color: #000000;">      ]
+</span><span style="color: #008080;">61</span> <span style="background-color: #f5f5f5; color: #000000;">    });
+</span><span style="color: #008080;">62</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">63</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script </span><span style="color: #ff0000;">language</span><span style="color: #0000ff;">="javascript"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">64</span> <span style="background-color: #f5f5f5; color: #000000;">    $(document).ready(</span><span style="background-color: #f5f5f5; color: #0000ff;">function</span><span style="background-color: #f5f5f5; color: #000000;">(){
+</span><span style="color: #008080;">65</span> <span style="background-color: #f5f5f5; color: #000000;">        $(</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">#saoyisao</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">).click(</span><span style="background-color: #f5f5f5; color: #0000ff;">function</span><span style="background-color: #f5f5f5; color: #000000;">(){
+</span><span style="color: #008080;">66</span> <span style="background-color: #f5f5f5; color: #000000;">            wx.scanQRCode({
+</span><span style="color: #008080;">67</span> <span style="background-color: #f5f5f5; color: #000000;">                needResult: </span><span style="background-color: #f5f5f5; color: #000000;">1</span><span style="background-color: #f5f5f5; color: #000000;">, </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> 默认为0，扫描结果由微信处理，1则直接返回扫描结果，</span>
+<span style="color: #008080;">68</span> <span style="background-color: #f5f5f5; color: #000000;">                scanType: [</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">qrCode</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">,</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">barCode</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">], </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> 可以指定扫二维码还是一维码，默认二者都有</span>
+<span style="color: #008080;">69</span> <span style="background-color: #f5f5f5; color: #000000;">                success: </span><span style="background-color: #f5f5f5; color: #0000ff;">function</span><span style="background-color: #f5f5f5; color: #000000;"> (res) {
+</span><span style="color: #008080;">70</span>                 <span style="background-color: #f5f5f5; color: #0000ff;">var</span><span style="background-color: #f5f5f5; color: #000000;"> result </span><span style="background-color: #f5f5f5; color: #000000;">=</span><span style="background-color: #f5f5f5; color: #000000;"> res.resultStr; </span><span style="background-color: #f5f5f5; color: #008000;">//</span><span style="background-color: #f5f5f5; color: #008000;"> 当needResult 为 1 时，扫码返回的结果</span>
+<span style="color: #008080;">71</span> <span style="background-color: #f5f5f5; color: #000000;">                alert(result);
+</span><span style="color: #008080;">72</span> <span style="background-color: #f5f5f5; color: #000000;">            }
+</span><span style="color: #008080;">73</span> <span style="background-color: #f5f5f5; color: #000000;">            });
+</span><span style="color: #008080;">74</span> <span style="background-color: #f5f5f5; color: #000000;">        });
+</span><span style="color: #008080;">75</span> <span style="background-color: #f5f5f5; color: #000000;">    });
+</span><span style="color: #008080;">76</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">77</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;">78</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>效果：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201701/1087254-20170115185932291-1997056742.jpg" alt="" /></p>
+<p style="text-align: left;">点按钮则触发了微信扫一扫操作：</p>
+<p style="text-align: center;"><img src="https://images2015.cnblogs.com/blog/1087254/201701/1087254-20170115190319197-404608894.jpg" alt="" width="343" height="609" /></p>
+<p style="text-align: left;">&nbsp;</p>
+<p>至此，《10天学会phpWeChat》系列教程就讲完了，相信您对phpWeChat以及对PC网站开发、微信公众号开发都有了更清晰的认识。我在后续也将继续发布一些跟phpWeChat开发相关的教程，更加深入、细致的讲解一些功能点。</p>
+<p>感谢您花时间来阅读我这10篇语句并不通顺的博文，也期待您在未来对phpWeChat和本博客继续关注。</p>
+<p>毕业了，同学们。我们工作中见。</p>
+<p>&nbsp;</p>
+<h3 class="myposts_title">《10天学会phpWeChat》系列教程传送门：</h3>
+<div class="PostList">
+<div class="postTitl2">
+<div class="PostList">
+<div class="postTitl2">
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_0" href="http://www.cnblogs.com/phpwechat/p/6287608.html">10天学会phpWeChat&mdash;&mdash;第十天：phpWeChat的会员注册、登录以及微信网页开发</a><span class="postDesc2">&nbsp;&nbsp;</span></div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_1" href="http://www.cnblogs.com/phpwechat/p/6287448.html">10天学会phpWeChat&mdash;&mdash;第九天：数据库增、删、改、查(CRUD)操作</a></div>
+<div class="postTitl2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_2" href="http://www.cnblogs.com/phpwechat/p/6287330.html">10天学会phpWeChat&mdash;&mdash;第八天：Form类，丰富表单提交的字段类型</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_3" href="http://www.cnblogs.com/phpwechat/p/6255929.html">10天学会phpWeChat&mdash;&mdash;第七天：创建一个自适应PC网站+H5移动端的模块</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_4" href="http://www.cnblogs.com/phpwechat/p/6238489.html">10天学会phpWeChat&mdash;&mdash;第六天：实现新闻的后台管理</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_5" href="http://www.cnblogs.com/phpwechat/p/6229845.html">10天学会phpWeChat&mdash;&mdash;第五天：实现新闻投稿功能</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_6" href="http://www.cnblogs.com/phpwechat/p/6229143.html">10天学会phpWeChat&mdash;&mdash;第四天：大U函数U()的使用</a></div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_7" href="http://www.cnblogs.com/phpwechat/p/6228058.html">10天学会phpWeChat&mdash;&mdash;第三天：从数据库读取数据到视图</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_8" href="http://www.cnblogs.com/phpwechat/p/6228007.html">10天学会phpWeChat&mdash;&mdash;第二天：hello world！我的第一个功能模块</a>&nbsp;</div>
+<div class="postText2">&nbsp;</div>
+</div>
+<div class="PostList">
+<div class="postTitl2"><a id="PostsList1_rpPosts_TitleUrl_9" href="http://www.cnblogs.com/phpwechat/p/6227036.html">10天学会phpWeChat&mdash;&mdash;第一天：核心框架的目录结构</a>&nbsp;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2017-01-15 19:09</span>&nbsp;
+<a href="https://www.cnblogs.com/phpwechat/">phpWeChat开发教程</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6287608" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(6287608);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 325015, cb_blogApp = 'phpwechat', cb_blogUserGuid = 'be81a4a9-0ecc-e611-845c-ac853d9f53ac';
+    var cb_entryId = 6287608, cb_entryCreatedDate = '2017-01-15 19:09', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 phpWeChat开发教程
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+</body>
+</html>

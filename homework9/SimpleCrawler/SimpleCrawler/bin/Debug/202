@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="“国王做梦，”他说，“首相筑梦。”" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>新DevOps八荣八耻 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/eight.html">新DevOps八荣八耻</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        “国王做梦，”他说，“首相筑梦。”
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 16px;">昀哥 20181001</span><br /><span style="font-size: 16px;">以随时可扩容可缩容可重启可切换机房流量为荣，以不能迁移为耻。</span></p>
+<p><span style="font-size: 16px;">以可配置为荣，以硬编码为耻。</span></p>
+<p><span style="font-size: 16px;">以系统互备为荣，以系统单点为耻。</span></p>
+<p><span style="font-size: 16px;">以交付时有监控报警为荣，以交付裸奔系统为耻。</span></p>
+<p><span style="font-size: 16px;">以无状态为荣，以有状态为耻。</span></p>
+<p><span style="font-size: 16px;">以标准化为荣，以特殊化为耻。</span></p>
+<p><span style="font-size: 16px;">以自动化工具为荣，以人肉操作为耻。</span></p>
+<p><span style="font-size: 16px;">以无人值守为荣，以人工介入为耻。</span></p>
+<p><span style="font-size: 16px;">&nbsp;<img src="https://img2018.cnblogs.com/blog/7438/201810/7438-20181003013036557-75932987.jpg" alt="" /></span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">核心业务流程的故障处理原则：<strong>不可恋战</strong></span><br /><span style="font-size: 16px;">第一时间叫多人一起分头查：查机房，查流量，查应用性能，查数据库，查Redis。</span><br /><span style="font-size: 16px;">如果迟迟定位不了问题（比如十分钟之内），就不可恋战，必须恢复业务（三板斧）：</span><br /><span style="font-size: 16px;">第一招重启应用，</span><br /><span style="font-size: 16px;">第二招回退版本，</span><br /><span style="font-size: 16px;">最后一招是异地多活切机房流量，把受影响的商户切到另一个机房的单元格里。</span><br /><span style="font-size: 16px;">千万别在定位问题上花太多时间。</span></p>
+<p><span style="font-size: 16px;">&nbsp;<img src="https://img2018.cnblogs.com/blog/7438/201810/7438-20181003012714271-1634248379.png" alt="" />&nbsp;</span></p>
+<p><span style="font-size: 16px;">不然有成千上万人想砍你。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">-EOF-</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">昀哥近期语录：</span></p>
+<p><span style="font-size: 16px;">1，</span></p>
+<p><span style="font-size: 16px;">不可能像搭积木一样&ldquo;拼&rdquo;出一个生态，一定是一个带动一个，履带式前进，干好一件大事儿，给客户带来一些额外的价值，顺着这一丝丝价值往里打，打出生态的另外一层。堆是堆不出生态的。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">2，</span></p>
+<p><span style="font-size: 16px;">现金在手是硬道理，不管上市还是不上市。共克时艰。&nbsp;</span></p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/201810/7438-20181003013126220-65831293.jpg" alt="" /></p>
+<p><span style="font-size: 16px;">/*Filip Hodas*/</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">3，</span></p>
+<p><span style="font-size: 16px;">&ldquo;你知道那句形容国王和首相的谚语吧？&rdquo;</span><br /><span style="font-size: 16px;">奈德当然知道。&ldquo;国王做梦，&rdquo;他说，&ldquo;首相筑梦。&rdquo;</span><br /><span style="font-size: 16px;">&mdash;&mdash;冰与火之歌1 第五章 艾德</span><br /><span style="font-size: 16px;">//董事长做梦，CEO/COO/CXO筑梦</span><br /><span style="font-size: 16px;">//梦里时常飘来一丝乌云，网络抖动，RDS CPU 100%，台风，&hellip;&hellip;</span><br /><span style="font-size: 16px;">//甚至有人一时兴起，点着了柳絮，把整个停车场的一百多辆车都烧得只剩下一个壳&hellip;&hellip;</span></p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/201810/7438-20181003013054661-225641150.jpg" alt="" /></p>
+<p><span style="font-size: 16px;">/*Filip Hodas*/</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">4，</span></p>
+<p><span style="font-size: 16px;">技术书单-面向中高级工程师：</span></p>
+<ol class="list-paddingleft-2">
+<li>
+<p><span style="font-size: 16px;">数据的本质，车品觉</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">大型网站系统与Java中间件开发实践，曾宪杰</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">亿级流量网站架构核心技术，张开涛&nbsp;</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">创京东</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">腾讯传</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">淘宝技术这十年，子柳</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">蚂蚁金服，由曦</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">有效管理的5大兵法，孙陶然</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">创业就是要细分垄断，李开复等</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">深入分布式缓存：从原理到实践</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">逆流而上，阿里巴巴集团成长集编委会&nbsp;</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">阿里巴巴Java开发手册</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">尽在双11：阿里巴巴技术演进与超越</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">聊聊架构，王概凯</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">决战618：探秘京东技术取胜之道，京东集团618作战指挥中心&nbsp;</span></p>
+
+
+
+</li>
+<li>
+<p><span style="font-size: 16px;">CTO说，CTO训练营</span></p>
+
+
+
+</li>
+
+
+
+</ol>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">5，</span></p>
+<p><span style="font-size: 16px;">链路上的每一个环节都有可能出问题，我已经知道了，但您也不用在一个月里集中展示，请长老收了神通吧～</span></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-10-03 01:30</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9739026" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9739026);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 9739026, cb_entryCreatedDate = '2018-10-03 01:30', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

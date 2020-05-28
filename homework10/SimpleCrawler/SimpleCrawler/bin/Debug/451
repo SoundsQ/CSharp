@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_Java架构师追风</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=710</id>
+  <updated>2020-04-28T13:48:26Z</updated>
+  <author>
+    <name>Java架构师追风</name>
+    <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12797510.html</id>
+    <title type="text">面试官：你对Redis缓存了解吗？面对这11道面试题你是否有很多问号？ - Java架构师追风</title>
+    <summary type="text">前言 关于Redis的知识，总结了一个脑图分享给大家 1、在项目中缓存是如何使用的？为什么要用缓存？缓存使用不当会造成什么后果？ 面试官心理分析 这个问题，互联网公司必问，要是一个人连缓存都不太清楚，那确实比较尴尬。 只要问到缓存，上来第一个问题，肯定是先问问你项目哪里用了缓存？为啥要用？不用行不行</summary>
+    <published>2020-04-28T13:48:00Z</published>
+    <updated>2020-04-28T13:48:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12797510.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12797510.html" />
+    <content type="html">【摘要】前言 关于Redis的知识，总结了一个脑图分享给大家 1、在项目中缓存是如何使用的？为什么要用缓存？缓存使用不当会造成什么后果？ 面试官心理分析 这个问题，互联网公司必问，要是一个人连缓存都不太清楚，那确实比较尴尬。 只要问到缓存，上来第一个问题，肯定是先问问你项目哪里用了缓存？为啥要用？不用行不行 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12797510.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12669566.html</id>
+    <title type="text">2020年Java多线程与并发系列22道高频面试题（附思维导图和答案解析） - Java架构师追风</title>
+    <summary type="text">前言 现在不管是大公司还是小公司，去面试都会问到多线程与并发编程的知识，大家面试的时候这方面的知识一定要提前做好储备。 关于多线程与并发的知识总结了一个思维导图，分享给大家 1、Java中实现多线程有几种方法 （1）继承Thread类； （2）实现Runnable接口； （3）实现Callable接</summary>
+    <published>2020-04-09T13:04:00Z</published>
+    <updated>2020-04-09T13:04:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12669566.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12669566.html" />
+    <content type="html">【摘要】前言 现在不管是大公司还是小公司，去面试都会问到多线程与并发编程的知识，大家面试的时候这方面的知识一定要提前做好储备。 关于多线程与并发的知识总结了一个思维导图，分享给大家 1、Java中实现多线程有几种方法 （1）继承Thread类； （2）实现Runnable接口； （3）实现Callable接 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12669566.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12628292.html</id>
+    <title type="text">Java开发5年，四面美团（多线程+redis+JVM+数据库），终拿offer！ - Java架构师追风</title>
+    <summary type="text">前言 Java开发五年多.投递阿里、腾讯、头条、美团、京东等各互联网公司的高级Java岗位，最终得到了美团的面试机会，并成功拿下美团高级Java岗的offer。美团Java岗四面，前三面都是技术面，第四面是HR面，下面是面试题！ 美团Java岗一面（技术，电话面，约40分钟） 自我介绍。 项目介绍。</summary>
+    <published>2020-04-03T10:39:00Z</published>
+    <updated>2020-04-03T10:39:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12628292.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12628292.html" />
+    <content type="html">【摘要】前言 Java开发五年多.投递阿里、腾讯、头条、美团、京东等各互联网公司的高级Java岗位，最终得到了美团的面试机会，并成功拿下美团高级Java岗的offer。美团Java岗四面，前三面都是技术面，第四面是HR面，下面是面试题！ 美团Java岗一面（技术，电话面，约40分钟） 自我介绍。 项目介绍。 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12628292.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12621352.html</id>
+    <title type="text">从阿里、腾讯的面试真题中总结了这11个Redis高频面试题 - Java架构师追风</title>
+    <summary type="text">前言 现在大家的工作生活基本已经是回归正轨了，最近也是迎来了跳槽面试季，有些人已经拿到了一两个offer了。 这段时间收集了阿里、腾讯、百度、京东、美团、字节跳动等公司的Java面试题，总结了Redis系列的高频面试题： 1、Redis持久化机制 2、缓存雪崩、缓存穿透、缓存预热、缓存更新、缓存降级</summary>
+    <published>2020-04-02T09:49:00Z</published>
+    <updated>2020-04-02T09:49:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12621352.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12621352.html" />
+    <content type="html">【摘要】前言 现在大家的工作生活基本已经是回归正轨了，最近也是迎来了跳槽面试季，有些人已经拿到了一两个offer了。 这段时间收集了阿里、腾讯、百度、京东、美团、字节跳动等公司的Java面试题，总结了Redis系列的高频面试题： 1、Redis持久化机制 2、缓存雪崩、缓存穿透、缓存预热、缓存更新、缓存降级 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12621352.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12577301.html</id>
+    <title type="text">2020年Java基础高频面试题汇总（1.4W字详细解析） - Java架构师追风</title>
+    <summary type="text">1、 Java语言有哪些特点 （1）简单易学、有丰富的类库 （2）面向对象（Java最重要的特性，让程序耦合度更低，内聚性更高） （3）与平台无关性（JVM是Java跨平台使用的根本） （4）可靠安全 （5）支持多线程 2、面向对象和面向过程的区别 面向过程：是分析解决问题的步骤，然后用函数把这些步</summary>
+    <published>2020-03-26T12:57:00Z</published>
+    <updated>2020-03-26T12:57:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12577301.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12577301.html" />
+    <content type="html">【摘要】1、 Java语言有哪些特点 （1）简单易学、有丰富的类库 （2）面向对象（Java最重要的特性，让程序耦合度更低，内聚性更高） （3）与平台无关性（JVM是Java跨平台使用的根本） （4）可靠安全 （5）支持多线程 2、面向对象和面向过程的区别 面向过程：是分析解决问题的步骤，然后用函数把这些步 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12577301.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12547225.html</id>
+    <title type="text">2020年大厂Java面试前复习的正确姿势（800+面试题附答案解析） - Java架构师追风</title>
+    <summary type="text">前言 个人觉得面试也像是一场全新的征程，失败和胜利都是平常之事。所以，劝各位不要因为面试失败而灰心、 丧失斗志。也不要因为面试通过而沾沾自喜，等待你的将是更美好的未来，继续加油！ 本篇分享的面试题内容包括：Java、MyBatis、ZooKeeper、Dubbo、Elasticsearch、Redi</summary>
+    <published>2020-03-22T09:37:00Z</published>
+    <updated>2020-03-22T09:37:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12547225.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12547225.html" />
+    <content type="html">【摘要】前言 个人觉得面试也像是一场全新的征程，失败和胜利都是平常之事。所以，劝各位不要因为面试失败而灰心、 丧失斗志。也不要因为面试通过而沾沾自喜，等待你的将是更美好的未来，继续加油！ 本篇分享的面试题内容包括：Java、MyBatis、ZooKeeper、Dubbo、Elasticsearch、Redi &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12547225.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12505166.html</id>
+    <title type="text">吃透这份pdf，面试阿里、腾讯、百度等一线大厂，顺利拿下心仪offer！ - Java架构师追风</title>
+    <summary type="text">吃透这份pdf，拿下阿里、腾讯等大厂心仪offer（Java岗）！</summary>
+    <published>2020-03-16T09:21:00Z</published>
+    <updated>2020-03-16T09:21:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12505166.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12505166.html" />
+    <content type="html">【摘要】吃透这份pdf，拿下阿里、腾讯等大厂心仪offer（Java岗）！ &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12505166.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12482494.html</id>
+    <title type="text">3月编程语言排行及程序员工资，快看看你在哪个等级 - Java架构师追风</title>
+    <summary type="text">3月编程语言比例 3月编程语言占比 3月程序员平均工资13820元，比上个月增加。具体趋势如图： 3月各主要程序员城市工资变化 3月主要城市程序员工资变化 职能 最后 欢迎大家一起交流，喜欢文章记得关注我点赞转发哟，感谢支持！</summary>
+    <published>2020-03-12T12:29:00Z</published>
+    <updated>2020-03-12T12:29:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12482494.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12482494.html" />
+    <content type="html">【摘要】3月编程语言比例 3月编程语言占比 3月程序员平均工资13820元，比上个月增加。具体趋势如图： 3月各主要程序员城市工资变化 3月主要城市程序员工资变化 职能 最后 欢迎大家一起交流，喜欢文章记得关注我点赞转发哟，感谢支持！ &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12482494.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12430667.html</id>
+    <title type="text">2020年春招面试必备Spring系列面试题129道（附答案解析） - Java架构师追风</title>
+    <summary type="text">前言 关于Spring的知识总结了个思维导图分享给大家 1、不同版本的 Spring Framework 有哪些主要功能？ 2、什么是 Spring Framework？ Spring 是一个开源应用框架，旨在降低应用程序开发的复杂度。它是轻量级、松散耦合的。它具有分层体系结构，允许用户选择组件，同</summary>
+    <published>2020-03-06T12:35:00Z</published>
+    <updated>2020-03-06T12:35:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12430667.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12430667.html" />
+    <content type="html">【摘要】前言 关于Spring的知识总结了个思维导图分享给大家 1、不同版本的 Spring Framework 有哪些主要功能？ 2、什么是 Spring Framework？ Spring 是一个开源应用框架，旨在降低应用程序开发的复杂度。它是轻量级、松散耦合的。它具有分层体系结构，允许用户选择组件，同 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12430667.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhuifeng523/p/12303547.html</id>
+    <title type="text">2万字Java并发编程面试题整理（含答案，建议收藏） - Java架构师追风</title>
+    <summary type="text">Java 并发编程 1、在 java 中守护线程和本地线程区别？ 2、线程与进程的区别？ 3、什么是多线程中的上下文切换？ 4、死锁与活锁的区别，死锁与饥饿的区别？ 5、Java 中用到的线程调度算法是什么？ 6、什么是线程组，为什么在 Java 中不推荐使用？ 7、为什么使用 Executor 框</summary>
+    <published>2020-02-13T06:34:00Z</published>
+    <updated>2020-02-13T06:34:00Z</updated>
+    <author>
+      <name>Java架构师追风</name>
+      <uri>http://www.cnblogs.com/zhuifeng523/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhuifeng523/p/12303547.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhuifeng523/p/12303547.html" />
+    <content type="html">【摘要】Java 并发编程 1、在 java 中守护线程和本地线程区别？ 2、线程与进程的区别？ 3、什么是多线程中的上下文切换？ 4、死锁与活锁的区别，死锁与饥饿的区别？ 5、Java 中用到的线程调度算法是什么？ 6、什么是线程组，为什么在 Java 中不推荐使用？ 7、为什么使用 Executor 框 &lt;a href="http://www.cnblogs.com/zhuifeng523/p/12303547.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

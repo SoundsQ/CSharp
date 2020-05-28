@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="Xamarin.Android 绑定友盟社会化分享组件 最近在开发 &amp;quot;博客园Android App&amp;quot; 的时候需要用到友盟社会化分享组件，在github上搜了一下都没有找到最新版本绑" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Xamarin.Android 绑定友盟社会化分享组件 - JoesWeek - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite.min.css?v=mxJZfspzqgmSFSdBbMH8zU83VuawcFZooz2hdrdyHlI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/ourozts/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/ourozts/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/ourozts/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 349175;
+        var currentBlogApp = 'ourozts';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Minyx2_Lite';
+    </script>
+    
+    
+    <script src="/skins/minyx2_lite/bundle-minyx2_lite.min.js?v=z_XLIOc5JYwRKqTPu9fAWp7D8tchhGxVWGYvlAiigUQ" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<div id="container">
+    <a class="minyx" href="https://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            Posts - 
+5, 
+Articles - 
+0, 
+Comments - 
+28
+<!---->
+
+
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="https://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="https://i.cnblogs.com/">Dashboard</a>
+        </li>
+        <li>
+            
+    <a id="lnkLogin" href="https://account.cnblogs.com/signin?ReturnUrl=https://www.cnblogs.com/ourozts/">Login</a>
+
+
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="https://www.cnblogs.com/ourozts/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="https://msg.cnblogs.com/send/JoesWeek">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="https://www.cnblogs.com/ourozts/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="https://www.cnblogs.com/ourozts/rss/">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="https://www.cnblogs.com/ourozts/">JoesWeek</a>
+            <!-- 子标题 -->
+            <small>
+                我有一个梦想.
+            </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            <div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2>
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/ourozts/p/6773667.html">Xamarin.Android 绑定友盟社会化分享组件</a>
+</h2>
+    <small>
+<span id="post-date">2017-04-27 13:13</span>&nbsp;
+<a href="https://www.cnblogs.com/ourozts/">JoesWeek</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6773667" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(6773667);return false;">收藏</a></small>
+    <div class="entry">
+        
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h2 id="xamarinandroid-绑定友盟社会化分享组件">Xamarin.Android 绑定友盟社会化分享组件</h2>
+<p>最近在开发<a href="http://www.cnblogs.com/ourozts/p/6724065.html">博客园Android App</a>的时候需要用到友盟社会化分享组件，在github上搜了一下都没有找到最新版本绑定好的项目，就自己动手来绑定一个最新版本的友盟社会化分享组件(文章发布时的最新版为v6.4.3)。</p>
+<h2 id="下载友盟android版sdk">下载友盟Android版SDK</h2>
+<p><a href="http://dev.umeng.com/social/android/sdk-download">友盟社会化分享组件 v6.4.3</a><br>
+本文只使用到微信,QQ,新浪微博,故只下载了精简版</p>
+<h2 id="创建绑定项目">创建绑定项目</h2>
+<p>创建步骤如图所示:</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124753381-915532834.png" alt=""><br>
+<img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124803037-896644884.png" alt=""></p>
+<h2 id="添加友盟sdk的jar包到绑定项目的jars文件夹下">添加友盟SDK的jar包到绑定项目的Jars文件夹下</h2>
+<p>添加下载的友盟SDK项目中main,platforms,shareboard,shareview文件夹中的jar包到绑定项目的Jars文件夹下,如图示:</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124814897-1864665522.png" alt=""><br>
+<img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124821881-1467979332.png" alt=""></p>
+<p>修改所有jar包的属性EmbeddedJar,如图示:</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124832725-1135601951.png" alt=""></p>
+<h2 id="生成项目">生成项目</h2>
+<p>全部修改好之后，生成项目，出现一大堆错误，先别急，看一下都有些什么错误。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124845772-436217878.png" alt=""></p>
+<p>好了，双击第一个错误，打开后发现UMImageMark类竟然继承的是自己，这应该就是错误的源头了。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124901865-202309362.png" alt=""></p>
+<p>然后我们把UMImageMark继承的类改为Java.Lang.Object试试，ok，错误消失了。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124921850-1046850658.png" alt=""></p>
+<p>但是这样改是没有用的，因为这已经是生成好的代码了，要改就只能在源头上更改了，怎么办呢? 打开Transforms文件夹下的Metadata.xml文件，在这里编写修改的代码就行了。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124933928-555519731.png" alt=""></p>
+<p>但是怎么修改UMImageMark类的继承类呢?按下面的方式添加一行代码就搞定了。</p>
+<p><code>&lt;attr path=&quot;/api/package[@name='com.umeng.social.tool']/class[@name='UMImageMark']&quot; name=&quot;extends&quot;&gt;Java.Lang.Object&lt;/attr&gt;</code></p>
+<p>然后再生成一下，看有没有效果。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427124948350-632782581.png" alt=""></p>
+<p>上面的错误没有了，说明成功了。可是还是有好多错误。接下来看下一个错误。双击打开第一个错误，发现CancelEventArgs类是一个分布类再两个文件中存在，google一下发现是因为IUMShareListener接口和IUMAuthListener接口存在相同的方法，所以绑定的时候会生成相同的类。好了，知道了原因就好办了，只要把其中一个接口中的方法名字改一下就好了，代码如下:</p>
+<pre><code class="language-&lt;attr">   &lt;attr path=&quot;/api/package[@name='com.umeng.socialize']/interface[@name='UMAuthListener']/method[@name='onComplete']&quot; name=&quot;managedName&quot;&gt;OnAuthComplete&lt;/attr&gt;
+   &lt;attr path=&quot;/api/package[@name='com.umeng.socialize']/interface[@name='UMAuthListener']/method[@name='onError']&quot; name=&quot;managedName&quot;&gt;OnAuthError&lt;/attr&gt;
+  &lt;attr path=&quot;/api/package[@name='com.umeng.socialize']/interface[@name='UMAuthListener']/method[@name='onStart']&quot; name=&quot;managedName&quot;&gt;OnAuthStart&lt;/attr&gt;
+</code></pre>
+<p>重新生成一下。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427125000365-2044806868.png" alt=""></p>
+<p>Good，成功了，只剩下3个错误了。<br>
+下一个错误一看就知道是因为修饰符的原因造成的，把继承类的这个方法修饰符protected改成public就可以了，代码:</p>
+<p><code>&lt;attr path=&quot;/api/package[@name='com.umeng.socialize.sina.params']/class[@name='BrowserRequestParamBase']/method[@name='onCreateRequestParamBundle' and count(parameter)=1 and parameter[1][@type='android.os.Bundle']]&quot; name=&quot;visibility&quot;&gt;public&lt;/attr&gt;</code></p>
+<p>重新生成一下。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427125829725-952792096.png" alt=""></p>
+<p>好了，还有2个错误。错误提示说“UMShareAPI.InitThread”不实现继承的抽象成员“QueuedWork.UMAsyncTask.DoInBackground()”，打开发现已经有了DoInBackground方法了，但是没有override关键字修饰。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427125816600-263362424.png" alt=""></p>
+<p>怎么办呢，只能新建一个UMShareAPI分布类来重写这个方法了。在Additions文件夹下新建一个UMShareAPI类，注意修改命名空间为Com.Umeng.Socialize，然后重写DoInBackground方法。由于原来已经有了一个叫DoInBackground的方法，所以需要把原来的方法名修改成DoInBackgrounds就搞定了，代码:</p>
+<pre><code>namespace Com.Umeng.Socialize
+{
+    public partial class UMShareAPI
+    {
+        public partial class InitThread : global::Com.Umeng.Socialize.Common.QueuedWork.UMAsyncTask
+        {
+            protected override Java.Lang.Object DoInBackground()
+            {
+                return DoInBackgrounds();
+            }
+        }
+    }
+}
+  &lt;attr path=&quot;/api/package[@name='com.umeng.socialize']/class[@name='UMShareAPI.InitThread']/method[@name='doInBackground' and count(parameter)=0]&quot;  name=&quot;name&quot;&gt;DoInBackgrounds&lt;/attr&gt;
+</code></pre>
+<p>保存后重新生成一下，搞定了。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1084163/201704/1084163-20170427125545678-174369906.png" alt=""></p>
+<p>最后一个错误是类名和属性名冲突了，修改一下类名就行了。</p>
+<p><code>&lt;attr path=&quot;/api/package[@name='com.umeng.socialize.utils']/class[@name='Log']/field[@name='LOG']&quot; name=&quot;name&quot;&gt;Logs&lt;/attr&gt; </code></p>
+<p>重新生成。搞定。大功告成。</p>
+<p><code>========== 生成: 成功 1 个，失败 0 个，最新 0 个，跳过 0 个 ========== </code></p>
+<h2 id="最后">最后</h2>
+<p>下载地址</p>
+<p><a href="https://github.com/i-1213/XamarinSDK">Github</a></p>
+<p>这个项目中是我在使用Xamarin.Android的时候自己用到的绑定库,包含了友盟统计，友盟社会化分享，讯飞版本自动更新。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info">
+        </div>
+        <div class="clear"></div>
+        <div id="post_next_prev"></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        
+<li class="icon_cat" id="BlogPostCategory">
+分类            <a href="https://www.cnblogs.com/ourozts/category/992524.html" target="_blank">Xamarin.Android</a>
+</li>
+<li class="icon_bullet" id="EntryTag">
+标签            <a href="https://www.cnblogs.com/ourozts/tag/C%23/">C#</a>
+,            <a href="https://www.cnblogs.com/ourozts/tag/Xamarin.Android/">Xamarin.Android</a>
+,            <a href="https://www.cnblogs.com/ourozts/tag/%E5%8F%8B%E7%9B%9F%E5%88%86%E4%BA%AB/">友盟分享</a>
+</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 349175, cb_blogApp = 'ourozts', cb_blogUserGuid = '3042ba5d-31c7-e611-845c-ac853d9f53ac';
+    var cb_entryId = 6773667, cb_entryCreatedDate = '2017-04-27 13:13', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            <div id="about">
+                <div>
+                    <h2 id="about_title">About</h2>
+                    <div id="about_body">
+                        <div id="sidebar_news"></div>
+                        <script type="text/javascript">loadBlogNews();</script>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            <div id="mySearchWrapper">
+                <div id="mySearch">
+                    <input type="image" src="/skins/minyx2_lite/images/btnsearch.gif" id="btnZzk"  class="submit" onclick="zzk_go();return false;"/>
+                    <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword" /></label>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            </div>
+            <div id="sideRight">
+            </div>
+            <div id="sideLeft">
+            </div>            
+                <div id="sideContainer">
+                </div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/ajax/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                $.ajax({
+                                    url: getAjaxBaseUrl() + 'TopLists.aspx',
+                                    type: 'get',
+                                    dataType: 'text',
+                                    success: function (topLists) {
+                                        if (topLists) {
+                                            $("#sideContainer").append(topLists);
+                                        }
+                                        var m = window.__blog.sideContainerRendered;
+                                        if (m) { m(__$("sideContainer")); }
+                                        window.__blog.sidebar.__layout();
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                </script>
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            <p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright &copy; 2020 JoesWeek
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+<p>
+<a href="http://www.cnblogs.com">博客园</a>
+</p>
+</div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+
+
+    
+</body>
+</html>

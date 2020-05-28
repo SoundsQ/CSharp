@@ -1,0 +1,1081 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="关键词列表：&#xD;&#xA;渐进增强；Combo Handler；Quirks Mode；浏览器盒子模型；选择器特殊性；Spacer Image；CSS Sprites；PNG8；" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>最佳实践系列：前端代码标准和最佳实践 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html">最佳实践系列：前端代码标准和最佳实践</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1><span style="font-size: 18pt;">最佳实践系列：前端代码标准</span></h1>
+<p>@窝窝商城前端（刘轶/李晨/徐利/穆尚）翻译于2012年 版本0.55 @郑昀校对</p>
+<p><a href="http://isobar-idev.github.com/code-standards/">isobar</a>的这个前端代码标准和最佳实践文档，涵盖了Web应用开发的方方面面，我们翻译了大部分章节，并做了注解。请仔细阅读用<img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />标记的段落。</p>
+<p>关键词列表：</p>
+<p><strong>渐进增强</strong>；<strong>Combo Handler</strong>；<strong>Quirks Mode</strong>；<strong>浏览器盒子模型</strong>；<strong>选择器特殊性</strong>；<strong>Spacer Image</strong>；<strong>CSS Sprites</strong>；<strong>PNG8</strong>；</p>
+<p>&nbsp;</p>
+<p>编写此文档的目的主要有两方面，第一，如何保持代码的一致性；第二，什么才是最佳实践。我们通过编码风格和约定保持一致，可以减轻代码维护的工作量，并降低风险，在将来代码出现问题的时候，方便我们排查错误。我们要保持最佳的编码习惯和做法，确保优化页面的加载和性能，并能更好地维护代码。</p>
+<p>&nbsp;</p>
+<h2><img style="float: left; margin-left: 5px; margin-right: 5px;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%E8%8A%B1%E6%8B%AC%E5%8F%B701.png" alt="章节" />普遍性准则</h2>
+<p>前端开发的核心　　</p>
+<p>&nbsp;</p>
+<p>1、&nbsp; <strong>结构、表现、行为应该分离</strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />。</p>
+<p>2、&nbsp; <a href="http://www.bbc.co.uk/guidelines/futuremedia/technical/semantic_markup.shtml">结构良好的、语义化</a>和<a href="http://isobar-idev.github.com/code-standards/#validation">有效</a>的HTML标记。</p>
+<p>3、&nbsp; <a href="http://icant.co.uk/articles/pragmatic-progressive-enhancement/">Javascript脚本的<strong>渐进增强</strong></a><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />！</p>
+<p><span style="color: #808080;">注：<a href="http://www.zhangxinxu.com/wordpress/?p=788"><span style="color: #808080;">渐进增强（Progressive Enhancement）</span></a></span></p>
+<p><span style="color: #808080;">名词定义：<strong>渐进增强</strong>是从一个功能可用的基本版本出发，然后逐步增加用户体验的丰富程度，并在应用增强功能之前先测试对该功能的支持性；最基本的可用性出发，在保证站点页面在低级浏览器中的可用性和可访问性的基础上，逐步增加功能及提高用户体验。辅助阅读：<a href="http://www.ryanbay.com/?p=97"><span style="color: #808080;">http://www.ryanbay.com/?p=97</span></a></span></p>
+<h3>一般性实践</h3>
+<h3>缩进</h3>
+<p>对于所有代码语言，我们需要通过TAB缩进进行代码排版（使用空格字符），在文本编辑器击中<em>TAB</em>应相当于<strong>四个空格</strong>。</p>
+<h3>可读性 vs 压缩</h3>
+<p>我们在代码可读性和文件大小的取舍中，更倾向于良好的可读性。</p>
+<p>在合适的地方，我们鼓励使用大量的缩进、换行来维持文件代码的可读性。开发者不需要刻意地压缩文件的体积大小，也不需要混淆使用JavaScript<img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />。</p>
+<p>我们将使用服务器端或发布过程中自动minify和gzip的所有静态客户端文件<img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />，如CSS和JavaScript。</p>
+<p><span style="color: #808080;">注：一般采用服务端的<a href="http://dancewithnet.com/2010/06/08/minify-js-and-css-files-in-server/#more-1507"><span style="color: #808080;"> Combo Handler</span></a> 来对服务器端上传的未压缩、未混淆的JS和CSS文件做统一合并、压缩和混淆。</span></p>
+<h2><img style="float: left; margin-left: 5px; margin-right: 5px;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%E8%8A%B1%E6%8B%AC%E5%8F%B701.png" alt="章节" />标签</h2>
+<p>标记定义了结构和轮廓的文档，并提供了一个结构化内容。</p>
+<p>标记并不打算定义的外观和视觉表现，只用于感知网页的基本概念，如标题、段落、列表。HTML标记中表现样式的属性都应被弃用，样式的表现应该包含在<a href="http://isobar-idev.github.com/code-standards/#css">样式表</a>里。</p>
+<h3>HTML5</h3>
+<p>我们将在适当的时候使用HTML5 Doctype和HTML5特性。</p>
+<p>我们将用<a href="http://validator.w3.org/">W3C验证器</a>测试我们的标记，以确保格式良好。100％有效的代码并不是我们的目标，但W3C验证确实有助于编写更易于维护的网站以及调试代码。Isobar不保证代码是100％有效，而是确保跨浏览器有统一的浏览体验。</p>
+<h3>模板</h3>
+<p>对于HTML5文档，我们将定制 <a href="http://html5boilerplate.com/" target="_blank">H5BP</a>。</p>
+<h3>文档类型</h3>
+<p><strong>应该始终使用一个合适的</strong><strong> Doctype </strong><strong>来触发浏览器的标准模式<img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</p>
+<p><strong>我们</strong><strong>应该始终避免</strong><a href="http://en.wikipedia.org/wiki/Quirks_mode"><strong>Quirks Mode</strong></a><strong>（怪异模式或兼容模式）。</strong></p>
+<p>HTML5的一个好的方面是，它简化了所需的代码量。无意义的属性已经有所下降，而且已大大简化了 Doctype 声明。因此<strong>建议文档类型应声明为</strong><strong>HTML5</strong><strong>的形式</strong>。</p>
+<p style="margin-left: 30px;">HTML5 Doctype</p>
+<div id="highlighter_633267" class="syntaxhighlighter " style="margin-left: 30px;">
+<div class="lines no-wrap" style="margin-left: 30px;">
+<div class="line alt1" style="margin-left: 30px;"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">&lt;!DOCTYPE html&gt;</code></span></span></div>
+</div>
+</div>
+<p><span style="color: #808080;">注：<a href="http://zh.wikipedia.org/zh/%E6%80%AA%E5%BC%82%E6%A8%A1%E5%BC%8F"><span style="color: #808080;">怪异模式</span></a>（<a href="http://en.wikipedia.org/wiki/Quirks_mode"><span style="color: #808080;">quirks mode</span></a>）</span></p>
+<p><span style="color: #808080;">名词定义：指在计算机领域中，一些网页浏览器为了维持对较旧的网页设计的向后兼容性，而使用的一种技术，有别于严格遵循万维网联盟（W3C）与互联网工程任务组（IETF）标准而设计的「标准模式」。</span></p>
+<p><span style="color: #808080;">为了与可能数量众多的网页维持兼容，现代的网页浏览器一般具有多种渲染模式：在「标准模式」(standards mode) 页面按照 HTML 与 CSS 的定义渲染，而在「quirks 模式」中则尝试模拟更旧的浏览器的行为。</span></p>
+<p><span style="color: #808080;">在 quirks 模式和标准模式之间一个突出的不同是对 CSS <a href="http://zh.wikipedia.org/zh/IE%E7%9B%92%E6%A8%A1%E5%9E%8B%E7%BC%BA%E9%99%B7"><span style="color: #808080;">IE盒模型缺陷</span></a>的处理。</span></p>
+<p><span style="color: #808080;">参考资料：<a href="http://www.cs.tut.fi/~jkorpela/quirks-mode.html"><span style="color: #808080;">What happens in Quirks Mode?</span></a></span></p>
+<table style="width: 100%;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;"><strong>DOCTYPE</strong><strong>声明</strong></span></p>
+</td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;"><strong>说明</strong></span></p>
+</td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;"><strong>IE8</strong></span></p>
+</td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;"><strong>FF</strong></span></p>
+</td>
+<td valign="top" width="9%">
+<p align="left"><span style="font-size: 13px;"><strong>Chrome</strong></span></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;">&lt;!DOCTYPE HTML&gt;</span></p>
+</td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;">HTML5推荐的方式</span></p>
+</td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+</td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+</td>
+<td valign="top" width="9%">
+<p align="left"><span style="font-size: 13px;">&nbsp;</span></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" </span><br /><span style="font-size: 13px;">
+  "http://www.w3.org/TR/html4/strict.dtd" &gt;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;">严格模式声明并给出DTD URL</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="9%">
+<p align="left"><span style="font-size: 13px;">&nbsp;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+
+
+
+
+
+
+
+
+ </tr>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD
+  HTML 4.01//EN"&gt;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;">严格模式声明但不给出DTD URL</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="9%">
+<p align="left"><span style="font-size: 13px;">&nbsp;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+
+
+
+
+
+
+
+
+ </tr>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD
+  HTML 4.01 Transitional//EN" </span><br /><span style="font-size: 13px;">
+  "http://www.w3.org/TR/html4/loose.dtd"&gt;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;">过渡模式并给出DTD URL</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;">CSS1Compat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="9%">
+<p align="left"><span style="font-size: 13px;">&nbsp;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+
+
+
+
+
+
+
+
+ </tr>
+<tr>
+<td valign="top" width="37%">
+<p align="left"><span style="font-size: 13px;">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD
+  HTML 4.01 Transitional//EN"&gt;</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="22%">
+<p align="left"><span style="font-size: 13px;">过渡模式但不给出DTD URL</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="17%">
+<p align="left"><span style="font-size: 13px;">BackCompat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="14%">
+<p align="left"><span style="font-size: 13px;">BackCompat</span></p>
+
+
+
+
+
+
+
+
+  </td>
+<td valign="top" width="9%"><span style="font-size: 13px;">&nbsp;</span></td>
+
+
+
+
+
+
+
+
+ </tr>
+
+
+
+
+
+
+
+
+</tbody>
+
+
+
+
+
+
+
+</table>
+<p>&nbsp;</p>
+<h3>字符编码</h3>
+<p><strong>所有标记都应设置为utf &ndash;
+8</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。它应该同时指定在
+HTTP 报头和文档头部。</p>
+<div id="highlighter_413353" class="syntaxhighlighter ">
+<div class="lines no-wrap">
+<div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">&lt;</code><code class="keyword">meta</code> <code class="color1">http-equiv</code><code class="plain">=</code><code class="string">"Content-Type"</code> <code class="color1">content</code><code class="plain">=</code><code class="string">"text/html; charset=UTF-8"</code> <code class="plain">/&gt;</code></span></span></div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+<p>In HTML5, just do:</p>
+<div id="highlighter_650733" class="syntaxhighlighter ">
+<div class="lines no-wrap">
+<div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">&lt;</code><code class="keyword">meta</code> <code class="color1">charset</code><code class="plain">=</code><code class="string">"utf-8"</code><code class="plain">&gt;</code></span></span></div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+<h3>通用标记指南</h3>
+<p>以下是一般指南，用于构建你的HTML标记。</p>
+<ul>
+<li>使用实际的P元素分隔符而不是多段BR标签。</li>
+<li>在适当的时候，利用DL（定义列表）和 BLOCKQUOTE。</li>
+<li><strong>使用UL</strong><strong>，OL</strong><strong>，DL </strong><strong>来表示一个项目列表，不要使用多个DIV</strong><strong>嵌套模拟一个项目列表</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</li>
+<li><strong>使用</strong><strong>label </strong><strong>字段来标记表单中每一个字段，它的</strong><strong>for</strong><strong>属性把这个label</strong><strong>与input field</strong><strong>关联起来，使得用户可以点击这个label</strong><strong>。</strong><strong>设置</strong><strong>cursor:pointer</strong><strong>给</strong><strong>label</strong><strong>也是明智之举</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong> ！！</li>
+<li><strong>不要使用size</strong><strong>属性来控制你输入框的大小，应该使用CSS</strong><strong>来定义</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</li>
+<li><strong>在一些闭合div</strong><strong>后面加上html</strong><strong>注释，以标示你关闭的是什么元素</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。有大量嵌套和缩进时这会很有帮助。</li>
+<li>不要使用 tables来完成你的页面布局。</li>
+<li>在适当的时候合理的运用table中的thead 、tbody、tfoot以及th等标签。</li>
+
+
+
+
+
+
+</ul>
+<p>正确的表格：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121901.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121901.png" /></p>
+<h3><strong>引号属性</strong></h3>
+<p>虽然HTML5规范定义了在那些可以自动识别空格的属性周围添加引号作为可选属性，但是所有的属性都应该添加引号。</p>
+<div id="highlighter_513340" class="syntaxhighlighter ">
+<div class="lines no-wrap">
+<div class="line alt1"><code class="number">1.</code><span class="content"><span class="block" style="margin-left: 0px !important;"><code class="plain">&lt;</code><code class="keyword">p</code> <code class="color1">class</code><code class="plain">=</code><code class="string">"line note"</code> <code class="color1">data-attribute</code><code class="plain">=</code><code class="string">"106"</code><code class="plain">&gt;This is my paragraph of special text.&lt;/</code><code class="keyword">p</code><code class="plain">&gt;</code></span></span></div>
+<div class="line alt1">
+<h2><a href="http://isobar-idev.github.com/code-standards/#_css"><img style="float: left; margin-left: 5px; margin-right: 5px;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%E8%8A%B1%E6%8B%AC%E5%8F%B701.png" alt="章节" /></a>CSS</h2>
+<p>Web页面的第二个组件是包含在样式表（Cascading Style Sheet，CSS）里的展示信息。</p>
+<p>&nbsp;</p>
+<h3>一般性编码原则</h3>
+<ul>
+<li>通过外部文件来添加CSS。CSS文件里尽可能不要用 # 。CSS总是应该在文档头部&lt;head&gt;&lt;/head&gt;之间。</li>
+<li>使用 link 标记来引用外部CSS文件，<a href="http://blog.amodernfable.com/2008/01/21/thoughts-on-linking-to-stylesheets/">永远不要使用 @import导入CSS</a>。</li>
+
+
+
+
+</ul>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121902.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121902.png" /></p>
+<ul>
+<li>不要使用<strong><span style="text-decoration: underline;">内联样式（</span></strong><strong><span style="text-decoration: underline;">inline styling</span></strong><strong><span style="text-decoration: underline;">）</span></strong>，因为维护的时候很难跟踪样式的规则。</li>
+
+
+
+
+</ul>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121903.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121903.png" /></p>
+<ul>
+<li>确保同一个CSS文件文档只引用一次。</li>
+<li>请用一个字体标准化文件，如<a href="http://developer.yahoo.com/yui/fonts/">YUI fonts.css</a>，来定义各个标记的字体在不同浏览器中有统一表现<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>文档中仅出现一次的元素，应使用ID，否则，使用class。</li>
+<li>理解<a href="http://www.stuffandnonsense.co.uk/archives/css_specificity_wars.html">层叠和选择器特性</a>，这样你就可以编写非常简洁、有效的代码。</li>
+<li><strong>编写CSS</strong><strong>代码时，使用高效的选择器。如果可能，要避免使用运行效率低下的选择器</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。比如，我们应该避免 * 通配符选择器，避免不适当的ID选择器（如<code>div#myid</code>）或类选择器（如<code>table.results</code>.）。这些之所以特别重要，是因为在Web应用程序中速度是至关重要的，可能有数以千计甚至数以万计的DOM元素需要被渲染。更多细节请参考： <a href="https://developer.mozilla.org/en/Writing_Efficient_CSS">在MDC上编写高效的CSS</a>。</li>
+
+
+
+
+</ul>
+<p>&nbsp;</p>
+<h3>浏览器盒子模型</h3>
+<p>深入了解CSS和浏览器盒子模型（browser-based box model）是做好CSS布局非常必要的一个条件。</p>
+<p><img class="decoded" src="http://isobar-idev.github.com/code-standards/img/box_model.png" alt="http://isobar-idev.github.com/code-standards/img/box_model.png" /></p>
+<h3>CSS校验</h3>
+<p>我们不使用 <a href="http://jigsaw.w3.org/css-validator/">w3c的css校验器</a>。</p>
+<h3>CSS格式化</h3>
+<p>我们应该保证，至少每一个选择器应该在单独的一行。声明应该是缩进的。</p>
+<h3>Classes vs. IDs</h3>
+<p>如果一些元素是文档中独一无二的，那么你应该只给他们一个ID属性。CLASS则是应用在具备同样属性样式的多个元素上。</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121904.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121904.png" /></p>
+<h3>选择器的命名规范</h3>
+<p>无论是ID选择器还是类选择器，我们应该遵循&ldquo;<strong>它是什么（</strong><strong>what it is</strong><strong>）</strong>&rdquo;而不是&ldquo;<strong>它是什么样子的（</strong><strong>what it looks like</strong><strong>）</strong>&rdquo;的原则进行命名<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。例如：一个class命名为 bigBlueText，如果它后来被改为了红色的小字体，那么该class命名就失去了意义，让人不好理解。</p>
+<p>如果我们命名为 noteText，无论如何改变外观，它仍然是一个文本框，仍然有意义。</p>
+<h3>选择器（<a href="http://isobar-idev.github.com/code-standards/#_selectors">Selectors</a>）</h3>
+<p><a href="http://www.w3.org/TR/2009/PR-css3-selectors-20091215/">CSS Selectors Level 3</a>规格说明书里介绍了一整套CSS选择器，非常有用。</p>
+<h4>Pseudo-classes</h4>
+<p>伪类（<a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">Pseudo-classes</a>）能动态化样式内容。一些伪类从CSS1就存在了，如<code>:visited, :hover</code><code>，有些从CSS2就存在了，如:first-child, :lang</code>。CSS3引入了16个伪类，都非常有用，请深入学习一下<a href="http://www.smashingmagazine.com/2011/03/30/how-to-use-css3-pseudo-classes/">它们的用法</a>。</p>
+<h4>特殊性（Specificity）</h4>
+<p>浏览器会计算一个选择器的权重，来决定应用哪一个CSS规则。如果两个选择器都要应用到一个元素上，那么特殊性更高的选择器胜出。</p>
+<p>ID的特殊性比属性选择器的更高；属性选择器则比类选择器高。所以你可以尝试用id来增加特殊性。</p>
+<h4>计算特殊性</h4>
+<p>当你遇到一个又大又复杂的样式表时，你最好知道怎么计算特殊性，这样能让你的选择器更有效率。</p>
+<p align="left">特殊性的值可以看作是一个由四个数组成的一个组合，用 a，b，c，d 来表示它的四个位置。 依次比较 a，b，c，d 这个四个数比较其特殊性的大小。比如，a 值相同，那么 b 值大的组合特殊性会较大，以此类推。注意，W3C 中并不是把它作为一个 4 位数来看待的。</p>
+<p align="left">a，b，c，d 值的确定规则：</p>
+<ol start="1">
+<li>如果 HTML 标签的 'style' 属性中该样式存在，则记 a 为 1；</li>
+<li>数一下选择器中 ID 选择器的个数作为 b 的值。比如，以上样式中包含 '#c1' 和 '#c2' 的选择器；</li>
+<li>其他属性以及伪类（pseudo-classes）的总数量是 c 的值。比如，上面例子中的 '.con'，':hover' 等；</li>
+<li>元素名和伪元素的数量是 d 的值；比如上面例子中的 &lsquo;div&rsquo;。</li>
+
+
+
+
+
+
+</ol>
+<p>（注：原文为：</p>
+<ul>
+<li>Element, Pseudo Element: d = 1 &ndash; (0,0,0,1)</li>
+<li>Class, Pseudo class, Attribute: c = 1 &ndash; (0,0,1,0)</li>
+<li>Id: b = 1 &ndash; (0,1,0,0)</li>
+<li>Inline Style: a = 1 &ndash; (1,0,0,0)</li>
+
+
+
+
+
+
+</ul>
+<p>此处没有直接翻译。）</p>
+<p>下面举一个实际例子：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121905.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121905.png" /></p>
+<p><strong>使用!important将覆盖所有特殊性，无论它们值有多高。<strong>因此尽量不要用</strong><strong> !important</strong>。大多数情况下它都是不必要的<img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" />。</strong></p>
+<p>&nbsp;</p>
+<h3><span style="font-family: tahoma,arial,helvetica,sans-serif;">Pixels vs. Ems</span></h3>
+<p>我们使用px计量单位来定义字体大小，因为它对文本提供了绝对控制。在IE6浏览器中，如果是用px为单位，那么在页面放大缩小的时候，就不会根据页面缩放的大小来调整基础文本的大小。当今所有主要浏览器(包括IE7和IE8)现在支持文本的像素单位 和/或 整版的缩放。在不考虑IE6的情况下，像素大小是首选。此外，没有单位的行高（line-height）是首选的，因为它不继承它的父元素一个百分比值，而是基于一个乘数的字体大小。</p>
+<p>正确的写法：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121906.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121906.png" /></p>
+<p>错误的写法：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121907.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121907.png" /></p>
+<p>&nbsp;</p>
+<h3>IE的那些BUG</h3>
+<p>不可避免的，当其他浏览器都工作正常时，IE的各个版本有可能会引入一些荒谬的BUG，搞得你措手不及。最后我们只好用CSS hooks加一些条件判断单独设置IE下的表现。更多详情请阅读<a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">paulirish的文章</a>。</p>
+<p>举例：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121908.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121908.png" /></p>
+<p>如果你使用HTML5（以及<a href="http://isobar-idev.github.com/code-standards/#h5bp">HTML5 Boilerplate</a>），那推荐你使用<a href="http://www.modernizr.com/">Modernizer</a> Javascript 库以及下面这个模式：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121909.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121909.png" /></p>
+<p>&nbsp;</p>
+<h3>简写（CSS Shorthand）</h3>
+<p>一般来说，CSS简写是首选的，因为简洁。开发人员应该意识到<strong><span style="text-decoration: underline;">TRBL</span></strong><strong><span style="text-decoration: underline;">（</span></strong><strong><span style="text-decoration: underline;">Top Right Bottom Left</span></strong><strong><span style="text-decoration: underline;">）</span></strong>缩略词，按顺时针&ldquo;上、右、下、左&rdquo;进行定义。例如：</p>
+<p>padding-left:10px;padding-right:15px;padding-top:20px;padding-bottom:10px;</p>
+<p>可将其简写为：padding:20px 15px 10px 10px;</p>
+<p align="left">参考阅读：</p>
+<ul>
+<li><a href="http://qrayg.com/journal/news/css-background-shorthand">http://qrayg.com/journal/news/css-background-shorthand</a></li>
+<li><a href="http://sonspring.com/journal/css-redundancy">http://sonspring.com/journal/css-redundancy</a></li>
+<li><a href="http://dustindiaz.com/css-shorthand">http://dustindiaz.com/css-shorthand</a></li>
+
+
+
+
+
+
+</ul>
+<h3>&nbsp;</h3>
+<h3>图片</h3>
+<ul>
+<li><strong>当需要使用重复平铺的图片时，</strong><a href="http://www.iandevlin.com/blog/2010/03/webdev/fading-issue-with-repeating-background-transparent-image-in-internet-explorer"><strong>图片尺寸大小应该大于</strong><strong> 1x1</strong><strong>像素</strong></a><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。
+<ul>
+<li>注：<a href="http://www.iandevlin.com/blog/2010/03/webdev/fading-issue-with-repeating-background-transparent-image-in-internet-explorer">链接给出了一个例子</a>，他用了一个1&times;1的透明PNG图片作为div的重复背景，样式为：background:transparent url('images/transparent-bg.png') repeat left;，但发现在IE7和IE8下显示有问题，最后只好用了一个1&times;2的透明图片。</li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+</li>
+<li><strong>不要使用</strong><strong>Spacer Images</strong><strong>（空白图片）</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！
+<ul>
+<li>注：spacer image，指的是1&times;1的透明图片，用以填充表格的空白区域，以便撑住表格不变形。</li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+</li>
+<li><strong>请大量使用</strong><a href="http://isobar-idev.github.com/code-standards/#_leverage_css_sprites"><strong>CSS sprites</strong></a><strong>技术</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！这样做可以大大的减少图片的HTTP请求次数，从而加快网页的加载时间。</li>
+<li>所有的切片图像应具有透明背景（PNG8）。切图应该紧着图片边缘切。
+<ul>
+<li>但是 logo 图片文件应该在切图时保留一个padding，这样便于其他人加热链。</li>
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+</li>
+
+
+
+
+
+
+</ul>
+<p>&nbsp;</p>
+<h3>文本和字体样式</h3>
+<p><strong>标题</strong></p>
+<ul>
+<li>定义标题的默认样式为h1～h6。推荐做法是，在你的CSS文件顶部声明这些默认样式，必要时修改它们使得它们在网站中保持一致性。</li>
+<li>标题的显示根据页面层级的不同和标题的重要性，从顶部开始，自上而下。h1为最大字体，h6为最小字体。</li>
+<li>SEO提示：请务必保证你的页面在失去CSS支持的时候，依然能够保证一个清晰的一个页面结构，因为搜索引擎对一个结构清晰的页面会特别关照。</li>
+
+
+
+
+
+
+</ul>
+<p><strong>链接</strong></p>
+<p>应确保链接的默认样式与主要文本的样式有所区分，鼠标悬停状态的样式也应该有所区分。</p>
+<p>&nbsp;</p>
+<h2><a href="http://isobar-idev.github.com/code-standards/#_css"><img style="float: left; margin-left: 5px; margin-right: 5px;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%E8%8A%B1%E6%8B%AC%E5%8F%B701.png" alt="章节" /></a>JavaScript</h2>
+<p>JavaScript是web页面中的第三个主要的组件。</p>
+<p>&nbsp;</p>
+<h3>JavaScript库</h3>
+<p>目前，我们主要使用<a href="http://api.jquery.com/">jQuery</a>开发新的web应用程序。</p>
+<h3>一般的编码规则</h3>
+<ul>
+<li>99％的代码应该放在外联JavaScript文件里。这些外联JavaScript文件的声明都应该放在body标记的底部，即&lt;/body&gt;标签之前。</li>
+<li>不要依赖于User-Agent字符串。一定要做适当的特征检测。（更多阅读：<a href="http://diveintohtml5.org/detect.html">Dive Into HTML5: Detection</a> &amp; <a href="http://api.jquery.com/jQuery.support/">jQuery.support docs</a>）。</li>
+<li><strong>不要使用document.write()</strong><strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>所有的布尔变量应该用&ldquo;is&rdquo;开头<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</li>
+<li>注意变量和函数名称的命名逻辑：例如：popUpWindowForAd，而不是mywindow。</li>
+<li>不要人为的简写变量名称。（除了在做For循环中传统的 i 变量），变量名应该是足够长以确保有意义。</li>
+<li>你的文档应该遵循<a href="http://www.naturaldocs.org/documenting.html">NaturalDocs</a>结构。</li>
+<li>常量或配置变量（如动画持续时间等），应在文件的顶部声明。</li>
+<li>多使用函数，这些函数带有参数和返回值。函数中只存在抽象的逻辑代码。通过参数的传递使其该函数能够达到最大化的重用。当功能和代码逻辑需要改变的时候，可以大大的减少维护代码的开销。例如，我们需要做一个弹窗，弹窗内容、尺寸大小、URL链接，我们应该将其做为变量传递，而不是将这些属性值写死。</li>
+<li>注释你的代码！它有助于花费更少的时间解决所遇到的问题。<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>（让combo handler负责minify！）</li>
+<li>内嵌的Javascript代码块，请使用&lt;!-- --&gt;包裹，除非你关心Netscape 4。</li>
+<li>尽可能少地使用全局变量，如果你要使用，请给予一个命名空间<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+
+
+
+
+
+
+</ul>
+<h3>合理使用空格</h3>
+<p>一般来说，使用空格应该遵循长期以来的英语阅读约定，符号左右应该存在一个空格，我们提倡代码的可读性。此外，前括号应该和总是和他的函数名处在同一行。</p>
+<p>考虑下面这个例子，一个JavaScript循环&hellip;</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121910.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121910.png" /></p>
+<p>&nbsp;</p>
+<h3>变量、ID和类</h3>
+<p>所有JavaScript的变量名，都应该写成全部字母小写或者驼峰式大小写的形式。一个例外是，构造函数需要按照传统统统大写。所有CSS的ID和Class应该全部使用小写。尽可能的避免使用中划线和下划线。</p>
+<h3>事件委托</h3>
+<p>事件委托就是在一个页面上使用一个事件来管理多种类型的事件。这并不是一个新的想法，但对于把握性能来说却很重要。</p>
+<p>事件委托对于web应用程序的性能有如下几个优点：</p>
+<ol>
+<li>需要管理的函数变少了</li>
+<li>占用的内存少了</li>
+<li>JavaScript代码和DOM结构之间的关联更少了</li>
+<li>在改变DOM结构中的innerHTML时，不需要改动事件处理函数</li>
+
+
+
+
+
+
+</ol>
+<p>从传统的事件处理方法转向事件委托，提高了大型web应用的性能<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。正因为它如此重要，一些类似于YUI、jQuey的javascript库也开始将事件委托应用在它们的核心接口中。实现事件委托是很轻松的，却能带来性能上很大的提高。尤其表现在你将数十个事件处理函数整合到一个函数里。试一下事件委托，你就不会再使用传统的事件处理方法了。</p>
+<p>出于性能考虑，jQuery中的<a href="http://api.jquery.com/delegate">delegate()</a>要大大优于<a href="http://api.jquery.com/live">live()<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong></a>。</p>
+<p>&nbsp;</p>
+<h3>调试</h3>
+<p>即使最好的验证器，也不可避免地会导致浏览器怪异模式的问题。有几个宝贵的工具，将有助于改进代码的完整性和加载速度。我们建议开发时先以Firefox和Safari第一，然后Chrome和Opera，最后有条件地单独调整Internet Explorer<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</p>
+<p>下面列出了有用的调试器和速度分析&hellip;</p>
+<ul>
+<li><strong>Firefox</strong>: <a href="http://getfirebug.com/">Firebug</a>, <a href="http://code.google.com/speed/page-speed/">Page Speed</a>, <a href="http://developer.yahoo.com/yslow/">YSlow</a></li>
+<li><strong>Safari</strong>: <a href="http://developer.apple.com/safari/library/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/UsingtheWebInspector/UsingtheWebInspector.html">Web Inspector</a></li>
+<li><strong>Google Chrome</strong>: <a href="http://google.com/chrome/intl/en/webmasters-faq.html#tools">Developer Tools</a></li>
+<li><strong>Opera</strong>: <a href="http://opera.com/dragonfly/">Dragonfly</a></li>
+<li><strong>Internet Explorer 6-7</strong>: <a href="http://microsoft.com/downloads/details.aspx?familyid=E59C3964-672D-4511-BB3E-2D5E1DB91038">Developer Toolbar</a></li>
+<li><strong>Internet Explorer 8-10</strong>: <a href="http://msdn.microsoft.com/en-us/library/dd565625%28v=VS.85%29.aspx">Developer Tools</a></li>
+
+
+
+
+
+
+</ul>
+<h3>良好的Javascript编写模式</h3>
+<ol>
+<li>编写可维护的代码</li>
+<li>单var模式（即用一个var语句声明多个变量，并以逗号分隔）</li>
+<li>不增加内置的原型</li>
+<li>避免隐含类型转换</li>
+<li>避免使用eval()</li>
+<li>数字转换请使用parseInt()</li>
+<li>注意左花括号的位置。</li>
+<li>构造函数名大写</li>
+<li>记得写注释</li>
+<li>避免声明void</li>
+<li>如果可能的话，避免<strong><span style="text-decoration: underline;">位运算符（</span></strong><strong><span style="text-decoration: underline;">Bitwise Operator</span></strong><strong><span style="text-decoration: underline;">）</span></strong></li>
+
+
+
+
+
+
+</ol>
+<p>&nbsp;</p>
+<h2><a href="http://isobar-idev.github.com/code-standards/#_css"><img style="float: left; margin-left: 5px; margin-right: 5px;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%E8%8A%B1%E6%8B%AC%E5%8F%B701.png" alt="章节" /></a>性能</h2>
+<p>我们将继续关注网络的性能优化，它仍然同样的重要。一个网页可以做到最小的性能消耗及等待时间。以下部分说明了如何对一个网页进行优化，让更多的浏览者更加满意。</p>
+<h3>优化并交付CSS和Javascript</h3>
+<ol>
+<li>遵循<a href="http://developer.yahoo.com/performance/">雅虎的性能指南</a></li>
+<li>使用<a href="http://developer.yahoo.com/yslow/smushit/">smush.it</a>对图像做无损压缩<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>适当时机请缓存headers。</li>
+<li>静态资源文件要考虑单独开辟无 cooike 的子域（避免Request携带大量cookies）<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>避免内联的&lt;script&gt;块<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>CSS应该定义在文档的&lt;head&gt;中，javascript 则应在&lt;/body&gt;前通过外部链接的方式引用。</li>
+<li>CSS和Javascript在应用程序发布前进行压缩，很多人使用<a href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a>来进行压缩。</li>
+<li>CSS和Javascript在服务端都应该被gzip压缩。</li>
+<li>CSS和Javascript文件应该被合并在一起，目的是在页面加载过程中减少对HTTP请求的次数<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+<li>避免在HTML文档中的内联<code>&lt;script&gt;</code>块，他们会阻塞页面渲染和页面加载时间<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>！</li>
+
+
+
+
+
+
+</ol>
+<h3>优化Javascript执行顺序</h3>
+<p>在一个页面加载中，通常等待执行的脚本有很多。基于用户的响应，这个顺序优先级应如下：</p>
+<ol>
+<li>会改变页面可视形态的的Script，优先级应该绝对是第一位的。这包括任何字体调整，布局框变更或IE6 的pngfixes。</li>
+<li>页面内容初始化。</li>
+<li>页眉、导航栏和页脚的初始化。</li>
+<li>事件监听处理程序。</li>
+<li>第三方的插件或脚本。</li>
+
+
+
+
+
+
+</ol>
+<h3>合理利用CSS Sprites技术</h3>
+<p>CSS Sprites把一些基本的图像资源合并到一个图像文件中。通过CSS背景定位的方式来获取其中的某一个部分。这样做的目的同样是为了减少http的请求次数<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。以下是一个典型的CSS Sprites：</p>
+<p><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121911.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_2012121911.png" /></p>
+<p>使用CSS Sprites 能有效降低页面引用资源数，从而加快页面加载。<a href="http://css-tricks.com/css-sprites/">更多内容请阅读CSS-tricks.com的技术和概述</a>。</p>
+<p>许多开发人员会使用一个垂直排列内部图片元素的Sprites，这种垂直排列的Sprites应该&lt;= 100px宽（高）。包含图标通常应该放在文件里的最边上，如列表项icon小图标。雅虎<a href="http://l.yimg.com/a/i/ww/sp/pa-icons3.gif">使用了一些像这样的</a>Sprites。</p>
+<p>另外一个要考虑的是不要使用过大的Sprites，超过1000px的任意一个方向的Sprites会占用相当大的内存空间<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</p>
+<h3>图片格式的应用</h3>
+<ol>
+<li><strong>JPEG</strong>&mdash;&mdash;这将应用在所有的摄影图像，如主页或者频道​页面中的宣传图像产品图像，或任何要求具备非常高的颜色数的图像。</li>
+<li><strong>PNG24</strong>&mdash;&mdash;方便在PhotoShop中输出高色数和全面支持分级不透明的图像，相对而言，这是一个相当重的格式，可能会产生千字节容量，而且在IE6中需要执行一个pngfix，在这种情况下我们建议使用<a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/">DD_belatedPNG script</a>（一个使IE6兼容背景透明的JS）。在很多时候，我们会为IE6后备一个GIF图像来支持背景透明。因为如果在一个很大的格式为PIN24的Sprites中应用pngfixes 会使所有的pngfixes的速度变得非常的慢，性能消耗代价特别大。因此最好避免在Sprites使用PNG24格式。</li>
+<li><strong>PNG8</strong>&mdash;&mdash;256色的颜色可以捕获一个令人惊讶的多样性， PNG是一个很大的可压缩比GIF（使用pngcrush和pngquant的工具，如）。此格式几乎在所有的浏览器允许渐变的不透明度，但在IE6中，那些半透明的像素是100％透明。在许多情况下，这是足够的。它也不会需要一个pngfix的脚本来运行，所以它的速度进行了优化。</li>
+<li>透明<strong>GIF 89a</strong><strong>&mdash;&mdash;GIF 89a</strong>中提供了灵活性，透明度和广泛的浏览器的支持，但没有渐变的不透明度，而且色数不能超过256色。根据我们的经验，色彩深度为64仍然提供了非常好的品质缩览图，并能保持同等的文件大小。所有低色数，如图标或专题图形图像应使用PNG8格式，因为它是这四个格式中最高效的。对于大多数网站上的图形，PNG8是我们的主要建议使用的图像格式。</li>
+
+
+
+
+
+
+</ol>
+<h3>高速缓存</h3>
+<p>对于静态内容，只要是合理的，我们都应该在本地缓存文件。应该被缓存的文件包括：</p>
+<ol>
+<li>CSS和JavaScript文件</li>
+<li>产品图片</li>
+<li>专题图形</li>
+<li>favicon.ico标志</li>
+<li>flash的.swf文件</li>
+<li>宣传多媒体影像</li>
+
+
+
+
+
+
+</ol>
+<p>如果你的服务器是Apache，使用ExpiresDefault指令设置相对于当前日期的过期时间。这个例子ExpiresDefault指令集的要求过期时间为1年。</p>
+<p align="left">Expires: Thu, 15 Apr 2015 20:00:00 GMT</p>
+<p>缓存只适用于准确的URL，所以改变文件名将开始一个新的拷贝。许多开发人员在文件发布或构建过程中添加一个版本号或时间戳<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。每一次构建将开始一个全新的缓存的版本，你不用担心缓存不会过期。</p>
+<h3>有节制的使用IFRAME</h3>
+<p>创建IFRAME比创建任何其他类型的DOM元素（包括脚本和样式表）耗时多出1-2个数量级。</p>
+<p>尽快产生 Window的onload事件是很重要的。这个事件会引发浏览器状态指示到达&ldquo;完毕&rdquo;状态，通知用户页面已经下载完毕。当onload事件被延迟，给用户的感受是页面变的更慢了。</p>
+<p>Window的onload事件在所有的iframe和iframe内所有元素完全下载后才能触发。在 Safari 和 Chrome浏览器内，通过JavaScript动态设置iframe的src属性可以避免这种阻塞行为。</p>
+<p>有人可能希望一个iframe有它自己单独的并发连接池，但是事实并不是这样。在所有主流浏览器中，连接池是被页面和iframe共享的。这意味着有可能一个iframe内的资源占据了所有可用的连接并阻塞了主页面的资源下载。如果iframe内的内容和主页面一样重要或者更重要，这是没有问题的。但如果iframe不太重要，iframe占用连接是不可取的。一个解决办法是在 更高级别的资源下载之后，动态设置iframe的src属性动态加载内容</p>
+<p>美国10大网站中5个使用了iframe。大多数情况下，它们常用来加载广告。这是不幸的，但可以理解，因为使用iframe插入广告内容很容易实现。在许多情况下，iframe是合乎逻辑的 解决方案。但要记住他们会对你的页面产生性能影响。尽可能避免使用iframe，当必须使用时，要有节制的使用它们。</p>
+<h3>FLASH</h3>
+<p>在应用FLASH动画的地方，请备注上相应的HTML文本，以便于SEO搜索引擎的优化。SWFObject的初始化应该在文档加载完毕之后。不要使用内嵌的JavaScript输出SWFObject。</p>
+<h3>建立于客户间的成功指标。</h3>
+<p>这些指标不管从技术角度以及可测试性应该是合理的：</p>
+<ol>
+<li>在页面没有任何缓存的情况下，页面的完全加载和初始化应该保证在5秒以内<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</li>
+<li>鼠标经过时的变化（如hover）应该保证在100毫秒以内完成<strong><img class="decoded" src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" alt="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif" /></strong>。</li>
+
+
+
+
+
+
+</ol>
+<p>&nbsp;</p>
+<p>原文链接：<a href="http://isobar-idev.github.com/code-standards/">http://isobar-idev.github.com/code-standards/</a></p>
+<p>翻译组：@窝窝团前端（刘轶/李晨/徐利/穆尚）</p>
+<p>校对：@郑昀</p>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+<hr />
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html">55最佳实践系列：MongoDB最佳实践</a><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 15:48)</div>
+<p><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 16:43)</span></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html">最佳实践系列：前端代码标准和最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-19 23:33)</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr />1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：Throttle Limits for calls/requests in a clustered environment</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:14)</div>
+
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题V：分布式锁</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:16)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:24)</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html">电商课题VI：分布式Session</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:30)</div>
+
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">5）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html">电商课题：RBAC权限控制</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:47)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">6）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html">电商课题：幂等性</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-22 23:52)</div>
+
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">7）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-09-19 01:17)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">8）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">电商课题：对付秒杀器等恶意访问行为的简单梳理</a><span class="Apple-converted-space">&nbsp;</span>(2012-09-18 03:51)</div>
+
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">9）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/14/topic7.html">电商课题VII：支付交易一般性准则</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-14 01:38)</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<p>赠图1枚：</p>
+<div class="artwork"><a href="http://www.alibuybuy.com/posts/78583.html" target="_blank"><img id="pic" class="M_cur_zoom_out" src="http://ww4.sinaimg.cn/large/6106a4f0jw1dzzdcsv4wej.jpg" alt="" /></a></div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-12-19 23:33</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2825695" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2825695);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2825695, cb_entryCreatedDate = '2012-12-19 23:33', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

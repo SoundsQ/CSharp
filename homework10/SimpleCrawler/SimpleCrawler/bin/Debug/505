@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>2019 年 7月 30 日 随笔档案 - 踏歌行666 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=vmUk-3Bh8LDsKXwjNHs2GDiFna-ZMTUgOJzjUaXTlPA" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=cJiDsI1JAuHHd-OAUWJeyE5JMXXsG4mmuUi2rVmEK1c" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhanglianghhh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhanglianghhh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhanglianghhh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 430741;
+        var currentBlogApp = 'zhanglianghhh';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'AnotherEon001';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhanglianghhh/">踏歌行的专栏</a>
+</h1>
+<div id="subtitle">
+一个爱学习爱分享的技术人员，微信公众号「OpenInfo」。
+本文原创发布于公众号 OpenInfo，转载请务必注明出处！
+</div>
+</div>
+<div id="sub"><div class="BlogStats">随笔 - 
+113, 文章 - 
+0, 评论 - 
+7, 引用 - 
+0</div>
+
+</div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+        
+<p class="date">
+	<span>		  
+	<a>2019年7月30日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhanglianghhh/p/11268694.html">
+    Linux下使用 github+hexo 搭建个人博客04-next主题优化
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：上篇我们说了 hexo 的优化，针对的站点的优化。 本篇讲解 next 主题的优化，包括：使用语言、前端页面显示宽度、菜单、侧栏、头像、添加或取消动画效果、打赏功能等等。 让页面排版更符合我们所要的功能和所想的风格。 可参考网站 主题设定 选择 Scheme 修改 next&#160;主题配置文件。 可以自行            <a href="https://www.cnblogs.com/zhanglianghhh/p/11268694.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-07-30 11:44 踏歌行666 阅读 (160) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11268694" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhanglianghhh/p/11268368.html">
+    Linux下使用 github+hexo 搭建个人博客03-hexo配置优化
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：上两张文章，我们说了 hexo 部署、主题的切换、博文的创建、MarkDown 简单使用和 hexo 部署到 GitHub Pages。 也说了我们会使用 next 主题做为我们后期博客的使用和维护。但是该主题的原生态，可能或多或少不满足我们当前的需求，因此需要我们对其进行优化，达到我们想要的效果。            <a href="https://www.cnblogs.com/zhanglianghhh/p/11268368.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-07-30 11:43 踏歌行666 阅读 (55) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11268368" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhanglianghhh/p/11268217.html">
+    Linux下使用 github+hexo 搭建个人博客02-hexo部署到Github Pages
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：之前的这篇文章《Linux下使用 github+hexo 搭建个人博客01-hexo搭建》，相信大家都知道怎么搭建 hexo ，怎么切换主题，并且完成了一篇博文的创建，以及 MarkDown 标记语法的用法。如果还不清楚或者不知道的，那就先回去看看这篇文章。 那么我们接下来就需要将 hexo 和 G            <a href="https://www.cnblogs.com/zhanglianghhh/p/11268217.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-07-30 10:02 踏歌行666 阅读 (200) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11268217" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+
+
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhanglianghhh/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%B8%8F%E6%AD%8C%E8%A1%8C666">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhanglianghhh/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/zhanglianghhh/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 踏歌行666
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+</body>
+</html>

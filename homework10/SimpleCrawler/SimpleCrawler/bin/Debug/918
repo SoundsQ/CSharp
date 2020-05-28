@@ -1,0 +1,1160 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>王陸 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/wkfvawl/custom.css?v=oZQ9BJsU3bHa9qMlVmd/c0Fqj/8=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/wkfvawl/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/wkfvawl/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/wkfvawl/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 421388;
+        var currentBlogApp = 'wkfvawl';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/wkfvawl/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/wkfvawl/"> 王陸 </a>
+</h1>
+<h2>
+书写是对思维的缓存
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/wkfvawl/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%8E%8B%E9%99%B8">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/wkfvawl/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+634&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+323</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/27.html">2020年4月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12789571.html">
+    线性代数思维导图——4.线性方程组
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：方程组解的情况判断。一般方程组解的情况有三种：无解，唯一解，无穷多解。齐次方程组有两种：唯一解（只有0解）和无穷多解（有非0 解）。 求通解问题。这方面的关键性概念是齐次方程组的基础解系，它就是解集的最大无关组。            <a href="https://www.cnblogs.com/wkfvawl/p/12789571.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-27 20:04 王陸 阅读 (9) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12789571" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/26.html">2020年4月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12782505.html">
+    Java Sping 第四章——Sping AOP 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Spring Aop的基本概念 1.Aop的概念 面向切面编程（AOP，Aspect Oriented Programming），通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种            <a href="https://www.cnblogs.com/wkfvawl/p/12782505.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-26 21:43 王陸 阅读 (13) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12782505" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12782266.html">
+     Java Sping 第三章——Sping Bean
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Bean的配置 Spring可以看做是一个大型工厂，生产和管理Spring容器中的Bean。如何使用这个工厂生产和管理Bean，需要开发者将Bean配置在Spring配置文件中。Spring框架支持XML和Properties两种格式的配置文件，在实际开发中，常用XML格式的配置文件。 Spri            <a href="https://www.cnblogs.com/wkfvawl/p/12782266.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-26 21:06 王陸 阅读 (6) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12782266" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/25.html">2020年4月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12775985.html">
+    C++设计模式——门面模式 Fa&#231;ade
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Fa&#231;ade是一个法语词，意思是外观、门面，因此该模式又称为外观模式！ 门面模式不仅仅是一种设计模式那么简单，更是一种设计素养，需要有边界划分的意识！ 动机(Motivation) 客户和组件中各种复杂的子系统有过多的耦合 如何简化外部客户程序和系统间的交互接口？如何解耦？ 模式定义 为子系统中的一            <a href="https://www.cnblogs.com/wkfvawl/p/12775985.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-25 22:55 王陸 阅读 (5) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12775985" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12775339.html">
+    几种常见曲线与定积分
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：这里整理一下定积分应用中几种常见的曲线和一些规律，没有涉及到一些曲线的表达式推导和由来，表达式推导内容建议参照《张宇高数18讲》第一讲中就有详尽的介绍，不得不说很多考研书籍在这一方面的讲解都是欠缺的，18讲很好弥补了这部分内容。 一、星形线 星形线弧长 星形线面积 星形线体积 二、心形线 心形线全长            <a href="https://www.cnblogs.com/wkfvawl/p/12775339.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-25 21:21 王陸 阅读 (20) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12775339" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/22.html">2020年4月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12757800.html">
+     Java Sping 第二章——Spring IoC
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Spring IoC的基本概念 控制反转（Inversion of Control，IoC）是一个比较抽象的概念，是Spring框架的核心，用来消减计算机程序的耦合问题。依赖注入（Dependency Injection，DI）是IoC的另外一种说法，只是从不同的角度，描述相同的概念。IOC（I            <a href="https://www.cnblogs.com/wkfvawl/p/12757800.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-22 23:41 王陸 阅读 (10) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12757800" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12749213.html">
+     Java Sping 第一章——初识 Spring
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Spring 简介 Spring是一个轻量级Java开发框架，最早由Rod Johnson创建，目的是为了解决企业级应用开发的业务逻辑层和其他各层的耦合问题。它是一个分层的JavaSE/EE full-stack(一站式) 轻量级开源框架，为开发Java应用程序提供全面的基础架构支持。Sprin            <a href="https://www.cnblogs.com/wkfvawl/p/12749213.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-22 00:37 王陸 阅读 (13) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12749213" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/21.html">2020年4月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12742174.html">
+    C++设计模式——状态模式 State
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机(Motivation) 对象状态如果改变，其行为也会随之而发生变化，比如文档处于只读状态，其支持的行为和读写状态支持的行为就可能完全不同。 如何在运行时根据对象的状态来透明地改变对象的行为？ 模式定义 允许一个对象在其内部状态改变时改变它的行为。从而使对象看起来似乎修改了其行为。 ——《设计模            <a href="https://www.cnblogs.com/wkfvawl/p/12742174.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-21 08:35 王陸 阅读 (15) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12742174" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12741837.html">
+    线性代数思维导图——3.向量组
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：向量组的线性关系有三个层次：线性表示，线性相关性，秩和最大无关组。线性表示是描述向量组和其他向量间的关系的，后两个 是刻画向量组的内在关系的。它们环环相扣，逐步深入，但是每个环节都有各自的应用。            <a href="https://www.cnblogs.com/wkfvawl/p/12741837.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-21 00:52 王陸 阅读 (54) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12741837" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/16.html">2020年4月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12710219.html">
+    基于Servlet实现简单系统登录
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、需求 1.实现分层架构：bean dao service controller层2.基于Servlet实现controller：登录成功进入欢迎页面；登录失败重新登录，并显示上次的登录用户名3.前端：登录页面login.jsp 欢迎页面success.jsp 二、项目结构 bean层 User.            <a href="https://www.cnblogs.com/wkfvawl/p/12710219.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-16 08:09 王陸 阅读 (47) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12710219" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/14.html">2020年4月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12695924.html">
+    C++设计模式——简单工厂模式与策略模式比较
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：简单工厂模式本应该放到工厂模式那篇博客中去介绍的，因为与策略模式有一定的相似性，这里摘出来单独成章。 简单工厂模式 用一个单独的类来做创造实例的过程，就是工厂。 工厂模式有一种非常形象的描述：建立对象的类就如一个工厂，而需要被建立的对象就是一个个产品；在工厂中加工产品，使用产品的人，不用在乎产品是如            <a href="https://www.cnblogs.com/wkfvawl/p/12695924.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-14 09:41 王陸 阅读 (21) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12695924" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12695582.html">
+    C++设计模式——工厂模式Factory Method
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在软件系统中，经常面临着创建对象的工作；由于需求的变化，需要创建的对象的具体类型经常变化。 如何应对这种变化？如何绕过常规的对象创建方法(new)，提供一种“封装机制”来避免客户程序和这种“具体对象创建工作”的紧耦合？ 模式定义 定义一个用于创建对象的接口，让子类决定实            <a href="https://www.cnblogs.com/wkfvawl/p/12695582.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-14 08:17 王陸 阅读 (8) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12695582" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/12.html">2020年4月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12687293.html">
+    JavaWeb——Servlet基础 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、内容提要 Servlet的基本介绍，以及Servlet的生命周期Servlet的运行环境以及Servlet的体系结构Servlet的配置与执行以及如何使用Web程序和Servlet进行交互相关接口 二、Servlet介绍 1 什么是Servlet Servlet是服务器端的Java小程序，可以被            <a href="https://www.cnblogs.com/wkfvawl/p/12687293.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-12 20:10 王陸 阅读 (30) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12687293" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/10.html">2020年4月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12671384.html">
+    C++设计模式——装饰模式Bridge-Pattern 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在某些情况下我们可能会“过度地使用继承来扩展对象的功能”，由于继承为类型引入的静态特质，使得这种扩展方式缺乏灵活性； 并且随着子类的增多（扩展功能的增多），各种子类的组合（扩展功能的组合）会导致更多子类的膨胀。 如何使“对象功能的扩展”能够根据需要来动态地实现？同时避免            <a href="https://www.cnblogs.com/wkfvawl/p/12671384.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-10 09:41 王陸 阅读 (7) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12671384" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/05.html">2020年4月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12638755.html">
+    线性代数思维导图——2.矩阵 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：矩阵，计算机领域更喜欢称为二维数表，从多个特征,多个维度来描述一种现象。            <a href="https://www.cnblogs.com/wkfvawl/p/12638755.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-05 19:59 王陸 阅读 (192) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12638755" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/04/01.html">2020年4月1日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12616317.html">
+    线性代数思维导图——1.行列式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：行列式是线性变换的伸缩因子。理解行列式一定要从线性变换出发去理解，直接去理解它的代数形式是没有意义的。            <a href="https://www.cnblogs.com/wkfvawl/p/12616317.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-01 22:06 王陸 阅读 (299) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12616317" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/31.html">2020年3月31日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12608911.html">
+    C++设计模式——适配器模式Bridge-Pattern 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机(Motivation) 由于应用环境的变化，常常需要将”一些现存的对象“放在新的环境中应用，但是新环境要求的接口是这些现存对象所不满足。 如何应对这些”迁移的变化“？ 模式定义 将一个类的接口转换成客户希望的另一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作            <a href="https://www.cnblogs.com/wkfvawl/p/12608911.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-31 21:57 王陸 阅读 (19) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12608911" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12602822.html">
+    C++设计模式——桥接模式Bridge-Pattern 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 由于某些类型的固有的实现逻辑，使得它们具有两个变化的维度，乃至多个纬度的变化。 如何应对这种“多维度的变化”？如何利用面向对象技术来使得类型可以轻松地沿着两个乃至多个方向变化，而不引入额外的复杂度？ 模式定义 将抽象部分(业务功能)与实现部分(平台实现)分离，使它们都可            <a href="https://www.cnblogs.com/wkfvawl/p/12602822.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-31 08:15 王陸 阅读 (27) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12602822" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/27.html">2020年3月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12582809.html">
+    不想写博客？那试试日记吧！
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、背景 昨天博客园的园龄达到了两年，原来我也是一个老园友了，大一下学期开始写博客整理一些ACM题解，现在使用博客园主要是为了整理一些学习笔记，然后顺道做一些分享，使自己时时刻刻保持一种既有输入又有输出的状态。 之前我一直提倡一种观念，有点想法就可以写博客，写一些自己对某些问题的理解也好，写一下知识            <a href="https://www.cnblogs.com/wkfvawl/p/12582809.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-27 17:38 王陸 阅读 (346) 评论 (6)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12582809" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/25.html">2020年3月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12566368.html">
+    C++设计模式——代理模式Proxy-Pattern 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机(Motivation) 在面向对象系统中，有些对象由于某种原因(比如对象创建的开销很大，或者某些操作需要安全控制，或者需要进程外的访问等)， 直接访问会给使用者、或者系统结构带来很多麻烦。 如何在不失去透明操作对象的同事来管理/控制这些对象特有的复杂性？增加一层间接层是软件开发中常见的解决方式            <a href="https://www.cnblogs.com/wkfvawl/p/12566368.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-25 15:06 王陸 阅读 (30) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12566368" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/24.html">2020年3月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12557909.html">
+    曲线曲面积分的关系
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、背景 这个周末一直在鼓捣曲线曲面积分的一些题目，个人其实感觉这应该是高等数学中对科研最有用的内容了。学院在安排专业培养的时候给我们17级没有设置大学物理，后面18级恰巧赶上工程认证，安排上了大学物理，当时觉得我们真庆幸，现在来看我要是有点大学物理的知识，对理解曲线曲面积分应该会有很大的帮助。我在            <a href="https://www.cnblogs.com/wkfvawl/p/12557909.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-24 11:34 王陸 阅读 (79) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12557909" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/20.html">2020年3月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12532140.html">
+    C++设计模式——享元模式Flyweight-Pattern 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机(Motivation) 在软件系统采用纯粹对象方案的问题在于大量细粒度的对象会很快充斥在系统中，从而带来很高的运行时代价——主要指内存需求方面的代价。 如何在避免大量细粒度对象问题的同时，让外部客户程序仍然能够透明地使用面向对象的方式来进行操作？ 模式定义 运行共享技术有效地支持大量细粒度的对            <a href="https://www.cnblogs.com/wkfvawl/p/12532140.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-20 15:41 王陸 阅读 (32) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12532140" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/17.html">2020年3月17日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12508591.html">
+    C++设计模式——单件模式Singleton-Pattern
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂；而且有时候支持不使用的算法也是一个性能负担。 如何在运行时根据需要透明地更改对象的算法？将算法与对象本身解耦，从而避免上述问题？ 模式定义 定义一系列算法，            <a href="https://www.cnblogs.com/wkfvawl/p/12508591.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-17 09:14 王陸 阅读 (29) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12508591" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/13.html">2020年3月13日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12486243.html">
+    C++设计模式——观察者模式Observer-Pattern
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在软件构建过程中，我们需要为某些对象建立一种“通知依赖关系” ——一个对象（目标对象）的状态发生改变，所有的依赖对 象（观察者对象）都将得到通知。如果这样的依赖关系过于紧密，将使软件不能很好地抵御变化。 使用面向对象技术，可以将这种依赖关系弱化，并形成一种稳定的依赖关系            <a href="https://www.cnblogs.com/wkfvawl/p/12486243.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-13 14:44 王陸 阅读 (46) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12486243" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/11.html">2020年3月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12462316.html">
+    计算机网络——物理层的几个概念
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、码元 根据百度百科被锁定词条“码元”给出的解释 在数字通信中常常用时间间隔相同的符号来表示一个二进制数字，这样的时间间隔内的信号称为(二进制）码元。 而这个间隔被称为码元长度。值得注意的是当码元的离散状态有大于2个时（如M大于2个） 时，此时码元为M进制码元。 一码元可以携带多个比特的信息量。例            <a href="https://www.cnblogs.com/wkfvawl/p/12462316.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-11 14:42 王陸 阅读 (91) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12462316" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/10.html">2020年3月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12453747.html">
+    C++设计模式——策略模式Strategy-Pattern
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在软件构建过程中，某些对象使用的算法可能多种多样，经常改变，如果将这些算法都编码到对象中，将会使对象变得异常复杂；而且有时候支持不使用的算法也是一个性能负担。 如何在运行时根据需要透明地更改对象的算法？将算法与对象本身解耦，从而避免上述问题？ 模式定义 定义一系列算法，            <a href="https://www.cnblogs.com/wkfvawl/p/12453747.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-10 09:08 王陸 阅读 (54) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12453747" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/06.html">2020年3月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12427496.html">
+    C++ 虚函数和友元
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：虚函数具有动态联编性，在类族中有强大功能；友元函数具有跨类访问的功能，本质却是一种对封装的破坏。 先看这样一个例子： #include&lt;iostream&gt; using namespace std; class A; class B { private: int x; void print() { c            <a href="https://www.cnblogs.com/wkfvawl/p/12427496.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-06 16:53 王陸 阅读 (49) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12427496" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/03/05.html">2020年3月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12422282.html">
+    C++设计模式——模板方法模式Template-Pattern
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：动机（Motivation） 在软件构建过程中，对于某一项任务，它常常有稳定的整体操作结构，但各个子步骤却有很多改变的需求，或者由于固有的原因（比如框架与应用之间的关系）而无法和任务的整体结构同时实现。 如何在确定稳定操作结构的前提下，来灵活应对各个子步骤的变化或者晚期实现需求？ 模式定义 定义一个            <a href="https://www.cnblogs.com/wkfvawl/p/12422282.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-05 19:54 王陸 阅读 (34) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12422282" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/02/29.html">2020年2月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12387241.html">
+    JavaWeb——第2章HTML5技术
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本章首先介绍HTML5页面的文档结构，然后介绍HTML5的内容架构与文本、超链接、多媒体、表格及表单。 一、HTML5文档结构 HTML5文件是由一些标签语句组成的文本文件，标签标识了内容和类型，Web浏览器通过解析这些标签进行显示。HTML5文件可以通过任意文本编辑器创建，但文件的扩展名必须使用“            <a href="https://www.cnblogs.com/wkfvawl/p/12387241.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-29 23:18 王陸 阅读 (40) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12387241" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/wkfvawl/archive/2020/02/27.html">2020年2月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/wkfvawl/p/12373775.html">
+    JavaWeb——第1章Web技术概述
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Web本意是蜘蛛网的意思，现常指Internet的Web技术。Web技术提供了方便的信息发布和交流方式，是一种典型的分布式应用结构，Web应用中的每一次信息交换都要涉及客户端和服务器。 一、Internet概述 Internet中文正式译名为“因特网”，是一个全球性的、开放的计算机互联网络，Inte            <a href="https://www.cnblogs.com/wkfvawl/p/12373775.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-27 19:11 王陸 阅读 (64) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12373775" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/wkfvawl/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 王陸
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!--代码复制-->
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<!--主题-->
+<script src="https://blog-static.cnblogs.com/files/wkfvawl/jstheme2.js" ></script>
+
+<!--scrollTo-->
+<script src="https://cdn.bootcss.com/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+
+<!--owo表情-->
+<script src="https://files.cnblogs.com/files/wkfvawl/owo.js"></script>
+<link rel="stylesheet" href="https://files.cnblogs.com/files/wkfvawl/owo.css" />
+
+<!-- import Vue.js -->
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<!--鼠标特效-->
+<script src="https://files.cnblogs.com/files/wkfvawl/mouse-click.js"></script>
+<canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
+
+
+<script type="text/javascript" language="javascript"> 
+window.onload=function(){
+    //为右下角推荐推荐区域添加关注按钮
+    $('#div_digg').prepend('<div style="padding-bottom: 5px"><span class="icon_favorite" style="padding-top: 2px"></span><a onclick="cnblogs.UserManager.FollowBlogger(\'9a35f2c7-18ab-e111-aa3f-842b2b196315\');" href="javascript:void(0);" style="font-weight: bold; padding-left:5px;">点赞求关注</a> </div>');
+}
+    </div>
+</body>
+</html>

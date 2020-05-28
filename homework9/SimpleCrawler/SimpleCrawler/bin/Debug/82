@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="防篡改验证码的生成规则可以很简单：md5(cookieValue&#x2B;key)或sha1(cookieValue&#x2B;key)，key可以是服务器端掌握的一个固定字符串，也可以很复杂（如后面的LTPA示例）。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题：cookie防篡改 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        防篡改验证码的生成规则可以很简单：md5(cookieValue+key)或sha1(cookieValue+key)，key可以是服务器端掌握的一个固定字符串，也可以很复杂（如后面的LTPA示例）。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><strong><strong><strong><a style="cursor: pointer;" href="http://weibo.com/yunzheng/">@郑昀</a>汇总</strong></strong></strong></span>&nbsp;</p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">关键词： cookie poisoning</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>概述：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">除了 session 外，一般不会在客户端的 cookies 里保存过于重要的凭据，但电商应用有时候不可避免地存储了一些敏感数据到客户端，当然不希望被篡改。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><br />
+<div><strong style="background-color: yellow;"><span style="font-size: large;">目的：</span></strong></div>
+<div>让服务器端能识别cookie值被篡改了。</div>
+<div>&nbsp;</div>
+<div><strong style="background-color: yellow;"><span style="font-size: large;">手法：</span></strong></div>
+<div>set-cookie时加上防篡改验证码。</div>
+<div>如：</div>
+<div>user_name=alex|bj95ef23cc6daecc475de</div>
+<div>&nbsp;</div>
+<div>防篡改验证码的生成规则可以很简单：md5(cookieValue+key)或sha1(cookieValue+key)，key可以是服务器端掌握的一个固定字符串，也可以很复杂（如后面的LTPA示例）。</div>
+<div>&nbsp;</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html" target="_blank">核对规则是</a>：</div>
+<div>服务器端得到客户端送上来的cookie后，重新计算一下验证码，如一致，则未篡改。</div>
+<div>&nbsp;</div>
+<div><strong><span style="background-color: silver; font-size: medium;">示例2：IBM LTPA 的 cookie 签名</span></strong></div>
+<div>Lightweight Third-Party Authentication (LTPA)是IBM Websphere和Domino产品中使用的单点登录技术。</div>
+<div>当服务器配置好LTPA认证方式，用户通过浏览器成功登录后，服务器会自动发送一个 session cookie 给浏览器；此 Cookie 中包含一个 LTPA Token。</div>
+<div>一个有效的 LTPA Cookie 能够在同一个认证域中被所有服务器自动认证。此 Cookie 中包含认证信息和时间戳。这些信息通过共享的 3DES Key 进行了 bis &nbsp;加密。使用公共密钥/私有密钥进行签名。</div>
+<div>&nbsp;</div>
+<div><strong>1）大致介绍：</strong></div>
+<div>
+<div>LTPA Cookie 原始值 通过<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">3DES密钥</span></strong><span class="Apple-converted-space">&nbsp;</span>使用 DESede/ECB/PKCS5P 进行加密。</div>
+<div>此&nbsp;<strong><span style="text-decoration: underline;">3DES密钥</span></strong>&nbsp;&nbsp;也是采用 DESede/ECB/PKCS5P 进行加密，加密后再使用事先提供的<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">密钥密码</span></strong>&nbsp;进行SHA-1 Hash，生成24个字节的密钥，再进行Base64编码。</div>
+<div>&nbsp;</div>
+<div>如 Dmonio 里，&nbsp;LTPA Cookie 值为以下公式组成：</div>
+<div>
+<div><strong><span style="color: #0000ff;">SHA-1=LTPA版本号+创建时间+过期时间+用户名+Domino LTPA 密钥</span></strong></div>
+<div><strong><span style="color: #0000ff;">LTPA Cookie= Base64(LTPA版本号+创建时间+过期时间+用户名+SHA-1)</span></strong></div>
+
+
+</div>
+<div><strong>&nbsp;</strong></div>
+<div>如要解析 LTPA Token，先得使用<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">密钥密码</span></strong>，生成<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">3DES密钥</span></strong>；再使用<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">3DES密钥</span></strong><span class="Apple-converted-space">&nbsp;</span>解密 Token Cookie。也可以使用公共/私有密钥来签名或验证LTPA Cookie。</div>
+
+
+</div>
+<div>
+<h3><span style="font-size: 14px;">2）<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html" target="_blank">WebSphere LTPA 生成原理</a></span></h3>
+<div>首先，这个 cookie 由以下部分组成，以%进行分隔：</div>
+<ul>
+<li><strong>用户信息</strong>，格式为u:user\:&lt;RealmName&gt;/&lt;UserDN&gt;，如：u:user\:VGOLiveRealm/CN=squallzhong,O=VGOLive Technology</li>
+<li><strong>过期时间</strong></li>
+<li><strong>签名信息，</strong>如：<br />
+<blockquote>u:<span style="color: #800080;">user\:VGOLiveRealm/CN=squallzhong,O=VGOLive Technology</span>%<span style="background-color: transparent;"><span style="color: #0000ff;">1301558320666</span></span>%<span style="color: #a52a2a;">Cy2CAeru5kEElGj0hrvYsKW2ZVsvvcu6Un573aeX55OO4G3EMYWc0e/ZbqDp1z7MS+dLzniuUH4sYWCMpnKdm7ZGabwmV+WcraBl+y+yzwcl722gHVMOnDZAW7U3jEay9Tk2yG4yXkMWU+617xndpVxke2jtS5wIyVVM3q7UDPw=</span></blockquote>
+
+
+</li>
+
+
+</ul>
+
+
+</div>
+<div>
+<h3><span style="font-size: 14px;">3）WebSphere LTPA&nbsp;Cookie 的解析</span></h3>
+<p>以下代码为解析从 WebSphere 或 Domino 发送过来的 LTPAToken Cookie。以Java为例：</p>
+<div id="highlighter_429806" class="syntaxhighlighter ieHover">
+<div class="lines">
+<div class="line alt1"><span style="font-family: Arial;"><code class="number bg" style="top: 1px; height: 780px;">01</code><span class="content"><span class="block" style="padding-left: 21px !important; text-indent: -21px !important; background-position: 0px 1.2em;"><code class="plain">&hellip;</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">02</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// LTPA 3DES 密钥</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">03</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpa3DESKey =<span class="Apple-converted-space">&nbsp;</span></code><code class="string">"7dH4i81YepbVe+gF9XVUzE4C1Ca5g6A4Q69OFobJV9g="</code><code class="plain">;</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">04</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// LTPA 密钥密码</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">05</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpaPassword =<span class="Apple-converted-space">&nbsp;</span></code><code class="string">"Passw0rd"</code><code class="plain">;</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">06</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">try</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">{</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">07</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 第一步，获得加密key</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">08</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] secretKey = getSecretKey(ltpa3DESKey, ltpaPassword);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">09</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 第二步，使用加密key解密ltpa Cookie</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">10</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpaPlaintext =<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">new</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">String(decryptLtpaToken(tokenCipher,</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">11</code><span class="content"><span class="block" style="padding-left: 161px !important; text-indent: -161px !important; background-position: 140px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">secretKey));</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">12</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">displayTokenData(ltpaPlaintext);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">13</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">catch</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">(Exception e) {</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">14</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.out.println(</code><code class="string">"Caught inner: "</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">+ e);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">15</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">16</code><span class="content"><span class="block" style="padding-left: 21px !important; text-indent: -21px !important; background-position: 0px 1.2em;"><code class="plain">&hellip;</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">17</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">//获得安全Key</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">18</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">private</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">static</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">byte</code><code class="plain">[] getSecretKey(String ltpa3DESKey, String password)</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">19</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">Exception {</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">20</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用SHA获得key密码的hash值</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">21</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">MessageDigest md = MessageDigest.getInstance(</code><code class="string">"SHA"</code><code class="plain">);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">22</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">md.update(password.getBytes());</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">23</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] hash3DES =<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">new</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">byte</code><code class="plain">[</code><code class="value">24</code><code class="plain">];</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">24</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(md.digest(),<span class="Apple-converted-space">&nbsp;</span></code><code class="value">0</code><code class="plain">, hash3DES,<span class="Apple-converted-space">&nbsp;</span></code><code class="value">0</code><code class="plain">,<span class="Apple-converted-space">&nbsp;</span></code><code class="value">20</code><code class="plain">);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">25</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用0替换后4个字节</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">26</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">Arrays.fill(hash3DES,<span class="Apple-converted-space">&nbsp;</span></code><code class="value">20</code><code class="plain">,<span class="Apple-converted-space">&nbsp;</span></code><code class="value">24</code><code class="plain">, (</code><code class="keyword">byte</code><code class="plain">)<span class="Apple-converted-space">&nbsp;</span></code><code class="value">0</code><code class="plain">);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">27</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// BASE64解码 ltpa3DESKey</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">28</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] decode3DES = Base64.decodeBase64(ltpa3DESKey.getBytes());</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">29</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用key密码hash值解密已Base64解码的ltpa3DESKey</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">30</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">decrypt(decode3DES, hash3DES);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">31</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">32</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">//解密LtpaToken</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">33</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">public</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">static</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">byte</code><code class="plain">[] decryptLtpaToken(String encryptedLtpaToken,<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">byte</code><code class="plain">[] key)</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">34</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">Exception {</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">35</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// Base64解码LTPAToken</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">36</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">byte</code><code class="plain">[] ltpaByteArray = Base64.decodeBase64(encryptedLtpaToken</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">37</code><span class="content"><span class="block" style="padding-left: 133px !important; text-indent: -133px !important; background-position: 112px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.getBytes());</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">38</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用key解密已Base64解码的LTPAToken</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">39</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">decrypt(ltpaByteArray, key);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">40</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">41</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// DESede/ECB/PKC5Padding解方法</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">42</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">public</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">static</code><span class="Apple-converted-space">&nbsp;</span><code class="keyword">byte</code><code class="plain">[] decrypt(</code><code class="keyword">byte</code><code class="plain">[] ciphertext,<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">byte</code><code class="plain">[] key)</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">43</code><span class="content"><span class="block" style="padding-left: 105px !important; text-indent: -105px !important; background-position: 84px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">Exception {</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">44</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">Cipher cipher = Cipher.getInstance(</code><code class="string">"DESede/ECB/PKCS5Padding"</code><code class="plain">);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">45</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">KeySpec keySpec =<span class="Apple-converted-space">&nbsp;</span></code><code class="keyword">new</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">DESedeKeySpec(key);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">46</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">Key secretKey = SecretKeyFactory.getInstance(</code><code class="string">"TripleDES"</code><code class="plain">)</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">47</code><span class="content"><span class="block" style="padding-left: 133px !important; text-indent: -133px !important; background-position: 112px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.generateSecret(keySpec);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">48</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">cipher.init(Cipher.DECRYPT_MODE, secretKey);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><span style="font-family: Arial;"><code class="number">49</code><span class="content"><span class="block" style="padding-left: 77px !important; text-indent: -77px !important; background-position: 56px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code><span class="Apple-converted-space">&nbsp;</span><code class="plain">cipher.doFinal(ciphertext);</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt2"><span style="font-family: Arial;"><code class="number">50</code><span class="content"><span class="block" style="padding-left: 49px !important; text-indent: -49px !important; background-position: 28px 1.2em;">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code><code class="lineTerm"></code></span></span></span></div>
+<div class="line alt1"><code class="number"><span style="font-family: Arial;">51</span></code><span class="content"><span class="block" style="padding-left: 21px !important; text-indent: -21px !important; background-position: 0px 1.2em;"><code class="plain"><span style="font-family: Arial;">&hellip;</span></code><code class="lineTerm"></code></span></span></div>
+
+
+</div>
+
+
+</div>
+<p>解析出来的LTPAToken信息以%分隔。</p>
+
+
+</div>
+<div>&nbsp;</div>
+<div>参考资源：</div>
+<div>1）hannover，<a id="cb_post_title_url" class="postTitle2" style="cursor: pointer;" href="http://www.cnblogs.com/hannover/archive/2011/05/29/2061798.html">LTPA Cookie原理</a></div>
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-17 22:24</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2775410" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2775410);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2775410, cb_entryCreatedDate = '2012-11-17 22:24', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

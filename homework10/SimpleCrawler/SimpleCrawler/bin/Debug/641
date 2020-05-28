@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_程序员之道</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=476</id>
+  <updated>2020-04-28T12:52:19Z</updated>
+  <author>
+    <name>程序员之道</name>
+    <uri>http://www.cnblogs.com/chanllenge/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/12797175.html</id>
+    <title type="text">绩效沟通季的瓜不好吃，小心下一个吃瓜的是你？ - 程序员之道</title>
+    <summary type="text">写在前面 学习很难，克服惰性。每天学一点，不会的就少一点。 懦夫从不启程，弱者死于路中，只剩我们前行，一步都不能停。 养成习惯很重要，先从点赞开始吧！ 最近跟一位进入大厂的朋友深夜畅谈(其实是不断的安慰他)，道哥的朋友当然大多数都是程序员，这位朋友还是程序员中的佼佼者，因为在去年10月份进入了某大厂</summary>
+    <published>2020-04-28T12:52:00Z</published>
+    <updated>2020-04-28T12:52:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/12797175.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/12797175.html" />
+    <content type="html">【摘要】写在前面 学习很难，克服惰性。每天学一点，不会的就少一点。 懦夫从不启程，弱者死于路中，只剩我们前行，一步都不能停。 养成习惯很重要，先从点赞开始吧！ 最近跟一位进入大厂的朋友深夜畅谈(其实是不断的安慰他)，道哥的朋友当然大多数都是程序员，这位朋友还是程序员中的佼佼者，因为在去年10月份进入了某大厂 &lt;a href="http://www.cnblogs.com/chanllenge/p/12797175.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/12635425.html</id>
+    <title type="text">一道排序算法竟然征服了阿里的面试官，怎么做到的？ - 程序员之道</title>
+    <summary type="text">写在前面 学习很难，克服惰性。每天学一点，不会的就少一点。 养成习惯很重要，先从点赞开始吧！关注[程序员之道]，程序员之路不再迷茫 大厂光环，闪耀万里，谁不想拥有BAT的一段光环。 最近有位朋友参加阿里的视频面试，道哥觉得他的面试过程很神奇，因为全程都是围绕一个排序算法？而且这位同学获得了面试官的充</summary>
+    <published>2020-04-04T16:15:00Z</published>
+    <updated>2020-04-04T16:15:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/12635425.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/12635425.html" />
+    <content type="html">【摘要】写在前面 学习很难，克服惰性。每天学一点，不会的就少一点。 养成习惯很重要，先从点赞开始吧！关注[程序员之道]，程序员之路不再迷茫 大厂光环，闪耀万里，谁不想拥有BAT的一段光环。 最近有位朋友参加阿里的视频面试，道哥觉得他的面试过程很神奇，因为全程都是围绕一个排序算法？而且这位同学获得了面试官的充 &lt;a href="http://www.cnblogs.com/chanllenge/p/12635425.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/12590959.html</id>
+    <title type="text">手把手教你用java实现syslog消息的收发，学不会你打我喽！ - 程序员之道</title>
+    <summary type="text">大家好，我是道哥，专注于后端java开发，喜欢写作和分享。如果觉得文章对你有用，那就点个赞呗！如果能转发那是对道哥最大的支持！ syslog的定义 见文知义，syslog，从英文名字上可以看出是指系统日志。 以下内容摘自百度百科： Syslog常被称为系统日志或系统记录，是一种用来在互联网协议（TC</summary>
+    <published>2020-03-29T01:51:00Z</published>
+    <updated>2020-03-29T01:51:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/12590959.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/12590959.html" />
+    <content type="html">【摘要】大家好，我是道哥，专注于后端java开发，喜欢写作和分享。如果觉得文章对你有用，那就点个赞呗！如果能转发那是对道哥最大的支持！ syslog的定义 见文知义，syslog，从英文名字上可以看出是指系统日志。 以下内容摘自百度百科： Syslog常被称为系统日志或系统记录，是一种用来在互联网协议（TC &lt;a href="http://www.cnblogs.com/chanllenge/p/12590959.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/12528483.html</id>
+    <title type="text">再也不怕数据结构和算法之开篇 - 程序员之道</title>
+    <summary type="text">为什么要学习算法和数据结构 算法和数据结构是程序员的基本内功，基本内功修炼不好，以后修炼一些招式，如设计模式、架构，新的技术热点如区块链，新的技术语言go等，都会感觉非常吃力。 喜欢看武侠小说的知道，张无忌正是因为内功精纯，再加乾坤大挪移加持，学习任何武功招式都如探囊取物，短时间内即可融汇贯通。程序</summary>
+    <published>2020-03-19T16:08:00Z</published>
+    <updated>2020-03-19T16:08:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/12528483.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/12528483.html" />
+    <content type="html">【摘要】为什么要学习算法和数据结构 算法和数据结构是程序员的基本内功，基本内功修炼不好，以后修炼一些招式，如设计模式、架构，新的技术热点如区块链，新的技术语言go等，都会感觉非常吃力。 喜欢看武侠小说的知道，张无忌正是因为内功精纯，再加乾坤大挪移加持，学习任何武功招式都如探囊取物，短时间内即可融汇贯通。程序 &lt;a href="http://www.cnblogs.com/chanllenge/p/12528483.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/12439289.html</id>
+    <title type="text">单例模式你真的会了吗(上篇)？ - 程序员之道</title>
+    <summary type="text">单例模式相信是很多程序员接触最多的了，也是面试过程中考察最频繁的一个了，不知道你有没有被问过这道面试题？欢迎留言讨论。 今天我们来重点讨论一下单例的几个问题，及如何正确的实现一个单例，然后你再来回顾一下，你之前的回答或者使用方式是否正确。 为何要使用单例 单例非常简单，一个类只允许创建一个对象或者实</summary>
+    <published>2020-03-07T15:39:00Z</published>
+    <updated>2020-03-07T15:39:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/12439289.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/12439289.html" />
+    <content type="html">【摘要】单例模式相信是很多程序员接触最多的了，也是面试过程中考察最频繁的一个了，不知道你有没有被问过这道面试题？欢迎留言讨论。 今天我们来重点讨论一下单例的几个问题，及如何正确的实现一个单例，然后你再来回顾一下，你之前的回答或者使用方式是否正确。 为何要使用单例 单例非常简单，一个类只允许创建一个对象或者实 &lt;a href="http://www.cnblogs.com/chanllenge/p/12439289.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/11833173.html</id>
+    <title type="text">redis分布式锁，面试官请随便问，我都会 - 程序员之道</title>
+    <summary type="text">[TOC] 前言 现在的业务场景越来越复杂，使用的架构也就越来越复杂，分布式、高并发已经是业务要求的常态。像腾讯系的不少服务，还有CDN优化、异地多备份等处理。 说到分布式，就必然涉及到分布式锁的概念，如何保证不同机器不同线程的分布式锁同步呢？ 实现要点 1. 互斥性，同一时刻，智能有一个客户端持有</summary>
+    <published>2019-11-11T02:07:00Z</published>
+    <updated>2019-11-11T02:07:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/11833173.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/11833173.html" />
+    <content type="html">【摘要】[TOC] 前言 现在的业务场景越来越复杂，使用的架构也就越来越复杂，分布式、高并发已经是业务要求的常态。像腾讯系的不少服务，还有CDN优化、异地多备份等处理。 说到分布式，就必然涉及到分布式锁的概念，如何保证不同机器不同线程的分布式锁同步呢？ 实现要点 1. 互斥性，同一时刻，智能有一个客户端持有 &lt;a href="http://www.cnblogs.com/chanllenge/p/11833173.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/11825320.html</id>
+    <title type="text">快手面试归来篇一，希望你看后能过 - 程序员之道</title>
+    <summary type="text">[TOC] 写给正在找工作的你 都说金三银四，对于找工作的人来说，因为每年的三月或四月是不少互联网公司的年终季，不少人都是拿到年终奖后不满意，或者感觉职业发展受限，之后跑路。这样不少部门因为人员流动，就会有hc空缺出来。 ==这里要说的是每年3、4月份确实是hc最多的季节，但同时是跳槽旺季，竞争大，</summary>
+    <published>2019-11-09T05:07:00Z</published>
+    <updated>2019-11-09T05:07:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/11825320.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/11825320.html" />
+    <content type="html">【摘要】[TOC] 写给正在找工作的你 都说金三银四，对于找工作的人来说，因为每年的三月或四月是不少互联网公司的年终季，不少人都是拿到年终奖后不满意，或者感觉职业发展受限，之后跑路。这样不少部门因为人员流动，就会有hc空缺出来。 ==这里要说的是每年3、4月份确实是hc最多的季节，但同时是跳槽旺季，竞争大， &lt;a href="http://www.cnblogs.com/chanllenge/p/11825320.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/11799847.html</id>
+    <title type="text">程序员不会理财，那跟咸鱼有什么区别？ - 程序员之道</title>
+    <summary type="text">前言 程序员给人的普遍印象，木讷，沉稳，话少，衣服不多，换来换去就那几套，整天对着个电脑，有时还能发出嘻嘻的怪笑声。看他们对正常人都没有对电脑(编程)的兴趣高。 你是否为自己的低收入而担忧，每年工资的涨幅远远跟不上通货膨胀，怎么能实现资产的合理配置，让自己变得有钱起来呢？ ==先看一个巴菲特历年收益</summary>
+    <published>2019-11-05T09:18:00Z</published>
+    <updated>2019-11-05T09:18:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/11799847.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/11799847.html" />
+    <content type="html">【摘要】前言 程序员给人的普遍印象，木讷，沉稳，话少，衣服不多，换来换去就那几套，整天对着个电脑，有时还能发出嘻嘻的怪笑声。看他们对正常人都没有对电脑(编程)的兴趣高。 你是否为自己的低收入而担忧，每年工资的涨幅远远跟不上通货膨胀，怎么能实现资产的合理配置，让自己变得有钱起来呢？ ==先看一个巴菲特历年收益 &lt;a href="http://www.cnblogs.com/chanllenge/p/11799847.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/11799824.html</id>
+    <title type="text">人生的康波周期，把握住一次，足以改变命运！ - 程序员之道</title>
+    <summary type="text">在这里和大家重温一下周金涛的演讲！ 首先声明： 投资有风险，入市需谨慎！本文不构成任何投资建议！ 先简单介绍下涛神： 周金涛，1972年7月出生于天津，毕业于南开大学。自2005年以来，在城市化和工业化的国际比较以及经济周期理论两个重点研究领域取得明显成果，并在此基础上建立了一套完整的结构主义经济学</summary>
+    <published>2019-11-05T09:16:00Z</published>
+    <updated>2019-11-05T09:16:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/11799824.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/11799824.html" />
+    <content type="html">【摘要】在这里和大家重温一下周金涛的演讲！ 首先声明： 投资有风险，入市需谨慎！本文不构成任何投资建议！ 先简单介绍下涛神： 周金涛，1972年7月出生于天津，毕业于南开大学。自2005年以来，在城市化和工业化的国际比较以及经济周期理论两个重点研究领域取得明显成果，并在此基础上建立了一套完整的结构主义经济学 &lt;a href="http://www.cnblogs.com/chanllenge/p/11799824.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chanllenge/p/11799784.html</id>
+    <title type="text">互联网面试开小灶系列之消息队列(一) - 程序员之道</title>
+    <summary type="text">@ "TOC" 背景 程序员不懂点消息队列的知识，怎么能证明你经历过高并发系统的洗礼呢？看起来你的项目经历比较单一和简单嘛，面试官在心里应该有点看低你这位候选人了。就算你的项目里没有用到，为了面试，你也得懂得一些消息队列的基本原理及常见面试套路吧！ 为什么使用消息队列 你们的项目中有用到消息队列吗？</summary>
+    <published>2019-11-05T09:11:00Z</published>
+    <updated>2019-11-05T09:11:00Z</updated>
+    <author>
+      <name>程序员之道</name>
+      <uri>http://www.cnblogs.com/chanllenge/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chanllenge/p/11799784.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chanllenge/p/11799784.html" />
+    <content type="html">【摘要】@ "TOC" 背景 程序员不懂点消息队列的知识，怎么能证明你经历过高并发系统的洗礼呢？看起来你的项目经历比较单一和简单嘛，面试官在心里应该有点看低你这位候选人了。就算你的项目里没有用到，为了面试，你也得懂得一些消息队列的基本原理及常见面试套路吧！ 为什么使用消息队列 你们的项目中有用到消息队列吗？ &lt;a href="http://www.cnblogs.com/chanllenge/p/11799784.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

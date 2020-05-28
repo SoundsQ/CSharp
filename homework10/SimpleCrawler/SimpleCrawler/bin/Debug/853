@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_一头小菜鸡</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=1052</id>
+  <updated>2020-04-28T14:41:55Z</updated>
+  <author>
+    <name>一头小菜鸡</name>
+    <uri>http://www.cnblogs.com/kuangdw/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/kuangdw/p/12783281.html</id>
+    <title type="text">springboot+dubbo简单分布式RPC调用demo - 一头小菜鸡</title>
+    <summary type="text">使用springboot+dubbo搭建RPC入门案例 本文背景简述: 最近在学习公司的一套RPC框架，初步接触的时候感觉挺复杂的。但是知道其原理肯定是和dubbo很相似的，毕竟都是RPC框架嘛，只是各自使用的范围和使 用者群体有些不同罢了。于是就去dubbo官网熟悉了其相关文档和案例教程，然后结合</summary>
+    <published>2020-04-28T14:31:00Z</published>
+    <updated>2020-04-28T14:31:00Z</updated>
+    <author>
+      <name>一头小菜鸡</name>
+      <uri>http://www.cnblogs.com/kuangdw/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/kuangdw/p/12783281.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/kuangdw/p/12783281.html" />
+    <content type="html">【摘要】使用springboot+dubbo搭建RPC入门案例 本文背景简述: 最近在学习公司的一套RPC框架，初步接触的时候感觉挺复杂的。但是知道其原理肯定是和dubbo很相似的，毕竟都是RPC框架嘛，只是各自使用的范围和使 用者群体有些不同罢了。于是就去dubbo官网熟悉了其相关文档和案例教程，然后结合 &lt;a href="http://www.cnblogs.com/kuangdw/p/12783281.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

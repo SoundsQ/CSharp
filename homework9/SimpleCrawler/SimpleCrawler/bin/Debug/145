@@ -1,0 +1,1019 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本文对InputStream 和 OutputStream 进行了整体的分析,涉及到具体的读写方法以及一些其他的辅助方法,对他们进行了解读,两个抽象类作为协议约定的存在" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[五] JavaIO之InputStream OutputStream简介 方法列表说明 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9618521.html">[五] JavaIO之InputStream OutputStream简介 方法列表说明</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        本文对InputStream 和 OutputStream 进行了整体的分析,涉及到具体的读写方法以及一些其他的辅助方法,对他们进行了解读,两个抽象类作为协议约定的存在
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: medium;">InputStream 和 OutputStream 对于字节流的输入和输出 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">是作为协议的存在 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">所以有必要了解下这两个类提供出来的基本约定 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">这两个类是抽象类,而且基本上没什么实现,都是依赖于子类具体的去实现 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">但是他是对于其子类 协议纲领一般的存在 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">了解清楚每一个方法含义,对于后续具体的子类将会有非常大的帮助</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">基本含义</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">InputStream </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">所有字节输入流的 超类 他是一个抽象类 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">OutputStream </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">所有字节输出流的 超类 他是一个抽象类</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">方法列表</span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123003909-2062580604.png"><img style="display: inline; background-image: none;" title="image_5b95f27e_7902" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123004282-1537334061.png" alt="image_5b95f27e_7902" width="567" height="226" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: medium;">InputStream&nbsp; 包含了读取方法以及辅助方法 </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">OutputStream包含了写入方法以及辅助方法</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">方法对照</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: medium;">read() </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">read(byte[]) </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">read(byte[], int, int) </span></div>
+</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: medium;">write(byte[]) </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">write(byte[], int, int) </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">write(int) </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">close </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">close </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">&nbsp;</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: medium;">flush() </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: medium;">available() </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">mark(int) </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">markSupported() </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">reset() </span></div>
+<div style="line-height: 200%;"><span style="font-size: medium;">skip(long)</span></div>
+</td>
+<td style="line-height: 200%;"><br />
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">方法详解</span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">read</span>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">read()&nbsp; 从输入流中读取数据的下一个字节。返回 0 到 255 范围内的 int 字节值<br />如果因为已经到达流末尾而没有可用的字节，则返回值 -1
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">方法将会一直阻塞,直到数据可用,检测到流的末尾或者抛出异常
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">无参数的read() 是抽象方法,由实现类提供实现<br />
+					</span>
+<div><span style="font-size: medium;">三个read方法实际上根本方法都是read()方法
+					</span></div>
+<div><span style="font-size: medium;">其他两个方法为拓展功能,逻辑便捷方法
+					</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">无参数的read()返回的数据为读取到的字节值<br />而有参数的则是读取到字节数组中,所以返回值为读取到的个数
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">read方法关键点<br />要么就是直接返回读取的字节<br />要么就是将读取到的字节放入字节数组中,字节数组是你传递进去的</span>
+				</td>
+
+
+			</tr>
+<tr>
+<td><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123005097-1995910150.png"><img style="display: inline; background-image: none;" title="image_5b95f27f_7672" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123005488-1851281463.png" alt="image_5b95f27f_7672" width="707" height="674" border="0" /></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">write</span>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">write(int b)
+					</span></div>
+
+<span style="font-size: medium;">将指定的字节写入此输出流<br />write 的常规协定是：向输出流写入一个字节, 要写入的字节是参数 b 的八个低位&nbsp;&nbsp; b 的 24 个高位将被忽略 <br />说白了就是写入的是byte虽然参数是int
+				</span></td>
+
+</tr>
+<tr>
+<td>
+<div><span style="font-size: medium;">write(byte[] b)
+					</span></div>
+<div><span style="font-size: medium;">将 b.length 个字节从指定的 byte 数组写入此输出流
+					</span></div>
+<div><span style="font-size: medium;">write(b) 的常规协定是：应该与调用 write(b, 0, b.length) 的效果完全相同
+					</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td>
+<div><span style="font-size: medium;">write(byte[] b,int off,int len)
+					</span></div>
+<div><span style="font-size: medium;">将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流
+					</span></div>
+<div>
+<div><span style="font-size: medium;">write(b, off, len) 的常规协定是：将数组 b 中的某些字节按顺序写入输出流；
+						</span></div>
+<div><span style="font-size: medium;">元素 b[off] 是此操作写入的第一个字节，b[off+len-1] 是此操作写入的最后一个字节
+						</span></div>
+
+</div>
+
+</td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">类似read的调用形式<br />直接写入指定字节的write(int b)&nbsp; 方法是根本<br />其他的是拓展功能</span>
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123005697-2130868380.png"><img style="display: inline; background-image: none;" title="image_5b95f27f_28a4" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123005880-111204704.png" alt="image_5b95f27f_28a4" width="691" height="373" border="0" /></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">read()&nbsp; 与write(int b) 是根本的读取一个字节或者写入一个字节的方法<br />其余形式是针对传入字节数组作为参数,以及指定字节数组的偏移量时的一些拓展功能<br />一旦传递了字节数组作为参数<br />read将会读取数据到字节数组<br />write将会将字节数组的数据写入</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">close</span>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">都需要关闭流,所以都有close方法<br />都是关闭流并释放与此流有关的系统资源<br />都可能抛出IOException
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">在InputStream和OutputStream中,两个close方法都是空方法</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+<br />
+</div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">flush</span>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">flush的含义为刷新,在写入数据时使用<br />所以,只有输出流拥有flush方法
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">之所以需要刷新,是因为有的输出流的写方法实现,可能已经缓冲了以前写入的任何字节<br />那么,这个方法用于提供能够立即将数据写入到磁盘的功能<br />不过,只是立即请求操作系统进行处理,而不保证这些字节实际已经写入到物理设备,比如磁盘</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><strong><span style="font-size: 18px;">下面几个为InputStream独有
+</span></strong></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>
+<div><span style="font-size: medium;">public int <strong><span style="font-size: 18px;">available()</span></strong>&nbsp; throws IOException&nbsp;&nbsp; </span></div>
+
+</div>
+<div><span style="font-size: medium;">返回此输入流下一个方法调用可以不受阻塞地从此输入流读取（或跳过）的估计字节数
+					</span></div>
+<div><span style="font-size: medium;">这句话有些绕口,直白的说就是:
+					</span></div>
+<div><span style="font-size: medium;">在方法调用前,可以获取到这个流中可用的字节数目
+					</span></div>
+<div><span style="font-size: medium;">假设说有N个字节可以使用,显然你应该很可能读取到N个字节,或者能够跳过N个字节
+					</span></div>
+<div><span style="font-size: medium;">一次读取或跳过此估计数个字节不会受阻塞
+					</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">注意:<br />这个数目是一个预估的数量<br />实际的读取或者跳过的字节数可能小于这个数
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">InputStream中的这个方法总是返回0&nbsp; <br />所以这个方法能否使用依赖于子类的实现</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123006043-2010805786.png"><img style="display: inline; background-image: none;" title="image_5b95f27f_373b" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123006209-208667158.png" alt="image_5b95f27f_373b" width="453" height="73" border="0" /></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">public long <span style="font-size: 18px;"><strong>skip(long n)</strong></span> throws IOException
+						</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">返回的是实际跳过的字节数<br />在内部创建一个 byte 数组，然后重复将字节读入其中，直到读够 n 个字节或已到达流末尾为止</span>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123006394-937130613.png"><img style="display: inline; background-image: none;" title="image_5b95f27f_6cd7" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123006570-2017556377.png" alt="image_5b95f27f_6cd7" width="675" height="426" border="0" /></a>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td>
+<div><strong><span style="font-size: 18px;">reset()
+						</span></strong></div>
+<div><strong><span style="font-size: 18px;">mark(int)
+						</span></strong></div>
+<div><strong><span style="font-size: 18px;">markSupported()&nbsp; </span></strong></div>
+<div><span style="font-size: medium;">三个方法是对于同一个功能点的不同方法&nbsp; ,可以解决重复读的问题
+						</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">mark(int)用来在此输入流中做标记,标记当前位置&nbsp; 打一个书签<br />markSupported()&nbsp;&nbsp; 测试此输入流是否支持 mark 和 reset 方法<br />reset()&nbsp; 将此流重新定位到最后一次对此输入流调用 mark 方法时的位置&nbsp;&nbsp; 回到书签
+					</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">看下类中的默认代码可以发现:
+						</span></div>
+<div><span style="font-size: medium;">默认情况下mark什么都不做
+						</span></div>
+<div><span style="font-size: medium;">markSupported直接返回false
+						</span></div>
+<div><span style="font-size: medium;">reset方法的调用会抛出异常
+						</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123006951-1798557407.png"><img style="display: inline; background-image: none;" title="image_5b95f27f_26c1" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180910123007084-758812927.png" alt="image_5b95f27f_26c1" width="626" height="181" border="0" /></a></span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">mark的参数用于告知输入流在标记位置失效之前允许读取的字节数
+					</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">标记已关闭的流对其无效
+					</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">说起来很迷惑,用起来却很简单<br />比如 <br />xxxStream.mark(50);//表明系统至少应该缓冲50以上个数据,以保证可以回来重新读取<br />xxxStream.read();<br />.....<br />xxxStream.read();<br /><br />xxxStream.reset();//reset之后,读取到的数据将会和刚才调用mark 方法后read的数据是相同的<br />
+						</span>
+<div><span style="font-size: medium;">xxxStream.read();
+						</span></div>
+<div><span style="font-size: medium;">.....
+						</span></div>
+<div><span style="font-size: medium;">xxxStream.read();
+						</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">如果方法 markSupported 返回 true，那么输入流总是在调用 mark 之后记录所有读取的字节<br />并时刻准备在调用方法 reset 时（无论何时），再次提供这些相同的字节<br />但是，如果在调用 reset 之前可以从流中读取多于 readlimit 的字节，则不需要该流记录任何数据</span>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-10 12:30</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9618521" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9618521);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9618521, cb_entryCreatedDate = '2018-09-10 12:30', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_喜欢兰花山丘</title>
+  <subtitle type="text">飘云簇簇, 山道绵绵</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=1184</id>
+  <updated>2020-04-28T15:34:03Z</updated>
+  <author>
+    <name>喜欢兰花山丘</name>
+    <uri>http://www.cnblogs.com/life2refuel/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/12732873.html</id>
+    <title type="text">浮点数精度上误差 - 喜欢兰花山丘</title>
+    <summary type="text">在我刚接触编程的时候, 那时候面试小题目很喜欢问下面这几类问题 1' 浮点数如何和零比较大小? 2' 浮点数如何转为整型? 然后过了七八年后这类问题应该很少出现在面试中了吧. 刚好最近我遇到线上 bug, 同大家交流科普下 问题最小现场 #include &lt;stdio.h&gt; int main(voi</summary>
+    <published>2020-04-28T15:34:00Z</published>
+    <updated>2020-04-28T15:34:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/12732873.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/12732873.html" />
+    <content type="html">【摘要】在我刚接触编程的时候, 那时候面试小题目很喜欢问下面这几类问题 1' 浮点数如何和零比较大小? 2' 浮点数如何转为整型? 然后过了七八年后这类问题应该很少出现在面试中了吧. 刚好最近我遇到线上 bug, 同大家交流科普下 问题最小现场 #include &lt;stdio.h&gt; int main(voi &lt;a href="http://www.cnblogs.com/life2refuel/p/12732873.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/12554417.html</id>
+    <title type="text">狂人日記 - 喜欢兰花山丘</title>
+    <summary type="text">作者：魯迅 1918年4月 某君昆仲，今隱其名，皆余昔日在中學校時良友；分隔多年，消息漸闕。日前偶聞其一大病；適歸故鄉，迂道往訪，則僅晤一人，言病者其弟也。勞君遠道來視，然已早愈，赴某地候補矣。因大笑，出示日記二冊，謂可見當日病狀，不妨獻諸舊友。持歸閱一過，知所患蓋「迫害狂」之類。語頗錯雜無倫次，又</summary>
+    <published>2020-03-23T11:56:00Z</published>
+    <updated>2020-03-23T11:56:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/12554417.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/12554417.html" />
+    <content type="html">【摘要】作者：魯迅 1918年4月 某君昆仲，今隱其名，皆余昔日在中學校時良友；分隔多年，消息漸闕。日前偶聞其一大病；適歸故鄉，迂道往訪，則僅晤一人，言病者其弟也。勞君遠道來視，然已早愈，赴某地候補矣。因大笑，出示日記二冊，謂可見當日病狀，不妨獻諸舊友。持歸閱一過，知所患蓋「迫害狂」之類。語頗錯雜無倫次，又 &lt;a href="http://www.cnblogs.com/life2refuel/p/12554417.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/12330462.html</id>
+    <title type="text">C 基础 _Generic 泛型应用 - 喜欢兰花山丘</title>
+    <summary type="text">引言 - _Generic 用法简介 #include &lt;stdio.h&gt; #define TYPENAME_CASE(type) \ type: #type, #define TYPENAME_POINTER_CASE(type) \ TYPENAME_CASE(type) \ TYPENAME_</summary>
+    <published>2020-02-19T04:25:00Z</published>
+    <updated>2020-02-19T04:25:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/12330462.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/12330462.html" />
+    <content type="html">【摘要】引言 - _Generic 用法简介 #include &lt;stdio.h&gt; #define TYPENAME_CASE(type) \ type: #type, #define TYPENAME_POINTER_CASE(type) \ TYPENAME_CASE(type) \ TYPENAME_ &lt;a href="http://www.cnblogs.com/life2refuel/p/12330462.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/12167989.html</id>
+    <title type="text">C基础 带你手写 redis ae 事件驱动模型 - 喜欢兰花山丘</title>
+    <summary type="text">引言 - 整体认识 redis ae 事件驱动模型, 网上聊得很多. 但当你仔细看完一篇又一篇之后, 可能你看的很舒服, 但对于 作者为什么要这么写, 出发点, 好处, 缺点 ... 可能还是好模糊, 不是吗? 我们这里基于阅读的人已经了解了 IO 复用大致流程且抄写过 ae 的全部代码. 好, 那</summary>
+    <published>2020-01-08T14:15:00Z</published>
+    <updated>2020-01-08T14:15:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/12167989.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/12167989.html" />
+    <content type="html">【摘要】引言 - 整体认识 redis ae 事件驱动模型, 网上聊得很多. 但当你仔细看完一篇又一篇之后, 可能你看的很舒服, 但对于 作者为什么要这么写, 出发点, 好处, 缺点 ... 可能还是好模糊, 不是吗? 我们这里基于阅读的人已经了解了 IO 复用大致流程且抄写过 ae 的全部代码. 好, 那 &lt;a href="http://www.cnblogs.com/life2refuel/p/12167989.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11966521.html</id>
+    <title type="text">C基础 带你手写 redis sds - 喜欢兰花山丘</title>
+    <summary type="text">前言 - Simple Dynamic Strings antirez 想统一 Redis，Disque，Hiredis 项目中 SDS 代码, 因此构建了这个项目 https://github.com/antirez/sds . 更多介绍的背景知识, 可以阅读 README.md. sds 项目是</summary>
+    <published>2019-12-01T10:41:00Z</published>
+    <updated>2019-12-01T10:41:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11966521.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11966521.html" />
+    <content type="html">【摘要】前言 - Simple Dynamic Strings antirez 想统一 Redis，Disque，Hiredis 项目中 SDS 代码, 因此构建了这个项目 https://github.com/antirez/sds . 更多介绍的背景知识, 可以阅读 README.md. sds 项目是 &lt;a href="http://www.cnblogs.com/life2refuel/p/11966521.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11911839.html</id>
+    <title type="text">C基础 带你手写 redis adlist 双向链表 - 喜欢兰花山丘</title>
+    <summary type="text">引言 - 导航栏目 有些朋友可能对 redis 充满着数不尽的求知欲, 也许是 redis 属于工作, 交流(面试)的大头戏, 不得不 ... 而自己当下对于 redis 只是停留在会用层面, 细节层面几乎没有涉猎. 为了更快的融于大 家, 这里尝试抛砖引玉. 先带大家手写个 redis 中最简单的</summary>
+    <published>2019-11-22T13:13:00Z</published>
+    <updated>2019-11-22T13:13:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11911839.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11911839.html" />
+    <content type="html">【摘要】引言 - 导航栏目 有些朋友可能对 redis 充满着数不尽的求知欲, 也许是 redis 属于工作, 交流(面试)的大头戏, 不得不 ... 而自己当下对于 redis 只是停留在会用层面, 细节层面几乎没有涉猎. 为了更快的融于大 家, 这里尝试抛砖引玉. 先带大家手写个 redis 中最简单的 &lt;a href="http://www.cnblogs.com/life2refuel/p/11911839.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11729063.html</id>
+    <title type="text">Go 零基础 30 min 入门 - 喜欢兰花山丘</title>
+    <summary type="text">不知不觉用 Go 开发也两年多了. 筹备点经验汇总, 方便后面的同学能快速上手. 提纲 1. Go 安装 2. Go ide 搭建 3. Go modules 模块管理 4. Go unit test 5. Go debug 调试 6. Go pprof 火焰图 7. Go online 调试 8.</summary>
+    <published>2019-10-23T13:52:00Z</published>
+    <updated>2019-10-23T13:52:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11729063.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11729063.html" />
+    <content type="html">【摘要】不知不觉用 Go 开发也两年多了. 筹备点经验汇总, 方便后面的同学能快速上手. 提纲 1. Go 安装 2. Go ide 搭建 3. Go modules 模块管理 4. Go unit test 5. Go debug 调试 6. Go pprof 火焰图 7. Go online 调试 8. &lt;a href="http://www.cnblogs.com/life2refuel/p/11729063.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11482948.html</id>
+    <title type="text">C 编程环境搭建 Window 篇 - 喜欢兰花山丘</title>
+    <summary type="text">前言 - 简介 我们在写代码的过程中, 不可避免的重度依赖所处的开发环境. 本文重点带大家在 Window 搭建 C 简单控制台项目. 当作存档, 用于记录项目搭建各种重复操作. 在详细过程之前, 我们约定下基础环境 Best new version Window Best new version </summary>
+    <published>2019-09-07T15:11:00Z</published>
+    <updated>2019-09-07T15:11:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11482948.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11482948.html" />
+    <content type="html">【摘要】前言 - 简介 我们在写代码的过程中, 不可避免的重度依赖所处的开发环境. 本文重点带大家在 Window 搭建 C 简单控制台项目. 当作存档, 用于记录项目搭建各种重复操作. 在详细过程之前, 我们约定下基础环境 Best new version Window Best new version  &lt;a href="http://www.cnblogs.com/life2refuel/p/11482948.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11409363.html</id>
+    <title type="text">C基础 stack 设计 - 喜欢兰花山丘</title>
+    <summary type="text">前言 - stack 设计思路 先说说设计 stack 结构的原由. 以前我们再释放查找树的时候多数用递归的后续遍历去释放. 其内部隐含了运行时的函数栈, 有些语言中存在爆栈风险. 所以想运用显示栈来替代隐式函数栈. 这就是我们设计 stack 的背景. 而我们这里的 stack 设计思路也比较直白</summary>
+    <published>2019-08-25T14:02:00Z</published>
+    <updated>2019-08-25T14:02:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11409363.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11409363.html" />
+    <content type="html">【摘要】前言 - stack 设计思路 先说说设计 stack 结构的原由. 以前我们再释放查找树的时候多数用递归的后续遍历去释放. 其内部隐含了运行时的函数栈, 有些语言中存在爆栈风险. 所以想运用显示栈来替代隐式函数栈. 这就是我们设计 stack 的背景. 而我们这里的 stack 设计思路也比较直白 &lt;a href="http://www.cnblogs.com/life2refuel/p/11409363.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/life2refuel/p/11222126.html</id>
+    <title type="text">C 猜猜猜😀文字小游戏 - 喜欢兰花山丘</title>
+    <summary type="text">前言 - 随机性 随机数生成 - https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90 没啥事情, 写了个猜猜猜(猜数字)小游戏. 遇到猜的部分, 那肯定会用到随机函数. 我们为了多平台行为一致, 就统</summary>
+    <published>2019-07-21T11:19:00Z</published>
+    <updated>2019-07-21T11:19:00Z</updated>
+    <author>
+      <name>喜欢兰花山丘</name>
+      <uri>http://www.cnblogs.com/life2refuel/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/life2refuel/p/11222126.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/life2refuel/p/11222126.html" />
+    <content type="html">【摘要】前言 - 随机性 随机数生成 - https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90 没啥事情, 写了个猜猜猜(猜数字)小游戏. 遇到猜的部分, 那肯定会用到随机函数. 我们为了多平台行为一致, 就统 &lt;a href="http://www.cnblogs.com/life2refuel/p/11222126.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

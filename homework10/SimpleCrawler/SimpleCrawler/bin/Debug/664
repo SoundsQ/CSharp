@@ -1,0 +1,515 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - 苹果大大个 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=QOYYSTCMV24crecFWClKz9msINKIFz9bTbzK1xaWbEw" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=0pGk3D9Ik_jI4q1TALBT2ybOjIePHS_80_0J4DDOQiY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xiguadadage/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xiguadadage/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xiguadadage/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 467139;
+        var currentBlogApp = 'xiguadadage';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'darkgreentrip';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xiguadadage/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xiguadadage/">苹果大大个</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xiguadadage/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%8B%B9%E6%9E%9C%E5%A4%A7%E5%A4%A7%E4%B8%AA">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xiguadadage/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+20&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+2</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/xiguadadage/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/xiguadadage/default.html?page=1">1</a>
+    2
+    
+    
+    
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2019/04/12.html">2019年4月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10694600.html">
+    深入理解Java设计模式之观察者模式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 观察者，即时observer，总结来说就是一个当一个被观察的对象的状态发生变化时，会通知相应的观察者对象。 观察者模式定义了四种角色：抽象主题、具体主题、抽象观察者、具体观察者 1.抽象主题（Subject）：通常为接口或抽象类，定义一系列操作，如订阅，取消订阅，通知等方法 2.具体主题（Co            <a href="https://www.cnblogs.com/xiguadadage/p/10694600.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-04-12 11:25 苹果大大个 阅读 (275) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10694600" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2019/01/09.html">2019年1月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10243332.html">
+    深入理解Java自带的线程池和缓冲队列
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 线程池是什么 线程池的概念是初始化线程池时在池中创建空闲的线程，一但有工作任务，可直接使用线程池中的线程进行执行工作任务，任务执行完成后又返回线程池中成为空闲线程。使用线程池可以减少线程的创建和销毁，提高性能。 举个例子：我是一个包工头，代表线程池，手底下有若干工人代表线程池中的线程。如果我没            <a href="https://www.cnblogs.com/xiguadadage/p/10243332.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-09 15:32 苹果大大个 阅读 (6705) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10243332" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/29.html">2018年12月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10193918.html">
+    深入理解Java的三种工厂模式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、简单工厂模式 简单工厂的定义：提供一个创建对象实例的功能，而无须关心其具体实现。被创建实例的类型可以是接口、抽象类，也可以是具体的类 实现汽车接口 奔驰类 宝马类 简单工厂，既能生产宝马又能生产奔驰 测试类 测试结果 根据简单工厂的定义，用户只要产品而不在乎产品如何生产，看起来好像很完美的样子。            <a href="https://www.cnblogs.com/xiguadadage/p/10193918.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-29 09:47 苹果大大个 阅读 (534) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10193918" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/28.html">2018年12月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10188634.html">
+    深入理解JAVA中的代理模式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 代理是什么 事故现场：我家的宠物今天生病了，而我又没有相关的医学知识，所以我只让我的宠物多喝热水吗？ 结果显然是不行的，所以我需要去找宠物医生这些更专业的人来帮我的宠物治病。 这个时候，代理就出现了，而宠物医生就是代理，而我就是目标对象。 总结起来就是代理代替目标对象执行相关操作，即是对目标对            <a href="https://www.cnblogs.com/xiguadadage/p/10188634.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-28 10:13 苹果大大个 阅读 (385) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10188634" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/27.html">2018年12月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10187072.html">
+    maven项目导入依赖jar包并打包为可运行的jar包
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.在pom.xml文件中添加插件 2.在dos窗口中进入项目路径 执行命令：mvn assembly:assembly 如果使用IDEA进行打包，则运行该项 3.正常打包成功后项目会生成一个target文件夹，里面打包出来的jar包，包名为{finalName}-jar-with-dependen            <a href="https://www.cnblogs.com/xiguadadage/p/10187072.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-27 20:13 苹果大大个 阅读 (422) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10187072" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10134030.html">
+    深入理解单例模式的几种实现方式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 单例模式是一种很常用的设计模式，其定义是单例对象的类只允许有一个实例存在。在使用spring自动创建对象时默认就是单例的。 使用场景 需要频繁的对对象进行创建与销毁，如果工具类对象 一、饿汉式（静态变量） 饿汉式就是在类加载初始化的时候就创建了对象，尽管你还不需要使用他。相对来说我是比较喜欢这            <a href="https://www.cnblogs.com/xiguadadage/p/10134030.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-27 09:59 苹果大大个 阅读 (313) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10134030" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/16.html">2018年12月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10127751.html">
+    Java使用AES算法进行加密解密
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、加密 二、解密 三、hex字符串与字节数组互转 注：因工作内容常与单片机进行数据传输，所以不能直接使用字符串进行加密解密，需要多进行一次hex字符串的转换 因为上述加密解密使用的补码模式是NoPadding，所以输入的字节必须是128位对应的16个字节的倍数，如有需要可以将补码模式改为以下模式            <a href="https://www.cnblogs.com/xiguadadage/p/10127751.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-16 19:50 苹果大大个 阅读 (158) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10127751" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/15.html">2018年12月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10123794.html">
+    深入理解this关键字
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：this是什么？ 在Java语言中，当创建一个对象后，Java虚拟机就会为其分配一个指向对象本身的指针，这个指针就是“this”。 this关键字有哪些用法？ 一、调用本类的成员变量 上述代码中，构造方法中的形参与Person类的成员变量名称相同，如果不使用this关键字，不说我们，编译器也无法辨识            <a href="https://www.cnblogs.com/xiguadadage/p/10123794.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-15 16:35 苹果大大个 阅读 (45) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10123794" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/12/10.html">2018年12月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/10097995.html">
+    基于jdk1.8的ArrayList源码分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：添加元素源码解析 执行add方法 ensureCapacityInternal(size + 1)方法表示是一个扩容操作，进入方法显示 modCount用于记录ArrayList的结构性变化的次数，add()、remove()、addall()、removerange()及clear()方法都会让m            <a href="https://www.cnblogs.com/xiguadadage/p/10097995.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-10 20:54 苹果大大个 阅读 (50) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10097995" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xiguadadage/archive/2018/10/12.html">2018年10月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xiguadadage/p/9778934.html">
+    linux下安装与配置Redis
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.安装 （1）获取源代码 wget http://download.redis.io/releases/redis-4.0.8.tar.gz （2）解压 tar xzvf redis-4.0.8.tar.gz （3）安装 解压后生成redis-4.0.8文件夹 cd redis-4.0.8 mak            <a href="https://www.cnblogs.com/xiguadadage/p/9778934.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-10-12 16:31 苹果大大个 阅读 (43) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9778934" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/xiguadadage/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/xiguadadage/default.html?page=1">1</a>
+    2
+    
+    
+    
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 苹果大大个
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

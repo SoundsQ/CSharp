@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="幂等性指的是，使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。2.1. 如何防范 POST 重复提交 2.2. 集群环境下的定时任务幂等性" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题：幂等性 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html">电商课题：幂等性</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        幂等性指的是，使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。2.1. 如何防范 POST 重复提交 2.2. 集群环境下的定时任务幂等性
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://weibo.com/yunzheng/" target="_blank">@郑昀</a>汇总</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">关键词：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">idempotency，BASE，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<p><span style="font-family: 微软雅黑; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; color: #800000; font-size: large;"><strong>一. 断言：</strong></span></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div>幂等性的数学表达：f(f(x)) = f(x)。</div>
+<div>幂等性是系统接口对外的一种承诺。</div>
+<div>幂等性指的是，使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。</div>
+</div>
+<div>幂等性的一个实现是，使你的接口必须返回 0（成功），即使这时资源或动作已经停止并且无工作要完成。</div>
+<div>&nbsp;</div>
+<div><span style="color: #800000; font-size: large;"><strong>二. 电商常见问题：</strong></span>
+<div>
+<div>
+<div><strong><span style="font-size: medium;">2.1. 如何<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html" target="_blank">防范 POST 重复提交</a></span></strong></div>
+</div>
+</div>
+</div>
+<div>HTTP POST 操作既不是安全的，也不是幂等的（至少在HTTP规范里没有保证）。</div>
+<div>当我们因为反复刷新浏览器导致多次提交表单，多次发出同样的POST请求，导致远端服务器重复创建出了资源。&nbsp;</div>
+<div>所以，对于电商应用来说，第一对应的后端 WebService 一定要做到幂等性，第二服务器端收到 POST 请求，<span style="color: #ff0000;"><strong>在操作成功后必须302跳转到另外一个页面</strong></span>，这样即使用户刷新页面，也不会重复提交表单。</div>
+<div>
+<div>
+<div>
+<div>
+<div><strong><span style="font-size: medium;">2.2. 集群环境下的<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html" target="_blank">定时任务幂等性</a></span></strong></div>
+</div>
+</div>
+</div>
+<div>分布式环境下，定时任务或异步处理如何保持幂等性？</div>
+</div>
+<div>&nbsp;</div>
+<div><strong style="color: #800000; font-size: large;">三. 把分布式事务分解为具有幂等性的异步消息处理：</strong></div>
+<div>电商的很多业务，考虑更多的是 BASE（即<span style="text-decoration: underline;">Basically Available</span>、<span style="text-decoration: underline;">Soft state</span>、和<span style="text-decoration: underline;">Eventually consistent</span>），而不是 ACID（Atomicity、Consistency、Isolation和 Durability）。即为了满足高负载的用户访问，我们可以容忍短暂的数据不一致。</div>
+<div>那怎么做呢？　　</div>
+<div>第一，不做分布式事务，代价太大。</div>
+<div>第二，不一定需要实时一致性，只需要保证最终的一致性即可。</div>
+<div>第三，&ldquo;通过状态机和严格的有序操作，来最大限度地降低不一致性&rdquo;。</div>
+<div>第四，最终一致性（Eventually Consistent）通过异步事件做到。</div>
+<div><strong>如果消息具有操作幂等性</strong>，也就是一个消息被应用多次与应用一次产生的效果是一样的话，那么<strong>把不需要同步执行的事务交给异步消息推送和订阅者集群来处理</strong>即可。假如消息处理失败，那么就消息重播，由于幂等性，应用多次也能产生正确的结果。</div>
+<div>实际情况下，消息很难具有幂等性，解决方法是使用另一个表记录已经被成功应用的消息，即消息队列和消息应用状态表一起来解决问题。</div>
+<div>&nbsp;</div>
+<div><strong>参考资源：</strong></div>
+<div>1）weidagang2046，博客园，<a id="cb_post_title_url" style="cursor: pointer;" href="http://www.cnblogs.com/weidagang2046/archive/2011/06/04/idempotence.html">理解HTTP幂等性</a>；</div>
+<div>2）相关设计模式&ldquo;Synchronized Token（简而言之，就是客户端的每一次 Request 里，必须携带一个服务器端给出的 Hash Code 作为 Token，这个 Token 只能用一次，不能重复使用） &rdquo;和&ldquo;幂等接收器，Idempotent Receiver &rdquo;；</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）针对 POST ，请参考&nbsp;<a style="cursor: pointer;" title="HTTPLR" href="http://www.dehora.net/doc/httplr/draft-httplr-01.html">HTTPLR</a>（由Bill de h&Oacute;ra提出）、<a style="cursor: pointer;" href="https://datatracker.ietf.org/doc/draft-nottingham-http-poe/">Mark Nottingham的POE</a>（POST Once Exactly）和Paul Prescod的<a style="cursor: pointer;" title="HTTP中的可靠传递" href="http://www.prescod.net/reliable_http.html">HTTP中的可靠传递</a>。（另一个值得一提的是Yaron Goland的<a style="cursor: pointer;" title="SOA-Rity" href="http://www.goland.org/draft-goland-http-reliability-00.text">SOA-Rity</a>）；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）淘宝核心系统团队博客，2010，<a style="cursor: pointer;" href="http://rdc.taobao.com/blog/cs/?p=671">用消息队列和消息应用状态表来消除分布式事务</a></div>
+<hr />
+<ul>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html">电商课题：RBAC权限控制</a></li>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html">电商课题VI：分布式Session</a></li>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a></li>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题V：分布式锁</a></li>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：Throttle Limits for calls/requests in a clustered environment</a></li>
+</ul>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-22 23:52</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2783685" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2783685);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2783685, cb_entryCreatedDate = '2012-11-22 23:52', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

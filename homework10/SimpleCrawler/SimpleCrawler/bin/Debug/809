@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_烟花易冷人憔悴</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=113</id>
+  <updated>2020-04-28T11:27:14Z</updated>
+  <author>
+    <name>烟花易冷人憔悴</name>
+    <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12794311.html</id>
+    <title type="text">gin请求数据校验 - 烟花易冷人憔悴</title>
+    <summary type="text">前言 最近优化 "gin+vue的前后端分离项目" 代码时候，发现代码中对请求数据的校验比较繁琐，于是想办法简化它。最终我发现了 "go playground/validator" 开源库很好用。 优化前代码 代码如下： 发现每个方法都这样校验数据，很繁琐。 优化代码 这里使用 "go playgr</summary>
+    <published>2020-04-28T11:27:00Z</published>
+    <updated>2020-04-28T11:27:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12794311.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12794311.html" />
+    <content type="html">【摘要】前言 最近优化 "gin+vue的前后端分离项目" 代码时候，发现代码中对请求数据的校验比较繁琐，于是想办法简化它。最终我发现了 "go playground/validator" 开源库很好用。 优化前代码 代码如下： 发现每个方法都这样校验数据，很繁琐。 优化代码 这里使用 "go playgr &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12794311.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12782137.html</id>
+    <title type="text">Go gRPC进阶-gRPC转换HTTP（十） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 我们通常把 用作内部通信，而使用 进行外部通信。为了避免写两套应用，我们使用 "grpc gateway" 把 转成 。服务接收到 请求后， 把它转成 进行处理，然后以 形式返回数据。本篇代码以上篇为基础，最终转成的 支持 验证、数据验证，并添加 文档。 gRPC转成HTTP 编写和编译pro</summary>
+    <published>2020-04-26T12:44:00Z</published>
+    <updated>2020-04-26T12:44:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12782137.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12782137.html" />
+    <content type="html">【摘要】前言 我们通常把 用作内部通信，而使用 进行外部通信。为了避免写两套应用，我们使用 "grpc gateway" 把 转成 。服务接收到 请求后， 把它转成 进行处理，然后以 形式返回数据。本篇代码以上篇为基础，最终转成的 支持 验证、数据验证，并添加 文档。 gRPC转成HTTP 编写和编译pro &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12782137.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12761033.html</id>
+    <title type="text">Go gRPC进阶-proto数据验证（九） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 上篇介绍了 "go grpc middleware" 的 、`grpc_auth grpc_recovery grpc_validator`，它可以对gRPC数据的输入和输出进行验证。 创建proto文件，添加验证规则 这里使用第三方插件 "go proto validators" 自动生成验</summary>
+    <published>2020-04-23T07:23:00Z</published>
+    <updated>2020-04-23T07:23:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12761033.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12761033.html" />
+    <content type="html">【摘要】前言 上篇介绍了 "go grpc middleware" 的 、`grpc_auth grpc_recovery grpc_validator`，它可以对gRPC数据的输入和输出进行验证。 创建proto文件，添加验证规则 这里使用第三方插件 "go proto validators" 自动生成验 &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12761033.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12750339.html</id>
+    <title type="text">Go gRPC进阶-go-grpc-middleware使用（八） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 上篇介绍了gRPC中TLS认证和自定义方法认证，最后还简单介绍了gRPC拦截器的使用。gRPC自身只能设置一个拦截器，所有逻辑都写一起会比较乱。本篇简单介绍 "go grpc middleware" 的使用，包括 、`grpc_auth grpc_recovery`。 go grpc midd</summary>
+    <published>2020-04-22T02:29:00Z</published>
+    <updated>2020-04-22T02:29:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12750339.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12750339.html" />
+    <content type="html">【摘要】前言 上篇介绍了gRPC中TLS认证和自定义方法认证，最后还简单介绍了gRPC拦截器的使用。gRPC自身只能设置一个拦截器，所有逻辑都写一起会比较乱。本篇简单介绍 "go grpc middleware" 的使用，包括 、`grpc_auth grpc_recovery`。 go grpc midd &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12750339.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12710325.html</id>
+    <title type="text">Go gRPC进阶-TLS认证+自定义方法认证（七） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 前面篇章的gRPC都是明文传输的，容易被篡改数据。本章将介绍如何为gRPC添加安全机制，包括TLS证书认证和Token认证。 TLS证书认证 什么是TLS TLS（Transport Layer Security，安全传输层)，TLS是建立在 TCP协议之上的协议，服务于应用层，它的前身是SS</summary>
+    <published>2020-04-16T00:52:00Z</published>
+    <updated>2020-04-16T00:52:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12710325.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12710325.html" />
+    <content type="html">【摘要】前言 前面篇章的gRPC都是明文传输的，容易被篡改数据。本章将介绍如何为gRPC添加安全机制，包括TLS证书认证和Token认证。 TLS证书认证 什么是TLS TLS（Transport Layer Security，安全传输层)，TLS是建立在 TCP协议之上的协议，服务于应用层，它的前身是SS &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12710325.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12702959.html</id>
+    <title type="text">Go gRPC进阶-超时设置（六） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 gRPC默认的请求的超时时间是很长的，当你没有设置请求超时时间时，所有在运行的请求都占用大量资源且可能运行很长的时间，导致服务资源损耗过高，使得后来的请求响应过慢，甚至会引起整个进程崩溃。 为了避免这种情况，我们的服务应该设置超时时间。前面的 "入门教程" 提到，当客户端发起请求时候，需要传入</summary>
+    <published>2020-04-15T00:45:00Z</published>
+    <updated>2020-04-15T00:45:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12702959.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12702959.html" />
+    <content type="html">【摘要】前言 gRPC默认的请求的超时时间是很长的，当你没有设置请求超时时间时，所有在运行的请求都占用大量资源且可能运行很长的时间，导致服务资源损耗过高，使得后来的请求响应过慢，甚至会引起整个进程崩溃。 为了避免这种情况，我们的服务应该设置超时时间。前面的 "入门教程" 提到，当客户端发起请求时候，需要传入 &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12702959.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12698194.html</id>
+    <title type="text">Go gRPC教程-双向流式RPC（五） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 上一篇介绍了 ，客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流的数据。本篇将介绍 。 ：客户端和服务端双方使用读写流去发送一个消息序列，两个流独立操作，双方可以同时发送和同时接收。 情景模拟：双方对话（可以一问一答、一问多答、多问一答，形式灵活）。 新建proto</summary>
+    <published>2020-04-14T07:13:00Z</published>
+    <updated>2020-04-14T07:13:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12698194.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12698194.html" />
+    <content type="html">【摘要】前言 上一篇介绍了 ，客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流的数据。本篇将介绍 。 ：客户端和服务端双方使用读写流去发送一个消息序列，两个流独立操作，双方可以同时发送和同时接收。 情景模拟：双方对话（可以一问一答、一问多答、多问一答，形式灵活）。 新建proto &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12698194.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12696733.html</id>
+    <title type="text">Go gRPC教程-客户端流式RPC（四） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 上一篇介绍了 ，客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流的数据。本篇将介绍 。 ：与 相反，客户端不断的向服务端发送数据流，而在发送结束后，由服务端返回一个响应。 情景模拟：客户端大量数据上传到服务端。 新建proto文件 新建client_stream.p</summary>
+    <published>2020-04-14T03:20:00Z</published>
+    <updated>2020-04-14T03:20:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12696733.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12696733.html" />
+    <content type="html">【摘要】前言 上一篇介绍了 ，客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流的数据。本篇将介绍 。 ：与 相反，客户端不断的向服务端发送数据流，而在发送结束后，由服务端返回一个响应。 情景模拟：客户端大量数据上传到服务端。 新建proto文件 新建client_stream.p &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12696733.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12693749.html</id>
+    <title type="text">Go gRPC教程-服务端流式RPC（三） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 上一篇介绍了 ，当数据量大或者需要不断传输数据时候，我们应该使用流式RPC，它允许我们边处理边传输数据。本篇先介绍 。 ：客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流，直到里面没有任何消息。 情景模拟：实时获取股票走势。 1.客户端要获取某原油股的实时走势，客户</summary>
+    <published>2020-04-13T12:30:00Z</published>
+    <updated>2020-04-13T12:30:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12693749.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12693749.html" />
+    <content type="html">【摘要】前言 上一篇介绍了 ，当数据量大或者需要不断传输数据时候，我们应该使用流式RPC，它允许我们边处理边传输数据。本篇先介绍 。 ：客户端发送请求到服务器，拿到一个流去读取返回的消息序列。 客户端读取返回的流，直到里面没有任何消息。 情景模拟：实时获取股票走势。 1.客户端要获取某原油股的实时走势，客户 &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12693749.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/FireworksEasyCool/p/12674120.html</id>
+    <title type="text">Go gRPC教程-简单RPC（二） - 烟花易冷人憔悴</title>
+    <summary type="text">前言 gRPC主要有4种请求和响应模式，分别是 、`服务端流式（Server side streaming RPC） 客户端流式（Client side streaming RPC） 双向流式（Bidirectional streaming RPC）`。 ：客户端发起请求并等待服务端响应。 ：客户端</summary>
+    <published>2020-04-10T08:04:00Z</published>
+    <updated>2020-04-10T08:04:00Z</updated>
+    <author>
+      <name>烟花易冷人憔悴</name>
+      <uri>http://www.cnblogs.com/FireworksEasyCool/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/FireworksEasyCool/p/12674120.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/FireworksEasyCool/p/12674120.html" />
+    <content type="html">【摘要】前言 gRPC主要有4种请求和响应模式，分别是 、`服务端流式（Server side streaming RPC） 客户端流式（Client side streaming RPC） 双向流式（Bidirectional streaming RPC）`。 ：客户端发起请求并等待服务端响应。 ：客户端 &lt;a href="http://www.cnblogs.com/FireworksEasyCool/p/12674120.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

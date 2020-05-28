@@ -1,0 +1,612 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - xhload3d - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cogitation/bundle-cogitation.min.css?v=PJ48NAY_dmbjZZ0ZTev3Avl3BcTMJe39d3Pc83CPcig" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cogitation/bundle-cogitation-mobile.min.css?v=jLHKTG0H_smj72y-Z2j0JGYUmhBVGTu4_QpAGb1B_sA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xhload3d/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xhload3d/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xhload3d/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 171723;
+        var currentBlogApp = 'xhload3d';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Cogitation';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="top">
+	
+<div>
+	<table>
+		<tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xhload3d/">xhload3d</a>
+</h1>
+				<p id="tagline">
+www.hightopo.com
+</p>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="HeaderBarTab" nowrap>
+&nbsp;
+<a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+ ::
+
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xhload3d/">
+首页</a>
+ ::
+<a href="http://q.cnblogs.com" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+ ::
+
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/xhload3d">
+联系</a> ::
+
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xhload3d/rss/">
+订阅</a>
+
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/xhload3d/rss/">
+    <img src="/skins/cogitation/images/xml.gif" alt="订阅" />
+</a> ::
+
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+ ::
+
+
+</td>
+			<td><img id="Header1_BlueTab" src="/skins/cogitation/images/BlueTabRight.gif" align="absmiddle" alt=""/></td>
+			<td class="HeaderBarTabBack" nowrap width="100%">
+				<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap>
+				&nbsp;
+				
+236 
+				随笔&nbsp;::
+				
+1 文章
+				::
+				
+429 评论
+				::
+				
+0 引用
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=24">24</a>
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=3">下一页</a>
+</div>
+</div>
+
+		
+<p class="date">
+	2020年3月26日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/26.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12571377.html">
+    基于 HTML5 Canvas 的拓扑组件 ToolTip 应用
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2020.cnblogs.com/blog/1496396/202003/1496396-20200320171132013-1454064707.png" class="desc_img">ToolTip 效果是网页制作中常见的使用特效。当用户将鼠标悬浮在某个控件上时，ToolTip 显示并向用户展示相应的提示信息；当鼠标离开时，ToolTip 隐藏。一般情况下，我们使用 ToolTip 只是显示一句话或几个字，其实我们还可以展示很多信息。而今天的重点则是通过 Hightopo 的 HT for Web 产品来制作多种样式的 ToolTip。            <a href="https://www.cnblogs.com/xhload3d/p/12571377.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-26 09:49 xhload3d 阅读 (283) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12571377" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年3月22日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/22.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12549527.html">
+    基于 HTML5 WebGL 与 GIS 的智慧机场大数据可视化分析
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2020.cnblogs.com/blog/1496396/202003/1496396-20200322130329569-487668784.gif" class="desc_img">前言：大数据，人工智能，工业物联网，5G已经或者正在潜移默化地改变着我们的生活。在信息技术快速发展的时代，谁能抓住数据的核心，利用有效的方法对数据做数据挖掘和数据分析，从数据中发现趋势，谁就能做到精准控制，实时分析，有的放矢，从而获取更快速、更平稳、更长远地发展。在航空领域，机场、航班和航线信息是至关重要的数据，本文将介绍 以HT 为平台，应用 JavaScript、HTML5、GIS 等技术开发的全球航线实例。            <a href="https://www.cnblogs.com/xhload3d/p/12549527.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-22 23:57 xhload3d 阅读 (422) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12549527" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年3月19日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/19.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12520693.html">
+    基于 HTML5 WebGL  的发动机 3D 可视化系统
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2018.cnblogs.com/i-beta/1496396/202002/1496396-20200205161952589-658210919.png" class="desc_img">工业机械产品大多体积庞大、运输成本高，在参加行业展会或向海外客户销售时，如果没有实物展示，仅凭静态、简单的图片说明书介绍，无法让客户全面了解产品，不仅工作人员制作麻烦，客户看得也费力。如果能在 Web 上做 3D 设备展示，销售人员可以不限平台随时给客户介绍演示。还可以不受现实条件限制，演示设备拆分和组装的过程，展示产品内部结构和动态运作时的效果，让客户更直观了解产品的部件组成，更准确、全面地了解产品的功能和特点，大大降低了沟通成本。为了解决这些行业痛点，本篇文章采用 Hightopo 的 HT for Web 产品实现了一个发动机设备 3D 可视化案例。            <a href="https://www.cnblogs.com/xhload3d/p/12520693.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-19 00:01 xhload3d 阅读 (484) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12520693" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年3月15日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/15.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12500800.html">
+    基于 HTML + WebGL 结合 23D 的疫情地图实时大屏 PC 版
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2020.cnblogs.com/blog/1496396/202003/1496396-20200304190648394-1333884077.gif" class="desc_img">2019年12月以来，湖北省武汉市陆续发现了多例肺炎病例，现已证实为一种新型冠状病毒感染引起的急性呼吸道传染病并蔓延全国，肺炎疫情牵动人心，人们每天起来都要看一眼疫情进展，期望这场天灾早日结束，社会回归正常秩序。虽然已经有不少疫情地图可以让人们方便地查阅，但是图扑科技长期在 2D，3D 的积淀很方便地能创造出观感，互动性都很优秀的疫情地图来，给大家增加一个疫情动态实时查阅的方式。不久前在前端小伙伴和设计小伙伴的合作下我们推出了移动版疫情地图，而这次我们又推出了PC版的疫情地图，在电脑等大屏上更直观地展示出疫情的最新动态和历史数据。            <a href="https://www.cnblogs.com/xhload3d/p/12500800.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-15 23:54 xhload3d 阅读 (597) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12500800" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年3月8日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/08.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12421857.html">
+    用 HTML5 造个有诚意的 23D 招聘稿
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2020.cnblogs.com/blog/1496396/202003/1496396-20200305163125670-1065884322.gif" class="desc_img">
+招聘对于一个公司来说是相当重要的一个环节，首先它影响着公司未来发展的趋势，其次它为公司注入新鲜血液，使公司更具有活力。当然在工业互联网，物联网大背景下诞生的 HT 也是需要注入新鲜的血液来进一步提升公司的技术和能力。本文不会像传统的招聘文案简单的列举一系列的岗位，一系列的福利来诱惑你们的加入，而是会通过如何使用 HT 完成一个 2D 结合 3D 的招聘 DEMO 来让你们体会到我们的设计审美能力，技术能力从而来诱惑你们的加入。因为这篇文章来自一位 HT 的前端工程师，所以希望通过讲解这个 DEMO 所涉及的一些交互，动画来让你提前了解 HT 的部分基础知识，从而对 HT 有一个简单的整体认识。            <a href="https://www.cnblogs.com/xhload3d/p/12421857.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-08 23:59 xhload3d 阅读 (351) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12421857" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年3月2日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/03/02.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12374499.html">
+    基于 HTML5 Canvas 的 3D 热力云图效果
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2018.cnblogs.com/common/1496396/202001/1496396-20200103115548049-1948363290.gif" class="desc_img">数据蕴藏价值，但数据的价值需要用 IT 技术去发现、探索，可视化可以帮助人更好的去分析数据，信息的质量很大程度上依赖于其呈现方式。在数据分析上，热力图无疑是一种很好的方式。在很多行业中都有着广泛的应用。最近刚好项目中需要用到 3D 热力图的效果展示。网上搜了相关资料，发现大多数是 2D 效果或者伪 3D 的，而 3D 粒子效果对于性能上的体验不是很好，于是取巧写了个 3D 热力图的效果 。            <a href="https://www.cnblogs.com/xhload3d/p/12374499.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-03-02 00:03 xhload3d 阅读 (574) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12374499" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年2月26日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/02/26.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12365739.html">
+    基于 HTML5 和 Canvas 实现的 3D 垃圾分类系统
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142121636-79685654.gif" class="desc_img">
+垃圾分类，一般是指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。垃圾在分类储存阶段属于公众的私有品，垃圾经公众分类投放后成为公众所在小区或社区的区域性准公共资源，垃圾分类搬运到垃圾集中点或转运站后成为没有排除性的公共资源。从国内外各城市对生活垃圾分类的方法来看，大致都是根据垃圾的成分、产生量，结合本地垃圾的资源利用和处理方式来进行分类的。到2019年6月25日，生活垃圾分类制度将入法。一套应用于工业物联网的智能一体化的垃圾分类机械臂将随之而来，由此，我应用 HT for Web 的图型化编辑工具打造了一款形象生动的例子：Garbage classification，也借此机会与大家一起分享和学习。            <a href="https://www.cnblogs.com/xhload3d/p/12365739.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-02-26 11:05 xhload3d 阅读 (115) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12365739" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年2月24日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/02/24.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12355678.html">
+    数百个 HT 工业互联网 2D 3D 可视化应用案例分享 - 2019 篇
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="http://www.hightopo.com/blog/wp-content/uploads/2020/02/Screen-Shot-2020-02-08-at-4.33.31-PM.jpg" class="desc_img">继《分享数百个 HT 工业互联网 2D 3D 可视化应用案例》2018 篇，图扑软件定义 2018 为国内工业互联网可视化的元年后，2019 年里我们与各行业客户进行了更深度合作，拓展了 HT for  Web 在更多新领域的应用，图扑软件作为在工业可视化领域的一线重度参与者，我            <a href="https://www.cnblogs.com/xhload3d/p/12355678.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-02-24 09:47 xhload3d 阅读 (122) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12355678" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年2月21日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/02/21.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12340372.html">
+    使用 H5 和 webGL 的智慧城市 3D 监控
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216104216733-519120101.gif" class="desc_img">要提升基础设施互联互通水平，打造数字长三角，协同建设新一代信息基础设施，共同推动重点领域智慧应用。大力发展基于物联网、大数据、人工智能的专业化服务，提升各领域融合发展、信息化协同和精细化管理水平。围绕城市公共管理、公共服务、公共安全等领域，支持有条件的城市建设基于人工智能和 5G 物联的城市大脑集群。
+城市治理和管理不仅是国家治理体系的重要组成部分，同时也是全球互联网治理体系的重要载体和构建网络空间命运共同体的重要基础。上个月我们发布了一篇文章《基于 HTML5 WebGL 构建智能城市 3D 场景》，大体介绍了如何使用 ht.js 快速 3D  建模，展示了良好的可视化效果，今天继续探讨智慧城市的应用。            <a href="https://www.cnblogs.com/xhload3d/p/12340372.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-02-21 10:10 xhload3d 阅读 (126) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12340372" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+		
+<p class="date">
+	2020年2月19日		  
+	<a href="https://www.cnblogs.com/xhload3d/archive/2020/02/19.html"></a>
+</p>
+
+
+		<div class="post">
+			<div class="postTitle">
+				
+
+<a class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12330400.html">
+    基于 H5和 3D WebVR 的可视化虚拟现实培训系统
+</a>
+
+			</div>
+			
+			<div class="postText">
+				
+
+    <div class="c_b_p_desc">
+摘要：<img src="https://img2018.cnblogs.com/blog/591709/202001/591709-20200105142740798-574522666.gif" class="desc_img">2019 年 VR, AR, XR, 5G, 工业互联网等名词频繁出现在我们的视野中，信息的分享与虚实的结合已经成为大势所趋，5G 是新一代信息通信技术升级的重要方向，工控业等行业数字化转型的重要驱动力。“5G + VR + 工业互联网”必将成为新的一年不变的话题，如何将当前工业中遇到的问题通过虚拟现实结合起来，让我们可以更近的去交流，去感受技术带给我们的变化。在今年苹果的发布会上，相信大家都知道苹果的 5G 手机没有问世，说明 5G 的应用和发展还处在快速发展的阶段，但是手机结合 AR 功能的 APP 已经早就问世，5G 的速度加上 AR, VR 的身临其境，让我们感受到的不仅仅是技术的革新，更是让我们感受到技术在不同领域的实际应用            <a href="https://www.cnblogs.com/xhload3d/p/12330400.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			
+			<div class="postFoot">
+				
+
+posted @ 2020-02-19 11:21 xhload3d 阅读 (129) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12330400" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+		<br>
+
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/xhload3d/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=24">24</a>
+    <a href="https://www.cnblogs.com/xhload3d/default.html?page=3">下一页</a>
+</div>
+</div>
+
+
+
+
+
+</div>
+<div class="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 xhload3d
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+
+
+    
+</body>
+</html>

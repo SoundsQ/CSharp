@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_暮良文王</title>
+  <subtitle type="text">不奋发，则心日颓靡； 不检束，则心日恣肆。</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=925</id>
+  <updated>2020-04-28T14:37:14Z</updated>
+  <author>
+    <name>暮良文王</name>
+    <uri>http://www.cnblogs.com/liangmingshen/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12794631.html</id>
+    <title type="text">python慎用os.getcwd() ，除非你知道【文件路径与当前工作路径的区别】 - 暮良文王</title>
+    <summary type="text">当你搜索 "获取当前文件路径" 时，有的文章会提到用os.getcwd()，但是这玩意要慎用！ 废话不多说，直接上例子： E:\program_software\Pycharm\ytb\ytb_api\api\views.py 文件内容如下： path1 = os.path.abspath(os.p</summary>
+    <published>2020-04-28T14:36:00Z</published>
+    <updated>2020-04-28T14:36:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12794631.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12794631.html" />
+    <content type="html">【摘要】当你搜索 "获取当前文件路径" 时，有的文章会提到用os.getcwd()，但是这玩意要慎用！ 废话不多说，直接上例子： E:\program_software\Pycharm\ytb\ytb_api\api\views.py 文件内容如下： path1 = os.path.abspath(os.p &lt;a href="http://www.cnblogs.com/liangmingshen/p/12794631.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12701461.html</id>
+    <title type="text">win下youtube-dl 【ERROR: requested format not available】选下载视频质量的坑--【值得一看】 - 暮良文王</title>
+    <summary type="text">需求说明（bug出处）： 简单说：下载youtube的视频，嵌入翻译好的中文字幕。 详细说（可略过）： 阿里的海外服务器需要布一个Web Service 用以接收国内（本地服务器）的请求， 然后用youtube-dl下载需要的视频（此bug出处），上传国内阿里服务器OSS， 之后做音频抽取，语音识别</summary>
+    <published>2020-04-14T14:27:00Z</published>
+    <updated>2020-04-14T14:27:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12701461.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12701461.html" />
+    <content type="html">【摘要】需求说明（bug出处）： 简单说：下载youtube的视频，嵌入翻译好的中文字幕。 详细说（可略过）： 阿里的海外服务器需要布一个Web Service 用以接收国内（本地服务器）的请求， 然后用youtube-dl下载需要的视频（此bug出处），上传国内阿里服务器OSS， 之后做音频抽取，语音识别 &lt;a href="http://www.cnblogs.com/liangmingshen/p/12701461.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12599430.html</id>
+    <title type="text">Mysql失败，异常pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9D\\x90\\xBF;...... - 暮良文王</title>
+    <summary type="text">问题描述： 插入Mysql时失败了，python代码报如下异常： pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9D\\x90\\xBF;...... 原因分析： UTF-8编码有可能是两个、三个、四个字节。E</summary>
+    <published>2020-03-30T08:34:00Z</published>
+    <updated>2020-03-30T08:34:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12599430.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12599430.html" />
+    <content type="html">【摘要】问题描述： 插入Mysql时失败了，python代码报如下异常： pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9D\\x90\\xBF;...... 原因分析： UTF-8编码有可能是两个、三个、四个字节。E &lt;a href="http://www.cnblogs.com/liangmingshen/p/12599430.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12397057.html</id>
+    <title type="text">scrapy post payload的坑及相关知识的补充【POST传参方式的说明及scrapy和requests实现】 - 暮良文王</title>
+    <summary type="text">一、问题及解决： 在用scrapy发送post请求时，把发送方式弄错了。 本来应该是 application/x-www-form-urlencoded 弄成了application/json。 但需要改两部分：body传入字典的构造方式和header的Content-Type内容 请求截图： 代码</summary>
+    <published>2020-03-02T14:27:00Z</published>
+    <updated>2020-03-02T14:27:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12397057.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12397057.html" />
+    <content type="html">【摘要】一、问题及解决： 在用scrapy发送post请求时，把发送方式弄错了。 本来应该是 application/x-www-form-urlencoded 弄成了application/json。 但需要改两部分：body传入字典的构造方式和header的Content-Type内容 请求截图： 代码 &lt;a href="http://www.cnblogs.com/liangmingshen/p/12397057.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12375124.html</id>
+    <title type="text">mitmproxy--Cannot establish TLS with client (sni: e.crashlytics.com): TlsException("(-1, 'Unexpected EOF')",) 解决办法 - 暮良文王</title>
+    <summary type="text">按崔哥（https://cuiqingcai.com/5391.html）的安装步骤一步步下来，会报这个错误： Cannot establish TLS with client (sni: e.crashlytics.com): TlsException("(-1, 'Unexpected EOF'</summary>
+    <published>2020-02-27T15:18:00Z</published>
+    <updated>2020-02-27T15:18:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12375124.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12375124.html" />
+    <content type="html">【摘要】按崔哥（https://cuiqingcai.com/5391.html）的安装步骤一步步下来，会报这个错误： Cannot establish TLS with client (sni: e.crashlytics.com): TlsException("(-1, 'Unexpected EOF' &lt;a href="http://www.cnblogs.com/liangmingshen/p/12375124.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12368735.html</id>
+    <title type="text">【GET TIPS】Chrome所见即所得的截图技巧 - 暮良文王</title>
+    <summary type="text">精简的前言： 对，我就是想说下事情的来龙去脉。您要不想听，就把耳朵捂起来23333。 想截个新冠肺炎病毒，全国确诊人数今日增长的图，以确定非湖北地区不再明显增长。 但由于网页需要的内容分布在上下两页，需要滚轮截图，微信自带的截图没法实现。 所以找到了此法，Chrome 自带的 Capture Nod</summary>
+    <published>2020-02-26T12:04:00Z</published>
+    <updated>2020-02-26T12:04:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12368735.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12368735.html" />
+    <content type="html">【摘要】精简的前言： 对，我就是想说下事情的来龙去脉。您要不想听，就把耳朵捂起来23333。 想截个新冠肺炎病毒，全国确诊人数今日增长的图，以确定非湖北地区不再明显增长。 但由于网页需要的内容分布在上下两页，需要滚轮截图，微信自带的截图没法实现。 所以找到了此法，Chrome 自带的 Capture Nod &lt;a href="http://www.cnblogs.com/liangmingshen/p/12368735.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12313229.html</id>
+    <title type="text">【Pycharm使用者必看】自定义【光标快速定位到行尾】的按键 - 暮良文王</title>
+    <summary type="text">1.问题描述 使用Pycharm写代码时，有很多比较方便的快捷键，比如：Shift+Enter快速切换到下一行， 但每次切换到多个括号外或者想移动到行尾，就必须按 End 键或者鼠标点击， 这样操作幅度太大，影响写代码的连贯性。多方查找，实现此功能的按键只有 End ， 所以需要自定义 光标快速定位</summary>
+    <published>2020-02-15T11:54:00Z</published>
+    <updated>2020-02-15T11:54:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12313229.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12313229.html" />
+    <content type="html">【摘要】1.问题描述 使用Pycharm写代码时，有很多比较方便的快捷键，比如：Shift+Enter快速切换到下一行， 但每次切换到多个括号外或者想移动到行尾，就必须按 End 键或者鼠标点击， 这样操作幅度太大，影响写代码的连贯性。多方查找，实现此功能的按键只有 End ， 所以需要自定义 光标快速定位 &lt;a href="http://www.cnblogs.com/liangmingshen/p/12313229.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12219237.html</id>
+    <title type="text">《韭菜的自我修养》读书笔记 - 暮良文王</title>
+    <summary type="text">基础篇（点击可直接跳转） 1、韭菜的定义 2、市场定律 3、永远不要“梭哈” 4、投资者和投机者的区别——是否善于学习 5、交易市场并非“零和市场” 6、“时机”在“价值投资”中的重要性 7、风险 进阶篇（点击可直接跳转） 8、回报风险比 9、止损线 10、交易频次 11、幻觉 12、反思 13、不</summary>
+    <published>2020-01-20T12:38:00Z</published>
+    <updated>2020-01-20T12:38:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12219237.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12219237.html" />
+    <content type="html">【摘要】基础篇（点击可直接跳转） 1、韭菜的定义 2、市场定律 3、永远不要“梭哈” 4、投资者和投机者的区别——是否善于学习 5、交易市场并非“零和市场” 6、“时机”在“价值投资”中的重要性 7、风险 进阶篇（点击可直接跳转） 8、回报风险比 9、止损线 10、交易频次 11、幻觉 12、反思 13、不 &lt;a href="http://www.cnblogs.com/liangmingshen/p/12219237.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12178189.html</id>
+    <title type="text">一则新闻引发的思考（20200202千年一遇对称日 厦门可正常办结婚登记） - 暮良文王</title>
+    <summary type="text">第一直觉，有点不信，为啥是千年一遇的对称日，废话不多说，代码来验证！ month_day = {'01': 31, '02': 28, '03':31, '04':30, '05':31, '06':30, '07':31, '08':31, '09':30, '10':31, '11':30, '</summary>
+    <published>2020-01-10T13:26:00Z</published>
+    <updated>2020-01-10T13:26:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12178189.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12178189.html" />
+    <content type="html">【摘要】第一直觉，有点不信，为啥是千年一遇的对称日，废话不多说，代码来验证！ month_day = {'01': 31, '02': 28, '03':31, '04':30, '05':31, '06':30, '07':31, '08':31, '09':30, '10':31, '11':30, ' &lt;a href="http://www.cnblogs.com/liangmingshen/p/12178189.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/liangmingshen/p/12173769.html</id>
+    <title type="text">VMware上安装Kali Linux 超详细教程 - 暮良文王</title>
+    <summary type="text">一、下载镜像文件 下载好系统对应镜像文件 https://www.kali.org/downloads/ 二、创建新的虚拟机 1、创建新的虚拟机 我们使用自定义的配置方法。 2、添加镜像文件的路径 3、选择系统 4.输入虚拟机的名称和安装位置。 5、处理器配置 6、内存分配 建议不要超过提示的最大推</summary>
+    <published>2020-01-09T15:17:00Z</published>
+    <updated>2020-01-09T15:17:00Z</updated>
+    <author>
+      <name>暮良文王</name>
+      <uri>http://www.cnblogs.com/liangmingshen/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/liangmingshen/p/12173769.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/liangmingshen/p/12173769.html" />
+    <content type="html">【摘要】一、下载镜像文件 下载好系统对应镜像文件 https://www.kali.org/downloads/ 二、创建新的虚拟机 1、创建新的虚拟机 我们使用自定义的配置方法。 2、添加镜像文件的路径 3、选择系统 4.输入虚拟机的名称和安装位置。 5、处理器配置 6、内存分配 建议不要超过提示的最大推 &lt;a href="http://www.cnblogs.com/liangmingshen/p/12173769.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

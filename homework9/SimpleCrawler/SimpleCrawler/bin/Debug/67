@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 原子类型累加器 是 JDK1.8" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>原子类型累加器 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/12191042.html">原子类型累加器</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<p><strong>原子类型累加器</strong>是<strong>JDK1.8</strong>引进的并发新技术，它可以看做<strong>AtomicLong</strong>和<strong>AtomicDouble</strong>的部分加强类型。</p>
+<p><strong>原子类型累加器</strong>有如下四种：</p>
+<ul>
+<li>DoubleAccumulator</li>
+<li>DoubleAdder</li>
+<li>LongAccumulator</li>
+<li>LongAdder</li>
+</ul>
+<p>由于上面四种累加器的原理类似，下面以LongAdder为列来介绍累加器的使用。以下内存是转载内容，原文请见<a href="https://segmentfault.com/a/1190000015865714">此博客</a>。</p>
+<h2 id="longadder简介">LongAdder简介</h2>
+<p>JDK1.8时，<code>java.util.concurrent.atomic</code>包中提供了一个新的原子类：<code>LongAdder</code>。<br>
+根据Oracle官方文档的介绍，LongAdder在高并发的场景下会比它的前辈————AtomicLong 具有更好的性能，代价是消耗更多的内存空间：<br>
+<img src="https://segmentfault.com/img/bVbeJyI?w=1453&amp;h=459" alt="clipboard.png"></p>
+<p>那么，问题来了：</p>
+<blockquote>
+<p><strong>为什么要引入LongAdder？ AtomicLong在高并发的场景下有什么问题吗？ 如果低并发环境下，LongAdder和AtomicLong性能差不多，那LongAdder是否就可以替代AtomicLong了？</strong></p>
+</blockquote>
+<h3 id="为什么要引入longadder？">为什么要引入LongAdder？</h3>
+<p>我们知道，<strong>AtomicLong</strong>是利用了底层的CAS操作来提供并发性的，比如<strong>addAndGet</strong>方法：</p>
+<p><img src="https://segmentfault.com/img/bVbeJG6?w=761&amp;h=67" alt="clipboard.png"></p>
+<p>上述方法调用了<strong>Unsafe</strong>类的<strong>getAndAddLong</strong>方法，该方法是个<strong>native</strong>方法，它的逻辑是采用自旋的方式不断更新目标值，直到更新成功。</p>
+<p>在并发量较低的环境下，线程冲突的概率比较小，自旋的次数不会很多。但是，高并发环境下，N个线程同时进行自旋操作，会出现大量失败并不断自旋的情况，此时<strong>AtomicLong</strong>的自旋会成为瓶颈。</p>
+<p>这就是<strong>LongAdder</strong>引入的初衷——解决高并发环境下<strong>AtomicLong</strong>的自旋瓶颈问题。</p>
+<h3 id="longadder快在哪里？">LongAdder快在哪里？</h3>
+<p>既然说到<strong>LongAdder</strong>可以显著提升高并发环境下的性能，那么它是如何做到的？这里先简单的说下<strong>LongAdder</strong>的思路，第二部分会详述<strong>LongAdder</strong>的原理。</p>
+<p>我们知道，<strong>AtomicLong</strong>中有个内部变量<strong>value</strong>保存着实际的long值，所有的操作都是针对该变量进行。也就是说，高并发环境下，value变量其实是一个热点，也就是N个线程竞争一个热点。</p>
+<p><strong>LongAdder</strong>的基本思路就是<strong>分散热点</strong>，将value值分散到一个数组中，不同线程会命中到数组的不同槽中，各个线程只对自己槽中的那个值进行CAS操作，这样热点就被分散了，冲突的概率就小很多。如果要获取真正的long值，只要将各个槽中的变量值累加返回。</p>
+<p>这种做法有没有似曾相识的感觉？没错，<a href="https://segmentfault.com/a/1190000015865714#">ConcurrentHashMap</a>中的“分段锁”其实就是类似的思路。</p>
+<h3 id="longadder能否替代atomiclong？">LongAdder能否替代AtomicLong？</h3>
+<p>回答这个问题之前，我们先来看下<strong>LongAdder</strong>提供的API：<br>
+<img src="https://segmentfault.com/img/bVbeJHi?w=1077&amp;h=767" alt="clipboard.png"></p>
+<p>可以看到，<strong>LongAdder</strong>提供的API和<strong>AtomicLong</strong>比较接近，两者都能以原子的方式对long型变量进行增减。</p>
+<p>但是<strong>AtomicLong</strong>提供的功能其实更丰富，尤其是<strong>addAndGet</strong>、<strong>decrementAndGet</strong>、<strong>compareAndSet</strong>这些方法。</p>
+<p><strong>addAndGet</strong>、<strong>decrementAndGet</strong>除了单纯的做自增自减外，还可以立即获取增减后的值，而<strong>LongAdder</strong>则需要做同步控制才能精确获取增减后的值。如果业务需求需要精确的控制计数，做计数比较，<strong>AtomicLong</strong>也更合适。</p>
+<p>另外，从空间方面考虑，<strong>LongAdder</strong>其实是一种“空间换时间”的思想，从这一点来讲<strong>AtomicLong</strong>更适合。当然，如果你一定要跟我杠现代主机的内存对于这点消耗根本不算什么，那我也办法。</p>
+<p>总之，低并发、一般的业务场景下AtomicLong是足够了。如果并发量很多，存在大量写多读少的情况，那LongAdder可能更合适。适合的才是最好的，如果真出现了需要考虑到底用AtomicLong好还是LongAdder的业务场景，那么这样的讨论是没有意义的，因为这种情况下要么进行性能测试，以准确评估在当前业务场景下两者的性能，要么换个思路寻求其它解决方案。</p>
+<p>最后，给出国外一位博主对LongAdder和AtomicLong的性能评测，以供参考：<a href="http://blog.palominolabs.com/2014/02/10/java-8-performance-improvements-longadder-vs-atomiclong">http://blog.palominolabs.com/...</a></p>
+<h2 id="longadder原理">LongAdder原理</h2>
+<p>之前说了，<strong>AtomicLong</strong>是多个线程针对单个热点值value进行原子操作。而<strong>LongAdder</strong>是每个线程拥有自己的槽，各个线程一般只对自己槽中的那个值进行CAS操作。</p>
+<blockquote>
+<p>比如有三个ThreadA、ThreadB、ThreadC，每个线程对value增加10。</p>
+</blockquote>
+<p>对于<strong>AtomicLong</strong>，最终结果的计算始终是下面这个形式：</p>
+<pre><code>value = 10 + 10 + 10
+</code></pre>
+<p>但是对于<strong>LongAdder</strong>来说，内部有一个<code>base</code>变量，一个<code>Cell[]</code>数组。<br>
+<code>base</code>变量：非竞态条件下，直接累加到该变量上<br>
+<code>Cell[]</code>数组：竞态条件下，累加个各个线程自己的槽<code>Cell[i]</code>中<br>
+最终结果的计算是下面这个形式：</p>
+<h3 id="longadder的内部结构">LongAdder的内部结构</h3>
+<p><strong>LongAdder</strong>只有一个空构造器，其本身也没有什么特殊的地方，所有复杂的逻辑都在它的父类<strong>Striped64</strong>中。<br>
+<img src="https://segmentfault.com/img/bVbeOyb?w=747&amp;h=91" alt="clipboard.png"></p>
+<p>来看下<strong>Striped64</strong>的内部结构，这个类实现一些核心操作，处理64位数据。<br>
+<strong>Striped64</strong>只有一个空构造器，初始化时，通过Unsafe获取到类字段的偏移量，以便后续CAS操作：<br>
+<img src="https://segmentfault.com/img/bVbeOyk?w=710&amp;h=580" alt="clipboard.png"></p>
+<p>上面有个比较特殊的字段是<code>threadLocalRandomProbe</code>，可以把它看成是线程的hash值。这个后面我们会讲到。</p>
+<p>定义了一个内部Cell类，这就是我们之前所说的槽，每个Cell对象存有一个value值，可以通过<strong>Unsafe</strong>来CAS操作它的值：<br>
+<img src="https://segmentfault.com/img/bVbeOyt?w=755&amp;h=559" alt="clipboard.png"></p>
+<p>其它的字段：<br>
+可以看到<strong>Cell[]</strong>就是之前提到的槽数组，<strong>base</strong>就是非并发条件下的基数累计值。<br>
+<img src="https://segmentfault.com/img/bVbeOyA?w=1124&amp;h=479" alt="clipboard.png"></p>
+<h3 id="longadder的核心方法">LongAdder的核心方法</h3>
+<p>还是通过例子来看：<br>
+假设现在有一个<strong>LongAdder</strong>对象la，四个线程A、B、C、D同时对la进行累加操作。</p>
+<pre><code>LongAdder la = new LongAdder();
+la.add(10);
+</code></pre>
+<p>①<strong>ThreadA调用add方法（假设此时没有并发）：</strong><br>
+<img src="https://segmentfault.com/img/bVbeOyG?w=660&amp;h=222" alt="clipboard.png"></p>
+<p>初始时Cell[]为null，base为0。所以ThreadA会调用<strong>casBase</strong>方法（定义在<strong>Striped64</strong>中），因为没有并发，CAS操作成功将base变为10：<br>
+<img src="https://segmentfault.com/img/bVbeOyL?w=689&amp;h=140" alt="clipboard.png"></p>
+<p>可以看到，如果线程A、B、C、D线性执行，那<strong>casBase</strong>永远不会失败，也就永远不会进入到<strong>base</strong>方法的if块中，所有的值都会累积到<strong>base</strong>中。<br>
+那么，如果任意线程有并发冲突，导致<strong>caseBase</strong>失败呢？</p>
+<p>失败就会进入if方法体：<br>
+<img src="https://segmentfault.com/img/bVbeOyS?w=549&amp;h=110" alt="clipboard.png"></p>
+<p>这个方法体会先再次判断<strong>Cell[]</strong>槽数组有没初始化过，如果初始化过了，以后所有的CAS操作都只针对槽中的Cell；否则，进入<strong>longAccumulate</strong>方法。</p>
+<p>整个<strong>add</strong>方法的逻辑如下图：<br>
+<img src="https://segmentfault.com/img/bVbeOyW?w=663&amp;h=748" alt="clipboard.png"></p>
+<blockquote>
+<p>可以看到，只有从未出现过并发冲突的时候，base基数才会使用到，一旦出现了并发冲突，之后所有的操作都只针对<code>Cell[]</code>数组中的单元Cell。<br>
+如果<code>Cell[]</code>数组未初始化，会调用父类的<code>longAccumelate</code>去初始化<code>Cell[]</code>，如果<code>Cell[]</code>已经初始化但是冲突发生在<code>Cell</code>单元内，则也调用父类的<code>longAccumelate</code>，此时可能就需要对<code>Cell[]</code>扩容了。</p>
+</blockquote>
+<p><strong>这也是LongAdder设计的精妙之处：尽量减少热点冲突，不到最后万不得已，尽量将CAS操作延迟。</strong></p>
+<h3 id="striped64的核心方法">Striped64的核心方法</h3>
+<p>我们来看下<strong>Striped64</strong>的核心方法<strong>longAccumulate</strong>到底做了什么：<br>
+<img src="https://segmentfault.com/img/bVbeOzv?w=966&amp;h=627" alt="clipboard.png"></p>
+<p>上述代码首先给当前线程分配一个hash值，然后进入一个自旋，这个自旋分为三个分支：</p>
+<ul>
+<li><strong>CASE1：Cell[]数组已经初始化</strong></li>
+<li><strong>CASE2：Cell[]数组未初始化</strong></li>
+<li><strong>CASE3：Cell[]数组正在初始化中</strong></li>
+</ul>
+<h3 id="case2：cell数组未初始化">CASE2：Cell[]数组未初始化</h3>
+<p>我们之前讨论了，初始时<strong>Cell[]</strong>数组还没有初始化，所以会进入分支②：<br>
+<img src="https://segmentfault.com/img/bVbeOzJ?w=718&amp;h=344" alt="clipboard.png"></p>
+<p>首先会将<strong>cellsBusy</strong>置为<strong>1-加锁状态</strong><br>
+<img src="https://segmentfault.com/img/bVbeOzL?w=704&amp;h=140" alt="clipboard.png"></p>
+<p>然后，初始化<strong>Cell[]</strong>数组（初始大小为2），根据当前线程的hash值计算映射的索引，并创建对应的<strong>Cell</strong>对象，<strong>Cell</strong>单元中的初始值x就是本次要累加的值。</p>
+<h3 id="case3：cell数组正在初始化中">CASE3：Cell[]数组正在初始化中</h3>
+<p>如果在初始化过程中，另一个线程ThreadB也进入了<strong>longAccumulate</strong>方法，就会进入分支③：<br>
+<img src="https://segmentfault.com/img/bVbeOzP?w=819&amp;h=93" alt="clipboard.png"></p>
+<p>可以看到，分支③直接操作<strong>base</strong>基数，将值累加到<strong>base</strong>上。</p>
+<h3 id="case1：cell数组已经初始化">CASE1：Cell[]数组已经初始化</h3>
+<p>如果初始化完成后，其它线程也进入了<strong>longAccumulate</strong>方法，就会进入分支①：<br>
+<img src="https://segmentfault.com/img/bVbeOzY?w=1061&amp;h=1027" alt="clipboard.png"></p>
+<p>整个<strong>longAccumulate</strong>的流程图如下：<br>
+<img src="https://segmentfault.com/img/bVbeOz3?w=1235&amp;h=859" alt="clipboard.png"></p>
+<h3 id="longadder的sum方法">LongAdder的sum方法</h3>
+<p>最后，我们来看下<strong>LongAdder</strong>的<strong>sum</strong>方法：<br>
+<img src="https://segmentfault.com/img/bVbeOz4?w=751&amp;h=480" alt="clipboard.png"></p>
+<p><strong>sum</strong>求和的公式就是我们开头说的：</p>
+<p>需要注意的是，这个方法只能得到某个时刻的近似值，这也就是<strong>LongAdder</strong>并不能完全替代<strong>LongAtomic</strong>的原因之一。</p>
+<blockquote>
+<p>PS: 由于计算总和时没有对Cell数组进行加锁，所以在累加过程中可能有其他线程对Cell中的值进行了修改，也有可能对数组进行了扩容，所以sum返回的值并不是非常精确的，其返回值并不是一个调用sum方法时的原子快照值。</p>
+</blockquote>
+<h2 id="longadder的其它兄弟">LongAdder的其它兄弟</h2>
+<p>JDK1.8时，<code>java.util.concurrent.atomic</code>包中，除了新引入<strong>LongAdder</strong>外，还有引入了它的三个兄弟类：<strong>LongAccumulator</strong>、<strong>DoubleAdder</strong>、<strong>DoubleAccumulator</strong></p>
+<p><img src="https://segmentfault.com/img/bVbeOAk?w=987&amp;h=197" alt="clipboard.png"></p>
+<h3 id="longaccumulator">LongAccumulator</h3>
+<p><strong>LongAccumulator</strong>是<strong>LongAdder</strong>的增强版。<strong>LongAdder</strong>只能针对数值的进行加减运算，而<strong>LongAccumulator</strong>提供了自定义的函数操作。其构造函数如下：<br>
+<img src="https://segmentfault.com/img/bVbeOAt?w=696&amp;h=113" alt="clipboard.png"></p>
+<p>通过<strong>LongBinaryOperator</strong>，可以自定义对入参的任意操作，并返回结果（<strong>LongBinaryOperator</strong>接收2个long作为参数，并返回1个long）</p>
+<p><strong>LongAccumulator</strong>内部原理和LongAdder几乎完全一样，都是利用了父类<strong>Striped64</strong>的<strong>longAccumulate</strong>方法。这里就不再赘述了，读者可以自己阅读源码。</p>
+<h3 id="doubleadder和doubleaccumulator">DoubleAdder和DoubleAccumulator</h3>
+<p>从名字也可以看出，<strong>DoubleAdder</strong>和<strong>DoubleAccumulator</strong>用于操作double原始类型。</p>
+<p>与<strong>LongAdder</strong>的唯一区别就是，其内部会通过一些方法，将原始的double类型，转换为long类型，其余和<strong>LongAdder</strong>完全一样：<br>
+<img src="https://segmentfault.com/img/bVbeOAB?w=861&amp;h=314" alt="clipboard.png"></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-14 11:20</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12191042" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12191042);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 12191042, cb_entryCreatedDate = '2020-01-14 11:20', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

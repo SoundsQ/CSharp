@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="对象的诞生 “你醒啦！”，迷迷糊糊中听到一个声音，我睁开了眼睛，发现一个小伙伴正看着我。 “这里是哪里，你是谁啊？” “这里是堆区，我是一个Ajax对象，叫我小A吧” 我慢慢坐了起来，举目四望，这里有" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>一个故事看懂垃圾回收 - 轩辕之风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanyuan/custom.css?v=1KFqgc8N4u9cFrFdaEZzuOblzkw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanyuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanyuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanyuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 193695;
+        var currentBlogApp = 'xuanyuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanyuan/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanyuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BE%95%E4%B9%8B%E9%A3%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanyuan/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+42&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+220</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12419730.html">一个故事看懂垃圾回收</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div id="img-content" class="rich_media_wrp">
+<div id="js_content" class="rich_media_content ">
+<p data-mpa-powered-by="yiban.io"><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131619871-1187498753.png" alt="" width="156" height="156"></p>
+<p data-mpa-powered-by="yiban.io">&nbsp;</p>
+<h2><span style="color: #ff6600;">对象的诞生</span></h2>
+<p>&ldquo;你醒啦！&rdquo;，迷迷糊糊中听到一个声音，我睁开了眼睛，发现一个小伙伴正看着我。</p>
+&ldquo;这里是哪里，你是谁啊？&rdquo;</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;这里是堆区，我是一个Ajax对象，叫我小A吧&rdquo;</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">我慢慢坐了起来，举目四望，这里有好多形形色色的对象居住在这里，远处还有好多的线程在各自忙碌着，好一副热闹的景象！</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131655421-198358401.png" alt="" width="273" height="262"><br /><br />&ldquo;你好，我才刚醒，我还不知道我是什么对象呢&rdquo;</div>
+<div class="rich_media_content ">&ldquo;这个简单，让我看看哈～～哦，原来你是一个APIController对象啊&rdquo;，小A摸了摸我的头。</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;你怎么知道的？&rdquo;<br />&ldquo;你的头上这里有个64bit的Klass指针，喏，顺着这个方向看过去，那里记录了你所属的类信息，你看，那里写着APIController呢&ldquo;</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131726347-460969423.png" alt=""></div>
+<div class="rich_media_content ">听他这么一说，我这才注意到我的头上有两个64bit的字段。</div>
+<div class="rich_media_content "><br />&ldquo;唉，小A，旁边这个64bit的数字又是装的什么内容呢？&rdquo;</div>
+<div class="rich_media_content ">&ldquo;那个叫MarkWord，是咱们Java对象的门面，里面的信息可重要了，你可要保管好了，这里面有。。。&rdquo;
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;">Minor GC</span></h2>
+
+
+
+突然，不知从哪里传来一串警报声，随后听到广播：&ldquo;各线程注意，请进入安全点等待，各分区注意，启动一次Minor GC&rdquo;</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131755500-231249970.png" alt="" width="174" height="120"></div>
+<div class="rich_media_content "><img class="rich_pages img_loading" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="" data-ratio="0.6904315196998124" data-s="300,640" data-src="https://mmbiz.qpic.cn/mmbiz_png/WGRZGqlEGL5Ianuh6c4KE8pOOjgNe9iaEtaO7Y50Aj9Rp9PogTCCzeoibViceFNjzgZtdStMXKuao4HY4Zgq47fdA/640?wx_fmt=png" data-type="png" data-w="533"><br />
+听到广播的我莫名的紧张起来。<br />不知怎么回事，远处忙碌的线程们都仿佛被施了定身法一般，都停下了手头的活。只有少数几个还在活动，这几个线程大叔看上去跟他们有些不一样，其中有几个朝我们这边走了过来。</div>
+<div class="rich_media_content "><br />&ldquo;这是要干什么啊？&rdquo;我向小A打听情况。</div>
+<div class="rich_media_content ">&ldquo;我也不知道，我也比你先出生没多久，这情况我也是第一次见到&rdquo;，小A好像也有一点慌张。</div>
+<div class="rich_media_content "><br />没过多久，来了一个凶巴巴的管理员线程，拿着喇叭吼着：&ldquo;<strong>Eden</strong>区的对象们听着，念到名字的站起来&rdquo;说完，便开始一个个点名，心里一阵忐忑，怕被叫到，又怕不被叫到。
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131836266-2145151692.png" alt=""></p>
+
+
+
+念了很久，终于听到了小A和我的名字，我俩战战兢兢的站了起来。<br />没多久就念完了，我一瞅，站起来的是少数啊，心里有点不好的预感。</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;念到名字的跟我来，其他的交给我的助手处理&rdquo;，说完大家跟着他开始移动。</div>
+<div class="rich_media_content "><br />在走的路上，碰上了另外一支队伍，和我们汇合了。</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131849631-300639501.png" alt="" width="160" height="179"></div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;唉，兄弟，怎么称呼，你们哪个单位的？&rdquo;小A热情的上去和一个对象攀谈了起来。</div>
+<div class="rich_media_content ">&ldquo;叫我小B吧，我们这波是<strong>Survivor From</strong>区的，你们<strong>Eden</strong>区来的吧，我半小时前还在你们那儿待过呢&rdquo;，这个自称是小B的也很随和。</div>
+<div class="rich_media_content "><br />&ldquo;小B哥您好，咱们这是要去哪里啊？&rdquo;我也上前搭了句话。</div>
+<div class="rich_media_content ">&ldquo;前面是<strong>Survivor To</strong>区&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;咱们是怎么被挑出来的？&rdquo;</div>
+<div class="rich_media_content ">&ldquo;这里的管理员会通过一种叫<strong>GC Roots</strong>的对象，顺藤摸瓜，找出所有还有引用关系的对象，咱们就是幸存者，说明咱们还有价值&rdquo;
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131924449-1498861257.png" alt=""></p>
+
+
+
+&ldquo;那留下的对象怎么办？&rdquo;</div>
+<div class="rich_media_content ">&ldquo;他们的命运多半悬了，因为没有别的对象引用他们了，需要把他们清理掉，腾出空间来&rdquo;</div>
+<div class="rich_media_content "><br />我似懂非懂，一边走一边担心着，很快我们就到了传说中的<strong>Survivor To</strong>区，管理员安排我们都坐下，&ldquo;这里好小啊&rdquo;</div>
+<div class="rich_media_content ">&ldquo;那可不，比起你原来的<strong>Eden</strong>区，这里只有八分之一大小&rdquo;，我一回头，刚才路上碰到的小B居然就在我和小A的旁边，巧了不是。</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;唉，小B哥，咱们这么折腾一圈是在做什么啊？&rdquo;<img class="rich_pages img_loading" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="" data-ratio="1.0511627906976744" data-s="300,640" data-src="https://mmbiz.qpic.cn/mmbiz_png/WGRZGqlEGL5Ianuh6c4KE8pOOjgNe9iaEZkDXsyhms9S4fqpXV9bXMTcfcvTJ2Uk3bxjDT9ytIYiatZYRSL32w3Q/640?wx_fmt=png" data-type="png" data-w="860"></div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132014314-681789061.png" alt="" width="189" height="199"><br />
+&ldquo;这叫做垃圾回收GC，你们开始待那地方叫<strong>Eden</strong>区，对象出生的地方都在那里。咱们所在的地方是一个叫<strong>Java Virtual Machine</strong>的世界，程序员只管创建对象，不管释放，这对象越来越多，Eden区放不下了，自然就要腾出空间来了。&rdquo;</div>
+<div class="rich_media_content "><br />我和小A都点了点头，心里庆幸躲过一劫，抬头望去，不知什么时候，那些定住的线程们又开始忙活起来了。</div>
+<div class="rich_media_content "><br />&ldquo;还没恭喜你们呢，长大一岁了&rdquo;，小B拍了拍我俩的肩膀，我俩面面相觑，满脸问号。</div>
+<div class="rich_media_content ">&ldquo;这是从何说起呢？&rdquo;，小A先开口了。</div>
+<div class="rich_media_content "><br />&ldquo;你们头上的MarkWord第3-6位记录的就是你们的年龄，经过一次GC就长大一岁了！&rdquo;我俩互相看了看，又看了看小B的GC年龄位置，居然已经15岁了。
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132031351-251642446.png" alt=""></p>
+
+
+
+&ldquo;小B哥，难怪你见多识广，都一把年纪了呀。咦，这表示GC年纪的只有4位，最大只能表示到15，等会儿要是再来一次GC，这不要装不下了吗？&rdquo;，看着小B的脑袋，我陷入了思考。</div>
+<div class="rich_media_content ">&ldquo;再来一次GC我要是还能幸存，我就要进入老年代区域了，就不能陪你们玩儿了&rdquo;，小B看着我们眨了眨眼睛。</div>
+<div class="rich_media_content "><br />&ldquo;老年代，那是什么地方，我们不能去吗？&rdquo;</div>
+<div class="rich_media_content ">&ldquo;都说了是老年代了，是我这种老年对象去的地方，你们新来的还要在<strong>Survivor To</strong>区和<strong>Survivor From</strong>区兜兜转转好些回合呢，等你们到我这把年纪就能过去了&rdquo;
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132053051-824246893.png" alt=""></p>
+
+
+
+&ldquo;啊，为什么这么麻烦，设置这么多区都是干嘛的啊？&rdquo;小A急着问。</div>
+<div class="rich_media_content ">小B把手搭在小A的肩说到：&ldquo;这里的管理员用的是标记-复制算法来清理空间，所以需要在<strong>Eden</strong>区之外再设一个地方接收复制活下来的对象。&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;那加一个<strong>Survivor</strong>区就够了啊，干嘛弄两个<strong>Survivor</strong>区？&rdquo;我也抛了一个问题。</div>
+<div class="rich_media_content ">小B把另一只手搭在了我的肩上，&ldquo;这是为了让存活的对象能够在这边反复流转，不要着急去老年代区域&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;那为什么<strong>Survivor</strong>比<strong>Eden</strong>小那么多？&rdquo;，我继续问到</div>
+<div class="rich_media_content ">&ldquo;根据他们统计发现，98%的对象都活不过一轮GC，留下来的都是少数。而且两个<strong>Survivor</strong>区有一个要空着，如果太大就太浪费了。&rdquo;</div>
+<div class="rich_media_content "><br />听着小B的话我们俩都陷入了沉思。<img class="img_loading" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="" data-croporisrc="http://mmbiz.qpic.cn/mmbiz_jpg/WGRZGqlEGL6McgUjBZ0NsibdzypL2V71oSvKAEKexX7X6y2yNL2SBicZSMwCyDzemqxViaBYJVQjfHKTJk3R93FKA/0?wx_fmt=jpeg" data-cropx1="0" data-cropx2="412.7906976744186" data-cropy1="73.64341085271317" data-cropy2="500" data-ratio="1.0364077669902914" data-src="https://mmbiz.qpic.cn/mmbiz_jpg/WGRZGqlEGL6McgUjBZ0NsibdzypL2V71onicJz4nsSU84LrkjlYqQ296xpBpPlhrQM6jd1Qyevgq3zfXBZjv8ic0g/640?wx_fmt=jpeg" data-type="jpeg" data-w="412"></div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132135353-170030236.png" alt="" width="237" height="246"></div>
+<div class="rich_media_content "><br />
+没过一会儿，广播又响了起来：&ldquo;各线程注意，请进入安全点等待，各分区注意，启动一次Minor GC&rdquo;，刚刚平静的心又一次悬了起来。</div>
+<div class="rich_media_content ">管理员又开始点名，这一次，我和小B都被点到了，而没有听到小A的名字。</div>
+<div class="rich_media_content "><br />我们跟小A告别了，离开了<strong>Survivor To</strong>区，走到分叉路口，小B也跟我道别：&ldquo;再见了朋友，如果有机会，老年代等你来再聚&rdquo;</div>
+<div class="rich_media_content "><br />接下来就只剩我一个对象了，跟随陌生的对象队伍来到了<strong>Survivor From</strong>区，这里跟刚才的To区规模相当，只是队伍比起之前那次又小了很多。<br />来到自己的位置坐好，看了看头上的GC年龄位，我2岁了。
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;">Finalizer对象</span></h2>
+
+
+
+没有了熟悉的朋友，独自发着呆，等待着线程们来访问我。</div>
+<div class="rich_media_content ">突然，有人拍了拍我的肩膀，我回头看去，居然是小A，他跑的气喘吁吁的。</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132218725-1746445878.png" alt="" width="194" height="194"></div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">&ldquo;你不是没有被念到名字，没有对象再引用你了吗，居然没有被清理？&rdquo;，再次看见小A，我有点难以置信。</div>
+<div class="rich_media_content ">&ldquo;刚才真的好险，我都吓死了，没想到事情出现了转机！&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;发生了什么，快告诉我！&rdquo;，我迫不及待的想知道这一切究竟是怎么回事。</div>
+<div class="rich_media_content ">小A喘了几口气继续说到：&ldquo;就在你们走后，管理员又拿出了另外一份名单，我的名字居然在上面，我一打听才知道原来检查到有一个<strong>Finalizer</strong>对象还在引用我~&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;奇怪了，不是说没有对象吗，怎么又冒出了一个<strong>Finalizer</strong>对象？这是什么？&rdquo;</div>
+<div class="rich_media_content ">&ldquo;<strong>后来我见到了那个Finalizer对象，就在开始我们没多远的位置，听他说是因为我所属的类有覆盖finalize方法，所以在我出生的时候，他也一同诞生，并且一直持有我的引用</strong>&rdquo;</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132252245-614371914.png" alt=""></div>
+<div class="rich_media_content ">&ldquo;那后来呢？&rdquo;，我继续追问。&ldquo;后来啊，他被管理员放进了一个ReferenceQueue的队列去了，他们把那地方叫F-Queue监狱。等待一个名字也叫Finalizer的线程大叔去处理，通过Finalizer对象来调用我的finalize方法，之后就把我们之间的联系切断了&rdquo;<br />&ldquo;他要倒霉了！不过好在还是救了你一命&rdquo;</div>
+<div class="rich_media_content ">&ldquo;躲得了初一，躲不过十五，现在连Finalizer对象也没引用我了，下一次GC我铁定要完蛋的&rdquo;，小A说完又低下了头。</div>
+<div class="rich_media_content ">&ldquo;别想那么多，做对象最重要的就是开心了，说不定下一次我陪你一起完蛋呢&rdquo;</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132319011-1684719737.png" alt="" width="266" height="184"></div>
+<div class="rich_media_content ">我俩刚刚说完，熟悉的广播又想起了：&ldquo;各线程注意，请进入安全点等待，各分区注意，启动一次Minor GC&rdquo;</div>
+<div class="rich_media_content ">很快，管理员就念到了我的名字，看来我还能撑下去。快到结束的时候，管理员居然神奇般的念到了小A的名字。</div>
+<div class="rich_media_content "><br />&ldquo;小A，你听到了吗，居然还有对象在引用你！&rdquo;我高兴的对小A说到，小A也使劲点点头。</div>
+<div class="rich_media_content ">&ldquo;我知道了，一定是Finalizer线程大哥在执行我的finalize方法的时候，又把我和谁建立了联系，对，一定是这样！&rdquo;</div>
+<div class="rich_media_content "><br />我们再一次从To区来到了From区，这一次又少了很多旧面孔，不过从Eden区来了不少新面孔。</div>
+<div class="rich_media_content "><br />往后的一段时间里，我们在这兜兜转转了好多轮，终于看到头上的年龄标记慢慢变成了15岁。
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;">Full GC</span></h2>
+
+
+
+没过多久，广播再次响起，我和小A幸运的再次被点到名字，随后，管理员检查了我和小A，发现我俩超龄了，直接给我们赶到了一条新的路上，我知道前面就是传说中的老年代了。<br />来到这个陌生的地方，放眼望去，这里可比我待过的Eden区、From区、To区加起来还要大，里面有好多的对象，密密麻麻的，不过看上去一个个都不是省油的灯，毕竟能来到这里的对象，比起Eden区的那些萌新都是些老油条了。
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132422112-1067620233.png" alt="" width="410" height="253"></p>
+
+
+
+我俩找到自己的位置坐下开始闲聊，这时，从不远处走过来一个身影，走近一看正是之前的小B。</div>
+<div class="rich_media_content ">&ldquo;唉，这不是小A吗，记得你不是被清理了吗，怎么来这儿了？&rdquo;，对于小A的出现，小B哥有些惊讶。</div>
+<div class="rich_media_content "><br />随后小A也向小B聊起了之前的那段惊险经历~</div>
+<div class="rich_media_content ">正在闲聊的时候，管理员突然进来圈了一大片空闲的位置，创建了一个巨大的对象！众对象都惊呆了！</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content "><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305132449771-1021685206.png" alt="" width="238" height="263">
+</div>
+<div class="rich_media_content ">&ldquo;小B哥，这哥们什么来路，空降啊，直接到老年代！&rdquo;我好奇的问到。</div>
+<div class="rich_media_content ">&ldquo;没办法，谁叫人家体格大，Eden区要么装不下，要么嫌给他复制过去复制过来太费劲，所以直接给安排到这里了，不像我们要一点点熬过来。&rdquo;</div>
+<div class="rich_media_content "><br />&ldquo;各线程注意，请进入安全点等待，各分区注意，启动一次Full GC&ldquo;，熟悉的广播又一次响起，只不过这一次听到的是Full GC。</div>
+<div class="rich_media_content ">&ldquo;看来内存吃紧了啊！&rdquo;小B叹了口气。</div>
+<div class="rich_media_content "><br />管理员又开始点名了，这一次，幸运不再眷顾小A。
+<p>&nbsp;</p>
+
+
+
+未完待续～～<br />
+<p>&nbsp;</p>
+
+
+</div>
+<blockquote>
+<div class="rich_media_content ">彩蛋：</div>
+<div class="rich_media_content ">&nbsp;</div>
+<div class="rich_media_content ">一个线程小姐姐迎面向我走了过来。</div>
+<div class="rich_media_content ">&ldquo;Hi，小朋友你好，我是3002号线程，现在我要来锁定你，别动哦，让我检查下你的MarkWord&rdquo;&ldquo;lock位是01，Good！让我再看看偏向锁标记位，呀！是个1，糟糕&rdquo;，小姐姐皱起了眉头。<br />欲知后事如何，请关注后续精彩......</div>
+
+
+</blockquote>
+<div class="rich_media_content "><em><em><br /></em></em>
+<p>往期精彩回顾</p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484121&amp;idx=1&amp;sn=144ea100a7f89039d029d57b5d6aad3e&amp;chksm=9ac40603adb38f152e4b27c4d64990c2fba873519fb1194b23769390f85742fc5227a334ee4a&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险3：权限管理</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484083&amp;idx=1&amp;sn=f4a15e32006eeeffc3fdd228317f9d24&amp;chksm=9ac40669adb38f7fb5688b804208c88db8032ebfba68e063fac940d71cd13b00b17616566773&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">谁动了你的HTTPS流量？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484047&amp;idx=1&amp;sn=4e5b0316f3b5debe746cdc1d11f3b88f&amp;chksm=9ac40655adb38f438331a9f8ed67ffee4b969ac4e18b47daffd40c9d4f4c4c930a3be5469016&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">路由器里的广告秘密</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484010&amp;idx=1&amp;sn=d35f799113977034c193a16196ee67bf&amp;chksm=9ac406b0adb38fa69d1962063d1f346fe090c12f90b68a9f2c88e05cd3e00537fa0782b202e0&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险2：中断与异常</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483942&amp;idx=1&amp;sn=6c67b2d735367d6b0876756cc5e81c12&amp;chksm=9ac406fcadb38fead95887a0f0288cf83f6a5cd683d77493724f23f84cc99efba70a92972870&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">DDoS攻击：无限战争</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483900&amp;idx=1&amp;sn=244d7d2a5b2e3b6e5bae63797e66b224&amp;chksm=9ac40526adb38c3093d99e1670623a30acb251a165a6bb71b10c4cef7dfde06e9d75cfa90973&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一条SQL注入引出的惊天大案</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483893&amp;idx=1&amp;sn=8d3edb80d31e6b631f72b2b20265eb46&amp;chksm=9ac4052fadb38c39f98632aaf7ab8e4d00296a295169cc7b2641327d24abee6d4594ced3eb63&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险：系统调用</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483861&amp;idx=1&amp;sn=9404c7ab703f4c73f70e4d913a00c0e6&amp;chksm=9ac4050fadb38c19e3f1406290f44cba36092ce1f53fdfa70bdc348c7490ca005c47b083a8b8&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一个HTTP数据包的奇幻之旅</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483806&amp;idx=1&amp;sn=32adfe25c549c0c7b023429c5f2aab50&amp;chksm=9ac40544adb38c52349cc6927a28ac7b26c8434d96ee4e1117d5116deafa487c17312e8a1556&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一个DNS数据包的惊险之旅</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483806&amp;idx=1&amp;sn=32adfe25c549c0c7b023429c5f2aab50&amp;chksm=9ac40544adb38c52349cc6927a28ac7b26c8434d96ee4e1117d5116deafa487c17312e8a1556&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">我是一个流氓软件线程</a></p>
+<p><img src="https://img2020.cnblogs.com/i-beta/659280/202003/659280-20200305131456767-255127146.png" alt="" width="464" height="156"></p>
+
+
+</div>
+
+
+
+</div>
+<div id="js_toobar3" class="rich_media_tool">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-05 13:28</span>&nbsp;
+<a href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12419730" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12419730);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 193695, cb_blogApp = 'xuanyuan', cb_blogUserGuid = '8508cac9-f21a-e411-8d02-90b11c0b17d6';
+    var cb_entryId = 12419730, cb_entryCreatedDate = '2020-03-05 13:28', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 轩辕之风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

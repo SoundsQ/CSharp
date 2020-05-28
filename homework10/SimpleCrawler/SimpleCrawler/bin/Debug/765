@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="参考链接：https://www.cnblogs.com/linkstar/p/5951141.html good wbc 解释原因： 在不同地方可以看到java有两种传递方式：值传递和引用传递。其实" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>java传参问题 - 橘子果汁 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lvmengtian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lvmengtian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lvmengtian/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 429825;
+        var currentBlogApp = 'lvmengtian';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/lvmengtian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lvmengtian/">橘子果汁</a>
+</h1>
+<h2>
+专注、坚持、自律
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lvmengtian/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%A9%98%E5%AD%90%E6%9E%9C%E6%B1%81">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/lvmengtian/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+10&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+2</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/8979266.html">java传参问题</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>参考链接：<a title="https://www.cnblogs.com/linkstar/p/5951141.html" href="https://www.cnblogs.com/linkstar/p/5951141.html" target="_blank">https://www.cnblogs.com/linkstar/p/5951141.html</a></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Example {
+</span><span style="color: #008080;"> 2</span>     String testString = <span style="color: #0000ff;">new</span> String("good"); <span style="color: #008000;">//</span><span style="color: #008000;">1</span>
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">char</span>[] testCharArray = {'a','b','c'};  <span style="color: #008000;">//</span><span style="color: #008000;">2</span>
+<span style="color: #008080;"> 4</span> 
+<span style="color: #008080;"> 5</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+</span><span style="color: #008080;"> 6</span>         Example ex = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Example();
+</span><span style="color: #008080;"> 7</span>         ex.change(ex.testString,ex.testCharArray); <span style="color: #008000;">//</span><span style="color: #008000;"> 3</span>
+<span style="color: #008080;"> 8</span>         System.out.println(ex.testString);   
+<span style="color: #008080;"> 9</span>         System.out.println(ex.testCharArray);
+<span style="color: #008080;">10</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">11</span> 
+<span style="color: #008080;">12</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> change(String testString,<span style="color: #0000ff;">char</span><span style="color: #000000;">[] testCharArray){
+</span><span style="color: #008080;">13</span>         testString = "hhhhhh"; <span style="color: #008000;">//</span><span style="color: #008000;"> 4 </span>
+<span style="color: #008080;">14</span>         testCharArray[0] = 'w'; <span style="color: #008000;">//</span><span style="color: #008000;"> 5</span>
+<span style="color: #008080;">15</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">16</span> }</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fa444be4-9b6b-4098-be78-9f0d2e51d221')"><img id="code_img_closed_fa444be4-9b6b-4098-be78-9f0d2e51d221" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fa444be4-9b6b-4098-be78-9f0d2e51d221" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fa444be4-9b6b-4098-be78-9f0d2e51d221',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_fa444be4-9b6b-4098-be78-9f0d2e51d221" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">good
+wbc</span></pre>
+</div>
+<span class="cnblogs_code_collapse">查看输出结果</span></div>
+<p>&nbsp;</p>
+<p>解释原因：</p>
+<p>在不同地方可以看到java有两种传递方式：值传递和引用传递。其实引用传递也是一种值传递，只不过此时的值是一个内存地址。</p>
+<p>第一步：代码中的 1 和 2 执行完毕之后，内存分配如图所示：</p>
+<p><img src="https://img-blog.csdn.net/201804221654323" alt="" /></p>
+<p>第二步：在代码中的 3 执行的时候，这些引用会创建一个副本，这些副本的引用所指向的地址与之前一样。内存分配如图所示：</p>
+<p><img src="https://img-blog.csdn.net/20180422165738932" alt="" /></p>
+<p>&nbsp;</p>
+<p>第三步：执行代码中的 4 的时候，由于字符串的不变性，所以此时需要在需要重新建立一个内存存放字符串"hhhh"；并将testString(副本)的引用指向新的内存地址；</p>
+<p>执行代码的5的时候，因为数组改变了第0个位置，所以就是把字符a变成了字符w，不会开辟新空间；所以testCharArray的引用地址不会改变。</p>
+<p>此时的内存地址分配如下：</p>
+<p><img src="https://img-blog.csdn.net/20180422170217420" alt="" /></p>
+<p>第四步：当代码3这一行的函数执行完毕之后，此时testString(副本)和testCharArray(副本)已经不存在了；此时内存分配如下：</p>
+<p><img src="https://img-blog.csdn.net/20180422170431908" alt="" /></p>
+<p>&nbsp;</p>
+<p>所以最终输出的应该是good和wbc</p>
+<p>如果有任何异议，请指出。谢谢</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-05-02 11:06</span>&nbsp;
+<a href="https://www.cnblogs.com/lvmengtian/">橘子果汁</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8979266" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(8979266);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 429825, cb_blogApp = 'lvmengtian', cb_blogUserGuid = 'cf642f89-c0de-46f2-e0d1-08d5a91b4f51';
+    var cb_entryId = 8979266, cb_entryCreatedDate = '2018-05-02 11:06', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 橘子果汁
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+转载请注明出处
+</div>
+    </div>
+</body>
+</html>

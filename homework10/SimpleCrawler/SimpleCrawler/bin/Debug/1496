@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第5页 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=4">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+    5
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=9">9</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=6">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/12/01.html">2019年12月1日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11967014.html">
+    探究 C# 中的 char 、 string（一）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：探究 C 中的 char 、 string（一） [TOC] 1. System.Char 字符 char 是 System.Char 的别名。 System.Char 占两个字节，16个二进制位。 System.Char 用来表示、存储一个 Unicode 字符。 System.Char 的表示范            <a href="https://www.cnblogs.com/whuanle/p/11967014.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-01 18:33 痴者工良 阅读 (518) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11967014" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/11/21.html">2019年11月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11908663.html">
+    .NET Core 获取数据库上下文实例的方法和配置连接字符串
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：.NET Core 获取数据库上下文实例的方法和配置连接字符串 [TOC] 假设数据库就两个表：User、Blogs， 模型类如下 数据库上下文大致这样 ASP.NET Core 注入 ASP.NET Core 的数据库注入是最为简单方便的了，在 ConfigureServices 配置即可。 然后            <a href="https://www.cnblogs.com/whuanle/p/11908663.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-21 21:51 痴者工良 阅读 (620) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11908663" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/11/17.html">2019年11月17日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11875782.html">
+    Deepin 下 使用 Rider 开发 .NET Core
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Deepin 下 使用 Rider 开发 .NET Core [TOC] 国产的 Deepin 不错，安利一下。 Deepin 用了也有一两年，也只是玩玩，没用在开发上面。后来 Win10 不太清真了，就想着能不能到 Deepin下撸码。要搞开发，首先少不了 IDE，VS2019 用不来，Vs Co            <a href="https://www.cnblogs.com/whuanle/p/11875782.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-17 11:32 痴者工良 阅读 (1625) 评论 (8)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11875782" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/11/15.html">2019年11月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11869210.html">
+    .NET Core 对龙芯的支持情况和对 .NET Core 开发嵌入式的思考
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：.NET Core 对龙芯的支持情况和对 .NET Core 开发嵌入式的思考 [TOC] 一，遗憾的尝试 前些天看到了张队公众推送的《 &quot;Asp.Net终于可以在龙芯服务器上运行啦：Jexus成功完成对国产系列CPU的适配&quot; 》，联想到上一周与朋友在龙芯捣鼓 .NET Core，就想写一下关于 .            <a href="https://www.cnblogs.com/whuanle/p/11869210.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-15 19:45 痴者工良 阅读 (2132) 评论 (9)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11869210" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/11/06.html">2019年11月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11804460.html">
+    立 Flag
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：| 行动目标 | 立Flag时间 | 计划开始时间 | 开始时间 | 行动寄语 | 通关目标 | 打卡1 | 打卡2 | 打卡3 | 打卡4 | 打卡5 | 打卡6 | | | | | | | | | | | | | | | C 7.0 核心技术指南 | 2019 11 1 | 1号 | 1号 |             <a href="https://www.cnblogs.com/whuanle/p/11804460.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-11-06 12:35 痴者工良 阅读 (125) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11804460" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/10/26.html">2019年10月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11743406.html">
+    ASP.NET Core 3.0 一个 jwt 的轻量角色/用户、单个API控制的授权认证库
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 说明 ASP.NET Core 3.0 一个 jwt 的轻量角色/用户、单个API控制的授权认证库 最近得空，重新做一个角色授权库，而之前做了一个角色授权库，是利用微软的默认接口做的，查阅了很多文档，因为理解不够，所以最终做出了有问题。 之前的旧版本 https://github.com            <a href="https://www.cnblogs.com/whuanle/p/11743406.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-10-26 15:38 痴者工良 阅读 (2684) 评论 (9)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11743406" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/10/14.html">2019年10月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11674013.html">
+    C# Xamarin 数据绑定入门基础
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：C Xamarin 数据绑定入门基础 [TOC] 关于数据绑定 Xamarin 单向、双向绑定 Xaml绑定 C 代码绑定 在此之前，几段 伪代码 帮助像我一样菜的同学入门。。。 假如说，有两个控件，一个是滑动条(Slider)，一个是显示文本的标签(Label)。 滑动条(Slider)滑动的最小            <a href="https://www.cnblogs.com/whuanle/p/11674013.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-10-14 20:47 痴者工良 阅读 (685) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11674013" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/10/11.html">2019年10月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11656734.html">
+    C# HttpClient 请求认证、数据传输笔记
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：C HttpClient 请求认证、数据传输笔记 [TOC] 一，授权认证 客户端请求服务器时，需要通过授权认证许可，方能获取服务器资源，目前比较常见的认证方式有 Basic 、JWT、Cookie。 HttpClient 是 C 中的 HTTP/HTTPS 客户端，用于发送 HTTP 请求和接收来            <a href="https://www.cnblogs.com/whuanle/p/11656734.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-10-11 20:39 痴者工良 阅读 (2473) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11656734" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/22.html">2019年9月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11569083.html">
+    表达式树练习实践：C#值类型、引用类型、泛型、集合、调用函数
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：C 值类型、引用类型、泛型、集合、调用函数 [TOC] 一，定义变量 C 表达式树中，定义一个变量，使用 。 创建变量结点的方法有两种， 两种方式都是生成 类型 和 都具有两个重载。他们创建一个 ParameterExpression节点，该节点可用于标识表达式树中的参数或变量。             <a href="https://www.cnblogs.com/whuanle/p/11569083.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-22 20:37 痴者工良 阅读 (1046) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11569083" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/09/21.html">2019年9月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/11562372.html">
+    表达式树练习实践：入门基础
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：表达式树练习实践：入门基础 [TOC] 什么是表达式树 来自微软官方文档的定义： 表达式树以树形数据结构表示代码。 它能干什么呢？ 你可以对表达式树中的代码进行编辑和运算。 这样能够动态修改可执行代码、在不同数据库中执行 LINQ 查询以及创建动态查询。 好不好玩？ 表达式树还能用于动态语言运行时             <a href="https://www.cnblogs.com/whuanle/p/11562372.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-21 12:35 痴者工良 阅读 (934) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11562372" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=4">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+    5
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=9">9</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=6">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

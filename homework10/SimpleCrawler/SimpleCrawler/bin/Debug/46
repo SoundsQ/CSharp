@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="MySQL行锁" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MySQL锁：InnoDB行锁需要避免的坑 - JJian - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=4KE41eS1YQSSwl64fGzzTUj6ijs-YQFat4AaN-g_jxc" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=0pGk3D9Ik_jI4q1TALBT2ybOjIePHS_80_0J4DDOQiY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jian0110/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jian0110/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jian0110/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 445573;
+        var currentBlogApp = 'jian0110';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'darkgreentrip';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jian0110/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jian0110/">Jian</a>
+</h1>
+<h2>
+我是一个木得感情，木得钱，木得...头发的杀手！
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jian0110/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/JJian">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+36&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+82</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jian0110/p/12721924.html">MySQL锁：InnoDB行锁需要避免的坑</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        MySQL行锁
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<h1><span style="font-family: 宋体;">前言</span></h1>
+<blockquote>
+<p><span style="font-family: 宋体;">　　换了工作之后，接近半年没有发博客了（一直加班），emmmm.....今天好不容易有时间，记录下工作中遇到的一些问题，接下来应该重拾知识点了。因为新公司工作中MySQL库经常<strong>出现查询慢，锁等待，节点挂掉........等一系列问题</strong>。导致每个程序员头都很大，一味抱怨&ldquo;<strong>为什么我就查一条数据这么卡&rdquo;，"我TM加了索引的啊，怎么还怎么慢</strong>"...........我想默默说的是，大部分MySQL出现锁等待，<strong>查询奇慢的情况基本都是因为SQL写的不好（有坑），或者数据表设计的不完善</strong>。对，不用想！这些所有的坑很大一部分都是自己造成的。那么是什么原因造成的，大部分只是抱怨，而不去关注MySQL的一些细节问题，比如：<span style="color: #ff0000;">MySQL行锁的细节，什么情况下会使用表锁等</span>。所以今天先讨论记录下InnoDB特有的行锁的一些细节，加强认识。</span></p>
+<p><span style="font-family: 宋体;">　　<strong><span style="color: #ff0000;">InnoDB不同于MyISAM最大的两个特点就是：一是支持事务，二是支持行锁</span></strong>；毋庸置疑，因为这两个特性大部分都采用InnoDB引擎，其中的支持行锁就是InnoDB适合多并发优势所在，但是行锁的一些细节没有深入理解过的话，可能会造成一定的误解，造成&ldquo;<strong>看似命中索引，走行锁，结果却是表锁，最终导致锁等待情况</strong>&rdquo;。</span></p>
+</blockquote>
+<p><span style="font-family: 宋体;">&nbsp;</span></p>
+<hr />
+<h1><span style="font-family: 宋体;">一、<strong>InnoDB行锁的实现方式</strong></span></h1>
+<p><span style="font-family: 宋体;"><strong>　　</strong>通过给索引上的索引项加锁来实现的，也就意味着：<span style="color: #ff0000;"><strong>只有通过索引条件检索数据，</strong><strong>InnoDB</strong><strong>才使用行级锁，否则，InnoDB</strong><strong>将使用表锁</strong></span>。这一点在实际应用中特别需要注意，不然的话<span style="color: #ff0000;"><strong>可能导致大量的锁冲突，从而影响引发并发性能</strong></span>。</span></p>
+<h3><span style="font-family: 宋体;">　　实验一：对没有索引的加锁，导致表锁</span></h3>
+<p><span style="font-family: 宋体;">　　　1）准备工作：建tab_no_index表，表中无任何索引，并插入数据</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200416173743060-2101044546.png" alt="" width="539" height="412" /></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">　　　2）Session_1: 我们给id=1的行加上排它锁（for update），<span style="color: #ff0000;">由于id没有索引，实际上是表级锁</span>；</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200416173951866-1964322683.png" alt="" width="531" height="180" /></span></p>
+<p><span style="font-family: 宋体;">　　　3）Session_2：我们给id=2的行加上排它锁（for update），由于id没有索引，所以去申请表级锁，但是却出现了锁等待！原<span style="color: #ff0000;">因就是在没有索引的情况下，InnoDB只能使用表锁</span>。</span></p>
+<p><span style="font-family: 宋体;">&nbsp;　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200416174229098-636268991.png" alt="" width="404" height="93" /></span></p>
+<p><span style="font-family: 宋体;">　　　　备注：MySQL中的<span style="color: #ff0000;">for update 仅适用于InnoDB（因为是只有此引擎才有行级锁），并且必须开启事务，在begin与commit之间才生效</span>。for update是在数据库中上锁用的，可以为数据库中的行上一个排它锁。当一个事务的操作未完成时候，其他事务可以对这行读取但是不能写入或更新，只能等该事务Rollback, Commit, Lost connection&hellip;</span></p>
+<h3><span style="font-family: 宋体;">　　　<strong>实验二：<span style="color: #ff0000;">对有索引的键值加锁，会对所有涉及到的数据行加锁</span></strong></span></h3>
+<p><span style="font-family: 宋体;">　　　　1）准备工作：对id建索引如下</span></p>
+<p>&nbsp;　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417182408283-1710146200.png" alt="" width="703" height="42" /></p>
+<p><span style="font-family: 宋体;">&nbsp;　　　2）Session_1：此时id是有索引的，我们对id=1 and name=1的一行加排它锁；</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417182657389-2024003398.png" alt="" width="451" height="146" /></span></p>
+<p><span style="font-family: 宋体;">　　　　3）Session_2：访问不同于Session_1的id=1, name=5行，但是索引键值是一样的，照样等待锁，锁冲突了。</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417183019011-381020088.png" alt="" width="414" height="97" /></span></p>
+<h3><span style="font-family: 宋体;">　　　实验三：多个索引时，不同的事务可以使用不同的索引锁定不同的行，<span style="color: #ff0000;"><strong>不论什么索引，</strong><strong>InnoDB</strong></span><strong><span style="color: #ff0000;">都会使用行锁对数据加锁</span>（对有索引的行数据）</strong>。</span></h3>
+<p><span style="font-family: 宋体;">　　　　1）准备工作：对tab_no_index追加name索引：alter table tab_no_index add index name(name);</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417183138190-1566262012.png" alt="" width="587" height="59" /></span></p>
+<p><span style="font-family: 宋体;">　　　　2）Session_1：开启事务对id=1的行加排它锁，即对name=1与name=5两个数据加锁。</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417183246574-556806524.png" alt="" width="425" height="163" /></span></p>
+<p><span style="font-family: 宋体;">　　　　3）Session_2：开启事务对name=2行加锁，因为该数据没有被加锁，索引可以获得锁</span></p>
+<p><span style="font-family: 宋体;">　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417184030020-2093032627.png" alt="" width="425" height="110" /></span></p>
+<p><span style="font-family: 宋体;">　　　　4）Session_3：再对name=5的数据进行加锁，由于该数据记录已被Session_1锁定，所以等待获得锁。</span></p>
+<h3><span style="font-family: 宋体;"><strong>　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417184949076-725461827.png" alt="" width="411" height="30" /></strong></span></h3>
+<h3><span style="font-family: 宋体;"><strong>　　注意事项：<span style="color: #ff0000;">即便使用了索引，但还是要看MySQL具体对SQL的执行计划，不一定能使用到</span></strong></span></h3>
+<p><strong>　　　　</strong><span style="font-family: 宋体;">如我们对实验三对name='2'进行加锁，误以为name是int类型，本来name是有索引的，但是最后结果导致表锁：</span></p>
+<p>　　　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417183706483-2060387989.png" alt="" width="394" height="131" /></p>
+<p><span style="font-family: 宋体;">　　</span></p>
+<p><span style="font-family: 宋体;">　　<strong>具体请看MySQL的索引情况。具体可以参考之前我的一篇博文</strong></span><a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jian0110/p/9356347.html">MySQL优化（1）--------常用的优化步骤</a>、<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jian0110/p/9410981.html">MySQL优化(2)--------常用优化</a></p>
+<p>&nbsp;</p>
+<h1><span style="font-family: 宋体;"><strong>二、间隙锁（Next-Key</strong><strong>锁）</strong></span></h1>
+<p><span style="font-family: 宋体;">　　当用范围条件而不是相等条件检索数据，并请求共享或者排它锁的时候，<span style="color: #ff0000;"><strong>InnoDB</strong><strong>会给符合条件的已有数据记录的索引项加锁；对于不在范围内的但并不存在的记录，叫做&ldquo;间隙(GAP)</strong><strong>&rdquo;，InnoDB</strong><strong>也会对这个间隙加锁，这就是所谓的间隙锁</strong></span>。</span></p>
+<p><span style="font-family: 宋体;">　　如：select * from where id&gt;100 for update 对id大于100的数据对加锁，但是此时数据中id只有1,2&hellip;.100,101，不仅对存在的101的记录加锁，还会对大于101不存在的数据的间隙加锁。</span></p>
+<p><span style="font-family: 宋体;">　　&nbsp;此外，对使用相等条件请求给一个不存在的记录加锁，InnoDB也会使用间隙锁，如下：</span></p>
+<p><span style="font-family: 宋体;">　　Session_1：对不存在的id=6的记录加锁</span></p>
+<p><span style="font-family: 宋体;">　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417185104793-374940538.png" alt="" width="401" height="38" /></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">　　Session_2：插入id=6的记录，也会出现锁等待</span></p>
+<p><span style="font-family: 宋体;">　　<img src="https://img2020.cnblogs.com/blog/1352849/202004/1352849-20200417185435723-1996290207.png" alt="" width="445" height="80" /></span></p>
+<p>&nbsp;</p>
+<h1><span style="font-family: 宋体;">三、<strong>什么时候使用表锁？</strong></span></h1>
+<p><span style="font-family: 宋体;">　　对于InnoDB表，在绝大部分情况下都应该使用行锁，因为事务和行锁往往是我们之所以选择InnoDB表的理由，但在个别情况下也使用表级锁；</span></p>
+<p><span style="font-family: 宋体;">　　1）<span style="color: #ff0000;">事务需要更新大部分或全部数据，表又比较大，如果使用默认的行锁，不仅这个事务执行效率低，而且可能造成其他事务长时间等待和锁冲突；</span></span></p>
+<p><span style="font-family: 宋体;">　　2）<span style="color: #ff0000;">事务涉及多个表，比较复杂，很可能引起死锁，造成大量事务回滚。</span></span></p>
+<p><span style="font-family: 宋体;">使用表锁需要注意几点：</span></p>
+<p><span style="font-family: 宋体;">　　1）使用LOCK TABLES虽然可以给InnoDB加表级锁，表级锁不是InnoDB存储引擎层管理的，而是由其上一层MySQL Server负责的</span></p>
+<p><span style="font-family: 宋体;">　　2）在用LOCK TABLES对InnoDB表加锁时需要注意，要将Autocommit设置为0，否则MySQL不会给表加锁；事务结束前，不要用UNLOCK TABLES释放表锁，因为UNLOCK_TABLES隐含提交事务；COMMIT或ROLLBACK并不能释放用LOCK TABLES加表级锁。</span></p>
+<p><span style="font-family: 宋体;">　　　SET AUTOCOMMIT=0;</span></p>
+<p><span style="font-family: 宋体;">　　　LOCK TABLES table1 WRITE, table2 READ,...；</span></p>
+<p><span style="font-family: 宋体;">　　　[do something....]</span></p>
+<p><span style="font-family: 宋体;">　　　<span style="color: #ff0000;">COMMIT;</span></span></p>
+<p><span style="font-family: 宋体;"><span style="color: #ff0000;">　　　UNLOCK TABLES</span>;</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h1><span style="font-family: 宋体;">总结：</span></h1>
+<ul>
+<li>
+<h4><span style="font-family: 宋体;"><strong>从设计之初，<span style="color: #ff0000;">就应该建立良好的索引机制，避免对关键字段搜索时造成表锁；</span></strong></span></h4>
+</li>
+<li>
+<h4><span style="font-family: 宋体;"><strong><span style="color: #ff0000;">避免长时间事务未提交等情况，导致锁冲突，死锁等情况</span>；</strong></span></h4>
+</li>
+<li>
+<h4><span style="font-family: 宋体;"><strong>不要老是<span style="color: #ff0000;">抱怨数据库有问题，应该从自身写的SQL分析出发，学会分析<span style="color: #000000;">（数据库不行大部分是因为SQL写的有问题，没错，是自身问题）</span><span style="color: #000000;">；</span></span></strong></span></h4>
+</li>
+<li>
+<h4><span style="font-family: 宋体;"><strong>不要总是觉得这是DBA该做的事，<span style="color: #ff0000;">开发者应该学会基本的SQL常识</span>（如MySQL的最左索引，回表，索引覆盖等知识）<span style="color: #000000;">，学会基本的优化步骤。</span></strong></span></h4>
+</li>
+</ul>
+<h3><strong><span style="font-family: 宋体;">主要参考资料：《深入浅出MySQL》（有需要PDF电子书的伙伴可以评论或者私信我）</span></strong></h3>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 19:00</span>&nbsp;
+<a href="https://www.cnblogs.com/jian0110/">JJian</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12721924" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12721924);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 445573, cb_blogApp = 'jian0110', cb_blogUserGuid = '5e6d02e5-8d13-4ad6-9b8d-08d5866282ce';
+    var cb_entryId = 12721924, cb_entryCreatedDate = '2020-04-17 19:00', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 JJian
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

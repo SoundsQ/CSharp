@@ -1,0 +1,516 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第3页 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=4">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/03/15.html">2020年3月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12498128.html">
+    C# 一些类名的后缀及其意义
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：C 中有常见的以以下名称为后缀的类型，笔者总结了一下大概用途。 [TOC] Extensions 此类型用于实现拓展函数，类名后加上 。 如下面的示例实现了拓展函数，就是我们平时使用的 。 Helper 或 Helpers 指工具类一般没有特殊意义，用于表示此类型用于完成某些辅助操作，例如一些转换、            <a href="https://www.cnblogs.com/whuanle/p/12498128.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-15 16:10 痴者工良 阅读 (68) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12498128" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12497614.html">
+    ASP.NET Core 中jwt授权认证的流程原理
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 1，快速实现授权验证 什么是 JWT ？为什么要用 JWT ？JWT 的组成？ 这些百度可以直接找到，这里不再赘述。 实际上，只需要知道 JWT 认证模式是使用一段 Token 作为认证依据的手段。 我们看一下 Postman 设置 Token 的位置。 那么，如何使用 C 的 Http            <a href="https://www.cnblogs.com/whuanle/p/12497614.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-15 14:54 痴者工良 阅读 (359) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12497614" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/03/07.html">2020年3月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12435413.html">
+    .NET Core 获取主机运行资源的库
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：简介 CZGL.SystemInfo 是一个支持 Windows 和 Linux 的资源信息获取库，用于获取系统环境、机器资源信息、系统资源使用情况。 Nuget 搜索 即可安装。 类库中每一个属性和方法，我都加上了注释，调用时可以看得到。 平台通用 CZGL.SystemInfo 命名空间下，有个            <a href="https://www.cnblogs.com/whuanle/p/12435413.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-07 17:01 痴者工良 阅读 (146) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12435413" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/29.html">2020年2月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12381290.html">
+    .NET Core 获取程序运行环境信息与反射的应用
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：笔者的九篇反射系统文章已经完结，但是笔者会持续更新反射在日常撸码中的应用。 本篇内容主要是 .NET Core 获取运行环境信息、利用反射更加方便地处理数据。 本篇内容有：RuntimeInformation、Environment、反射、特性等。 本篇代码下载地址 https://gitee.co            <a href="https://www.cnblogs.com/whuanle/p/12381290.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-29 16:55 痴者工良 阅读 (373) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12381290" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/05.html">2020年2月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12263903.html">
+    【5分钟+】计算机系统结构-数据表示
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：计算机系统结构 数据表示 [TOC] 数据表示：数据表示是指能由计算机硬件直接识别和引用的数据类型。（例如定点数浮点数） 表现在什么地方：表现在它有对这种数据类型进行操作的 指令和功能部件 。 数据结构种类：串，队，列，栈，阵列，链表，树，图 什么是数据结构：它反映了应用中要用到的各种数据元素和或信            <a href="https://www.cnblogs.com/whuanle/p/12263903.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-05 15:11 痴者工良 阅读 (128) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12263903" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/04.html">2020年2月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12260471.html">
+    在 Ubuntu 上安装 K8S教程
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在 Ubuntu 上安装 K8S教程 [TOC] 1，更新系统源 如果系统本身自带得镜像地址，服务器在国外，下载速度会很慢，可以打开 替换为国内得镜像源。 2，更新软件包 将系统得软件组件更新至最新稳定版本。 3，安装 Docker 也可以参考其它过程安装 如果需要配置为开机启动，可执行以下命令 如            <a href="https://www.cnblogs.com/whuanle/p/12260471.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-04 18:28 痴者工良 阅读 (538) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12260471" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12260224.html">
+    【5分钟+】计算机系统结构：CPU性能公式
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：计算机系统结构：CPU性能公式 基础知识 CPU 时间：一个程序在 CPU 上运行的时间。(不包括I/O时间) 主频、时钟频率：CPU 内部主时钟的频率，表示1秒可以完成多少个周期。 例如，主频为 4.1GHz，表示每秒可以完成 4.1 109 个时钟周期。 时钟周期：时钟周期也称为振荡周期，定义为            <a href="https://www.cnblogs.com/whuanle/p/12260224.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-04 18:26 痴者工良 阅读 (425) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12260224" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/03.html">2020年2月3日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12256135.html">
+    计算机系统结构1-概论
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：计算机系统结构 概论 考察知识点 计算机系统的层次结构 计算机系统结构、计算机组成、计算机的实现 计算机的软硬件取舍及定量设计原理 软件、应用、器件的发展对系统结构的影响 系统结构中的并行性开发及计算机系统的分类 知识难度： 每个知识点使用 ※ 号标记掌握程度和类型。 ※：标识，能够记住知识点和概念            <a href="https://www.cnblogs.com/whuanle/p/12256135.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-03 18:20 痴者工良 阅读 (60) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12256135" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12255824.html">
+    ASP.NET Core 从入门到精通-资源收集导航
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：&quot;ASP.NET Core 从入门到精通 资源收集导航&quot; [TOC] 学习路线 来自 dotNET匠人 的(中文翻译) &quot;ASP.NET Core开发者成长路线图&quot; 原英文地址 &quot;ASP.NET Core Developer Roadmap&quot; 里面包含了 C 、Web、各类采用框架/库、微服务、容器            <a href="https://www.cnblogs.com/whuanle/p/12255824.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-03 18:18 痴者工良 阅读 (427) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12255824" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/02.html">2020年2月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12253616.html">
+    【5分钟系列】计算机系统结构的定义
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1，计算机系统的层次结构 从语言角度来看，一台计算机是由软硬件组合成的，按照功能划分，可以形成多层机器级组成的层次结构。 不同层次的语言，可以使用翻译或解释技术来实现。例如 C 语言是应用语言，在编译时会生成 IL 语言(高级语言)，属于翻译(Translation 美 /tr&#230;nzˈleɪʃn,t            <a href="https://www.cnblogs.com/whuanle/p/12253616.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-02 20:41 痴者工良 阅读 (130) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12253616" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=4">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

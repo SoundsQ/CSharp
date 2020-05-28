@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>一头小菜鸡 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/bj2008/bundle-bj2008.min.css?v=USoHH8tjeQTCnR6dTIfNTrNZrzcYJLkibibKhhTXIp8" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bj2008/bundle-bj2008-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kuangdw/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kuangdw/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kuangdw/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 599052;
+        var currentBlogApp = 'kuangdw';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BJ2008';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <!--done-->
+<div id="outer_body">
+<div align="center">
+	<div id="banner">
+		
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kuangdw/">一头小菜鸡</a>
+<br>
+	</div>
+	<div class="headerDis">
+
+</div>
+</div>
+
+
+		<div id="left_top">
+				<div id="mylinks">
+					
+<!--done-->
+
+&nbsp;&nbsp;
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kuangdw/">
+首页</a>
+&nbsp;&nbsp;
+
+
+&nbsp;&nbsp;
+
+<a id="MyLinks1_NewArticleLink" class="menu" href="https://i.cnblogs.com/EditArticles.aspx?opt=1">新文章</a>
+&nbsp;&nbsp;
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%B8%80%E5%A4%B4%E5%B0%8F%E8%8F%9C%E9%B8%A1">
+联系</a>&nbsp;&nbsp;
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+&nbsp;&nbsp;
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/kuangdw/rss/">
+订阅</a>&nbsp;
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/kuangdw/rss/">
+    <img src="/skins/bj2008/images/xml.gif" alt="订阅" />
+</a>
+
+
+				</div>
+				<div id="mystats">
+					
+						<!--done-->
+<div class="blogStats">
+随笔- 
+1&nbsp;
+文章- 
+0&nbsp;
+评论- 
+0&nbsp;
+</div>
+
+
+					
+			    </div>
+		</div>
+	</div>
+	<div id="main">
+		
+		<!-- left starts -->
+		<div id="left">
+			
+			<div id="topics">
+				
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kuangdw/archive/2020/04/28.html"><img src="/skins/bj2008/images/fire.gif" border=0 align=absmiddle></a>
+        &nbsp;
+        2020年4月28日
+    </div>
+
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/kuangdw/p/12783281.html">
+    springboot+dubbo简单分布式RPC调用demo
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：使用springboot+dubbo搭建RPC入门案例 本文背景简述 最近在学习公司的一套RPC框架，初步接触的时候感觉挺复杂的。但是知道其原理肯定是和dubbo很相似的，毕竟都是RPC框架嘛，只是各自使用的范围和使用者群体有些不同罢了。 于是就去dubbo官网熟悉了其相关文档和案例教程，然后结合网            <a href="https://www.cnblogs.com/kuangdw/p/12783281.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 22:31 一头小菜鸡 阅读 (1) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12783281" rel="nofollow">
+    编辑
+</a>
+</div>
+
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+			</div>
+			<br /><br /><br />
+		</div>
+		<!-- left ends -->
+	<!-- right starts -->
+		<div id="right">
+			<!-- 右侧工具部分 -->
+			<div id="right_content">
+				
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+				<div id="calendar">
+					<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+				</div>
+				 
+				<DIV id="leftcontentcontainer">
+						<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+				</DIV>
+				
+			 </div>
+			<!-- //右侧工具部分 -->
+		</div>
+	<!-- right ends -->
+	  
+	
+	</div>
+	<div class="clear"></div>
+	<div id="footer">
+		Copyright &copy; 2020 一头小菜鸡
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+  
+	</div>
+	</div>
+</div>
+
+
+    
+</body>
+</html>

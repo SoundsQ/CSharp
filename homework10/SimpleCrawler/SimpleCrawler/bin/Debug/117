@@ -1,0 +1,630 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="前言 前情提要： &amp;quot;Git应用详解第一讲：Git分区，配置与日志&amp;quot; 在第一讲中我们对 进行了简单的入门介绍，相信聪明的你已经了解 的基本使用了。 这一讲我们来进一步深入学习 应用，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Git应用详解第二讲：Git删除、修改、撤销操作 - AhuntSun - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/AhuntSun-blog/custom.css?v=aQxv9ugmgmxj9aI02HToOmJXaLs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/AhuntSun-blog/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/AhuntSun-blog/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/AhuntSun-blog/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 555013;
+        var currentBlogApp = 'AhuntSun-blog';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+         
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/AhuntSun-blog/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/AhuntSun-blog/">AhuntSun</a>
+</h1>
+<h2>
+Talk is cheap, Show me the code.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/AhuntSun-blog/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/AhuntSun">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/AhuntSun-blog/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+127&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+70</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/AhuntSun-blog/p/12685415.html">Git应用详解第二讲：Git删除、修改、撤销操作</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h3 id="前言">前言</h3>
+<blockquote>
+<p>前情提要：<a href="https://www.cnblogs.com/AhuntSun-blog/p/12679145.html">Git应用详解第一讲：Git分区，配置与日志</a></p>
+</blockquote>
+<p>在第一讲中我们对<code>Git</code>进行了简单的入门介绍，相信聪明的你已经了解<code>Git</code>的基本使用了。</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/1.png" alt="image-20200412134325276"></p>
+<p>这一讲我们来进一步深入学习<code>Git</code>应用，着重介绍<code>Git</code>的一些常见操作，包括：删除文件、比较文件、撤销修改、修改注释与查看帮助文档。</p>
+<h3 id="一、删除文件">一、删除文件</h3>
+<h4 id="1git-rm-file">1.<code>git rm &lt;file&gt;</code></h4>
+<p><strong>该命令用于删除版本库中的文件</strong>；删除工作区和暂存区中的文件都会报错：</p>
+<ul>
+<li>若用该指令删除<strong>工作区</strong>中的文件，会报找不到文件的错误：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/2.png" alt="image-20200405195803132"></p>
+<ul>
+<li>若用该指令删除<strong>暂存区</strong>中的文件，报如下错误：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/3.png" alt="image-20200405201638233"></p>
+<blockquote>
+<p><strong>所谓版本库中的文件指的是：</strong>已经通过<code>commit</code>指令提交的文件，而不是工作区中的文件（<strong>红色</strong>），或暂存区中的文件（<strong>绿色</strong>）。</p>
+</blockquote>
+<p><code>git rm</code>完成了两步操作：</p>
+<ul>
+<li><strong>第一步：</strong>将版本库中的文件删除；</li>
+<li><strong>第二步：</strong>将删除操作纳入暂存区（<code>stage</code>）。如下图所示，相当于执行了<code>git add test.txt</code>，随后可直接提交，完成<code>test.txt</code>的删除；</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/4.png" alt="image-20200405201927597"></p>
+<h4 id="2rm-file">2.<code>rm &lt;file&gt;</code></h4>
+<p><strong>该命令用于删除工作区和版本库中的文件，不能删除暂存区文件</strong>；</p>
+<blockquote>
+<p><strong>注意：</strong>没有添加到<code>git</code>仓库中的本地文件，都属于工作区文件。</p>
+</blockquote>
+<ul>
+<li>删除<strong>工作区</strong>中的文件时：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/5.png" alt="image-20200405222915798"></p>
+<ul>
+<li>删除<strong>版本库</strong>中的文件时：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/6.png" alt="image-20200405223040208"></p>
+<p>与<code>git rm</code><strong>不同的是</strong>，该指令不会将删除操作纳入<strong>暂存区</strong>。需要先将删除的<code>test.txt</code>纳入<strong>暂存区</strong>，再提交到<strong>版本库</strong>才能完成<code>test.txt</code>文件的删除；</p>
+<ul>
+<li>删除<strong>暂存区</strong>中文件时：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/7.png" alt="image-20200405223452369"></p>
+<p>从图中可知<code>rm</code>命令只能删除工作区中的<code>test3.txt</code>，不能删除暂存区中的<code>test3.txt</code>；：</p>
+<h3 id="二、重命名文件">二、重命名文件</h3>
+<h4 id="1git-mv-file1-file2">1.<code>git mv &lt;file1&gt; &lt;file2&gt;</code></h4>
+<p>使用<code>git</code>命令<code>git mv</code>：</p>
+<pre><code>git mv test.txt test3.txt
+</code></pre>
+<p>​	将<code>test.txt</code>重命名为<code>test3.txt</code>；<code>mv</code>命令可理解为<strong>剪切</strong>的同时进行<strong>更名</strong>；</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/8.png" alt="image-20200310092256341"></p>
+<p><code>changes to be committed</code>  表示该修改已经纳入<strong>暂存区</strong>，可以进行提交操作；</p>
+<blockquote>
+<p>一般<strong>绿色</strong>的文件（操作）表示已经提交到<strong>暂存区</strong>了，不用再进行<code>git add</code> ，可以直接进行提交（<code>git commit</code>）。</p>
+</blockquote>
+<p>从上文可知<code>git mv</code>做了两件事：</p>
+<ul>
+<li><strong>第一步：</strong>将文件<code>test.txt</code>重命名为<code>test3.txt</code>；</li>
+<li><strong>第二步：</strong>将重命名操作<code>test.txt -&gt; test3.txt</code>纳入<strong>暂存区</strong>；</li>
+</ul>
+<h4 id="2mv-file1-file2">2.<code>mv &lt;file1&gt; &lt;file2&gt;</code></h4>
+<p>使用系统命令<code>mv</code>：</p>
+<pre><code>mv test2.txt test3.txt
+</code></pre>
+<p>执行该语句后查看状态<code>git status</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/9.png" alt="image-20200310095219961"></p>
+<p>发现工作区中多出两步操作：</p>
+<ul>
+<li>
+<p>删除文件<code>test2.txt</code>；</p>
+</li>
+<li>
+<p>新建文件<code>text3.txt</code>；</p>
+</li>
+</ul>
+<p>再使用<code>git add test2.txt test3.txt</code>  将操作提交到暂存区，通过<code>git status</code>查看状态：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/10.png" alt="image-20200310095715353"></p>
+<p>此时<code>git</code>立即就能识别出来这是一个文件重命名；</p>
+<p><strong>由此说明<code>git mv</code>进行了三步操作：</strong></p>
+<ul>
+<li><strong>第一步：</strong>删除工作区中重命名前的文件<code>test2.txt</code>；</li>
+<li><strong>第二步：</strong>在工作区中创建重命名后的文件<code>test3.txt</code>；</li>
+<li><strong>第三步：</strong>将上述的两个操作提交到<strong>暂存区</strong>中；</li>
+</ul>
+<p>即<code>git mv</code> 与 <code>mv</code>的区别相当于<code>git rm</code> 与 <code>rm</code> 之间的区别。</p>
+<h3 id="三、比较文件">三、比较文件</h3>
+<h4 id="1本地文件---本地文件">1.本地文件 <code>&lt;-&gt;</code> 本地文件</h4>
+<h5 id="diff-file_a-file_b"><code>diff file_a file_b</code></h5>
+<p>这是系统提供的比较命令，用于比较本地文件或已经提交到版本库的文件。创建文件<code>a</code>和文件<code>b</code>，使用上述指令进行比较：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/11.png" alt="image-20200406231641027"></p>
+<p><strong>在 <code>diff -u a b</code>的输出信息中：</strong></p>
+<blockquote>
+<p>加上参数<code>-u</code>可以更详细地显示比较信息。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong><code>--- a</code></strong>表示<code>a</code>为原文件；</p>
+</li>
+<li>
+<p><strong><code>+++ b</code></strong>表示<code>b</code>为目标文件；</p>
+</li>
+<li>
+<p><strong><code>-1，3</code></strong>中   <strong><code>-</code></strong>   表示原文件即<code>a</code>，<strong><code>1</code></strong>  表示原文件中的第一行，<strong><code>3</code></strong>  表示到第<code>3</code>行。合起来的意思为：<strong>在原文件<code>a</code>中的<code>1~3</code>行</strong>；</p>
+</li>
+<li>
+<p>同理：<strong><code>+1，3</code></strong>  表示：<strong>目标文件<code>b</code>中的<code>1~3</code>行</strong>；</p>
+</li>
+<li>
+<p>数据前面<strong>有三种符号</strong>，分别表示不同的信息：</p>
+<ul>
+<li><strong>空格</strong>：表示该行在两个文件中都存在，如上图所示<code>AABB</code>这一行文件<code>a</code>，<code>b</code>都有；</li>
+<li><strong><code>-</code></strong> ：表示原文件<code>a</code>去掉该行就能变为目标文件<code>b</code>；</li>
+<li><strong><code>+</code></strong> ：表示原文件<code>a</code>加上该行就能变为目标文件<code>b</code>；</li>
+</ul>
+<p>所以整个输出信息的意思为：<code>AABB</code>这一行两文件都有，只要原文件<code>a</code>去掉：</p>
+</li>
+</ul>
+<pre><code>a1
+a2
+</code></pre>
+<p>并加上：</p>
+<pre><code>b1
+b2
+</code></pre>
+<p>就能变为目标文件<code>b</code>；</p>
+<h4 id="2工作区---暂存区">2.工作区 <code>&lt;-</code> 暂存区</h4>
+<p>以下为<code>git</code>提供的比较命令，作用为：比较<strong>暂存区</strong>和<strong>工作区</strong>中的同一文件。并且：<strong>原始文件</strong>为<strong>暂存区</strong>中的文件，<strong>目标文件</strong>为<strong>工作区</strong>中的文件。示例如下：</p>
+<h5 id="git-diff"><code>git diff</code></h5>
+<p>首先，新建文件<code>A.txt</code>和<code>B.txt</code>，修改其内容并提交到<strong>暂存区</strong>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/12.png" alt="image-20200412120920654"></p>
+<p>然后，在<strong>工作区</strong>中再次修改文件<code>A.txt</code>与<code>B.txt</code>的内容：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/13.png" alt="image-20200412121509360"></p>
+<p>此时使用<strong><code>git diff</code></strong>进行比较：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/14.png" alt="image-20200412122316757"></p>
+<p><strong>在 <code>git diff</code>的输出信息中：</strong></p>
+<ul>
+<li>
+<p><code>--- a/A.txt</code>：表示<strong>原文件</strong>为<strong>暂存区</strong>中的<code>A.txt</code>；</p>
+</li>
+<li>
+<p><code>+++ b/A.txt</code>：表示<strong>目标文件</strong>为<strong>工作区</strong>中的<code>A.txt</code>；</p>
+</li>
+<li>
+<p><code>-1</code>： 其中<code>-</code>表示原文件，<code>1</code>表示从第<code>1</code>行开始。由于暂存区中的<code>A.txt</code>文件（<strong>原文件</strong>）只有<code>1</code>行，所以将原来的<code>(-1,1)</code>简写为<code>-1</code>；</p>
+</li>
+<li>
+<p><code>+1，2</code>：其中<code>+</code>表示目标文件，<code>1，2</code>表示工作区中的<code>A.txt</code>文件（<strong>目标文件</strong>）从第<code>1</code>行开始有<code>2</code>行；</p>
+</li>
+<li>
+<p><code>hello  world</code>：表示<strong>原文件</strong>和<strong>目标文件</strong>中都存在的内容；</p>
+</li>
+<li>
+<p><code>+hello java</code>表示暂存区中的<code>A.txt</code>加上该行，就能变得与工作区中的<code>A.txt</code>一样；</p>
+</li>
+</ul>
+<p>可以看到该指令是将同一文件的<strong>工作区</strong>版本与<strong>暂存区</strong>版本进行比较，各比各的，并不会将<code>A.txt</code>与<code>B.txt</code>进行比较。</p>
+<h4 id="3工作区---版本库">3.工作区 <code>&lt;-</code> 版本库</h4>
+<p>以下指令作用为：比较<strong>版本库</strong>和<strong>工作区</strong>中的同一文件。并且：<strong>原始文件</strong>为<strong>版本库</strong>中的文件，<strong>目标文件</strong>为<strong>工作区</strong>中的文件。</p>
+<h5 id="git-diff--commit_id"><code>git diff  commit_id</code></h5>
+<p>用于比较指定<code>commit id</code>提交上的<code>A</code>文件和工作区中的<code>A</code>文件；</p>
+<h5 id="git-diff-head"><code>git diff HEAD</code></h5>
+<p>用于比较最新提交上的<code>A</code>文件和工作区中的<code>A</code>文件：</p>
+<blockquote>
+<p>上面的<code>A</code>文件仅为一个示例，以下同理。</p>
+</blockquote>
+<p>如下图所示，先初始化<code>test.txt</code>为：<code>版本库中的修改</code>，然后进行一次提交；随后在工作区中为<code>test.txt</code>添加<code>工作区的修改</code>；然后执行上述比较指令，从显示出来的比较结果可知，工作区中的<code>test.txt</code>文件比最新一次提交的<code>test.txt</code>文件多了一行<code>工作区中的修改</code>内容。</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/15.png" alt="image-20200412115931597"></p>
+<h4 id="4暂存区---版本库">4.暂存区 <code>&lt;-</code> 版本库</h4>
+<p>以下指令作用为：比较<strong>版本库</strong>和<strong>暂存区</strong>中的同一文件，其中<strong>原始文件</strong>为<strong>版本库</strong>中的文件，<strong>目标文件</strong>为<strong>暂存区</strong>中的文件：</p>
+<h5 id="git-diff---cached-commit_id"><code>git diff --cached commit_id</code></h5>
+<p>用于比较指定提交上的<code>A</code>文件和暂存区中的<code>A</code>文件；</p>
+<h5 id="git-diff---cached"><code>git diff --cached</code></h5>
+<p>用于比较最新提交上的<code>A</code>文件和暂存区中的<code>A</code>文件。示例如下：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/16.png" alt="image-20200407000812878"></p>
+<p>可以看到，暂存区中的<code>A.txt</code>文件比最新提交中的<code>A.txt</code>文件多了一行<code>hello java</code>；暂存区中的<code>B.txt</code>文件比最新提交中的<code>B.txt</code>文件多了一行<code>hello java2</code>。</p>
+<h4 id="5总结">5.总结</h4>
+<ul>
+<li>
+<p>关于目标文件与原始文件的判定，遵循的顺序为：工作区 <code>&lt;-</code> 暂存区 <code>&lt;-</code>版本库（提交）；</p>
+</li>
+<li>
+<p>上述比较指令的比较如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">原始文件</th>
+<th style="text-align:center">目标文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>diff &lt;file1&gt; &lt;file2&gt;</code></td>
+<td style="text-align:center">比较两个本地文件</td>
+<td style="text-align:center">本地文件/版本库</td>
+<td style="text-align:center">本地文件/版本库</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>git diff</code></td>
+<td style="text-align:center">比较暂存区和工作区中的同一文件</td>
+<td style="text-align:center">暂存区</td>
+<td style="text-align:center">工作区</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>git diff commit_id</code></td>
+<td style="text-align:center">比较指定<code>commit id</code>提交上的<code>A</code>文件和工作区中的<code>A</code>文件</td>
+<td style="text-align:center">版本库</td>
+<td style="text-align:center">工作区</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>git diff HEAD</code></td>
+<td style="text-align:center">比较最新提交上的<code>A</code>文件和工作区中的<code>A</code>文件</td>
+<td style="text-align:center">版本库</td>
+<td style="text-align:center">工作区</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>git diff --cached commit_id</code></td>
+<td style="text-align:center">比较指定提交上的<code>A</code>文件和暂存区中的<code>A</code>文件</td>
+<td style="text-align:center">版本库</td>
+<td style="text-align:center">暂存区</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>git diff --cached</code></td>
+<td style="text-align:center">比较最新提交上的<code>A</code>文件和暂存区中的<code>A</code>文件</td>
+<td style="text-align:center">版本库</td>
+<td style="text-align:center">暂存区</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>表格中的<code>A</code>文件仅为示例。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="四、撤销修改">四、撤销修改</h3>
+<p>主要是将已经纳入<strong>暂存区</strong>的修改（<strong>绿色</strong>），先恢复到<strong>工作区</strong>（<strong>红色</strong>），再恢复到修改前。比如撤销<code>git rm</code>这一删除操作：</p>
+<h4 id="1将暂存区修改恢复到工作区（unstage）">1.将暂存区修改恢复到工作区（<code>unstage</code>）</h4>
+<blockquote>
+<p>也就是将对文件的修改操作由<strong>绿色</strong>变为<strong>红色</strong>。</p>
+</blockquote>
+<h5 id="法一：git-reset-head--file">法一：<code>git reset head  &lt;file&gt;</code></h5>
+<p>如下图所示，通过<code>git rm</code>删除了版本库中的<code>test3.txt</code>文件，并将该操作提交到了暂存区。随后通过以上命令，将这一删除操作恢复到了工作区；</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/17.png" alt="image-20200405225413462"></p>
+<h5 id="法二：git-restore---stage-file">法二：<code>git restore --stage &lt;file&gt;</code></h5>
+<p>这里的参数<code>--stage</code>写成<code>--staged</code>效果是一样的，作用与法一相同：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/18.png" alt="image-20200405225640532"></p>
+<h4 id="2撤销工作区操作">2.撤销工作区操作</h4>
+<p>比如撤销工作区中对文件的修改、新增和删除操作：</p>
+<h5 id="法一：git-restore-file">法一：<code>git restore &lt;file&gt;</code></h5>
+<p>如下图所示，在工作区中删除了<code>test3.txt</code>文件。然后，通过上述指令撤销了工作区中对<code>test3.txt</code>的删除操作：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/19.png" alt="image-20200405230055203"></p>
+<h5 id="法二：git-checkout----file">法二：<code>git checkout -- &lt;file&gt;</code></h5>
+<p>作用与法一相同：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/20.png" alt="image-20200405230315968"></p>
+<h3 id="五、修改提交注释与作者">五、修改提交注释与作者</h3>
+<h4 id="1修改最近一次提交信息">1.修改最近一次提交信息</h4>
+<h5 id="git-commit---amend--m-修正信息"><code>git commit --amend -m</code> '修正信息'</h5>
+<p>如果写错了提交消息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/21.png" alt="image-20200310101619708"></p>
+<p>可以通过：<code>git commit --amend -m '注释'</code>   来修改<strong>上一次</strong>的提交信息：（<code>amend</code>是修复的意思）</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/22.png" alt="image-20200310101729451"></p>
+<h5 id="git-commit---amend"><code>git commit --amend</code></h5>
+<p>当需要为最近一次提交添加大量注释时，可以直接使用该指令进入<code>vim</code>编辑器编辑：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/23.png" alt="image-20200407111646674"></p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/24.png" alt="image-20200407111918667"></p>
+<p>这样的好处是：错误的提交和修正后的提交经过该命令修正后，只变为<strong>一次提交</strong>，而不是两次提交；</p>
+<h5 id="git-commit---amend---author-nameemail"><code>git commit --amend --author 'Name&lt;email&gt;'</code></h5>
+<p>用于修改最近一次提交的配置信息，包含作者和注释信息。执行命令时会进入<code>vim</code>编辑器编辑注释信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/25.png" alt="image-20200407112745165"></p>
+<p>修改前该分支上最近两次的提交信息为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/26.png" alt="image-20200407113017530"></p>
+<p>修改后的最近两次提交信息为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/27.png" alt="image-20200407112949897"></p>
+<p>可以看到成功地改变了最新一次提交的作者和提交注释。</p>
+<blockquote>
+<p><strong>注意：</strong>修改提交注释的同时，虽然提交的内容相同，但是提交前后的<code>commit_id</code>是不同的，说明创建了一个新提交替换了原来需要修正的提交。如下图中的提交<code>5</code>与提交<code>3</code>所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/28.png" alt="image-20200412135216028"></p>
+</blockquote>
+<h4 id="2修改特定提交信息">2.修改特定提交信息</h4>
+<p>如图所示，在<code>test</code>分支进行了四次提交。现在我们想要修改第三次提交的提交信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/29.png" alt="image-20200409220741630"></p>
+<h5 id="git-rebase--i-commit_id"><code> git rebase -i commit_id</code></h5>
+<p>通过以上指令可以进入<code>rebase</code>交互模式，并显示<code>commit_id</code>之后的提交信息。比如：若命令中的<code>commit_id</code>为第一次提交的<code>commit_id</code>，那么就会显示第<code>2~4</code>次的提交信息。这里我们需要修改第三次提交的信息，只需要将它指定为第二次提交的<code>commit_id</code>即可。执行以下命令，进入<code>vim</code>编辑器：</p>
+<pre><code>git rebase -i 678e0
+</code></pre>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/30.png" alt="image-20200409221442183"></p>
+<p>在这个界面中，我们可以通过将<code>pick</code>参数修改为其他<code>rebase</code>提供的参数，从而对第三次错误提交进行修改。有两个参数可以实现这一目的：</p>
+<blockquote>
+<p>这里涉及到<code>vim</code>编辑器的使用方式：</p>
+<ul>
+<li><code>shift + A</code>为插入命令，可进入<code>vim</code>编辑器的编辑模式；</li>
+<li>编辑完成后，先按<code>ESC</code>回到<code>vim</code>编辑器的命令行模式，再输入<code>:wq</code>表示保存并退出编辑器；</li>
+</ul>
+</blockquote>
+<p><strong><code>reword</code>参数</strong></p>
+<p>该参数的意思是：直接修改设置了该参数的提交的提交注释。这里应该将第三次提交的<code>pick</code>参数改为<code>reword</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/31.png" alt="image-20200409221729553"></p>
+<p>通过<code>:wq</code>保存并退出，随后再次进入<code>vim</code>编辑器，这次是修改设置了<code>reword</code>参数的提交的提交注释：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/32.png" alt="image-20200409222313064"></p>
+<p>将它改为正确的提交信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/33.png" alt="image-20200409222354009"></p>
+<p>通过<code>:wq</code>保存并退出<code>vim</code>编辑器，完成错误提交信息的修改，再次查看历史提交信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/34.png" alt="image-20200409222546686"></p>
+<p>可以发现：错误的提交信息得到了纠正，并且这次提交及其之后的提交的<code>commit_id</code>都发生了变化。说明<code>git</code>新创建了对应数目的提交，并对原有提交进行了覆盖，但是内容没有发生变化；</p>
+<blockquote>
+<p>事实上：<code>rebase</code>的含义为变换基准，<code>git rebase -i commit_id</code>中的<code>commit_id</code>所指的提交节点就是新的基准点。该基准点之后的提交都会被<code>git</code>新创建的，内容一样的新提交所覆盖。<code>rebase</code>指令之后会详细介绍。</p>
+</blockquote>
+<p><strong><code>edit</code>参数</strong></p>
+<p>该参数也可以达到上述效果，只不过稍微多了几个步骤。这个参数的意思是：停下<code>rebase</code>进程，编辑添加了该参数的提交，编辑完之后，通过调用<code>git rebase --continue</code>继续进行<code>rebase</code>；具体如下：</p>
+<p>将添加了错误提交信息的提交的<code>pick</code>参数改为<code>edit</code>参数：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/35.png" alt="image-20200409223222526"></p>
+<p>通过<code>:wq</code>保存并退出：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/36.png" alt="image-20200409223307520"></p>
+<p>可以看到，<code>edit</code>参数将<code>rebase</code>操作停了下来。根据提示，可以通过：</p>
+<pre><code>git commit --amend
+</code></pre>
+<p>进入<code>vim</code>编辑器，修改当前提交的注释信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/37.png" alt="image-20200409223703479"></p>
+<p>修改完后，通过<code>:wq</code>保存并退出<code>vim</code>编辑器。再调用：</p>
+<pre><code>git rebase --continue
+</code></pre>
+<p>继续进行<code>rebase</code>操作，由此完成错误提交信息的修改：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/38.png" alt="image-20200409223842997"></p>
+<p>此时查看<code>test</code>分支的提交历史，会发现错误的提交信息得到了更正，并且与上<code>reword</code>参数一样，创建了新的提交，对原有提交进行了覆盖，同样内容也不发生变化：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/39.png" alt="image-20200409224153743"></p>
+<h5 id="git-rebase--i-headn"><code>git rebase -i HEAD~n</code></h5>
+<p>通过上述指令也可以进入<code>rebase</code>交互模式，其中<code>n</code>表示需要显示的最近<code>n</code>次提交记录。比如通过以下指令，显示<code>test</code>分支最近的三次提交记录：</p>
+<pre><code>git rebase -i HEAD~3
+</code></pre>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/40.png" alt="image-20200409224856810"></p>
+<p>进入<code>rebase</code>的交互界面之后，后续的操作和结果都与第一种方法一样，这里就不再赘述了。</p>
+<h3 id="六、获取帮助">六、获取帮助</h3>
+<h4 id="1git-help-config">1.<code>git help config</code></h4>
+<p>该命令会打开<code>git</code>安装目录下的<code>git-config</code>帮助文档：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/41.png" alt="image-20200412143709617"></p>
+<p>文档中详细地显示了相关操作指令的使用：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/42.png" alt="image-20200412143856397"></p>
+<h4 id="2git-config---help">2.<code>git config --help</code></h4>
+<p>效果与上述一样，都是弹出同样的帮助网页；</p>
+<h4 id="3man-git-config">3.<code>man git-config</code></h4>
+<p><code>man</code>为<code>linux</code>中自带的帮助文档，也可以查看帮助；</p>
+<h4 id="4git">4.<code>git</code></h4>
+<p>直接在命令窗口显示常用的指令：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson2/43.png" alt="image-20200310181313462"></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-12 15:25</span>&nbsp;
+<a href="https://www.cnblogs.com/AhuntSun-blog/">AhuntSun</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12685415" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12685415);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 555013, cb_blogApp = 'AhuntSun-blog', cb_blogUserGuid = 'bad5555f-0923-4a98-9bae-08d753a8c051';
+    var cb_entryId = 12685415, cb_entryCreatedDate = '2020-04-12 15:25', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 AhuntSun
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!--代码复制-->
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<!--主题-->
+<script src="https://blog-static.cnblogs.com/files/AhuntSun-blog/bilibili2.js" ></script>
+<!--scrollTo-->
+<script src="https://cdn.bootcss.com/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<!--owo表情-->
+<script src="https://blog-static.cnblogs.com/files/gshang/gshang.owo.2020.01.05.1.js"></script>
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/elkyo/OwO.min.css" />
+
+<!-- import Vue.js -->
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<!-- 额外小特效 -->
+ <!--鼠标特效-->
+ <script src="https://blog-static.cnblogs.com/files/zouwangblog/mouse-click.js"></script>
+ <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
+ <!--鼠标特效 end-->
+
+<!--图片放大器-->
+<script type="text/javascript" src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css">
+<script>
+
+<!--指定fancybox作用的区域-->
+$(".forFlow img").each(function () {
+    var element = document.createElement("a");
+    $(element).attr("data-fancybox", "gallery");
+    $(element).attr("href", $(this).attr("src"));
+    $(this).wrap(element);
+});
+</script>
+
+    </div>
+</body>
+</html>

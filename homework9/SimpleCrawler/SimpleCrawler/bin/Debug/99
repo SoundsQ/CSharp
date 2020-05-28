@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="最近在工作中和一个同事因为自增是不是原子性操作争论的面红耳赤，那Java的自增操作到底是不是原子性操作呢，答案是否的，即Java的自增操作不是原子性操作。1.首先我们先看看Bruce Eckel是怎么" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【Kevin原创】关于Java自增操作的原子性 - wurr707 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismore/bundle-lessismore.min.css?v=zIJHCVIW8ogRcUFVWHfM_7E_wChBUrXPbKFNppkseEg" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismore/bundle-lessismore-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kevinwu/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kevinwu/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kevinwu/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 116315;
+        var currentBlogApp = 'kevinwu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'LessIsMore';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kevinwu/">wurr707</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kevinwu/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/wurr707">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/kevinwu/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+6&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+14</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/kevinwu/archive/2012/05/02/2479464.html">【Kevin原创】关于Java自增操作的原子性</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>最近在工作中和一个同事因为自增是不是原子性操作争论的面红耳赤，那Java的自增操作到底是不是原子性操作呢，答案是否的，即Java的自增操作不是原子性操作。</p>
+<p>1.首先我们先看看<span>Bruce Eckel是怎么说的：</span></p>
+<p><span>　　<span>In the JVM an increment is not atomic and involves both a read and a write. (<span>via the latest&nbsp;</span><a href="http://www.javaperformancetuning.com/newsletter032.shtml" target="_blank">Java Performance Tuning Newsletter</a>)</span></span></p>
+<p><span><span>　　意思很简单，就是说在jvm中自增不是原子性操作，它包含一个读操作和一个写操作。</span></span></p>
+<p><span><span>2.以上可能还不能让你信服，要想让人心服口服，就必须用代码说话。正如FaceBook的文化一样：代码赢得争论。那我们就看一段代码：</span></span></p>
+<p><span><span>　　以下的代码是用100个线程同时执行自增操作，每个线程自增</span></span>100次，如果自增操作是原子性操作的话，那么执行完amount的值为10,000。运行代码之后，你会发现amount的值小于10,000，这就说明自增操作不是原子性的</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * 
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> renrun.wu
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> MultiThread <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Runnable {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> count;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> amount = 1<span style="color: #000000;">;
+    
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> MultiThread() {
+         count </span>= 100<span style="color: #000000;">;
+    }
+    
+    </span><span style="color: #0000ff;">public</span> MultiThread(<span style="color: #0000ff;">int</span><span style="color: #000000;"> count) {
+        </span><span style="color: #0000ff;">this</span>.count =<span style="color: #000000;"> count;
+    }
+    
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> run() {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; count; i++<span style="color: #000000;">) {
+            amount</span>++<span style="color: #000000;">;
+        }
+    }
+    
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        ExecutorService executorService </span>=<span style="color: #000000;"> Executors.newCachedThreadPool();
+        MultiThread multiThread </span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> MultiThread();
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 100; i++<span style="color: #000000;">) {
+            executorService.execute(multiThread);
+        }
+        executorService.shutdown();
+        
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            Thread.sleep(</span>60000<span style="color: #000000;">);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(multiThread.amount);
+    }
+}</span></pre>
+</div>
+<p>3.如果以上还不能让你信服的话，也没关系。我们就把自增操作反编译出来，看看java字节码是怎么操作的</p>
+<p>　　以下是一个简单的自增操作代码</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Increment {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span> id = 0<span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> getNext(){
+        id</span>++<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>　　我们看看反编译之后的Java字节码，主要关注getNext()方法内部的Java字节码。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">　　public</span> <span style="color: #0000ff;">class</span> Increment <span style="color: #0000ff;">extends</span><span style="color: #000000;"> java.lang.Object{
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Increment();
+      Code:
+       </span>0<span style="color: #000000;">:   aload_0
+       </span>1:   invokespecial   #1; <span style="color: #008000;">//</span><span style="color: #008000;">Method java/lang/Object."&lt;init&gt;":()V</span>
+       4<span style="color: #000000;">:   aload_0
+       </span>5<span style="color: #000000;">:   iconst_0
+       </span>6:   putfield        #2; <span style="color: #008000;">//</span><span style="color: #008000;">Field id:I</span>
+       9:   <span style="color: #0000ff;">return</span>
+
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> getNext();
+      Code:
+       </span>0:   aload_0　　　　　　   <span style="color: #008000;">//</span><span style="color: #008000;">加载局部变量表index为0的变量，在这里是this </span>
+       1:   dup                 <span style="color: #008000;">//</span><span style="color: #008000;">将当前栈顶的对象引用复制一份</span>
+       2:   getfield        #2; <span style="color: #008000;">//</span><span style="color: #008000;">Field id:I,获取id的值,并将其值压入栈顶</span>
+       5:   iconst_1            <span style="color: #008000;">//</span><span style="color: #008000;">将int型的值1压入栈顶</span>
+       6:   iadd                <span style="color: #008000;">//</span><span style="color: #008000;">将栈顶两个int类型的元素相加，并将其值压入栈顶</span>
+       7:   putfield        #2; <span style="color: #008000;">//</span><span style="color: #008000;">Field id:I,将栈顶的值赋值给id</span>
+       10:  <span style="color: #0000ff;">return</span><span style="color: #000000;">
+
+    }</span></pre>
+</div>
+<p>&nbsp;　　很明显，我们能够看到在getNext()方法内部，对于类变量id有一个先取值后加一再赋值的过程。因此，我们可以很肯定的说Java中的自增操作不是原子性的。</p>
+<p>4.也许你会问，那局部变量的自增操作是否是原子性的。好，我们在看看一下代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Increment {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> getNext(){
+    </span><span style="color: #0000ff;">int</span> id = 0<span style="color: #000000;">;
+        id</span>++<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>　　我们再看看反编译之后的Java字节码，主要还是关注getNext()方法内部的Java字节码。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Increment <span style="color: #0000ff;">extends</span><span style="color: #000000;"> java.lang.Object{
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Increment();
+  Code:
+   </span>0<span style="color: #000000;">:   aload_0
+   </span>1:   invokespecial   #1; <span style="color: #008000;">//</span><span style="color: #008000;">Method java/lang/Object."&lt;init&gt;":()V</span>
+   4:   <span style="color: #0000ff;">return</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> getNext();
+  Code:
+   </span>0<span style="color: #000000;">:   iconst_0
+   </span>1<span style="color: #000000;">:   istore_1
+   </span>2:   iinc    1, 1
+   5:   <span style="color: #0000ff;">return</span><span style="color: #000000;">
+
+}</span></pre>
+</div>
+<p>　　与全局变量的自增操作相比，很明显局部变量的自增操作少了getfield与putfield操作。而且对于局部变量来说，它无论如何都不会涉及到多线程的操作，因此局部变量的自增操作是否是原子操作也就显得不那么重要了。</p>
+<p>　　参考资料：《深入java虚拟机》</p>
+<p>　　参考链接：<a href="http://madbean.com/2003/mb2003-44/">http://madbean.com/2003/mb2003-44/</a></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-05-02 22:01</span>&nbsp;
+<a href="https://www.cnblogs.com/kevinwu/">wurr707</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2479464" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2479464);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 116315, cb_blogApp = 'kevinwu', cb_blogUserGuid = '1dfb47f9-1e91-e111-aa3f-842b2b196315';
+    var cb_entryId = 2479464, cb_entryCreatedDate = '2012-05-02 22:01', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 wurr707
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

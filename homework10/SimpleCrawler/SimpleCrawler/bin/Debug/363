@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="分析 rtthread 内核，论述用 C 语言实现的继承、派生与容器" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>C语言如何实现继承及容器 - wenzid - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/wenziw5/custom.css?v=dwwqrzCzq1JdXagxyuAi04nq0Xs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/wenziw5/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/wenziw5/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/wenziw5/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 579080;
+        var currentBlogApp = 'wenziw5';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/wenziw5/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/wenziw5/">wenzid</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/wenziw5/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/wenzid">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/wenziw5/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+2&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+2</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/wenziw5/p/12793073.html">C语言如何实现继承及容器</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        分析 rtthread 内核，论述用 C 语言实现的继承、派生与容器
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="继承的概念">继承的概念</h1>
+<p>继承是面向对象软件技术当中的一个概念，与多态、封装共为面向对象的三个基本特征。继承可以使得子类具有父类的属性和方法或者重新定义，追加属性和方法。<br>
+面向对象中的重要概念就是类，在我们熟知的编程语言 C++ 、Python 中都存在类的概念，通过现有的类从而继承得到新的类。但是对于 C 语言来讲，其中并不存在类的概念，那又如何实现继承呢 ?</p>
+<h2 id="c-语言继承的实现">C 语言继承的实现</h2>
+<p>笔者了解到 C 语言实现继承是在阅读 rt-thread 源码中发现的，rt-thread 以小而美的物联网操作系统著称，在阅读其源码的时候，也能够感受到其实现的精妙，其中对于内核对象的管理就是以面向对象的方式进行，采用结构体嵌套的方式实现了内核对象的继承与派生。在 rt-thread 的内核对象管理模块中，定义了通用的数据结构 rt_object ，笔者在这里姑且将其称之为父类，因为内核的线程对象，内存池对象，定时器对象，设备对象都是由 rt_object 派生而来。下面是 rt_object 的实现细节。</p>
+<pre><code class="language-c">struct rt_object
+{
+    char       name[RT_NAME_MAX];                       /**&lt; name of kernel object */
+    rt_uint8_t type;                                    /**&lt; type of kernel object */
+    rt_uint8_t flag;                                    /**&lt; flag of kernel object */
+    rt_list_t  list;                                    /**&lt; list node of kernel object */
+};
+</code></pre>
+<p>有了这个通用数据结构，我们就可以依据此继承派生出新的内核对象，比如定时器对象，其实现细节如下所示：</p>
+<pre><code class="language-c">struct rt_timer
+{
+    struct rt_object parent;                            /**&lt; inherit from rt_object */
+
+    rt_list_t        row[RT_TIMER_SKIP_LIST_LEVEL];
+
+    void (*timeout_func)(void *parameter);              /**&lt; timeout function */
+    void            *parameter;                         /**&lt; timeout function's parameter */
+
+    rt_tick_t        init_tick;                         /**&lt; timer timeout tick */
+    rt_tick_t        timeout_tick;                      /**&lt; timeout tick */
+};
+
+</code></pre>
+<p>如上图代码所示，rt_timer 结构体内定义的 parent 就是由 rt_object 所继承下来的，在继承的基础上，又在结构体内增加了新的内容，从而形成了定时器对象。<br>
+因此对于 rt_thread 中的线程对象，内存池对象，定时器对象也可以用如下的一张图表明他们之间的关系。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200331192252149.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNjc5MQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">上述就是关于继承的概念及 C 语言的具体的实现方式。</p>
+<h1 id="容器的概念">容器的概念</h1>
+<p>在 C++ 中对于容器的定义是这样的：在数据存储上，有一种对象类型，它可以持有其他对象或者指向其他对象的指针，这种对象类型就是容器，对于 C++ 来说，有专门的构造函数实现容器，比如 vector() ，就可以创建一个容器。</p>
+<h2 id="c-语言容器的实现">C 语言容器的实现</h2>
+<p>那 C 语言是如何创建一个容器呢 ？在 rt_thread 中,是通过一个全局数组的形式实现的，数组的类型是 rt_object_information ,rt_object_information 的实现代码如下：</p>
+<pre><code class="language-c">struct rt_object_information
+{
+    enum rt_object_class_type type;                     /**&lt; object class type */
+    rt_list_t                 object_list;              /**&lt; object list */
+    rt_size_t                 object_size;              /**&lt; object size */
+};
+</code></pre>
+<p>其中，type 是用一个枚举类型实现的，具体实现如下：</p>
+<pre><code class="language-c">enum rt_object_info_type
+{
+    RT_Object_Info_Thread = 0,                         /**&lt; The object is a thread. */
+#ifdef RT_USING_SEMAPHORE
+    RT_Object_Info_Semaphore,                          /**&lt; The object is a semaphore. */
+#endif
+#ifdef RT_USING_MUTEX
+    RT_Object_Info_Mutex,                              /**&lt; The object is a mutex. */
+#endif
+    RT_Object_Info_Unknown,                            /**&lt; The object is unknown. */
+};
+</code></pre>
+<p>对象的链表是基于这样实现的：</p>
+<pre><code class="language-c">struct rt_list_node
+{
+    struct rt_list_node *next;                          /**&lt; point to next node. */
+    struct rt_list_node *prev;                          /**&lt; point to prev node. */
+};
+</code></pre>
+<p>由于 rt_thread 中容器中的对象有点多，笔者将其中对象进行缩减，截取一部分出来，具体如下：</p>
+<pre><code class="language-c">static struct rt_object_information rt_object_container[RT_Object_Info_Unknown] =
+{
+    /* initialize object container - thread */
+    {
+        RT_Object_Class_Thread, 
+        _OBJ_CONTAINER_LIST_INIT(RT_Object_Info_Thread), 
+        sizeof(struct rt_thread)
+    },
+#ifdef RT_USING_SEMAPHORE
+    /* initialize object container - semaphore */
+    {
+        RT_Object_Class_Semaphore, 
+        _OBJ_CONTAINER_LIST_INIT(RT_Object_Info_Semaphore), 
+        sizeof(struct rt_semaphore)
+    },
+#endif
+#ifdef RT_USING_MUTEX
+    /* initialize object container - mutex */
+    {
+        RT_Object_Class_Mutex, 
+        _OBJ_CONTAINER_LIST_INIT(RT_Object_Info_Mutex), 
+        sizeof(struct rt_mutex)
+    },
+#endif
+}
+</code></pre>
+<p>上面就实现了一个容器，其中_OBJ_CONTAINER_LIST_INIT 是一个宏定义，具体定义如下：</p>
+<pre><code class="language-c">
+#define _OBJ_CONTAINER_LIST_INIT(c)     \
+    {&amp;(rt_object_container[c].object_list), &amp;(rt_object_container[c].object_list)}
+</code></pre>
+<p>其所用是初始化对象的链表，将头尾指针都指向自身，实现的效果如下：<br>
+<img src="https://img-blog.csdnimg.cn/20200331212915727.jpg#pic_center" alt="在这里插入图片描述">所以总体来说，rt_thread 中实现的容器里的内容就包含每一个内核对象，然后内核对象是由一个结构体实现的，结构体包含着内核对象的类型，初始化好的内核对象链表以及内核对象的大小。既然如此我们就可以对容器里的内容进行操作，比如获得指定内核对象的指针，代码如下：</p>
+<pre><code class="language-c">rt_object_get_information(enum rt_object_class_type type)
+{
+    int index;
+
+    for (index = 0; index &lt; RT_Object_Info_Unknown; index ++)
+        if (rt_object_container[index].type == type) 
+        	return &amp;rt_object_container[index];
+
+    return RT_NULL;
+}
+</code></pre>
+<h1 id="总结">总结</h1>
+<p>通过 C 语言实现的继承与派生，rt_thread 实现了多个内核对象的定义，然后通过 C 语言实现的容器，我们可以管理内核对象，容器中包含的内核对象有对象本身的链表，拿线程打比方，我们新创建的线程也就可以通过链表的形式挂接到容器中对应的线程控制块中，实现的效果如下：<br>
+<img src="https://img-blog.csdnimg.cn/20200331214742390.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNjc5MQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">最后，如果您觉的我的文章对您有所帮助，可以关注我的个人公众号，期待与您一同前行~<br>
+<img src="https://img-blog.csdnimg.cn/20200401150944104.jpg" alt="在这里插入图片描述"></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 21:40</span>&nbsp;
+<a href="https://www.cnblogs.com/wenziw5/">wenzid</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12793073" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12793073);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 579080, cb_blogApp = 'wenziw5', cb_blogUserGuid = 'efd8baca-138d-413b-8d63-08d7b205d422';
+    var cb_entryId = 12793073, cb_entryCreatedDate = '2020-04-28 21:40', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 wenzid
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

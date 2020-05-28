@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 多线程是Java编程中一块非常重" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【并发编程】并发编程中你需要知道的基础概念 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/11935433.html">【并发编程】并发编程中你需要知道的基础概念</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<p>多线程是Java编程中一块非常重要的内容，其中涉及到很多概念。这些概念我们平时经常挂在嘴上，但是真的要让你介绍下这些概念，你可能还真的讲不清楚。这篇博客就总结下多线程编程中经常用到的概念，理解这些概念能帮助我们更好地掌握多线程编程。</p>
+<h2 id="进程process与线程thread">进程(Process)与线程(Thread)</h2>
+<p>进程和线程是最常提到的概念了。在linux中，线程与进程最大的区别就是是否共享同一块地址空间，而且共享同一块地址空间的那一组线程将显现相同的PID号。下面介绍下两者的概念：</p>
+<ul>
+<li>进程是操作系统进行资源分配和调度的最小单元，可以简单地理解为系统中运行的一个程序就是一个进程。</li>
+<li>线程是CPU调度的最小单元，是进程中的一个个执行流程。</li>
+<li>一个进程至少包含一个线程，可以包含多个线程，这些线程共享这个进程的资源（比如堆区和方法区资源）。同时每个线程都拥有独立的运行栈和程序计数器，线程切换开销小。</li>
+<li>多进程指的是操作系统同时运行多个程序，如当前操作系统中同时运行着QQ、IE、微信等程序。</li>
+<li>多线程指的是同一进程中同时运行多个线程，如迅雷运行时，可以开启多个线程，同时进行多个文件的下载。</li>
+</ul>
+<p>谈到线程和进程，又势必会涉及到线程号和进程号的概念。下面列举了各个ID的概念。</p>
+<ul>
+<li>pid: 进程ID。</li>
+<li>tgid: 线程组ID，也就是线程组leader的进程ID，等于pid。</li>
+<li>lwp: 线程ID。在用户态的命令(比如ps)中常用的显示方式。</li>
+<li>tid: 线程ID，等于lwp。tid在系统提供的接口函数中更常用，比如syscall(SYS_gettid)和syscall(__NR_gettid)。</li>
+</ul>
+<h2 id="并行parallel、并发concurrent">并行(Parallel)、并发(Concurrent)</h2>
+<ul>
+<li><strong>并发</strong>：是指多个线程任务在同一个CPU上快速地轮换执行，由于切换的速度非常快，给人的感觉就是这些线程任务是在同时进行的，但其实并发只是一种逻辑上的同时进行；</li>
+<li><strong>并行</strong>：是指多个线程任务在不同CPU上同时进行，是真正意义上的同时执行。</li>
+</ul>
+<p>下面贴上一张图来解释下这两个概念：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/201911/1775037-20191126174120354-1101855388.png" alt=""></p>
+<p>上图中的咖啡就可以看成是CPU，上面的只有一个咖啡机，相当于只有一个CPU。想喝咖啡的人只有等前面的人制作完咖啡才能制作自己的开发，也就是同一时间只能有一个人在制作咖啡，这是一种并发模式。下面的图中有两个咖啡机，相当于有两个CPU，同一时刻可以有两个人同时制作咖啡，是一种并行模式。</p>
+<p>我们发现并行编程中，很重要的一个特点是系统具有多核CPU。要是系统是单核的，也就谈不上什么并行编程了。</p>
+<h2 id="线程安全">线程安全</h2>
+<p>这个概念可能是在多线程编程中提及最多的一个概念了。在面试过程中，我试着问过几个面试者，但是几乎没人能将这个概念解释的很好的。</p>
+<p>关于这个概念，我觉得好多人都有一个误区，包括我自己一开始也是这样的。我一开始认为线程安全讲的是某个共享变量线程安全，其实我们所说的线程安全是指某段代码或者是某个方法是线程安全的。线程安全的准确定义应该是这样的：</p>
+<p><strong>如果线程的随机调度顺序不影响某段代码的最后执行结果，那么我们认为这段代码是线程安全的</strong>。</p>
+<p>为了保证代码的线程安全，Java中推出了很多好用的工具类或者关键字，比如volatile、synchronized、ThreadLocal、锁、并发集合、线程池和CAS机制等。这些工具并不是在每个场景下都能满足我们多线程编程的需求，并不是在每个场景下都有很高的效率，需要我们程序员根据具体的场景来选择最适合的技术，这也许就是我们程序员存在的价值所在。（我一直觉得如果有一个技术能很好的解决大多数场景下的问题，那么这个领域肯定是可以做成机器自动化的。那么对于这个领域就不太需要有多少人参与了。）</p>
+<p><strong>一般情况下，当我们对共享变量进行并发修改时就可能会产生线程安全问题，最常见的就是多个线程对一个共享变量进行累加操作。这时就需要我们自己采取各种手段来保证代码执行的正确性。那是不是说只有对共享变量进行并发改时才有线程安全问题呢？其实不是的。多线程只读操作时也会发生可见性问题，这个会在后面的文章中分析到。这边有个小建议：在分析共享变量的线程安全问题时，可以逐一用原子性问题、可见性问题和有序性问题往上套，如果这三个问题都不存在的话，那么大概率就不存在线程安全问题了。</strong></p>
+<h2 id="死锁">死锁</h2>
+<p>线程1占用了锁A，等待锁B，线程2占用了锁B，等待锁A，这种情况下就造成了死锁（更加书面的解释：死锁是指两个或两个以上的线程在执行过程中，因争夺资源而造成的互相等待的现象，在无外力作用的情况下，这些线程会一直相互等待而无法继续运行下去）。在死锁状态下，相关的代码将不能再提供服务。</p>
+<pre><code class="language-java">private void deadLock() {
+	  Thread t1 = new Thread(new Runnable() {
+		@Override
+		public void run() {
+		    synchronized (lock1) {
+			  try {
+				Thread.currentThread().sleep(2000);
+			  } catch (InterruptedException e) {
+				e.printStackTrace();
+			  }
+			  synchronized (lock2) {
+				System.out.println(&quot;1&quot;);
+			  }
+		    }
+		}
+	  });
+	  Thread t2 = new Thread(new Runnable() {
+		@Override
+		public void run() {
+		    synchronized (lock2) {
+			  synchronized (lock1) {
+				System.out.println(&quot;2&quot;);
+			  }
+		    }
+		}
+	  });
+	  t1.start();
+	  t2.start();
+    }
+</code></pre>
+<p>这段代码只是演示死锁的场景，在现实中你可能不会写出这样的代码。但是，在一些更为复杂的场景中，你可能会遇到这样的问题，比如t1拿到锁之后，因为一些异常情况没有释放锁（死循环）。又或者是t1拿到一个数据库锁，释放锁的时候抛出了异常，没释放掉。</p>
+<p>如果你怀疑代码中有线程出现了死锁，你可以dump线程，然后查看线程状态有没有Blocked的线程（java.lang.Thread.State: BLOCKED）</p>
+<pre><code>
+&quot;Thread-2&quot; prio=5 tid=7fc0458d1000 nid=0x116c1c000 waiting for monitor entry [116c1b000] 
+    java.lang.Thread.State: BLOCKED (on object monitor) 
+	 at com.ifeve.book.forkjoin.DeadLockDemo$2.run(DeadLockDemo.java:42) 
+	 - waiting to lock &lt;7fb2f3ec0&gt; (a java.lang.String) 
+	 - locked &lt;7fb2f3ef8&gt; (a java.lang.String) 
+	 at java.lang.Thread.run(Thread.java:695)
+	 
+	 
+&quot;Thread-1&quot; prio=5 tid=7fc0430f6800 nid=0x116b19000 waiting for monitor entry [116b18000] 
+    java.lang.Thread.State: BLOCKED (on object monitor) 
+	 at com.ifeve.book.forkjoin.DeadLockDemo$1.run(DeadLockDemo.java:31) 
+	 - waiting to lock &lt;7fb2f3ef8&gt; (a java.lang.String) 
+	 - locked &lt;7fb2f3ec0&gt; (a java.lang.String) 
+	 at java.lang.Thread.run(Thread.java:695)
+
+</code></pre>
+<p>避免死锁的几个方式：</p>
+<ul>
+<li>尽量不要一个线程同时占用多个锁；</li>
+<li>多个线程加锁的顺序保持一致，比如上面的列子中，都先加A锁，再加B锁，这样就能破坏造成死锁的环路结构。</li>
+<li>尝试使用定时锁，使用lock.tryLock（timeout）来替代使用内部锁机制。</li>
+<li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况。</li>
+</ul>
+<h2 id="饥饿">饥饿</h2>
+<p>饥饿是指某一个或者多个线程因为种种原因无法获得所需要的资源，导致一直无法执行。比如它的线程优先级可能太低，而高优先级的线程不断抢占它需要的资源，导致低优先级线程无法工作。</p>
+<p>在自然界中，母鸟给雏鸟喂食时很容易出现这种情况：由于雏鸟很多，食物有限，雏鸟之间的食物竞争可能非常厉害，经常抢不到食物的雏鸟有可能会被饿死。线程的饥饿非常类似这种情况。</p>
+<p>此外，某一个线程一直占着关键资源不放，导致其他需要这个资源的线程无法正常执行，这种情况也是饥饿的一种。与死锁相比，饥饿还是有可能在未来一段时间内解决的（比如，高优先级的线程已经完成任务，不再疯狂执行）。</p>
+<h2 id="活锁">活锁</h2>
+<p>活锁是一种非常有趣的情况。不知道大家是否遇到过这么一种场景，当你要坐电梯下楼时，电梯到了，门开了，这时你正准备出去。但很不巧的是，门外一个人挡着你的去路，他想进来。于是，你很礼貌地靠左走，避让对方。同时，对方也非常礼貌地靠右走，希望避让你。结果，你们俩就又撞上了。于是乎，你们都意识到了问题，希望尽快避让对方，你立即向右边走，同时，他立即向左边走。结果，又撞上了！不过介于人类的智能，我相信这个动作重复两三次后，你应该可以顺利解决这个问题。因为这个时候，大家都会本能地对视，进行交流，保证这种情况不再发生。</p>
+<p>但如果这种情况发生在两个线程之间可能就不会那么幸运了。如果线程的智力不够，且都秉承着“谦让”的原则，主动将资源释放给他人使用，那么就会导致资源不断地在两个线程间跳动，而没有一个线程可以同时拿到所有资源正常执行。这种情况就是活锁。</p>
+<h2 id="同步（synchronous）和异步（asynchronous）">同步（Synchronous）和异步（Asynchronous）</h2>
+<p>这边讨论的同步和异步指的是同步方法和异步方法。</p>
+<p>同步方法是指调用这个方法后，调用方必须等到这个方法执行完成之后才能继续往下执行。<br>
+异步方法是指调用这个方法后会立马返回，调用方能立马往下继续执行。被调用的异步方法其实是由另外的线程进行执行的，如果这个异步方法有返回值的话可以通过某种通知的方式告知调用方。</p>
+<p>实现异步方法的方式：</p>
+<ul>
+<li>回调函数模式：一个方法被调用后立马返回，调用结果通过回调函数返回给调用方；</li>
+<li>MQ（发布/订阅）：请求方将请求发送到MQ，请求处理方监听MQ处理这些请求，并将请求处理结果也返回给某个MQ，调用方监听这个Queue获取处理结果；</li>
+<li>多线程处理模式：系统创建其他线程处理调用请求，比如Spring中的@Async注解标注的方法就是这种方法。</li>
+</ul>
+<h2 id="临界区">临界区</h2>
+<p>涉及读写共享资源的代码片段叫“临界区”。</p>
+<p>比如下面代码中,1处和2处就是一个代码临界区。</p>
+<pre><code class="language-java">private static class BankAccount{
+        String accountName;
+        double balance;
+
+        public BankAccount(String accountName,double balance){
+            this.accountName = accountName;
+            this.balance = balance;
+        }
+
+        public synchronized   double deposit(double amount){
+            balance = balance + amount; //1
+            return balance;
+        }
+
+        public synchronized  double  withdraw(double amount){
+            balance = balance - amount; //2
+            return balance;
+        }
+
+    }
+</code></pre>
+<h2 id="上下文切换">上下文切换</h2>
+<p>线程在CPU上运行之前需要CPU给这个线程分配时间片，当时间片运行完之后这个线程就会让出CPU资源给其他的线程运行。但是线程在将CPU资源让出之前会保存当前的任务状态以便下次获得CPU资源之后可以继续往下执行。所以线程从保存当前执行状态到再加载的过程称为一次上下文切换。</p>
+<p><strong>减少上下文切换的措施</strong></p>
+<ul>
+<li>无锁并发编程。多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一些办法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同的线程处理不同段的数据。</li>
+<li>CAS算法。Java的Atomic包使用CAS算法来更新数据，而不需要加锁。</li>
+<li>使用最少线程。避免创建不需要的线程，比如任务很少，但是创建了很多线程来处理，这样会造成大量线程都处于等待状态。</li>
+<li>协程：在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换。</li>
+</ul>
+<p>使用vmstat命令，可以观测机器每秒上下文切换的次数</p>
+<pre><code class="language-bash">
+[root@xx ~]# vmstat 1 5
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0  69708 149024  57776 601328    0    0    11   142    0    1  4  1 87  7  1    
+ 1  0  69708 148776  57776 601508    0    0     0     0  781 1553 37  3 58  0  2    
+ 0  0  69708 148776  57776 601544    0    0     0    36  372  801  7  0 92  0  1    
+ 0  0  69708 148776  57776 601544    0    0     0     0  315  521  0  1 99  0  0    
+ 0  0  69708 145500  57792 601560    0    0     0    72  355  624  3  4 92  0  1    
+
+</code></pre>
+<p>上面命令中，1表示每秒采集一次服务器状态，5表示采集5次。cs那列表示每秒上下文切换的次数。</p>
+<p>当我们调用系统函数，就要进行上下文切换，线程的切换，也要进程上下文切换，cs这个值要越小越好，太大了，要考虑调低线程或者进程的数目,例如在apache和nginx这种web服务器中，我们一般做性能测试时会进行几千并发甚至几万并发的测试，选择web服务器的进程可以由进程或者线程的峰值一直下调，压测，直到cs到一个比较小的值，这个进程和线程数就是比较合适的值了。系统调用也是，每次调用系统函数，我们的代码就会进入内核空间，导致上下文切换，这个是很耗资源，也要尽量避免频繁调用系统函数。上下文切换次数过多表示你的CPU大部分浪费在上下文切换，导致CPU干正经事的时间少了，CPU没有充分利用，是不可取的。</p>
+<h2 id="多线程编程的优势和挑战">多线程编程的优势和挑战</h2>
+<p>使用并发编程的目的是让程序运行的更快（更大限度的使用CPU资源，让程序运行更快），但是在进行并发编程的过程也会遇到一些挑战。</p>
+<p>PS：多线程并发编程可以让我们最大限度的使用系统的CPU资源，以达到让程序运行更快的目的（不是所有情况下多线程都更快）。但是一个硬币具有两面性，引入多线程编程会给我们带来其他的问题，比如说线程的上下文切换问题、共享变量的线程安全问题、线程间通信问题、线程死锁问题和硬件资源对多线程的影响等问题。其实研究多线程并发编程就是在研究这对矛盾体，怎么在享受多线程并发编程给我们带来便利的同时又能避开多线程带来的坑。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="http://blog.chinaunix.net/uid-31404751-id-5753869.html">http://blog.chinaunix.net/uid-31404751-id-5753869.html</a></li>
+<li><a href="https://blog.csdn.net/hanchao5272/article/details/79513153">https://blog.csdn.net/hanchao5272/article/details/79513153</a></li>
+<li>《实战Java高并发程序设计》</li>
+<li>《Java并发编程艺术》</li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-12-02 15:00</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11935433" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11935433);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 11935433, cb_entryCreatedDate = '2019-12-02 15:00', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

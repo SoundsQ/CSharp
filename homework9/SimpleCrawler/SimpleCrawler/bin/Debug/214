@@ -1,0 +1,694 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="域名注册域名解析域名绑定 dns服务器解析 域名记录的添加 记录类型含义@ www 访问域名请求过程" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>域名注册域名解析域名绑定 dns服务器解析 域名记录的添加 记录类型含义@ www 访问域名请求过程 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/5239677.html">域名注册域名解析域名绑定 dns服务器解析 域名记录的添加 记录类型含义@ www 访问域名请求过程</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        域名注册域名解析域名绑定 dns服务器解析 域名记录的添加 记录类型含义@ www 访问域名请求过程
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 16px;">创建一个web应用,简言之就是访问一个域名,可以到达一个地方,这个地方就是你存放供别人查看的文件的地方</span></p>
+<p><span style="font-size: 16px;">就像一条绳,从这头拉一下,可以拉出来另一头的东西</span></p>
+<p><span style="font-size: 16px;">主要有两个部分: <strong>域名 虚拟主机(空间)</strong></span></p>
+<p><span style="font-size: 16px;"><strong>1.域名</strong></span></p>
+<p><span style="font-size: 16px;"><strong>1.1域名注册</strong></span></p>
+<p><span style="font-size: 16px;">Google/baidu 搜索一下&nbsp; 域名注册</span></p>
+<p><span style="font-size: 16px;">随便点一下,一般首页都会有这样类似的地方,输入你想要的,看看是不是被别人占有了,没有的话,恭喜你,一步一步的操作付费就好了</span></p>
+<p><span style="font-size: 16px;">这样域名就注册好了</span></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160303182942455-2077417192.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9d587eb0-bb62-484f-b716-e7a6030ee289[4]" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160303182942924-2090740687.jpg" alt="9d587eb0-bb62-484f-b716-e7a6030ee289[4]" width="1131" height="237" border="0" /></a></p>
+<p><span style="font-size: 16px;"><strong>1.2域名解析</strong></span></p>
+<p><span style="font-size: 16px;">注册好了域名,只是代表你花了钱,这个域名是你的,他并没有做任何事情,他也不能做任何事情</span></p>
+<p><span style="font-size: 16px;">所以还必须解析到你的虚拟主机上,更明确一点,就是虚拟主机的ip</span></p>
+<p><span style="font-size: 16px;">域名供应商一般都会提供dns解析服务器,也有第三方的dns服务器</span></p>
+<p><span style="font-size: 16px;">比如</span></p>
+<p><span style="font-size: 16px;">如果是阿里云(万网)的域名,他们有自己的dns服务器,你注册的万网的域名一般会提示你添加或者默认就是他们自己的</span></p>
+<p><span style="font-size: 16px;">也有第三方的比如dnspod</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">接下来说一下<strong>域名与解析的配置关系:</strong></span></p>
+<p><span style="font-size: 16px;">域名注册商的控制面板上,可以解析,这个解析就是使用的域名服务商的dns解析</span></p>
+<p><span style="font-size: 16px;"><strong>换言之,你用的谁的dns服务器,那么你就在那里的解析才生效</strong></span></p>
+<p><span style="font-size: 16px;">否则,即使你在域名服务商这边解析了,dns切换成第三方的了,那么理论上来说是此处的应该是不生效的</span></p>
+<p><span style="font-size: 16px;">你如果是用的第三方的</span></p>
+<p><span style="font-size: 16px;">在域名管理的地方,把dns服务器换成第三方的</span></p>
+<p><span style="font-size: 16px;">然后在第三方的dns服务器上,把记录添加上去</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">关于dns服务器的地址的具体值</span></p>
+<p><span style="font-size: 16px;">域名服务商的地方会有提示的</span></p>
+<p><span style="font-size: 16px;">第三方的可以到帮助文档找一下一般也会有提示</span></p>
+<p><span style="font-size: 16px;">域名服务商的网站或者第三方的网站一般都有比较明显的字眼,找到你的域名 这条信息旁边肯定有解析或者啥的</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">关于<strong>域名解析的记录添加</strong></span></p>
+<p><span style="font-size: 16px;">一般都是这样子的面板(域名服务商处)</span></p>
+<p><span style="font-size: 16px;">第三方的也类似</span></p>
+<p><span style="font-size: 16px;">想要你的网站能访问,这两个是需要的</span></p>
+<p><span style="font-size: 16px;">A记录类型 主机记录一个是www 一个是@&nbsp; 后面是你的ip地址</span></p>
+<p><span style="font-size: 16px;">@开头的其实就是解析根域名比如&nbsp; example.com</span></p>
+<p><span style="font-size: 16px;">www开头的其实是一个二级域名</span></p>
+<p><span style="font-size: 16px;">指的是万维网,解析到www.example.com</span></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160303182943502-1167808054.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="6a559997-9002-4749-8f1f-4bd197bdbf5d[4]" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160303182943924-1284027410.png" alt="6a559997-9002-4749-8f1f-4bd197bdbf5d[4]" width="1387" height="399" border="0" /></a></p>
+<p><span style="font-size: 16px;">这样你的域名不管是访问</span></p>
+<p><span style="font-size: 16px;">www.example.com&nbsp; 还是example.com</span></p>
+<p><span style="font-size: 16px;">都是可以访问的</span></p>
+<p><span style="font-size: 16px;"><strong>不过一般是为了seo会把&nbsp; 不带www的跳转到www.的</strong></span></p>
+<p><span style="font-size: 16px;">ps:</span></p>
+<p><span style="font-size: 16px;">在搜索引擎看来，带www和不带www的URL是不同的两个URL，当它们指向同一个网站时，会让搜索引擎不懂应该选择哪一个URL作为主要的。带www和不带www的域名对搜索引擎是同等的，任意选择其中一个作为主域名，在内部链接和友情链接时，都使用主域名，这样不会使PR值分散。　</span></p>
+<p><span style="font-size: 16px;">-关于这几个具体的记录------引用自万网的解释-------------------------------</span></p>
+<p><span style="font-size: 16px;">A记录：</span></p>
+<p><span style="font-size: 16px;">将域名指向一个IPv4地址（例如：10.10.10.10），需要增加A记录</span></p>
+<p><span style="font-size: 16px;">CNAME记录：</span></p>
+<p><span style="font-size: 16px;">如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录</span></p>
+<p><span style="font-size: 16px;">MX记录：</span></p>
+<p><span style="font-size: 16px;">建立电子邮箱服务，将指向邮件服务器地址，需要设置MX记录</span></p>
+<p><span style="font-size: 16px;">NS记录：</span></p>
+<p><span style="font-size: 16px;">域名解析服务器记录，如果要将子域名指定某个域名服务器来解析，需要设置NS记录</span></p>
+<p><span style="font-size: 16px;">TXT记录：</span></p>
+<p><span style="font-size: 16px;">可任意填写（可为空），通常用做SPF记录（反垃圾邮件）使用</span></p>
+<p><span style="font-size: 16px;">AAAA记录：将主机名（或域名）指向一个IPv6地址（例如：ff03:0:0:0:0:0:0:c1），需要添加AAAA记录</span></p>
+<p><span style="font-size: 16px;">SRV记录：记录了哪台计算机提供了哪个服务。格式为：服务的名字.协议的类型（例如：_example-server._tcp）</span></p>
+<p><span style="font-size: 16px;">显性URL：将域名指向一个http（s)协议地址，访问域名时，自动跳转至目标地址（例如：将www.net.cn显性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址为：www.hichina.com）。</span></p>
+<p><span style="font-size: 16px;">隐性URL：与显性URL类似，但隐性转发会隐藏真实的目标地址（例如：将www.net.cn隐性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址仍然为：www.net.cn）</span></p>
+<p><span style="font-size: 16px;">-------------------</span></p>
+<p><span style="font-size: 16px;">一般情况下,常用的是A类型以及CNAME类型</span></p>
+<p><span style="font-size: 16px;">A类型上面已经说过了,解析到ip地址</span></p>
+<p><span style="font-size: 16px;">CNAME主要是别名</span></p>
+<p><span style="font-size: 16px;">说白了,它指向的是一个域名,不是一个IP</span> <a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160303182944237-1461450176.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="7c096537-03d5-45b1-b37a-6363cfbb4f18[4]" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160303182944877-611929475.png" alt="7c096537-03d5-45b1-b37a-6363cfbb4f18[4]" width="1527" height="245" border="0" /></a></p>
+<p><span style="font-size: 16px;">前面的主机记录,你可以随便写,比如 test&nbsp; 后面的记录值,你写www.baidu,com</span></p>
+<p><span style="font-size: 16px;">那么就是相当于你的二级域名,test.example.com&nbsp; 就会被解析跳转到www.baidu.com&nbsp;&nbsp;</span></p>
+<p><span style="font-size: 16px;">一个比较有用的场景:比如说很多的二级域名都要跳转到某一个固定的ip</span></p>
+<p><span style="font-size: 16px;">1,你可以每一个添加无数个A记录,指向你的ip地址2.你可以先添加一个ip对应的A记录,然后所有的二级域名添加CNAME类型,指向这个A记录的域名</span></p>
+<p><span style="font-size: 16px;">不过如果,你的这个ip要变了,如果是你有100个二级域名,你怎么办?</span></p>
+<p><span style="font-size: 16px;">第一种方法就需要每一个都改变第二种方法就可以仅仅改变这个A记录的ip就行了!</span></p>
+<p><span style="font-size: 16px;">关于虚拟主机</span></p>
+<p><span style="font-size: 16px;">一般很普通的虚拟主机或者说网络空间,会有一个管理面板,有绑定选项</span></p>
+<p><span style="font-size: 16px;">这个绑定刚才已经说过,就是根据域名已经找到了ip了,就是这台主机了,具体的那个路径,还不知道</span></p>
+<p><span style="font-size: 16px;">绑定就是完成了具体路径的映射</span></p>
+<p><span style="font-size: 16px;">刚说到的有管理面板的虚拟主机,你可以绑定某一个目录,把你的文件放进去,</span></p>
+<p><span style="font-size: 16px;">那么通过这个域名,找到这个ip然后就是找到了这个虚拟主机上的这个路径,就可以访问里面的文件了</span></p>
+<p><span style="font-size: 16px;">上面说到的是很普通的一般的空间主机</span></p>
+<p><span style="font-size: 16px;">正规一点的你购买的主机就相当于一台电脑</span></p>
+<p><span style="font-size: 16px;">分windows和linux的,具体的也有不少版本可以选择</span></p>
+<p><span style="font-size: 16px;">大多数是linux主机的话,可能就需要自己配置这台服务器了,你购买的服务器可以理解为就是一台单独的linux系统的电脑</span></p>
+<p><span style="font-size: 16px;">&nbsp;&nbsp;</span></p>
+<p><span style="font-size: 16px;"><strong>域名解析与域名绑定</strong></span></p>
+<p><span style="font-size: 16px;">你想要去小明家找到小明</span></p>
+<p><span style="font-size: 16px;">你先要根据小明小区名字(域名)查询到小明的准确地址(ip)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 然后找到他的房间号(主机上的一个路径)</span></p>
+<p><span style="font-size: 16px;">D&nbsp;&nbsp; N&nbsp;&nbsp;&nbsp;&nbsp; S&nbsp;&nbsp; 服务器做这个事儿&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 域名的绑定做这个事儿</span></p>
+<p><span style="font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 前面是域名变成ip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 后面是到了服务器之后,找到需要的文件</span></p>
+<p><span style="font-size: 16px;">好像少了点什么?</span></p>
+<p><span style="font-size: 16px;">怎么过去的呢?</span></p>
+<p><span style="font-size: 16px;">简单说一下一个http请求的过程,也就是从我们浏览器输入地址敲下回车之后</span></p>
+<p><span style="font-size: 16px;">浏览器输入域名敲下回车之后</span></p>
+<p><span style="font-size: 16px;">一般我们都是http请求,具体的自行百度</span></p>
+<p><span style="font-size: 16px;">http协议是一种通讯的规范</span></p>
+<p><span style="font-size: 16px;">输入这样一个请求,需要建立socket连接,因为socket是通过ip和端口建立的</span></p>
+<p><span style="font-size: 16px;">所以接下来就是域名变成ip</span></p>
+<p><span style="font-size: 16px;">这就是dns服务器的作用</span></p>
+<p><span style="font-size: 16px;">把域名变成ip</span></p>
+<p><span style="font-size: 16px;">他是一个树状的结构,我们自己的电脑上有一个dns服务器,他会先查询这个,查不到就向上</span></p>
+<p><span style="font-size: 16px;">可以理解为你搞掉你们村的村长,像上告,找到镇里,镇里不行市里......一直找到能搞定它的</span></p>
+<p><span style="font-size: 16px;">这样就得到了ip,http请求默认的是80端口,如果不是的话,在请求的时候就需要协商,比如&nbsp; example.com:8080</span></p>
+<p><span style="font-size: 16px;">这样子有了ip和端口就可以建立socket连接了</span></p>
+<p><span style="font-size: 16px;">然后就是向服务器发送请求了</span></p>
+<p><span style="font-size: 16px;">服务器根据请求找到绑定的路径文件等这样子就完成了域名到页面的访问了</span></p>
+<p><span style="font-size: 16px;">好像明白点什么了吧!</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2016-03-03 18:30</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=5239677" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(5239677);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 5239677, cb_entryCreatedDate = '2016-03-03 18:30', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,721 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="进程的通信方式是多进程以及多线程通信理论的核心，想要学习多线程并发，必须要对进程的通信理论具有一定的了解" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>进程通信概念简介 多线程上篇（六） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10354581.html">进程通信概念简介 多线程上篇（六）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        进程的通信方式是多进程以及多线程通信理论的核心，想要学习多线程并发，必须要对进程的通信理论具有一定的了解
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程通信指的是进程间的信息交换 ，IPC（Inter-Process Communication，进程间通信）</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">之前说到：</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="color: #0000ff; font-size: 13.5pt;"><strong>进程通信就相当于一种工作方式、沟通形式</strong></span>，<span style="font-size: 16px;">比如你给我一个SVN标签号并且告知我意图，我去库中检索指定标签修改的指定内容，就完成了一个任务的协作。</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">进程同步中，也有信息的交换，比如互斥量访问，再比如生产者和消费者，共享缓冲池，但是这些通常被称之为低级的进程通信。</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">以信号量为例，如果你说我在塔顶点亮灯表示危险，否则表示安全，这没问题，如果你想用灯亮灯灭来像QQ一样，大段大段的传递讯息可能么？</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">多搞几盏灯？然后用编码？即使那样你依然是很费力的。</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以说尽管比如信号量机制作为同步工具是卓有成效的，但作为通信工具，则不够方便 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">首先是效率低，另外共享数据结构的设置、数据的传送、进程的互斥与同步等，都必须由程序员自己去实现 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以，对于进程间的通信，我们迫切的渴望有&ldquo;封装好的方法&rdquo; </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程通信主要指的就是操作系统提供的进程通信工具（&ldquo;封装好的方法&rdquo;）用来进程间的信息交换。</strong></span></div>
+<h3><span style="font-size: 18px;">进程通信类型 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>主要有四种通信方式</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113213627-984317619.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_4162" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113214205-115606601.png" alt="image_5c5ba6a9_4162" width="393" height="211" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">共享存储器系统 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>共享存储系统关键在于共享</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">主要两种： </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">共享数据结构 </span></li>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">共享存储区 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113214990-1657891783.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_38d2" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113215732-1645050849.png" alt="image_5c5ba6a9_38d2" width="1146" height="229" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">管道通信 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">这种方式</span><span style="color: #000000; font-size: 13.5pt;"><strong>首创于UNIX 系统</strong></span>，<span style="font-size: 16px;">由于它能有效地传送大量数据，因而又被引入到许多其它的操作系统中 </span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">管道指用于连接一个读进程和一个写进程以实现它们之间通信的一个共享文件，这个文件又被叫做pipe文件 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>管道可以理解为一种比较特殊的&ldquo;共享存储器系统&rdquo;的通信方式</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113216760-1471284321.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_5578" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113217127-727357365.png" alt="image_5c5ba6a9_5578" width="996" height="403" border="0" /></a> </span></div>
+<div style="line-height: 200%;">
+<h3><span style="font-size: 18px;">消息传递系统 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>在该机制中，进程不必借助任何共享存储区或数据结构，而是以格式化的消息(message)为单位，将通信的数据封装在消息中</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">并利用操作系统提供的一组通信命令(原语)，在进程间进行消息传递，完成进程间的数据交换 </span></div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">计算机网络中的报文就是一种message&nbsp;&nbsp; </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><span style="font-family: 'Microsoft YaHei';"><img src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113754653-790653296.png" alt="" /></span></span>
+<p>&nbsp;</p>
+</div>
+<div><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>消息传递系统中的消息，其实也是&ldquo;共享数据结构&rdquo;的一种形式，是一种特殊的形式</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">因为被共享的数据结构而不是随便自定义的，而是大家共同设计好的，认可的，一致的一种格式。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">基于这种一致性的格式，然后操作系统对他提供了支持 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以，他就是共享数据结构的一个特例，这个特例使用更加方便简单。 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">简单说，计算机报文是一种message，那么操作系统对整个TCP/IP协议栈的实现，这就是通信命令，封装了底层的传输细节，对开发者来说是透明的</span></div>
+<h3><span style="font-size: 18px;">客户服务器系统 </span></h3>
+<div style="line-height: 200%;">
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">客户机一服务器系统的通信机制，在网络环境的各种应用领域已成为当前主流的通信实现机制 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">BS架构的系统本质也是包装演化的CS，浏览器难道不是客户端软件么 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">主要有三种： </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">套接字 </span></li>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">远程过程调用 </span></li>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">远程方法调用 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>远程过程调用 RPC（Remote Procedure Call），RPC采用客户机/服务器模式，请求程序就是一个客户机，而服务提供程序就是一个服务器</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>RPC允许你 透明的 调用远程服务器上提供的服务</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于面向对象的编程中，远程过程调用通常也被称为远程方法调用</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">比如java1.1中实现的Remote Method Invocation，RMI，可以认为是RPC的Java版本，RMI大大增强了Java开发分布式应用的能力。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">概括地说的话： </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">远程过程调用RPC是一种协议概念，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">RPC不依赖于具体的网络传输协议，tcp、udp等都可以。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">协议必然需要被实现才能使用，他只是一种协议与标准，RMI就相当于是sun对RPC的一个Java实现 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">Socket是应用层与TCP/IP协议族通信的中间软件抽象层，是更加底层的通信工具，所以可以认为RPC是socket的上层建筑 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">一个或许不是很合适的比喻：如果RPC是议论文格式，那么RMI可能是汉语的议论文，socket可能是汉字 </span></div>
+</div>
+<div style="line-height: 200%;"><img src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113650167-368143969.png" alt="" />
+<p>&nbsp;</p>
+</div>
+<h4><span style="font-size: 16px;">套接字原理步骤 </span></h4>
+<div style="line-height: 200%;">
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">双方进程运行在不同主机的网络环境下，被分配了一对套接字，一个属于接收进程(或服务器端)，一个属于发送进程(或客户端)。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">发送进程(或客户端)发出连接请求时，随机申请一个套接字，主机为之分配一个端口，与该套接字绑定，不再分配给其它进程。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">接收进程(或服务器端)拥有全局公认的套接字和指定的端口(如ftp服务器监听端口为21,Web或http服务器监听端口为80)，并通过监听端口等待客户请求。因此，任何进程都可以向它发出连接请求和信息请求，以方便进程之间通信连接的建立。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">接收进程(或服务器端)一旦收到请求，就接受来自发送进程(或客户端)的连接，完成连接，即在主机间传输的数据可以准确地发送到通信进程，实现进程间的通信; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当通信结束时，系统通过关闭接收进程(或服务器端)的套接字撤销连接。</span></div>
+</div>
+<h4><span style="font-size: 16px;">远程过程原理步骤 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">负责RPC的调用的进程有两个，一个是本地客户进程，另一个是远程服务进程，这两个进程也被称之为网络守护进程，主要负责网络之间的消息传递 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">通常处于阻塞之中，等待消息。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">而远程过程调用的透明化核心就是所谓的存根，也叫做</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>桩stub</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以说两个进程和两个存根是RPC的根本 </span></div>
+<h4><span style="font-size: 16px;">桩的原理 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113218762-1297887871.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_6f8b" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113218951-1008372327.png" alt="image_5c5ba6a9_6f8b" width="590" height="279" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">桩类似代理者、转换器一类的角色 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">举一个例子：在一些与底层硬件芯片等交互的软件层，软件层依赖底层芯片的处理，如何更方便的进行代码测试？ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">也就是相当于A类中有方法functionA，B类中有方法functionB（假定functionB 是硬件处理部分，测试并不方便，需要依赖设备） </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">functionA(){ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">functionB(); </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">} </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">我们就可以编写一个新的类C，提供桩方法：functionStubC，所有调用functionB的地方全部使用functionStubC，也就是 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">functionA(){ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">functionStubC(); </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">}&nbsp; </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">而functionStubC的返回值，永远是functionB成功的返回值。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">这就是一个打桩的概念。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>RPC也是通过这个桩的概念来实现透明的远程过程调用</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对本地调用来说，他看到的只是客户端存根（stub） </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">就如同我们上面的functionStubC，当然比functionStubC要更加复杂，所有的处理都在他背后被执行 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以对本地调用来说是透明的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113219127-538328583.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_3654" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113219314-159716494.png" alt="image_5c5ba6a9_3654" width="480" height="409" border="0" /></a></span></div>
+<h4><span style="font-size: 16px;">RPC过程步骤 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113219538-1186182812.png"><img style="display: inline; background-image: none;" title="image_5c5ba6a9_4644" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207113219741-1245829514.png" alt="image_5c5ba6a9_4644" width="410" height="343" border="0" /></a> </span></div>
+<div style="line-height: 200%;">
+<div><ol>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">本地过程调用者以一般方式调用远程过程在本地关联的客户存根，传递相应的参数，然后将控制权转移给客户存根; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">客户存根执行，完成包括过程名和调用参数等信息的消息建立，将控制权转移给本地客户进程; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">本地客户进程完成与服务器的消息传递，将消息发送到远程服务器进程; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">远程服务器进程接收消息后转入执行，并根据其中的远程过程名找到对应的服务器存根，将消息转给该存根; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">该服务器存根接到消息后，由阻塞状态转入执行状态，拆开消息从中取出过程调用的参数，然后以一般方式调用服务器上关联的过程; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">在服务器端的远程过程运行完毕后，将结果返回给与之关联的服务器存根; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">该服务器存根获得控制权运行，将结果打包为消息，并将控制权转移给远程服务器进程: </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">远程服务器进程将消息发送回客户端; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">本地客户进程接收到消息后，根据其中的过程名将消息存入关联的客户存根，再将控制权转移给客户存根; </span></li>
+<li><span style="line-height: 32px; font-family: 'Microsoft YaHei'; font-size: 16px;">客户存根从消息中取出结果，返回给本地调用者进程，并完成控制权的转移。 </span></li>
+</ol></div>
+</div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">进程通信的一些核心思想与基本形式就是上面的这些简介 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">这些是最纯粹基本的理论知识，而对于我们实际的开发中，面对的总是各种各样的对于现存的理论的实现版本 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">核心仍旧是依赖操作系统以及语言本身的实现以及一些框架等 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">但是理解这些概念是必要的，能让你后续的学习路线越来越明朗，技术是层不出穷的，你仅仅学习招式，永远也无法穷尽，还导致自己没有底蕴。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10354581.html" target="_blank">进程通信概念简介 多线程上篇（六）</a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-07 11:40</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10354581" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10354581);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10354581, cb_entryCreatedDate = '2019-02-07 11:40', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

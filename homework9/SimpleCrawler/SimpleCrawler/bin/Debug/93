@@ -1,0 +1,613 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="之所以搞这么麻烦，是因为存在很多种网络结构，如 Nginx&#x2B;Resin、Apache&#x2B;WebLogic、Squid&#x2B;Nginx。下面挨个儿讲一下。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="color: #000000; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-family: 'Microsoft Yahei';">20120917<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://weibo.com/yunzheng">@郑昀</a>汇总<br /></span></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">外界流传的JAVA/PHP服务器端获取客户端IP都是这么取的：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">伪代码：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><span style="color: #000080;">1）ip = request.getHeader("</span><span style="color: #ff0000;"><strong>X-FORWARDED-FOR</strong></span><span style="color: #000080;">")</span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><span style="color: #000080;">&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span><strong style="color: #800080; font-family: 'Microsoft Yahei';">可伪造，参考附录A</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';"><span style="color: navy;" lang="EN-US">2）如果该值为空或数组长度为0或等于</span><span style="color: #000080;">"</span><span style="color: navy;">unknown</span><span style="color: #000080;">"</span><span style="color: navy;">，那么：</span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><span style="color: #000080;">ip = request.getHeader("</span><span style="color: #ff0000;">Proxy-Client-IP</span><span style="color: #000080;">")</span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';"><span style="color: navy;" lang="EN-US"><span lang="EN-US">3）如果该值</span></span><span style="color: #000080;">为空</span><span style="color: #000080;">或数组长度为0</span><span style="color: navy;">或等于</span><span style="color: #000080;">"</span><span style="color: navy;">unknown</span><span style="color: #000080;">"</span><span style="color: navy;">，那么：</span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><span style="color: #000080;">ip = request.getHeader("</span><span style="color: #ff0000;">WL-Proxy-Client-IP</span><span style="color: #000080;">")</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><span style="color: navy;" lang="EN-US"><span lang="EN-US">4）如果该值</span></span><span style="color: #000080;">为空</span><span style="color: #000080;">或数组长度为0</span><span style="color: navy;">或等于</span><span style="color: #000080;">"</span><span style="color: navy;">unknown</span><span style="color: #000080;">"</span><span style="color: navy;">，那么：</span></div>
+<div><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="color: #000080;">ip = request.getHeader("</span><span style="color: #ff0000;">HTTP_CLIENT_IP</span><span style="color: #000080;">")</span></span></span></span></div>
+<div><strong style="color: #800080;">&nbsp;&nbsp;&nbsp;&nbsp;可伪造</strong></div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei'; color: navy;" lang="EN-US"><span lang="EN-US"><span lang="EN-US">5）如果该值为空</span></span></span><span style="font-family: 'Microsoft Yahei'; color: #000080;">或数组长度为0</span><span style="font-family: 'Microsoft Yahei'; color: navy;">或等于"unknown</span><span style="font-family: 'Microsoft Yahei'; color: #000080;">"</span><span style="font-family: 'Microsoft Yahei'; color: navy;">，那么：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><span style="color: #000080;">ip = request.</span><span style="color: #ff0000;"><strong>getRemoteAddr</strong></span><span style="color: #000080;">()</span></span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong style="color: #800080;"><span style="font-family: 'Microsoft Yahei';">&nbsp;&nbsp;&nbsp;&nbsp;可对于匿名代理服务器，可隐匿原始ip，参考附录B</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">之所以搞这么麻烦，是因为存在很多种网络结构，如 Nginx+Resin、Apache+WebLogic、Squid+Nginx。下面挨个儿讲一下。</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';"><a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/">郑昀</a><span class="Apple-converted-space">&nbsp;</span>:△ </span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">首先，明确一下，Nginx 配置一般如下所示：</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location / {<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass &nbsp; &nbsp; &nbsp; http://yourdomain.com;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp; Host &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $host;<br /><span style="color: #ff0000;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp; X-Real-IP &nbsp; &nbsp; &nbsp; &nbsp;$remote_addr;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header &nbsp; X-Forwarded-For &nbsp;$proxy_add_x_forwarded_for;</span><br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">注意看红色字体，这些配置与下面的闯关拿IP有关。</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></span></span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong>&mdash;&mdash;第一关|X-Forwarded-For ：背景&mdash;&mdash;</strong></div>
+<div>这是一个 Squid 开发的字段，并非 RFC 标准。</div>
+<div>简称<span class="Apple-converted-space">&nbsp;</span><strong>XFF 头</strong>，只有在通过了 HTTP 代理或者负载均衡服务器时才会添加该项。在 Squid 开发文档中可以找到该项的详细介绍。</div>
+<div>XFF 格式如下：</div>
+<div><span style="color: #0000ff;">X-Forwarded-For: client1, proxy1, proxy2</span></div>
+<div>可以看出，XFF 头信息可以有多个，中间用逗号分隔，第一项为真实的客户端ip，剩下的就是曾经经过的代理或负载均衡服务器的ip地址。</div>
+<div>&nbsp;</div>
+<div><strong>&mdash;&mdash;第一关|X-Forwarded-For ：场景=客户端--CDN--Nginx&mdash;&mdash;</strong></div>
+<div>
+<div>当用户请求经过 CDN 后到达 Nginx 负载均衡服务器时，其 XFF 头信息应该为 &ldquo;客户端IP,CDN的IP&rdquo;。</div>
+<div>一般情况下CDN服务商出于自身安全考虑会将屏蔽CDN的ip，只保留客户端ip。</div>
+<div>那么请求头到达 Nginx 时：</div>
+<div>
+<ul>
+<li><span style="display: inline-block; background-color: yellow;">在默认情况下，Nginx 并不会对 XFF 头做任何处理</span></li>
+<ul>
+<li>此时 Nginx 后面的 Resin/Apache/Tomcat 通过&nbsp;<span style="color: #000080;">request.getHeader("</span><span style="color: #ff0000;">X-FORWARDED-FOR</span><span style="color: #000080;">")</span>&nbsp;获得的ip<strong>仍然是原始ip</strong>。</li>
+
+
+
+
+
+</ul>
+<li><span style="display: inline-block; background-color: yellow;">当 Nginx 设置 X-Forwarded-For 等于 $proxy_add_x_forwarded_for 时</span>：</li>
+<ul>
+<li>如果从CDN过来的请求没有设置 XFF 头（通常这种事情不会发生），<strong>XFF 头为 CDN 的ip</strong></li>
+<ul>
+<li>此时相对于 Nginx 来说，客户端就是 CDN&nbsp;</li>
+
+
+
+
+
+</ul>
+<li>如果 CDN 设置了 XFF 头，我们这里又设置了一次，且值为$proxy_add_x_forwarded_for 的话：</li>
+<ul>
+<li><strong>XFF 头为&ldquo;客户端IP,Nginx负载均衡服务器IP&rdquo;</strong>，这样取第一个值即可</li>
+<li><span style="color: #ff0000;"><strong>这也就是大家所常见的场景！</strong></span></li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_client-cdn-nginx-resin.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_client-cdn-nginx-resin.png" /></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>综上所述，XFF 头在上图的场景，Resin 通过&nbsp;<span style="color: #000080;">request.getHeader("</span><span style="color: #ff0000;">X-FORWARDED-FOR</span><span style="color: #000080;">")</span>&nbsp;获得的ip字符串，做一个split，第一个元素就是原始ip。</div>
+<div>那么，XFF 头可以伪造吗？</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>&mdash;&mdash;第一关|X-Forwarded-For ：伪造&mdash;&mdash;</strong></div>
+<div>
+<div><strong><span style="color: #ff0000;">可以伪造。</span></strong></div>
+<div>XFF 头仅仅是 HTTP Headers 中的一分子，自然是可以随意增删改的。如附录A所示。</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+<div>很多投票系统都有此漏洞，它们简单地取 XFF 头中定义的ip地址设置为来源地址，因此第三方可以伪造任何ip投票。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+<div><strong>&mdash;&mdash;第二和第三关|Proxy-Client-IP/WL-</strong><strong>Proxy-Client-IP</strong><strong>&nbsp;：背景&mdash;&mdash;</strong></div>
+<div>Proxy-Client-IP 字段和&nbsp;WL-Proxy-Client-IP 字段只在 Apache（Weblogic Plug-In Enable）+WebLogic 搭配下出现，其中&ldquo;WL&rdquo; 就是 WebLogic 的缩写。</div>
+<div>即访问路径是：</div>
+
+
+
+
+
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div>Client -&gt; Apache WebServer + Weblogic http plugin -&gt; Weblogic Instances</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>所以这两关对于我们来说仅仅是兼容而已，怕你突然把 Nginx+Resin 换成 Apache+WebLogic 。</div>
+<div>也可以直接忽略这两个字段。</div>
+<div>&nbsp;</div>
+<div>
+<div>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+<div><strong>&mdash;&mdash;第四关|HTTP-Client-IP</strong><strong>&nbsp;：背景&mdash;&mdash;</strong></div>
+<div>HTTP_CLIENT_IP 是代理服务器发送的HTTP头。</div>
+<div>很多时候 Nginx 配置中也并没有下面这项：</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div>
+<div>proxy_set_header HTTP_CLIENT_IP $remote_addr;</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div>所以本关也可以忽略。</div>
+<div><a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/">郑昀</a><span class="Apple-converted-space">&nbsp;</span>:△ </div>
+
+
+
+
+
+</div>
+<div>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+<div><strong>&mdash;&mdash;第五关|&nbsp;request.getRemoteAddr() ：背景&mdash;&mdash;</strong></div>
+<div>
+<div><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="color: #000000; font-size: 14px;">从&nbsp;</span></span></span></span></span>request.getRemoteAddr() 函数的定义看：</div>
+<div><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span lang="EN-US"><span style="font-family: 'Microsoft Yahei';">&nbsp;&nbsp;&nbsp;&nbsp;Returns the Internet Protocol (IP) address of the client or last proxy that sent the request.&nbsp;</span></span></span></span></span></div>
+
+
+
+
+
+实际上，REMOTE_ADDR 是客户端跟服务器&ldquo;握手&rdquo;时的IP，但如果使用了&ldquo;匿名代理&rdquo;，REMOTE_ADDR 将显示代理服务器的ip，或者最后一个代理服务器的ip。请参考附录B。&nbsp;</div>
+<div>&nbsp;</div>
+<div>综上，</div>
+<div><strong>java/php 里拿到的ip地址可能是伪造的或代理服务器的ip。</strong></div>
+<div><strong>&nbsp;</strong></div>
+<div><strong><a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/">郑昀</a><span class="Apple-converted-space">&nbsp;</span>:△ </strong></div>
+<div><strong>+++附录A XFF 与 Nginx 配置的测试用例+++</strong></div>
+<div>测试环境： nginx+resin<br />内网IP：172.16.100.10<br />客户端IP：123.123.123.123<br /><br />测试页面： test.jsp<br />&lt;%<br />out.println("x-forwarded-for: " + request.getHeader("x-forwarded-for"));<br />out.println("remote hosts: " + request.getRemoteAddr());<br />%&gt;<br /><br /></div>
+
+
+
+
+
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div>nginx 配置一</div>
+
+
+
+
+
+</div>
+<div>
+<div>proxy_set_header X-Real-IP $remote_addr;</div>
+
+
+
+
+
+</div>
+<div>
+<div>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div>
+
+
+
+
+
+</div>
+<div>
+<div>&nbsp;</div>
+
+
+
+
+
+</div>
+<div>
+<div>wget测试</div>
+
+
+
+
+
+</div>
+<div>
+<div>wget -O aa --header="X-Forwarded-For:192.168.0.1" "http://test.com/test.jsp"</div>
+
+
+
+
+
+</div>
+<div>
+<div>页面返回结果：</div>
+
+
+
+
+
+</div>
+<div>
+<div>x-forwarded-for: 192.168.0.1, 123.123.123.123</div>
+
+
+
+
+
+</div>
+<div>
+<div>remote hosts: 172.16.100.10</div>
+
+
+
+
+
+</div>
+<div>
+<div>&nbsp;</div>
+
+
+
+
+
+</div>
+<div>
+<div>curl测试</div>
+
+
+
+
+
+</div>
+<div>
+<div>curl -H "X-Forwarded-For:192.168.0.1" "http://test.com/test.jsp"</div>
+
+
+
+
+
+</div>
+<div>
+<div>x-forwarded-for: 192.168.0.1, 123.123.123.123</div>
+
+
+
+
+
+</div>
+<div>
+<div>remote hosts: 172.16.100.10</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><br />nginx 配置二<br />proxy_set_header X-Real-IP $remote_addr;<br />proxy_set_header X-Forwarded-For $remote_addr;<br />proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br /><br />wget测试：<br />wget -O aa --header="X-Forwarded-For:192.168.0.1" "http://test.com/test.jsp"<br />页面返回结果：<br />x-forwarded-for: 123.123.123.123<br />remote hosts: 172.16.100.10<br /><br />curl测试<br />curl -H "X-Forwarded-For:192.168.0.1" "http://test.com/test.jsp"<br />x-forwarded-for: 123.123.123.123<br />remote hosts: 172.16.100.10<br /><br />测试结果：<br />1、配置&nbsp;&nbsp;</div>
+<div>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br />增加了一个真实ip X-Forwarded-For，并且顺序是增加到了&ldquo;后面&rdquo;。<br /><br />2、配置&nbsp;&nbsp;</div>
+<div>proxy_set_header X-Forwarded-For $remote_addr;<br /><span style="text-decoration: underline;">清空了客户端伪造传入的X-Forwarded-For</span>，<br />保证了使用 request.getHeader("x-forwarded-for") 获取的ip为真实ip，<br />或者用&ldquo;,&rdquo;分隔，截取 X-Forwarded-For 最后的值。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>+++附录B 搜狗浏览器高速模式的测试用例+++</strong></div>
+<div>访问路径：</div>
+
+
+
+
+
+</div>
+<div>搜狗浏览器&ldquo;高速&rdquo;模式（即使用代理）--&gt;LVS--&gt;Apache</div>
+<div>获得的值为：</div>
+<div>x-forwarded-for:180.70.92.43&nbsp; &nbsp;(即真实ip)</div>
+<div>Proxy-Client-IP:null</div>
+<div>WL-Proxy-Client-IP:null&nbsp;</div>
+<div>getRemoteAddr:123.126.50.185&nbsp;&nbsp;（即搜狗代理ip）</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><strong>&times;&times;&times;参考资源：&times;&times;&times;</strong></div>
+<div>1，http://bbs.linuxtone.org/thread-9050-1-1.html</div>
+<div>2，http://hi.baidu.com/thinkinginlamp/item/e2cf05263eb4d18e6e2cc3e6</div>
+<div>3，http://bbs.chinaunix.net/thread-3659453-1-1.html</div>
+<div>&nbsp;</div>
+<div>赠图2枚：</div>
+<div><a href="http://weibo.com/1687387222/yzKBp5pvY" target="_blank"><img class="decoded" src="http://ww4.sinaimg.cn/bmiddle/64937c56jw1dwg7insv8fj.jpg" alt="http://ww4.sinaimg.cn/bmiddle/64937c56jw1dwg7insv8fj.jpg" /></a></div>
+<div><a href="http://weibo.com/1283512551/xrkU1nqWQ" target="_blank"><img class="decoded" src="http://ww3.sinaimg.cn/bmiddle/4c80d8e7jw1dlt7ho0s4tj.jpg" alt="http://ww3.sinaimg.cn/bmiddle/4c80d8e7jw1dlt7ho0s4tj.jpg" /></a></div>
+
+
+
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-09-19 01:17</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2692435" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2692435);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2692435, cb_entryCreatedDate = '2012-09-19 01:17', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

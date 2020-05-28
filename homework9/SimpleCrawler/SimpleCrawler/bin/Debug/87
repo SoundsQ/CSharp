@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="当线上出现诡异问题，&#xD;&#xA;当你意识到靠现有的日志无法定位问题时，&#xD;&#xA;当现象难以在你的开发环境重现时，&#xD;&#xA;请不要执著于枯坐肉眼看代码，因为：一）不一定是你代码逻辑问题，可能是脏数据造成的，是老业务数据造成" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>55最佳实践系列：Logging最佳实践 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">@郑昀</a>汇总 创建日期：2012/10</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>#意识</strong></div>
+<p><strong style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="color: #0000ff; font-size: medium;">ASAP (As Soon As Possible)原则</span></strong></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">当线上出现诡异问题，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">当你意识到靠现有的日志无法定位问题时，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">当现象难以在你的开发环境重现时，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">请不要执著于枯坐肉眼看代码，因为：一）不一定是你代码逻辑问题，可能是脏数据造成的，是老业务数据造成的，是分布式环境造成的，是其他子系统造成的；二）线上业务处于不稳定中，条件不允许问题定位无限期。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">此时，<strong>请立即在问题相关的调用链条上，一次性：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li><strong>在函数的入口和出口打印日志，同时</strong><strong><span style="font-size: 10.5pt; font-family: 微软雅黑, sans-serif; color: red;">打印输入、输出参数</span></strong></li>
+<li><strong>catch(){&hellip;&hellip;}里打印stacktrace，</strong><strong><span style="font-size: 10.5pt; font-family: 微软雅黑, sans-serif;">同时</span><span style="font-size: 10.5pt; font-family: 微软雅黑, sans-serif; color: red;">打印<span lang="EN-US">try</span>块中关键变量的值（避免你发现某个异常是问题第一原因，却不知道是什么变量传入导致的）</span></strong></li>
+<li><strong>与其他模块交互的接口入口处打印输入参数，</strong></li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即，<strong>解决线上问题归根结底要靠log、a lot of log output！</strong><br />
+<div>在logging的力度上切勿犹犹豫豫，我们的工程师习惯于吝啬地找两个函数打印日志、打包部署一把、没看出来、再找几个函数打印、再部署、等着现象重现再观察、&hellip;&hellip;，一来二去时间流逝，闲庭信步，从客服知道的小事故变成了全国皆知的大事故。</div>
+<div>所以，再强调一遍：<strong>在你的调用链条上，逐层调用的函数入口和出口都打印详细日志，不怕多只怕少，然后部署，等待现象重现，毕其功于一役！</strong></div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">我们要记录什么？</span></strong></div>
+<div>1）完成某项操作所需的时间</div>
+
+
+
+</div>
+<div>
+<p>通过它可以跟踪为什么系统响应变慢或者太快</p>
+<ul>
+<li>处理完一个incoming request所耗费的时间，精确到毫秒</li>
+<li>执行数据库查询的时间</li>
+<li>从磁盘或者存储介质获取数据的时间</li>
+<li>等等</li>
+
+
+
+</ul>
+
+
+
+</div>
+<div>2）异常和堆栈跟踪</div>
+<div>&nbsp;</div>
+<div>3）Sessions</div>
+<div>知道一个问题是由谁引起的非常重要，因此在日志中使用会话标识符就变得必不可少。它可以简单到是一个 IP 地址或者是一个更复杂的 UUID，只要能区分不同的请求者就足够。</div>
+<div>&nbsp;</div>
+<div>4）版本号</div>
+<div>&nbsp;</div>
+<div><strong>#工具</strong></div>
+<div><strong><span style="color: #0000ff; font-size: medium;">推荐的Java Logging框架</span></strong></div>
+<div>1）log4j：我们的配置是，log4j.appender.CONSOLE.layout.ConversionPattern=[%-d{yyyy-MM-dd HH\:mm\:ss.SSS}] [%p] [%c] [%m]%n；%p是日志优先级，%c是类目名，%m是输出信息，%n是回车换行符。</div>
+<div>2）logback：log4j创建人Ceki G&uuml;lc&uuml;后续推出了SLF4J+logback。SLF4J(Simple Logging Facade for Java)作为commons-logging的替代，为各种logging APIs提供了一个简单的统一接口，使得最终用户能够在部署的时候配置所希望的logging APIs的实现。logback胜在性能，据称&ldquo;某些关键操作，比如判定是否记录一条日志语句的操作，其性能得到了显著的提高。这个操作在logback中需要3纳秒，而在 log4j&nbsp;中则需要30纳 秒。 logback&nbsp;创建记录器（logger）的速度也更快：13毫秒，而在 log4j&nbsp;中需要23毫秒。更重要的是，它获取已存在的记录器只需94纳秒， 而 log4j&nbsp;需要2234纳秒，时间减少到了1/23。跟java.util.logging(JUL)相比性能提高也是显著的&rdquo;。</div>
+<div>&nbsp;</div>
+<div><strong>#配置</strong></div>
+<div><strong><span style="color: #0000ff; font-size: medium;">不要随便从网上找一个log4j的配置文件，请确认你理解每一个配置项</span></strong></div>
+<div>我们既然输出日志，自然期望在面对&ldquo;<strong>这个问题是否从过去几天开始出现？</strong>&rdquo;这样的疑问时，不至于发现你的rollingPolicy错误设置导致只能看到最近几小时的日志，或者日志发生时间没有精确到毫秒。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>#理念</strong></div>
+<div><strong><span style="color: #0000ff; font-size: medium;">可用grep抽取的日志：独立的行！</span></strong></div>
+<div>我们总是希望能用grep处理日志文件。这意味着：<strong>一个日志条目永远不应该跨多行，除非你是堆栈打印</strong>。</div>
+
+
+
+</div>
+<div>我们会用grep问日志什么问题呢？如：</div>
+<div>
+<ul>
+<li>用手机号13910******下单的顾客最近三天内都来自于哪些IP？</li>
+<li>浏览地址是****?from=kfapi的顾客，但referral却是搜索引擎域名，最近三天有多少次？</li>
+<li>最近一周内，订单中心执行的所有事务，耗时最长的一次是多长时间？</li>
+<li>&times;&times;&times;&times;的接口是否真的于18:00发送了一个请求，我们收到的参数是什么？</li>
+
+
+
+</ul>
+
+
+
+</div>
+<div>确保你的日志能回答这样的问题。</div>
+<div>&nbsp;</div>
+<div><strong><span style="color: #0000ff; font-size: medium;">不同关注领域写不同的日志文件</span></strong></div>
+<div>当访问和调用极其频繁，有时候你会发现把你的工程里什么信息都打印到一个日志文件里，会让你看得头昏脑胀。</div>
+<div>最简单的示范就是Apache的访问日志和错误日志是分开的。</div>
+<div>同样，你也可以把更加安静的事件（偶尔出现）与更加喧闹的事件分开存储。</div>
+<div>如，对外的开放平台可以打印三种日志文件：connection log（建立链接和关闭链接，附带接入参数），message log（内部调用链），stacktrace log（异常的堆栈打印）。</div>
+<div>&nbsp;</div>
+<div><strong>#具体实现</strong></div>
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">至少精确到毫秒</span></strong></div>
+<div>日志必须包含时间戳，精确到至少毫秒级。</div>
+
+
+
+</div>
+<div>如果只是记录到秒级，我们曾明知代码因缺乏并发控制而产生BUG，却只能郁闷地看着精确到秒级的日志。</div>
+<div>对Java来说，最好配置为：<span style="font-family: tahoma;">yyyy-MM-dd/HH:mm:ss<span style="background-color: yellow; color: #ff0000;">.SSS</span>。</span></div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">请尽可能打印明确的会话标识</span></strong></div>
+<div>日志条目里打印一个会话标识（A certain session identifier），当有许多并发请求打过来时，你就能基于此字段过滤 client 了。比如，我们日志会补充打印一个浏览器 cookies 里种下的 UUID 。</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div><strong><span style="color: #0000ff; font-size: medium;">log4j的isDebugEnabled判断</span></strong></div>
+<div>如果打印信息是常量字符串或简单字符串拼接，那么不需要if ( log.isDebugEnabled() )。</div>
+<div>如果你拼装的动作比较耗资源，请用if ( log.isDebugEnabled() )。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">如有可能，请将性能数据标准化输出</span></strong></div>
+<div>这样更方便grep或hadoop做性能数据抽取和挖掘，从而能很轻松地转换为图形监控。</div>
+
+
+
+</div>
+<div>比如，订单中心的性能数据格式为：<strong>树枝标志&nbsp;当前节点起始时间 [当前节点持续时间, 当前节点自身消耗时间, 在父节点中所占的时间比例]</strong></div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">哪些位置需要部署性能检测点&nbsp;</span></strong></div>
+<div>（1）访问数据库的dao层；</div>
+<div>（2）访问外部资源的ext层；</div>
+<div>（3）访问mq的方法；</div>
+<div>（4）等等，一切不在你自己负责的工程掌握的部分（外部），或一切你认为自己工程的性能危险点，都需要加入性能监控日志。</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><strong>#Sample</strong></div>
+<div>
+<div><span style="color: #0000ff; font-size: medium;"><strong>一个好的启动日志</strong></span></div>
+
+
+
+</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-013%20%E5%89%AF%E6%9C%AC.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-013%20%E5%89%AF%E6%9C%AC.png" /></a></div>
+<div>打印了应用的版本号，客户端的会话标识，关键步骤的执行时长。</div>
+<div>&nbsp;</div>
+<div><strong style="color: #0000ff; font-size: medium;">一个好的堆栈跟踪日志</strong></div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20014%E5%89%AF%E6%9C%AC.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20014%E5%89%AF%E6%9C%AC.png" /></a></div>
+<div>&nbsp;</div>
+<div>本文首发于<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">旁观者-郑昀</a>的<a href="http://www.cnblogs.com/zhengyun_ustc/category/438091.html" target="_blank">55最佳实践系列</a>，链接：<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html" target="_blank">http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html</a>　　</div>
+<div>&nbsp;</div>
+<div><strong>参考资源：</strong></div>
+<div>1，红薯，<a style="cursor: pointer;" name="top" href="http://www.oschina.net/question/12_44624">Logging 日志记录最佳实践</a>，<a style="cursor: pointer;" href="http://blog.dynom.nl/archives/Logging-best-practices_20120304_63.html">英文原文</a></div>
+<div>2，<a style="cursor: pointer;" href="http://juliusdavies.ca/logging.html">Julius Davies：Log4j Best Practices</a>，<a style="cursor: pointer;" href="http://article.yeeyan.org/view/117321/215494">译文在此</a></div>
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3，<a style="cursor: pointer;" href="http://logback.qos.ch/10reasons.ppt">十个转移到logback的理由</a>[PPT]</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html">55最佳实践系列：MongoDB最佳实践</a><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 15:48)</div>
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 16:43)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）</div>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>赠图1枚：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://weibo.com/1642333010/z6nLLjZON" target="_blank"><strong><img src="http://ww2.sinaimg.cn/bmiddle/61e40352jw1dz3xp4brtbj.jpg" alt="61e40352jw1dz3xp4brtbj.jpg (440&times;440)" /></strong></a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-12-15 16:43</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2819450" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2819450);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2819450, cb_entryCreatedDate = '2012-12-15 16:43', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

@@ -1,0 +1,1143 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="java中double 包装类Double简介 属性方法以及内部实现 Double方法解读" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[八]基础数据类型之Double详解 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9758751.html">[八]基础数据类型之Double详解</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        java中double 包装类Double简介 属性方法以及内部实现 Double方法解读
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 24pt;">Double 基本数据类型double&nbsp; 的包装类</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">Double 类型的对象包含一个 double 类型的字段</div>
+<div style="line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100933511-869416030.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_356e" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100934058-2058842160.png" alt="image_5bbc0d42_356e" width="567" height="253" border="0" /></a></div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<h3><span style="font-size: 16px;"><strong>属性简介</strong> </span></h3>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; line-height: 24pt; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody style="line-height: 24pt;">
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">用来以二进制补码形式表示 double 值的比特位数</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public static final int <strong>SIZE</strong> = 64;</td>
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">二进制补码形式表示 double 值的字节数</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public static final int <strong>BYTES</strong> = SIZE / Byte.SIZE;</td>
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">表示基本类型 double 的 Class 实例</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public static final Class&lt;Double&gt;&nbsp;&nbsp; <strong>TYPE</strong> = (Class&lt;Double&gt;) Class.getPrimitiveClass("double");</td>
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">能够表示的最大值<br />只有标准化一种形式,也就是前文提到过的<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100934455-500929706.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_caa" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100934721-1091159250.png" alt="image_5bbc0d42_caa" width="147" height="41" border="0" /></a>						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>MAX_VALUE</strong> = 0x1.fffffffffffffP+1023;&nbsp; </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">标准化的最小值<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100934962-107985587.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_27a0" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100935266-1808603738.png" alt="image_5bbc0d42_27a0" width="80" height="43" border="0" /></a>						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>MIN_NORMAL</strong> = 0x1.0p-1022;						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">最小值还有非标准化的形式<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100935452-1854447640.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_4fe1" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100935636-1471497946.png" alt="image_5bbc0d42_4fe1" width="96" height="35" border="0" /></a>						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>MIN_VALUE</strong> = 0x0.0000000000001P-1022;
+						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">正无穷<br />等同于Double.longBitsToDouble(0x7ff0000000000000L)
+						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>POSITIVE_INFINITY</strong> = 1.0 / 0.0;
+						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">负无穷<br />等同于Double.longBitsToDouble(0xfff0000000000000L).
+						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>NEGATIVE_INFINITY</strong> = -1.0 / 0.0
+						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">NaN<br />not 
+a number<br />等同于Double.longBitsToDouble(0x7ff8000000000000L)&nbsp; </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">public 
+static final double <strong>NaN</strong> = 0.0d / 0.0						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="line-height: 24pt;">指数真值的有效的最大值						 </td>
+<td style="line-height: 24pt;">public static final int 
+<strong>MAX_EXPONENT</strong> = 1023						 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="line-height: 24pt;">指数真值的有效的最小值						 </td>
+<td style="line-height: 24pt;">public static final int 
+<strong>MIN_EXPONENT</strong> = -1022						 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">这些属性,看过浮点数简介的话,可以很清晰的理解,再次说明下,但凡本人的系列文章,全部都是有顺序的</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span></div>
+
+</div>
+
+
+			 </div>
+<h3><span style="font-size: 16px;"><strong>构造方法</strong>	</span></h3>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">Double 依然提供了根据基本类型double以及double的String形式构造
+			 </div>
+<div style="line-height: 24pt;">String形式依然借助于parseXXX形式 parseDouble			 </div>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; line-height: 24pt; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody style="line-height: 24pt;">
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">Double(double 
+value)							 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100935758-1295749273.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_71a2" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100935923-1694150543.png" alt="image_5bbc0d42_71a2" width="282" height="68" border="0" /></a>							 </td>
+
+</tr>
+<tr style="line-height: 24pt;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;">Double(String 
+s) 							 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 24pt;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936056-443250024.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_4304" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936223-2013842317.png" alt="image_5bbc0d42_4304" width="515" height="69" border="0" /></a>							 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<h3>常用方法</h3>
+<div style="line-height: 24pt;">
+<div>对于浮点数,有一些额外的属性方法			 </div>
+<div>我们浮点数介绍中,对于浮点数的表示形式进行了介绍			 </div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936353-2061879610.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_625a" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936506-2134173847.png" alt="image_5bbc0d42_625a" width="563" height="235" border="0" /></a>			 </div>
+
+</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24px;">Double提供了对于指定值的表示形式的获取方法, 这表示形式也就是是一个64位的二进制位序列
+			 </div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">Double 
+获取表示形式<br />对于获取表示形式 提供了两种形式的方法,主要是针对于非数字的NaN的不同表示<br /><br />他们可以与longBitsToDouble 
+可以进行互相转换<br />
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 100%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">doubleToRawLongBits(double)
+											 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>根据 IEEE 754 浮点&ldquo;双精度格式&rdquo;位布局，返回指定浮点值的表示形式，并保留 NaN 值												 </div>
+<div>
+<div>如果参数是正无穷大，则结果为 0x7ff0000000000000L													 </div>
+<div>如果参数是负无穷大，则结果为 0xfff0000000000000L													 </div>
+<div>如果参数是 NaN，则结果是表示实际 NaN 值的 long 整数													 </div>
+<div>&nbsp;</div>
+<div>与 doubleToLongBits 方法不同													 </div>
+<div>doubleToRawLongBits 并没有将 NaN 编码为一个&ldquo;规范的&rdquo;NaN 值													 </div>
+<div>&nbsp;</div>
+
+</div>
+<div>在所有情况下，结果都是一个 long 整数												 </div>
+<div>将其赋予 longBitsToDouble(long) 方法将生成一个与 doubleToRawLongBits 的参数相同的浮点值
+												 </div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>本地方法												 </div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936663-136396473.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_6397" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100936861-824097364.png" alt="image_5bbc0d42_6397" width="566" height="29" border="0" /></a>												 </div>
+
+</td>
+
+</tr>
+<tr>
+<td>doubleToLongBits(double)											 </td>
+<td>
+<div>根据 IEEE 754 浮点双精度格式 ("double format") 位布局，返回指定浮点值的表示形式												 </div>
+<div>&nbsp;</div>
+<div>
+<div>如果参数是正无穷大，则结果为 0x7ff0000000000000L													 </div>
+<div>如果参数是负无穷大，则结果为 0xfff0000000000000L													 </div>
+<div>如果参数是 NaN，则结果为 0x7ff8000000000000L													 </div>
+<div>&nbsp;</div>
+
+</div>
+<div>
+<div>在所有情况下，结果都是一个 long 整数													 </div>
+<div>将其赋予 longBitsToDouble(long) 方法将生成一个与 doubleToLongBits 的参数相同的浮点值
+													 </div>
+<div>(所有 NaN 值被压缩成一个&ldquo;规范&rdquo;NaN 值时除外）													 </div>
+<div>&nbsp;</div>
+<div>也就是NaN的处理不一样,此方法将NaN全部规范化为指定固定的值													 </div>
+<div>&nbsp;</div>
+<div>依赖&nbsp; doubleToRawLongBits													 </div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100937009-1770967161.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_3511" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100937219-1905227476.png" alt="image_5bbc0d42_3511" width="557" height="212" border="0" /></a>
+													 </div>
+
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">longBitsToDouble(long)<br />返回对应于给定位表示形式的 
+double 值<br /><br />
+<div>如果参数是 0x7ff0000000000000L，则结果为正无穷大								 </div>
+<div>如果参数是 0xfff0000000000000L，则结果为负无穷大								 </div>
+<div>如果参数值在 0x7ff0000000000001L 到 0x7fffffffffffffffL 之间或者在 0xfff0000000000001L 
+到 0xffffffffffffffffL 之间，则结果为 NaN								 </div>
+<div>&nbsp;</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;">浮点数有几种特殊的表示,比如 无穷 NaN等			 </div>
+<div style="line-height: 24px;">额外的,也提供了一些相关的方法			 </div>
+<div style="line-height: 24px;">
+<div>&nbsp;</div>
+
+</div>
+<div style="line-height: 24px;">
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+boolean isNaN(double v)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />是否一个非数字 
+(NaN) 值<br />非数值 true <br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100937375-748017807.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_2842" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100937575-230120712.png" alt="image_5bbc0d42_2842" width="373" height="75" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+boolean isFinite(double d)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />是否是有限的浮点数<br />有限的true<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100937720-1399489808.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_2240" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100938514-948294357.png" alt="image_5bbc0d42_2240" width="466" height="59" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+boolean isInfinite(double v)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />是否是无穷大<br />是无穷大&nbsp; true<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100940441-1099555377.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_5a46" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100941463-629903324.png" alt="image_5bbc0d42_5a46" width="591" height="75" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">boolean 
+isInfinite()								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">实例方法<br />依赖静态方法<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100942695-523084638.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_1e28" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100944464-591030309.png" alt="image_5bbc0d42_1e28" width="275" height="67" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">boolean 
+isNaN()								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>实例方法									 </div>
+<div>依赖静态方法									 </div>
+
+<a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100944867-1434492963.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_34d6" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100945490-2052873858.png" alt="image_5bbc0d42_34d6" width="276" height="72" border="0" /></a>								 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<div style="line-height: 24px;">&nbsp;</div>
+
+</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;"><span style="font-size: 16px;"><strong>比较</strong>			 </span></div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static int 
+compare(double d1, double d2)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />比较两个double<br />d1 
+&lt; d2 小于0<br />d1 = d2 等于0 <br />d1 &gt; d2 大于0								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">int 
+compareTo(Double anotherDouble)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">实例方法<br />两个对象进行大小比较,依赖于静态方法<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100945760-555334223.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_5464" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100946461-303712828.png" alt="image_5bbc0d42_5464" width="521" height="63" border="0" /></a>								 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+
+</div>
+<div style="line-height: 24pt;">
+<h3><span style="font-size: 16px;"><strong>parseXXX系列 </strong>				 </span></h3>
+<div style="line-height: 32px;">字符串解析 为 基本类型,				 </div>
+<div style="line-height: 32px;">不需要对象,所以都是静态方法				 </div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100946600-1019633134.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_28d1" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100946741-2129374243.png" alt="image_5bbc0d42_28d1" width="412" height="71" border="0" /></a>				 </div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">返回一个字符串形式表示的基本类型double<br />表现效果同valueOf(String),不过valueOf 
+返回的是对象							 </td>
+
+</tr>
+<tr>
+<td>如果不包含可以解析的字符串将会抛出异常							 </td>
+
+</tr>
+<tr>
+<td>底层依赖sun.misc.FloatingDecimal<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100947508-1083710124.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_1d10" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100947713-1880071073.png" alt="image_5bbc0d42_1d10" width="676" height="65" border="0" /></a><br /><br /></td>
+
+</tr>
+
+</tbody>
+
+</table>
+<div style="line-height: 24pt;">&nbsp;</div>
+
+</div>
+<h3><strong><span><span style="font-size: 13.5pt;">valueOf系列 </span></span></strong>&nbsp;&nbsp;&nbsp; </h3>
+<div style="line-height: 24pt;">
+<div style="line-height: 32px;">把基本基本类型 包装为对象				 </div>
+<div style="line-height: 32px;">用来创建获得对象,所以无需对象,全都是静态方法				 </div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100947850-458563441.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_6c31" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100948224-454432185.png" alt="image_5bbc0d42_6c31" width="370" height="75" border="0" /></a>				 </div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">不同于之前介绍的整数 数值,他们都有缓冲				 </div>
+<div style="line-height: 32px;">Double v不存在缓存,valueOf也是直接new 对象				 </div>
+
+</div>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+Double valueOf(double d)							 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100948481-2056419756.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_39df" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100948668-39086901.png" alt="image_5bbc0d42_39df" width="386" height="66" border="0" /></a>							 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+Double valueOf(String s)							 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">依赖parseDouble方法<br />所以上面说跟valueOf(String)表现效果相同,本身就是一样<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100948811-1251567309.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_2394" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100949072-2082077066.png" alt="image_5bbc0d42_2394" width="622" height="68" border="0" /></a>							 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">
+<div style="line-height: 24pt;">
+<h3><span style="font-size: 16px;">Double没有 decode方法<strong><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span></strong></span></h3>
+
+
+						 </div>
+
+</div>
+
+</div>
+<h3><span style="font-size: 16px;"><strong>XXXValue系列</strong>	</span></h3>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">类似之前介绍的其他数值类型<br />全部都是强转内部的&nbsp; value<br />return (XXX)value;							 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>byteValue()								 </div>
+<div>shortValue()								 </div>
+<div>intValue()								 </div>
+<div>longValue()								 </div>
+<div>floatValue()								 </div>
+<div>doubleValue()								 </div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<h3><span style="font-size: 16px;"><strong>toString&nbsp; toXXXString&nbsp; 系列</strong>	</span></h3>
+<div style="line-height: 24pt;">
+<div>
+<div>toString(double)					 </div>
+<div>toString()					 </div>
+<div>toHexString(double)					 </div>
+<div>&nbsp;</div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+String toString(double d)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100949438-2133472360.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_2268" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100949643-1764769889.png" alt="image_5bbc0d42_2268" width="480" height="76" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">String 
+toString()								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">实例方法<br />内部调用&nbsp; static String toString(double d)<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100949786-1609500607.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_1586" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100949980-1371151898.png" alt="image_5bbc0d42_1586" width="264" height="68" border="0" /></a>								 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static 
+String toHexString(double d)								 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />返回 
+double参数的十六进制字符串表示形式<br />API帮助文档中对于字符的转换有明确的规定,可以仔细研究下<br /><br />示例<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100950118-1956717707.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d42_430f" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100950557-5804377.png" alt="image_5bbc0d42_430f" width="506" height="384" border="0" /></a>								 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div>toString系列好像没什么好说的,又好像有很多要说的				 </div>
+<div>用到的时候对于格式字符的规定有疑惑直接查看API				 </div>
+
+</div>
+
+</div>
+<h3><span style="font-size: 16px;">equals</span></h3>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">boolean 
+equals(Object obj)&nbsp; </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>
+<div>将此对象与指定对象比较								 </div>
+<div>当且仅当参数不是 null 而是 Double 对象，且表示的 Double 值与此对象表示的 double 值相同时，结果为 true
+								 </div>
+<div>为此，当且仅当将方法 doubleToLongBits(double) 应用于两个值所返回的 long 值相同时，才认为这两个 double 值相同
+								 </div>
+<div>注意，在大多数情况下，对于 Double 类的两个实例 d1 和 d2，当且仅当								 </div>
+<div>&nbsp;&nbsp; d1.doubleValue() == d2.doubleValue()								 </div>
+<div>为 true 时，d1.equals(d2) 的值才为 true								 </div>
+<div>&nbsp;</div>
+<div>但是，有以下两种例外情况： 								 </div>
+<div>&nbsp;</div>
+<div>如果 d1 和 d2 都表示 Double.NaN，那么即使 Double.NaN==Double.NaN 值为 false，equals 
+方法也将返回 true								 </div>
+<div>如果 d1 表示 +0.0 而 d2 表示 -0.0，或者相反，那么即使 +0.0==-0.0 值为 true，equals 测试也将返回 false
+								 </div>
+<div>此定义使得哈希表得以正确操作								 </div>
+
+</div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100950707-549381050.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_411" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100950868-1284326875.png" alt="image_5bbc0d43_411" width="535" height="111" border="0" /></a>							 </div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+
+		 </div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">
+<h3><span style="font-size: 16px;">hashCode</span></h3>
+
+</div>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">static int 
+hashCode(double value)						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">静态方法<br />获得一个value的hashcode值<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100951517-621326307.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_4f6e" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100951683-1663214012.png" alt="image_5bbc0d43_4f6e" width="405" height="84" border="0" /></a>						 </td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">int 
+hashCode()						 </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">实例方法<br />依赖静态方法<br /><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100951820-218412989.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_de9" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100952507-836546934.png" alt="image_5bbc0d43_de9" width="334" height="92" border="0" /></a>						 </td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+		 </div>
+<div style="line-height: 24pt;"><strong><span><br /></span></strong>		 </div>
+<h3><span style="font-size: 16px;">其他方法</span></h3>
+<div style="line-height: 24pt;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none 100% / 1 / 0 stretch; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent; width: 90%;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;">sum(double, 
+double)						 </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100952646-563818770.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_5ab4" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100953529-2133886314.png" alt="image_5bbc0d43_5ab4" width="422" height="61" border="0" /></a>						 </span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;">max(double, 
+double)						 </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100954441-105051312.png"><img style="margin: 0px; border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_5dd1" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100955456-607396892.png" alt="image_5bbc0d43_5dd1" width="428" height="62" border="0" /></a>						 </span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;">min(double, 
+double)						 </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100955594-1375760943.png"><img style="border: 0px currentcolor; border-image: none; display: inline; background-image: none;" title="image_5bbc0d43_516d" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181009100956508-1280905803.png" alt="image_5bbc0d43_516d" width="424" height="65" border="0" /></a>						 </span></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">
+<h3><span style="font-size: 16px;"><strong>总结</strong>	</span></h3>
+<div style="line-height: 24pt;">其实浮点数的表示形式与使用规范才是重点			 </div>
+<div style="line-height: 24pt;">就像Float似的, Double只是double的包装,double也只是IEEE754 
+标准的一个实现,根本还是在于标准的理解			 </div>
+<div style="line-height: 24pt;">Double&nbsp; 和 Float 
+提供的方法结构基本上是一样的,毕竟都是浮点数,标准也都是IEEE754&nbsp; </div>
+<div style="line-height: 24pt;">&nbsp;</div>
+<div style="line-height: 24pt;">至此,已经介绍了,基本类型包装类中的数值部分			 </div>
+<div style="line-height: 24pt;">也就是Byte&nbsp; Short&nbsp; Integer Long Float 
+Double&nbsp;&nbsp; 他们作为数值有很多类似的方法			 </div>
+<div style="line-height: 24pt;">这些类似的方法属性也可以说是作为数值类型的共性			 </div>
+<div style="line-height: 24pt;">个人认为,找到共性能够更好理解运用 java提供的类与功能			 </div>
+<div style="line-height: 24pt;">&nbsp;</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-10-09 10:15</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9758751" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9758751);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9758751, cb_entryCreatedDate = '2018-10-09 10:15', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

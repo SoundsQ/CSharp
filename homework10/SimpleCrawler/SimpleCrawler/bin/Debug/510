@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_wenzid</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=815</id>
+  <updated>2020-04-28T13:39:32Z</updated>
+  <author>
+    <name>wenzid</name>
+    <uri>http://www.cnblogs.com/wenziw5/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/wenziw5/p/12793073.html</id>
+    <title type="text">C语言如何实现继承及容器 - wenzid</title>
+    <summary type="text">分析 rtthread 内核，论述用 C 语言实现的继承、派生与容器</summary>
+    <published>2020-04-28T13:40:00Z</published>
+    <updated>2020-04-28T13:40:00Z</updated>
+    <author>
+      <name>wenzid</name>
+      <uri>http://www.cnblogs.com/wenziw5/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wenziw5/p/12793073.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wenziw5/p/12793073.html" />
+    <content type="html">【摘要】分析 rtthread 内核，论述用 C 语言实现的继承、派生与容器 &lt;a href="http://www.cnblogs.com/wenziw5/p/12793073.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wenziw5/p/12792740.html</id>
+    <title type="text">C语言指定初始化器解析及其应用 - wenzid</title>
+    <summary type="text">指定初始化器的概念 C90 标准要求初始化程序中的元素以固定的顺序出现，与要初始化的数组或结构体中的元素顺序相同。但是在新标准 C99 中，增加了一个新的特性： 指定初始化器 。利用该特性可以初始化指定的数组或者结构体元素。 数组的指定初始化器 一维数组的指定初始化器 利用指定初始化器的特性，我们可</summary>
+    <published>2020-04-28T03:19:00Z</published>
+    <updated>2020-04-28T03:19:00Z</updated>
+    <author>
+      <name>wenzid</name>
+      <uri>http://www.cnblogs.com/wenziw5/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wenziw5/p/12792740.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wenziw5/p/12792740.html" />
+    <content type="html">【摘要】指定初始化器的概念 C90 标准要求初始化程序中的元素以固定的顺序出现，与要初始化的数组或结构体中的元素顺序相同。但是在新标准 C99 中，增加了一个新的特性： 指定初始化器 。利用该特性可以初始化指定的数组或者结构体元素。 数组的指定初始化器 一维数组的指定初始化器 利用指定初始化器的特性，我们可 &lt;a href="http://www.cnblogs.com/wenziw5/p/12792740.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

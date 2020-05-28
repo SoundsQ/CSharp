@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="1.编译后的方法区，其中存储的代码都是一些字节码指令 2.Java虚拟机执行模型： java代码是在一个线程内部执行，每个线程都有自己的执行栈，栈由帧组成，每个帧表示一个方法的调用，每调用一个方法，都" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java ASM学习(2) - tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12790121.html">Java ASM学习(2)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>1.编译后的方法区，其中存储的代码都是一些字节码指令</p>
+<p>2.Java虚拟机执行模型：</p>
+<p>java代码是在一个线程内部执行，每个线程都有自己的执行栈，栈由帧组成，每个帧表示一个方法的调用，每调用一个方法，都将将新的帧压入执行栈，方法返回时(不管是整成return还是异常返回)，该方法对应的帧都将出栈，即按照先进后出的规则。</p>
+<p>执行栈与操作数栈不一样，操作数栈包含在执行栈中。每一帧包括局部变量和操作数栈两部分，操作数栈中包括字节码指令用来当操作数的值。比如a.equals(b)将创建一帧，此时该帧将有一个空栈，并且a和b作为局部变量</p>
+<p>字节码指令：</p>
+<p>由标识该指令的操作码和固定数目的参数组成，操作码指定要进行哪一类操作，参数指定具体精确行为。指令分为两类，一类在局部变量和操作数栈之间传值，一类从操作数栈弹出值计算后再压入</p>
+<p>例如：</p>
+<p>ILOAD,LLOAD,FLOAD,DLOAD,ALOAD读取一个局部变量，并将其值压入操作数栈中，其对应的参数是其读取的局部变量索引i(因为局部变量就是通过索引来进行随机访问的)，LLOAD和DLOAD加载时需要两个槽(slot),因为局部变量部分和操作数占部分的每个槽(slot)都可以保存除了long和double之外的java值(long和double需要两个槽)。</p>
+<div class="cnblogs_code">
+<pre>ILOAD:加载boolean、<span style="color: #0000ff;">char</span>、<span style="color: #0000ff;">byte</span>、<span style="color: #0000ff;">short</span><span style="color: #000000;">、int局部变量
+LLOAD:加载long
+FLOAD:加载float
+DLOAD:加载double
+ALOAD:加载对象和数组引用</span></pre>
+</div>
+<p>对应的ISTORE,LSTORE,FSTORE,DSTORE,ASTORE从操作数栈弹出值并将其存储在指定的索引i所代表的局部变量中，所以这些操作指令是和java数据类型密切相关的。存取值和数据类型也相关，<span style="color: #ff0000;">比如使用ISTORE 1 ALOAD 1,此时从操作数栈弹出一个int值存入索引1处的局部变量中，再将该值转为对象类型进行转换读取是非法的。但是对于一个局部变量位置，我们可以在运行过程中改变其类型，比如ISTORE 1 ALOAD 1非法，但是ATORE 1 ALOAD1就合法了。<span style="color: #000000;">具体的字节码指令见ASM指南附A.1</span></span></p>
+<p>通过一个例子来进行学习，比如以下方法：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> bean {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> f;
+
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> bean() {
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setF(<span style="color: #0000ff;">int</span><span style="color: #000000;"> f) {
+        </span><span style="color: #0000ff;">this</span>.f =<span style="color: #000000;"> f;
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getF() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">.f;
+    }
+}</span></pre>
+</div>
+<p>直接通过字节码文件查看其class文件结构，其字段就一个int类型的f，访问修饰符为private</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428135849832-1310962342.png" alt="" width="449" height="186"></p>
+<p>setf方法的字节码指令如下</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428140521443-789621236.png" alt=""></p>
+<p>&nbsp;其局部变量表如下，所以有两个值一个就是当前对象this和成员变量f，分别对应下标0和1</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428140753850-1579519247.png" alt="" width="261" height="144"></p>
+<p>&nbsp;这里要设计到几个字节码指令：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">GETFIELD owner name desc：读取一个字段的值并将其值压入操作数栈中
+PUTFIELD owner name desc：从操作数弹出值存在name所代表的字段中
+owner：类的全限定名
+GETSTATIC owner name desc和PUTSTATIC owner name desc类似，只是为静态变量</span></pre>
+</div>
+<p>aload 0，读取局部变量this，也就是局部变量表下标为0处的this对象(其在调用这个方法的时候就已经初始化存储在局部变量表中)，然后将其压入操作数栈。</p>
+<p>iload 1，读取局部变量f，下标为1(创建帧期间已经初始化，也就是入口参数int f)，压入操作数栈中</p>
+<p>putfield #2 &lt;asm/bean.f&gt; 也就是弹出压入的两个值，赋值给asm/bean.f，也就是将入口的int f的值赋给this.f</p>
+<p>return 即该方法执行完成，那么该帧从执行栈从弹出</p>
+<p>getf对应的字节码指令如下所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428144642735-1089148814.png" alt=""></p>
+<p>aload 0，即从局部变量表拿到this放入操作数栈</p>
+<p>getfield #2 &lt;asm/bean.f&gt; 即从操作数栈中拿出this，并将this.f的值压入操作数栈</p>
+<p>ireturn 返回f的值get方法的调用者，xreturn，x即返回变量对应的修饰符</p>
+<p>bean构造方法，字节码指令如下：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428150509190-150040943.png" alt="" width="595" height="122"></p>
+<p>aload 0: 从局部变量表拿到this，压入操作数栈</p>
+<p>这里要设计方法的调用相关的字节码指令：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">INVOKEVIRTUAL owner name desc：<br />调用owner所表示的类的name方法<br />desc用来描述一个方法的参数类型和返回类型
+INVOKESTATIC：调用静态方法
+INVOKESPECIAL: 调用私有方法和构造器
+INVOKEINTERFACE: 接口中定义的方法</span></pre>
+</div>
+<p>invokespecial #1 &lt;java/lang/Object.&lt;init&gt;&gt;: 调用object对象的init方法，即super()调用，最后return返回，如果是对于以下代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> bean {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> f;
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setFf(<span style="color: #0000ff;">int</span><span style="color: #000000;"> f) {
+        </span><span style="color: #0000ff;">if</span>(f&gt;0<span style="color: #000000;">){
+        </span><span style="color: #0000ff;">this</span>.f =<span style="color: #000000;"> f;}
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> IllegalArgumentException();
+        }
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getF() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> f;
+    }
+
+}</span></pre>
+</div>
+<p>此时setf的字节码指令如下：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428162145986-396877655.png" alt=""></p>
+<p>iload&nbsp; 1，从局部表量表中拿出入口参数 int f，压入操作数栈</p>
+<p>ifile 9：此时弹出操作数栈中的int f和0进行比较</p>
+<p>a.如果小于等于0(这里将大于判断转为小于等于的判断)，则到第12条指令&nbsp;</p>
+<p>new #2 ：新建一个异常对象并压入操作数栈</p>
+<p>dup：重复压入该值一次</p>
+<p>invokespecial #4&nbsp; : 弹出操作栈中两个对象值其中之一，并调用其构造函数实例化该对象</p>
+<p>athrow：弹出操作数栈中剩下的值(另一个异常对象)，并将其作为异常抛出</p>
+<p>b.如果大于0，则依次执行</p>
+<p>aload0 从局部变量表拿出this对象放入操作数栈中</p>
+<p>iload1 拿出入口int f的值压入栈中</p>
+<p>putfiled #2 &lt;asm/bean.f&gt;：将int f的值赋给this.f</p>
+<p>goto 20: 到第20条字节码指令</p>
+<p>return ： 返回</p>
+<p>感觉和汇编有点像，不过比汇编更容易理解，主要还是方法内的一些操作，能看懂基本的字节码指令，复杂的再去查doc，听说面试有时候会问i++和++i的区别：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">package asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> testplus {
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> plusf(){
+        </span><span style="color: #0000ff;">int</span> i=<span style="color: #800080;">0</span><span style="color: #000000;">;
+        System.</span><span style="color: #0000ff;">out</span>.println(i++<span style="color: #000000;">);
+    }
+       </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> pluse(){
+        </span><span style="color: #0000ff;">int</span> i=<span style="color: #800080;">0</span><span style="color: #000000;"> ;
+        System.</span><span style="color: #0000ff;">out</span>.println(++<span style="color: #000000;">i);
+       }
+}</span></pre>
+</div>
+<p>编译后：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span>
+<span style="color: #008000;">//</span><span style="color: #008000;"> Source code recreated from a .class file by IntelliJ IDEA
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> (powered by Fernflower decompiler)
+</span><span style="color: #008000;">//
+</span>
+<span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> testplus {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> testplus() {
+    }
+　　//i++
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> plusf() {
+        </span><span style="color: #0000ff;">int</span> i = 0<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">byte</span> var10001 =<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">int</span> var2 = i + 1<span style="color: #000000;">;
+        System.out.println(var10001);
+    }
+　　//++i
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> pluse() {
+        </span><span style="color: #0000ff;">int</span> i = 0<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">int</span> i = i + 1<span style="color: #000000;">;
+        System.out.println(i);
+    }
+}</span></pre>
+</div>
+<p>首先从生成的class来看，i++编译后竟然用字节存储了i的值，然后i自增1，输出的为字节类型i即0，所以i++，<span style="color: #ff0000;">最终输出为0</span>，++i，直接是i自增1，然后输出i，<span style="color: #ff0000;">所以最终输出为1</span>，<span style="color: #ff0000;">所以for循环用i++，而不用++i</span></p>
+<p><span style="color: #000000;">从字节码指令来看：</span></p>
+<p><strong><span style="color: #ff0000;">i++</span></strong></p>
+<p><span style="color: #000000;"><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428212912538-2076403183.png" alt="" width="823" height="198"></span></p>
+<p>iconst 0：首先操作数栈中压入常量0</p>
+<p>istore 1：然后弹出常量0放入局部变量表索引1处，此时局部变量表处1处从i变为0,操作数栈空</p>
+<p>getstatic #2 ：即拿到java.lang.System.out，即取静态变量System.out压入栈中，此时栈中1元素</p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;"><span style="color: #000000;"><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428214009967-1312074347.png" alt="" width="587" height="73"></span></span></p>
+<p><span style="color: #000000;"><span style="color: #000000;">#2在常量池中为第二个，关于该字段的引用说明如下，out对应的描述符即为Ljava/io/PrintStream; 那么类类型的描述符就是L+类的全限定名+；</span></span></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428214334472-149817593.png" alt="" width="458" height="77"></p>
+<p>iload 1：从局部变量表1处取值，压住操作数栈，即将0压入操作数栈</p>
+<p>iinc 1 by 1：给局部变量1处的值+1，此时1处即从0变为1</p>
+<p>invokevirtual：调用java.io.PrintStream.println,此时需要的值是从操作数栈中取的，<span style="color: #ff0000;">然而此时操作数栈顶弹出的数值为0，所以输出为0</span></p>
+<p><span style="color: #ff0000;"><strong>++i</strong></span></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428212942620-201426025.png" alt="" width="812" height="235"></p>
+<p>iconst 0：首先操作数栈中压入常量0</p>
+<p>istore 1：然后弹出常量0放入局部变量表索引1处，此时局部变量表处1处从i变为0,操作数栈空</p>
+<p>getstatic #2 ：即拿到java.lang.System.out，即取静态变量System.out压入栈中，此时栈中1元素</p>
+<p>iinc 1 by 1：将局部变量表1处的值加1，即从0变为1</p>
+<p>iload 1：加载局部变量表1处的值，压入操作数栈中，即将1压入栈中</p>
+<p>invokevirtual：调用java.io.PrintStream.println,此时需要的值是从操作数栈中取的，<span style="color: #ff0000;">然而此时操作数栈顶弹出的数值为1，所以输出为1</span></p>
+<p>所以i++和++i的区别从字节码指令上来看就是<span style="color: #ff0000;">局部变量表自增和压入操作数栈的顺序不一样，i++是先压栈，后局部变量表自增，++i是先局部变量表自增，后压入操作数栈</span>，这样就完全搞懂了2333~</p>
+<p>所以再分析一个巩固巩固：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> asm;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> testplus {
+
+       </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> pluse(){
+        </span><span style="color: #0000ff;">int</span> i=0<span style="color: #000000;"> ;
+        </span><span style="color: #0000ff;">int</span> p = 2 + i++ - ++<span style="color: #000000;">i;
+        System.out.println(i);
+        System.out.println(p);
+       }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        testplus t </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> testplus();
+        t.pluse();
+    }
+}</span></pre>
+</div>
+<p>main方法：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428222948487-1772551934.png" alt="" width="655" height="199"></p>
+<p>new #4 &lt;asm/testplus&gt;：new一个对象压入栈中</p>
+<p>dup：赋值一个栈顶的对象再压入操作数栈，关于为什么要压入两个重复的值原因：</p>
+<p>首先字节码指令操作数值时基于栈实现的，那么对于同一个值从栈中操作时必定要弹出，那么如果对一个数同时操作两次，那么就要两次压栈。涉及到new一个对象操作时，java虚拟机自动dup，在new一个对象以后，栈中放入的是该对象在堆中的地址，比如声明以下两个</p>
+<div class="cnblogs_code">
+<pre>class1 a = <span style="color: #0000ff;">new</span><span style="color: #000000;"> class1();
+a.pp()</span></pre>
+</div>
+<p>通常在调用对象调用其类中方法前肯定要调用其init实例化，那么init要用一次操作数栈中的地址，此时弹出一次地址参与方法调用，后面只需要再将该栈中的地址放入局部变量表，该地址的对象已经完成了实例化操作，那么后面每次调用只需要从局部变量表从取到该对象的地址，即可任意调用其类中的方法。</p>
+<p>invokespecial #5 ：这里调用testplus的init方法，所以从栈中弹出一个testplus的地址</p>
+<p>astore 1：将实例化以后的该testplus对象地址放入局部变量表1处</p>
+<p>aload 1：取局部变量表1处的对象地址压入栈中</p>
+<p>invokevirtual #6：调用testplus的pluse方法</p>
+<p>return ：返回</p>
+<p>pluse方法：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428230232425-1893428182.png" alt="" width="621" height="401"></p>
+<p>&nbsp;</p>
+<p>iconst 0：压入常量0</p>
+<p>istore 1：弹出0存入局部变量表1处 (完成int i=0)</p>
+<p>iconst 2：将2压入栈中</p>
+<p>iload 1：取出局部变量表1处的值0压入栈中</p>
+<p>iinc 1 by 1：局部变量表1处的值加1，即从0变为1</p>
+<p>iadd ：将栈中的两个值相加，即 stack[0] + stack[1] = 2 + 0 =2</p>
+<p>iinc 1 by 1: 局部变量表1处的值加1，即从1变为2</p>
+<p>iload 1：去局部变量表1处的值压入栈中，即栈顶为2</p>
+<p>isub ：将栈中两个元素相减，即stack[0] - stack[1] =&nbsp; 2 - 2 =0</p>
+<p>istore 2:弹出栈中的唯一一个元素2，存入局部变量表2处，此时栈空</p>
+<p>getstatic # 2 ：拿到Syetem.out，压入栈中</p>
+<p>iload 1：取出局部表量表1处的值压入栈中，即栈顶为2</p>
+<p>invokevirtual&nbsp; #3 ： 弹出栈中两个元素，调用System.out的println方法，即stack[0].print(stack[1])，即输出2</p>
+<p>同理压入System.out,然后iload 2，取出局部变量表2处的0压入栈中，输出0</p>
+<p>最终输出结果也是2和0</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200428231234815-320975515.png" alt="" width="615" height="84"></p>
+<p><audio controls="controls" style="display: none;"></audio></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 23:14</span>&nbsp;
+<a href="https://www.cnblogs.com/tr1ple/">tr1ple</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12790121" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12790121);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 316934, cb_blogApp = 'tr1ple', cb_blogUserGuid = 'f3d76e0f-51aa-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12790121, cb_entryCreatedDate = '2020-04-28 23:14', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

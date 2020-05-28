@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第6页 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=7">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2019/08/30.html">2019年8月30日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/11433115.html">
+    熔断断流简述
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：熔断降级的概念 降级 降级的目的就是当某个服务提供者发生故障的时候，向调用方返回一个替代响应或者错误响应。 服务器当压力剧增的时候,根据当前业务情况及流量,对一些服务和页面进行有策略的降级.以此环节服务器资源的压力,以保证核心业务的正常运行,同时也保持了客户和大部分客户得到正确响应.简单来讲:服务器            <a href="https://www.cnblogs.com/yyfh/p/11433115.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-08-30 09:12 HueiFeng 阅读 (132) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11433115" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2018/05/22.html">2018年5月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/9070833.html">
+    Asp.Net Core NLog 将日志输出到数据库以及添加LayoutRenderer的支持
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在这之前打算用Apache的Log4Net，但是发现其AdoNetAppender方法已经不存在了，无法使用配置文件直接输出到数据库了，因此我便改用了NLog框架。 一、对项目添加NLog 通过Nuget安装NLog NLog.Extensions.Logging、NLog.Web.AspNetCo            <a href="https://www.cnblogs.com/yyfh/p/9070833.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-05-22 12:22 HueiFeng 阅读 (418) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9070833" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/12/25.html">2017年12月25日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/8107866.html">
+    ASP.NET WebAPI 测试文档 (Swagger)
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：ASP.NET WebAPI使用Swagger生成测试文档 SwaggerUI是一个简单的Restful API测试和文档工具。简单、漂亮、易用(官方demo)。通过读取JSON配置显示API .项目本身仅仅也只依赖一些html,css,js静态文件.你可以几乎放在任何Web容器上使用 捣鼓了好久最            <a href="https://www.cnblogs.com/yyfh/p/8107866.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-12-25 10:01 HueiFeng 阅读 (393) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8107866" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/08/10.html">2017年8月10日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/7338912.html">
+    C#线程（二）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：使用Mutex类 class Program { static void Main(string[] args) { const string MutexName =&quot;CSharpThreadingCookbook&quot;; using (var m = new Mutex(false, MutexNam            <a href="https://www.cnblogs.com/yyfh/p/7338912.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-08-10 13:58 HueiFeng 阅读 (219) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7338912" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/08/09.html">2017年8月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/7325149.html">
+    C#线程（一）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：简介 过去普通计算机只有计算单元，却不能同时执行多个任务。然而操作系统却已经可以同时运行多个应用程序，即实现了多任务的概念。为了防止一个应用程序控制CPU而导致其他应用程序和操作系统本身永远被挂起这一可能情况，操作系统不得不使用某种方式 将物理计算单元分割为一些虚拟的进程，并给予每个程序一定量的计算            <a href="https://www.cnblogs.com/yyfh/p/7325149.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-08-09 14:37 HueiFeng 阅读 (447) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7325149" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/07/26.html">2017年7月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/7238712.html">
+    JBOSS安装配置详细教程
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：首先在http://jbossas.jboss.org/downloads/下载相关程序我下载的是 JBoss AS 6.1.0.Final 1、配置jboss环境 1.1用户变量path后面添加 ;%JBOSS_HOME%\bin; 1.2添加系统变量 2、配置myeclipse Jboss端口修            <a href="https://www.cnblogs.com/yyfh/p/7238712.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-07-26 11:31 HueiFeng 阅读 (7845) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7238712" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/06/26.html">2017年6月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/7080553.html">
+    Aspose.Words关于域的应用
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：#region 通过word域去插入相应的数据 /// &lt;summary&gt; /// 通过word域去进行指定位置替换数据 /// &lt;/summary&gt; public void WordHelpers() { string filepath = FileHelper.GetDateDir(); Fil            <a href="https://www.cnblogs.com/yyfh/p/7080553.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-06-26 14:45 HueiFeng 阅读 (817) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7080553" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/06/09.html">2017年6月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/6971893.html">
+    SqlServer PIVOT行转列
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：PIVOT通过将表达式某一列中的唯一值转换为输出中的多个列来旋转表值表达式，并在必要时对最终输出中所需的任何其余列值执行聚合。 测试数据 INSERT INTO [TestRows2Columns] ([UserName],[Subject],[Source]) SELECT N&#39;张三&#39;,N&#39;语文&#39;            <a href="https://www.cnblogs.com/yyfh/p/6971893.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-06-09 14:57 HueiFeng 阅读 (224) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6971893" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/04/20.html">2017年4月20日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/6737629.html">
+    关于ajax请求rul时意外结束符号
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：最终解决办法：web.config 中添加节点 &lt;webServices&gt; &lt;protocols&gt; &lt;add name=&quot;HttpPost&quot;/&gt; &lt;add name=&quot;HttpGet&quot;/&gt; &lt;/protocols&gt; &lt;/webServices&gt;            <a href="https://www.cnblogs.com/yyfh/p/6737629.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-04-20 11:05 HueiFeng 阅读 (103) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6737629" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2017/02/22.html">2017年2月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/6427319.html">
+    ASP.NET程序运行出现WebDev.WebServer40.exe已停止工作解决方法（netsh winsock reset）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：问题描述：在开发系统时候运行程序突然报出“WebDev.WebServer40.exe已停止工作”的错误，程序调试运行，发现程序在打开数据库时候报错，也就是Connection.Open()处。 但是发现程序连接本地数据库正常，连接内网服务器数据库会报错，但是Sqlserver是可以直接连接到内网服            <a href="https://www.cnblogs.com/yyfh/p/6427319.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-02-22 08:59 HueiFeng 阅读 (291) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6427319" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=7">下一页</a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

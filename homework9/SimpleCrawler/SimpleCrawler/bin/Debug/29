@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="Origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Xamarin.Android - 随笔分类 - JoesWeek - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite.min.css?v=mxJZfspzqgmSFSdBbMH8zU83VuawcFZooz2hdrdyHlI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/ourozts/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/ourozts/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/ourozts/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 349175;
+        var currentBlogApp = 'ourozts';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Minyx2_Lite';
+    </script>
+    
+    
+    <script src="/skins/minyx2_lite/bundle-minyx2_lite.min.js?v=z_XLIOc5JYwRKqTPu9fAWp7D8tchhGxVWGYvlAiigUQ" type="text/javascript" language="javascript"></script>
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<div id="container">
+    <a class="minyx" href="https://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            Posts - 
+5, 
+Articles - 
+0, 
+Comments - 
+28
+<!---->
+
+
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="https://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="https://i.cnblogs.com/">Dashboard</a>
+        </li>
+        <li>
+            
+    <a id="lnkLogin" href="https://account.cnblogs.com/signin?ReturnUrl=https://www.cnblogs.com/ourozts/">Login</a>
+
+
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="https://www.cnblogs.com/ourozts/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="https://msg.cnblogs.com/send/JoesWeek">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="https://www.cnblogs.com/ourozts/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="https://www.cnblogs.com/ourozts/rss/">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="https://www.cnblogs.com/ourozts/">JoesWeek</a>
+            <!-- 子标题 -->
+            <small>
+                我有一个梦想.
+            </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+
+
+
+<h2>随笔分类 - Xamarin.Android</h2>
+
+    <div class="post post-list-item" id="post_8341975">
+        <h2>
+            
+
+<a id="PostsList1_rpPosts_TitleUrl_0" href="https://www.cnblogs.com/ourozts/p/8341975.html">2017回顾与2018目标</a> 
+        </h2>
+        <small>
+            2018-01-24 15:45 by JoesWeek, 188 阅读, <a href="#" onclick="PutInWz();return false;">收藏</a>, <a id="homepage1_ctl01_rptEntries_lnkEdit_1" href="https://i.cnblogs.com/EditPosts.aspx?postid=8341975">编辑</a>
+        </small>
+        <div class="entry">
+
+                <div class="c_b_p_desc">
+摘要：2017年过去有段时间了，早就打算要写的总结拖到了现在。前段时间朋友圈流行晒18岁的梗，作为第一批90后，马上28岁了，这些年感触良多。工作很多年了，呆过几家公司，现在的公司是我呆的最长的一个，有4年多了，到了不得不改变的时候了。 工作与学习 1.工作内容基本没变，继续维护公司网站，温水煮青蛙。 2                        <a href="https://www.cnblogs.com/ourozts/p/8341975.html" class="c_b_p_desc_readmore">阅读全文</a>
+                </div>
+        </div>
+        <ul class="postmetadata">
+            <li class="icon_comment icon_r">
+                <a id="homepage1_ctl01_rptEntries_lnkCommentCount_1" href="https://www.cnblogs.com/ourozts/p/8341975.html#comments">0 Comment</a>
+            </li>
+            
+<li class="icon_cat" id="BlogPostCategory">
+分类            <a href="https://www.cnblogs.com/ourozts/category/992524.html" target="_blank">Xamarin.Android</a>
+,            <a href="https://www.cnblogs.com/ourozts/category/1082842.html" target="_blank">Xamarin.Forms</a>
+</li>
+<li class="icon_bullet" id="EntryTag">
+标签            <a href="https://www.cnblogs.com/ourozts/tag/%E4%BB%A3%E7%A0%81%E4%B9%8B%E5%A4%96/">代码之外</a>
+</li>
+        </ul>
+        <script type="text/javascript">
+            $(".icon_cat").hide();
+        </script>
+    </div>
+    <script type="text/javascript">
+        var m = window.__blog.postRendered;
+        if (m) {
+            m(__$("post_8341975"));
+        }
+    </script>
+    <div class="post post-list-item" id="post_7553945">
+        <h2>
+            
+
+<a id="PostsList1_rpPosts_TitleUrl_1" href="https://www.cnblogs.com/ourozts/p/7553945.html">优雅的博客园Android客户端</a> 
+        </h2>
+        <small>
+            2017-09-19 20:31 by JoesWeek, 6949 阅读, <a href="#" onclick="PutInWz();return false;">收藏</a>, <a id="homepage1_ctl01_rptEntries_lnkEdit_2" href="https://i.cnblogs.com/EditPosts.aspx?postid=7553945">编辑</a>
+        </small>
+        <div class="entry">
+
+                <div class="c_b_p_desc">
+摘要：介绍 一款优雅的博客园Android客户端，Xamarin App，Material Design风格。如有意见反馈或bug提交，请加QQ群(181050206)交流. 项目地址 Github： &amp;quot;Cnblogs&amp;quot; 欢迎Fork，欢迎Star。 支持功能 登录博客园 查看已发布的博客 查看博文，新闻                        <a href="https://www.cnblogs.com/ourozts/p/7553945.html" class="c_b_p_desc_readmore">阅读全文</a>
+                </div>
+        </div>
+        <ul class="postmetadata">
+            <li class="icon_comment icon_r">
+                <a id="homepage1_ctl01_rptEntries_lnkCommentCount_2" href="https://www.cnblogs.com/ourozts/p/7553945.html#comments">22 Comment</a>
+            </li>
+            
+<li class="icon_cat" id="BlogPostCategory">
+分类            <a href="https://www.cnblogs.com/ourozts/category/992524.html" target="_blank">Xamarin.Android</a>
+</li>
+<li class="icon_bullet" id="EntryTag">
+标签            <a href="https://www.cnblogs.com/ourozts/tag/Xamarin/">Xamarin</a>
+</li>
+        </ul>
+        <script type="text/javascript">
+            $(".icon_cat").hide();
+        </script>
+    </div>
+    <script type="text/javascript">
+        var m = window.__blog.postRendered;
+        if (m) {
+            m(__$("post_7553945"));
+        }
+    </script>
+    <div class="post post-list-item" id="post_6773667">
+        <h2>
+            
+
+<a id="PostsList1_rpPosts_TitleUrl_2" href="https://www.cnblogs.com/ourozts/p/6773667.html">Xamarin.Android 绑定友盟社会化分享组件</a> 
+        </h2>
+        <small>
+            2017-04-27 13:13 by JoesWeek, 1245 阅读, <a href="#" onclick="PutInWz();return false;">收藏</a>, <a id="homepage1_ctl01_rptEntries_lnkEdit_3" href="https://i.cnblogs.com/EditPosts.aspx?postid=6773667">编辑</a>
+        </small>
+        <div class="entry">
+
+                <div class="c_b_p_desc">
+摘要：Xamarin.Android 绑定友盟社会化分享组件 最近在开发 &amp;quot;博客园Android App&amp;quot; 的时候需要用到友盟社会化分享组件，在github上搜了一下都没有找到最新版本绑定好的项目，就自己动手来绑定一个最新版本的友盟社会化分享组件(文章发布时的最新版为v6.4.3)。 下载友盟Androi                        <a href="https://www.cnblogs.com/ourozts/p/6773667.html" class="c_b_p_desc_readmore">阅读全文</a>
+                </div>
+        </div>
+        <ul class="postmetadata">
+            <li class="icon_comment icon_r">
+                <a id="homepage1_ctl01_rptEntries_lnkCommentCount_3" href="https://www.cnblogs.com/ourozts/p/6773667.html#comments">3 Comment</a>
+            </li>
+            
+<li class="icon_cat" id="BlogPostCategory">
+分类            <a href="https://www.cnblogs.com/ourozts/category/992524.html" target="_blank">Xamarin.Android</a>
+</li>
+<li class="icon_bullet" id="EntryTag">
+标签            <a href="https://www.cnblogs.com/ourozts/tag/C%23/">C#</a>
+,            <a href="https://www.cnblogs.com/ourozts/tag/Xamarin.Android/">Xamarin.Android</a>
+,            <a href="https://www.cnblogs.com/ourozts/tag/%E5%8F%8B%E7%9B%9F%E5%88%86%E4%BA%AB/">友盟分享</a>
+</li>
+        </ul>
+        <script type="text/javascript">
+            $(".icon_cat").hide();
+        </script>
+    </div>
+    <script type="text/javascript">
+        var m = window.__blog.postRendered;
+        if (m) {
+            m(__$("post_6773667"));
+        }
+    </script>
+
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) {
+        m();
+    }
+</script>
+
+<div class="pager">
+    
+
+
+
+
+</div>
+
+
+
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            <div id="about">
+                <div>
+                    <h2 id="about_title">About</h2>
+                    <div id="about_body">
+                        <div id="sidebar_news"></div>
+                        <script type="text/javascript">loadBlogNews();</script>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            <div id="mySearchWrapper">
+                <div id="mySearch">
+                    <input type="image" src="/skins/minyx2_lite/images/btnsearch.gif" id="btnZzk"  class="submit" onclick="zzk_go();return false;"/>
+                    <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword" /></label>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            </div>
+            <div id="sideRight">
+            </div>
+            <div id="sideLeft">
+            </div>            
+                <div id="sideContainer">
+                </div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/ajax/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                $.ajax({
+                                    url: getAjaxBaseUrl() + 'TopLists.aspx',
+                                    type: 'get',
+                                    dataType: 'text',
+                                    success: function (topLists) {
+                                        if (topLists) {
+                                            $("#sideContainer").append(topLists);
+                                        }
+                                        var m = window.__blog.sideContainerRendered;
+                                        if (m) { m(__$("sideContainer")); }
+                                        window.__blog.sidebar.__layout();
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                </script>
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            <p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright &copy; 2020 JoesWeek
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+<p>
+<a href="http://www.cnblogs.com">博客园</a>
+</p>
+</div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+
+
+    
+</body>
+</html>

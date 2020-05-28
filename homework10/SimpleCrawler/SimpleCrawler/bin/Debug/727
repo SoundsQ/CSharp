@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="服务器是之前已经购买了的 1.腾讯云产品中搜索域名注册（产品太多了懒得找，直接搜索来得快些） 2.进去之后可以选择各种后缀的域名，输入自己喜欢的，看看哪些后缀是没有被注册的。自己挑选一个就可以，按照指" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>域名和服务器绑定及https协议更换 - 白露非霜 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/nijunyang/custom.css?v=A9u7xVfhSJoTmppKz90WY0xn/08=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nijunyang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nijunyang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nijunyang/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 372735;
+        var currentBlogApp = 'nijunyang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/nijunyang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/nijunyang/">bluedarkni</a>
+</h1>
+<h2>
+笨鸟也要飞，蜗牛也要爬呀...
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nijunyang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%99%BD%E9%9C%B2%E9%9D%9E%E9%9C%9C">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nijunyang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+89&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+13</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/nijunyang/p/12783768.html">域名和服务器绑定及https协议更换</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-family: 宋体;">服务器是之前已经购买了的</span></p>
+<p><span style="font-family: 宋体;">1.腾讯云产品中搜索域名注册（产品太多了懒得找，直接搜索来得快些）</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002744119-1128399681.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">2.<span style="font-family: 宋体;">进去之后可以选择各种后缀的域名，输入自己喜欢的，看看哪些后缀是没有被注册的。自己挑选一个就可以，按照指导给付钱就行了。看见有个</span>xyz<span style="font-family: 宋体;">后缀的，刚好是三维坐标系，就随手搜了下三维时代，然后就注册了这个。</span></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002813021-1752593320.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>3.<span style="font-family: 宋体;">域名到手，进入</span>&ldquo;域名管理&rdquo;就可以看到自己的域名了。如果找不到域名管理就去云产品搜索&ldquo;域名管理&rdquo;</p>
+<p><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002859222-1278912269.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>4.<span style="font-family: 宋体;">实名认证，按照指导去实名认证就可以了，不认证过几天就用不了了</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002909585-13588773.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;5.<span style="font-family: 宋体;">绑定服务器（前提是已经有服务器了），点击解析，进入设置</span>--<span style="font-family: 宋体;">添加记录</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002926899-1379948768.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;"><span style="font-family: 宋体;">主机记录：选择解析的方式，比如</span>&ldquo;<span style="font-family: Calibri;">www.</span><span style="font-family: 宋体;">域名&rdquo;这种，记录值就是你服务器的</span><span style="font-family: Calibri;">IP</span><span style="font-family: 宋体;">。配置好了之后就可以通过域名访问服务器了</span></span></p>
+<p><span style="font-family: 宋体;"><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427002949405-30029402.png" alt=""></span></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>6.<span style="font-family: 宋体;">服务器安装</span>nginx----<span style="font-family: 宋体;">如果不会的可以看 </span><span style="font-family: Calibri;">-&gt; &nbsp; <a href="https://www.cnblogs.com/nijunyang/p/12272915.html" target="_blank">nginx</a></span><a href="https://www.cnblogs.com/nijunyang/p/12272915.html" target="_blank"><span style="font-family: 宋体;">安装及基础命令</span></a><span style="font-family: 宋体;"> 这篇文章</span></p>
+<p><span style="font-family: 宋体;">启动</span>nginx<span style="font-family: 宋体;">之后，在浏览器访问 </span><span style="font-family: Calibri;">www.sanweishidai.xyz</span><span style="font-family: 宋体;">就可以访问到</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">服务了。</span></p>
+<p><span style="font-family: 宋体;">但是这个时候的是</span>http<span style="font-family: 宋体;">协议的请求，如果我们换成</span><span style="font-family: Calibri;">https</span><span style="font-family: 宋体;">是如法访问的。我们需要申请</span><span style="font-family: Calibri;">ssl</span><span style="font-family: 宋体;">证书</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;7.懒得找的东西，直接搜索ssl证书</p>
+<p><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003135763-2128866333.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;8.<span style="font-family: 宋体;">申请免费的证书，然后按照要求输入自己刚才注册的域名就可以了。</span></p>
+<p><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003153985-1548853723.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003202005-524359641.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003208354-468530151.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003215041-1917377161.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003246584-384022281.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>9.去刚才域名解析那里，新增一个解析，数值就是上面证书详情里面的内容</p>
+<p><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003333337-581661181.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;10 <span style="font-family: 宋体;">配置好了过一会回去刷新</span>SSL<span style="font-family: 宋体;">证书那边，生效需要一定时间。就可以看到证书验证通过，颁发了</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003353748-625944081.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;"></span></p>
+<p>&nbsp;11.<span style="font-family: 宋体;">下载证书到本地解压，可以看到里面有几种服务器的</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003415567-19175807.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;"></span></p>
+<p>&nbsp;<span style="font-family: 宋体;">因为我装的是</span>nginx<span style="font-family: 宋体;">，所以就使用</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">的，其他的可以看看这个：</span><a href="https://cloud.tencent.com/document/product/400/4143"><span style="text-decoration: underline;">https://cloud.tencent.com/document/product/400/4143</span></a></p>
+<p><span style="font-family: 宋体;">将</span>nginx<span style="font-family: 宋体;">目录下的文件放到</span><span style="font-family: Calibri;">/usr/local/nginx/conf</span><span style="font-family: 宋体;">（对应自己的</span><span style="font-family: Calibri;">ng</span><span style="font-family: 宋体;">安装目录）这个目录下。</span></p>
+<p><span style="font-family: 宋体;">12.<span style="font-family: 宋体;">修改</span>ng<span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">conf</span><span style="font-family: 宋体;">文件配置，如下</span><span style="font-family: Calibri;">: https</span><span style="font-family: 宋体;">默认是</span><span style="font-family: Calibri;">443</span><span style="font-family: 宋体;">端口</span></span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">server {
+        listen       </span>443<span style="color: #000000;"> ssl;
+        server_name  www.sanweishidai.xyz;
+        
+        #证书文件名称
+        ssl_certificate 1_sanweishidai.xyz_bundle.crt; 
+        #私钥文件名称
+        ssl_certificate_key 2_sanweishidai.xyz.key; 
+        
+        ssl_session_timeout 5m;
+        #请按照以下协议配置
+        ssl_protocols TLSv1 TLSv1.</span>1 TLSv1.2<span style="color: #000000;">; 
+        #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+        ssl_ciphers ECDHE</span>-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!<span style="color: #000000;">DHE; 
+        ssl_prefer_server_ciphers on;
+
+        #charset koi8</span>-<span style="color: #000000;">r;
+
+        #access_log  logs</span>/<span style="color: #000000;">host.access.log  main;
+
+        location </span>/<span style="color: #000000;"> {
+            root   html;
+            index  index.html index.htm;
+        }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>13 <span style="font-family: 宋体;">如果</span>nginx<span style="font-family: 宋体;">没有安装</span><span style="font-family: Calibri;">--with-http_ssl_module</span><span style="font-family: 宋体;">这个模块是识别不了上面的配置文件的</span></p>
+<p>./configure --with-http_ssl_module&nbsp;<span style="font-family: 宋体;">安装模块重新编译</span> make install<span style="font-family: 宋体;">，模块安装详见还有nginx的配置文件：</span><a href="https://www.cnblogs.com/nijunyang/p/12272915.html" target="_blank"><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">安装及基础命令</span></a></p>
+<p><span style="font-family: 宋体;">然后重新启动服务，就可以使用</span>https<span style="font-family: 宋体;">协议访问</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">了</span></p>
+<p><span style="font-family: 宋体;"><img src="https://img2020.cnblogs.com/blog/1216484/202004/1216484-20200427003648125-79724918.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;"></span></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-27 00:38</span>&nbsp;
+<a href="https://www.cnblogs.com/nijunyang/">白露非霜</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12783768" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12783768);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 372735, cb_blogApp = 'nijunyang', cb_blogUserGuid = 'e0b913ba-3f74-49c4-685c-08d49c352df3';
+    var cb_entryId = 12783768, cb_entryCreatedDate = '2020-04-27 00:38', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 白露非霜
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+<span class="id_cnzz_stat_icon" id="id_cnzz_stat_icon_1278726400">访问量</span>
+
+</div>
+    </div>
+</body>
+</html>

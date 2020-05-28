@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="0x01 前言 在这之前想必大家对ab(http)与abs(https)也有一些了解,我们今天不去看ab和abs, SuperBenchmarker (sb.exe)是一个压测工具,他是一个受Apac" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> SuperBenchmarker一个用.NET编写的压测工具 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12447263.html"> SuperBenchmarker一个用.NET编写的压测工具</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <blockquote>
+<h2 id="0x01-前言">0x01 前言</h2>
+</blockquote>
+<p>在这之前想必大家对ab(http)与abs(https)也有一些了解,我们今天不去看ab和abs,<strong>SuperBenchmarker</strong>(sb.exe)是一个压测工具,他是一个受Apache Benchmark的启发,他会在终端窗口为我们显示最终的结果,同时也会在web界面生成一个动态结果。<strong>SuperBenchmarker</strong>(sb.exe)可以在Windows或者Mac上运行(尚未在Linux上进行测试),他可以安装在.NET4.52+或者.NET Core2.0+。</p>
+<blockquote>
+<h2 id="0x02-安装">0x02 安装</h2>
+</blockquote>
+<p>我们可以直接拉取源代码进行构建</p>
+<pre><code class="language-bash">git clone https://github.com/aliostad/SuperBenchmarker
+ cd SuperBenchmarker 
+./build.sh
+</code></pre>
+<blockquote>
+<h2 id="0x03-参数">0x03 参数</h2>
+</blockquote>
+<p><img src="https://imgkr.cn-bj.ufileos.com/889e974c-6d88-4c95-a069-601087810599.png" alt=""></p>
+<ul>
+<li>-c  --concurrency        (Default: 1) 并发请求数</li>
+<li>-n, --numberOfRequests       (Default: 100) 请求数量</li>
+<li>-m, --method                 (Default: GET) HTTP Method</li>
+<li>-u, --url                    请求地址，也就是需要压测的地址</li>
+<li>-v,--verbose：输出详细</li>
+<li>-h, --headers：输出HTTP Header</li>
+<li>-k, --cookies：输出cookie</li>
+<li>-q, --onlyRequest：仅输出请求信息</li>
+</ul>
+<blockquote>
+<h2 id="0x04-运行">0x04 运行</h2>
+</blockquote>
+<pre><code class="language-bash">dotnet ./src/SuperBenchmarker/bin/Debug/netcoreapp2.0/SuperBenchmarker.dll -u https://baidu.com -N 10
+</code></pre>
+<p>如下所示：</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/e012e132-5de2-4499-919b-1ef85edffbc2.png" alt=""></p>
+<p>通过如下结果图我们可以看到吞吐率(RPS)和总请求数量(requests)、最大处理时长、最小处理时长、平均时长等信息</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/78595097-4347-4835-8672-77c9f0d104b3.png" alt=""></p>
+<p>TPS吞吐量请求数/请求响应的时间(s) ，即每秒请求数，对应 Request per second<br>
+响应时间：请求发送到接受到请求的时间差，单位为ms，一般看90%的响应时间<br>
+并发连接数：每秒服务器端能处理的连接数。并发连接数 = 吞吐量*响应时间</p>
+<p><strong>TPS和QPS区别</strong><br>
+QPS：Queries Per Second，意思是“每秒查询率”，是一台服务器每秒能够响应的查询次数，是对一个特定的查询服务器（比如是读写分离的架构，就是读的服务器）在规定时间内所处理流量多少的衡量标准。</p>
+<p>TPS：TransactionsPerSecond，意思是每秒事务数，一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+<p><strong>QPS计算</strong></p>
+<p>QPS = req/sec = 请求数/秒</p>
+<p><strong>【QPS计算PV和机器的方式】</strong></p>
+<p>QPS统计方式 [一般使用 http_load 进行统计]<br>
+QPS = 总请求数 / (进程总数 * 请求时间)<br>
+QPS: 单个进程每秒请求服务器的成功次数</p>
+<p>单台服务器每天PV计算<br>
+公式1：每天总PV = QPS * 3600 * 6<br>
+公式2：每天总PV = QPS * 3600 * 8</p>
+<p>服务器计算<br>
+服务器数量 = ceil(每天总PV / 单台服务器每天总PV)</p>
+<p><strong>【峰值QPS和机器计算公式】</strong></p>
+<p>原理：每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间<br>
+公式：(总PV数 * 80%) / (每天秒数 * 20%) = 峰值时间每秒请求数(QPS)<br>
+机器：峰值时间每秒QPS / 单台机器的QPS   = 需要的机器</p>
+<p>问：每天300w PV 的在单台机器上，这台机器需要多少QPS？<br>
+答：(3000000 * 0.8) / (86400 * 0.2) = 139 (QPS)</p>
+<p>问：如果一台机器的QPS是58，需要几台机器来支持？</p>
+<p>答：139 / 58 = 3</p>
+<blockquote>
+<h2 id="reference">Reference</h2>
+</blockquote>
+<p><a href="https://www.cnblogs.com/Renyi-Fan/p/12040781.html">https://www.cnblogs.com/Renyi-Fan/p/12040781.html</a><br>
+<a href="https://github.com/aliostad/SuperBenchmarker">https://github.com/aliostad/SuperBenchmarker</a><br>
+<a href="https://www.cnblogs.com/uncleyong/p/11059556.html">https://www.cnblogs.com/uncleyong/p/11059556.html</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-09 10:49</span>&nbsp;
+<a href="https://www.cnblogs.com/yyfh/">HueiFeng</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12447263" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12447263);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 329108, cb_blogApp = 'yyfh', cb_blogUserGuid = 'f2702a43-bbde-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12447263, cb_entryCreatedDate = '2020-03-09 10:49', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 原子类型字段更新器 在 中，原子" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>原子类型字段更新器AtomicXxxxFieldUpdater - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/12167772.html">原子类型字段更新器AtomicXxxxFieldUpdater</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<h2 id="原子类型字段更新器">原子类型字段更新器</h2>
+<p>在<code>java.util.concurrent.atomic</code>中，原子类型字段更新器有以下三种：</p>
+<ul>
+<li>AtomicIntegerFieldUpdater：基于反射的工具类，可以原子性的更新指定对象的指定int类型字段。</li>
+<li>AtomicLongFieldUpdater：基于反射的工具类，可以原子性的更新指定对象的指定long类型字段。</li>
+<li>AtomicReferenceFieldUpdater：基于反射的工具类，可以原子性的更新指定对象的指定应用类型字段。</li>
+</ul>
+<h2 id="使用规则">使用规则</h2>
+<p>原子类型字段更新器在内部通过Unsafe类的native方法保证操作的原子性。</p>
+<p>关于原子类型字段更新器的使用需要注意以下几个方面：</p>
+<ul>
+<li>字段必须是volatile类型的，用于保证可见性。</li>
+<li>字段和字段更新器的访问类型(public/protected/private)必须一致。</li>
+<li>字段只能是实例变量，不能是类变量(static)。</li>
+<li>字段不能是final的变量，这样的字段不可修改。</li>
+<li>如果要处理Integer和Long类型，则需要使用AtomicReferenceFieldUpdater</li>
+</ul>
+<h2 id="使用列子（以atomicintegerfieldupdater为列）">使用列子（以AtomicIntegerFieldUpdater为列）</h2>
+<pre><code class="language-java">public class AtomicIntegerFieldUpdaterTest {
+     private static AtomicIntegerFieldUpdater&lt;User&gt; a = AtomicIntegerFieldUpdater.newUpdater(User.class, &quot;old&quot;);
+
+    public static void main(String[] args) {
+        // 设置柯南的年龄是10岁
+        User conan = new User(&quot;conan&quot;,10);
+        // 柯南长了一岁，但是仍然会输出旧的年龄
+        System.out.println(a.getAndIncrement(conan));
+        // 输出柯南现在的年龄
+        System.out.println(a.get(conan));
+    }
+
+    public static class User {
+        private String name;
+        public volatile int old;
+
+        public User(String name,int old) {
+            this.name = name;
+            this.old = old;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getOld() {
+            return old;
+        }
+    }
+}
+</code></pre>
+<h2 id="方法说明">方法说明</h2>
+<p>首先学习上述三种原子类型字段更新器的通用方法，这些方法如下：</p>
+<ul>
+<li>构造器：只有一个无参protected的构造函数，并不可用。</li>
+<li>newUpdater(fieldClass,fieldName)：原子类型字段更新器提供的一个静态泛型方法，用于创建和返回指定字段和指定类型的原子类型字段更新器实例对象。</li>
+<li>get(obj)：赋值，具有原子性和可见性。</li>
+<li>set(obj)：取值，具有原子性和可见性。</li>
+<li>lazySet(obj,newValue)：赋值，具有原子性，不具备可见性。</li>
+<li>getAndSet(obj,newValue)：赋值并返回旧值，具有原子性和可见性。</li>
+<li>compareAndSet(obj,expect,update)：如果当前是期望值则赋值并返回赋值成功与否，具有原子性和可见性。</li>
+<li>weakCompareAndSet(obj,expect,update)：与compareAndSet(obj,expect,update)类似。</li>
+</ul>
+<p>原子类型字段更新器的通用方法与普通原子类型的通用方法类似，唯一的区别在于多了一个参数：obj(被修改的字段的所属对象)。</p>
+<p>AtomicIntegerFieldUpdater和AtomicLongFieldUpdater的独有方法，下面这些方法AtomicReferenceFieldUpdater类没有：</p>
+<ul>
+<li>getAndAdd(obj)：增量计算并返回旧值，具有原子性和可见性。</li>
+<li>addAndGet(obj)：增量计算并返回新值，具有原子性和可见性。</li>
+<li>getAndIncrement(obj)：自增并返回旧值，类似i ++，具有原子性和可见性。</li>
+<li>incrementAndGet(obj)：自增并返回新值，类似++ i，具有原子性和可见性。</li>
+<li>getAndDecrement(obj)：自减并返回旧值，类似i --，具有原子性和可见性。</li>
+<li>decrementAndGet(obj)：自减并返回新值，类似-- i，具有原子性和可见性。</li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-08 17:19</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12167772" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12167772);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 12167772, cb_entryCreatedDate = '2020-01-08 17:19', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="问题描述 使用CentOS7的 yum 包管理器安装了 Kubernetes 集群，使用 kubectl 创建服务成功后，执行 ，发现AGE虽然在不断增加，但状态始终不变 本文内容 分析问题原因 给出" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>CentOS 7 yum安装 k8s 创建Pod一直处于ContainerCreating状态 问题解决 - 东北小狐狸 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=pdMIVgsH8kXt-vOWnlL0N20TlHt3UyP9HzGgocfsP4s" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/hellxz/custom.css?v=l1VT2gGEUGbO0cihIozMxGClos8=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=na9bpAY4yh7uEWCcrXj3vfJM3VBse8YtU6-5fUUQPz0" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/hellxz/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/hellxz/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/hellxz/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 349591;
+        var currentBlogApp = 'hellxz';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'coffee';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/hellxz/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/hellxz/">Hellxz博客</a>
+</h1>
+<h2>
+积沙成塔，集腋成裘
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/hellxz/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+</li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+
+	
+</li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<!--done-->
+随笔- 
+174&nbsp;
+文章- 
+3&nbsp;
+评论- 
+111&nbsp;
+
+
+
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/hellxz/p/k8s-pod-always-container-creating-status-problem.html">CentOS 7 yum安装 k8s 创建Pod一直处于ContainerCreating状态 问题解决</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h2 id="问题描述">问题描述</h2>
+<p>使用CentOS7的 yum 包管理器安装了 Kubernetes 集群，使用 kubectl 创建服务成功后，执行 <code>kubectl get pods</code>，发现AGE虽然在不断增加，但状态始终不变</p>
+<p><img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417155421590-1506160825.png" alt=""></p>
+<h2 id="本文内容">本文内容</h2>
+<ul>
+<li>分析问题原因</li>
+<li>给出直接解决此问题的方式 （不完美）</li>
+<li>给出其他方案</li>
+</ul>
+<p>且听我娓娓道来~</p>
+<h2 id="问题分析与解决">问题分析与解决</h2>
+<p>kubectl 提供了 describe 子命令来输出指定的一个/多个资源的详细信息。</p>
+<p>执行 <code>kubectl describe pod mytomcat-9lcq5</code>，查看问题 Pod 的状态信息，输出如下：</p>
+<pre><code class="language-bash">[root@kube-master app]# kubectl describe pod mytomcat-9lcq5
+Name:		mytomcat-9lcq5
+Namespace:	default
+Node:		kube-node-2/192.168.87.145
+Start Time:	Fri, 17 Apr 2020 15:53:50 +0800
+Labels:		app=mytomcat
+Status:		Pending
+IP:		
+Controllers:	ReplicationController/mytomcat
+Containers:
+  mytomcat:
+    Container ID:		
+    Image:			tomcat:9-jre8-alpine
+    Image ID:			
+    Port:			8080/TCP
+    State:			Waiting
+      Reason:			ContainerCreating
+    Ready:			False
+    Restart Count:		0
+    Volume Mounts:		&lt;none&gt;
+    Environment Variables:	&lt;none&gt;
+Conditions:
+  Type		Status
+  Initialized 	True 
+  Ready 	False 
+  PodScheduled 	True 
+No volumes.
+QoS Class:	BestEffort
+Tolerations:	&lt;none&gt;
+Events:
+  FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason		Message
+  ---------	--------	-----	----			-------------	--------	------		-------
+  5m		5m		1	{default-scheduler }			Normal		Scheduled	Successfully assigned mytomcat-9lcq5 to kube-node-2
+  4m		4m		1	{kubelet kube-node-2}			Warning		FailedSync	Error syncing pod, skipping: failed to &quot;StartContainer&quot; for &quot;POD&quot; with ErrImagePull: &quot;image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (Get https://registry.access.redhat.com/v1/_ping: net/http: TLS handshake timeout)&quot;
+
+  3m	3m	1	{kubelet kube-node-2}		Warning	FailedSync	Error syncing pod, skipping: failed to &quot;StartContainer&quot; for &quot;POD&quot; with ErrImagePull: &quot;image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (Network timed out while trying to connect to https://registry.access.redhat.com/v1/repositories/rhel7/pod-infrastructure/images. You may want to check your internet connection or if you are behind a proxy.)&quot;
+
+  2m	2m	1	{kubelet kube-node-2}		Warning	FailedSync	Error syncing pod, skipping: failed to &quot;StartContainer&quot; for &quot;POD&quot; with ErrImagePull: &quot;image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.  details: (Error: image rhel7/pod-infrastructure:latest not found)&quot;
+
+  3m	1m	3	{kubelet kube-node-2}		Warning	FailedSync	Error syncing pod, skipping: failed to &quot;StartContainer&quot; for &quot;POD&quot; with ImagePullBackOff: &quot;Back-off pulling image \&quot;registry.access.redhat.com/rhel7/pod-infrastructure:latest\&quot;&quot;
+
+</code></pre>
+<p>通过查看最下方的输出信息，<code>Successfully assigned mytomcat-9lcq5 to kube-node-2</code> 说明这个 Pod 分配到 kube-node-2 这个主机上了，然后在这个主机上创建 Pod 失败，</p>
+<p>原因是 <code>image pull failed for registry.access.redhat.com/rhel7/pod-infrastructure:latest, this may be because there are no credentials on this request.</code></p>
+<p>通过以上信息，我们了解到通过红帽自家的 docker 仓库 pull 镜像，需要使用 CA 证书进行认证，才能 pull 成功</p>
+<p>docker的证书在 <code>/etc/docker/certs.d</code> 目录下，根据上边的错误提示域名是 <code>registry.access.redhat.com</code>，证书在这个目录中</p>
+<p><img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417161409458-1454341729.gif" alt=""></p>
+<p>经过 <code>ll</code> 命令查看，发现 <code>/etc/docker/certs.d/registry.access.redhat.com/redhat-ca.crt</code> 是一个软链接（<a href="https://www.runoob.com/linux/linux-comm-ln.html">软链接是什么？</a>），指向到 <code>/etc/rhsm/ca/redhat-uep.pem</code>，</p>
+<p>熟悉软连接的我们知道，处于红色闪烁状态的目标是不存在，需要生成 <code>/etc/rhsm/ca/redhat-uep.pem</code> 证书文件</p>
+<p>生成证书:</p>
+<pre><code class="language-bash"># openssl s_client -showcerts -servername registry.access.redhat.com -connect registry.access.redhat.com:443 &lt;/dev/null 2&gt;/dev/null | openssl x509 -text &gt; /etc/rhsm/ca/redhat-uep.pem
+</code></pre>
+<blockquote>
+<p>生成证书命令执行有时会出现 <code>unable to load certificate 139930742028176:error:0906D06C:PEM routines:PEM_read_bio:no start line:pem_lib.c:707:Expecting: TRUSTED CERTIFICATE</code> 问题，重新执行就好</p>
+</blockquote>
+<p>命令执行完毕后，查看软链接指向的证书文件：</p>
+<pre><code class="language-bash">[root@kube-node-2 registry.access.redhat.com]# ll /etc/rhsm/ca/redhat-uep.pem
+-rw-r--r-- 1 root root 9233 Apr 17 16:55 /etc/rhsm/ca/redhat-uep.pem
+</code></pre>
+<p>证书文件已经存在，我们去 k8s 管理节点 kube-master 主机删除刚才的 Pods，等待 Pod 重新创建成功 （第二个节点因为网络问题没有拉成功镜像……）</p>
+<p><img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417165819483-983958088.png" alt=""></p>
+<p>至此完成 Pod 的创建</p>
+<blockquote>
+<p>但是还有存在些问题的，当前国内网络环境访问外边的网络偶尔会有问题，导致创建 Pod 失败，通过 describe 描述还是同样的信息提示，但是查看证书文件却存在且有内容</p>
+</blockquote>
+<h2 id="原因分析与其他方案">原因分析与其他方案</h2>
+<p>k8s 管理节点分配创建 Pod 到执行节点，到达执行节点后，拉取红帽 docker 仓库的 Pod基础镜像 <code>pod-infrastructure:latest</code>，由于其仓库使用 https 需要验证证书，证书不存在导致失败</p>
+<p>另外就是因为拉取的镜像是红帽 docker 仓库中的，在国内网络环境下握手失败，无法下载镜像</p>
+<p>所以问题就成了 <code>如何解决 k8s pod-infrastructure 镜像拉取失败</code>，这里给出一个方案，步骤如下：</p>
+<ul>
+<li>
+<p>拉取 docker 官方仓库其他人上传的 <code>pod-infrastructure</code> 镜像，<code>docker pull tianyebj/pod-infrastructure</code></p>
+</li>
+<li>
+<p>添加tag标签，改为私有仓库地址，如：<code>docker tag tianyebj/pod-infrastructure 10.2.7.70:5000/dev/pod-infrastructure</code></p>
+</li>
+<li>
+<p>push镜像到私有仓库，如：<code>docker push 10.2.7.70:5000/dev/pod-infrastructure</code></p>
+<p><img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417172926594-1963103907.png" alt=""></p>
+</li>
+<li>
+<p>修改所有 worker 节点的 <code>/etc/kubernetes/kubelet</code>，修改 <code>registry.access.redhat.com/rhel7/pod-infrastructure</code> 为刚才设置的 tag 标签</p>
+<pre><code class="language-bash">sed -i &quot;s#registry.access.redhat.com/rhel7/pod-infrastructure#&lt;私有仓库pod-infrastructure镜像tag&gt;#&quot; /etc/kubernetes/kubelet
+</code></pre>
+<p><img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417173653530-597321189.png" alt=""></p>
+</li>
+<li>
+<p>重启所有 worker 节点的 kubelet，<code>systemctl restart kubelet</code>，即可</p>
+</li>
+</ul>
+<blockquote>
+<p>注意事项：</p>
+<ul>
+<li>上传的镜像要设为公开镜像，否则 kubelet 自己没权限拉镜像的，另外也可以去 ssh 登录 worker 节点登录仓库，执行<code>docker pull &lt;私有仓库pod-infrastructure镜像tag&gt;</code></li>
+</ul>
+</blockquote>
+<p>最后的效果：<br>
+<img src="https://img2020.cnblogs.com/blog/1149398/202004/1149398-20200417181534739-1430387024.png" alt=""></p>
+<h2 id="参考">参考</h2>
+<p><a href="https://github.com/CentOS/sig-atomic-buildscripts/issues/329">https://github.com/CentOS/sig-atomic-buildscripts/issues/329</a><br>
+<a href="https://cloud.tencent.com/developer/article/1156329">https://cloud.tencent.com/developer/article/1156329</a></p>
+<p><strong>本文采用 CC BY 4.0 协议进行授权，转载请标注作者署名及来源。</strong><br>
+<a href="https://www.cnblogs.com/hellxz/p/k8s-pod-always-container-creating-status-problem.html">https://www.cnblogs.com/hellxz/p/k8s-pod-always-container-creating-status-problem.html</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 18:25</span>&nbsp;
+<a href="https://www.cnblogs.com/hellxz/">东北小狐狸</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12721652" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12721652);return false;">收藏</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 349591, cb_blogApp = 'hellxz', cb_blogUserGuid = '78bba0fa-2f24-e711-9fc1-ac853d9f53cc';
+    var cb_entryId = 12721652, cb_entryCreatedDate = '2020-04-17 18:25', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 东北小狐狸
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!--图片放大功能-->
+<!-- zoom.js 的样式 -->
+<link rel="stylesheet" type="text/css" href="https://blog-static.cnblogs.com/files/yadongliang/zoom.css">
+<!-- jQuery 的 cdn -->
+<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+<!-- Bootstrap 的 transition.js cdn（过渡动画插件）-->
+<script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/transition.js"></script>
+<!-- zoom.js 核心代码 -->
+<script src="https://blog-static.cnblogs.com/files/yadongliang/zoom.js"></script>
+<script type='text/javascript'>$('#cnblogs_post_body img').attr('data-action', 'zoom');</script>
+
+<!-- 定制返回文章顶部按急钮 -->
+<a href="#top">
+    <div id="back-div">
+      <div id="back-top"></div>
+      <div class="top-font">top</div>
+    </div>
+</a>
+    </div>
+</body>
+</html>

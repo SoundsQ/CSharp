@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>轩辕之风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanyuan/custom.css?v=1KFqgc8N4u9cFrFdaEZzuOblzkw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanyuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanyuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanyuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 193695;
+        var currentBlogApp = 'xuanyuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanyuan/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanyuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BE%95%E4%B9%8B%E9%A3%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanyuan/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+42&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+220</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/04/26.html">2020年4月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12776866.html">
+    哈希表哪家强？几大编程语言吵起来了！
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：哈希表华山论剑 比特宇宙编程语言联合委员会准备举办一次大会，主题为 哈希表 ，给各大编程语言帝国都发去了邀请函。 很快就到了大会这一天 联合委员会秘书长开场发言：“诸位，为促进技术交流与发展，增强各帝国友谊，联合委员会特设此盛会，感谢诸位的捧场” 会场传来一阵鼓掌声&#183;&#183;&#183;&#183;&#183;&#183; 秘书长继续发言：“本            <a href="https://www.cnblogs.com/xuanyuan/p/12776866.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-26 09:08 轩辕之风 阅读 (2695) 评论 (28)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12776866" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/04/23.html">2020年4月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12758678.html">
+    调用sleep后，我做了一个噩梦
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：sleep系统调用 我是一个线程，生活在Linux帝国。一直以来辛勤工作，日子过得平平淡淡，可今天早上发生了一件事让我回想起来都后怕。 早上，我还是如往常一样执行着人类编写的代码指令，不多时走到了一个冷门的分支，一个 函数调用摆在了我的面前。 终于可以去休息了！听老一辈的线程们说，执行了这个函数就可            <a href="https://www.cnblogs.com/xuanyuan/p/12758678.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-23 09:42 轩辕之风 阅读 (449) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12758678" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/04/16.html">2020年4月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12710715.html">
+    震撼！全网第一张源码分析全景图揭秘Nginx
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：不管是C/C++技术栈，还是PHP，Java技术栈，从事后端开发的朋友对 nginx 一定不会陌生。 想要深入学习nginx，阅读源码一定是非常重要的一环，但nginx源码量毕竟还是不算少，一不小心就容易陷入某个细节，迷失在茫茫码海之中。 如果有一张地图，让我们开启上帝视角，总览全局，帮助我们快速学            <a href="https://www.cnblogs.com/xuanyuan/p/12710715.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-16 09:56 轩辕之风 阅读 (2299) 评论 (13)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12710715" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/04/03.html">2020年4月3日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12625042.html">
+    一个整数＋1引发的灾难
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：帝国危机 夜幕降临，喧嚣褪去，繁忙的Linux帝国渐渐平静了下来，谁也没有想到，一场改变帝国命运的风暴正在悄然而至...... “咚咚！”，帝国安全部长办公室的敲门声，打破了夜晚的宁静。 “部长，刚刚发现有线程在修改 passwd 文件”，原来是文件系统部门的小黑到访。 “这有什么大惊小怪的？只要有            <a href="https://www.cnblogs.com/xuanyuan/p/12625042.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-03 10:41 轩辕之风 阅读 (1751) 评论 (9)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12625042" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/03/20.html">2020年3月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12529598.html">
+    一网打尽！每个程序猿都该了解的黑客技术大汇总
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：上面这个段子估计很多朋友都看过，程序员被黑过无数次，在其他人眼中，仿佛我们需要写得了木马，翻得了围墙，修得了电脑，找得到资源，但凡是跟计算机沾点边的，咱都得会才行。 段子归段子，言归正传，对于咱们程序员来说，多多少少了解一些信息安全的技术知识还是大有裨益的，不仅能了解一些计算机和网络的底层原理，也能            <a href="https://www.cnblogs.com/xuanyuan/p/12529598.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-20 09:15 轩辕之风 阅读 (4316) 评论 (25)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12529598" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/03/12.html">2020年3月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12467264.html">
+    看过无数Java GC文章，这5个问题你也未必知道！
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：读者朋友们可能已经看过太多关于Java垃圾回收相关的文章，如果没有，墙裂安利大家看下面这篇： &quot;看完这篇垃圾回收，和面试官扯皮没问题了&quot; 本文不再重复谈GC算法以及垃圾回收器，而是谈谈在GC发生的时候，有几个可能被忽略的问题。搞懂这些问题，相信将对GC的理解能再加深几分。 本文主要内容 Q1: GC            <a href="https://www.cnblogs.com/xuanyuan/p/12467264.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-12 09:51 轩辕之风 阅读 (336) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12467264" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/03/10.html">2020年3月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12453796.html">
+    Python一键转Jar包，Java调用Python新姿势！
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：粉丝朋友们，不知道大家看故事看腻了没（要是没腻可一定留言告诉我^\_^），今天这篇文章换换口味，正经的来写写技术文。言归正传，咱们开始吧！ 本文结构： 需求背景 进击的 Python 随着人工智能的兴起，Python 这门曾经小众的编程语言可谓是焕发了第二春。 以 tensorflow、pytorc            <a href="https://www.cnblogs.com/xuanyuan/p/12453796.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-10 09:39 轩辕之风 阅读 (502) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12453796" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/03/05.html">2020年3月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12419730.html">
+    一个故事看懂垃圾回收
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：对象的诞生 “你醒啦！”，迷迷糊糊中听到一个声音，我睁开了眼睛，发现一个小伙伴正看着我。 “这里是哪里，你是谁啊？” “这里是堆区，我是一个Ajax对象，叫我小A吧” 我慢慢坐了起来，举目四望，这里有好多形形色色的对象居住在这里，远处还有好多的线程在各自忙碌着，好一副热闹的景象！ “你好，我才刚醒，            <a href="https://www.cnblogs.com/xuanyuan/p/12419730.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-05 13:28 轩辕之风 阅读 (1733) 评论 (13)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12419730" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/02/25.html">2020年2月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12361461.html">
+    一个故事看懂Linux文件权限管理
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前情回顾： 我通过open这个系统调用虫洞来到了内核空间，又在老爷爷的指点下来到了sys_open的地盘，即将开始打开文件的工作。 详情参见：内核地址空间大冒险：系统调用 open系统调用链 我是一个线程，出生在这个Linux帝国。在老爷爷的指点下，通过系统调用表来到了这个叫sys_open的地方。            <a href="https://www.cnblogs.com/xuanyuan/p/12361461.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-25 14:10 轩辕之风 阅读 (1586) 评论 (10)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12361461" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/xuanyuan/archive/2020/02/18.html">2020年2月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12326610.html">
+    为什么用上了HTTPS，还是被流量劫持？
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：广告再临 “老周，有人找你” 一大早，361杀毒公司的老周就被吵醒。 今天的阳光很明媚，老周伸了伸懒腰，这才踱步走向工作室。 “是谁一大早的就来吵吵，坏了我的瞌睡”，听得出来，老周有点不太高兴。 “咚咚～”，老周微微抬头一瞥，只见一甜美女子出现在工作室的门前。 老周一下从座椅上弹了起来，三步并作两步            <a href="https://www.cnblogs.com/xuanyuan/p/12326610.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-18 16:05 轩辕之风 阅读 (1300) 评论 (13)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12326610" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/xuanyuan/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 轩辕之风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

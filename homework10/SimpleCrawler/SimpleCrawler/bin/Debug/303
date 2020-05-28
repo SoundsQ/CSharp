@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="老孟导读：前2天有读者问到是否有带分页功能的表格控件，今天分页功能的表格控件详细解析来来。 PaginatedDataTable PaginatedDataTable是一个带分页功能的DataTabl" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Flutter 分页功能表格控件 - 老孟Flutter - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/book/bundle-book.min.css?v=Yr9TGmN8ri6FBY9Rkzqw6l-UX-n2toh8YHB85y4FqJ0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/book/bundle-book-mobile.min.css?v=9mAu4TwtRDzYz0p44sAVkFWE9nZCxO_rGCjvQ8nF6I0" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/mengqd/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/mengqd/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/mengqd/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 141280;
+        var currentBlogApp = 'mengqd';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BOOK';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <script type="text/javascript">
+	try {
+		if (screen.availWidth > 1200) {
+			document.getElementById("MainCss").href = '/skins/book/bundle-book-2.min.css';
+		}
+	} catch (e) { }
+</script>
+
+<div id="header">
+<div id="HeaderTitle">
+<div id="Title">
+<a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/mengqd/">meng5619</a>
+
+</div>
+<div id="subTitle">
+
+</div>
+</div>
+</div>
+
+
+<div id="main">
+	<div id="post_detail">
+    <div class="post">
+        <h2>
+            
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12796957.html">Flutter 分页功能表格控件</a>
+
+        </h2>
+        
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201522531-709397019.png" alt=""></p>
+<blockquote>
+<p>老孟导读：前2天有读者问到是否有带分页功能的表格控件，今天分页功能的表格控件详细解析来来。</p>
+</blockquote>
+<h2 id="paginateddatatable">PaginatedDataTable</h2>
+<p>PaginatedDataTable是一个带分页功能的DataTable，生成一批数据，项目中此一般通过服务器获取，定义model类：</p>
+<pre><code class="language-dart">class User {
+  User(this.name, this.age, this.sex);
+
+  final String name;
+  final int age;
+  final String sex;
+}
+</code></pre>
+<p>生成数据：</p>
+<pre><code class="language-dart">List&lt;User&gt; _data = [];
+
+@override
+  void initState() {
+    List.generate(100, (index) {
+      _data.add(User('老孟$index', index % 50, index % 2 == 0 ? '男' : '女'));
+    });
+    super.initState();
+  }
+</code></pre>
+<p>PaginatedDataTable的基础用法如下：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  header: Text('header'),
+  columns: [
+    DataColumn(label: Text('姓名')),
+    DataColumn(label: Text('性别')),
+    DataColumn(label: Text('年龄')),
+  ],
+  source: MyDataTableSource(_data),
+)
+</code></pre>
+<p><code>header</code>表示表格顶部控件。</p>
+<p><code>columns</code>表示每一列的列头控件。</p>
+<p><code>source</code>表示数据源，需要继承DataTableSource，用法如下：</p>
+<pre><code class="language-dart">class MyDataTableSource extends DataTableSource {
+  MyDataTableSource(this.data);
+
+  final List&lt;User&gt; data;
+
+  @override
+  DataRow getRow(int index) {
+    if (index &gt;= data.length) {
+      return null;
+    }
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        DataCell(Text('${data[index].name}')),
+        DataCell(Text('${data[index].sex}')),
+        DataCell(Text('${data[index].age}')),
+      ],
+    );
+  }
+
+  @override
+  int get selectedRowCount {
+    return 0;
+  }
+
+  @override
+  bool get isRowCountApproximate {
+    return false;
+  }
+
+  @override
+  int get rowCount {
+    return data.length;
+  }
+}
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201524882-700288798.gif" alt=""></p>
+<p><code>getRow</code>是根据index获取每一行的数据，通常使用DataRow.byIndex返回数据，cells表示每一个表格的数据，<code>cells</code>的数量需要与PaginatedDataTable中<code>columns</code>数量保持一致。</p>
+<p><code>selectedRowCount</code>是选中的行数，注意这里不是索引，是总共选中的行数。</p>
+<p><code>isRowCountApproximate</code>：如果<code>isRowCountApproximate</code>设置为true，行数将会无尽大，所以正常情况下<code>isRowCountApproximate</code>设置为false。</p>
+<p><code>rowCount</code>表示行数，如果<code>isRowCountApproximate</code>设置为true，此属性无效。</p>
+<p>设置<code>actions</code>，显示在<code>header</code>的右端，用法如下：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  header: Text('header'),
+  actions: &lt;Widget&gt;[
+    IconButton(icon: Icon(Icons.add),onPressed: (){},),
+    IconButton(icon: Icon(Icons.delete),onPressed: (){},),
+  ],
+  ...
+)
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201525502-76538834.png" alt=""></p>
+<p><code>rowsPerPage</code>表示每页显示的行数，默认10行，设置5行如下：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  rowsPerPage: 5,
+  ...
+)
+</code></pre>
+<p><code>onRowsPerPageChanged</code>不为null时，在左下角出现每页显示多少行数的选项，用法如下：</p>
+<pre><code class="language-dart">var _rowsPerPage = 5;
+PaginatedDataTable(
+  onRowsPerPageChanged: (v) {
+    setState(() {
+      _rowsPerPage = v;
+    });
+  },
+  availableRowsPerPage: [5,10,15,16],
+  rowsPerPage: _rowsPerPage,
+  ...
+)
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201525899-1100822358.png" alt=""></p>
+<p>点击出现<code>availableRowsPerPage</code>设置的数组，<code>onRowsPerPageChanged</code>为选择其中一项后回调，用于更新<code>rowsPerPage</code>属性。</p>
+<p>显示的数据过多时，需要将PaginatedDataTable包裹在SingleChildScrollView中，滚动显示数据：</p>
+<pre><code class="language-dart">SingleChildScrollView(
+  child: PaginatedDataTable()
+)
+</code></pre>
+<p><code>onPageChanged</code>是翻页时回调，返回当前页第一条数据的索引：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  onPageChanged: (page){
+    print('onPageChanged:$page');
+  },
+</code></pre>
+<p>打印数据为：</p>
+<pre><code class="language-dart">flutter: onPageChanged:10
+flutter: onPageChanged:20
+flutter: onPageChanged:30
+flutter: onPageChanged:40
+</code></pre>
+<h2 id="排序">排序</h2>
+<p>生序降序设置：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  sortColumnIndex: 1,
+  sortAscending: false,
+  ...
+)
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201526163-1151344795.png" alt=""></p>
+<p>生序降序的设置仅仅显示相应图标，数据并不会实际排序，对数据进行排序可以当用户点击表头时对数据按照本列数据进行排序，用法如下，</p>
+<pre><code class="language-dart">var _sortAscending = true;
+
+_buildPaginatedDataTable() {
+  return PaginatedDataTable(
+    header: Text('header'),
+    sortColumnIndex: 2,
+    sortAscending: _sortAscending,
+    columns: [
+      DataColumn(label: Text('姓名')),
+      DataColumn(label: Text('性别')),
+      DataColumn(
+          label: Text('年龄'),
+          onSort: (index, sortAscending) {
+            setState(() {
+              _sortAscending = sortAscending;
+              if (sortAscending) {
+                _data.sort((a, b) =&gt; a.age.compareTo(b.age));
+              } else {
+                _data.sort((a, b) =&gt; b.age.compareTo(a.age));
+              }
+            });
+          }),
+    ],
+    source: MyDataTableSource(_data),
+  );
+}
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201527348-748121041.gif" alt=""></p>
+<h2 id="选中">选中</h2>
+<p>可以在每一行的前面添加复选框，表示当前行是否选中，在User中添加是否选中属性，用法如下：</p>
+<pre><code class="language-dart">class User {
+  User(this.name, this.age, this.sex, {this.selected = false});
+
+  final String name;
+  final int age;
+  final String sex;
+  bool selected;
+}
+</code></pre>
+<p>添加勾选框：</p>
+<pre><code class="language-dart">@override
+DataRow getRow(int index) {
+  if (index &gt;= data.length) {
+    return null;
+  }
+  return DataRow.byIndex(
+    index: index,
+    selected: data[index].selected,
+    onSelectChanged: (selected) {
+      data[index].selected = selected;
+      notifyListeners();
+    },
+    cells: [
+      DataCell(
+        Text('${data[index].name}'),
+      ),
+      DataCell(Text('${data[index].sex}')),
+      DataCell(Text('${data[index].age}')),
+    ],
+  );
+}
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201528435-1926698937.gif" alt=""></p>
+<p>全选控制：</p>
+<pre><code class="language-dart">PaginatedDataTable(
+  header: Text('header'),
+  onSelectAll: (all) {
+    setState(() {
+      _data.forEach((f){
+        f.selected = all;
+      });
+    });
+  },
+</code></pre>
+<h2 id="处理数据显示不全问题">处理数据显示不全问题</h2>
+<p>当表格列比较多的时候，使用SingleChildScrollView包裹，显示不全时滚动显示，用法如下：</p>
+<pre><code class="language-dart">SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: PaginatedDataTable()
+)
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201531746-1009228360.gif" alt=""></p>
+<h2 id="交流">交流</h2>
+<p>老孟Flutter博客地址（近200个控件用法）：<a href="http://laomengit.com">http://laomengit.com</a></p>
+<p>欢迎加入Flutter交流群（微信：laomengit）、关注公众号【老孟Flutter】：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://img2020.cnblogs.com/other/467322/202004/467322-20200428201532301-1513562384.jpg" alt=""></td>
+<td><img src="http://img.laomengit.com/laomeng_qr.png"></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        <p class="postfoot">
+            posted on 
+<span id="post-date">2020-04-28 20:16</span>&nbsp;
+<a href="https://www.cnblogs.com/mengqd/">老孟Flutter</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12796957" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12796957);return false;">收藏</a>
+        </p>
+    </div>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 141280, cb_blogApp = 'mengqd', cb_blogUserGuid = 'c138f17a-a42c-e211-aa8f-842b2b196315';
+    var cb_entryId = 12796957, cb_entryCreatedDate = '2020-04-28 20:16', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 老孟Flutter
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+<div id="rightmenu">
+	
+		<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+			<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/mengqd/">
+首页</a>
+</li>
+			<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+			<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%80%81%E5%AD%9FFlutter">
+联系</a></li>
+			<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/mengqd/rss/">
+订阅</a>
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/mengqd/rss/">
+    <img src="/skins/book/images/xml.gif" alt="订阅" />
+</a></li>
+			<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		
+<h3>统计</h3>
+<ul>
+    <li>随笔 - 
+43</li>
+    <li>文章 - 
+2</li>
+    <li>评论 - 
+21</li>
+    <li>
+        引用 - 
+0
+    </li>
+</ul>
+
+
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+			
+			
+			
+			
+			 
+
+	
+
+
+    <div id="page_end_html">
+        
+
+    </div>
+</body>
+</html>

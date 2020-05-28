@@ -1,0 +1,2294 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="File 虽然并不是Java io的类层次结构中的一员,但是却是IO中很重要的基础,本文介绍了抽象路径名File 以及FileSystem文件系统相关的内容,并且也对Windows平台山的FileSy" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[二] JavaIO之File详解  以及FileSystem  WinNTFileSystem简介 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9609837.html">[二] JavaIO之File详解  以及FileSystem  WinNTFileSystem简介</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        File 虽然并不是Java io的类层次结构中的一员,但是却是IO中很重要的基础,本文介绍了抽象路径名File 以及FileSystem文件系统相关的内容,并且也对Windows平台山的FileSystem实现类WinNTFileSystem进行了介绍
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">File类</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">文件和目录路径名的抽象表示形式。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们知道,对于不同的操作系统,文件路径的描述是不同的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">比如 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">windows平台：用\ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">linux平台：用/ </span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">File是Java为了这一概念提供的抽象描述,与系统无关的视图 </span></div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">抽象路径名</span><span style="font-size: 15px;">有两个组件: </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">1.可选的与系统有关的<span style="font-weight: bold;">前缀</span>&nbsp; 字符串&nbsp;&nbsp; 比如盘符，"/" 表示 UNIX 中的根目录,"\\\\" 表示 Microsoft Windows UNC 路径名 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">2.零个或者多个&nbsp; 字符串&nbsp; 名称 序列 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">第一个名称是 目录名,第一个名称之后每个名称表示一个目录,最后一个名称既可以是目录,也可以是名称 </span></div>
+<div><span style="font-size: 15px;">空 抽象路径名没有前缀和名称序列 </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">注意: </span></div>
+<div style="line-height: 200%;"><span style="font-weight: bold; font-size: 15px;">既然最后一个名称可以是目录,也可以是文件名称,那么File 并不一定就是一个文件,也可以是一个文件路径,也就是目录</span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>构造方法</strong></span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">java中使用File来抽象表示 文件/目录这一个概念 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也就是在Java中,想要表示一个文件,构造一个File对象即可 </span></div>
+<div style="line-height: 200%;"><span style="font-weight: bold; font-size: 15px;">构造方法 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">File(File parent, String child)</span><br /><span style="font-size: 15px;">根据 parent 抽象路径名和 child 路径名字符串创建一个新 File 实例。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">File(String pathname)</span><br /><span style="font-size: 15px;">通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">File(String parent, String child)</span><br /><span style="font-size: 15px;">根据 parent 路径名字符串和 child 路径名字符串创建一个新 File 实例。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">File(URI uri)</span><br /><span style="font-size: 15px;"> 通过将给定的 file: URI 转换为一个抽象路径名来创建一个新的 File 实例。
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">通过路径构造一个File,是最自然地做法
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">File(File parent, String child)根据参数file的路径和child字符串进行组合
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">File(String parent, String child)根据参数 parent字符串和child字符串组合
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本质上也就还是路径,不过很显然,拼接 child 就可以进行创建子目录
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">URI是统一资源标识符,将文件转换成一个链接，可以网络访问 ,通过这个URI 也可以用来生成文件
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">new File只是在java中描述这么一个文件,是否真的存在? 你还需要进行去验证,只是一个虚拟的描述符
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">File file = new File("D:\\testFile");//file就是对这个路径的一个描述,那么是否真的存在? 你还需要进行去验证
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<div style="line-height: 200%;">
+<h4 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>名称与路径的分隔符</strong></span>
+	</h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外File 中还包括两个分隔符
+	</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">目录分隔符&nbsp; 名称分隔符的两种形式&nbsp; char 和 String
+	</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">separatorChar</span><br /><span style="font-size: 15px;">public static final char separatorChar
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">与系统有关的默认名称分隔符。
+						</span></div>
+<div><span style="font-size: 15px;">此字段被初始化为包含系统属性 file.separator 值的第一个字符。
+						</span></div>
+<div><span style="font-size: 15px;">在 UNIX 系统上，此字段的值为 '/'；在 Microsoft Windows 系统上，它为 '\\'。
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">separator</span><br /><span style="font-size: 15px;">public static final String separator
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">与系统有关的默认名称分隔符，为了方便，它被表示为一个字符串。此字符串只包含一个字符，即 separatorChar。
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">pathSeparatorChar</span><br /><span style="font-size: 15px;">public static final char pathSeparatorChar
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">与系统有关的路径分隔符。</span><br /><span style="font-size: 15px;">此字段被初始为包含系统属性 path.separator 值的第一个字符。</span><br /><span style="font-size: 15px;">此字符用于分隔以路径列表 形式给定的文件序列中的文件名。</span><br /><span style="font-size: 15px;">在 UNIX 系统上，此字段为 ':'；在&nbsp; Microsoft Windows 系统上，它为 ';'。
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">pathSeparator</span><br /><span style="font-size: 15px;">public static final String pathSeparator
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">与系统有关的路径分隔符，为了方便，它被表示为一个字符串。
+						</span></div>
+<div><span style="font-size: 15px;">此字符串只包含一个字符，即 pathSeparatorChar。&nbsp; </span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>File API分类</strong></span>
+	</h3>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">File既可能是目录,也可能是文件
+		</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">那么,他必然提供了文件和目录的一些基本常见操作
+		</span></div>
+
+
+	</div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">按照文件的属性以及相关操作对API进行分类</span>
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">文件自身属性读取
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">getName()
+					</span></div>
+<div><span style="font-size: 15px;">getParent()
+					</span></div>
+<div><span style="font-size: 15px;">getParentFile()
+					</span></div>
+<div><span style="font-size: 15px;">getPath()
+					</span></div>
+<div><span style="font-size: 15px;">isHidden()
+					</span></div>
+<div><span style="font-size: 15px;">lastModified()
+					</span></div>
+<div><span style="font-size: 15px;">length()
+					</span></div>
+<div><span style="font-size: 15px;">isAbsolute()
+					</span></div>
+<div><span style="font-size: 15px;">isDirectory()
+					</span></div>
+<div><span style="font-size: 15px;">isFile()
+					</span></div>
+<div><span style="font-size: 15px;">exists()
+					</span></div>
+<div><span style="font-size: 15px;">getAbsoluteFile()
+					</span></div>
+<div><span style="font-size: 15px;">getAbsolutePath()
+					</span></div>
+<div><span style="font-size: 15px;">getCanonicalFile()
+					</span></div>
+<div><span style="font-size: 15px;">getCanonicalPath()
+					</span></div>
+<div><span style="font-size: 15px;">getFreeSpace()
+					</span></div>
+<div><span style="font-size: 15px;">getTotalSpace()
+					</span></div>
+<div><span style="font-size: 15px;">getUsableSpace()
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">创建文件/目录基本操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+
+
+				</td>
+<td>
+<div><span style="font-size: 15px;">mkdir()
+					</span></div>
+<div><span style="font-size: 15px;">mkdirs()
+					</span></div>
+<div>
+<div><span style="font-size: 15px;">delete()
+						</span></div>
+<div><span style="font-size: 15px;">deleteOnExit()
+						</span></div>
+
+
+					</div>
+<div><span style="font-size: 15px;">renameTo(File)
+					</span></div>
+<div><span style="font-size: 15px;">createTempFile(String, String)
+					</span></div>
+<div><span style="font-size: 15px;">createTempFile(String, String, File)
+					</span></div>
+<div><span style="font-size: 15px;">createNewFile()
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">文件/目录 列表读取
+				</span></td>
+<td>
+<div><span style="font-size: 15px;">listRoots()
+					</span></div>
+<div><span style="font-size: 15px;">list()
+					</span></div>
+<div><span style="font-size: 15px;">list(FilenameFilter)
+					</span></div>
+<div><span style="font-size: 15px;">listFiles()
+					</span></div>
+<div><span style="font-size: 15px;">listFiles(FileFilter)
+					</span></div>
+<div><span style="font-size: 15px;">listFiles(FilenameFilter)
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">文件权限访问以及文件信息设置
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">canExecute()
+					</span></div>
+<div><span style="font-size: 15px;">canRead()
+					</span></div>
+<div><span style="font-size: 15px;">canWrite()
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">setExecutable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setExecutable(boolean, boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setReadable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setReadable(boolean, boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setReadOnly()
+					</span></div>
+<div><span style="font-size: 15px;">setWritable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setWritable(boolean, boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setLastModified(long)
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">其他
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">toPath()
+					</span></div>
+<div><span style="font-size: 15px;">toString()
+					</span></div>
+<div><span style="font-size: 15px;">toURI()
+					</span></div>
+<div>&nbsp;</div>
+<div>
+<div><span style="font-size: 15px;">equals(Object)
+						</span></div>
+<div><span style="font-size: 15px;">compareTo(File)
+						</span></div>
+<div><span style="font-size: 15px;">hashCode()
+						</span></div>
+
+
+					</div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">File API详解</span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">测试:</span>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173447431-1839674736.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_32ae" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173447756-1408007615.png" alt="image_5b9396eb_32ae" width="679" height="355" border="0" /></a></div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>File相关的基础信息属性</strong></span>
+</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String getName()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回由此抽象路径名表示的文件或目录的名称。</span><br /><span style="font-size: 15px;">该名称是路径名名称序列中的最后一个名称。如果路径名名称序列为空，则返回空字符串。</span><br /><span style="font-size: 15px;">测试信息: getName():&nbsp; cccc.txt</span><br />
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String getParent()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回此抽象路径名父目录的路径名字符串；</span><br /><span style="font-size: 15px;">如果此路径名没有指定父目录，则返回 null。 </span><br /><span style="font-size: 15px;">getParent():&nbsp; D:\testFile
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public File getParentFile()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String getParent() 的File形式,等同于new File(getParent())
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String getPath()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">将此抽象路径名转换为一个路径名字符串。</span><br /><span style="font-size: 15px;">所得字符串使用&nbsp; 默认<span style="font-weight: bold;">名称分隔符</span>&nbsp; 分隔名称序列中的名称。&nbsp; </span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">一个File用于描述一个抽象路径名
+		</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">这个抽象路径名(File) 的<span style="font-weight: bold;">名称 name</span>为&nbsp; 路径名名称序列中的最后一个名称&nbsp; </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">这个抽象路径名(File) 的<span style="font-weight: bold;">父 parent</span>为&nbsp; 路径名名称序列中的除了最后一个名称以外的所有&nbsp; </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">这个抽象路径名(File) 的<span style="font-weight: bold;">路径path</span>为&nbsp; 路径名名称序列中所有的名称,只不过使用默认的的名称分隔符分割
+				</span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+			</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173448431-831777772.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_1578" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173448650-1410577886.png" alt="image_5b9396eb_1578" width="430" height="92" border="0" /></a>
+			</div>
+
+
+		</div>
+
+
+	</div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173448853-879292759.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_6d68" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173449439-950007880.png" alt="image_5b9396eb_6d68" width="563" height="307" border="0" /></a>
+	</div>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">public boolean isHidden()
+					</span></td>
+<td><span style="font-weight: bold; font-size: 15px;">是否隐藏文件</span><br /><span style="font-size: 15px;">测试此抽象路径名指定的文件是否是一个隐藏文件。</span><br /><span style="font-size: 15px;">隐藏 的具体定义与系统有关
+					</span></td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">public long lastModified()
+						</span></div>
+
+
+					</td>
+<td><span style="font-weight: bold; font-size: 15px;">long 毫秒数</span><br /><span style="font-size: 15px;">表示文件最后一次被修改的时间的 <span style="font-weight: bold;">long</span> 值，</span><br /><span style="font-size: 15px;">用与时间点（1970 年 1 月 1 日，00:00:00 GMT）之间的毫秒数表示；</span><br /><span style="font-size: 15px;">如果该文件不存在，或者发生 I/O 错误，则返回 0L 
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public long length()
+					</span></td>
+<td><span style="font-weight: bold; font-size: 15px;">长度,字节</span><br /><span style="font-size: 15px;">返回由此抽象路径名表示的文件的长度。</span><br /><span style="font-size: 15px;">如果此路径名表示一个目录，则返回值是不确定的。</span><br />
+<div><span style="font-size: 15px;">此抽象路径名表示的文件的长度，以字节为单位；
+						</span></div>
+<div><span style="font-size: 15px;">如果文件不存在，则返回 0L。
+						</span></div>
+<div><span style="font-size: 15px;">对于表示特定于系统的实体（比如设备或管道）的路径名，某些操作系统可能返回 0L。
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public boolean isAbsolute()
+					</span></td>
+<td>
+<div><span style="font-weight: bold; font-size: 15px;">是否绝对路径
+						</span></div>
+<div><span style="font-size: 15px;">测试此抽象路径名是否为绝对路径名。绝对路径名的定义与系统有关。
+						</span></div>
+<div><span style="font-size: 15px;">在 UNIX 系统上，如果路径名的前缀是 "/"，那么该路径名是绝对路径名。
+						</span></div>
+<div><span style="font-size: 15px;">在 Microsoft Windows 系统上，
+						</span></div>
+<div><span style="font-size: 15px;">如果路径名的前缀是后跟 "\\" 的盘符，或者是 "\\\\"，那么该路径名是绝对路径名。
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public boolean isDirectory()
+					</span></td>
+<td><span style="font-size: 15px;">当且仅当此抽象路径名表示的文件存在且 是一个目录时，返回 true；否则返回 false&nbsp; </span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public boolean isFile()
+					</span></td>
+<td><span style="font-size: 15px;">当且仅当此抽象路径名表示的文件存在且 是一个标准文件时，返回 true；否则返回 false
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public boolean exists()
+					</span></td>
+<td><span style="font-size: 15px;">当且仅当此抽象路径名表示的文件或目录存在时，返回 true；否则返回 false&nbsp; </span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">public String getAbsolutePath()
+					</span></td>
+<td><span style="font-size: 15px;">绝对路径名字符串，它与此抽象路径名表示相同的文件或目录 
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public File getAbsoluteFile()
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">绝对&nbsp;&nbsp;&nbsp; 抽象路径名，它与此抽象路径名表示相同的文件或目录&nbsp; 相当于new File(this.getAbsolutePath())
+						</span></div>
+<div>&nbsp;</div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<div>
+<div><span style="font-size: 15px;"><strong>规范路径名是绝对路径名，并且是惟一的</strong>。规范路径名的准确定义与系统有关。
+		</span></div>
+<div><span style="font-size: 15px;">如有必要，此方法首先将路径名转换为绝对路径名，这与调用 getAbsolutePath() 方法的效果一样，然后用与系统相关的方式将它映射到其惟一路径名。
+		</span></div>
+<div><span style="font-size: 15px;">这通常涉及到从路径名中移除多余的名称（比如 "." 和 ".."）、解析符号连接（对于 UNIX 平台），以及将驱动器号转换为标准大小写形式（对于 Microsoft Windows 平台）。 
+		</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">每个表示现存文件或目录的路径名<span style="font-weight: bold;">都有一个惟一的规范形式</span>。
+		</span></div>
+<div><span style="font-size: 15px;">每个表示不存在文件或目录的路径名也有一个惟一的规范形式。
+		</span></div>
+<div><span style="font-size: 15px;">不存在文件或目录路径名的规范形式可能不同于创建文件或目录之后同一路径名的规范形式。
+		</span></div>
+<div><span style="font-size: 15px;">同样，现存文件或目录路径名的规范形式可能不同于删除文件或目录之后同一路径名的规范形式。 
+		</span></div>
+<div>&nbsp;</div>
+
+
+	</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public String getCanonicalPath()
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">规范路径名字符串，它与此抽象路径名表示相同的文件或目录 
+						</span></div>
+<div>&nbsp;</div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public File getCanonicalFile()
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">等同于 new File(this.getCanonicalPath())&nbsp; </span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;">
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public long getFreeSpace()
+								</span></div>
+<div><span style="font-size: 15px;">public long getTotalSpace()
+								</span></div>
+<div><span style="font-size: 15px;">public long getUsableSpace()
+								</span></div>
+
+
+							</td>
+<td><span style="font-size: 15px;">返回此抽象路径名指定的分区中空间相关的数据信息,一定注意是抽象路径名指定的分区</span><br /><span style="font-size: 15px;">未分配 /全部/已使用&nbsp;&nbsp; 空间情况</span><br /><span style="font-size: 15px;">单位是字节数
+							</span></td>
+
+
+						</tr>
+
+
+					</tbody>
+
+
+				</table>
+
+</div>
+
+</div>
+<h4 style="line-height: 24px;"><span style="font-size: 13.5pt;"><strong>File相关的操作 </strong></span>
+		</h4>
+<div style="line-height: 24px;"><span style="font-size: 15px;">创建 重命名 删除等
+		</span></div>
+
+
+	</div>
+<div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">mkdir()
+							</span></div>
+<div>&nbsp;</div>
+
+
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">创建此抽象路径名指定的目录,当且仅当已创建目录时，返回 true；否则返回 false
+						</span></td>
+
+
+					</tr>
+<tr>
+<td><span style="font-size: 15px;">mkdirs()
+						</span></td>
+<td><span style="font-size: 15px;">创建此抽象路径名指定的目录，包括所有必需但不存在的父目录。</span><br /><span style="font-size: 15px;">注意，此操作失败时也可能已经成功地创建了一部分必需的父目录。&nbsp; </span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+
+
+	</div>
+<div>
+<div style="line-height: 24px;">&nbsp;</div>
+
+
+	</div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">mkdir/mkdirs&nbsp; 用于创建目录
+	</span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">mkdir只会创建最后一个名称为名称的目录,&nbsp; 如果一个路径的parent不存在,并不会创建成功
+	</span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">mkdirs 则会创建所有
+	</span></div>
+<div style="line-height: 24px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173449681-1538415114.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_319e" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173449876-1843891995.png" alt="image_5b9396eb_319e" width="458" height="309" border="0" /></a>
+	</div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean renameTo(File dest)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">重新命名此抽象路径名表示的文件。</span><br /><span style="font-size: 15px;">参数为File</span><br />
+<div><span style="font-size: 15px;">此方法行为的许多方面都是与平台有关的：重命名操作无法将一个文件从一个文件系统移动到另一个文件系统，
+						</span></div>
+<div><span style="font-size: 15px;">该操作不是不可分的，如果已经存在具有目标抽象路径名的文件，那么该操作可能无法获得成功。
+						</span></div>
+<div><span style="font-size: 15px;">应该始终检查返回值，以确保重命名操作成功。
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">他的参数为File 也是一个抽象路径名 所以说不仅仅就是改一下文件的最后一个名称
+	</span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">他可以把文件进行移动
+	</span></div>
+<div style="line-height: 24px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173450075-1032474101.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_5a1c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173450288-573684805.png" alt="image_5b9396eb_5a1c" width="585" height="368" border="0" /></a>
+	</div>
+<div style="line-height: 24px;">&nbsp;</div>
+<div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean delete()
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">删除此抽象路径名表示的文件或目录。如果此路径名表示一个目录，则该目录必须为空才能删除。</span><br />
+<div><span style="font-size: 15px;">当且仅当成功删除文件或目录时，返回 true；否则返回 false&nbsp; </span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public void deleteOnExit()
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">在虚拟机终止时，请求删除此抽象路径名表示的文件或目录。&nbsp; </span></div>
+<div><span style="font-size: 15px;">文件（或目录）将以与注册相反的顺序删除。
+							</span></div>
+<div><span style="font-size: 15px;">调用此方法删除已注册为删除的文件或目录无效。
+							</span></div>
+<div><span style="font-size: 15px;">根据 Java 语言规范中的定义，只有在虚拟机正常终止时，才会尝试执行删除操作。 
+							</span></div>
+<div><span style="font-size: 15px;">一旦请求了删除操作，就无法取消该请求。所以应小心使用此方法。
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">file1 是文件&nbsp; file2是目录,但是目录下还有文件
+		</span></div>
+<div><span style="font-size: 15px;">所以file1删除成功&nbsp; file2删除失败
+		</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173450537-1531663324.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_35ab" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173450770-1956194968.png" alt="image_5b9396eb_35ab" width="517" height="492" border="0" /></a>
+		</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+	</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public static File createTempFile(String prefix,
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String suffix,
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; File directory)
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">在指定目录中创建一个新的空文件，使用给定的前缀和后缀字符串生成其名称。</span><br /><span style="font-size: 15px;">如果 directory 参数为 null，则使用与系统有关的默认临时文件目录</span><br /><span style="font-size: 15px;">默认临时文件目录由系统属性 java.io.tmpdir 指定
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public static File createTempFile(String prefix,
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String suffix)
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">在默认临时文件目录中创建一个空文件，使用给定前缀和后缀生成其名称。</span><br /><span style="font-size: 15px;">调用此方法等同于调用 createTempFile(prefix, suffix, null)
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public boolean createNewFile()
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IOException
+						</span></div>
+
+
+					</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">当且仅当不存在具有此抽象路径名指定名称的文件时，不可分地创建一个新的空文件。</span><br /><span style="font-size: 15px;">检查文件是否存在，若不存在则创建该文件</span><br /><span style="font-size: 15px;">如果指定的文件不存在并成功地创建，则返回 true；如果指定的文件已经存在，则返回 false
+					</span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+<h4><span style="font-size: 13.5pt;"><strong>File相关的列表查询</strong></span>
+	</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">public String[] list()
+					</span></td>
+<td><span style="font-size: 15px;">返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。 </span><br />
+<div><span style="font-size: 15px;">如果此抽象路径名不表示一个目录，那么此方法将返回 null。
+						</span></div>
+<div><span style="font-size: 15px;">否则返回一个字符串数组，每个数组元素对应目录中的每个文件或目录。
+						</span></div>
+<div><span style="font-size: 15px;">表示目录本身及其父目录的名称不包括在结果中。每个字符串是一个文件名，而不是一条完整路径。
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String[] list(FilenameFilter filter)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中满足指定过滤器的文件和目录。</span><br /><span style="font-size: 15px;">除了返回数组中的字符串必须满足过滤器外，此方法的行为与 list() 方法相同。</span><br /><span style="font-size: 15px;">如果给定 filter 为 null，则接受所有名称。
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public File[] listFiles()
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回一个抽象路径名数组，这些路径名表示此抽象路径名表示的目录中的文件。</span><br /><span style="font-size: 15px;"> 如果此抽象路径名不表示一个目录，那么此方法将返回 null。</span><br /><span style="font-size: 15px;">否则返回一个 File 对象数组，每个数组元素对应目录中的每个文件或目录。</span><br /><span style="font-size: 15px;">表示目录本身及其父目录的名称不包括在结果中。</span><br /><span style="font-size: 15px;">不保证所得数组中的相同字符串将以特定顺序出现，特别是不保证它们按字母顺序出现。
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public File[] listFiles(FilenameFilter filter)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">除了返回数组中的路径名必须满足过滤器外，此方法的行为与 listFiles() 方法相同</span><br /><span style="font-size: 15px;">如果给定 filter 为 null，则接受所有路径名
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public File[] listFiles(FileFilter filter)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">除了返回数组中的路径名必须满足过滤器外，此方法的行为与 listFiles() 方法相同。</span><br /><span style="font-size: 15px;">如果给定 filter 为 null，则接受所有路径名。
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public static File[] listRoots()
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">列出可用的文件系统根。 
+						</span></div>
+<div><span style="font-size: 15px;">特定 Java 平台可以支持零个或更多个分层组织的文件系统。
+						</span></div>
+<div><span style="font-size: 15px;">每个文件系统有一个 root 目录，可以从这里到达文件系统中的所有其他文件。
+						</span></div>
+<div><span style="font-size: 15px;">例如，Windows 平台为每个活动驱动器提供了一个根目录；
+						</span></div>
+<div><span style="font-size: 15px;">UNIX 平台只有一个根目录，即 "/"。
+						</span></div>
+<div><span style="font-size: 15px;">可用文件系统根的设置受各种系统级操作的影响，比如可移动介质的插入和弹出，以及断开或卸载那些物理磁盘或虚拟磁盘。 
+						</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">此方法返回一个 File 对象数组，这些对象表示可用文件系统根的根目录。
+						</span></div>
+<div><span style="font-size: 15px;">可以保证本地机器上物理存在的任何文件的规范路径名都以此方法返回的根之一开始。 
+						</span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">list返回的是名称列表 ,必须是一个目录
+	</span></div>
+<div><span style="font-size: 15px;">listFile返回的是File列表 必须是一个目录
+	</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173450996-1322053840.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_4694" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173451430-761633226.png" alt="image_5b9396eb_4694" width="430" height="573" border="0" /></a>
+	</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173451656-2026824037.png"><img style="display: inline; background-image: none;" title="image_5b9396eb_10c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173451921-125822838.png" alt="image_5b9396eb_10c" width="412" height="545" border="0" /></a>
+	</div>
+<div><span style="font-size: 15px;">ps:直接打印f 调用的是toString&nbsp; 形式,返回的是path
+	</span></div>
+<div>&nbsp;</div>
+<div>
+<div style="line-height: 24px;"><span style="font-size: 13.5pt;"><strong>过滤器形式的与无参数版本的行为是相同的,只不过是还要符合过滤器的要求</strong></span>
+		</div>
+<div>&nbsp;</div>
+
+
+	</div>
+<div><span style="font-size: 15px;">对于FilenameFilter&nbsp; 和 FileFilter,他们是函数式接口
+	</span></div>
+<div><span style="font-size: 15px;">可以直接使用lambda表达式传入参数
+	</span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173452613-68425054.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_4243" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173452814-1965243501.png" alt="image_5b9396ec_4243" width="648" height="522" border="0" /></a>
+	</div>
+<div>&nbsp;</div>
+<div>
+<div><span style="font-size: 15px;">对函数式接口不熟悉的可以翻阅之前关于java8的文章,当然你也可以匿名内部类或者实现它,显然lambda表达式是最方便的
+		</span></div>
+<div><span style="font-size: 15px;">下面是调用过程
+		</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173453045-1959870443.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_4430" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173453674-1892340253.png" alt="image_5b9396ec_4430" width="647" height="697" border="0" /></a></div>
+<div><span style="font-size: 15px;">从上面的调用可以看得出来,
+		</span></div>
+<div><span style="font-size: 15px;">FilenameFilter&nbsp; 当前抽象路径名以及所有的名字会传入到方法中
+		</span></div>
+<div><span style="font-size: 15px;">FileFilter则仅仅只有每个抽象路径名
+		</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">测试&nbsp; FilenameFilter时&nbsp; 下面没使用到第一个参数,这个你根据实际情况来
+		</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173453910-449040427.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_6760" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173454569-1161576983.png" alt="image_5b9396ec_6760" width="485" height="796" border="0" /></a>
+		</div>
+<div>&nbsp;</div>
+<div><strong>ListRoots</strong>
+		</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173454785-911157669.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_55d9" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173454969-120905002.png" alt="image_5b9396ec_55d9" width="410" height="271" border="0" /></a></div>
+
+
+	</div>
+
+
+</div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">File相关权限设置</span></strong>
+</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean canExecute()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">测试应用程序是否可以执行此抽象路径名表示的文件。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean canRead()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">测试应用程序是否可以读取此抽象路径名表示的文件。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean canRead()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">测试应用程序是否可以修改此抽象路径名表示的文件。
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">setExecutable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setExecutable(boolean, boolean)
+					</span></div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">设置此抽象路径名的所有者或所有用户的执行权限。
+					</span></div>
+<div>
+<div><span style="font-size: 15px;">executable - 如果为 true，则设置允许执行操作的访问权限；如果为 false，则不允许执行操作。
+						</span></div>
+<div><span style="font-size: 15px;">ownerOnly - 如果为 true，则执行权限只适用于所有者的执行权限；否则适用于所有用户。
+						</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">如果底层文件系统不能区分所有者执行权限与其他执行权限，那么无论该参数为何值，执行权限将适用于所有用户。
+						</span></div>
+<div><span style="font-size: 15px;">&nbsp; </span></div>
+
+
+					</div>
+<div><span style="font-size: 15px;">单参数版本是双参数版本的快捷默认设置形式
+					</span></div>
+<div><span style="font-size: 15px;">file.setExcutable(arg) 形式的调用与以下调用的行为完全相同：file.setExecutable(arg, true)&nbsp; </span></div>
+<div><span style="font-size: 15px;">也就是单参数默认是设置当前用户
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">setReadable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setReadable(boolean, boolean)
+					</span></div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">设置此抽象路径名的所有者或所有用户的读权限。</span><br /><br /><span style="font-size: 15px;">其余的用法形式同setExecutable
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">setWritable(boolean)
+					</span></div>
+<div><span style="font-size: 15px;">setWritable(boolean, boolean)
+					</span></div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">设置此抽象路径名的所有者或所有用户的写权限。
+					</span></div>
+<div><span style="font-size: 15px;">&nbsp; </span></div>
+<div><span style="font-size: 15px;">其余的用法形式同setExecutable
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">setExecutable/setReadable/setWritable 用于设置 执行&nbsp;&nbsp; 读&nbsp;&nbsp; 写 权限
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">双参数版本&nbsp; 第一个参数表示是否允许,第二个参数表示是否是用于所有的用户
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一个参数版本是两个参数版本的当前用户的简化快捷形式
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean setReadOnly()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">标记此抽象路径名指定的文件或目录，从而只能对其进行读操作。
+					</span></div>
+<div><span style="font-size: 15px;">调用此方法后，可以保证在被删除或被标记为允许写访问之前，文件或目录不会发生更改。
+					</span></div>
+<div><span style="font-size: 15px;">是否可以删除某个只读文件或目录则取决于底层系统。
+					</span></div>
+
+<br />
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean setLastModified(long time)
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">设置此抽象路径名指定的文件或目录的最后一次修改时间。
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 18px;">其他</span></h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public Path toPath()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回一个java.nio.file.Path&nbsp;&nbsp; 从这个抽象路径构造的Path对象</span><br /><span style="font-size: 15px;">1.7新增的
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public String toString()
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">返回此抽象路径名的路径名字符串。该字符串就是 getPath() 方法返回的字符串。</span><br />
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; public String toString() {
+					</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return getPath();
+					</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; }
+					</span></div>
+<div>&nbsp;</div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">public URI toURI()
+				</span></td>
+<td>
+<div><span style="font-size: 15px;">构造一个表示此抽象路径名的 file: URI。 
+					</span></div>
+<div><span style="font-size: 15px;">该 URI 的具体形式与系统有关。如果可以确定此抽象路径名表示的文件是一个目录，那么所得 URI 将以斜杠结束。 
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">对于某个给定抽象路径名 f，可保证： 
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">new File( f.toURI()).equals( f.getAbsoluteFile())
+					</span></div>
+<div>&nbsp;</div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public int compareTo(File pathname)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">按字母顺序比较两个抽象路径名。此方法定义的顺序取决于底层系统。</span><br /><span style="font-size: 15px;">在 UNIX 系统上，比较路径名时，字母大小写通常很重要，而在 Microsoft Windows 系统上，这通常不重要。 </span><br /><span style="font-size: 15px;">依赖
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public boolean equals(Object obj)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">测试此抽象路径名与给定对象是否相等。</span><br /><span style="font-size: 15px;">当且仅当该参数不是 null，而是一个与此抽象路径名表示相同的文件或目录的抽象路径名时，返回 true。</span><br /><span style="font-size: 15px;">两个抽象路径名是否相等取决于底层系统。</span><br /><span style="font-size: 15px;">在 UNIX 系统上，比较路径名时，字母大小写通常很重要，而在 Microsoft Windows 系统上，这通常不重要。&nbsp; </span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">public int hashCode()
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">计算此抽象路径名的哈希码。</span><br /><span style="font-size: 15px;">因为抽象路径名的相等性与系统有关，所以对其哈希码的计算也与系统有关。</span><br /><span style="font-size: 15px;">在 UNIX 系统上，抽象路径名的哈希码等于其路径名字符串和十进制值 1234321 的哈希码的异或。</span><br /><span style="font-size: 15px;">在 Microsoft Windows 系统上，哈希码等于其转换为小写的路径名字符串和十进制值 1234321 的哈希码的异或。</span><br /><span style="font-size: 15px;">在将路径名字符串转换为小写时不考虑语言环境。&nbsp; </span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>
+<div>&nbsp;</div>
+
+</div>
+<h3><span style="font-size: 18pt;"><strong>FileSystem简介</strong></span></h3>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">File中有一个变量fs&nbsp; 类型为FileSystem
+	</span></div>
+<div><span style="font-size: 15px;">compareTo方法依赖于他
+	</span></div>
+<div><span style="font-size: 15px;">而equals方法又依赖compareTo
+	</span></div>
+<div><span style="font-size: 15px;">hashCode也是依赖他
+	</span></div>
+<div><span style="font-size: 15px;">所以说:
+	</span></div>
+<div><span style="font-size: 15px;">compareTo&nbsp;&nbsp; equals&nbsp;&nbsp; hashCode&nbsp;&nbsp; 都依赖于 FileSystem fs
+	</span></div>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173455641-904393702.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_4984" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173455886-1946785348.png" alt="image_5b9396ec_4984" width="684" height="508" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">其实你在回头看看整个File文件中,很多个地方都出现了fs的身影
+</span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 15px;"><strong>FileSystem到底是什么?</strong>
+</span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作系统有各自的文件系统，这些文件系统又存在很多差异，而Java 因为是跨平台的，所以它必须要统一处理这些不同平台文件系统之间的差异，才能往上提供统一的入口。
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">说白了又是接口来实现统一,不同的操作系统实现这个接口,就可以提供统一的表现形式
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">FileSystem是一个抽象类
+</span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173456430-414941107.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_1e68" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173456617-1886083164.png" alt="image_5b9396ec_1e68" width="235" height="29" border="0" /></a>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">windows下的实现类为:WinNTFileSystem,在IDE中可以直接找到
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173456818-3926314.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_6881" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173456998-1508453057.png" alt="image_5b9396ec_6881" width="450" height="161" border="0" /></a>
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可能你只是找到了一个WinNTFileSystem,只有一个要接口还有什么意思?
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果你目前只看到了一个WinNTFileSystem&nbsp; 那说明你在Windows下
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">WinNTFileSystem类 和 UnixFileSystem类并不是在同一个 JDK 里面，也就是说它们是分开的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">你只能在 Windows 版本的 JDK 中找到 WinNTFileSystem，而在 Linux 版本的 JDK 中找到 UnixFileSystem
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">同样地，其他操作系统也有自己的文件系统实现类。
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">接下来大致的看下WinNTFileSystem
+</span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>属性</strong></span>
+</h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">char</span> slash;<span style="color: #008000;">//</span><span style="color: #008000;">斜杠符号</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">char</span> altSlash;<span style="color: #008000;">//</span><span style="color: #008000;">与slash相反的斜杠</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">char</span> semicolon;<span style="color: #008000;">//</span><span style="color: #008000;">分号</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> String[] driveDirCache = <span style="color: #0000ff;">new</span> String[26];<span style="color: #008000;">//</span><span style="color: #008000;">表示驱动盘目录缓存</span>
+<span style="color: #0000ff;">private</span> ExpiringCache cache = <span style="color: #0000ff;">new</span> ExpiringCache();<span style="color: #008000;">//</span><span style="color: #008000;">用于缓存标准路径</span>
+<span style="color: #0000ff;">private</span> ExpiringCache prefixCache = <span style="color: #0000ff;">new</span> ExpiringCache();<span style="color: #008000;">//</span><span style="color: #008000;">用于缓存标准路径前缀</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">其实slash就是名称分隔符</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">semicolon就是路径分隔符</span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">构造方法中根据系统变量对文件分隔符和路径分隔符进行初始化</span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173457447-1102157405.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_1983" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173457638-1633071708.png" alt="image_5b9396ec_1983" width="628" height="158" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">isSlash&nbsp; 和 isLetter都非常简单,简单的判断 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173457852-1546001427.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_607" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173458443-316246307.png" alt="image_5b9396ec_607" width="648" height="162" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">判断是否以slash&nbsp; 开头,是的话直接返回,不是的话,给他加一个 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173458641-181218666.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_cb6" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173458841-1304715690.png" alt="image_5b9396ec_cb6" width="639" height="94" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">getSeparator&nbsp; 和 getPathSeparator&nbsp; 就是File中分隔符的来处 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173459534-2023239871.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_7f39" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173500450-788235620.png" alt="image_5b9396ec_7f39" width="692" height="408" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>路径的标准化</strong></span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不光标准化,前面还提到了规范化路径 File中有方法getCanonicalFile&nbsp; getCanonicalPath </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他们到底都是在说什么事情呢 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">先说下标准化,看一个例子 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">我们给出了一个很奇怪的路径字符串</span><br /><span style="font-size: 15px;">"D://////\\\\\\/testFile\\\\///////\\wdwqdwqwd.java"</span><br /><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173500649-244867971.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_428" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173500867-667970048.png" alt="image_5b9396ec_428" width="275" height="236" border="0" /></a><br />
+<div>
+<div class="cnblogs_code">
+<pre>File file = <span style="color: #0000ff;">new</span> File("D://////\\\\\\/testFile\\\\///////\\wdwqdwqwd.java"<span style="color: #000000;">);
+
+</span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (file.exists()){
+
+System.out.println(file.getName());
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173501039-501928085.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_7ea4" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173501527-1019978609.png" alt="image_5b9396ec_7ea4" width="451" height="89" border="0" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">虽然看起来很奇怪,但是不影响程序运行</div>
+<div style="line-height: 200%;">我们此时可以用比较通俗的话来描述这个情况</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">我们给出来了一个乱七八糟的路径,最终路径按照当前文件系统的规则,进行了解析, </span></div>
+<div><span style="font-size: 15px;">去除了不必要的分隔符 或者可能把错误的分隔符进行替换等按照一定的规则 </span></div>
+<div><span style="font-size: 15px;">整理出来一个合理的路径,这就是标准化 </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">debug 看下File的构造方法&nbsp; 就知道了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">最终他帮我们正确的解析了路径,这就是标准化 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173501744-682801634.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_5748" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173502736-703959422.png" alt="image_5b9396ec_5748" width="881" height="159" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可以看得出来,标准化,借助的仍旧是fs&nbsp; 也就是FileSystem </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在WinNTFileSystem 中的normalize方法就是标准化路径的一个对外接口 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他还有两个相关的private方法,用于处理细节 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">方法的具体过程,到底是怎么处理的,有兴趣的同学可以继续深挖以下 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">仔细看下注释也可理解一二 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一个标准的win32路径名,不能包括重复的名称分隔符(斜杠) UNC除外 ,也不能以名称分隔符(斜杠)结束 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可能是一个空的String </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 15px;">规范化Win32路径名具有便捷的特点:<strong>前缀的长度</strong>几乎唯一地标识了路径的类型 </span></div>
+<div><span style="font-size: 15px;">无论它是绝对的还是相对的 </span></div>
+<div><span style="font-size: 15px;">0,1,2,3是分类说明 </span></div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173502964-643335011.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_945" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173503435-1780755960.png" alt="image_5b9396ec_945" width="696" height="468" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如同上面标准化描述的一样,前缀的长度对于标准化很有用,这个方法经常被使用 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173503658-549238749.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_4300" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173503828-1535069859.png" alt="image_5b9396ec_4300" width="665" height="126" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">还是刚才的文件夹列表</span><br /><span style="font-size: 15px;">这次使用另外的构造方法</span><br />
+<div>
+<p style="margin: 0px;">&nbsp;</p>
+<div class="cnblogs_code">
+<pre>File file = <span style="color: #0000ff;">new</span> File("D:\\\\\\/testFile///////\\\\","\\///wdwqdwqwd.java"<span style="color: #000000;">);
+
+</span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (file.exists()){
+
+System.out.println(file.getName());
+
+}</span></pre>
+</div>
+<p style="margin: 0px;">&nbsp;</p>
+</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173504005-901059570.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_5b48" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173504441-1680584219.png" alt="image_5b9396ec_5b48" width="428" height="88" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173504635-1364034536.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_6083" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173504862-933034407.png" alt="image_5b9396ec_6083" width="597" height="348" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">所以可以看得出来resolve做的事情 </span></div>
+<div><span style="font-size: 15px;">他要求传递进去的两个字符串都是normal的,所以入参传递进去时,就做了处理 </span></div>
+<div><span style="font-size: 15px;">虽然说两个都是normal但是两个拼接起来的情况还是很可能需要处理的, </span></div>
+<div><span style="font-size: 15px;">比如子路径如果以 slash 开头，丢弃它的头部，所以子路径从第2的位置开始 </span></div>
+<div><span style="font-size: 15px;">双参数的resolve就是解决这个问题的 </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173505053-641771900.png"><img style="display: inline; background-image: none;" title="image_5b9396ec_61c9" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173505252-1339692244.png" alt="image_5b9396ec_61c9" width="580" height="142" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">一个参数的resolve </span></div>
+<div><span style="font-size: 15px;">public String resolve(File f) </span></div>
+<div><span style="font-size: 15px;">也是类似的道理 </span></div>
+<div><span style="font-size: 15px;">只不过他处理的是一个File </span></div>
+<div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">1. 获取路径前缀长度 </span></div>
+<div><span style="font-size: 15px;">2. 如果头部长为2且以\开头，此时为 UNC 路径，直接返回路径 </span></div>
+<div><span style="font-size: 15px;">3. 如果头部长为3，则为本地绝对路径，直接返回路径 </span></div>
+<div><span style="font-size: 15px;">4. 如果长度为0，则为相对路径，返回用户路径+此相对路径。 </span></div>
+<div><span style="font-size: 15px;">5. 如果长度为1，则为驱动盘相对路径，此时尝试根据用户路径获取驱动盘，存在驱动盘则返回驱动盘+此路径 </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp; 不存在驱动盘则说明用户路径是一个 UNC 路径，返回用户路径+此路径。 </span></div>
+<div><span style="font-size: 15px;">6. 如果头部长度为2，则为目录相对路径。 </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp; 此时先获取用户路径，再根据用户路径获取对应驱动盘，如果路径以驱动盘开头，则直接返回用户路径+去掉驱动盘后的路径。 </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp; 如果继续往下则通过 getDriveDirectory 获取指定驱动盘的工作目录， </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp; 将驱动盘+:+工作目录+路径等拼接起来得到最终的新路径，然后还要用安全管理器检查是否有读的权限 </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173505558-897876185.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_27c1" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173505842-19229368.png" alt="image_5b9396ed_27c1" width="713" height="555" border="0" /></a></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">规范化路径 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173506080-1776552329.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_426d" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173506557-496398263.png" alt="image_5b9396ed_426d" width="640" height="47" border="0" /></a> </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">此处的规范化的含义与File中介绍的返回规范化路径和文件是一致的 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">看下File中的调用即可,依赖的就是这个方法 </span></div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173506751-473392160.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_ee0" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173507448-1594411769.png" alt="image_5b9396ed_ee0" width="535" height="138" border="0" /></a></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">resolve&nbsp; normal canonicalize方法本质是一样的,此处说的本质指的是逻辑切入点 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">他们都是为了处理路径的,只不过是基于不同的场景下去解析组织返回路径 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">normal最单纯 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">resolve 用于合并路径,或者将一个File转换为路径 </span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">canonicalize 是一个绝对路径,并且是唯一的形式</span></div>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">getUserPath方法&nbsp;&nbsp;&nbsp;&nbsp; 通过 System 获取 user.dir 属性作为用户路径。&nbsp; </span></div>
+<div><span style="font-size: 15px;">getDrive方法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 获取驱动盘，先获取路径头部长度，再截取驱动盘。 </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173507649-1389052220.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_6d90" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173507861-694342897.png" alt="image_5b9396ed_6d90" width="510" height="204" border="0" /></a></div>
+</td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">driveIndex方法 </span></div>
+<div><span style="font-size: 15px;">获取驱动盘的索引值，按照字母顺序，比如 a 或 A 则索引值为0 </span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173508021-804203766.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_7916" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173508439-791915678.png" alt="image_5b9396ed_7916" width="461" height="103" border="0" /></a></div>
+</td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">getDriveDirectory方法 </span></div>
+<div><span style="font-size: 15px;">获取指定驱动盘下的工作目录，每个驱动盘都有工作目录。 </span></div>
+<div><span style="font-size: 15px;">先根据驱动盘获取对应的驱动盘索引 </span></div>
+<div><span style="font-size: 15px;">然后尝试从缓存中读取,如果读取得到直接返回 </span></div>
+<div><span style="font-size: 15px;">如果获取不到, 使用本地方法获取,然后在缓存起来 </span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173508645-1056383130.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_44b6" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173508827-190688891.png" alt="image_5b9396ed_44b6" width="501" height="244" border="0" /></a></div>
+</td>
+</tr>
+<tr>
+<td><span style="font-size: 15px;">fromURIPath主要是完成了路径的格式化</span><br /><span style="font-size: 15px;">看代码的注释,注释就是示例程序</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173509017-138001856.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_286d" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173509547-52216242.png" alt="image_5b9396ed_286d" width="538" height="313" border="0" /></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp; </div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">WinNTFileSystem&nbsp; 还有不少方法,其中有些还是本地方法,只需要大致了解功能即可
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不是public的外面也用不了
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173509759-146981521.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_35f1" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173509936-1428507503.png" alt="image_5b9396ed_35f1" width="309" height="48" border="0" /></a>
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不过这个类对于了解File 的基本实现是很有帮助的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">因为可以说File非常非常的依赖他
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">UnixFileSystem的逻辑概念也是类似的,算是废话了,毕竟都是实现同一个接口
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本文主要对java中&nbsp;&nbsp; 抽象路径名&nbsp; File这一概念进行了详细的解读
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">并且介绍了File 依赖的底层接口&nbsp; FileSystem&nbsp; 文件系统
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不同的操作系统有不同的文件系统,FileSystem 接口用于提供一致性的操作访问
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不同的操作系统提供不同的实现类
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作文件依赖底层操作系统,所以File 也必然依赖底层系统
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">关于文件系统中的规范化标准化可能会有一定的疑惑,因为
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">其实你跳出来代码的思维来看,就是说window平台对于文件路径名称格式本身就有一些的要求
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所谓标准化就是适配这种格式,就好像学生时代让穿校服一样,那你到了这个学校就换上这个学校的校服,没什么好奇怪的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">你给出来的一个路径,想要在某个环境下运行,这个路径必须是跟本地系统适配的</span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>关于路径相关的一些补充</strong></span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">根据上面的介绍,很显然,名称分隔符和路径分隔符,不同平台下是不同的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">File中的分隔符都是获取的本地系统的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以不要在你的代码中写死某种分隔符,而是使用File给我们提供的哪几个public static final定义的分隔符
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">下面说下windows下的一些路径概念
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">绝对路径是一个广泛的概念，它表示的是可以唯一定位一个文件或文件夹的路径，
+					</span></div>
+<div><span style="font-size: 15px;">有多种形式的路径都属于绝对路径的范畴 比如,完整路径（Full path） 
+					</span></div>
+<div><span style="font-size: 15px;">我们平时所说的&ldquo;绝对路径&rdquo;通常就是指完整路径，它的windows格式如下：
+					</span></div>
+<div><span style="font-size: 15px;">C:\Windows\System32\drivers\etc\hosts
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">UNC是网络(主要指局域网)中用于标志共享文件的路径
+					</span></div>
+<div><span style="font-size: 15px;">在windows下格式
+					</span></div>
+<div><span style="font-size: 15px;">\\servername\sharename\path\filename
+					</span></div>
+<div><span style="font-size: 15px;">包括计算机名/共享文件夹名/以及共享文件夹下的路径
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">相对路径都是以某一个路径为基础的
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">纯粹的相对路径</span><br />
+<div><span style="font-size: 15px;">纯粹的相对路径格式如下：
+					</span></div>
+<div><span style="font-size: 15px;">Windows\System32\calc.exe 可以看得到,没有 斜杆&nbsp; 也没有盘符
+					</span></div>
+<div><span style="font-size: 15px;">相对的位置是,进程的当前文件夹
+					</span></div>
+<div><span style="font-size: 15px;">进程的当前文件夹并不是指EXE执行文件所在的文件夹
+					</span></div>
+<div><span style="font-size: 15px;">比如cmd控制台
+					</span></div>
+<div><span style="font-size: 15px;">cmd.exe程序的位置不会变,但是你可以切换当前文件夹的位置,切换过的位置就是当前文件夹
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">斜杠 开头的相对路径</span><br /><span style="font-size: 15px;">斜杠开头的表示相对于当前文件夹的根路径,根据上面介绍的当前文件夹,然后确定他的根路径</span><br /><span style="font-size: 15px;">比如当前是C:\Windows&nbsp; 根就是C&nbsp;&nbsp; 相对的就是C
+				</span></td>
+
+
+			</tr>
+<tr>
+<td>
+<p><span style="font-size: 15px;">盘符开头的相对路径</span><br /><span style="font-size: 15px;">C:System32\calc.exe 看起来跟完整路径类似,但是冒号:&nbsp; 后面却没有斜杠</span><br /><span style="font-size: 15px;">这也是一种相对路径</span><br /><span style="font-size: 15px;">表示的是进程在该分区上的当前文件夹</span><br /><span style="font-size: 15px;">进程会保留在每个分区上的当前文件夹,比如你从 C盘 跳到了D盘,你的当前文件夹变化了</span><br /><span style="font-size: 15px;">但是你在C盘最后一次的当前文件夹不在变动了,这就是&nbsp; 分区上的当前文件夹</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173510156-780726848.png"><img style="display: inline; background-image: none;" title="image_5b9396ed_7e20" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180908173510665-334744781.png" alt="image_5b9396ed_7e20" width="304" height="155" border="0" /></a></p>
+<p><span style="font-size: 15px;">calc计算器位于上面的路径,打开文件可以执行</span><br /><span style="font-size: 15px;">切换到别的分区</span><br /><span style="font-size: 15px;">当你再次切换到C盘的时候,直接就回到了上一次的文件路径,这就是分区的当前文件夹</span><br /><br />
+				</p>
+
+</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">linux的绝对路径是指从根目录说起的. 例如 /home/somedir/..
+					</span></div>
+<div><span style="font-size: 15px;">而相对路径则是从当前目录说起: 即 ./
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">有4个相对路径的表示方法:
+					</span></div>
+<div><span style="font-size: 15px;">当前目录 .
+					</span></div>
+<div><span style="font-size: 15px;">父目录 ..
+					</span></div>
+<div><span style="font-size: 15px;">某用户的根目录 ~user
+					</span></div>
+<div><span style="font-size: 15px;">自己的根目录 ~
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-08 17:35</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9609837" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9609837);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9609837, cb_entryCreatedDate = '2018-09-08 17:35', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

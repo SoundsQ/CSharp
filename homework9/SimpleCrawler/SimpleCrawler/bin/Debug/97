@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="令牌桶和漏桶算法最主要的差别在于：漏桶算法能够强行限制数据的传输速率，而令牌桶算法能够在限制数据的平均传输速率的同时还允许某种程度的突发传输。  &#xD;&#xA;在令牌桶算法中，只要令牌桶中存在令牌，那么就允许突" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题I：集群环境下业务限流 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：集群环境下业务限流</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        令牌桶和漏桶算法最主要的差别在于：漏桶算法能够强行限制数据的传输速率，而令牌桶算法能够在限制数据的平均传输速率的同时还允许某种程度的突发传输。  
+在令牌桶算法中，只要令牌桶中存在令牌，那么就允许突发地传输数据直到达到用户配置的门限，因此它适合于具有突发特性的流量。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><strong><a style="cursor: pointer;" href="http://weibo.com/yunzheng/">@郑昀</a>汇总&nbsp;</strong></p>
+<div><strong>创建日期：20120925</strong></div>
+<div><strong><br /></strong>
+<div><strong>关键词索引：</strong></div>
+<div>令牌桶算法，漏桶算法</div>
+<div><br />
+<div><strong>背景：</strong>
+<div>
+<div>防注册机、秒杀器或扫号等常见电商流量过滤技术，一般具有如下要求：</div>
+<div>1) 高性能。算法简单高效，能对HTTP Requests进行实时在线处理。</div>
+<div>2) 分类错误率低。尤其是尽量保证不误杀正常顾客访问。</div>
+<div>3) 鲁棒性强。由于双方攻防的对抗性很强，所以算法必须适应各种类型的攻击情形（包括DDoS攻击）。</div>
+<div>&nbsp;</div>
+<div><strong>课题1：</strong></div>
+<div>对网站某一个URL/表单提交/Ajax请求的访问进行实时检测，找出过于频繁请求的ip，对这些ip的访问频率进行限制。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong>课题2：</strong></div>
+<div>对网站开放平台访问，对某一个开放接口的调用，有频次约束，即针对单一App Key不得超过每小时150次调用。</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div><strong>翻译一下：</strong></div>
+<div>郑昀认为，我们希望限制住的是，在用M度量的任何时间周期内，某一个动作（action）的发生次数N。</div>
+<div>&nbsp;</div>
+<div><strong>英文关键词：</strong></div>
+<div>rate limiter</div>
+<div>rate limiting</div>
+<div>throttle limiter</div>
+<div>&nbsp;</div>
+<div><strong>要控制的是 Average Rate ：</strong></div>
+<div>　　<img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard1211.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard1211.png" /></div>
+<div>&nbsp;</div>
+<div><strong><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html" target="_blank">解决思路</a>：</strong></div>
+<div>推荐采用令牌桶算法的简易实现。</div>
+<div>&nbsp;</div>
+<div><strong>参考资料：</strong></div>
+<div><span class="st">一）</span></div>
+<div><span class="st"><a style="cursor: pointer;" href="http://en.wikipedia.org/wiki/Leaky_bucket">Leaky Bucket</a>，漏桶算法。</span></div>
+<div><span class="st"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard.png" /></span></div>
+<div><span class="st">&nbsp; &nbsp; &nbsp;图1.1 漏桶算法示意图</span></div>
+<div><span class="st">如图1所示，桶本身具有一个<strong>恒定的速率</strong>往下漏水，而上方<strong>时快时慢</strong>地会有水进入桶中。当桶还未满时，上方的水可以加入。一旦水满，上方的水就无法加入了。桶满正是算法中的一个的关键触发条件（即流量异常判断成立的条件）。</span></div>
+<div>
+<div>在桶满水之后，常见的两种处理方式为：</div>
+<div>1）暂时拦截住上方水的向下流动，等待桶中的一部分水漏走后，再放行上方水。</div>
+<div>2）溢出的上方水直接抛弃。</div>
+<div>将水看作网络通信中数据包的抽象，则</div>
+<div>方式1起到的效果称为Traffic Shaping，</div>
+<div>方式2起到的效果称为Traffic Policing（流量策略）。</div>
+<div>由此可见，Traffic Shaping 的核心理念是&ldquo;等待&rdquo;，Traffic Policing 的核心理念是&ldquo;丢弃&rdquo;。它们是两种常见的流速控制方法。</div>
+<div>&nbsp;</div>
+<div>
+<div>再回顾一下上面的图，可以看出算法只需要两个参数：</div>
+<div>1）桶漏水的速率</div>
+<div>2）桶的大小</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>算法核心：</div>
+<div>利用桶模型判断何时的流量达到异常了</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>
+<div>外延：</div>
+<div>1）流量异常时的处理方法：traffic policing v.s. traffic shaping</div>
+<div>2）处理的数据包是否定长：定长 v.s. 变长</div>
+
+
+
+</div>
+<div>3）桶的大小是否等同于每个tick放行的水量：as a queue v.s. as a meter</div>
+<div>&nbsp;</div>
+<div>二）</div>
+<div><span class="st"><a style="cursor: pointer;" href="http://en.wikipedia.org/wiki/Token_bucket">Token Bucket</a>，令牌桶算法是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。</span></div>
+<div>
+<div>漏桶算法不够灵活，因此加入令牌机制。&nbsp;</div>
+<div>基本思想：</div>
+<div>令牌桶在&nbsp;traffic shaping 中的应用思想如下图2.1所示。</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard121112.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard121112.png" /></a></div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard32.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard32.png" /></a></div>
+<div>&nbsp; &nbsp; 图2.1 CAR和CTS进行流量控制示意图</div>
+<div>
+<p>我们主要关注<strong><span style="color: #ff0000;">约定访问速率(CAR)</span></strong>模式，即：</p>
+<p>a. 按特定的速率向令牌桶投放令牌；</p>
+<p>b.根据预设的匹配规则先对报文进行分类，<strong>不符合匹配规则的报文不需要经过令牌桶的处理，直接发送</strong>；</p>
+<p>c.符合匹配规则的报文，则需要令牌桶进行处理。当桶中有足够的令牌则报文可以被继续发送下去，同时令牌桶中的令牌量按报文的长度做相应的减少；</p>
+<p>d.<strong>当令牌桶中的令牌不足时，报文将不能被发送（即丢弃）</strong>，只有等到桶中生成了新的令牌，报文才可以发送。这就可以限制报文的流量只能是小于等于令牌生成的速度，达到限制流量的目的。</p>
+
+
+
+</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>实现：</div>
+<div><strong>在数据结构上，没有必要真的实现一个令牌桶。</strong></div>
+<div><strong>基于时间的流逝生成受控制数量的令牌即可&mdash;&mdash;以时间的流逝来洗涤旧迹，也就是将两次发包或者收包的间隔和令牌数量联系起来。</strong></div>
+<div>&nbsp;</div>
+<div>辅助理解的图形：</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html" target="_blank"><span class="st"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard33.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard33.png" /></span></a></div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html" target="_blank"><span class="st"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard34.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard34.png" /></span></a></div>
+<div>&nbsp;</div>
+<div>令牌桶和漏桶算法最主要的差别在于：<strong>漏桶算法能够强行限制数据的传输速率，而令牌桶算法能够在限制数据的平均传输速率的同时还允许某种程度的突发传输。 &nbsp;</strong></div>
+<div>在令牌桶算法中，只要令牌桶中存在令牌，那么就允许突发地传输数据直到达到用户配置的门限，因此它适合于具有突发特性的流量。&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<div>三）<a style="cursor: pointer;" href="http://developer.linkedin.com/documents/throttle-limits">http://developer.linkedin.com/documents/throttle-limits&nbsp;</a>&nbsp;这是常见的开放平台限制请求速率的方式。</div>
+<div>
+<div>LinkedIn 比较好的一点就是把<strong>Application throttles</strong>和<strong>Developer throttles</strong>分开了。后者是方便联调测试的。</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>四）<a style="cursor: pointer;" href="http://www.pennedobjects.com/2010/10/better-rate-limiting-with-dot-net/" rel="nofollow">Better Rate Limiting in .NET [Penned Objects]</a></div>
+
+
+
+</div>
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>五）郑昀推荐阅读，<a style="cursor: pointer;" href="http://leyew.blog.51cto.com/5043877/860302">Leaky Bucket算法和Token Bucket算法学习笔记</a>，<a style="cursor: pointer;" href="http://hi.baidu.com/networkor/item/13be43cffc767007b77a2427">令牌桶算法的应用</a>，<a style="cursor: pointer;" href="http://blog.csdn.net/lycb_gz/article/details/7492468">QoS令牌桶工作原理</a>，<a style="cursor: pointer;" href="http://blog.csdn.net/dog250/article/details/6945502">用Netfilter模块实现基于令牌桶的每IP地址流量控制</a></div>
+<div>&nbsp;</div>
+<div>六）Token Bucket 算法的 Python 实现一：kombu.utils.limits.py</div>
+<div>代码：https://github.com/celery/kombu/blob/master/kombu/utils/limits.py</div>
+<div>对此实现一个较为早期的解释：<a style="cursor: pointer;" href="http://code.activestate.com/recipes/511490/">http://code.activestate.com/recipes/511490/</a></div>
+<div>
+<div id="LC15" class="line"><span style="font-family: 'Microsoft Yahei';">即，每次外界调用 _get_tokens 方法时，才会查一下需要追加多少token。</span></div>
+<div id="LC16" class="line"><span class="k">class</span> <span class="nc">TokenBucket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+
+
+
+</div>
+<div>
+<div id="LC65" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">def</span> <span class="nf">_get_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div id="LC66" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokens</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">:</span></div>
+<div id="LC67" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
+<div id="LC68" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="n">delta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span></div>
+<div id="LC69" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="bp">self</span><span class="o">.</span><span class="n">_tokens</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokens</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span></div>
+<div id="LC70" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">now</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokens</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">消耗令牌则是通过 consume 函数，指明本次消耗多少张令牌：</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<pre>    <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+        <span class="sd">"""Consume tokens from the bucket. Returns True if there were</span>
+<span class="sd">        sufficient tokens otherwise False."""</span>
+        <span class="k">if</span> <span class="n">tokens</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tokens</span> <span class="o">-=</span> <span class="n">tokens</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span></pre>
+</div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">七）Rate Limiting 的 memcache-based django&nbsp;</span></span><span style="font-family: 微软雅黑;">decorator</span><span class="n" style="font-family: 微软雅黑;"><span style="font-family: 'Microsoft Yahei';"> 实现：</span></span><span style="font-family: 'Microsoft Yahei';"><a style="cursor: pointer;" href="http://simonwillison.net/2009/Jan/7/ratelimitcache/">Rate limiting with memcached</a></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 微软雅黑;">代码实现：https://github.com/simonw/ratelimitcache/blob/master/ratelimitcache.py </span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">八）</span></span><span style="font-family: 'Microsoft Yahei';"><a style="cursor: pointer;" href="http://amix.dk/blog/viewEntry/19425">Preventing login hacks: <span style="color: #ff0000;">Rate limiting using memcached</span></a></span><span style="font-family: 'Microsoft Yahei';">Python 实现。</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">它明确提出了防字典攻击防扫号的目的。</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">既可限制住ip，也可限制住其他字段如 username 。</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">八）Token Bucket 算法的node.js实现</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';"><a style="cursor: pointer;" href="https://github.com/jhurliman/node-rate-limiter">jhurliman/node-rate-limiter</a> 给出了一个非常便于理解的 Token 消耗方式：</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">下面是 150次请求/次 范例，每1次请求消耗1个token：</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<pre><code>var RateLimiter = require('limiter').RateLimiter;
+// Allow 150 requests per hour (the Twitter search limit). Also understands
+// 'second', 'minute', 'day', or a number of milliseconds
+var limiter = <strong>new <a style="cursor: pointer;" href="https://github.com/jhurliman/node-rate-limiter/blob/master/lib/rateLimiter.js">RateLimiter</a>(150, 'hour')</strong>;
+
+// Throttle requests
+limiter.removeTokens(<strong><span style="color: #0000ff;">1</span></strong>, function(err, remainingRequests) {
+  // err will only be set if we request more than the maximum number of
+  // requests we set in the constructor
+
+  // remainingRequests tells us how many additional requests could be sent
+  // right this moment
+  callMyRequestSendingFunction(...);
+});</code></pre>
+</div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">下面是150KB/sec 范例</span></span><span style="font-family: 'Microsoft Yahei';">，每1个字节的传输就消耗1个token</span><span style="font-family: 'Microsoft Yahei';">：</span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<pre><code>var BURST_RATE = 1024 * 1024 * 150; // 150KB/sec burst rate
+var FILL_RATE = 1024 * 1024 * 50; // 50KB/sec sustained rate
+var TokenBucket = require('limiter').TokenBucket;
+// We could also pass a parent token bucket in as the last parameter to
+// create a hierarchical token bucket
+var bucket = <strong>new <a style="cursor: pointer;" href="https://github.com/jhurliman/node-rate-limiter/blob/master/lib/tokenBucket.js">TokenBucket</a>(BURST_RATE, FILL_RATE, 'second', null)</strong>;
+
+bucket.removeTokens(<span style="color: #0000ff;">myData.byteLength</span>, function() {
+  sendMyData(myData);
+});</code></pre>
+</div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><span style="font-family: 'Microsoft Yahei';">九）StackOverflow 上的相关讨论：</span></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span class="n"><a style="cursor: pointer;" href="http://stackoverflow.com/questions/1407113/throttling-method-calls-to-m-requests-in-n-seconds"><span style="font-family: 'Microsoft Yahei';">Throttling method calls to M requests in N seconds</span></a></span></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a style="cursor: pointer;" href="http://stackoverflow.com/questions/667508/whats-a-good-rate-limiting-algorithm"><span style="font-family: 'Microsoft Yahei';">What&rsquo;s a good rate limiting algorithm?</span></a></div>
+<div id="LC71" class="line" style="color: #000000; font-family: monospace; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a style="cursor: pointer;" href="http://stackoverflow.com/questions/33969/best-way-to-implement-request-throttling-in-asp-net-mvc"><span style="font-family: 'Microsoft Yahei';">Best way to implement request throttling in ASP.NET MVC?</span></a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-17 22:14</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2775400" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2775400);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2775400, cb_entryCreatedDate = '2012-11-17 22:14', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

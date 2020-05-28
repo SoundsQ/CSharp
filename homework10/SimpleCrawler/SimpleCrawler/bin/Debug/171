@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="本期盘点一下博主在工作中，常用的13个idea快捷键，这些快捷键基本涵盖了大部分的开发场景，希望可以萌新们的idea使用效率,系统为mac系统 上一步 / 下一步撤销 / 反撤销进入一个类生成方法变量" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>14个快捷键让你的idea飞起来(新手向 + 演示) - 进击的李同学 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/nedulee/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/nedulee/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/nedulee/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 384238;
+        var currentBlogApp = 'nedulee';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/nedulee/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/nedulee/">Java后端进阶指南</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/nedulee/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BF%9B%E5%87%BB%E7%9A%84%E6%9D%8E%E5%90%8C%E5%AD%A6">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/nedulee/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+61&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+38</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/nedulee/p/12796778.html">14个快捷键让你的idea飞起来(新手向 + 演示)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div id="output_wrapper_id" class="output_wrapper" style="font-size: 15px; color: #3e3e3e; line-height: 1.8; word-spacing: 2px; letter-spacing: 2px; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center;">
+<blockquote style="line-height: inherit; display: block; padding: 15px 15px 15px 1rem; font-size: 0.9em; margin: 1em 0px; color: #000000; border-left: 5px solid #ef7060; background: #efebe9; overflow: auto; overflow-wrap: normal; word-break: normal;">
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 0px;">本期盘点一下博主在工作中，常用的13个idea快捷键，这些快捷键基本涵盖了大部分的开发场景，希望可以萌新们的idea使用效率,系统为mac系统</p>
+</blockquote>
+<p id="tocid_0" class="toc" style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px; margin-left: 25px;"><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h">上一步 / 下一步</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-1">撤销 / 反撤销</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-2">进入一个类</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-3">生成方法</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-4">变量命名 / 代码提示</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#hprojectstructure">打开 Project/structure面板</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-5">收起/展开代码</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-6">批量修改名称</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-7">查看方法调用链</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-8">查看方法调用位置</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-9">代码格式整理</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-10">创建文件</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-11">关键字搜索</a></span></span><span class="toc_item" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; display: block;"><span class="toc_left" style="font-size: inherit; color: inherit; line-height: inherit; margin: 0px; padding: 0px; margin-left: 25px;"><a style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; text-decoration: none; color: #1e6bb8; overflow-wrap: break-word;" href="#h-12">突出显示</a></span></span></p>
+<h3 id="h" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">上一步 / 下一步</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">alt + -&gt; / alt + &lt;-</strong><br />类似于我们的浏览器的上一页/下一页，切换到光标上一个/下一个移动的位置</p>
+<h3 id="h-1" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">撤销 / 反撤销</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">ctrl + z / ctrl + shift + z</strong><br />如果你使用过world, 就会知道在world中的反撤销是ctrl + y,但是非常坑爹的是在idea中，ctrl + y是删除当前行</p>
+<h3 id="h-2" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">进入一个类</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">command + B</strong><br />如果是您使用的是鼠标的话，这个操作就是command + 鼠标左键，我们可以通过上述的[上一步]，执行进入后退出一个类</p>
+<h3 id="h-3" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">生成方法</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">control + return</strong> <br /><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">getter/setter/toString/equals &hellip;</strong><br />常用来给pojo类生成getter/setter方法，</p>
+<h3 id="h-4" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">变量命名 / 代码提示</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">alt + return</strong> <br />这里演示一个idea根据提示替换代码的例子(只是简单演示idea的提示与替换功能，代码本身毫无意义)</p>
+<img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-5cf9620eeaec8a2f.gif?imageMogr2/auto-orient/strip" alt="">
+<h3 id="hprojectstructure" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">打开 Project/structure面板</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">command + 1/7</strong><br />这里比较直观，就不再演示了，我们通过Project面板可以快速定位文件位置，通过structure面板可以快速查找当前类的变量和方法，非常实用</p>
+<h3 id="h-5" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">收起/展开代码</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">command + shift</strong></p>
+<h3 id="h-6" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">批量修改名称</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">shift + f6</strong><br />这也是一个非常实用的快捷键，常用于代码重构。</p>
+<h3 id="h-7" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">查看方法调用链</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">control + alt + h</strong><br />主要用于读代码的时候，查看方法调用关系，或者重构代码的时候，进行风险评估，即谁调用过我(包含直接调用和间接调用)</p>
+<img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-c2257f800232dc57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br /><img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-3cb2219b4b4358a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
+<h3 id="h-8" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">查看方法调用位置</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">alt + f7</strong><br />和查看方法调用链类似，即谁直接调用过我</p>
+<img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-d7d5928a9350ad9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">
+<h3 id="h-9" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">代码格式整理</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">command + shift + l</strong><br />一定要进行代码整理, idea支持不同风格的代码格式整理(sun / google), 默认是sun风格，google风格需要引入XML文件</p>
+<h3 id="h-10" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">创建文件</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">control + return</strong><br />代码开发中，一定会频繁的创建文件，通过这个快捷键就可以解放双手，避免了多次的鼠标点击</p>
+<h3 id="h-11" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">关键字搜索</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">contrl + f 当前文件下的文本查询</strong><br /><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">contrl + shift + f 全局的文本查询</strong><br /><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">contrl + shift + n 全局的文件查询</strong></p>
+<h3 id="h-12" style="color: inherit; line-height: inherit; padding: 0px; margin: 1.6em 0px; font-weight: bold; border-bottom: 2px solid #ef7060; font-size: 1.3em;"><span style="font-size: inherit; line-height: inherit; margin: 0px; display: inline-block; font-weight: normal; background: #ef7060; color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">突出显示</span></h3>
+<p style="font-size: inherit; color: inherit; line-height: inherit; padding: 0px; margin: 1.7em 0px;"><strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">alt + 鼠标右键 / command + 鼠标右键</strong> <br />非常有意思的一个功能，适用于梳理代码结构，esc退出</p>
+<img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-1f9d00c2db2909de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br /><img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="" src="https://upload-images.jianshu.io/upload_images/20067815-2753b4b4626b0ac3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br />&emsp;&emsp;<strong style="font-size: inherit; line-height: inherit; margin: 0px; padding: 0px; font-weight: bold; color: #e96900;">最后，期待您的订阅和点赞，专栏每周都会更新，希望可以和您一起进步，同时也期待您的批评与指正！</strong><br /><img style="font-size: inherit; color: inherit; line-height: inherit; padding: 0; display: block; margin: 0 auto; max-width: 100%" title="image" src="https://upload-images.jianshu.io/upload_images/20067815-0e37906a9bde4fd6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image">image</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 19:44</span>&nbsp;
+<a href="https://www.cnblogs.com/nedulee/">进击的李同学</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12796778" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12796778);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 384238, cb_blogApp = 'nedulee', cb_blogUserGuid = 'b1fb867b-9370-4b49-eb30-08d4ef52ecb5';
+    var cb_entryId = 12796778, cb_entryCreatedDate = '2020-04-28 19:44', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 进击的李同学
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

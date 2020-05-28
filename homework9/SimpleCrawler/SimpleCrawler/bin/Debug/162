@@ -1,0 +1,760 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="死锁是并发（多线程、多进程）必然出现的一个问题，也是必须要面对的一个问题，可以认为是并发（并行）的一个副作用，如果没有并发则不会出现死锁，但是并发是必然，所以也必须要解决死锁问题，本文对死锁进行了介绍" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>死锁概念以及预防解决方法简介 多线程上篇（八） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10354664.html">死锁概念以及预防解决方法简介 多线程上篇（八）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        死锁是并发（多线程、多进程）必然出现的一个问题，也是必须要面对的一个问题，可以认为是并发（并行）的一个副作用，如果没有并发则不会出现死锁，但是并发是必然，所以也必须要解决死锁问题，本文对死锁进行了介绍以及如何解决进行了简单说明
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">在前面不止一次的提到过死锁。</span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所谓死锁(Deadlock)</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>是指多个进程在运行过程中因争夺资源而造成的一种僵局(DeadlyEmbrace)，当进程处于这种僵持状态时，若无外力作用，它们都将无法再向前推进。</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="color: #ff0000; font-size: 13.5pt;"><strong>死锁的定义：</strong></span><span style="color: #0000ff; font-size: 13.5pt;"><strong>集合中的每一个进程都在等待只能由本集合中的其他进程才能引发的事件，那么该组进程是死锁的。</strong></span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">也就是说集合中的人需要等待本集合中的其他人来帮忙， 但是，可怕的是所有的人都是这状态。</span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">引起死锁的主要原因是：</span>&ldquo;<span style="color: #ff0000; font-size: 13.5pt;"><strong>需要采用互斥方法访问的、不可以被抢占的资源</strong></span>&ldquo;。</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">因为需要互斥，所以就产生了竞争，出现了竞争就会出现等待，但是资源又不可被抢占，所以可能会被别人一直占有，那么就可能无限的等待，这就形成了死锁。</span></div>
+<h3><span style="font-size: 18px;">资源角度 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122936156-868017946.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_2778" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122936435-734688794.png" alt="image_5c5bb432_2778" width="696" height="486" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">计算机资源可以从两个维度进行划分，重用性以及抢占性。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">不管是可重用资源还是消耗性资源，他们都不是可以任意请求的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">系统中可重用资源的个数相对来说比较固定，消耗性资源尽管是个数不固定，动态的，但是某瞬间也都是有个数的，所以也不是可以任意请求的。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以不管是否可重用，只要有竞争访问，就可能出现死锁。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对于不可抢占资源，一旦被请求了，如果不能够释放，那么别人就必须要等待。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">可抢占资源即使被分配，仍旧可以被抢占，所以这类资源不会引起死锁。 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以，从资源的角度看，只需要关注是否是可抢占资源，如果不可抢占，那么就有可能出现死锁。</strong> </span></div>
+<h3><span style="font-size: 18px;">资源分配图 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">为了直观的分析死锁的情况，可以使用资源分配图 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">是一种描述资源申请与分配关系的图 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">使用圆圈表示进程，矩形表示资源； </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">箭头表示资源的申请与释放，资源-&gt;进程表示分配，进程-&gt;资源表示资源申请。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如下图所示，表示P1获得了R1在等待R2，P2获得了R2 在等待R1 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122936668-971769228.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_93c" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122936836-695945732.png" alt="image_5c5bb432_93c" width="311" height="240" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">死锁产生情况 </span></h3>
+<h4><span style="font-size: 16px;">竞争不可抢占资源 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; P2 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">wait(R1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wait(R2) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">wait(R2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wait(R1) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如上所示，进程P1和P2，一个先申请资源R1，一个先申请资源R2，一旦资源R1和R2同时被两个不同的进程获得，将会进入死锁状态。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果一个结束之后，另一个开始，那么就不会出现死锁。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937004-617323160.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_93c[1]" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937166-89763054.png" alt="image_5c5bb432_93c[1]" width="311" height="240" border="0" /></a> </span></div>
+<h4><span style="font-size: 16px;">竞争可消耗资源 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">设有进程P1、P2、P3，有可消耗资源R1、R2、R3 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果如下顺序推进 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P1:&nbsp; send(p2, R1);&nbsp;&nbsp;&nbsp; receive(p3, R3);&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P2:&nbsp; send(p3, R2);&nbsp;&nbsp;&nbsp; receive(p1, R1);&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P3:&nbsp; send(p1, R3);&nbsp;&nbsp;&nbsp; receive(p2, R2);&nbsp; </span></div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如下图所示，每个进程都先生产资源给别人，然后才会等待别人的资源，每个人最终都能够获得资源 </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937320-104841706.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_57dc" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937471-703774564.png" alt="image_5c5bb432_57dc" width="255" height="236" border="0" /></a> </span></div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果是 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P1:&nbsp; receive(p3, R3);&nbsp;&nbsp;&nbsp;&nbsp; send(p2, R1);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P2:&nbsp; receive(p1, R1);&nbsp;&nbsp;&nbsp;&nbsp; send(p3, R2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">P3:&nbsp; receive(p2, R2);&nbsp;&nbsp;&nbsp;&nbsp; send(p1, R3);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所有的人都在等待别人的资源，才会生产消息，形成了死锁。 </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937667-1536615191.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_6ca6" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122937998-879752477.png" alt="image_5c5bb432_6ca6" width="293" height="301" border="0" /></a> </span></div>
+</div>
+<h4><span style="font-size: 16px;">进程推进顺序不当 </span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">下图中，横坐标为进程1，纵坐标为进程2 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">进程1的活动过程有Request(R1)&nbsp; Request(R2)&nbsp;&nbsp; Release(R1)&nbsp;&nbsp; Release(R2) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">进程2的活动过程有Request(R2)&nbsp; Request(R1)&nbsp;&nbsp; Release(R2)&nbsp;&nbsp; Release(R1) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">显然，图中的阴影区域D，阴影区域的左下角表示进程1申请了资源R1，进程2申请了资源R2，如果此时进程1申请R2或者进程2申请R1或者两者都有，必然会发生死锁 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果避开这个区域，比如一个进程结束后另一个开始，1号曲线或者2号曲线，或者进程1释放了R1后，进程2才开始申请R2就不会进入死锁 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">通过这种活动顺序图，可以推测出来可能会出现死锁的时空区域。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122938561-1895736606.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_56f8" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122938999-1741098281.png" alt="image_5c5bb432_56f8" width="589" height="340" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">《计算机操作系统 第四版》 图3-14 </span></div>
+<h3><span style="font-size: 18px;">死锁必要条件 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">前面从资源以及场景的角度分析了死锁，其根本也还是&ldquo;</span><span style="color: #000000; font-size: 13.5pt;"><strong>需要采用互斥方法访问的、不可以被抢占的资源</strong></span>&rdquo;。 <span style="color: #000000; font-size: 13.5pt;"><strong><br /></strong></span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122939246-1220947353.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_5de3" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122939449-1297743919.png" alt="image_5c5bb432_5de3" width="648" height="476" border="0" /></a>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">死锁形成有四大必要条件，也就是说如果死锁了必然存在这些。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果不互斥，大家都可以访问，就没可能死锁；
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果没有请求和保持，比如一次性分配，如果分配不到等待别人使用后释放即可，保持和请求必然会导致&ldquo;拿走了比人需要的，还等待别人&rdquo;的场景；
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果可以抢占，即使已经死锁，肯定会被打破；
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果没有循环等待，终究会有一个进程会自己完成，完成后便会释放自己持有的资源，整个系统就会被激活。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以说，想要处理死锁，或者说避免死锁，关键点就是这几个条件，只要条件被打破，就不会存在继续死锁下去的可能。
+</span></div>
+<h3><span style="font-size: 18px;">死锁解决方法
+</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122939653-1062769075.png"><img style="display: inline; background-image: none;" title="image_5c5bb432_77ac" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207122939871-1767351371.png" alt="image_5c5bb432_77ac" width="816" height="568" border="0" /></a>
+</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>从预防-避免-检测-解除，对死锁的防范程度依次减弱，但是对应的资源的利用率依次提高，也就是并发程度依次变高。</strong>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">预防就像接种疫苗，可能你这辈子都不会接触到病毒。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">避免就是在可能出事情的地方，做一些保障处理，比如发现有些场合人员混乱，全是二手烟，那就不进房间了。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">检测就好像是定期的体检，没问题继续生活，有什么小问题就去治疗一下。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">解除就是真的去看病了。
+</span></div>
+<h4><span style="font-size: 16px;">预防死锁
+</span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">预防就是事先前的准备，如同疫苗，死锁的预防通常就是增加限制，破坏必要条件。
+</span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>破坏&ldquo;请求和保持&rdquo;</strong>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所有的资源必须一次性分配，或者不分配，这样能够保障一个进程要么就等待，要么就可以获得全部的资源，而不会出现保持了资源，然后再去请求的可能。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">但是很显然，资源利用率低，并发程度低
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">比如说有一个任务三个阶段，每个阶段一种资源，每个阶段十分钟，如果一次性分配的话，每个资源都会有二十分钟的闲置，极大地浪费。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">这种方案可以进一步优化，分阶段处理，而不是一次性，还是刚才的示例，每个阶段仅仅申请该阶段的资源，使用完毕后，将资源释放，然后再去获取下一阶段的资源
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">也就是说需要合理的划分阶段，一个完整任务中的一个子任务（也就是一个阶段）一次性分配资源，使用完毕后释放，再去请求，就不存在保持请求了。
+</span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>破坏&ldquo;不可抢占&rdquo;</strong>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果资源是可抢占的，自然就不会死锁，终究会自动解锁，如果能够合理的将不可抢占资源转换为&ldquo;可抢占&rdquo;那么就可以预防死锁
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当一个进程持有了某些资源后，如果又提出了新的请求，如果该请求并不能满足，那么他必须释放已有的资源，也就可以说是被抢占了
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">不过这个思路实现复杂，可能会付出很大的代价，比如打印机开始处理了，你现在要切换，肯定不会很容易。
+</span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>破坏&ldquo;循环等待&rdquo;</strong>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">将资源按照一定的顺序进行申请，可以保证资源的有序性，也就可以破坏循环等待，正是因为资源的顺序很随意，所以才导致很容易死锁
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">比如所有的进程全部都是R1然后R2，就永运不会死锁
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以可以采取对系统内资源编号的形式，所有的资源申请必须是从小到大的顺序。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如此，就肯定不会循环成环。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">但是，号码如何编？到底谁大谁小？要统计下平时资源的申请顺序进行编号
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">然后如果新增加设备？
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">另外如果有些进程就是跟系统的排序不同怎么办？
+</span></div>
+<h4><span style="font-size: 16px;">避免死锁
+</span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">在死锁避免方法中，把系统的状态分为安全状态和不安全状态。
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">安全状态就是可以找到资源分配的有序序列， 各进程可以顺利推进完成。
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">不安全状态如果找不到一个合理的资源分配的有序序列，不能保障各进程可以顺利完成，那么就是不安全。
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当系统处于安全状态时，可避免发生死锁。反之，当系统处于不安全状态时，则可能进入到死锁状态。
+	</span></div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">简言之，避免死锁就是在资源分配时，借助于算法对资源分配进行计算评估，相当于风险评估机构。
+	</span></div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">经典的算法有Dijkstra提出的银行家算法
+</span></div>
+<h4><span style="font-size: 16px;">死锁检测
+</span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">死锁的检测也是借助于算法进行处理，想要检测死锁
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">首先，系统中必须能够记录资源的请求和分配记录，其次需要提供一种算法，通过对请求和分配记录进行分析，计算出当前的状态。
+</span></div>
+<h4><span style="font-size: 16px;">死锁解除
+</span></h4>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果检测出死锁，那么必须进行解除，常用的解除方式有两种，抢占资源和终止进程，本质都是强行将资源夺回到系统中。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">终止进程的话最简单的就是全部终止，将涉及的死锁进程全部都终止掉，显然全部终止就好像将一台工作中的电脑强行重启一样，代价很大
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以还可以逐个终止，直到死锁解除。
+</span></div>
+<h3><span style="font-size: 18px;">总结
+</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">本文对操作系统中死锁的概念进行了简单的介绍，不仅仅进程有死锁，线程的运行仍旧也会有死锁。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">多线程编程中也会出现死锁，在这些场景中，死锁的概念是相同的---都是同一个集合中的线程都在等待本集合中的线程
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对于操作系统对死锁的处理与解决，对于编程中不无借鉴之处，我们应该深刻理解死锁形成的条件，才能够在编程中尽可能的避免死锁。
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10354664.html" target="_blank">死锁概念以及预防解决方法简介 多线程上篇（八）</a></span></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-08 10:12</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10354664" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10354664);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10354664, cb_entryCreatedDate = '2019-02-08 10:12', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

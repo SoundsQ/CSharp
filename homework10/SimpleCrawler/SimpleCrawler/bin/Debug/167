@@ -1,0 +1,1028 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一步一步搭建Mybatis的使用示例，项目中可能只是编写接口与XML映射文件，本文根据官方文档从底层描述一个完整示例，并对Mybatis进行了一个简单的介绍，作为入门。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>第一个Mybatis程序示例 Mybatis简介（一） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10332784.html">第一个Mybatis程序示例 Mybatis简介（一）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        一步一步搭建Mybatis的使用示例，项目中可能只是编写接口与XML映射文件，本文根据官方文档从底层描述一个完整示例，并对Mybatis进行了一个简单的介绍，作为入门。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 15px;">在JDBC小结中（可以参阅本人JDBC系列文章），介绍到了ORM，其中Mybatis就是一个不错的ORM框架</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">MyBatis由iBatis演化而来 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">iBATIS一词来源于&ldquo;internet&rdquo;和&ldquo;abatis&rdquo;的组合，是一个由Clinton Begin在2001年发起的开放源代码项目。于2010年6月16号被谷歌托管，改名为MyBatis。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">是一个基于SQL映射支持Java和&middot;NET的持久层框架。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">MyBatis是一个优秀的持久层框架，对JDBC操作数据库进行了封装，封装后的Mybatis使应用程序开发者只需要关注SQL本身 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">完全不需要再次花精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码（最初的Mybatis环境搭建只需要立项之初配置即可） </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 15px;">要求通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来 </span></li>
+<li><span style="font-size: 15px;">并通过java对象和statement中的sql进行映射生成最终执行的sql语句 </span></li>
+<li><span style="font-size: 15px;">mybatis框架执行sql并将结果映射成java对象并返回。 </span></li>
+</ul>
+</div>
+<div><span style="font-size: 15px;">项目环境搭建好之后我们需要做的就是通过XML或者注解将要执行的SQL配置起来，也就是仅仅关注SQL </span></div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">中文版文档 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a title="" href="http://www.mybatis.org/mybatis-3/zh/index.html">http://www.mybatis.org/mybatis-3/zh/index.html</a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">github地址 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a title="" href="https://github.com/mybatis/mybatis-3">https://github.com/mybatis/mybatis-3</a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">截止本文，最新版本为：mybatis-3.4.6 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本文不涉及架构解析，首先演示了一个最简单的示例，然后以这个简单示例为基础，简单介绍了从外部看过去的Mybatis的呈现样子 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">帮助简单了解Mybatis</span></div>
+<h3><span style="font-size: 18px;">第一个Mybatis程序 </span></h3>
+<h4><span style="font-size: 16px;">1.新建项目 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">新建一个Java 项目 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我取名为mybatis，并且新建了一个包 first </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100541104-1800647131.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c7_7089" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100541390-607076669.png" alt="image_5c4fb3c7_7089" width="755" height="423" border="0" /></a></div>
+<h4><span style="font-size: 16px;">2.包获取与导入 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">基础的两个包 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">mybatis 和 mysql-connector（因为要用MYSQL） ，可以从官方下载&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">https://dev.mysql.com/downloads/connector/j/ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">https://github.com/mybatis/mybatis-3/releases </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100541724-1190818442.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c7_4d8d" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100542087-2118833986.png" alt="image_5c4fb3c7_4d8d" width="1001" height="736" border="0" /></a></div>
+<h4><span style="font-size: 15px;">3.数据库准备 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本人已经有本地数据库，MYSQL，以student表为测试 </span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `student` (
+  `id` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;"> AUTO_INCREMENT,
+  `name` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span> <span style="color: #0000ff;">DEFAULT</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">默认姓名</span><span style="color: #ff0000;">'</span> COMMENT <span style="color: #ff0000;">'</span><span style="color: #ff0000;">姓名</span><span style="color: #ff0000;">'</span><span style="color: #000000;">,
+  `age` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">1</span><span style="color: #ff0000;">'</span><span style="color: #000000;">,
+  `sex` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  `random` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  </span><span style="color: #0000ff;">PRIMARY</span> <span style="color: #0000ff;">KEY</span><span style="color: #000000;"> (`id`)
+) ENGINE</span><span style="color: #808080;">=</span>InnoDB  <span style="color: #0000ff;">DEFAULT</span> CHARSET<span style="color: #808080;">=</span>utf8;</pre>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100542455-1857561790.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c7_2ce3" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100542931-2057771013.png" alt="image_5c4fb3c7_2ce3" width="981" height="652" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">数据库信息为： </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; String user = "root"; </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; String password = "123456"; </span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; String url = "jdbc:mysql://localhost:3306/sampledb?useUnicode=true&amp;characterEncoding=utf-8";</span></div>
+</div>
+<h4><span style="font-size: 16px;">4.配置文件设置 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">src下新建config，然后新建xml文件名为mybatis-config.xml </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">内容从官方文档中复制：&nbsp; http://www.mybatis.org/mybatis-3/zh/getting-started.html&nbsp; </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100543265-1352194406.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c7_45ef" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100543607-1241191914.png" alt="image_5c4fb3c7_45ef" width="1117" height="516" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如下图所示官方示例的配置XML </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100543922-1464970943.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c8_4712" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100544211-1602710002.png" alt="image_5c4fb3c8_4712" width="688" height="754" border="0" /></a></div>
+</div>
+<h4><span style="font-size: 16px;">5.SQL映射文件设置 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">src下新建mapper文件夹，创建xml文件名为myBatis.xml </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">内容从官方文档复制 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100544586-1362109364.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c8_4a84" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100545046-1750678937.png" alt="image_5c4fb3c8_4a84" width="988" height="389" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100545393-1199939331.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c8_288d" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100545635-783364596.png" alt="image_5c4fb3c8_288d" width="526" height="388" border="0" /></a></div>
+<h4><span style="font-size: 16px;">6.调整配置文件 </span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100545941-26453797.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_1e82" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100546378-60119988.png" alt="image_5c4fb3c9_1e82" width="1100" height="434" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">主要任务就是将数据库链接信息设置准确，并且将SQL映射文件的位置设置准确 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100546678-189298830.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_70e9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100546944-1335906996.png" alt="image_5c4fb3c9_70e9" width="382" height="326" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于url的设置需要注意&ldquo;&amp;&rdquo;符号，在xml的配置文件中 要用&nbsp; &amp;amp;&nbsp;&nbsp; 代替&amp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这是XML的语法本身的问题与mybatis没关系 </span></div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100547228-282096151.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_6f94" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100548070-1605721576.png" alt="image_5c4fb3c9_6f94" width="1059" height="302" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;"><span style="font-size: 15px;">五个在XML文档中预定义好的实体： </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">&amp;lt; &lt; 小于号 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">&amp;gt; &gt; 大于号 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">&amp;amp; &amp; 和 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">&amp;apos; ' 单引号 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">&amp;quot; " 双引号 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">实体必须以符号"&amp;"开头，以符号";"结尾 </span></div>
+</div>
+<h4><span style="font-size: 16px;">7.创建实体类Student </span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100548417-297721566.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_504d" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100548691-220696700.png" alt="image_5c4fb3c9_504d" width="934" height="535" border="0" /></a></div>
+<h4><span style="font-size: 16px;">8.修改myMapper.xml文件 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">需要调整namespace 设置resultType类型，需要设置使用的sql </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100548946-721534430.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_548e" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100549495-1516549240.png" alt="image_5c4fb3c9_548e" width="1070" height="412" border="0" /></a></div>
+<h4><span style="font-size: 16px;">9.测试 </span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100549771-596045196.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_31ed" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100550087-1523508660.png" alt="image_5c4fb3c9_31ed" width="1117" height="603" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">每一次的业务开发时，其实需要的仅仅是编写myMapper.xml文件，然后对其调用 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">环境配置等工作环境搭建之初就已经完成了</span></div>
+<h3><span style="font-size: 18px;">初识Mybatis </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在第一个Mybatis程序示例中的代码几乎都是官方文档中的，根据官方的提示一步一步操作即可建立 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不管是Mybatis还是JDBC还是其他，终归是需要连接数据库的，不管以何种形式，连接以后就是需要执行SQL，所以你还得准备好你想要执行的SQL </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在Mybatis中，SQL以XML文件的形式设置 ，也就是上例中的myMapper.xml文件 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以在上例中的主配置文件mybatis-config.xml中我们配置了数据库的连接信息以及SQL XML文件的位置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">每个基于Mybatis的应用都是以一个SqlSessionFactory的实例为中心的，这一部分核心的配置文件就是提供给SqlSessionFactory实例的。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">既然是操作数据库，很重要的一部分自然是SQL语句 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">mapper文件的格式是什么？对于一个SQL到底是查询还是delete？返回类型是什么？如下图所示，我们的类型是first.Student，SQL的内容又是什么？ </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100551178-523257523.png"><img style="display: inline; background-image: none;" title="image_5c4fb3c9_619" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100551561-1458325595.png" alt="image_5c4fb3c9_619" width="552" height="197" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">此处不深入，但是很显然，对于Mybatis mapper映射文件的编写是很重要的一部分学习内容 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">有了核心配置文件就可以构建SqlSessionFactory实例，通过SqlSessionFactory实例就可以获取到SqlSession对象 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">SqlSession是Mybatis最重要的构建之一，可以简单的认为Mybatis一系列的配置目的是生成类似 JDBC生成的Connection对象的SqlSession对象 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">有了这个&ldquo;Connection&rdquo;对象之后才能进一步与数据库进行交流 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这个&ldquo;Connection&rdquo;对象就可以根据我们mapper xml配置文件中设置的标识符，比如上例中的selectStudent的全名，以及参数执行SQL </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100552121-2098964432.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_777b" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100552642-1588308014.png" alt="image_5c4fb3ca_777b" width="842" height="1071" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如上图所示，我们从头简单的理一下Mybatis的基本流程 </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>需要两个重要信息：数据库配置以及mapper文件位置</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>通过这两个核心信息可以生成SqlSessionFactory，通过SqlSessionFactory就可以创建SqlSession</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>SqlSession就可以根据名称标识符识别需要执行哪个文件里面的哪个SQL，比如上面就是执行mapper/myMapper.xml文件中，标识符为selectStudent的那一条</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而执行该SQL以及周边的信息，都在文件中指定了，比如SQL内容是什么？返回类型又是什么？ </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">通过配置文件到SqlSessionFactory实例的创建，完成了宏观上Mybatis的配置，两个主要任务： </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 15px;">要从哪个数据库进行操作？ </span></li>
+<li><span style="font-size: 15px;">要操作的SQL在哪里？ </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">通过SqlSession完成了具体一次执行的任务 </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 15px;">执行哪个SQL？通过层级的命名标识符定位 </span></li>
+<li><span style="font-size: 15px;">执行SQL的细节信息有哪些？SQL内容，参数内容，返回类型等 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100553049-1572135128.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_4a57" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100553308-1862538417.png" alt="image_5c4fb3ca_4a57" width="973" height="563" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">比如现在的中国好声音，形式变化了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所有的参赛选手在等待大厅内坐等，所有的人的姓名和演唱曲目形成了歌单，导师点歌的形式选择选手表演。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这个过程很类似Mybatis的处理 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所有的选手形成了一个等待集合，这就相当于是一系列的mapper.xml文件，每个选手都有一个名字，这就相当于是一个文件（一个文件名，或者说一个命名空间） </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是重名的有很多，当导师叫名字 xxx 的时候，其实是在说&ldquo;本次参加中国好声音，等待大厅的xxx&rdquo;，但是不说大家也都知道，说王伟的时候，肯定不会是你身边坐着那个同事 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是程序不知道，这个&ldquo;本次参加中国好声音，等待大厅的xxx&rdquo;就相当于上例中namespace="mapper.myMapper" </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">整个节目组，导师，时间，场地等这些环境信息因素构成了整个的节目核心，这些零散的数据就是配置项目 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">构成的整体就相当于一个运行的机器，这就相当于SqlSessionFactory&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他作为核心知道整个节目组所有的信息，导师的信息等等，学员以及学员表演曲目也呈现在了导师面前 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">当一个导师进行点歌时，就类似SqlSession执行一次数据库操作 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">导师通过姓名，也就是我们上面说的&ldquo;一个隐含的命名空间&rdquo;，进行点歌，选择选手进行表演 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这就相当于从等候大厅定位了一个Mapper文件，而他表演的那个曲目就好像是mapper文件中的ID，因为你唱了《止战之殇》，别人也可以再唱一次。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而针对于歌曲自身的更多信息，自然要看你接下来的表演了，是不是改变了?变化了哪些内容等等，这都属于某一个id对应的mapper文件中的具体内容信息。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">Mybatis核心为配置以及映射</span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 15px;">配置信息搭建了Mybatis应用框架</span></li>
+<li><span style="font-size: 15px;">映射设置了一次执行的所需信息</span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100553583-959973552.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_4aa9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100553851-1435366384.png" alt="image_5c4fb3ca_4aa9" width="631" height="323" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: large; font-weight: bold;">Mybatis细化实现为核心的协调</span><span style="color: #ff0000; font-size: large; font-weight: bold;">组装</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">核心信息包含了将要执行的目标数据库信息以及需要执行的SQL映射，有了这两部分信息如果是在Navicat等客户端的话就足够了，使用数据库信息连接，然后执行SQL </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于Mybatis也是足够了，不过代码中毕竟不是可以手动连接数据库，手动输入SQL，肉眼查看结果这么简单 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以还有很多的周边业务需要处理，比如配置文件如何表示？都有哪些属性需要配置？另外MyBatis是一个功能强大的工具，所以还提供了更多的细节调优参数以供设置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于mapper文件的位置如何描述？ </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100554075-75134427.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_552c" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100554312-1217887813.png" alt="image_5c4fb3ca_552c" width="436" height="111" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">前面示例中使用了上面的形式，另外你也可以指定一个包，比如 下面的形式，那么这个包下面所有的xml都会被扫描，相当于你全部都罗列了出来 </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 24px;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span>
+  <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">package </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="org.mybatis.builder"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div><span style="font-size: 15px;">对于映射如何表述？可以使用XML也还可以使用注解的形式 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他们又有哪些语法？每种形式的利弊是什么？字段属性都有哪些？ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">参数如何设置？ 返回结果又是如何设置呢？等等 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">尽管这一系列的实现都很复杂，但是，仍旧是围绕着核心信息来的 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以对于Mybatis的学习，最开始应该了解整体的处理过程,了解各块 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">然后就是深入学习配置文件以及映射的设置配置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">最后就是了解源码的架构 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果还有精力，最好的文档就是源码了 </span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px;">附录：完整代码</span></h3>
+<div style="line-height: 200%;">数据库</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `student` (
+`id` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;"> AUTO_INCREMENT,
+`name` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span> <span style="color: #0000ff;">DEFAULT</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">默认姓名</span><span style="color: #ff0000;">'</span> COMMENT <span style="color: #ff0000;">'</span><span style="color: #ff0000;">姓名</span><span style="color: #ff0000;">'</span><span style="color: #000000;">,
+`age` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">1</span><span style="color: #ff0000;">'</span><span style="color: #000000;">,
+`sex` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+`random` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+</span><span style="color: #0000ff;">PRIMARY</span> <span style="color: #0000ff;">KEY</span><span style="color: #000000;"> (`id`)
+) ENGINE</span><span style="color: #808080;">=</span>InnoDB <span style="color: #0000ff;">DEFAULT</span> CHARSET<span style="color: #808080;">=</span>utf8;</pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<h4><span style="font-size: 16px;">项目结构</span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100554533-1227600849.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_70aa" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100554896-283800320.png" alt="image_5c4fb3ca_70aa" width="473" height="258" border="0" /></a></div>
+<h4><span style="font-size: 16px;">mybatis-config.xml</span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8" </span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">environments </span><span style="color: #ff0000;">default</span><span style="color: #0000ff;">="development"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">environment </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="development"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">transactionManager </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="JDBC"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dataSource </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="POOLED"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="driver"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="com.mysql.jdbc.Driver"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="url"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="jdbc:mysql://localhost:3306/sampledb?useUnicode=true&amp;amp;characterEncoding=utf-8"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="username"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="root"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="password"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="123456"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dataSource</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">environment</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">environments</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">resource</span><span style="color: #0000ff;">="mapper/myMapper.xml"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<h4><span style="font-size: 16px;">myMapper.xml</span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8" </span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="mapper.myMapper"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectStudent"</span><span style="color: #ff0000;"> resultType</span><span style="color: #0000ff;">="first.Student"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+select * from student where id = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">Student</span></h4>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> first;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Student {
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Long id;
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Integer age;
+ 
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String sex;
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Long getId() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> id;
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setId(Long id) {
+</span><span style="color: #0000ff;">this</span>.id =<span style="color: #000000;"> id;
+}
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getName() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> name;
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setName(String name) {
+</span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+}
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer getAge() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> age;
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setAge(Integer age) {
+</span><span style="color: #0000ff;">this</span>.age =<span style="color: #000000;"> age;
+}
+ 
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getSex() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sex;
+}
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setSex(String sex) {
+</span><span style="color: #0000ff;">this</span>.sex =<span style="color: #000000;"> sex;
+}
+ 
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String toString() {
+</span><span style="color: #0000ff;">final</span> StringBuilder sb = <span style="color: #0000ff;">new</span> StringBuilder("Student{"<span style="color: #000000;">);
+sb.append(</span>"id="<span style="color: #000000;">).append(id);
+sb.append(</span>", name='").append(name).append('\''<span style="color: #000000;">);
+sb.append(</span>", age="<span style="color: #000000;">).append(age);
+sb.append(</span>", sex='").append(sex).append('\''<span style="color: #000000;">);
+sb.append(</span>'}'<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sb.toString();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">测试代码 </span></h4>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> first;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.InputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.io.Resources;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSession;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 每个基于 MyBatis 的应用都是以一个 SqlSessionFactory 的实例为中心的。
+* SqlSessionFactory 的实例可以通过 SqlSessionFactoryBuilder 获得。
+* 而 SqlSessionFactoryBuilder 则可以从 XML 配置文件或一个预先定制的 Configuration 的实例构建出 SqlSessionFactory 的实例。
+* </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+String resource </span>= "config/mybatis-config.xml"<span style="color: #000000;">;
+InputStream inputStream </span>=<span style="color: #000000;"> Resources.getResourceAsStream(resource);
+SqlSessionFactory sqlSessionFactory </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> SqlSessionFactoryBuilder().build(inputStream);
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 从 SqlSessionFactory 中获取 SqlSession
+* </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+SqlSession session </span>=<span style="color: #000000;"> sqlSessionFactory.openSession();
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+Student student </span>= (Student) session.selectOne("mapper.myMapper.selectStudent", 2<span style="color: #000000;">);
+System.out.println(student);
+} </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+session.close();
+}
+}
+}</span></pre>
+</div>
+</div>
+<h3><span style="font-size: 18px;">接口应用</span></h3>
+<div>而对于SQL的执行更好的一种方式是使用接口，而不是直接通过字符串去定位需要执行的目标资源</div>
+<div style="line-height: 200%;">借助于接口不是基于字符串常量的，就会更安全，而且使用接口逻辑概念更加清晰</div>
+<div>&nbsp;</div>
+<div>在原有结构上增加一个接口和一个映射文件</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100555166-1760415731.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_14ce" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100555471-1914446289.png" alt="image_5c4fb3ca_14ce" width="309" height="272" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>MyMapper.java</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> first;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> MyMapper {
+Student selectStudent(Integer id);
+}</span></pre>
+</div>
+</div>
+<div>myMapper2.xml</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8" </span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="first.MyMapper"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectStudent"</span><span style="color: #ff0000;"> resultType</span><span style="color: #0000ff;">="first.Student"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+select * from student where id = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">从下图可以看得出来接口与XML映射的数据对照关系，XML映射文件的namespace需要与接口的全限定名对应</div>
+<div style="line-height: 200%;">接口的方法名对应XML映射的id</div>
+<div style="line-height: 200%;">接口方法返回类型为XML映射的ResultMap（resultType）</div>
+<div style="line-height: 200%;">接口方法的参数对应XML映射的入参</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100555718-2115286376.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_d79" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100555976-1094018815.png" alt="image_5c4fb3ca_d79" width="958" height="219" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">新增加了一个XML映射文件，需要将路径添加到配置中</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100556286-1645196105.png"><img style="display: inline; background-image: none;" title="image_5c4fb3ca_5963" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190129100556463-1442077404.png" alt="image_5c4fb3ca_5963" width="510" height="128" border="0" /></a></div>
+<div style="line-height: 200%;">增加一个测试类</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> first;
+ 
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.InputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.io.Resources;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSession;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactoryBuilder;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test2 {
+ 
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">
+    * 每个基于 MyBatis 的应用都是以一个 SqlSessionFactory 的实例为中心的。
+    * SqlSessionFactory 的实例可以通过 SqlSessionFactoryBuilder 获得。
+    * 而 SqlSessionFactoryBuilder 则可以从 XML 配置文件或一个预先定制的 Configuration 的实例构建出 SqlSessionFactory 的实例。
+    * </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    String resource </span>= "config/mybatis-config.xml"<span style="color: #000000;">;
+    InputStream inputStream </span>=<span style="color: #000000;"> Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory </span>= <span style="color: #0000ff;">new</span> SqlSessionFactoryBuilder().build(inputStream,"development"<span style="color: #000000;">);
+     
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">
+    * 从 SqlSessionFactory 中获取 SqlSession
+    * </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    SqlSession session </span>=<span style="color: #000000;"> sqlSessionFactory.openSession();
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+        MyMapper mapper </span>= session.getMapper(MyMapper.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+        Student student </span>= mapper.selectStudent(2<span style="color: #000000;">);
+        System.out.println(student);
+    } </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+        session.close();
+    }
+}
+ 
+}</span></pre>
+</div>
+</div>
+<div>关键代码为</div>
+<div>
+<div class="cnblogs_code">
+<pre>      MyMapper mapper = session.getMapper(MyMapper.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+      Student student </span>= mapper.selectStudent(2);</pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">结果与前面一致</div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10332784.html" target="_blank">第一个Mybatis程序示例 Mybatis简介（一）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-30 08:53</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10332784" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10332784);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10332784, cb_entryCreatedDate = '2019-01-30 08:53', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="连续发送多份小数据时40ms延迟问题以及TCP_NODELAY、TCP_CORK失效问题的定位与解决Pyramidtandai@baidu.com提到TCP_NODELAY和TCP_CORK，相信很多" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>连续发送多份小数据时40ms延迟问题 - tangr206 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/banlieue13/bundle-banlieue13.min.css?v=1J0RP_opHZcWv1yy974pRZewfj9S0p6tTP1QNRnmMiI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/banlieue13/bundle-banlieue13-mobile.min.css?v=cTNtJQ6_6SB1QXNeWlP0QHJBE4K5SDodawH8t2CtJ3Y" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tangr206/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tangr206/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tangr206/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 101818;
+        var currentBlogApp = 'tangr206';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Banlieue13';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/tangr206/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tangr206/">tom</a>
+</h1>
+<h2>
+tangr206's blog
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li>
+</li>
+	<li>
+
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+</li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+
+	
+</li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<!--done-->
+随笔- 
+33&nbsp;
+文章- 
+145&nbsp;
+评论- 
+4&nbsp;
+
+
+
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tangr206/articles/3284203.html">连续发送多份小数据时40ms延迟问题</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>连续发送多份小数据时40ms延迟问题</h1>
+<p>&nbsp;</p>
+<h2><a name="以及TCP_NODELAY、TCP_CORK失�"></a>以及TCP_NODELAY、TCP_CORK失效问题的定位与解决</h2>
+<p>Pyramid&nbsp;<a href="mailto:tandai@baidu.com">tandai@baidu.com</a></p>
+<p>提到TCP_NODELAY和TCP_CORK，相信很多人都很熟悉。然而由于Linux实现上的问题，这两个参数在实际使用中，并不像书里介绍的那么简单。最近DTS在解决一个TCP超时问题时，对这两个参数和它们背后所隐藏的问题有了比较深刻的认识，在此与同学们分享一下我们的经验和教训。</p>
+<p>&nbsp;</p>
+<h2><a name="问题描述"></a>问题描述</h2>
+<p>和许多经典的分布式程序类似，DTS使用TCP长连接用于client和server的数据交互：client发送请求给server，然后等待server回应。有时候出于数据结构上的考虑，client需要先连续发送多份数据，再等待server的回应。测试发现这种情况下，server端有时会出现接收数据延迟。比如说某个case里，client会先发送275个字节，接着发送24个字节，然后再发送292字节数据等等；此时如果该TCP连接被复用过，则server端在收取24字节这批数据时会很容易出现40ms延迟。</p>
+<p>由于client每次发送的数据都很小，很自然想到是nagle算法延迟了client端的数据发送，于是在client端和server端都设置了TCP_NODELAY。然而测试发现，此时server虽然顺利接受了24字节数据，却在接受随后292字节数据时依然出现了40ms延迟。难道是数据太多导致TCP_NODELAY失效？因此又在client端添加了TCP_CORK选项：即如果client需要连续发送多次数据，则先关闭TCP_NODELAY，打开TCP_CORK；所有数据write完后，再关闭TCP_CORK，打开TCP_NODELAY。按照设想，client应该会把所有数据打包在一起发送，但测试结果依然和以前一样，server还是在收取第三份数据时出现了40ms的延迟。</p>
+<p>不得已使用tcpdump进行分析，结果如下：</p>
+<pre>18:18:01.640134 IP jx-dp-wk11.jx.baidu.com.36989 &gt; tc-dpf-rd-in.tc.baidu.com.licensedaemon: P 551:826(275) ack 141 win 1460 &lt;nop,nop,timestamp 2551499424 1712127318&gt;
+18:18:01.640151 IP jx-dp-wk11.jx.baidu.com.36989 &gt; tc-dpf-rd-in.tc.baidu.com.licensedaemon: P 826:850(24) ack 141 win 1460 &lt;nop,nop,timestamp 2551499424 1712127318&gt;
+18:18:01.680812 IP tc-dpf-rd-in.tc.baidu.com.licensedaemon &gt; jx-dp-wk11.jx.baidu.com.36989: . ack 850 win 2252 &lt;nop,nop,timestamp 1712127359 2551499424&gt;
+18:18:01.680818 IP jx-dp-wk11.jx.baidu.com.36989 &gt; tc-dpf-rd-in.tc.baidu.com.licensedaemon: P 850:1142(292) ack 141 win 1460 &lt;nop,nop,timestamp 2551499465 1712127359&gt;
+</pre>
+<p>注意红色的部分，可见client并没有将所有数据打成一个包，每次write的数据还是作为单独的包发送；此外，client在发送完24字节的数据后，一直等到server告知ack才接着发送剩下的292字节。由于server延迟了40ms才告知ack，因此导致了其接收292字节数据时也出现了40ms延迟。</p>
+<p>既然查出了延迟是server端delayed ack的原因，通过设置server端TCP_QUICKACK，40ms延迟的问题得到了解决。</p>
+<p>&nbsp;</p>
+<h2><a name="原因定位"></a>原因定位</h2>
+<p>虽然DTS的延时问题暂时得到了解决，但其内在原因却使人百思不得其解：为什么TCP_NODELAY会失效？为什么TCP_CORK无作为？&hellip;&hellip; 在STL同学的帮助下，我们逐渐对这些困惑有了答案。</p>
+<p>首先介绍下delayed ack算法：当协议栈接受到TCP数据时，并不一定会立刻发送ACK响应，而是倾向于等待一个超时或者满足特殊条件时再发送。对于Linux实现，这些特殊条件如下：</p>
+<p>1）收到的数据已经超过了full frame size</p>
+<p>2）或者处于快速回复模式</p>
+<p>3）或者出现了乱序的包</p>
+<p>4）或者接收窗口的数据足够多</p>
+<p>如果接收方有数据回写，则ACK也会搭车一起发送。当以上条件都不满足时，接收方会延迟40ms再回应ACK。</p>
+<p>&nbsp;</p>
+<ul>
+<li>1. 为什么TCP_NODELAY失效</li>
+</ul>
+<p>UNIX网络编程这本书介绍说，TCP_NODELAY同时禁止了nagle算法和delayed ACK算法，因此小块数据可以直接发送。然而Linux实现中，TCP_NODELAY只禁止了nagle算法。另一方面，协议栈在发送包的时候，不仅受到TCP_NODELAY的影响，还受到协议栈里面拥塞窗口的影响。由于server端delayed ack，client迟迟无法收到ack应答，拥塞窗口堵满，从而无法继续发送更多数据；一直到40ms后ack达到，才能继续发送（题外话： TCP_NODELAY在FREEBSD上性能优于Linux上，因为FREEBSD并不像Linux一样需要第一个包到达后就响应ACK）。</p>
+<p>这也解释了为什么延时现象在重用过的TCP连接上特别容易出现：目前使用的52bs内核中，连接刚建立时拥塞窗口默认是3，因此可以发送3个数据包，而后拥塞窗口变为2，就会导致第3个292字节的包发不出去。</p>
+<p>&nbsp;</p>
+<ul>
+<li>2. 为什么TCP_CORK失效</li>
+</ul>
+<p>TCP_CORK会将发送端多份数据打成一个包，待到TCP_CORK关闭后一起发送。Linux Man手册上也描述了TCP_CORK选项和TCP_NODELAY一起使用的情形。然而根据之前tcpdump的结果，client端设置TCP_CORK后并没有发挥效果。继续测试发现，只要设置过TCP_NODELAY选项，即使随后关闭也会导致TCP_CORK无效；如果从未设置过TCP_NODELAY，则TCP_CORK可以产生效果。</p>
+<p>根据STL同学对协议栈代码的调研，发现这个是Linux实现上的问题。在内核中，设置启动TCP_NODELAY选项后，内核会为socket增加两个标志位TCP_NAGLE_OFF和TCP_NAGLE_PUSH，关闭TCP_NODELAY的时候，内核只去掉了TCP_NAGLE_OFF标志位。而在发包的时候判断的却恰恰是TCP_NAGLE_PUSH标志位，如果该位置位设置，就直接把包发出去，从而导致TCP_CORK发挥不了作用。这很可能是这一版本Linux内核实现上的bug。</p>
+<p>&nbsp;</p>
+<ul>
+<li>3. TCP_QUICKACK的作用和限制</li>
+</ul>
+<p>前面介绍delayed ack算法时，讲到协议栈迅速回复ack的情形之一就是进入到快速回复模式。而TCP_QUICKACK选项就是向内核建议进入快速回复模式。快速回复ack模式的判断条件如下：(tp-&gt;ack.quick &amp;&amp; tp-&gt;ack.pingpong)，其中设置QUICKACK选项会置pingpong=0。</p>
+<p>然而，随着TCP连接的重用和数据的不断收发，快速回复模式有可能失效。例如在后续的交互过程当中，pingpong变为1的条件就有：1.收到fin后；2. 发送方发送数据时，发现当前时间与上次接收数据的时间小于40ms。此外，发送方发现数据包带有ack标志位时，也会减小ack.quick值。这些都会导致快速回复模式的退出。因此，即使每次接受数据前都设置TCP_QUICKACK选项，也不能完全解决delayed ack问题。</p>
+<p>&nbsp;</p>
+<h2><a name="解决方案"></a>解决方案</h2>
+<p>经过上述的测试与分析，可以认识到当连续发送多个小数据时，TCP_NODELAY作用并不明显，TCP_CORK无法像宣传的那样和TCP_NODELAY混合使用，而TCP_QUICKACK也不能完全解决问题。因此，我们最终的解决方案如下：</p>
+<p>（1）在client端多次发送数据时，先打开TCP_CORK选项，发送完后再关闭TCP_CORK，将多份小数据打成一个包发送；此外，client端不能设置TCP_NODELAY选项，以避免TCP_CORK失效。</p>
+<p>（2）server端开启TCP_QUICKACK选项，尽量快速回复ack。</p>
+<p>通过这个延时问题的解决，可以看到由于Linux实现策略上的问题，TCP_NODELAY和TCP_CORK还是暗藏了不少陷阱。实际应用中，其实也可以绕过这些参数，在应用层将多份数据序列化到一个buffer中，或者使用writev系列函数。然而，这些方法需要额外的内存拷贝，或者让传输对象对外暴露过多的数据结构信息，并不一定容易实现，也会添加代码重构的代价。</p>
+<p>另一方面，考虑到那些使用TCP进行异步请求的应用，由于多个请求需要同时复用一个TCP连接，也很容易出现延时问题；而无论是通过TCP_CORK还是writev哪种方法，都不太适合这种异步场景。最近STL推出的新内核添加了一个禁止delayed ack的系统参数，使用该参数理论上讲可以彻底根除40ms的延迟问题。</p>
+<p>详细信息参看http://stl.sys.baidu.com/admin/show.php?page=kernel_5600.html，在此也感谢stl的chenjian和liwen同学在这个问题上的帮忙!</p>
+<p>&nbsp;</p>
+<h2><a name="反馈建议"></a>反馈建议</h2>
+<p>&nbsp;</p>
+<hr />
+<p><span><strong>Comments From</strong></span>&nbsp;<span class="twikiNewLink"><a title="sangwenfeng (this topic does not yet exist; you can create it)" href="http://wiki.babel.baidu.com/twiki/bin/edit/Com/Main/Sangwenfeng?topicparent=Com/Ns.TcpCork;nowysiwyg=0" rel="nofollow">sangwenfeng</a></span>&nbsp;- 01 Jul 2009&nbsp;<br />赞，深入，ub框架以前的40ms是不是也有隐患不彻底？</p>
+<p>&nbsp;</p>
+<hr />
+<p><span><strong>Comments From</strong></span>&nbsp;<span class="twikiNewLink"><a title="baonenghui (this topic does not yet exist; you can create it)" href="http://wiki.babel.baidu.com/twiki/bin/edit/Com/Main/Baonenghui?topicparent=Com/Ns.TcpCork;nowysiwyg=0" rel="nofollow">baonenghui</a></span>&nbsp;- 01 Jul 2009&nbsp;<br />ub的模式主要是一次请求一次交互，基本是不会TCP_NODELAY后还出现40ms延时。在TCP_NODELAY后还出现40ms延时一般都是对于连续发送小数据的情况下出现的。最早ub的40ms主要是client端没有TCP_NODELAY设置产生的。</p>
+<p>&nbsp;</p>
+<hr />
+<p><span><strong>Comments From</strong></span>&nbsp;<span class="twikiNewLink"><a title="hongdingkun (this topic does not yet exist; you can create it)" href="http://wiki.babel.baidu.com/twiki/bin/edit/Com/Main/Hongdingkun?topicparent=Com/Ns.TcpCork;nowysiwyg=0" rel="nofollow">hongdingkun</a></span>&nbsp;- 03 Jul 2009&nbsp;<br />赞，学习了</p>
+<p>&nbsp;</p>
+<hr />
+<p><span><strong>Comments From</strong></span>&nbsp;<span class="twikiNewLink"><a title="baonenghui (this topic does not yet exist; you can create it)" href="http://wiki.babel.baidu.com/twiki/bin/edit/Com/Main/Baonenghui?topicparent=Com/Ns.TcpCork;nowysiwyg=0" rel="nofollow">baonenghui</a></span>&nbsp;- 22 Oct 2009&nbsp;<br />快速回复ack模式的判断条件如下：(tp-&gt;ack.quick &amp;&amp; tp-&gt;ack.pingpong) 应该是 (tp-&gt;ack.quick &amp;&amp; tp-&gt;ack.pingpong)</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2013-08-27 09:27</span>&nbsp;
+<a href="https://www.cnblogs.com/tangr206/">tangr206</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditArticles.aspx?postid=3284203" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3284203);return false;">收藏</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 101818, cb_blogApp = 'tangr206', cb_blogUserGuid = '41b92244-550f-e111-b422-842b2b196315';
+    var cb_entryId = 3284203, cb_entryCreatedDate = '2013-08-27 09:27', cb_postType = 2; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tangr206
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_Java后端进阶指南</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=187</id>
+  <updated>2020-04-28T11:44:30Z</updated>
+  <author>
+    <name>进击的李同学</name>
+    <uri>http://www.cnblogs.com/nedulee/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12796778.html</id>
+    <title type="text">14个快捷键让你的idea飞起来(新手向 + 演示) - 进击的李同学</title>
+    <summary type="text">本期盘点一下博主在工作中，常用的13个idea快捷键，这些快捷键基本涵盖了大部分的开发场景，希望可以萌新们的idea使用效率,系统为mac系统 上一步 / 下一步撤销 / 反撤销进入一个类生成方法变量命名 / 代码提示打开 Project/structure面板收起/展开代码批量修改名称查看方法调用</summary>
+    <published>2020-04-28T11:44:00Z</published>
+    <updated>2020-04-28T11:44:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12796778.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12796778.html" />
+    <content type="html">【摘要】本期盘点一下博主在工作中，常用的13个idea快捷键，这些快捷键基本涵盖了大部分的开发场景，希望可以萌新们的idea使用效率,系统为mac系统 上一步 / 下一步撤销 / 反撤销进入一个类生成方法变量命名 / 代码提示打开 Project/structure面板收起/展开代码批量修改名称查看方法调用 &lt;a href="http://www.cnblogs.com/nedulee/p/12796778.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12661371.html</id>
+    <title type="text">模拟Java内存溢出 - 进击的李同学</title>
+    <summary type="text">本文通过修改虚拟机启动参数，来剖析常见的java内存溢出异常(基于jdk1.8)。 修改虚拟机启动参数Java堆溢出虚拟机栈溢出方法区溢出本机直接内存溢出 修改虚拟机启动参数 这里我们使用的是IDEA集成开发环境，选择Run/Debug Configurations 然后选择Configuratio</summary>
+    <published>2020-04-08T09:35:00Z</published>
+    <updated>2020-04-08T09:35:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12661371.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12661371.html" />
+    <content type="html">【摘要】本文通过修改虚拟机启动参数，来剖析常见的java内存溢出异常(基于jdk1.8)。 修改虚拟机启动参数Java堆溢出虚拟机栈溢出方法区溢出本机直接内存溢出 修改虚拟机启动参数 这里我们使用的是IDEA集成开发环境，选择Run/Debug Configurations 然后选择Configuratio &lt;a href="http://www.cnblogs.com/nedulee/p/12661371.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12600561.html</id>
+    <title type="text">树的后序遍历的两种实现 - 进击的李同学</title>
+    <summary type="text">今天介绍一下树的后序遍历 什么是后序遍历 所谓遍历就是将集合中的所有元素都访问一遍，由于树是一种非线性结构，所以它的遍历方式有很多种： 前序遍历 ：根左右 中序遍历 ：左根右 后序遍历 ：左右根 按层遍历 ：逐层访问 接下来我们用动图的方式，看一下树的后序遍历过程： 递归 我们将动图翻译成代码，就得</summary>
+    <published>2020-03-30T11:19:00Z</published>
+    <updated>2020-03-30T11:19:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12600561.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12600561.html" />
+    <content type="html">【摘要】今天介绍一下树的后序遍历 什么是后序遍历 所谓遍历就是将集合中的所有元素都访问一遍，由于树是一种非线性结构，所以它的遍历方式有很多种： 前序遍历 ：根左右 中序遍历 ：左根右 后序遍历 ：左右根 按层遍历 ：逐层访问 接下来我们用动图的方式，看一下树的后序遍历过程： 递归 我们将动图翻译成代码，就得 &lt;a href="http://www.cnblogs.com/nedulee/p/12600561.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12563063.html</id>
+    <title type="text">图解I/O模型 - 进击的李同学</title>
+    <summary type="text">本文带你鸟瞰I/O模型全貌，希望可以让你对I/O模型有一个直观的认识 什么是I/O?I/O的过程?同步阻塞 I/O同步非阻塞 I/OI/O多路复用异步I/O 什么是I/O? I/O就是计算机内存和外部设备之间拷贝数据的过程。 那么I/O模型主要解决的问题是什么呢？程序通过CPU，请求外部设备上的数据</summary>
+    <published>2020-03-24T15:20:00Z</published>
+    <updated>2020-03-24T15:20:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12563063.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12563063.html" />
+    <content type="html">【摘要】本文带你鸟瞰I/O模型全貌，希望可以让你对I/O模型有一个直观的认识 什么是I/O?I/O的过程?同步阻塞 I/O同步非阻塞 I/OI/O多路复用异步I/O 什么是I/O? I/O就是计算机内存和外部设备之间拷贝数据的过程。 那么I/O模型主要解决的问题是什么呢？程序通过CPU，请求外部设备上的数据 &lt;a href="http://www.cnblogs.com/nedulee/p/12563063.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12542104.html</id>
+    <title type="text">Mysql优化大分页查询 - 进击的李同学</title>
+    <summary type="text">如题，年前做了一个需求，涉及到Mysql大分页查询，整理一下，希望对需要的小伙伴有帮助。 背景分页查询的性能瓶颈B+树简述B+比起二叉查找树，有什么优势？分页查询过程测试集解决方法1 延迟关联法：2 主键阈值法最后 背景 系统结构如上图。经过排查是因为系统B拉取数据时间太长导致的推送超时。 系统B拉</summary>
+    <published>2020-03-21T12:50:00Z</published>
+    <updated>2020-03-21T12:50:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12542104.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12542104.html" />
+    <content type="html">【摘要】如题，年前做了一个需求，涉及到Mysql大分页查询，整理一下，希望对需要的小伙伴有帮助。 背景分页查询的性能瓶颈B+树简述B+比起二叉查找树，有什么优势？分页查询过程测试集解决方法1 延迟关联法：2 主键阈值法最后 背景 系统结构如上图。经过排查是因为系统B拉取数据时间太长导致的推送超时。 系统B拉 &lt;a href="http://www.cnblogs.com/nedulee/p/12542104.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12520785.html</id>
+    <title type="text">2020年学而思春招算法题 - 进击的李同学</title>
+    <summary type="text">今天学弟分享了一下学而思2020年春招算法题，整理一下，希望对有需要的小伙伴有帮助 斐波那契数列题干思路代码数组问题题干思路代码 斐波那契数列 题干 有一对兔子，3个月后，每个月都会生一对兔子，生下的兔子过了3个月，也会每月生一对兔子，假设兔子不会死亡，n个月后总共有多少兔子? 思路 这道题我们可以</summary>
+    <published>2020-03-18T14:09:00Z</published>
+    <updated>2020-03-18T14:09:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12520785.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12520785.html" />
+    <content type="html">【摘要】今天学弟分享了一下学而思2020年春招算法题，整理一下，希望对有需要的小伙伴有帮助 斐波那契数列题干思路代码数组问题题干思路代码 斐波那契数列 题干 有一对兔子，3个月后，每个月都会生一对兔子，生下的兔子过了3个月，也会每月生一对兔子，假设兔子不会死亡，n个月后总共有多少兔子? 思路 这道题我们可以 &lt;a href="http://www.cnblogs.com/nedulee/p/12520785.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12520362.html</id>
+    <title type="text">3分钟入门lambda表达式 - 进击的李同学</title>
+    <summary type="text">本节是lambda表达式的一个入门课，讲解的同时配有练习demo 前言什么是lambda表达式？基础语法函数式接口自己实现一个函数式接口jdk提供的函数式接口ConsumersupplierfunctionPredicate其他场景 前言 lambda表达式是java8推出的一个新特性。标志着从jd</summary>
+    <published>2020-03-18T13:17:00Z</published>
+    <updated>2020-03-18T13:17:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12520362.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12520362.html" />
+    <content type="html">【摘要】本节是lambda表达式的一个入门课，讲解的同时配有练习demo 前言什么是lambda表达式？基础语法函数式接口自己实现一个函数式接口jdk提供的函数式接口ConsumersupplierfunctionPredicate其他场景 前言 lambda表达式是java8推出的一个新特性。标志着从jd &lt;a href="http://www.cnblogs.com/nedulee/p/12520362.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12503204.html</id>
+    <title type="text">图解排序算法 - 进击的李同学</title>
+    <summary type="text">图解快速排序，动图+代码+分析 简述：图解：代码：方法：测试：结果：分析：时间复杂度空间复杂度稳定性 简述： 快速排序(QuickSort)是对冒泡排序的一种改进 它的基本思想是：通过一趟排序将要排序的数据分割成两个独立的部分，其中一部分的所有数据都比另外一部分的所有数据要小，然后再按此方法对这两部</summary>
+    <published>2020-03-16T05:09:00Z</published>
+    <updated>2020-03-16T05:09:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12503204.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12503204.html" />
+    <content type="html">【摘要】图解快速排序，动图+代码+分析 简述：图解：代码：方法：测试：结果：分析：时间复杂度空间复杂度稳定性 简述： 快速排序(QuickSort)是对冒泡排序的一种改进 它的基本思想是：通过一趟排序将要排序的数据分割成两个独立的部分，其中一部分的所有数据都比另外一部分的所有数据要小，然后再按此方法对这两部 &lt;a href="http://www.cnblogs.com/nedulee/p/12503204.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12492889.html</id>
+    <title type="text">leetcode面试题42. 连续子数组的最大和 - 进击的李同学</title>
+    <summary type="text">总结一道leetcode上的高频题，反反复复遇到了好多次，特别适合作为一道动态规划入门题，本文将详细的从读题开始，介绍解题思路。 题目描述示例动态规划分析代码结果 题目 面试题42. 连续子数组的最大和 地址：https://leetcode-cn.com/problems/lian-xu-zi-s</summary>
+    <published>2020-03-14T08:50:00Z</published>
+    <updated>2020-03-14T08:50:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12492889.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12492889.html" />
+    <content type="html">【摘要】总结一道leetcode上的高频题，反反复复遇到了好多次，特别适合作为一道动态规划入门题，本文将详细的从读题开始，介绍解题思路。 题目描述示例动态规划分析代码结果 题目 面试题42. 连续子数组的最大和 地址：https://leetcode-cn.com/problems/lian-xu-zi-s &lt;a href="http://www.cnblogs.com/nedulee/p/12492889.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nedulee/p/12466390.html</id>
+    <title type="text">如何学习kafka? - 进击的李同学</title>
+    <summary type="text">本文是我学习kafka的一个思路和总结，希望对刚接触kafka的你有所帮助。在学习kafka之前，最好能对kafka有一个简单的了解，可以提出一些问题，带着问题去学习，就会容易一些。 0 什么是kakfa1 kafka的版本2 kakfa中的术语3 Kafka消息模型4 kafka的结构5 使用ka</summary>
+    <published>2020-03-11T15:19:00Z</published>
+    <updated>2020-03-11T15:19:00Z</updated>
+    <author>
+      <name>进击的李同学</name>
+      <uri>http://www.cnblogs.com/nedulee/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nedulee/p/12466390.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nedulee/p/12466390.html" />
+    <content type="html">【摘要】本文是我学习kafka的一个思路和总结，希望对刚接触kafka的你有所帮助。在学习kafka之前，最好能对kafka有一个简单的了解，可以提出一些问题，带着问题去学习，就会容易一些。 0 什么是kakfa1 kafka的版本2 kakfa中的术语3 Kafka消息模型4 kafka的结构5 使用ka &lt;a href="http://www.cnblogs.com/nedulee/p/12466390.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>老孟Flutter - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/book/bundle-book.min.css?v=Yr9TGmN8ri6FBY9Rkzqw6l-UX-n2toh8YHB85y4FqJ0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/book/bundle-book-mobile.min.css?v=9mAu4TwtRDzYz0p44sAVkFWE9nZCxO_rGCjvQ8nF6I0" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/mengqd/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/mengqd/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/mengqd/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 141280;
+        var currentBlogApp = 'mengqd';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BOOK';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <script type="text/javascript">
+	try {
+		if (screen.availWidth > 1200) {
+			document.getElementById("MainCss").href = '/skins/book/bundle-book-2.min.css';
+		}
+	} catch (e) { }
+</script>
+
+<div id="header">
+<div id="HeaderTitle">
+<div id="Title">
+<a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/mengqd/">meng5619</a>
+
+</div>
+<div id="subTitle">
+
+</div>
+</div>
+</div>
+
+
+<div id="main">
+	
+
+
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/01/18.html"></a>
+	2020年1月18日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12209814.html">
+[置顶]    OpenGL ES for Android
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：经过半年的准备OpenGL ES for Android系列文章终于要和大家见面了，在这里定一个小目标-先吸引1000个粉丝，万一实现了呢。写关于OpenGL ES的文章开始是有一些犹豫的，因为OpenGL ES的一些概念非常晦涩难懂，很多需要懂得计算机图形算法学相关的知识，您可能学了很久都找不到门            <a href="https://www.cnblogs.com/mengqd/p/12209814.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-01-18 18:13 老孟Flutter 阅读 (88) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12209814" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/28.html"></a>
+	2020年4月28日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12796957.html">
+    Flutter 分页功能表格控件
+</a>
+</h2>
+			
+			
+
+    <div class="cnblogs-post-body" id="postlist_postbody_12796957">
+        正文内容加载中...
+    </div>
+    <script type="text/javascript">getBlogPostBody(12796957);</script>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-28 20:16 老孟Flutter 阅读 (69) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12796957" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/25.html"></a>
+	2020年4月25日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12773218.html">
+    Flutter 步骤进度组件
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：​老孟导读：最近文章更新拖后腿了，一直忙着网站改版的事情，今天总算落地了，全新的Flutter网站即将上线，敬请期待。网站目前收集197个组件的详细用法，还有150多个组件待整理。 Stepper Stepper控件是一个展示一系列步骤进度的控件，用法如下： 效果如下： 还可以设置 属性，用法如下：            <a href="https://www.cnblogs.com/mengqd/p/12773218.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-25 15:22 老孟Flutter 阅读 (38) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12773218" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/22.html"></a>
+	2020年4月22日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12755594.html">
+    程序员到底要不要学习框架、库和工具
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：昨天看了一篇文章，文章名称叫做《STOP LEARNING FRAMEWORKS》（停止学习框架），文章发布时间时间是2018年，感叹为什么没有早一点看到这一篇文章，看过我《对Flutter初学者的一些建议》这篇文章的都知道，里面建议少使用第三方库，但仅仅是从生态发展的角度考虑的，这篇文章            <a href="https://www.cnblogs.com/mengqd/p/12755594.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-22 20:15 老孟Flutter 阅读 (477) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12755594" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/17.html"></a>
+	2020年4月17日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12722593.html">
+    Flutter 吐血整理组件继承关系图
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：前几天一个读者和我说能不能整理一个各个控件之间的继承关系，这2天抽时间整理了一下，不整理不知道，一整理真的吓一跳啊，仅仅Widget的子类（包括间接子类）就高达353个，今天发群里给大家浏览的时候，有人说：“看见这个，会让初学者从入门到放弃的“，其实不必担心，虽然很多，但常用的就那几十个，            <a href="https://www.cnblogs.com/mengqd/p/12722593.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-17 21:29 老孟Flutter 阅读 (293) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12722593" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/16.html"></a>
+	2020年4月16日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12715429.html">
+    超过百万的StackOverflow Flutter 问题
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：今天分享StackOverflow上高访问量的20大问题，这些问题给我一种特别熟悉的感觉，我想你一定或多或少的遇到过，有的问题在stackoverflow上有几十万的阅读量，说明很多人都遇到了这些问题，把这些问题整理分享给大家，每期20个，每隔2周分享一次。 如何实现Android平台的w            <a href="https://www.cnblogs.com/mengqd/p/12715429.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-16 20:27 老孟Flutter 阅读 (326) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12715429" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/14.html"></a>
+	2020年4月14日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12701007.html">
+    Flutter 实现网易云音乐字幕
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：没有接触过音乐字幕方面知识的话，会对字幕的实现比较迷茫，什么时候转到下一句？看了这篇文章，你就会明白字幕so easy。 先来一张效果图： 字幕格式 目前市面上有很多种字幕格式，比如srt, ssa, ass（文本形式）和idx+sub（图形格式），但不管哪一种格式都会包含2个属性：时间戳            <a href="https://www.cnblogs.com/mengqd/p/12701007.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-14 20:48 老孟Flutter 阅读 (78) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12701007" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/13.html"></a>
+	2020年4月13日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12694159.html">
+    Flutter 实现虎牙/斗鱼 弹幕效果
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：用Flutter实现弹幕功能，轻松实现虎牙、斗鱼的弹幕效果。 先来一张效果图： 实现原理 弹幕的实现原理非常简单，即将一条弹幕从左侧平移到右侧，当然我们要计算弹幕垂直方向上的偏移，不然所有的弹幕都会在一条直线上，相互覆盖。平移代码如下： 计算垂直方向的偏移： 这些准备好后，就是创建一条弹幕            <a href="https://www.cnblogs.com/mengqd/p/12694159.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-13 21:44 老孟Flutter 阅读 (64) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12694159" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/10.html"></a>
+	2020年4月10日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12675641.html">
+    Flutter AbsorbPointer 与 IgnorePointer的区别
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：AbsorbPointer AbsorbPointer是一种禁止用户输入的控件，比如按钮的点击、输入框的输入、ListView的滚动等，你可能说将按钮的 设置为null，一样也可以实现，是的，但AbsorbPointer可以提供多组件的统一控制，而不需要你单独为每一个组件设置。 用法如下： 默认情况            <a href="https://www.cnblogs.com/mengqd/p/12675641.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-10 19:38 老孟Flutter 阅读 (140) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12675641" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12675477.html">
+    《Flutter 小技巧》一行禁用App，一行置灰App，致敬
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：为表达全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼，国务院发布公告， 决定2020年4月4日举行全国性哀悼活动。 在此期间，全国和驻外使领馆下半旗志哀，全国停止公共娱乐活动。4月4日10时起，全国人民默哀3分钟，汽车、火车、舰船鸣笛，防空警报鸣响。 这一天，我们看到几乎所有的网页、            <a href="https://www.cnblogs.com/mengqd/p/12675477.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-10 18:58 老孟Flutter 阅读 (57) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12675477" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<a href="https://www.cnblogs.com/mengqd/archive/2020/04/09.html"></a>
+	2020年4月9日		  
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12664503.html">
+    Flutter 完美的验证码输入框
+</a>
+</h2>
+			
+			
+
+    <div class="c_b_p_desc">
+摘要：老孟导读：刚开始看到这个功能的时候一定觉得so easy，开始的时候我也是这么觉得的，这还不简单，然而真正写的时候才发现并没有想象的那么简单。 先上图，不上图你们都不想看，我难啊，到Github： &quot;https://github.com/781238222/flutter do&quot; 上给个小星星可还行            <a href="https://www.cnblogs.com/mengqd/p/12664503.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			
+			<p class="postfoot">		
+				
+
+posted @ 2020-04-09 08:57 老孟Flutter 阅读 (251) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12664503" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/mengqd/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 老孟Flutter
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+<div id="rightmenu">
+	
+		<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+			<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/mengqd/">
+首页</a>
+</li>
+			<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+			<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%80%81%E5%AD%9FFlutter">
+联系</a></li>
+			<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/mengqd/rss/">
+订阅</a>
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/mengqd/rss/">
+    <img src="/skins/book/images/xml.gif" alt="订阅" />
+</a></li>
+			<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		
+<h3>统计</h3>
+<ul>
+    <li>随笔 - 
+43</li>
+    <li>文章 - 
+2</li>
+    <li>评论 - 
+21</li>
+    <li>
+        引用 - 
+0
+    </li>
+</ul>
+
+
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+			
+			
+			
+			
+			 
+
+	
+
+
+    <div id="page_end_html">
+        
+
+    </div>
+</body>
+</html>

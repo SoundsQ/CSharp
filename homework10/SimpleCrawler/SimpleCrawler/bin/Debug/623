@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 垃圾分类，一般是指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。垃圾在分类储存阶段属于公众的私" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>基于 HTML5 和 Canvas 实现的 3D 垃圾分类系统 - xhload3d - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cogitation/bundle-cogitation.min.css?v=PJ48NAY_dmbjZZ0ZTev3Avl3BcTMJe39d3Pc83CPcig" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cogitation/bundle-cogitation-mobile.min.css?v=jLHKTG0H_smj72y-Z2j0JGYUmhBVGTu4_QpAGb1B_sA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xhload3d/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xhload3d/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xhload3d/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 171723;
+        var currentBlogApp = 'xhload3d';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Cogitation';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="top">
+	
+<div>
+	<table>
+		<tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xhload3d/">xhload3d</a>
+</h1>
+				<p id="tagline">
+www.hightopo.com
+</p>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="HeaderBarTab" nowrap>
+&nbsp;
+<a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+ ::
+
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xhload3d/">
+首页</a>
+ ::
+<a href="http://q.cnblogs.com" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+ ::
+
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/xhload3d">
+联系</a> ::
+
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xhload3d/rss/">
+订阅</a>
+
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/xhload3d/rss/">
+    <img src="/skins/cogitation/images/xml.gif" alt="订阅" />
+</a> ::
+
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+ ::
+
+
+</td>
+			<td><img id="Header1_BlueTab" src="/skins/cogitation/images/BlueTabRight.gif" align="absmiddle" alt=""/></td>
+			<td class="HeaderBarTabBack" nowrap width="100%">
+				<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap>
+				&nbsp;
+				
+236 
+				随笔&nbsp;::
+				
+1 文章
+				::
+				
+429 评论
+				::
+				
+0 引用
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12365739.html">基于 HTML5 和 Canvas 实现的 3D 垃圾分类系统</a>
+
+	</div>
+	
+	<div class="postText">
+		
+    <div id="cnblogs_post_description" style="display: none">
+        <img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142121636-79685654.gif" class="desc_img">
+垃圾分类，一般是指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。垃圾在分类储存阶段属于公众的私有品，垃圾经公众分类投放后成为公众所在小区或社区的区域性准公共资源，垃圾分类搬运到垃圾集中点或转运站后成为没有排除性的公共资源。从国内外各城市对生活垃圾分类的方法来看，大致都是根据垃圾的成分、产生量，结合本地垃圾的资源利用和处理方式来进行分类的。到2019年6月25日，生活垃圾分类制度将入法。一套应用于工业物联网的智能一体化的垃圾分类机械臂将随之而来，由此，我应用 HT for Web 的图型化编辑工具打造了一款形象生动的例子：Garbage classification，也借此机会与大家一起分享和学习。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>前言</h1>
+<p>垃圾分类，一般是指按一定规定或标准将垃圾分类储存、分类投放和分类搬运，从而转变成公共资源的一系列活动的总称。分类的目的是提高垃圾的资源价值和经济价值，力争物尽其用。垃圾在分类储存阶段属于公众的私有品，垃圾经公众分类投放后成为公众所在小区或社区的区域性准公共资源，垃圾分类搬运到垃圾集中点或转运站后成为没有排除性的公共资源。从国内外各城市对生活垃圾分类的方法来看，大致都是根据垃圾的成分、产生量，结合本地垃圾的资源利用和处理方式来进行分类的。到2019年6月25日，生活垃圾分类制度将入法。一套应用于工业物联网的智能一体化的垃圾分类机械臂将随之而来，由此，我应用&nbsp;<a href="http://www.hightopo.com/cn-index.html" target="_blank">HT for Web</a>&nbsp; 的图型化编辑工具打造了一款形象生动的例子：<a href="http://www.hightopo.com/demo/garbage-classification/" target="_blank">Garbage classification</a>，也借此机会与大家一起分享和学习。</p>
+<h1>代码实现</h1>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142121636-79685654.gif" alt="" width="812" height="431"></p>
+<p>（注：gif 的上传大小有限，实际效果与还请参考 demo 链接）</p>
+<p>首先，我应用已经精心布置好的 3D 场景，为了有更好的操作体验感，我们要从它的基本设置开始：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>gv.setMovableFunc(() =&gt; { return false }) // 禁止拖动
+gv.getWireframe = (d) =&gt; { d.s('wf.visible', false) }  // 隐藏选中边框
+gv.setEye([583, -212, -789]) // 设置眼睛
+gv.setCenter([-76, -654, -133]) // 设置中心点
+gv.setFar(100000) // 设置远端位置
+gv.setNear(10) // 设置近端位置
+gv.setInteractors([ new ht.graph3d.MapInteractor(gv) ]) // 设置交互限制
+gv.setSkyBox(dm.getDataByTag('skyBox')) // 设置天空球
+window.document.oncontextmenu = () =&gt; { return false } // 全局设置右键菜单禁用
+gv.scene = { // 复制初始位置
+    eye: ht.Default.clone(gv.getEye()),
+    center: ht.Default.clone(gv.getCenter()),
+    far: ht.Default.clone(gv.getFar()),
+    near: ht.Default.clone(gv.getNear()),
+}</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+</div>
+<p>我复制了一下整个场景的初始视角情况方便我做稍后的处理，我监听了部分鼠标事件来形成自己的操作风格（比如双击背景还原视角以及双击模型拉近视角）：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>gv.mi(e =&gt; {
+    let data = e.data
+    let kind = e.kind
+    if (kind === 'doubleClickBackground') { // 双击背景
+        gv.moveCamera(this.gv.scene.eye, this.gv.scene.center, {duration : 1000}) // 恢复视角
+    }
+    else if (kind === 'doubleClickData') { // 双击模型
+        gv.flyTo(data, {animation : {duration : 500}, distance : 800}) // 拉近视角
+    }
+})</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+</div>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142227760-1060023949.gif" alt="" width="815" height="433"></p>
+<p>好了，准备工作做好了，下面来实现动画部分，除了了解&nbsp;<a href="https://baike.baidu.com/item/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/2904193?fr=aladdin" target="_blank">垃圾分类</a>&nbsp;的方式外我还参考了网上很多机械臂的视频，学习它的运动模式和动作细节，对每个结构和部位的动画进行步骤的排序和构思。这里我挑选几处动画的实现方式来展示：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>function mechanicalArmAnim1() {
+　　ht.Default.startAnim({
+　　　　duration: 1000,
+　　　　easing: (t) =&gt; { return t },
+　　　　action: (v, t) =&gt; {
+　　　　　　postbrachium.r3(degrees(0) + (degrees(20) - degrees(0)) * v, postbrachium.r3()[1], postbrachium.r3()[2]) // 后臂向下移
+　　　　},
+　　　　finishFunc: () =&gt; {
+　　　　　　setTimeout(() =&gt; {
+　　　　　　　　mechanicalArmAnim2()
+　　　　　　}, 300)
+　　　　}
+　　})
+}
+function mechanicalArmAnim2() {
+　　ht.Default.startAnim({
+　　　　duration: 1000,
+　　　　easing: (t) =&gt; { return t },
+　　　　action: (v, t) =&gt; {
+　　　　　　postbrachium.p3(-208 + (-184 + 208) * v, postbrachium.p3()[1], postbrachium.p3()[2]) // 后臂前伸
+　　　　　　hydraulicRod1.r3(degrees(0) + (degrees(8) - degrees(0)) * v, hydraulicRod1.r3()[1], hydraulicRod1.r3()[2]) // 液压杆1倾斜
+　　　　　　extensionRod1.r3(degrees(0) + (degrees(8) - degrees(0)) * v, extensionRod1.r3()[1], extensionRod1.r3()[2]) // 伸长杆1倾斜
+　　　　　　extensionRod1.p3(-169 + (-185 + 169) * v, -516 + (-511 + 516) * v, extensionRod1.p3()[2]) // 伸长杆1伸长
+　　　　　　hydraulicRod2.r3(degrees(0) + (degrees(-8) - degrees(0)) * v, hydraulicRod2.r3()[1], hydraulicRod2.r3()[2]) // 液压杆2倾斜
+　　　　　　extensionRod2.r3(degrees(0) + (degrees(-8) - degrees(0)) * v, extensionRod2.r3()[1], extensionRod2.r3()[2]) // 伸长杆2倾斜
+　　　　　　extensionRod2.p3(-169 + (-185 + 169) * v, -516 + (-511 + 516) * v, extensionRod2.p3()[2]) // 伸长杆2伸长
+　　　　},
+　　　　finishFunc: () =&gt; {
+　　　　　　setTimeout(() =&gt; {
+　　　　　　　　mechanicalArmAnim3()
+　　　　　　}, 300)
+　　　　}
+　　})
+}
+function mechanicalArmAnim3() {
+　　let oldValue = antebrachium.r3()[0]
+　　ht.Default.startAnim({
+　　　　duration: 1000,
+　　　　easing: (t) =&gt; { return t },
+　　　　action: (v, t) =&gt; {
+　　　　　　hydraulicRod1.r3(degrees(8) + (degrees(7) - degrees(8)) * v, hydraulicRod1.r3()[1], hydraulicRod1.r3()[2]) // 液压杆1倾斜
+　　　　　　extensionRod1.r3(degrees(8) + (degrees(7) - degrees(8)) * v, extensionRod1.r3()[1], extensionRod1.r3()[2]) // 伸长杆1倾斜
+　　　　　　extensionRod1.p3(-185 + (-186 + 185) * v, -511 + (-507 + 511) * v, extensionRod1.p3()[2]) // 伸长杆1伸长
+　　　　　　hydraulicRod2.r3(degrees(-8) + (degrees(-7) - degrees(-8)) * v, hydraulicRod2.r3()[1], hydraulicRod2.r3()[2]) // 液压杆2倾斜
+　　　　　　extensionRod2.r3(degrees(-8) + (degrees(-7) - degrees(-8)) * v, extensionRod2.r3()[1], extensionRod2.r3()[2]) // 伸长杆2倾斜
+　　　　　　extensionRod2.p3(-185 + (-186 + 185) * v, -511 + (-507 + 511) * v, extensionRod2.p3()[2]) // 伸长杆2伸长
+　　　　　　postbrachium.r3(degrees(20) + (degrees(25) - degrees(20)) * v, postbrachium.r3()[1], postbrachium.r3()[2]) // 后臂向下移
+　　　　　　antebrachium.r3(oldValue + (degrees(-40) - oldValue) * v, antebrachium.r3()[1], antebrachium.r3()[2]) // 前臂向下移
+　　　　　　claw1.r3(degrees(-20) + (degrees(-60) - degrees(-20)) * v, claw1.r3()[1], claw1.r3()[2]) // 上爪抓取
+　　　　　　claw2.r3(degrees(-60) + (degrees(-30) - degrees(-60)) * v, claw2.r3()[1], claw2.r3()[2]) // 下爪抓取
+　　　　},
+　　　　finishFunc: () =&gt; {
+　　　　　　mechanicalArmAnim4()
+　　　　}
+　　})
+}</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+</div>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142718584-177708730.gif" alt="" width="800" height="425"></p>
+<p>这一段动画是机械臂从初始化状态到向下抓取的一个过程，我将每段动画分成函数来写比较方便后续管理，每一处也代表了一个步骤。这其中最复杂且细微的步骤要数液压杆的运动了，为了让动画看起来更加真实，我除了将手臂单独运动的过程中加入了延时执行下一段动画以体现机器运动的特点外，也把液压杆的部分也做了动画，如果不做处理，那么机械臂在上下移动的时候就会有不科学的效果出现。<a href="http://www.hightopo.com/guide/guide/core/beginners/ht-beginners-guide.html#ref_animation" target="_blank">动画函数</a>&nbsp;在这种 demo 中应用的最广，而且里面也包含了一些缓动函数，有兴趣的博友们可以&nbsp;<a href="https://hightopo.com/codeeditor/index.html?url=http://www.hightopo.com/guide/guide/core/beginners/examples/example_animation.html" target="_blank">点此处</a>&nbsp;自己亲自动手玩一玩~</p>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007143357259-223945465.png" alt="" width="505" height="246"><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007143404360-207440718.png" alt="" width="509" height="247"></p>
+<p>这里面的拾取垃圾步骤还应用了我过去介绍过的&nbsp;<a href="https://www.cnblogs.com/htdaydayup/p/9778453.html" target="_blank">吸附</a>&nbsp;功能，这个方法非常的适合抓取物体的动作，通过&nbsp;<strong>setHost&nbsp;</strong>使节点吸附于宿主，这样就相当于子节点跟随父节点移动，此时只需要对机械臂进行偏移和旋转的操作，垃圾便会随之一起运动了，大大减少了工作量！<strong><br /></strong></p>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201910/1496396-20191007142549421-479570086.gif" alt="" width="786" height="417"></p>
+<p>还有一部分更酷的属性设置给大家展示一下，可以让 3D 场景整体有更真实的阴影处理效果。首先我们要注意将无关的节点阴影通过&nbsp;<strong>node.s('shadow.cast', false)</strong>&nbsp;关闭，比如编组用的box，背景，地板和面板等。</p>
+<p>最后我们就把阴影的细节做下调整，达到比较好的效果：</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre>gv.enableShadow(true, {
+　　degreeX : 0,       // 投影 x 轴角度
+　　degreeZ : -25,      // 投影 z 轴角度
+　　intensity : 0.3,    // 阴影强度， 1 为黑色
+　　quality : 'high',  // low / medium / high / ultra / 4096数值, 质量
+　　type : 'soft',     // none / hard / soft
+　　radius : 0.2,      // type 为 hard / soft 时，补充的边缘厚度，用来提供更柔和的边缘
+　　bias : -0.003     // 深度浮点偏差补足
+})</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+</div>
+<h1>总结</h1>
+<p>更多动画 demo 以及工业化领域的文章请继续关注我的博客，感谢大家的支持！</p>
+<p>医疗站（<a href="https://www.cnblogs.com/htdaydayup/p/11558748.html" target="_blank">https://www.cnblogs.com/htdaydayup/p/11558748.html</a>）</p>
+<p><img src="https://img2018.cnblogs.com/blog/1496396/201909/1496396-20190920135025781-2114795492.gif" alt="" width="783" height="387"></p>
+<p>在工业物联网从婴儿走到青年的成熟道路上，一定会有更多的潜力和挑战在等着我们，等待我们去开发，等待我们去创造！相信我们的技术成为国际水准会指日可待！同时在十一国庆后的第一个工作日祝大家精神饱满，工作顺利！</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+	</div>
+	
+	<div class="postfoot">
+		posted on 
+<span id="post-date">2020-02-26 11:05</span>&nbsp;
+<a href="https://www.cnblogs.com/xhload3d/">xhload3d</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12365739" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12365739);return false;">收藏</a>
+	</div>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 171723, cb_blogApp = 'xhload3d', cb_blogUserGuid = '99a30dc7-3165-e311-8d02-90b11c0b17d6';
+    var cb_entryId = 12365739, cb_entryCreatedDate = '2020-02-26 11:05', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div class="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 xhload3d
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+
+
+    
+</body>
+</html>

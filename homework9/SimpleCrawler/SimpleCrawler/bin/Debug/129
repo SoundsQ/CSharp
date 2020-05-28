@@ -1,0 +1,1020 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="显式锁是Java对于锁与监视器概念，线程同步解决方案的JDK实现，想要深入了解学习Lock接口以及Condition以及后续，必然需要先对显式锁的概念进行了解。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>java 并发多线程显式锁概念简介 什么是显式锁 多线程下篇（一） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10474581.html">java 并发多线程显式锁概念简介 什么是显式锁 多线程下篇（一）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        显式锁是Java对于锁与监视器概念，线程同步解决方案的JDK实现，想要深入了解学习Lock接口以及Condition以及后续，必然需要先对显式锁的概念进行了解。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">目前对于同步，仅仅介绍了一个关键字synchronized，可以用于保证线程同步的原子性、可见性、有序性</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于synchronized关键字，对于静态方法默认是以该类的class对象作为锁，对于实例方法默认是当前对象this，对于同步代码块，需要指定锁对象</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于整个同步方法或者代码块，不再需要显式的进行加锁，默认这一整个范围都是在锁范围内</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">可以理解为，隐含的在代码开始和结尾处，进行了隐式的加锁和解锁</span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以synchronized又被称为隐式锁</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于synchronized关键字的隐式锁，不需要显式的加锁和释放，即使出现了问题，仍旧能够对锁进行释放</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">synchronized是一种阻塞式的，在前面也提到过，对于synchronized修饰的同步，如果无法进入监视器则是BLOCKED状态，无疑，性能方面可想而知</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>而且，这种隐式锁，在同一个代码片段内只有一个监视器，灵活性不够</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">为了优化synchronized的一些不便，Java又提出来了显式锁的概念Lock </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">顾名思义，显式，是相对隐式来说的，也就是对于加锁和解锁，需要明确的给出，而不会自动的进行处理</span></div>
+<h3><span style="font-size: 18px;">示例回顾 </span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">回忆下是之前《多线程协作wait、notify、notifyAll方法简介理解使用 》一文中使用的例子 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">ps:下面的例子是优化过的，其中if判断换成了while 循环检测，notify换成了notifyAll </span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> test1;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.LinkedList;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 消息队列MessageQueue 测试
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> T14 {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+</span><span style="color: #0000ff;">final</span> RefactorMessageQueue mq = <span style="color: #0000ff;">new</span> RefactorMessageQueue(5<span style="color: #000000;">);
+System.out.println(</span>"***************task begin***************"<span style="color: #000000;">);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">创建生产者线程并启动</span>
+<span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 20; i++<span style="color: #000000;">) {
+</span><span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+</span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+mq.set(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Message());
+}
+}, </span>"producer"+<span style="color: #000000;">i).start();
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">创建消费者线程并启动</span>
+<span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+</span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+mq.get();
+}
+}, </span>"consumer"<span style="color: #000000;">).start();
+}
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 消息队列
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> RefactorMessageQueue {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 队列最大值
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> max;
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 锁
+* </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">byte</span>[] lock = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span>[1<span style="color: #000000;">];
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* final确保发布安全
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">final</span> LinkedList&lt;Message&gt; messageQueue = <span style="color: #0000ff;">new</span> LinkedList&lt;&gt;<span style="color: #000000;">();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 构造函数默认队列大小为10
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span><span style="color: #000000;"> RefactorMessageQueue() {
+max </span>= 10<span style="color: #000000;">;
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 构造函数设置队列大小
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> RefactorMessageQueue(<span style="color: #0000ff;">int</span><span style="color: #000000;"> x) {
+max </span>=<span style="color: #000000;"> x;
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> set(Message message) {
+</span><span style="color: #0000ff;">synchronized</span><span style="color: #000000;"> (lock) {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果已经大于队列个数，队列满，进入等待</span>
+<span style="color: #0000ff;">while</span> (messageQueue.size() &gt;<span style="color: #000000;"> max) {
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+System.out.println(Thread.currentThread().getName() </span>+ " : queue is full ,waiting..."<span style="color: #000000;">);
+lock.wait();
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+e.printStackTrace();
+}
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列未满，生产消息，随后通知lock上的等待线程
+</span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息生产，都会通知消费者</span>
+System.out.println(Thread.currentThread().getName() + " : add a message"<span style="color: #000000;">);
+messageQueue.addLast(message);
+lock.notifyAll();
+}
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> get() {
+</span><span style="color: #0000ff;">synchronized</span><span style="color: #000000;"> (lock) {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列为空，进入等待，无法获取消息</span>
+<span style="color: #0000ff;">while</span><span style="color: #000000;"> (messageQueue.isEmpty()) {
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+System.out.println(Thread.currentThread().getName() </span>+ " : queue is empty ,waiting..."<span style="color: #000000;">);
+lock.wait();
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+e.printStackTrace();
+}
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">队列非空时，读取消息，随后通知lock上的等待线程
+</span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息读取，都会通知生产者</span>
+System.out.println(Thread.currentThread().getName() + " : get a message"<span style="color: #000000;">);
+messageQueue.removeFirst();
+lock.notifyAll();
+}
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">分析下这个示例中的一些概念</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">使用了synchronized用作同步，锁对象为&nbsp; private final byte[] lock = new byte[1];</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">有多个生产者和一个消费者，为了进行通信使用了监视器（也就是锁对象）的wait和notifyAll方法进行通信</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">ps：前文也说过为何要用notifyAll而不是notify</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">简单说两个点：</span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">synchronized关键字</span></li>
+<li><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">监视器方法</span></li>
+</ul>
+</div>
+</div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">借助于这两个点，可以完成多线程之间的协作与通信（多个生产者一个消费者）</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">监视器方法的调用需要在监视器内，也就是同步方法内</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">而且上面的例子中的监视器都是同一个就是锁对象，wait是当前线程在监视器上wait，notifyAll方法则是唤醒所有在此监视器上等待的线程</span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>很显然，其实生产者应该唤醒生产者，消费者应该唤醒消费者</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">可是，多线程协作使用的是同一个队列，所以需要使用同一把锁</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">又因为监视器方法必须在同步方法内而且也必须是持有监视器才能调用相应的监视器方法，所以只能使用同一个监视器了</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>也就是只能将这些线程组织在同一个监视器中，就不好做到&ldquo;其实生产者应该唤醒生产者，消费者应该唤醒消费者&rdquo;</strong></span></div>
+<h3><span style="font-size: 18px;">显式锁逻辑 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">再回过头看显式锁，他是如何做到各方面灵活的呢？ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">从上面的分析来看主要就是因为隐式锁与监视器之间的比较强的关联关系 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">synchronized修饰的代码片段使用的是同一把锁，同步方法内的监视器方法也只能调用这个锁的，也就是说在使用上来看，用什么锁，就要用这个锁的监视器，强关联 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">问题的一种解题思路就是</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>解耦</strong></span><span style="font-size: 16px;">，显式锁就是这种思路&nbsp; </span></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>Lock就好比是synchronized关键字，只不过你需要显式的进行加锁和解锁</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">惯用套路如下 </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre>Lock l =<span style="color: #000000;"> ...;
+l.lock();
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> access the resource protected by this lock</span><span style="color: #000000;">
+} </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+l.unlock();
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">本来使用<span style="line-height: 32px;">synchronized隐式的加锁和解锁，换成了Lock的lock和unlock方法调用</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">那么监视器呢？</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>与锁关联的监视器又是什么，又如何调用监视器的方法呢？</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>Lock提供了Condition newCondition();方法</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>返回类型为Condition，被称之为条件变量，可以认为是锁关联的监视器</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">借助于Condition，就可以达到原来监视器方法调用的效果，Condition方法列表如下，看得出来，是不是很像wait和notify、notifyAll？目标是一致的</span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201903/897393-20190305090502067-1235640030.png"><img style="display: inline; background-image: none;" title="image_5c7dcac8_2722" src="https://img2018.cnblogs.com/blog/897393/201903/897393-20190305090502584-159205981.png" alt="image_5c7dcac8_2722" width="277" height="189" border="0" /></a></span></div>
+<div><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以可以说，显式锁的逻辑就是借助于Lock接口以及Condition接口，实现了对synchronized关键字以及锁对应的监视器的另外的一种实现</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">从而提供了更大的灵活性</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">还是之前的示例，尝试试用一下显式锁</span></div>
+<div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> test2;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.LinkedList;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.Condition;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.Lock;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.ReentrantLock;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> T26 {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+</span><span style="color: #0000ff;">final</span> RefactorMessageQueue mq = <span style="color: #0000ff;">new</span> RefactorMessageQueue(5<span style="color: #000000;">);
+System.out.println(</span>"***************task begin***************"<span style="color: #000000;">);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">创建生产者线程并启动</span>
+<span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 20; i++<span style="color: #000000;">) {
+</span><span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+</span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+mq.set(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Message());
+}
+}, </span>"producer" +<span style="color: #000000;"> i).start();
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">创建消费者线程并启动</span>
+<span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+</span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+mq.get();
+}
+}, </span>"consumer"<span style="color: #000000;">).start();
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 消息队列中存储的消息
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Message {
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 消息队列
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> RefactorMessageQueue {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 队列最大值
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> max;
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 锁
+* </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Lock lock = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ReentrantLock();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 条件变量
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Condition condition =<span style="color: #000000;"> lock.newCondition();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* final确保发布安全
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">final</span> LinkedList&lt;Message&gt; messageQueue = <span style="color: #0000ff;">new</span> LinkedList&lt;&gt;<span style="color: #000000;">();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 构造函数默认队列大小为10
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span><span style="color: #000000;"> RefactorMessageQueue() {
+max </span>= 10<span style="color: #000000;">;
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 构造函数设置队列大小
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> RefactorMessageQueue(<span style="color: #0000ff;">int</span><span style="color: #000000;"> x) {
+max </span>=<span style="color: #000000;"> x;
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> set(Message message) {
+lock.lock();
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果已经大于队列个数，队列满，进入等待</span>
+<span style="color: #0000ff;">while</span> (messageQueue.size() &gt;<span style="color: #000000;"> max) {
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+System.out.println(Thread.currentThread().getName() </span>+ " : queue is full ,waiting..."<span style="color: #000000;">);
+condition.await();
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+e.printStackTrace();
+}
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列未满，生产消息，随后通知lock上的等待线程
+</span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息生产，都会通知消费者</span>
+System.out.println(Thread.currentThread().getName() + " : add a message"<span style="color: #000000;">);
+messageQueue.addLast(message);
+condition.signalAll();
+} </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+}
+lock.unlock();
+}
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> get() {
+lock.lock();
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列为空，进入等待，无法获取消息</span>
+<span style="color: #0000ff;">while</span><span style="color: #000000;"> (messageQueue.isEmpty()) {
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+System.out.println(Thread.currentThread().getName() </span>+ " : queue is empty ,waiting..."<span style="color: #000000;">);
+condition.await();
+} </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+e.printStackTrace();
+}
+}
+</span><span style="color: #008000;">//</span><span style="color: #008000;">队列非空时，读取消息，随后通知lock上的等待线程
+</span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息读取，都会通知生产者</span>
+System.out.println(Thread.currentThread().getName() + " : get a message"<span style="color: #000000;">);
+messageQueue.removeFirst();
+condition.signalAll();
+} </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+lock.unlock();
+}
+}
+}
+}</span></pre>
+</div>
+</div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">改变的核心逻辑就是锁和条件变量</span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 锁
+* </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Lock lock = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ReentrantLock();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 条件变量
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Condition condition = lock.newCondition();</pre>
+</div>
+</div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="color: #ff0000; font-size: large; font-family: 'Microsoft YaHei';"><strong>使用lock.lock();以及lock.unlock(); 替代了synchronized（lock）</strong> </span></li>
+<li><span style="color: #ff0000; font-size: large; font-family: 'Microsoft YaHei';"><strong>使用condition的await和signalAll方法替代了lock.wait()和&nbsp;&nbsp; lock.notifyAll</strong> </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">看起来与使用synchronized关键字好像差不多，这没什么毛病 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>显式锁的设计本来就是为了弥补隐式锁的，虽说不是说作为一种替代品，但是功能逻辑的相似性是必然的</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">注意到，使用条件变量，与隐式锁中都是只有一个监视器，所有的线程仍旧都是被唤醒 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">前面提到过，其实生产者应该唤醒消费者，消费者才应该唤醒生产者 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">是不是可以两个变量？ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对于生产者来说，只要非满即可，如果满了等待，非满生产然后唤醒消费者 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对于消费者来说，只要非空即可，如果空了等待，非空消费然后唤醒生产者 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">可以定义两个条件变量，如下所示完整代码 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">其实只是定义了两个监视器</span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> test2;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.LinkedList;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.Condition;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.Lock;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.concurrent.locks.ReentrantLock;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> T27 {
+  </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+    </span><span style="color: #0000ff;">final</span> RefactorMessageQueue mq = <span style="color: #0000ff;">new</span> RefactorMessageQueue(5<span style="color: #000000;">);
+    System.out.println(</span>"***************task begin***************"<span style="color: #000000;">);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">创建生产者线程并启动</span>
+    <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 20; i++<span style="color: #000000;">) {
+      </span><span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+        </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+          mq.set(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Message());
+        }
+      }, </span>"producer" +<span style="color: #000000;"> i).start();
+    }
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">创建消费者线程并启动</span>
+    <span style="color: #0000ff;">new</span> Thread(() -&gt;<span style="color: #000000;"> {
+      </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+        mq.get();
+      }
+    }, </span>"consumer"<span style="color: #000000;">).start();
+  }
+  </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+  * 消息队列中存储的消息
+  </span><span style="color: #008000;">*/</span>
+  <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Message {
+  }
+  </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+  * 消息队列
+  </span><span style="color: #008000;">*/</span>
+  <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> RefactorMessageQueue {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 队列最大值
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> max;
+    </span><span style="color: #008000;">/*</span><span style="color: #008000;">
+    * 锁
+    * </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Lock lock = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ReentrantLock();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 条件变量，用于消费者，非空即可消费
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Condition notEmptyCondition =<span style="color: #000000;"> lock.newCondition();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 条件变量，用于生产者，非满即可生产
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Condition notFullCondition =<span style="color: #000000;"> lock.newCondition();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * final确保发布安全
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">final</span> LinkedList&lt;Message&gt; messageQueue = <span style="color: #0000ff;">new</span> LinkedList&lt;&gt;<span style="color: #000000;">();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 构造函数默认队列大小为10
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> RefactorMessageQueue() {
+      max </span>= 10<span style="color: #000000;">;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 构造函数设置队列大小
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> RefactorMessageQueue(<span style="color: #0000ff;">int</span><span style="color: #000000;"> x) {
+      max </span>=<span style="color: #000000;"> x;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> set(Message message) {
+      lock.lock();
+      </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">如果已经大于队列个数，队列满，进入等待</span>
+        <span style="color: #0000ff;">while</span> (messageQueue.size() &gt;<span style="color: #000000;"> max) {
+          </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            System.out.println(Thread.currentThread().getName() </span>+ " : queue is full ,waiting..."<span style="color: #000000;">);
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">如果满了，生产者在&ldquo;非满&rdquo;这个条件上等待</span>
+<span style="color: #000000;">            notFullCondition.await();
+          } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列未满，生产消息，随后通知lock上的等待线程
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息生产，都会通知消费者</span>
+        System.out.println(Thread.currentThread().getName() + " : add a message"<span style="color: #000000;">);
+        messageQueue.addLast(message);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">生产后，增加了消息，非空条件满足，需要唤醒消费者</span>
+<span style="color: #000000;">        notEmptyCondition.signalAll();
+      } </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+      }
+      lock.unlock();
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> get() {
+      lock.lock();
+      </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">如果队列为空，进入等待，无法获取消息</span>
+        <span style="color: #0000ff;">while</span><span style="color: #000000;"> (messageQueue.isEmpty()) {
+          </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            System.out.println(Thread.currentThread().getName() </span>+ " : queue is empty ,waiting..."<span style="color: #000000;">);
+            </span><span style="color: #008000;">//</span><span style="color: #008000;">如果空了，消费者需要在&ldquo;非空&rdquo;条件上等待</span>
+<span style="color: #000000;">            notEmptyCondition.await();
+          } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">队列非空时，读取消息，随后通知lock上的等待线程
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">每一次的消息读取，都会通知生产者</span>
+        System.out.println(Thread.currentThread().getName() + " : get a message"<span style="color: #000000;">);
+        messageQueue.removeFirst();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">消费后，减少了消息，所以非满条件满足，需要唤醒生产者</span>
+<span style="color: #000000;">        notFullCondition.signalAll();
+      } </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+        lock.unlock();
+      }
+    }
+  }
+}</span></pre>
+</div>
+</div>
+<div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">通过上面的示例，应该可以理解显式锁的思路 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">他与隐式锁并没有像名称上看起来这么对立（一个隐 一个显），他们的核心仍旧是为了解决线程的同步与线程间的通信协作 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>线程同步与通信的在Java中的底层核心概念为锁和监视器</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>不管是synchronized还是Lock，不管是Object提供的通信方法还是Condition中的方法，都还是围绕着锁和监视器的概念展开的</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如同平时写代码，同样的功能，可能会有多种实现方式，显式锁和隐式锁也是类似的，他们的实现有着很多的不同，也都有各种利弊 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以才会有隐式锁和显式锁，在程序中很难找到&ldquo;放之四海而皆准&rdquo;的实现代码，所以才会有各种各样的解决方案 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">尽管早期synchronized关键字性能比较低，但是随着版本的升级，性能也有了很大的改善 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以官方也是建议如果场景满足，还是尽可能使用synchronized关键字而不是显式锁</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">显式锁是为了解决隐式锁而不好解决的一些场景而存在的，尽管本文并没有体现出来他们之间的差异（本文恰恰相反，对相同点进行了介绍） </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">但是显式锁有很多隐式锁不存在的优点，后续慢慢介绍，通过本文希望理解，显式锁也只是线程同步与协作通信的一种实现途径而已 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10474581.html" target="_blank">java 并发多线程显式锁概念简介 什么是显式锁 多线程下篇（一）</a></span></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-03-06 11:08</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10474581" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10474581);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10474581, cb_entryCreatedDate = '2019-03-06 11:08', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

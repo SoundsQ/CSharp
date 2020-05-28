@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 中共中央、国务院在今年12月印发了《长江三角洲区域一体化发展规划纲要》(下文简称《纲要》)，并发出通知，要求各地区各部门结合实际认真贯彻落实。 《纲要》强调，要提升基础设施互联互通水平，打造数字" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>使用 H5 和 webGL 的智慧城市 3D 监控 - xhload3d - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cogitation/bundle-cogitation.min.css?v=PJ48NAY_dmbjZZ0ZTev3Avl3BcTMJe39d3Pc83CPcig" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cogitation/bundle-cogitation-mobile.min.css?v=jLHKTG0H_smj72y-Z2j0JGYUmhBVGTu4_QpAGb1B_sA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xhload3d/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xhload3d/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xhload3d/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 171723;
+        var currentBlogApp = 'xhload3d';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Cogitation';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="top">
+	
+<div>
+	<table>
+		<tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xhload3d/">xhload3d</a>
+</h1>
+				<p id="tagline">
+www.hightopo.com
+</p>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="HeaderBarTab" nowrap>
+&nbsp;
+<a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+ ::
+
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xhload3d/">
+首页</a>
+ ::
+<a href="http://q.cnblogs.com" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+ ::
+
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/xhload3d">
+联系</a> ::
+
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xhload3d/rss/">
+订阅</a>
+
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/xhload3d/rss/">
+    <img src="/skins/cogitation/images/xml.gif" alt="订阅" />
+</a> ::
+
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+ ::
+
+
+</td>
+			<td><img id="Header1_BlueTab" src="/skins/cogitation/images/BlueTabRight.gif" align="absmiddle" alt=""/></td>
+			<td class="HeaderBarTabBack" nowrap width="100%">
+				<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap>
+				&nbsp;
+				
+236 
+				随笔&nbsp;::
+				
+1 文章
+				::
+				
+429 评论
+				::
+				
+0 引用
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12340372.html">使用 H5 和 webGL 的智慧城市 3D 监控</a>
+
+	</div>
+	
+	<div class="postText">
+		
+    <div id="cnblogs_post_description" style="display: none">
+        <img src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216104216733-519120101.gif" class="desc_img">要提升基础设施互联互通水平，打造数字长三角，协同建设新一代信息基础设施，共同推动重点领域智慧应用。大力发展基于物联网、大数据、人工智能的专业化服务，提升各领域融合发展、信息化协同和精细化管理水平。围绕城市公共管理、公共服务、公共安全等领域，支持有条件的城市建设基于人工智能和 5G 物联的城市大脑集群。
+城市治理和管理不仅是国家治理体系的重要组成部分，同时也是全球互联网治理体系的重要载体和构建网络空间命运共同体的重要基础。上个月我们发布了一篇文章《基于 HTML5 WebGL 构建智能城市 3D 场景》，大体介绍了如何使用 ht.js 快速 3D  建模，展示了良好的可视化效果，今天继续探讨智慧城市的应用。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><strong>前言</strong></p>
+<p>　　中共中央、国务院在今年12月印发了《<a href="http://www.gov.cn/zhengce/2019-12/01/content_5457442.htm?tdsourcetag=s_pcqq_aiomsg" target="_blank">长江三角洲区域一体化发展规划纲要</a>》(下文简称《纲要》)，并发出通知，要求各地区各部门结合实际认真贯彻落实。</p>
+<p>　　《纲要》强调，要提升基础设施互联互通水平，打造数字长三角，协同建设新一代信息基础设施，共同推动重点领域智慧应用。大力发展基于物联网、大数据、人工智能的专业化服务，提升各领域融合发展、信息化协同和精细化管理水平。围绕城市公共管理、公共服务、公共安全等领域，支持有条件的城市建设基于人工智能和&nbsp;5G&nbsp;物联的城市大脑集群。</p>
+<p>城市治理和管理不仅是国家治理体系的重要组成部分，同时也是全球互联网治理体系的重要载体和构建网络空间命运共同体的重要基础。上个月我们发布了一篇文章《<a href="https://www.cnblogs.com/htdaydayup/p/11898465.html" target="_blank">基于&nbsp;HTML5 WebGL 构建智能城市 3D 场景</a>》，大体介绍了如何使用&nbsp;ht.js&nbsp;快速&nbsp;3D&nbsp;&nbsp;建模，展示了良好的可视化效果，今天继续探讨智慧城市的应用。</p>
+<p>　　demo:&nbsp;<a href="http://www.hightopo.com/demo/city/" target="_blank">http://www.hightopo.com/demo/city/</a></p>
+<p><strong>功能点</strong></p>
+<ul>
+<li>&nbsp;应急响应</li>
+<li>&nbsp;交通情况</li>
+<li>&nbsp;城市漫游</li>
+<li>&nbsp;工程情况</li>
+</ul>
+<p><strong>1.应急响应</strong></p>
+<p>随着城市化、工业化、信息化进程加快,各种风险隐患层出不穷,突发事件频繁发生,已经从&ldquo;非常态化&rdquo;的偶发事件演变成了&ldquo;常态化&rdquo;的频发事件,直接威胁着公众的生命财产安全。为了及时、有效、妥善地处置各种城市突发事件,必须建立统一领导的指挥系统、常备不懈的保障系统和防患未然的防范系统,。</p>
+<p>&nbsp;<img title=" 模拟应急响应动画（4倍速）" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216104216733-519120101.gif" alt=" 模拟应急响应动画（4倍速）" width="550" height="255" data-mce-selected="1"></p>
+<p>上图主要以&nbsp;2/3D&nbsp;&nbsp;联动的方式，依次展示了在面对突发情况下，城市应急救援的响应过程。</p>
+<p>步骤：事故定位-&gt;告警设施自启动-&gt;电力切断-&gt;油气截断阀启动-&gt;周边情况-&gt;确认告警范围-&gt;通知学校-&gt;医院准备-&gt;应急人员准备-&gt;交通规划-&gt;应急方案预备-&gt;应急方案启动-&gt;应急资源触发-&gt;现场方案预备-&gt;现场方案启动-&gt;人员进场-&gt;作业中）</p>
+<p>实现思路：首先对模型进行分组，并在相应的图元上标记&nbsp;tag&nbsp;，使用&nbsp;ht.Default.startAnim()&nbsp;&nbsp;来完成每一步的动画效果，然后拼接动画即可实现上图中的&nbsp;3D&nbsp;动画效果。至于右边的&nbsp;2D&nbsp;步骤显示面板的联动，因为本&nbsp;demo&nbsp;采用的是&nbsp;ht.js&nbsp;来实现的，&nbsp;ht.DataModel&nbsp;作为承载&nbsp;Data&nbsp;&nbsp;数据的模型，管理着&nbsp;Data&nbsp;&nbsp;数据的增删以及事件派发，右侧的&nbsp;2D&nbsp;面板里的步骤也是一个个&nbsp;Data&nbsp;，我们只要对其进行<a href="http://www.hightopo.com/guide/guide/core/databinding/ht-databinding-guide.html" target="_blank"><strong>数据绑定</strong></a>，在动画执行到某一时刻，通过动态修数据来控制图元的透明度等样式就可以实现&nbsp;2/3D&nbsp;联动了。demo&nbsp;中的事故地点，点击可跳转到另一个室内定位的&nbsp;<a href="http://www.hightopo.com/demo/indoor-position/" target="_blank">案例</a>&nbsp;。</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre>// 事故定位动画主要代码
+ animStep_1() {
+    let process_01 = this.main.g2d.dm().getDataByTag("process_01");
+    process_01.s("opacity", 1);
+    let emergencyResponseParent_1 = this.main.g3d
+        .dm()
+        .getDataByTag("emergencyResponseParent_1");
+    this.setVisible(emergencyResponseParent_1, true, "children");
+    let children = this.getChildren(emergencyResponseParent_1);
+    children.forEach(i =&gt; {
+        i.s("shape3d.transparent", true);
+        i.s("shape3d.opacity", 0);
+    });
+    this.main.anim = ht.Default.startAnim({
+        duration: 2000,
+        easing: t =&gt; {
+            return t;
+        },
+        finishFunc: () =&gt; {
+            this.animStep_2();
+        }, // 动画结束后调用的函数。
+        action: (v, t) =&gt; {
+            this.setStepPanel(process_01, t, 4);
+            if (t &lt;= 0.25) {
+                children[0].s("shape3d.opacity", 5 * Ease.easeOutSine(t));
+            } else if (t &lt;= 0.375) {
+                children[1].s(
+                    "shape3d.opacity",
+                    8 * Ease.easeOutSine(t - 0.25)
+                );
+            } else if (t &lt;= 0.5) {
+                children[2].s(
+                    "shape3d.opacity",
+                    8 * Ease.easeOutSine(t - 0.375)
+                );
+            }
+        }
+    });
+}</pre>
+</div>
+<p><strong>2.交通情况</strong></p>
+<p>先上图：</p>
+<p>&nbsp;<img title="交通情况示意图" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216104944139-1482971168.png" alt="交通情况示意图" width="550" height="309" data-mce-selected="1"></p>
+<p>从应用领域来看，目前我国智慧交通主要应用在公路交通信息化、城市道路交通管理服务信息化以及城市公交信息化领域。伴随着数字化转型，政府主动牵头智慧城市建设，未来市场潜力巨大。该功能点能更直观有效的反应当前的道路交通情况，使各地政府更加有效的、科学的管理交通，发挥出大城市的交通效能。常规的&nbsp;2D&nbsp;效果图已经不满足于当下的需求了，伴随着大数据、云计算、5G、AI、边缘计算等技术的发展成熟，3D&nbsp;&nbsp;可视化更能直观的、有效的反馈信息。当然，3D&nbsp;&nbsp;可视化离不开一款强大的图形引擎。本模块只是简单地模拟了交通状况，并未继续拓展。</p>
+<p><strong>3.城市漫游</strong></p>
+<p>&nbsp;<img title="漫游效果图（2倍速）" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216105536484-1361039183.gif" alt="漫游效果图（2倍速）" width="550" data-mce-selected="1"></p>
+<p>由于计算机图形学和软硬件技术的快速发展,虚拟现实技术越来越为人们所重视。虚拟现实技术的应用一直是计算机应用领域的热点,虚拟现实技术的应用价值已经得到了广泛的认可。3D&nbsp;&nbsp;漫游可以提供很好的用户交互体验，所以本&nbsp;demo&nbsp;&nbsp;也展示了这一功能。</p>
+<p>借助于&nbsp;HT，漫游功能的实现只要几行代码就可以实现了。<a href="http://www.hightopo.com/guide/guide/core/shape/ht-shape-guide.html" target="_blank">ht.Shape</a>&nbsp;&nbsp;是极其强大的图元类型，这里绘制漫游路线就是使用其扩展子类&nbsp;ht.Polyline&nbsp;，绘制一条三维空间管道，然后通过获取该路径上的点来不断设置&nbsp;eye&nbsp;就行了。代码如下：</p>
+<p>&nbsp;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:false;">// 漫游动画
+roamingAnim() {
+    // polyline
+    let polyline = this.main.g3d.dm().getDataByTag("polyline");
+    this.main.anim = ht.Default.startAnim({
+        duration: 15000,
+        easing: t =&gt; {
+            return t;
+        },
+        finishFunc: () =&gt; {
+        }, // 动画结束后调用的函数。
+        action: (v, t) =&gt; {
+            let length = this.main.g3d.getLineLength(polyline),
+                offset = this.main.g3d.getLineOffset(polyline, length * v),
+                point = offset.point,
+                px = point.x,
+                py = point.y,
+                pz = point.z;
+                this.main.g3d.setEye(
+                    px ,
+                    py ,
+                    pz
+                );
+                this.main.g3d.setCenter(0, 0, 0);
+        }
+    });
+}</pre>
+</div>
+<p><strong>4.工程情况</strong></p>
+<p>&nbsp;<img title="工程情况示意图" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216105845737-1457224724.png" alt="工程情况示意图" width="550" data-mce-selected="1"></p>
+<p>该页面主要展示了工程情况：大桥（<a href="https://hightopo.com/demo/Bridge3d/" target="_blank">戳</a>）、盾构作业（<a href="https://hightopo.com/demo/fan3d-magic/" target="_blank">戳</a>）、海底隧道（<a href="https://hightopo.com/demo/tunnel2/index.html" target="_blank">戳</a>）。</p>
+<p>至此，该&nbsp;demo&nbsp;的功能点就介绍完了。</p>
+<p>&nbsp;<img title="厦门吕厝路面塌陷图" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216105952812-863979399.png" alt="厦门吕厝路面塌陷图" width="550" data-mce-selected="1"></p>
+<p><img title="江苏盐城化工厂爆炸图" src="https://img2018.cnblogs.com/common/1496396/201912/1496396-20191216110006376-1682060184.png" alt="江苏盐城化工厂爆炸图" width="550" data-mce-selected="1"></p>
+<p>&nbsp;</p>
+<p>图一，12月12日晚，厦门地铁2号线吕厝路口配套的物业开发地块施工现场发生塌陷，所幸没有造成人员伤亡，事故原因疑似管道破裂导致，水流将路基中的稳定土层掏空，加上路面上的汽车压力，导致路面坍塌。</p>
+<p>图二，3月21日下午14:48左右，位于响水县生态化工园区的化工厂发生爆炸。近年来，多加化工厂爆炸，所造成的生命、财产损失不可估量。</p>
+<p>一场场事故触目惊心，时刻提醒着我们要防患于未然。水是人类生活的源泉而随着城市的发展水污染问题也越来越严重，水资源监管和治理成为城市发展的一大困扰，水质监控不及时、水灾预警不及时更是直接关系到民生问题。而智慧水务的发展则能非常及时、准确的解决问题。假如有比较好的监控预警系统，这些事故发生的可能性将大大降低。后续会再写些关于智慧水务的文章，也会再拓展应急预案的场景案例。</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+	</div>
+	
+	<div class="postfoot">
+		posted on 
+<span id="post-date">2020-02-21 10:10</span>&nbsp;
+<a href="https://www.cnblogs.com/xhload3d/">xhload3d</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12340372" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12340372);return false;">收藏</a>
+	</div>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 171723, cb_blogApp = 'xhload3d', cb_blogUserGuid = '99a30dc7-3165-e311-8d02-90b11c0b17d6';
+    var cb_entryId = 12340372, cb_entryCreatedDate = '2020-02-21 10:10', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div class="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 xhload3d
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+
+
+    
+</body>
+</html>

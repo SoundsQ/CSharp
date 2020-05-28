@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="TCP/IP详解系列，关于tcp拥塞控制和数据流的地方讲的不细致，或许是涉及概念/算法太多，作者略去了一些对初学者来说比较陌生的细节吧。比如SWS未说明是什么就开始介绍其避免方法，还和nagle扯在了" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>糊涂窗口综合症和Nagle算法 - aitao - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/thinkinside/bundle-thinkinside.min.css?v=g9BhPHSvbBYsBrKRm8mptAFcq19OSA8tvN0H3884GYw" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/thinkinside/bundle-thinkinside-mobile.min.css?v=-99kdknJAJsoRA0UeBwKu6WHa3LvEP4487GKBNHpHoI" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhaoyl/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhaoyl/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhaoyl/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 115490;
+        var currentBlogApp = 'zhaoyl';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'ThinkInside';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/zhaoyl/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhaoyl/">Just Love U</a>
+</h1>
+<h2>
+學而不思则罔，真理越辯越明
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhaoyl/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/aitao">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhaoyl/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+121&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+59</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhaoyl/archive/2012/09/20/2695799.html">糊涂窗口综合症和Nagle算法</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>　　TCP/IP详解系列，关于tcp拥塞控制和数据流的地方讲的不细致，或许是涉及概念/算法太多，作者略去了一些对初学者来说比较陌生的细节吧。比如SWS未说明是什么就开始介绍其避免方法，还和nagle扯在了一起，直觉告诉我二者一定有猫腻，边搜索一下，果然很有收获。今天贴在这里，分享给大家。&nbsp;</p>
+<p><strong>　　关键字：糊涂窗口综合症 &nbsp;nagle算法 &nbsp;延迟ACK/clark算法 &nbsp; CORK选项</strong></p>
+<p><strong style="line-height: 1.5;">第一部分&nbsp;</strong><span style="font-family: 黑体;"><strong>糊涂窗口综合症</strong></span></p>
+<p>　　当发送端应用进程产生数据很慢、或接收端应用进程处理接收缓冲区数据很慢，或二者兼而有之；就会使应用进程间传送的报文段很小，特别是有效载荷很小。 极端情况下，有效载荷可能只有1个字节；而传输开销有40字节(20字节的IP头+20字节的TCP头) 这种现象就叫糊涂窗口综合症。</p>
+<p><span style="font-family: 黑体;"><strong>发送端求解（negle）</strong></span></p>
+<p>　　如果发送端为产生数据很慢的应用程序服务(典型的有telnet应用)，例如，一次产生一个字节。这个应用程序一次将一个字节的数据写入发送端的TCP的缓存。如果发送端的TCP没有特定的指令，它就产生只包括一个字节数据的报文段。结果有很多41字节的IP数据报就在互连网中传来传去。解决的方法是防止发送端的TCP逐个字节地发送数据。必须强迫发送端的TCP收集数据，然后用一个更大的数据块来发送。发送端的TCP要等待多长时间呢？如果它等待过长，它就会使整个的过程产生较长的时延。如果它的等待时间不够长，它就可能发送较小的报文段，于是，Nagle找到了一个很好的解决方法，发明了Nagle算法。而他选择的等待时间是一个RTT,即下个ACK来到时。</p>
+<p><span style="font-family: 黑体;"><strong>接收端求解（delay-ack）</strong></span></p>
+<p>　　接收端的TCP可能产生糊涂窗口综合症，如果它为消耗数据很慢的应用程序服务，例如，一次消耗一个字节。假定发送应用程序产生了1000字节的数据块，但接收应用程序每次只吸收1字节的数据。再假定接收端的TCP的输入缓存为4000字节。发送端先发送第一个4000字节的数据。接收端将它存储在其缓存中。现在缓存满了。它通知窗口大小为零，这表示发送端必须停止发送数据。接收应用程序从接收端的TCP的输入缓存中读取第一个字节的数据。在入缓存中现在有了1字节的空间。接收端的TCP宣布其窗口大小为1字节，这表示正渴望等待发送数据的发送端的TCP会把这个宣布当作一个好消息，并发送只包括一个字节数据的报文段。这样的过程一直继续下去。一个字节的数据被消耗掉，然后发送只包含一个字节数据的报文段。</p>
+<p>　　对于这种糊涂窗口综合症，即应用程序消耗数据比到达的慢，有两种建议的解决方法：<br />　　1） Clark解决方法</p>
+<p>&nbsp; &nbsp; &nbsp; Clark解决方法是只要有数据到达就发送确认，但宣布的窗口大小为零，直到或者缓存空间已能放入具有最大长度的报文段，或者缓存空间的一半已经空了。<br />　　2 ）延迟确认ACK </p>
+<p>&nbsp; &nbsp; &nbsp; 这表示当一个报文段到达时并不立即发送确认。接收端在确认收到的报文段之前一直等待，直到入缓存有足够的空间为止。延迟的确认防止了发送端的TCP滑动其窗口。当发送端的TCP发送完其数据后，它就停下来了。这样就防止了这种症状。迟延的确认还有另一个优点：它减少了通信量。接收端不需要确认每一个报文段。但它也有一个缺点，就是迟延的确认有可能迫使发送端重传其未被确认的报文段。可以用协议来平衡这个优点和缺点，例如现在定义了确认的延迟不能超过500毫秒。</p>
+<p>&nbsp;</p>
+<p><span style="font-family: arial; color: #000000;"><strong>第二部分：治疗办法</strong></span></p>
+<p><span style="font-family: arial; color: #000000;"><strong>　　 2.1 nagle算法</strong></span></p>
+<p><span style="color: #333333; font-family: arial;">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;TCP/IP协议中，无论发送多少数据，总是要在数据前面加上协议头，同时，对方接收到数据，也需要发送ACK表示确认。为了尽可能的利用网络带宽，TCP总是希望尽可能的发送足够大的数据。（一个连接会设置MSS参数，因此，TCP/IP希望每次都能够以MSS尺寸的数据块来发送数据）。</span><span><span style="color: #333333;">Nagle算法就是为了尽可能发送大块数据，避免网络中充斥着许多小数据块。</span><span><br />&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<span><span style="color: #800080;">N</span><span style="color: #800080;">agle算法的基本定义是</span></span><span style="color: #800080;"><strong>任意时刻，最多只能有一个未被确认的小段</strong><span>。 所谓&ldquo;小段&rdquo;，指的是小于MSS尺寸的数据块，所谓&ldquo;未被确认&rdquo;，是指一个数据块发送出去后，没有收到对方发送的ACK确认该数据已收到</span></span></span><span><span style="color: #800080;">。</span><br /><span>&nbsp;&nbsp; &nbsp;<span style="color: #333333;">&nbsp; &nbsp; 从Nagle算法生效情况的补集，可以侧面理解其本质，<span>参考tcp_output.c文件里tcp_nagle_check函数：</span></span></span></span></span></p>
+<p><span style="color: #333333;">&nbsp;&nbsp; &nbsp; &nbsp;（1）如果包长度达到MSS，则允许发送；</span></p>
+<p><span style="color: #333333;">&nbsp;&nbsp; &nbsp; &nbsp;（2）如果该包含有FIN，则允许发送；</span></p>
+<p><span style="color: #333333;">&nbsp;&nbsp; &nbsp; &nbsp;（3）设置了TCP_NODELAY选项（意在禁止nagle），则允许发送；</span></p>
+<p>
+<span style="color: #333333;">&nbsp;&nbsp; &nbsp; &nbsp;（4）未设置TCP_CORK选项时，若所有发出去的小数据包（包长度小于MSS）均被确认，则允许发送；</span>&nbsp;</p>
+<p><span style="color: #333333;">&nbsp;&nbsp; &nbsp; &nbsp;（5）上述条件都未满足，但发生了超时（一般设置延迟ACK，一般为200ms），则立即发送。</span></p>
+<p><span style="color: #333333;">　　 通常我们比较关注的是情况(1)和(5)。</span></p>
+<p>&nbsp;<span><span>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #0000ff;">Nagle算法只允许一个未被ACK的包存在于网络，它并不管包的大小，因此它事实上就是一个扩展的停-等协议，只不过它是基于包停-等的，而不是基于字节停-等的</span></span></span><span style="color: #0000ff;"><span>。</span><span>Nagle算法完全由TCP协议的ACK机制决定，这会带来一些问题，比如如果对端ACK回复很快的话，Nagle事实上不会拼接太多的数据包，虽然避免了网络拥塞，网络总体的利用率依然很低。<span style="color: #000000;">另外，他是一个自适应的方法，读者可以自己按上述规则试验一下。</span></span></span><span style="color: #0000ff;">&nbsp;</span></p>
+<p><span style="font-family: arial;">&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #333333;"><span style="color: #ff0000;">&nbsp;Nagle算法是silly window syndrome(SWS)预防算法的一个半集，预防SWS不止nagle算法一个途径。</span>SWS算法预防发送少量的数据，<span>Nagle算法是其在发送方的实现，而接收方要做的时不要通告缓冲空间的很小增长，不通知小窗口，除非</span>缓冲区空间有显著的增长。这里显著的增长定义为完全大小的段（MSS）或增长到大于最大窗口的一半。</span><br /><br /><span style="color: #0000ff;">注意</span>：</span><span><span style="color: #333333;">BSD的实现是允许在空闲链接上发送大的写操作剩下的最后的小段，也就是说，当超过1个MSS数据发送时，内核先依次发送完n个MSS的数据包，然后再发送尾部的小数据包，其间不再延时等待。（假设网络不阻塞且接收窗口足够大）</span></span></p>
+<p><span style="font-family: 黑体; font-size: 14px;"><strong><span style="color: #333333;">&nbsp; &nbsp; TCP_NODELAY 选项</span></strong></span></p>
+<p><span style="color: #333333; font-family: arial;"><span>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;默认情况下，发送数据采用Nagle 算法。这样虽然提高了网络吞吐量，但是实时性却降低了，在一些交互性很强的应用程序来说是不允许的，使用TCP_NODELAY选项可以禁</span>止Negale 算法。</span><span style="font-family: arial;"><span style="color: #333333;">此时，应用程序向内核递交的每个数据包都会立即发送出去。</span><span style="color: #0000ff;">需要注意的是，虽然禁止了Negale 算法，但网络的传输仍然受到TCP确认延迟机制的影响。</span></span></p>
+<p><span style="font-family: arial;"><br /></span><span style="font-family: arial;"><span style="font-size: 13px;"><strong><span style="color: #333333;">&nbsp;相关：linux环境下的TCP_CORK 选项</span></strong></span></span><span style="font-size: 13px;">&nbsp;</span></p>
+<p>
+<span style="font-family: arial;"><span style="color: #333333;"><span>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;所谓的</span><span>CORK</span><span>就是塞子的意思，形象地理解就是用</span><span>CORK</span><span>将连接塞住，使得数据先不发出去，等到拔去塞子后再发出去。设置该选项后，内核会尽力把小数据包拼接成一个大的数据包（一个MTU）再发送出去，当然若一定时间后（一般为200ms，该值尚待确认），内核仍然没有组合成一个MTU时也必须发送现有的数据（不可能让数据一直等待吧）。</span><br /><span>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;然而，TCP_CORK的实现可能并不像你想象的那么完美，CORK并不会将连接完全塞住。内核其实并不知道应用层到底什么时候会发送第二批数据用于和第一批数据拼接以达到MTU的大小，因此内核会给出一个时间限制，在该时间内没有拼接成一个大包（努力接近MTU）的话，内核就会无条件发送。</span></span><span style="color: #0000ff;">也就是说若应用层程序发送小包数据的间隔不够短时，<span>TCP_CORK就没有一点作用，反而失去了数据的实时性（每个小包数据都会延时一定时间再发送）。</span></span><br /><br /><span style="color: #333333;"><span style="font-size: 13px;"><strong>Nagle算法与</strong></span><span style="font-size: medium;"><strong><span style="font-size: 13px;">CORK算法区别</span></strong></span></span></span></p>
+<p><span style="font-family: arial; font-size: 14px;"><span style="color: #333333;">　　Nagle算法的初衷：避免发送大量的小包，防止小包泛滥于网络，理想情况下，对于一个TCP连接而言，网络上每次只能一个小包存在。它更多的是端到端意义上的优化。<br />　　CORK算法的初衷：提高网络利用率，理想情况下，完全避免发送小包，仅仅发送满包以及不得不发的小包。</span></span></p>
+<p>　　很多人都把Nagle算法的目的理解为&ldquo;提高网络利用率&rdquo;，事实上，Nagle算法所谓的&ldquo;提高网络利用率&rdquo;只是它的一个副作用(Side effect...)，Nagle算法的主旨在于&ldquo;避免发送&lsquo;大量&rsquo;的小包&rdquo;。Nagle算法并没有阻止发送小包，它只是阻止了发送大量的小包！诚然，发送大量的小包是降低了网络利用率，但是，发送少量必须发送的小包也是对网络利用率的降低，想彻底提高网络利用率，为嘛不直接阻止小包发送呢？不管是大量小包还是少量小包，甚至一个小包也不让发送，这才是提高网络利用率的正解！是的，TCP_CORK就是做这个的。所以有人说，CORK选项是Nagle的增强，而实际上，它们是完全不同的两回事，初衷不同。</p>
+<p><span style="color: #333333;">　　Nagle算法和CORK算法着眼点不一样，</span><span style="color: #0000ff;">Nagle算法主要避免网络因为太多的小包（协议头的比例非常之大）而拥塞，而CORK算法则是为了提高网络的利用率，使得总体上协议头占用的比例尽可能的小</span><span style="font-family: arial; line-height: 1.5;">。</span><span style="color: #333333;">如此看来这二者在避免发送小包上是一致的，在用户控制的层面上，Nagle算法完全不受用户socket的控制，你只能简单的设置TCP_NODELAY而禁用它，CORK算法同样也是通过设置或者清除TCP_CORK使能或者禁用之，然而Nagle算法关心的是网络拥塞问题，只要所有的ACK回来则发包，而CORK算法却可以关心内容，在前后数据包发送间隔很短的前提下（很重要，否则内核会帮你将分散的包发出），即使你是分散发送多个小数据包，你也可以通过使能CORK算法将这些内容拼接在一个包内，如果此时用Nagle算法的话，则可能做不到这一点。</span></p>
+<p><span style="font-family: 黑体;"><strong><span style="line-height: 1.5; color: #333333;">&nbsp; &nbsp; 2.2 延迟ACK</span></strong></span></p>
+<p><span style="color: #333333;"><span>&nbsp; &nbsp; &nbsp; &nbsp; 这里要说明一下，</span><span>Nagle算法和延迟ACK作用在方向相反的数据包和针对该数据包的确认包上，因此它们的作用力会相悖，结果就是谁也不能发包。就像一根绳子上拴两只青蛙一样，被对方牵制谁也跑不了！关键点在于，小包的发送依赖于ACK，然而延迟ACK阻止了ACK的即时发送，形成了僵持状态。本来只是为了减少网络上小包的数量(再次强调Nagle算法以及延迟ACK的目的，注意，糊涂窗口综合症只是网络上小包泛滥的原因之一！)，却人为引入了大量的延迟！</span></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: arial;"><span><span style="color: #333333;">后记：文章是2013年9月份找工作时现学现卖写的，不知不觉网络上已经很多人引用了。今天工作中涉及到类似知识，再整理完善一遍~</span></span></span></p>
+<p><span style="font-family: arial;"><span><span style="color: #333333;">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　2014年03月20日</span></span></span></p>
+<p><span style="font-family: arial;"><span><span style="color: #333333;">参考文献</span></span></span></p>
+<p><span style="font-family: arial;"><span><span style="color: #333333;">《<a title="zz" href="http://blog.csdn.net/dog250/article/details/21303679">再次谈谈TCP的Nagle算法与TCP_CORK选项</a>》</span></span></span></p>
+<p><a title="qq" href="http://blog.csdn.net/turkeyzhou/article/details/6764389"><span style="font-family: arial;"><span style="color: #333333;">《延迟问题实测》</span></span></a></p>
+<p><span style="font-family: arial;"><span style="color: #333333;">《tcp/ip详解卷2》 &nbsp;24章　TCP 传输控制协议</span></span></p>
+<p><span style="font-family: arial;"><span style="color: #333333;">《<a title="xx" href="http://www.cnblogs.com/tangr206/articles/3284203.html">连续发送多份小数据时40ms延迟问题</a>》</span></span></p>
+<p><span style="font-family: arial;"><span style="color: #333333;">&nbsp;《so_linger选项关闭timewait》http://www.xuebuyuan.com/1783143.html</span></span></p>
+<p><span style="font-family: arial;"><span style="color: #333333;">&nbsp; 《nginx实现的应用层linger选项》http://blog.csdn.net/wangpengqi/article/details/17245889 以及</span></span><span style="font-family: arial;"><span style="color: #333333;">http://blog.csdn.net/fangru/article/details/9024759</span></span></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-09-20 19:12</span>&nbsp;
+<a href="https://www.cnblogs.com/zhaoyl/">aitao</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2695799" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2695799);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 115490, cb_blogApp = 'zhaoyl', cb_blogUserGuid = '03fd6403-558b-e111-aa3f-842b2b196315';
+    var cb_entryId = 2695799, cb_entryCreatedDate = '2012-09-20 19:12', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 aitao
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

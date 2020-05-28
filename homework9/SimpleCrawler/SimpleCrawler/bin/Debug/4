@@ -1,0 +1,564 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="多线程高并发编程" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>多线程高并发编程(3) -- ReentrantLock源码分析AQS - 码猿手 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/huangrenhui/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/huangrenhui/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/huangrenhui/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 427735;
+        var currentBlogApp = 'huangrenhui';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/huangrenhui/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/huangrenhui/">码猿手</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/huangrenhui/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A0%81%E7%8C%BF%E6%89%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/huangrenhui/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+19&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+0</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/huangrenhui/p/12712475.html">多线程高并发编程(3) -- ReentrantLock源码分析AQS</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        多线程高并发编程
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h2>背景：</h2>
+<h3><span style="font-family: 宋体;">　　AbstractQueuedSynchronizer(AQS)</span></h3>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> AbstractQueuedSynchronizer
+    </span><span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractOwnableSynchronizer
+    </span><span style="color: #0000ff;">implements</span> java.io.Serializable</pre>
+</div>
+<ul>
+<li>
+<h3><span style="font-family: 宋体;">介绍</span></h3>
+</li>
+</ul>
+<div class="block"><ol>
+<li><span style="font-size: 15px; font-family: 宋体;">提供一个框架，用于实现依赖<strong><span style="color: #ff0000;">先进先出</span></strong>（FIFO）等待队列的阻塞锁和相关同步器（信号量，事件等）。 该类被设计为大多数类型的同步器的有用依据，这些同步器依赖于<strong><span style="color: #ff0000;">单个原子<code>int</code>值来表示状态</span></strong>。 子类必须定义改变此状态的受保护方法，以及根据该对象被获取或释放来定义该状态的含义。 给定这些，这个类中的其他方法执行所有排队和阻塞机制。 子类可以保持其他状态字段，但只<strong><span style="color: #ff0000;">以原子方式更新<code>int</code>使用方法操纵值<span style="color: #ff0000;"><code>getState</code></span><span style="color: #ff0000;"><code>()</code></span> ， <span style="color: #ff0000;"><code>setState(int)</code></span>和<span style="color: #ff0000;"><code>compareAndSetState(int, int)</code></span>被跟踪相对于同步</span></strong>。</span></li>
+<li><span style="font-size: 15px; font-family: 宋体;">子类应定义为非公共内部助手类，用于实现其封闭类的同步属性。 <strong><code>AbstractQueuedSynchronizer</code></strong>类不实现任何同步接口。 相反，它定义了一些方法，如<strong><code>acquireInterruptibly(int)</code></strong> ，可以通过具体的锁和相关同步器来调用适当履行其公共方法。</span></li>
+<li><span style="font-size: 15px; font-family: 宋体;">此类支持默认<span style="color: #ff0000;"><strong><em>独占</em>模式</strong></span>和<span style="color: #ff0000;"><strong><em>共享</em>模式</strong></span>。【<strong>使用模板模式来定义是独占还是共享模式</strong>】 当以独占模式获取时，尝试通过其他线程获取不能成功。 多线程获取的共享模式可能（但不需要）成功。 除了在机械意义上，这个类不理解这些差异，当共享模式获取成功时，下一个等待线程（如果存在）也必须确定它是否也可以获取。 在不同模式下等待的线程共享相同的FIFO队列。 通常，实现子类只支持这些模式之一，但是两者都可以在<strong><code>ReadWriteLock</code></strong>中发挥作用 。 仅支持独占或仅共享模式的子类不需要定义支持未使用模式的方法。</span></li>
+<li><span style="font-size: 15px; font-family: 宋体;">这个类定义的嵌套<strong><code>AbstractQueuedSynchronizer</code></strong><strong><code>.</code></strong><strong><code>ConditionObject</code></strong>可用于作为一类<strong><code>Condition</code></strong>由子类支持独占模式用于该方法的实施<strong><code>isHeldExclusively()</code></strong>份报告是否同步排他相对于保持在当前线程，方法<strong><code>release(int)</code></strong>与当前调用<strong><code>getState()</code></strong>值完全释放此目的，和<strong><code>acquire(int)</code></strong> ，给定此保存的状态值，最终将此对象恢复到其先前获取的状态。 <strong><code>AbstractQueuedSynchronizer</code></strong>方法将创建此类条件，因此如果不能满足此约束，请勿使用该约束。 <code><strong>AbstractQueuedSynchronizer</strong>.<strong>ConditionObject</strong></code>的行为当然取决于其同步器实现的语义。</span></li>
+<li><span style="font-size: 15px; font-family: 宋体;">该类为内部队列提供检查，检测和监控方法，以及条件对象的类似方法。 这些可以根据需要导出到类中，使用<strong><code>AbstractQueuedSynchronizer</code></strong>进行同步机制。</span></li>
+<li><span style="font-size: 15px; font-family: 宋体;">此类的序列化仅存储底层原子整数维持状态，因此反序列化对象具有空线程队列。 需要可序列化的典型子类将定义一个<strong><code>readObject</code></strong>方法，可以将其恢复为<strong><code>readObject</code></strong>时的已知初始状态。</span></li>
+</ol>
+<ul class="blockList">
+<li class="blockList">
+<div class="block">
+<h3>用法</h3>
+<p><span style="font-family: 宋体; font-size: 15px;">使用这个类用作同步的基础上，重新定义以下方法，【即<strong><span style="color: #ff0000;">在同步器中定义内部类重写下面的方法】</span></strong>，如适用，通过检查和/或修改使用所述同步状态<strong><code>getState()</code></strong> ，<strong> <code>setState(int)</code></strong>或<strong><code>compareAndSetState(int,</code></strong><strong><code> int)【通过这三个方法来保证原子性和线程安全性】</code></strong>&nbsp;：</span></p>
+<ul>
+<li><span style="font-family: 宋体; font-size: 15px;"><strong><a><code>tryAcquire(int)独占模式获取锁</code></a></strong></span></li>
+<li><span style="font-family: 宋体; font-size: 15px;"><strong><a><code>tryRelease(int)独占模式释放锁</code></a></strong></span></li>
+<li><span style="font-family: 宋体; font-size: 15px;"><strong><a><code>tryAcquireShared(int)共享模式获取锁</code></a></strong></span></li>
+<li><span style="font-family: 宋体; font-size: 15px;"><strong><a><code>tryReleaseShared(int)共享模式释放锁</code></a></strong></span></li>
+<li><span style="font-family: 宋体; font-size: 15px;"><strong><a><code>isHeldExclusively()是否是独占式</code></a></strong></span></li>
+</ul>
+<span style="font-family: 宋体; font-size: 15px;">每个这些方法默认抛出<strong><code>UnsupportedOperationException</code></strong>。 这些方法的实现必须是线程安全的，通常应该是短的而不是阻止的。 定义这些方法是<em>唯一</em>支持使用此类的方法。 <strong>所有其他方法都被声明为<code>final</code></strong> ，因为它们不能独立变化。</span></div>
+</li>
+<li class="blockList">
+<h3><span style="font-family: 宋体; font-size: 15px;"><span style="font-family: 宋体; font-size: 15px;">看下面的源码分析前可先观看<a href="https://www.cnblogs.com/huangrenhui/p/12711778.html" target="_blank">多线程高并发编程(2) -- 可重入锁介绍和自定义</a></span></span></h3>
+</li>
+</ul>
+<h2 class="blockList">一.ReentrantLock的lock和unlock源码解析</h2>
+<ul>
+<li>
+<h3><span style="font-size: 15px;">lock流程：</span></h3>
+</li>
+</ul>
+<ol>
+<li><span style="font-family: 宋体; font-size: 15px;">调用同步器Sync的抽象方法lock，由公平锁FairSync实现</span></li>
+<li><span style="font-family: 宋体; font-size: 15px;">调用AQS的acquire获取锁</span><ol>
+<li><span style="font-family: 宋体; font-size: 15px;"><span style="font-family: 宋体; font-size: 15px;">尝试获取锁：公平锁FairSync的</span></span>tryAcquire<ol>
+<li><span style="font-family: 宋体; font-size: 15px;">第一次获取锁，若队列没有前节点和设置状态成功，存储当前线程，返回true，表示获取成功；</span></li>
+<li><span style="font-family: 宋体; font-size: 15px;">如果是重入获取，锁持有数量+1；</span></li>
+</ol></li>
+<li><span style="font-size: 15px; font-family: 宋体;">获取锁失败，把当前线程加入等待队列中，并对等待队列进行阻塞，不断竞争获取锁：acquireQueued遍历等待队列addWaiter，若有头节点则从队列中取出来，若没有则进行中断；</span></li>
+</ol></li>
+</ol>
+<ul>
+<li>
+<h3><span style="font-size: 15px;">unlock流程：</span></h3>
+</li>
+</ul>
+<ol>
+<li><span style="font-size: 15px; font-family: 宋体;">调用同步器的release方法，有AQS实现；</span></li>
+<li><span style="font-family: 宋体; font-size: 15px;">tryRelease释放锁，由Sync实现</span><ol>
+<li><span style="font-family: 宋体; font-size: 15px;">锁数量-1；</span></li>
+<li><span style="font-family: 宋体; font-size: 15px;">当前线程和保存的线程不一致抛出异常；</span></li>
+<li><span style="font-family: 宋体;"><span style="font-size: 15px;">锁数量为0则进行释放锁，把独占线程设置为null，修改状态；</span></span><span style="color: #008080;">&nbsp;</span></li>
+</ol></li>
+</ol>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">  1</span> <span style="color: #008000;">//</span><span style="color: #008000;">===========================ReentrantLock源码===============================</span>
+<span style="color: #008080;">  2</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ReentrantLock <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Lock, java.io.Serializable {
+</span><span style="color: #008080;">  3</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> Sync sync;<span style="color: #008000;">//</span><span style="color: #008000;">同步器</span>
+<span style="color: #008080;">  4</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> lock() {<span style="color: #008000;">//</span><span style="color: #008000;">获取锁</span>
+<span style="color: #008080;">  5</span>             sync.lock();<span style="color: #008000;">//</span><span style="color: #008000;">调用同步器Sync的lock，由FairSync实现</span>
+<span style="color: #008080;">  6</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">  7</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> unlock() {<span style="color: #008000;">//</span><span style="color: #008000;">使用锁</span>
+<span style="color: #008080;">  8</span>         sync.release(1);<span style="color: #008000;">//</span><span style="color: #008000;">调用同步器的release，由AQS实现</span>
+<span style="color: #008080;">  9</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 10</span> 
+<span style="color: #008080;"> 11</span> 
+<span style="color: #008080;"> 12</span>     <span style="color: #008000;">//</span><span style="color: #008000;">内部类，同步器继承AQS，实现tryRelease释放锁</span>
+<span style="color: #008080;"> 13</span>     <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span> Sync <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractQueuedSynchronizer{
+</span><span style="color: #008080;"> 14</span>         <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">void</span> lock();<span style="color: #008000;">//</span><span style="color: #008000;">获取锁抽象方法，由FairSync实现
+</span><span style="color: #008080;"> 15</span> <span style="color: #008000;">//</span><span style="color: #008000;">===========================释放锁===============================</span>
+<span style="color: #008080;"> 16</span>         <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> tryRelease(<span style="color: #0000ff;">int</span><span style="color: #000000;"> releases) {
+</span><span style="color: #008080;"> 17</span>             <span style="color: #0000ff;">int</span> c = getState() - releases;<span style="color: #008000;">//</span><span style="color: #008000;">锁数量-1
+</span><span style="color: #008080;"> 18</span>             <span style="color: #008000;">//</span><span style="color: #008000;">当前线程和保存的线程不一致</span>
+<span style="color: #008080;"> 19</span>             <span style="color: #0000ff;">if</span> (Thread.currentThread() !=<span style="color: #000000;"> getExclusiveOwnerThread())
+</span><span style="color: #008080;"> 20</span>                 <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> IllegalMonitorStateException();
+</span><span style="color: #008080;"> 21</span>             <span style="color: #0000ff;">boolean</span> free = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 22</span>             <span style="color: #0000ff;">if</span> (c == 0) {<span style="color: #008000;">//</span><span style="color: #008000;">持有的锁数量为0</span>
+<span style="color: #008080;"> 23</span>                 free = <span style="color: #0000ff;">true</span>;<span style="color: #008000;">//</span><span style="color: #008000;">释放锁</span>
+<span style="color: #008080;"> 24</span>                 setExclusiveOwnerThread(<span style="color: #0000ff;">null</span>);<span style="color: #008000;">//</span><span style="color: #008000;">当前独占线程为null</span>
+<span style="color: #008080;"> 25</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;"> 26</span>             setState(c);<span style="color: #008000;">//</span><span style="color: #008000;">设置状态</span>
+<span style="color: #008080;"> 27</span>             <span style="color: #0000ff;">return</span><span style="color: #000000;"> free;
+</span><span style="color: #008080;"> 28</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;"> 29</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 30</span> 
+<span style="color: #008080;"> 31</span>     <span style="color: #008000;">//</span><span style="color: #008000;">内部类，公平锁继承同步器，实现lock方法</span>
+<span style="color: #008080;"> 32</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">class</span> FairSync <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Sync {
+</span><span style="color: #008080;"> 33</span>             <span style="color: #008000;">//</span><span style="color: #008000;">===========================获取锁===============================</span>
+<span style="color: #008080;"> 34</span>             <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> lock() {
+</span><span style="color: #008080;"> 35</span>                 acquire(1);<span style="color: #008000;">//</span><span style="color: #008000;">调用AQS的acquire</span>
+<span style="color: #008080;"> 36</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;"> 37</span>             <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> tryAcquire(<span style="color: #0000ff;">int</span><span style="color: #000000;"> acquires) {
+</span><span style="color: #008080;"> 38</span>                 <span style="color: #0000ff;">final</span> Thread current = Thread.currentThread();<span style="color: #008000;">//</span><span style="color: #008000;">获得当前线程</span>
+<span style="color: #008080;"> 39</span>                 <span style="color: #008000;">/**</span><span style="color: #008000;">getState是AQS的Node的waitStatus，其值有
+</span><span style="color: #008080;"> 40</span> <span style="color: #008000;">                *CANCELLED =  1
+</span><span style="color: #008080;"> 41</span> <span style="color: #008000;">                *SIGNAL    = -1
+</span><span style="color: #008080;"> 42</span> <span style="color: #008000;">                *CONDITION = -2
+</span><span style="color: #008080;"> 43</span> <span style="color: #008000;">                *PROPAGATE = -3
+</span><span style="color: #008080;"> 44</span>                 <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 45</span>                 <span style="color: #0000ff;">int</span> c =<span style="color: #000000;"> getState();
+</span><span style="color: #008080;"> 46</span>                 <span style="color: #008000;">//</span><span style="color: #008000;">c初始值为0，0表示不是以上的状态；hasQueuedPredecessors之前是否有节点，
+</span><span style="color: #008080;"> 47</span>                 <span style="color: #008000;">//</span><span style="color: #008000;">如果是true表示这个线程的前面还有节点应该让前面的节点先获取锁，当前线程获取失败；
+</span><span style="color: #008080;"> 48</span>                 <span style="color: #008000;">//</span><span style="color: #008000;">【非公平锁少了hasQueuedPredecessors这个判断】
+</span><span style="color: #008080;"> 49</span>                 <span style="color: #008000;">//</span><span style="color: #008000;">compareAndSetState CAS比较，设置当前状态为1；setExclusiveOwnerThread当前线程设置为独占线程</span>
+<span style="color: #008080;"> 50</span>                 <span style="color: #0000ff;">if</span> (c == 0<span style="color: #000000;">) {
+</span><span style="color: #008080;"> 51</span>                     <span style="color: #0000ff;">if</span> (!hasQueuedPredecessors() &amp;&amp;
+<span style="color: #008080;"> 52</span>                         compareAndSetState(0<span style="color: #000000;">, acquires)) {
+</span><span style="color: #008080;"> 53</span> <span style="color: #000000;">                        setExclusiveOwnerThread(current);
+</span><span style="color: #008080;"> 54</span>                         <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span>;<span style="color: #008000;">//</span><span style="color: #008000;">获取成功</span>
+<span style="color: #008080;"> 55</span> <span style="color: #000000;">                    }
+</span><span style="color: #008080;"> 56</span> <span style="color: #000000;">                }
+</span><span style="color: #008080;"> 57</span>                 <span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (current == getExclusiveOwnerThread()) {<span style="color: #008000;">//</span><span style="color: #008000;">如果是当前线程，表示重入</span>
+<span style="color: #008080;"> 58</span>                     <span style="color: #0000ff;">int</span> nextc = c + acquires;<span style="color: #008000;">//</span><span style="color: #008000;">锁数量+1</span>
+<span style="color: #008080;"> 59</span>                     <span style="color: #0000ff;">if</span> (nextc &lt; 0)<span style="color: #008000;">//</span><span style="color: #008000;">小于0表示溢出</span>
+<span style="color: #008080;"> 60</span>                         <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> Error("Maximum lock count exceeded"<span style="color: #000000;">);
+</span><span style="color: #008080;"> 61</span>                     setState(nextc);<span style="color: #008000;">//</span><span style="color: #008000;">更新状态</span>
+<span style="color: #008080;"> 62</span>                     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span>;<span style="color: #008000;">//</span><span style="color: #008000;">获取成功</span>
+<span style="color: #008080;"> 63</span> <span style="color: #000000;">                }
+</span><span style="color: #008080;"> 64</span>                 <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span>;<span style="color: #008000;">//</span><span style="color: #008000;">获取失败</span>
+<span style="color: #008080;"> 65</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;"> 66</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 67</span> <span style="color: #000000;">}
+</span><span style="color: #008080;"> 68</span> 
+<span style="color: #008080;"> 69</span> 
+<span style="color: #008080;"> 70</span> 
+<span style="color: #008080;"> 71</span> <span style="color: #008000;">//</span><span style="color: #008000;">=============AbstractQueuedSynchronizer源码==============</span>
+<span style="color: #008080;"> 72</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> AbstractQueuedSynchronizer
+</span><span style="color: #008080;"> 73</span>     <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractOwnableSynchronizer
+</span><span style="color: #008080;"> 74</span>     <span style="color: #0000ff;">implements</span><span style="color: #000000;"> java.io.Serializable{
+</span><span style="color: #008080;"> 75</span> <span style="color: #008000;">//</span><span style="color: #008000;">===========================获取锁===============================
+</span><span style="color: #008080;"> 76</span>     <span style="color: #008000;">//</span><span style="color: #008000;">以独占模式获取，忽略中断。通过调用至少一次tryAcquire(int)实现，成功返回。否则线程排队，
+</span><span style="color: #008080;"> 77</span>     <span style="color: #008000;">//</span><span style="color: #008000;">可能会重复阻塞和解除阻塞，直到成功才调用tryAcquire(int)。</span>
+<span style="color: #008080;"> 78</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">void</span> acquire(<span style="color: #0000ff;">int</span> arg) {<span style="color: #008000;">//</span><span style="color: #008000;">FairSync的lock调用
+</span><span style="color: #008080;"> 79</span>             <span style="color: #008000;">//</span><span style="color: #008000;">tryAcquire获取锁；acquireQueued线程加入到了等待队列中，进行阻塞等待，竞争获取锁；
+</span><span style="color: #008080;"> 80</span>             <span style="color: #008000;">//</span><span style="color: #008000;">addWaiter其他线程获取锁失败添加到等待队列中；Node.EXCLUSIVE节点独占，为null</span>
+<span style="color: #008080;"> 81</span>             <span style="color: #0000ff;">if</span> (!tryAcquire(arg) &amp;&amp;
+<span style="color: #008080;"> 82</span> <span style="color: #000000;">                acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+</span><span style="color: #008080;"> 83</span> <span style="color: #000000;">                selfInterrupt();
+</span><span style="color: #008080;"> 84</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 85</span>     <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">boolean</span> tryAcquire(<span style="color: #0000ff;">int</span> arg) {<span style="color: #008000;">//</span><span style="color: #008000;">acquire调用，由FairSync实现</span>
+<span style="color: #008080;"> 86</span>         <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> UnsupportedOperationException();
+</span><span style="color: #008080;"> 87</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 88</span>     <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> acquireQueued(<span style="color: #0000ff;">final</span> Node node, <span style="color: #0000ff;">int</span> arg) {<span style="color: #008000;">//</span><span style="color: #008000;">acquire调用</span>
+<span style="color: #008080;"> 89</span>         <span style="color: #0000ff;">boolean</span> failed = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 90</span>         <span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+</span><span style="color: #008080;"> 91</span>             <span style="color: #0000ff;">boolean</span> interrupted = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 92</span>             <span style="color: #0000ff;">for</span><span style="color: #000000;"> (;;) {
+</span><span style="color: #008080;"> 93</span>                 <span style="color: #0000ff;">final</span> Node p = node.predecessor();<span style="color: #008000;">//</span><span style="color: #008000;">获取前一个节点</span>
+<span style="color: #008080;"> 94</span>                 <span style="color: #0000ff;">if</span> (p == head &amp;&amp; tryAcquire(arg)) {<span style="color: #008000;">//</span><span style="color: #008000;">如果获取的节点为头节点并且获取到锁</span>
+<span style="color: #008080;"> 95</span>                     setHead(node);<span style="color: #008000;">//</span><span style="color: #008000;">当前节点设置为头节点</span>
+<span style="color: #008080;"> 96</span>                     p.next = <span style="color: #0000ff;">null</span>;<span style="color: #008000;">//</span><span style="color: #008000;">头节点下一节点为空，即把当前节点从队列中移除出来</span>
+<span style="color: #008080;"> 97</span>                     failed = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 98</span>                     <span style="color: #0000ff;">return</span><span style="color: #000000;"> interrupted;
+</span><span style="color: #008080;"> 99</span> <span style="color: #000000;">                }
+</span><span style="color: #008080;">100</span>               <span style="color: #008000;">//</span><span style="color: #008000;">当前节点不是头节点，parkAndCheckInterrupt让当前线程处于阻塞等待状态由其他线程唤醒</span>
+<span style="color: #008080;">101</span>                 <span style="color: #0000ff;">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+<span style="color: #008080;">102</span> <span style="color: #000000;">                    parkAndCheckInterrupt())
+</span><span style="color: #008080;">103</span>                     interrupted = <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">104</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">105</span>         } <span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">106</span>             <span style="color: #0000ff;">if</span><span style="color: #000000;"> (failed)
+</span><span style="color: #008080;">107</span> <span style="color: #000000;">                cancelAcquire(node);
+</span><span style="color: #008080;">108</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">109</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">110</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> shouldParkAfterFailedAcquire(Node pred, Node node) {<span style="color: #008000;">//</span><span style="color: #008000;">acquireQueued调用</span>
+<span style="color: #008080;">111</span>         <span style="color: #0000ff;">int</span> ws = pred.waitStatus;<span style="color: #008000;">//</span><span style="color: #008000;">获取前一节点的等待状态</span>
+<span style="color: #008080;">112</span>         <span style="color: #0000ff;">if</span> (ws == Node.SIGNAL)<span style="color: #008000;">//</span><span style="color: #008000;">如果状态为唤醒状态</span>
+<span style="color: #008080;">113</span>             <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">114</span>         <span style="color: #0000ff;">if</span> (ws &gt; 0) {<span style="color: #008000;">//</span><span style="color: #008000;">处于CANCELLED状态</span>
+<span style="color: #008080;">115</span>             <span style="color: #0000ff;">do</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">116</span>                 node.prev = pred = pred.prev;<span style="color: #008000;">//</span><span style="color: #008000;">1.把所有处于CANCELLED状态的节点移除</span>
+<span style="color: #008080;">117</span>             } <span style="color: #0000ff;">while</span> (pred.waitStatus &gt; 0<span style="color: #000000;">);
+</span><span style="color: #008080;">118</span>             pred.next = node;<span style="color: #008000;">//</span><span style="color: #008000;">2.把所有处于CANCELLED状态的节点移除</span>
+<span style="color: #008080;">119</span>         } <span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">120</span>             compareAndSetWaitStatus(pred, ws, Node.SIGNAL);<span style="color: #008000;">//</span><span style="color: #008000;">设置为SIGNAL状态</span>
+<span style="color: #008080;">121</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">122</span>         <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;">123</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">124</span>     <span style="color: #0000ff;">private</span> Node addWaiter(Node mode) {<span style="color: #008000;">//</span><span style="color: #008000;">acquireQueued的参数，在acquire中调用</span>
+<span style="color: #008080;">125</span>         Node node = <span style="color: #0000ff;">new</span> Node(Thread.currentThread(), mode);<span style="color: #008000;">//</span><span style="color: #008000;">创建Node,当前线程指向node</span>
+<span style="color: #008080;">126</span>         Node pred = tail;<span style="color: #008000;">//</span><span style="color: #008000;">前节点指向尾节点【双向链表】</span>
+<span style="color: #008080;">127</span>         <span style="color: #0000ff;">if</span> (pred != <span style="color: #0000ff;">null</span>) {<span style="color: #008000;">//</span><span style="color: #008000;">尾节点不为空</span>
+<span style="color: #008080;">128</span>             node.prev = pred;<span style="color: #008000;">//</span><span style="color: #008000;">当前线程节点指向尾节点</span>
+<span style="color: #008080;">129</span>             <span style="color: #0000ff;">if</span> (compareAndSetTail(pred, node)) {<span style="color: #008000;">//</span><span style="color: #008000;">CAS比较，把当前线程节点更新为尾节点</span>
+<span style="color: #008080;">130</span>                 pred.next = node;<span style="color: #008000;">//</span><span style="color: #008000;">前尾节点的下一节点指向当前尾节点</span>
+<span style="color: #008080;">131</span>                 <span style="color: #0000ff;">return</span><span style="color: #000000;"> node;
+</span><span style="color: #008080;">132</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">133</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">134</span>         enq(node);<span style="color: #008000;">//</span><span style="color: #008000;">如果尾节点为空，把当前节点放到一个初始化节点或添加到节点中做为尾节点</span>
+<span style="color: #008080;">135</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> node;
+</span><span style="color: #008080;">136</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">137</span>     <span style="color: #0000ff;">private</span> Node enq(<span style="color: #0000ff;">final</span> Node node) {<span style="color: #008000;">//</span><span style="color: #008000;">addWaiter调用</span>
+<span style="color: #008080;">138</span>         <span style="color: #0000ff;">for</span><span style="color: #000000;"> (;;) {
+</span><span style="color: #008080;">139</span>             Node t =<span style="color: #000000;"> tail;
+</span><span style="color: #008080;">140</span>             <span style="color: #0000ff;">if</span> (t == <span style="color: #0000ff;">null</span>) { <span style="color: #008000;">//</span><span style="color: #008000;"> 尾节点为空</span>
+<span style="color: #008080;">141</span>                 <span style="color: #0000ff;">if</span> (compareAndSetHead(<span style="color: #0000ff;">new</span> Node()))<span style="color: #008000;">//</span><span style="color: #008000;">创建新节点并维护一个头节点</span>
+<span style="color: #008080;">142</span>                     tail = head;<span style="color: #008000;">//</span><span style="color: #008000;">把当前节点设置为头节点</span>
+<span style="color: #008080;">143</span>             } <span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">144</span>                 node.prev = t;<span style="color: #008000;">//</span><span style="color: #008000;">当前节点指向尾节点</span>
+<span style="color: #008080;">145</span>                 <span style="color: #0000ff;">if</span> (compareAndSetTail(t, node)) {<span style="color: #008000;">//</span><span style="color: #008000;">把当前节点更新为尾节点</span>
+<span style="color: #008080;">146</span>                     t.next = node;<span style="color: #008000;">//</span><span style="color: #008000;">前尾节点的下一节点指向当前尾节点</span>
+<span style="color: #008080;">147</span>                     <span style="color: #0000ff;">return</span><span style="color: #000000;"> t;
+</span><span style="color: #008080;">148</span> <span style="color: #000000;">                }
+</span><span style="color: #008080;">149</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">150</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">151</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">152</span>     <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> selfInterrupt() {<span style="color: #008000;">//</span><span style="color: #008000;">acquire调用</span>
+<span style="color: #008080;">153</span>         Thread.currentThread().interrupt();<span style="color: #008000;">//</span><span style="color: #008000;">当前线程中断</span>
+<span style="color: #008080;">154</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">155</span> <span style="color: #008000;">//</span><span style="color: #008000;">===========================释放锁===============================</span>
+<span style="color: #008080;">156</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">final</span> <span style="color: #0000ff;">boolean</span> release(<span style="color: #0000ff;">int</span> arg) {<span style="color: #008000;">//</span><span style="color: #008000;">ReentrantLock的unlock调用</span>
+<span style="color: #008080;">157</span>         <span style="color: #0000ff;">if</span> (tryRelease(arg)) {<span style="color: #008000;">//</span><span style="color: #008000;">当前线程锁释放成功，唤醒其他线程进行资源的竞争</span>
+<span style="color: #008080;">158</span>             Node h =<span style="color: #000000;"> head;
+</span><span style="color: #008080;">159</span>             <span style="color: #0000ff;">if</span> (h != <span style="color: #0000ff;">null</span> &amp;&amp; h.waitStatus != 0<span style="color: #000000;">)
+</span><span style="color: #008080;">160</span> <span style="color: #000000;">                unparkSuccessor(h);
+</span><span style="color: #008080;">161</span>             <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">162</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">163</span>         <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;">164</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">165</span>     <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">boolean</span> tryRelease(<span style="color: #0000ff;">int</span> arg) {<span style="color: #008000;">//</span><span style="color: #008000;">release调用，由Sync实现</span>
+<span style="color: #008080;">166</span>         <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> UnsupportedOperationException();
+</span><span style="color: #008080;">167</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">168</span> }</pre>
+</div>
+<p>　　备注：公平锁是针对锁的获取而言，如果一个锁是公平的，那么锁的获取顺序就应该符合请求的绝对时间顺序；非公平锁会进行插队获取锁；</p>
+<h2>二.AQS重写锁</h2>
+<h3><span style="font-family: 宋体; font-size: 15px;">流程：</span></h3>
+<ol>
+<li><span style="font-family: 宋体; font-size: 15px;">实现Lock，重写实现方法lock、lockInterruptibly、tryLock、unlock、newCondition；</span></li>
+<li><span style="font-family: 宋体; font-size: 15px;">内部类继承AQS，重写tryAcquire和tryRelease；</span></li>
+</ol>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> MyAQSLock <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Lock{
+</span><span style="color: #008080;"> 2</span>     <span style="color: #0000ff;">private</span><span style="color: #000000;"> MyAQS myAQS;
+</span><span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">class</span> MyAQS <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractQueuedSynchronizer{
+</span><span style="color: #008080;"> 4</span> <span style="color: #000000;">        @Override
+</span><span style="color: #008080;"> 5</span>         <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">boolean</span> tryAcquire(<span style="color: #0000ff;">int</span><span style="color: #000000;"> arg) {
+</span><span style="color: #008080;"> 6</span>             <span style="color: #0000ff;">int</span> state = getState();<span style="color: #008000;">//</span><span style="color: #008000;">获取状态</span>
+<span style="color: #008080;"> 7</span>             Thread thread =<span style="color: #000000;"> Thread.currentThread();
+</span><span style="color: #008080;"> 8</span>             <span style="color: #0000ff;">if</span>(state==0){<span style="color: #008000;">//</span><span style="color: #008000;">线程第一次进来获取，状态为0，表示可以拿到锁</span>
+<span style="color: #008080;"> 9</span>                 <span style="color: #0000ff;">if</span>(compareAndSetState(0,arg)){<span style="color: #008000;">//</span><span style="color: #008000;">更新状态</span>
+<span style="color: #008080;">10</span>                     setExclusiveOwnerThread(Thread.currentThread());<span style="color: #008000;">//</span><span style="color: #008000;">设置为独占线程，其他线程进来进入等待</span>
+<span style="color: #008080;">11</span>                     <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span>;<span style="color: #008000;">//</span><span style="color: #008000;">获取成功</span>
+<span style="color: #008080;">12</span> <span style="color: #000000;">                }
+</span><span style="color: #008080;">13</span>             }<span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span>(getExclusiveOwnerThread()== thread){<span style="color: #008000;">//</span><span style="color: #008000;">重入，存储线程等于当前线程</span>
+<span style="color: #008080;">14</span>                 setState(state+1);<span style="color: #008000;">//</span><span style="color: #008000;">锁数量+1</span>
+<span style="color: #008080;">15</span>                 <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">16</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">17</span>             <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span>;<span style="color: #008000;">//</span><span style="color: #008000;">获取失败</span>
+<span style="color: #008080;">18</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">19</span> 
+<span style="color: #008080;">20</span> <span style="color: #000000;">        @Override
+</span><span style="color: #008080;">21</span>         <span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">boolean</span> tryRelease(<span style="color: #0000ff;">int</span><span style="color: #000000;"> arg) {
+</span><span style="color: #008080;">22</span>             <span style="color: #008000;">//</span><span style="color: #008000;">当前线程不是存储线程</span>
+<span style="color: #008080;">23</span>             <span style="color: #0000ff;">if</span>(Thread.currentThread() !=<span style="color: #000000;"> getExclusiveOwnerThread()){
+</span><span style="color: #008080;">24</span>                 <span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> RuntimeException();
+</span><span style="color: #008080;">25</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">26</span>             <span style="color: #0000ff;">int</span> state = getState()-arg;<span style="color: #008000;">//</span><span style="color: #008000;">锁数量-1</span>
+<span style="color: #008080;">27</span>             <span style="color: #0000ff;">boolean</span> flag = <span style="color: #0000ff;">false</span><span style="color: #000000;">;
+</span><span style="color: #008080;">28</span>             <span style="color: #0000ff;">if</span>(state==0){<span style="color: #008000;">//</span><span style="color: #008000;">锁数量为0</span>
+<span style="color: #008080;">29</span>                 setExclusiveOwnerThread(<span style="color: #0000ff;">null</span>);<span style="color: #008000;">//</span><span style="color: #008000;">独占锁为null，表示可以让其他线程进来竞争获取资源了</span>
+<span style="color: #008080;">30</span>                 flag=<span style="color: #0000ff;">true</span><span style="color: #000000;">;
+</span><span style="color: #008080;">31</span> <span style="color: #000000;">            }
+</span><span style="color: #008080;">32</span>             setState(state);<span style="color: #008000;">//</span><span style="color: #008000;">更新状态</span>
+<span style="color: #008080;">33</span>             <span style="color: #0000ff;">return</span><span style="color: #000000;"> flag;
+</span><span style="color: #008080;">34</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">35</span> 
+<span style="color: #008080;">36</span>         <span style="color: #0000ff;">public</span><span style="color: #000000;"> ConditionObject newConditonObject(){
+</span><span style="color: #008080;">37</span>             <span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConditionObject();
+</span><span style="color: #008080;">38</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">39</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">40</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">41</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> lock() {
+</span><span style="color: #008080;">42</span>         myAQS.acquire(1<span style="color: #000000;">);
+</span><span style="color: #008080;">43</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">44</span> 
+<span style="color: #008080;">45</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">46</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> lockInterruptibly() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> InterruptedException {
+</span><span style="color: #008080;">47</span>         myAQS.acquireInterruptibly(1<span style="color: #000000;">);
+</span><span style="color: #008080;">48</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">49</span> 
+<span style="color: #008080;">50</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">51</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">boolean</span><span style="color: #000000;"> tryLock() {
+</span><span style="color: #008080;">52</span>         <span style="color: #0000ff;">return</span> myAQS.tryAcquire(1<span style="color: #000000;">);
+</span><span style="color: #008080;">53</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">54</span> 
+<span style="color: #008080;">55</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">56</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">boolean</span> tryLock(<span style="color: #0000ff;">long</span> time, TimeUnit unit) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> InterruptedException {
+</span><span style="color: #008080;">57</span>         <span style="color: #0000ff;">return</span> myAQS.tryAcquireNanos(1<span style="color: #000000;">,unit.toNanos(time));
+</span><span style="color: #008080;">58</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">59</span> 
+<span style="color: #008080;">60</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">61</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> unlock() {
+</span><span style="color: #008080;">62</span>             myAQS.release(1<span style="color: #000000;">);
+</span><span style="color: #008080;">63</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">64</span> 
+<span style="color: #008080;">65</span> <span style="color: #000000;">    @Override
+</span><span style="color: #008080;">66</span>     <span style="color: #0000ff;">public</span><span style="color: #000000;"> Condition newCondition() {
+</span><span style="color: #008080;">67</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> myAQS.newConditonObject();
+</span><span style="color: #008080;">68</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">69</span> }</pre>
+</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 14:36</span>&nbsp;
+<a href="https://www.cnblogs.com/huangrenhui/">码猿手</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12712475" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12712475);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 427735, cb_blogApp = 'huangrenhui', cb_blogUserGuid = 'fd44a137-e2e1-4e7a-b2e4-08d5866282ce';
+    var cb_entryId = 12712475, cb_entryCreatedDate = '2020-04-17 14:36', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 码猿手
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

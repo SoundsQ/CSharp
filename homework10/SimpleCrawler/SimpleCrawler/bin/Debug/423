@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_红拂与妹奔</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=735</id>
+  <updated>2020-04-28T13:53:31Z</updated>
+  <author>
+    <name>红拂与妹奔</name>
+    <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12797532.html</id>
+    <title type="text">使用openmp进行并行编程 - 红拂与妹奔</title>
+    <summary type="text">预处理指令pragma 在系统中加入预处理器指令一般是用来允许不是基本c语言规范部分的行为。不支持pragma的编译器会忽略pragma指令提示的那些语句，这样就允许使用pragma的程序在不支持它们的平台上运行。 第一个程序：hello Hello例子的分析： 最基本的并行原语 用于运行代码块的线</summary>
+    <published>2020-04-28T13:51:00Z</published>
+    <updated>2020-04-28T13:51:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12797532.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12797532.html" />
+    <content type="html">【摘要】预处理指令pragma 在系统中加入预处理器指令一般是用来允许不是基本c语言规范部分的行为。不支持pragma的编译器会忽略pragma指令提示的那些语句，这样就允许使用pragma的程序在不支持它们的平台上运行。 第一个程序：hello Hello例子的分析： 最基本的并行原语 用于运行代码块的线 &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12797532.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12783639.html</id>
+    <title type="text">使用pthread进行编程 - 红拂与妹奔</title>
+    <summary type="text">使用pthread进行并行编程 进程与线程 进程是一个运行程序的实例；线程像一个轻量级的进程；在一个共享内存系统中，一个进程可以有多个线程 POSIX® Threads： 即 Pthreads，是一个 Unix 系统标准；一个可以用于 C 语言的库；是多线程编程的一个 API 接口。 第一个 pth</summary>
+    <published>2020-04-26T15:55:00Z</published>
+    <updated>2020-04-26T15:55:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12783639.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12783639.html" />
+    <content type="html">【摘要】使用pthread进行并行编程 进程与线程 进程是一个运行程序的实例；线程像一个轻量级的进程；在一个共享内存系统中，一个进程可以有多个线程 POSIX® Threads： 即 Pthreads，是一个 Unix 系统标准；一个可以用于 C 语言的库；是多线程编程的一个 API 接口。 第一个 pth &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12783639.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12727846.html</id>
+    <title type="text">使用openmp进行共享内存编程 - 红拂与妹奔</title>
+    <summary type="text">预处理指令pragma:在系统中加入预处理器指令一般是用来允许不是基本c语言规范部分的行为。不支持pragma的编译器会忽略pragma指令提示的那些语句，这样就允许使用pragma的程序在不支持它们的平台上运行。 #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #in</summary>
+    <published>2020-04-18T12:21:00Z</published>
+    <updated>2020-04-18T12:21:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12727846.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12727846.html" />
+    <content type="html">【摘要】预处理指令pragma:在系统中加入预处理器指令一般是用来允许不是基本c语言规范部分的行为。不支持pragma的编译器会忽略pragma指令提示的那些语句，这样就允许使用pragma的程序在不支持它们的平台上运行。 #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #in &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12727846.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12505788.html</id>
+    <title type="text">并行与分布式计算之并行硬件与并行软件 - 红拂与妹奔</title>
+    <summary type="text">https://blog.csdn.net/Dalham/article/details/104905379 实在不会上传图片所以发到csdn去了，头大</summary>
+    <published>2020-03-16T10:42:00Z</published>
+    <updated>2020-03-16T10:42:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12505788.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12505788.html" />
+    <content type="html">【摘要】https://blog.csdn.net/Dalham/article/details/104905379 实在不会上传图片所以发到csdn去了，头大 &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12505788.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12457065.html</id>
+    <title type="text">算法笔记刷题5（PAT A1025) - 红拂与妹奔</title>
+    <summary type="text">第一次上手PAT的甲级题目，瑟瑟发抖（英语不好对着题目愣了半天） 这一题的要点是使用sort函数。 使用sort函数必须使用 #include &lt;algorithm&gt; using namespace std; 一开始我是准备在结构体内同时储存局部排名和总体排名的，但是书上的做法空间复杂度比我的好多了</summary>
+    <published>2020-03-10T09:27:00Z</published>
+    <updated>2020-03-10T09:27:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12457065.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12457065.html" />
+    <content type="html">【摘要】第一次上手PAT的甲级题目，瑟瑟发抖（英语不好对着题目愣了半天） 这一题的要点是使用sort函数。 使用sort函数必须使用 #include &lt;algorithm&gt; using namespace std; 一开始我是准备在结构体内同时储存局部排名和总体排名的，但是书上的做法空间复杂度比我的好多了 &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12457065.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12445438.html</id>
+    <title type="text">算法笔记刷题4（PAT B1009) - 红拂与妹奔</title>
+    <summary type="text">这一题本来不应该有什么问题的，我很快写出来了，在dev c++里面运行也正常。但是放到pat以后出现了问题。更换了c/c++都不行通过编译。 #include &lt;cstdio&gt; #include &lt;cstring&gt; int main(){ char str[81]; gets(str); int i</summary>
+    <published>2020-03-08T14:19:00Z</published>
+    <updated>2020-03-08T14:19:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12445438.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12445438.html" />
+    <content type="html">【摘要】这一题本来不应该有什么问题的，我很快写出来了，在dev c++里面运行也正常。但是放到pat以后出现了问题。更换了c/c++都不行通过编译。 #include &lt;cstdio&gt; #include &lt;cstring&gt; int main(){ char str[81]; gets(str); int i &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12445438.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12444884.html</id>
+    <title type="text">算法笔记刷题3（codeup 5901) - 红拂与妹奔</title>
+    <summary type="text">今天刷题的速度依旧很慢（小乌龟挥爪.jpg） 我觉得codeup5901中回文串的处理很妙，如果是我自己写的话可能会把数组直接倒过来和原来对比。按照对称规律进行比对的话，工作量可以减少一半。 #include &lt;cstdio&gt; #include &lt;cstring&gt; const int maxn=25</summary>
+    <published>2020-03-08T14:03:00Z</published>
+    <updated>2020-03-08T14:03:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12444884.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12444884.html" />
+    <content type="html">【摘要】今天刷题的速度依旧很慢（小乌龟挥爪.jpg） 我觉得codeup5901中回文串的处理很妙，如果是我自己写的话可能会把数组直接倒过来和原来对比。按照对称规律进行比对的话，工作量可以减少一半。 #include &lt;cstdio&gt; #include &lt;cstring&gt; const int maxn=25 &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12444884.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12439028.html</id>
+    <title type="text">算法笔记刷题2（codeup 1928) - 红拂与妹奔</title>
+    <summary type="text">又磕了一晚上，多点测试真的很烦 ，完全不知道错哪里，后来发现是我变量名命名不规范导致自己晕了填错了，其实思路还是对的 我觉得书上的做法也还行，但我不太喜欢用二维数组，所以拿以前写的算天数的程序改装了一下 代码如下： #include &lt;stdio.h&gt; int isRun(int year) { i</summary>
+    <published>2020-03-07T14:51:00Z</published>
+    <updated>2020-03-07T14:51:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12439028.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12439028.html" />
+    <content type="html">【摘要】又磕了一晚上，多点测试真的很烦 ，完全不知道错哪里，后来发现是我变量名命名不规范导致自己晕了填错了，其实思路还是对的 我觉得书上的做法也还行，但我不太喜欢用二维数组，所以拿以前写的算天数的程序改装了一下 代码如下： #include &lt;stdio.h&gt; int isRun(int year) { i &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12439028.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/yiyefuyou/p/12431513.html</id>
+    <title type="text">算法笔记刷题1（codeup 1934) - 红拂与妹奔</title>
+    <summary type="text">准备6月份的拼题甲级中（本来现在这两天就考试了，但是因为疫情的原因延期了） 刚刚开始按算法笔记刷题，今天是探索codeup的第一天。 一开始并没有把多点测试当回事，直到一错再错，心态爆炸。。。 附上我的最终代码 1 #include &lt;stdio.h&gt; 2 #define MAX 210 3 int</summary>
+    <published>2020-03-06T14:56:00Z</published>
+    <updated>2020-03-06T14:56:00Z</updated>
+    <author>
+      <name>红拂与妹奔</name>
+      <uri>http://www.cnblogs.com/yiyefuyou/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/yiyefuyou/p/12431513.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/yiyefuyou/p/12431513.html" />
+    <content type="html">【摘要】准备6月份的拼题甲级中（本来现在这两天就考试了，但是因为疫情的原因延期了） 刚刚开始按算法笔记刷题，今天是探索codeup的第一天。 一开始并没有把多点测试当回事，直到一错再错，心态爆炸。。。 附上我的最终代码 1 #include &lt;stdio.h&gt; 2 #define MAX 210 3 int &lt;a href="http://www.cnblogs.com/yiyefuyou/p/12431513.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,540 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="[5分钟]菜鸟修研之设计模式：六大设计原则 [TOC] 笔者作为一个菜鸟，会尝试以简单的代码和容易理解的语句去解释这几种原则的特性和应用场景。 这六种原则分别为单一职责原则、接口隔离原则、里氏替换原则" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[5分钟]菜鸟修研之设计模式：六大设计原则 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12631427.html">[5分钟]菜鸟修研之设计模式：六大设计原则</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="5分钟菜鸟修研之设计模式：六大设计原则">[5分钟]菜鸟修研之设计模式：六大设计原则</h1>
+<p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="#5分钟菜鸟修研之设计模式：六大设计原则">[5分钟]菜鸟修研之设计模式：六大设计原则</a><ul><li><a href="#单一职责原则">单一职责原则</a></li><li><a href="#接口隔离原则">接口隔离原则</a></li><li><a href="#开闭原则">开闭原则</a></li><li><a href="#里氏替换原则">里氏替换原则</a></li><li><a href="#依赖倒置原则">依赖倒置原则</a></li><li><a href="#迪米特法则">迪米特法则</a></li></ul></li></ul></div></p>
+<p>笔者作为一个菜鸟，会尝试以简单的代码和容易理解的语句去解释这几种原则的特性和应用场景。</p>
+<p>这六种原则分别为单一职责原则、接口隔离原则、里氏替换原则、迪米特法则、依赖倒置原则、开闭原则。</p>
+<h3 id="单一职责原则">单一职责原则</h3>
+<p><strong>单一职责原则(SRP：Single responsibility principle)，规定一个类中应该只有一个原因引起类的变化。</strong></p>
+<p>单一职责原则的核心就是<strong>解耦和增强内聚性</strong>。</p>
+<p>问题：</p>
+<pre><code class="language-C#">    // 假设此类是数据库上下文
+    public class DatabaseContext { }
+
+    public class Test
+    {
+        private readonly DatabaseContext _context;
+        public Test(DatabaseContext context)
+        {
+            _context = context;
+        }
+
+        // 用户登录
+        public void UserLogin() { }
+
+        // 用户注销
+        public void UserLogout() { }
+
+        // 新增一个用户
+        public void AddUser() { }
+
+        // 修改一个用户的信息
+        public void UpdateUser() { }
+
+        // 删除一个用户
+        public void DeleteUser() { }
+    }
+</code></pre>
+<p>Test 负责 职责 P1(用户登录和退出)和 P2(用户账号管理) 两个职责，当由于职责 P1 的需求发生变化而需要修改类时， 有可能会导致正常职责 P2 的功能发生故障。</p>
+<p>上面的代码中，两个职责被耦合起来，担任了多种功能。</p>
+<p>一个类中应该只有一个原因引起类的变化，也就要求一个类只应该负责一个功能，类中地代码是紧密联系的。</p>
+<p>上面的示例代码非常简单，我们可以很自然地将一个个类分为两个部分。</p>
+<pre><code class="language-c#">    // 假设此类是数据库上下文
+    public class DatabaseContext { }
+
+    public class Test1
+    {
+        private readonly DatabaseContext _context;
+        public Test1(DatabaseContext context)
+        {
+            _context = context;
+        }
+
+        // 用户登录
+        public void UserLogin() { }
+
+        // 用户注销
+        public void UserLogout() { }
+
+    }
+
+    public class Test2
+    {
+        private readonly DatabaseContext _context;
+        public Test2(DatabaseContext context)
+        {
+            _context = context;
+        }
+        // 新增一个用户
+        public void AddUser() { }
+
+        // 修改一个用户的信息
+        public void UpdateUser() { }
+
+        // 删除一个用户
+        public void DeleteUser() { }
+    }
+</code></pre>
+<p>因此，单一职责原则的解决方法，是<strong>将不同职责封装到不同的类或模块中</strong>。</p>
+<h3 id="接口隔离原则">接口隔离原则</h3>
+<p>接口隔离原则(ISP：Interface Segregation Principle) 要求对接口进行细分，类的继承建立在最小的粒度上，确保客户端继承的接口中，每一个方法都是它需要的。</p>
+<p>笔者查阅了国外一些资料，大多将接口隔离原则定义为：</p>
+<p><em>“Clients should not be forced to depend upon interfaces that they do not use.”</em></p>
+<p>意思是<strong>不应强迫客户依赖于它不使用的方法。</strong></p>
+<p>对于此原则的解释，这篇文章讲的非常透彻：</p>
+<p><a href="https://stackify.com/interface-segregation-principle/">https://stackify.com/interface-segregation-principle/</a></p>
+<p>这就要求我们拆分臃肿的接口成为更小的和更具体的接口，使得接口负责的功能更加单一。</p>
+<p>目的：通过将软件分为多个独立的部分来减少所需更改的副作用和频率。</p>
+<p>笔者想到从两方面论述：</p>
+<p>其一，在描述多种动物时，我们可能会将不同种类的动物分类。但是这还不够，例如在鸟类中，我们印象中鸟的特征是鸟会飞，但是企鹅不会飞~。</p>
+<p>那么还要对物种的特征进行细分，例如血液是什么颜色的、有没有脊椎等。</p>
+<p>其二，我们可以通过下面代码表达：</p>
+<pre><code class="language-C#">    // 与登录有关
+    public interface IUserLogin
+    {
+        // 登录
+        void Login();
+
+        // 注销
+        void Logout();
+    }
+
+    // 与用户账号有关
+    public interface IUserInfo
+    {
+        // 新增一个用户
+        void AddUser();
+
+        // 修改一个用户的信息
+        void UpdateUser();
+
+        // 删除一个用户
+        void DeleteUser();
+    }
+</code></pre>
+<p>上面的两个接口，各种实现不同的功能，彼此没有交叉，完美。</p>
+<p>接下来我们看看两个继承了 IUserLogin 接口的代码</p>
+<pre><code class="language-c#">    // 对用户登录注销进行管理，资源准备和释放
+    public class Test1 : IUserLogin
+    {
+        public void Login(){}
+
+        public void Logout(){}
+    }
+
+    public class Test2 : IUserLogin
+    {
+        public void Login()
+        {
+            // 获取用户未读消息
+        }
+
+        public void Logout()
+        {
+        }
+    }
+</code></pre>
+<p>对于 Test1 ，根据登录和注销两个状态，进行不同操作。</p>
+<p>但是，对于 Test2，它只需要登录这个状态，其它情况不关它事。那么 <code>Logout()</code> 对他来说，完全没有用，这就是接口污染。</p>
+<p>上面的代码就违法了接口隔离原则。</p>
+<p>但是，接口隔离原则有个缺点，就是容易过多地将细分接口。一个项目中，出现成千上万个接口，将是维护地灾难。</p>
+<p>因此接口隔离原则要灵活使用，就 Test2 来说，多继承一个方法无伤大碍，不用就是了。ASP.NET Core 中就存在很多这样的实现。</p>
+<pre><code class="language-c#">        public void Function()
+        {
+            throw new NotImplementedException();
+        }
+</code></pre>
+<p>示例地址：<a href="https://github.com/dotnet/aspnetcore/search?q=throw+new+NotImplementedException%28%29%3B&amp;unscoped_q=throw+new+NotImplementedException%28%29%3B">https://github.com/dotnet/aspnetcore/search?q=throw+new+NotImplementedException()%3B&amp;unscoped_q=throw+new+NotImplementedException()%3B</a></p>
+<p>《设计模式之禅》第四章中，作者对接口隔离原则总结了四个要求：</p>
+<p>接口尽量小：不出现臃肿(Fat)的接口。</p>
+<p>接口要高内聚：提高接口、类、模块的处理能力。</p>
+<p>定制服务：小粒度的接口可以组成大接口，灵活定制新的功能。</p>
+<p>接口的设计有限度：难以有固定的标准去衡量接口的粒度是否合理。</p>
+<p>另外还有关于单一职责原则和接口隔离原则的关系和对比。</p>
+<p>单一职责原则是从服务提供者的角度去看，提供一个高内聚的、单一职责的功能；</p>
+<p>接口隔离原则是从使用者角度去看，也是实现高内聚和低耦合。</p>
+<p>接口隔离原则的粒度可能更小，通过多个接口灵活组成一个符合单一职责原则的类。</p>
+<p>我们也看到了，单一职责原则更多是围绕类来讨论；接口隔离原则是对接口来讨论，即对抽象进行讨论。</p>
+<h3 id="开闭原则">开闭原则</h3>
+<p>开闭原则(Open/Closed Principle)规定 ：</p>
+<p>“软件中的对象（类，模块，函数等等）应该对于扩展是开放的，但是对于修改是封闭的”</p>
+<p style="float:right;">--《Object-Oriented Software Construction》作者 Bertrand Meyer </p>
+<p>开闭原则意味着一个实体是允许在不改变它的源代码的前提下变更它的行为。类的改动是通过增加代码实现，而不是修改源代码。</p>
+<p>开闭原则 有 梅耶开闭原则、多态开闭原则。</p>
+<ul>
+<li>
+<p>梅耶开闭原则</p>
+<p>​	代码一旦完成，一个类的实现只应该因错误而修改，新的或者改变的特性应该通过新建不同的类实现。</p>
+<p>​	特点：继承，子类继承父类，拥有其所有的方法，并且拓展。</p>
+</li>
+<li>
+<p>多态开闭原则</p>
+<p>​	此原则使用接口而不是父类来允许不同的实现，您可以在不更改它们的代码的情况下轻松替换它们。</p>
+</li>
+</ul>
+<p>现在大多数情况下，开闭原则指的是多态开闭原则。</p>
+<p>多态开闭原则笔者在查阅资料是，发现这个接口指的不是 <code>Interface</code> ，指的是抽象方法、虚方法。</p>
+<p>问：面向对象的三大特性是什么？答：封装、继承、多态。</p>
+<p>对，多态开闭原则就是指这个多态。不过，原则要求不应对方法进行重载(重写)、隐藏。</p>
+<p>这是一个示例：</p>
+<pre><code class="language-c#">    // 实现登录注销
+    public class UserLogin
+    {
+        public void Login() { }
+        public void Logout() { }
+        public virtual void A() {/* 做了一些事*/}
+        public virtual void B() {/* 也做了一些事*/ }
+    }
+    public class UserLogin1 : UserLogin
+    {
+        public void Login(string userName) { }      // 应不应该对父类的方法进行重载？
+        public override void A() { }                // √
+        public override void B() { }                // √
+        public new void Logout() { }                // 也许行？
+    }
+</code></pre>
+<p>多态开闭原则的好处是，引入了抽象，使得两个类松耦合，而且可以使得在不修改代码的前提下，使用子类替换父类(里氏替换原则)。</p>
+<p>有时，会看到这样的题目：接口和抽象类的区别？</p>
+<p>笔者隐约记得有过一条这样的解释：接口是为了实现共同的标准；抽象是为了代码的复用。</p>
+<p>当然，接口和抽象，都可以实现里氏替换。</p>
+<p>通过开闭原则，我们可以了解到多态，也了解接口和抽象的应用场景。</p>
+<p>还有一个问题是，开闭原则要求是要修改或添加功能时，通过子类来实现，而不是修改原有代码。那么是否可以和应该对父类的代码进行重载和隐藏？</p>
+<p>而开闭原则的核心是构造抽象，从而通过子类派生来实现拓展。貌似没有说到这方面。</p>
+<p>笔者觉得不太应该。。。</p>
+<p>先结合下面的里氏替换原则，我们再讨论这个问题？</p>
+<h3 id="里氏替换原则">里氏替换原则</h3>
+<p>里氏替换原则(LSP：Liskov Substitution Principle)要求：凡是父类出现的地方，子类都可以出现。</p>
+<p>这就要求了子类必须与父类具有相同的行为。只有当子类能够替换任何父类的实例时，才会符合里氏替换原则。</p>
+<p>里氏替换原则的约束：</p>
+<ul>
+<li>子类必须实现父类的抽象方法，但不能重写父类中已实现的方法。</li>
+<li>子类中可以增加方法拓展功能。</li>
+<li>当子类覆盖或实现(虚拟方法/抽象方法)父类的方法时，方法的输入参数限制更加宽松并且返回值要比父类方法更加严格。</li>
+</ul>
+<p>所以，我们看到开闭原则中的示例，子类应不应该重载父类的方法？应不应该使用 new 关键字隐藏父类的方法？为了确保子类继承后，还具有跟父类一致的特性，不建议这样做呢，亲。</p>
+<p>实现了开闭原则，自然可以使用里氏替换原则。</p>
+<h3 id="依赖倒置原则">依赖倒置原则</h3>
+<p>依赖倒置原则（Dependence Inversion Principle）要求程序要依赖于抽象接口，不要依赖于具体实现。</p>
+<p>我们可以从代码中，慢慢演进和推导理论。</p>
+<pre><code class="language-c#">    // 实现登录注销
+    public class UserLogin
+    {
+        public void Login(){}
+        public void Logout(){}
+    }
+
+    public class Test1 : UserLogin { }
+
+    public class Test2
+    {
+        private readonly UserLogin userLogin = new UserLogin();
+    }
+
+    public class Test3
+    {
+        private readonly UserLogin _userLogin;
+        public Test3(UserLogin userLogin)
+        {
+            _userLogin = userLogin;
+        }
+    }
+</code></pre>
+<p>上面代码中，Test1、Test2、Test3 都依赖 UserLogin 。先不说上面代码有什么毛病，根据依赖倒置原则，应该是这样编写代码的</p>
+<pre><code class="language-c#">    // 与登录有关
+    public interface IUserLogin
+    {
+        void Login();       // 登录
+        void Logout();      // 注销
+    }
+
+    // 实现登录注销
+    public class UserLogin1 : IUserLogin
+    {
+        public void Login(){}
+        public void Logout(){}
+    }
+    
+    // 实现登录注销
+    public class UserLogin2 : IUserLogin
+    {
+        public void Login(){}
+        public void Logout(){}
+    }
+
+    public class Test4
+    {
+        private readonly IUserLogin _userLogin;
+        public Test4(IUserLogin userLogin)
+        {
+            _userLogin = userLogin;
+        }
+    }
+</code></pre>
+<p>依赖倒置原则，在于引入一种抽象，这种抽象将高级模块和底层模块彼此分离。高层模块和底层模块松耦合，底层模块的变动不需要高层模块也要变动。</p>
+<p>依赖导致原则有两个思想：</p>
+<ul>
+<li>
+<p>高层模块不应该依赖于底层模块，两者都应该依赖于抽象。</p>
+</li>
+<li>
+<p>抽象不应该依赖细节，细节应该依赖于抽象。</p>
+</li>
+</ul>
+<p>因为依赖于抽象，底层模块可以任意替换一个实现了抽象的模块。</p>
+<p>里氏替换原则是要求子类父类行为一致，子类可以替换父类。</p>
+<p>依赖倒置原则，每个方法的行为是可以完全不一样的。</p>
+<h3 id="迪米特法则">迪米特法则</h3>
+<p>迪米特法则(Law of Demeter)要求两个类之间尽可能保持最小的联系。</p>
+<p>例如 对象A 不应该直接调用 对象B，而是应该通过 中间对象C 来保持通讯。</p>
+<p>请参考 <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">https://en.wikipedia.org/wiki/Law_of_Demeter</a></p>
+<p>优势：松耦合，较少了依赖。</p>
+<p>缺点：要编写许多包装代码，增加复杂读，模块之间的通讯效率变低。</p>
+<p>笔者找了很多资料，发现都是 java 的。。。</p>
+<p>最终发现有个是以 C# 讲述的文章 <a href="https://www.cnblogs.com/zh7791/p/7922960.html">https://www.cnblogs.com/zh7791/p/7922960.html</a></p>
+<p>一般来说，较少会提到迪米特原则，代码符合依赖倒置原则和里氏替换原则等，也就算是符合迪米特法则了。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-04 13:15</span>&nbsp;
+<a href="https://www.cnblogs.com/whuanle/">痴者工良</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12631427" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12631427);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 406195, cb_blogApp = 'whuanle', cb_blogUserGuid = 'b8263b87-b86b-4861-1de2-08d54dbac325';
+    var cb_entryId = 12631427, cb_entryCreatedDate = '2020-04-04 13:15', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,753 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="JDBC与ORM那点事儿，为什么需要ORM，ORM框架发展的历史背景。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JDBC与ORM发展与联系  JDBC简介（九） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10319299.html">JDBC与ORM发展与联系  JDBC简介（九）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        JDBC与ORM那点事儿，为什么需要ORM，ORM框架发展的历史背景。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3><span style="font-size: 18px;">概念回顾</span></h3>
+<div style="line-height: 200%;">回顾下JDBC的概念：</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>JDBC提供了一种基准，据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序。</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>JDBC是Java数据库连接技术，所以，他必然根植于Java语言，使用JDBC离不开Java开发环境，是Java语言对于数据库连接的技术实现。</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>JDBC作为一种协议的体现，在Java代码中就是一系列的接口与实现的约定。</strong></span></div>
+<div style="line-height: 200%;">数据库驱动厂商以及应用程序开发者基于这一协议进行对接，从而解耦，从而可以相互分离的独立发展。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">既然最终体现形式为一组API这组API到底做了什么？</div>
+<div style="line-height: 200%;">想要了解JDBC到底做了什么，在windows平台的话，可以直接打开命令窗口</div>
+<div style="line-height: 200%;">根据用户名密码进行连接，然后发送语句，然后查看结果</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140448485-1496895804.png"><img style="display: inline; background-image: none;" title="image_5c4aa710_48d2" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140448867-940624516.png" alt="image_5c4aa710_48d2" width="801" height="867" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>JDBC是Java数据库连接，仍旧是在做&rdquo;连接数据库&ldquo;这件事情本身，哪怕变出花来，他的根本仍旧是连接数据库</strong></span></div>
+<div style="line-height: 200%;">数据库就是那个数据库，他一直在那里，数据库有他们固有的操作流程步骤以及SQL执行规范</div>
+<div style="line-height: 200%;">当你用命令窗口连接数据库，发送SQL语句时，你是在操作数据库</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>使用JDBC只是换了一种方式，不再是手动了，而是借助于Java代码，然后依赖于底层的数据库驱动，去操作数据库</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>简言之，你本来是在命令窗口里面，输入一行SQL之后敲回车</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>现在变成了借助于Java代码，通过几个对象相互配合进而发送SQL</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>做的所有事情都没有任何变化，查询还是那个查询，更新还是那个更新，变得只是形式 </strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong><br /></strong></span>
+</div>
+<div style="line-height: 200%;">你以为开个法拉利去车站接人和骑电动车去接人有本质区别么？
+</div>
+<div style="line-height: 200%;">你要做的还是去车站接人，你要接的人还是那个人，但是形式变了，停车位置变了，时间变了，连旁边的妹子看你得眼光可能也变了，但是，但是，你的事儿还是那个事儿，如果接不到人，一切还不是扯淡？
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">所以说一个数据库客户端一般可以提供给我们那些服务，JDBC就能够提供给我们那些服务
+</div>
+<div style="line-height: 200%;">不过，对于客户端来说，结果直接就可以呈现出来了，但是对于Java代码---方法的调用，需要处理更多的细节，哪些是输出，哪些是输入，参数的传递
+</div>
+<div style="line-height: 200%;">所以JDBC没有看起来这么简单
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>JDBC作为数据库连接的中间层，将应用程序与数据库连接进行解耦，给开发者提供了极大地方便，从此以后，再也不需要面向数据库驱动进行编程了</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>只需要面向JDBC进行编程即可，所以JDBC的出现，对于Java连接数据库实现了大一统的局面，解放了生产力</strong></span>
+</div>
+<div style="line-height: 200%;">但是，你既然作为中间层，将两者进行解耦，你就要负责对接，否则就真的彻底断开了，就不叫做解耦了。。。
+</div>
+<div style="line-height: 200%;">这其中最重要的一点就是结果集的返回
+</div>
+<div style="line-height: 200%;">对于类似命令行或者Navicat的客户端，是直观的呈现，眼睛来识别，而对于接口调用，则是API各个方法中的数据的对接，结果集的解析
+</div>
+<div style="line-height: 200%;">JDBC是对数据库操作的Java描述，所以对于比如查询来说，结果集的逻辑呈现也是下图类似式样
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140449168-1155772199.png"><img style="display: inline; background-image: none;" title="image_5c4aa710_15c1" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140449368-1642339395.png" alt="image_5c4aa710_15c1" width="290" height="154" border="0" /></a>
+</div>
+<div style="line-height: 200%;">JDBC对于结果集的处理核心就是将这样子的数据返回给应用程序，直观看起来很简单的行列，映射到字段中就涉及到很复杂的转换了
+</div>
+<div style="line-height: 200%;">总共有多少行记录？又有多少列？有哪些字段是要处理的？字段顺序是什么？字段类型是什么？SQL类型与Java类型又是如何映射？有些字段的精度又是什么？
+</div>
+<div style="line-height: 200%;">某列的值应该跟哪一个实体中的字段进行对照？等等这些都是结果集要处理的，所以说JDBC的确又很复杂</div>
+<h3><span style="font-size: 18px;">不得不面对的问题
+</span></h3>
+<h4><span style="font-size: 16px;">冗余代码
+</span></h4>
+<div style="line-height: 200%;">借助于JDBC编程，有很多模块化的代码，在第一个JDBC示例中，所有的步骤都是需要按部就班完成的
+</div>
+<div style="line-height: 200%;">而这些步骤很显然，有些是结构化的模式化的，比如连接数据库，关闭连接，异常处理，这些其实对于应用开发者其实并不想处理，但是却不得不处理
+</div>
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong><span style="color: #000000;">简言之，JDBC功能足够，但是便捷性欠缺，结构化本身没错，结构化模式化流程化才能成为标准，但是必然会产生冗余步骤，</span><span style="color: #ff0000;">如何灵活是一个问题</span></strong></span></div>
+<h4><span style="font-size: 16px;">对象映射
+</span></h4>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>目前存储数据最常用最流行的工具是关系型数据库，我们通过JDBC借助于SQL语句操作数据库，但是Java是面向对象的编程语言，所有的操作都是对象</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>在使用JDBC进行操作时，面向对象的概念却被弱化了</strong></span>
+</div>
+<div style="line-height: 200%;">比如下面的这一段代码，对于参数的设置，是按照属性字段的索引，你看不到对象的影子
+</div>
+<div style="line-height: 200%;">你可能希望有这么一个学生Student类
+</div>
+<div style="line-height: 200%;">这个类有几个属性：id、姓名、年龄、性别
+</div>
+<div style="line-height: 200%;">当需要执行下面的插入行为时，可以直接将Student的对象实例直接传递进去即可，而不是这样按照索引去设置。
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140449619-1954046285.png"><img style="display: inline; background-image: none;" title="image_5c4aa710_42df" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140449936-2061496845.png" alt="image_5c4aa710_42df" width="739" height="237" border="0" /></a>
+</div>
+<div style="line-height: 200%;">结果集的取回也是类似的
+</div>
+<div style="line-height: 200%;">当你想要查询一个列表时，你不得不如下这般处理
+</div>
+<div style="line-height: 200%;">你是不是会想，我有一个Student类了，为什么不能直接给我返回一个List&lt;Student&gt; ？那样不是很方便么？
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140450331-593976743.png"><img style="display: inline; background-image: none;" title="image_5c4aa710_12f4" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140450641-258568515.png" alt="image_5c4aa710_12f4" width="606" height="376" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>所以看得出来，Java作为纯粹的面向对象编程语言，一切皆是对象，但是目前常用的数据库却是关系型数据库</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>关系模型就像一张二维表格，因而一个关系型数据库就是由二维表及其之间的联系组成的一个数据组织，这并不是对象型的</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>JDBC的操作方式是也不是面向对象的，整个过程面向对象编程的思维观念很大程度上被遏制了</strong></span>
+</div>
+<div style="line-height: 200%;">所以，尽管JDBC将应用程序与数据库驱动进行解耦，应用程序开发者面向JDBC进行编程，而不需要面向数据库进行编程
+</div>
+<div style="line-height: 200%;">但是谁也没办法否认Java是纯粹的面向对象，所以在对象与关系型数据库的字段之间，又缺少了一层，这层用于将字段与对象进行映射对照
+</div>
+<div style="line-height: 200%;">没有这层功能，只能是应用程序开发者借助于JDBC自己手动的将字段组装成对象，很繁琐，而且，不成规范，就如同没有JDBC之前开发数据库操作的程序那样，需要自己实现。
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>简言之，关系型数据库不是面向对象的，而JAVA却是纯粹的面向对象的语言，这势必不能很流畅的合作，JDBC对象的映射全靠自己</strong></span></div>
+<h3><span style="font-size: 18px;">ORM
+</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>鉴于以上提出来的问题，在使用Java开发时，我们希望真正的建立一个对象型数据库，或者说至少使用起来看起来像一个对象型数据库</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>但是，目前常用的数据库又的确是关系型数据库，这一点短期内又无法改变</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>所以出现了ORM，对象关系映射（Object Relational Mapping，简称ORM，或O/RM，或O/R mapping）</strong></span>
+</div>
+<div style="line-height: 200%;">面向对象是从软件工程基本原则（如耦合、聚合、封装）的基础上发展起来的，而关系数据库则是从数学理论发展而来的，两套理论存在显著的区别。
+</div>
+<div style="line-height: 200%;">而面向对象的编程思想是软件开发的一大趋势，而关系数据库也是目前的必然存在，两种理论的差别的不匹配，造就了ORM，乱世出英雄。</div>
+<h4><span style="font-size: 16px;">ORM到底做什么？
+</span></h4>
+<div style="line-height: 200%;">JDBC将应用程序开发者与底层数据库驱动程序进行解耦，作为中间层承上启下
+</div>
+<div style="line-height: 200%;">而ORM是插入在应用程序与JDBCAPI之间的一个中间层，JDBC并不能很好地支持面向对象的程序设计
+</div>
+<div style="line-height: 200%;">ORM解决了这个问题，通过JDBC将字段高效的与对象进行映射
+</div>
+<div style="line-height: 200%;">应用程序开发人员不再需要直接与JDBC API进行打交道了，可以使用更加便利的ORM工具，提高开发效率
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>所以ORM是干什么的？</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>ORM用于完成Java对象与关系型数据库的映射，是JDBC的一层封装，提高了易用性。</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>简言之，ORM工具就是JDBC的封装，简化了JDBC的使用，完成关系型数据库中数据与Java对象的映射。</strong></span>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140450966-127871193.png"><img style="display: inline; background-image: none;" title="image_5c4aa710_22d8" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190125140451370-1729890009.png" alt="image_5c4aa710_22d8" width="1007" height="370" border="0" /></a>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>ORM工具框架最大的核心就是封装了JDBC的交互，你不在需要处理结果集中的字段或者行或者列</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>借助于ORM可以快速进行开发，而无需关注JDBC交互细节</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>但是既然是JDBC的封装，多一层封装，就势必会带来性能的开销，这是无法回避的事实，不过现在技术不断发展，性能开销越来越小。</strong></span>
+</div>
+<div style="line-height: 200%;">从上面的解释看，好似有些狭义，会认为ORM框架仅仅完成对象的映射，其实并不然，ORM最原始的是一个概念，所有的ORM产品是基于ORM思想的实现实体
+</div>
+<div style="line-height: 200%;">他们往往都附加了更多的功能，比如很多ORM框架也叫做持久化ORM框架
+</div>
+<div style="line-height: 200%;">什么意思呢?
+</div>
+<div style="line-height: 200%;">持久化简单理解就是脱离内存可以独立保存，保存到数据库，保存到文件等等形式，都是持久化
+</div>
+<div style="line-height: 200%;">&ldquo;持久化ORM框架&rdquo;中的持久化一般是指保存到数据库，所以说如果一个ORM提供了CRUD操作API，应用程序可以借助于ORM完成数据持久化的操作，这就算是一个持久化ORM框架
+</div>
+<div style="line-height: 200%;">就如同很多DataSource的实现中添加了很多功能，有些就直接被叫做数据库连接池
+</div>
+<div style="line-height: 200%;">所以说具体怎么讲，都是字面的含义，真正需要做的是理解ORM思想的含义：
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>完成对象与关系型数据库的映射，封装底层与数据库的交互，并且很多都提供了强大的附加功能，比如持久化</strong></span>
+</div>
+<div style="line-height: 200%;">现在的ORM基本上都是包括对持久类对象进行CRUD操作的API
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">对于Java来说，常用的有Hibernate和Mybatis（iBatis）还有Spring JDBC等，在ORM核心思想的基础上周边又做了很多事情
+</div>
+<div style="line-height: 200%;">所以说基本上很少有人直接使用原生的JDBC，可能有的公司中不会使用这些框架，因为毕竟框架的引入会牺牲性能
+</div>
+<div style="line-height: 200%;">而且框架是作为JDBC的封装，就好比一个工具类，而且是别人封装的工具类，终归有些地方可能有的人用的不顺手，或者说不适合有些场景，大公司有些会自己研发一套自己需要的类ORM工具，自己使用
+</div>
+<div style="line-height: 200%;">ORM框架各有千秋利弊，你可以不用各种已成的框架，但是，没有任何人可以否定ORM背后的思想，<span style="color: #000000; font-size: 13.5pt;"><strong>ORM会一定程度上降低性能但是借助于代码生成工具等可以极大地提高开发效率</strong></span>
+</div>
+<div style="line-height: 200%;">而且，ORM工具有极强的可维护性，虽然会降低性能，但是更多的时候可能是代码不够完美，算法不够高明，逻辑不够清晰，所以负责任的说ORM在很多场景都是很好的一种选择。
+</div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10319299.html" target="_blank">JDBC与ORM发展与联系 JDBC简介（九）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-29 08:37</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10319299" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10319299);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10319299, cb_entryCreatedDate = '2019-01-29 08:37', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

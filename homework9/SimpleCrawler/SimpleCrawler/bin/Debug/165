@@ -1,0 +1,1021 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本系列是计算机网络简单了解介绍的第一篇，主要对计算机网络的起源阿帕网进行了简单的介绍，从阿帕网开始形成了现代计算机网络的雏形，以ip为标识，以线路为联通，以协议为纲领的传输线路。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>计算机网络起源 网络发展简介（一） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10218446.html">计算机网络起源 网络发展简介（一）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        本系列是计算机网络简单了解介绍的第一篇，主要对计算机网络的起源阿帕网进行了简单的介绍，从阿帕网开始形成了现代计算机网络的雏形，以ip为标识，以线路为联通，以协议为纲领的传输线路。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">&ldquo;上网&rdquo;这个有些口语化的词汇，想必没人会觉得陌生，可是&ldquo;网&rdquo;到底是什么？&nbsp;&nbsp;</div>
+<div>
+<div style="line-height: 200%;">
+<h3 style="line-height: 200%;"><span style="font-size: 18px;">互联网概念&nbsp;&nbsp;</span> <span style="color: #000000; font-size: 13.5pt;"><strong><br /></strong></span></h3>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103016767-733038317.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fc_2d21" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103017059-2087814473.png" alt="image_5c2ec3fc_2d21" width="880" height="180" border="0" /></a>
+		</div>
+<div style="line-height: 200%;">截图自百度百科：<a title="" href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91/199186">https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91/199186</a>&nbsp;&nbsp; </div>
+
+
+
+	</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>互联网发展编年史</strong></span>
+	</div>
+<div style="line-height: 200%;">互联网发展史是从20世纪50年代到90年代，按编年体的形式，详细历数了互联网一步步走向成熟的发展过程，由美国国防部编制。
+	</div>
+<div style="line-height: 200%;">百度百科链接：
+	</div>
+<div style="line-height: 200%;"><a href="https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%91%E5%B1%95%E5%8F%B2/4635625">https://baike.baidu.com/item/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%91%E5%B1%95%E5%8F%B2/4635625</a>
+	</div>
+<h3><span style="font-size: 18px;">ARPANET
+	</span></h3>
+<div style="line-height: 200%;">
+<h4><span style="font-size: 16px;">阿帕
+		</span></h4>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>互联网始于1969年美国的&ldquo;阿帕网&rdquo;</strong></span>
+		</div>
+<div style="line-height: 200%;">&ldquo;阿帕网&rdquo;又是什么？
+		</div>
+<div style="line-height: 200%;">&ldquo;阿帕&rdquo;（ARPA），是美国高级研究计划署（Advanced&nbsp; Research&nbsp; Project&nbsp; Agency）的简称。
+		</div>
+<div style="line-height: 200%;">1957 苏联发射了人类第一颗人造地球卫星Sputnik。作为响应，美国国防部(DoD)组建了高级研究计划局(ARPA)，开始将科学技术应用于军事领域 。
+		</div>
+<div style="line-height: 200%;">他的核心机构之一是信息处理处（IPTO&nbsp; Information&nbsp; Processing&nbsp; Techniques&nbsp; Office），一直在关注电脑图形、网络通讯、超级计算机等研究课题。
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">在美国，20世纪60年代是一个很特殊的时代。
+			</div>
+<div style="line-height: 200%;">60年代初，古巴核导弹危机发生，美国和原苏联之间的冷战状态随之升温，核毁灭的威胁成了人们日常生活的话题。
+			</div>
+<div style="line-height: 200%;">在美国对古巴封锁的同时，越南战争爆发，许多第三世界国家发生政治危机。
+			</div>
+<div style="line-height: 200%;">由于美国联邦经费的刺激和公众恐惧心理的影响，"实验室冷战"也开始了。
+			</div>
+<div style="line-height: 200%;">鉴于此，苏联发射卫星与成立ARPA的直接关系应该很容易理解。
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+		</div>
+<div style="line-height: 200%;">1962年，J.C.R.Licklider离开MIT，加入ARPA，并在后来成为IPTO的首席执行官。
+		</div>
+<div style="line-height: 200%;">也就是他在任期间将办公室名称从命令控制研究（Command&nbsp; and&nbsp; Control&nbsp; Research）改为IPTO。
+		</div>
+<div style="line-height: 200%;">也就是在他任职期间，据估计，整个美国计算机科学领域研究的70%由ARPA赞助
+		</div>
+<div style="line-height: 200%;">在许多人看来与一个严格意义上的军事机构相去甚远，并给许多研究者自由领域来实验
+		</div>
+<div style="line-height: 200%;">结果ARPA不仅成为网络诞生地，同样也是电脑图形、平行过程、计算机模拟飞行等重要成果的诞生地。
+		</div>
+<div style="line-height: 200%;">约瑟夫&middot;利克莱德是全球互联网公认的开山领袖之一，是麻省理工学院(MIT)的心理学和人工智能专家J.C.R.Licklider(约瑟夫&middot;利克莱德)教授。&nbsp; </div>
+<h4><span style="font-size: 16px;">阿帕网起源
+		</span></h4>
+<div style="line-height: 200%;">
+<div>美国国防部认为：
+			</div>
+<div style="line-height: 200%;">如果仅有一个集中的军事指挥中心，万一这个中心被原苏联的核武器摧毁，全国的军事指挥将处于瘫痪状态，其后果将不堪设想。
+			</div>
+<div style="line-height: 200%;">因此有必要设计这样一个分散的指挥系统&mdash;&mdash;
+			</div>
+<div style="line-height: 200%;">它由一个个分散的指挥点组成，当部分指挥点被摧毁后其它点仍能正常工作，而这些分散的点又能通过某种形式的通讯网取得联系。
+			</div>
+<div style="line-height: 200%;">以上来自于百度百科中阿帕网词条的释义
+			</div>
+<div style="line-height: 200%;"><a title="" href="https://baike.baidu.com/item/arpanet/3562284?fr=aladdin">https://baike.baidu.com/item/arpanet/3562284?fr=aladdin</a>&nbsp;&nbsp;&nbsp; </div>
+
+
+</div>
+<div style="line-height: 200%;">1964年伊凡&middot;沙日尔兰德（Ivan&nbsp; Sutherland）继任担任该处处长
+		</div>
+<div style="line-height: 200%;">2两年后的鲍勃&middot;泰勒（Bob&nbsp; Taylor）上任，他在任职期间萌发了新型计算机网络的想法，并筹集资金启动试验。
+		</div>
+<div style="line-height: 200%;">在鲍勃&middot;泰勒的一再邀请下，日后成为&ldquo;阿帕网之父&rdquo;的拉里&middot;罗伯茨出任信息处理处处长。&nbsp;&nbsp; </div>
+<div style="line-height: 200%;">1967年，罗伯茨来到高级研究计划署ARPA，着手筹建&ldquo;分布式网络&rdquo;。人员调度和工程设计很顺利，不到一年，就提出阿帕网的构想。
+		</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;">1968年，罗伯茨提交研究报告《资源共享的计算机网络》，其中着力阐发的就是让&ldquo;阿帕&rdquo;的电脑达到互相连接，从而使大家分享彼此的研究成果。
+			</div>
+<div style="line-height: 32px;">根据这份报告组建的国防部&ldquo;高级研究计划网&rdquo;，就是著名的&ldquo;阿帕网&rdquo;，拉里&middot;罗伯茨也就成为&ldquo;阿帕网之父&rdquo;。&nbsp; </div>
+
+
+</div>
+<h3><span style="font-size: 18px;">分组交换的发展
+		</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">1948年 <span style="color: #000000; font-size: 13.5pt;"><strong>香农</strong></span> 在 《通信的数学理论》中写道:
+			</div>
+<div style="line-height: 200%;">通信的基本问题是在一点精确地或者近似的复现在另一个点所选取的讯息,这些讯息往往都是有意义的 。
+			</div>
+
+
+
+		</div>
+<div style="line-height: 200%;">通信的本质是数据交换，只有实现了数据的交换，才能证明线路的连通性&nbsp;&nbsp; </div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">从电话发明之初，人们就发现想要所有的电话机都进行两两连接是不现实的
+		</div>
+<div style="line-height: 200%;">因为这种方式的电路连接将需要大量的电话线
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103017226-827139188.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fc_7e03" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103017399-603866150.png" alt="image_5c2ec3fc_7e03" width="296" height="186" border="0" /></a>
+		</div>
+<div style="line-height: 200%;">于是人们借助于电话交换机将电话连接起来，每一部电话都连接到交换机上
+		</div>
+<div style="line-height: 200%;">电路交换机使用交换的方法，让电话用户彼此之间进行通信
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103017587-84064327.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fc_7acb" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103018020-313282106.png" alt="image_5c2ec3fc_7acb" width="299" height="190" border="0" /></a>
+		</div>
+<div style="line-height: 200%;">在使用电路交换前，必须先拨号请求连接，当被叫用户接收到交换机送来的振铃声，并接听时
+		</div>
+<div style="line-height: 200%;">主叫端到被叫端就建立起来了一条连接，也就是一条专用的物理通路，这条连接保证了双方通话需要的所有资源
+		</div>
+<div style="line-height: 200%;">这些资源在双方通信时不会被其他用户占用。
+		</div>
+<div style="line-height: 200%;">这种必须经过&ldquo;建立连接&rdquo;（占用资源）---&gt;&ldquo;通话&rdquo;（一直占用资源）---&gt;&ldquo;释放连接&rdquo;（释放资源）三个步骤的交换方式称之为<span style="color: #000000; font-size: 13.5pt;"><strong>电路交换</strong></span>。
+		</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>通话的全部时间内，通话的两个用户始终占用端到端的通信资源。</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>电路交换的实时性好，稳定性高，但是由于通话双方独占通信资源，线路的利用率很低。</strong></span>
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">再后来出现了<span style="color: #000000; font-size: 13.5pt;"><strong>分组交换</strong></span>
+		</div>
+<div style="line-height: 200%;">学术界公认分组交换技术是英国人Donald Watts Davies(唐纳德&middot;戴维斯)和美国人Paul Baran(保罗&middot;巴兰)在20世纪60年代早期分别独立发明的
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>分组交换采取存储转发技术</strong></span>
+		</div>
+<div style="line-height: 200%;">通常把要发送的整块数据称之为一个报文
+		</div>
+<div style="line-height: 200%;">在发送报文之前，把一个报文划分为几个分组后在进行传送&nbsp; </div>
+<div style="line-height: 200%;">在传送数据之前，不需要提前建立连接，也不会持续占用通信链路，在哪段链路传输，就占用哪段的资源
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103018232-1328959541.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fc_859" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103018497-314232492.png" alt="image_5c2ec3fc_859" width="705" height="172" border="0" /></a>
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">其实从本质上讲，分组交换这种分段存储转发原理并不是全新的理念
+	</div>
+<div style="line-height: 200%;">自古就有邮政通信，本质理念也是存储转发，而且，电报通信也是基于存储转发原理
+	</div>
+<div style="line-height: 200%;">在交换中心，一份完整的报文被全部接受后，在进行转发，这就叫做报文交换
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>电路交换</strong></span>&mdash;<span style="color: #000000; font-size: 13.5pt;"><strong>整个报文的比特流连续地从源点直达终点，好像在一个管道中传送。</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>报文交换</strong></span>&mdash;<span style="color: #000000; font-size: 13.5pt;"><strong>整个报文先传送到相邻结点，全部存储下来后查找转发表，转发到下一个结点。</strong></span>
+		</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>分组交换</strong></span>&mdash;<span style="color: #000000; font-size: 13.5pt;"><strong>单个分组(这只是整个报文的一部分)传送到相邻结点，存储下来后查找转发表，转发到下一个结点。</strong></span>
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103018746-1732971656.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fd_886" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103019081-1983304418.png" alt="image_5c2ec3fd_886" width="797" height="540" border="0" /></a>&nbsp;&nbsp; </div>
+<h3><span style="font-size: 18px;">阿帕网的连接实现
+		</span></h3>
+<div>
+<div style="line-height: 200%;">既然提出了阿帕网的构想，那么下一步就是进行实现。
+			</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">阿帕网是建立在&ldquo;<span style="color: #000000; font-size: 13.5pt;"><strong>包交换理论</strong></span>&rdquo;基础之上的一个去中心化的，或者叫做分布式的网络系统（DistributedNetworks）。
+				</div>
+<div style="line-height: 200%;"><span style="line-height: 32px;">最初的阿帕网有四个节点：</span>
+				</div>
+<div style="line-height: 200%;"><span style="line-height: 32px;">洛杉矶的加利福尼亚州大学洛杉矶分校、加州大学圣巴巴拉分校、斯坦福大学、犹他州大学四所大学的4台大型计算机</span>
+				</div>
+
+
+
+			</div>
+<div>
+<div>
+<div style="line-height: 32px;"><span style="line-height: 32px;">ARPA网采用两类通信处理机：交换处理机(IMP)和终端交换处理机(TIP)，IMP其实就是路由器的前生。</span>
+					</div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;">1968年 Bolt Beranek and Newman、Inc.公司(<span style="color: #000000; font-size: 13.5pt;"><strong>BBN</strong></span>)获得建立<span style="font-size: 13.5pt;"><strong>接口消息处理机(IMP)</strong></span>中的包交换部分的合同。
+						</div>
+<div style="line-height: 32px;"><span style="font-size: 10pt;">IMP是一种专用于通信的计算机，有些IMP之间直接相连，有些IMP之间必须经过其他的IMP间接相连。当IMP收到一个报文后要根据报文的目标地址决定把该报文提交给与它相连的主机还是转发到下一个IMP，这种通信方式叫做存储-转发通信。</span>
+						</div>
+<div style="line-height: 32px;">1969年 使用BBN公司开发的接口消息处理器IMP建立节点(配有12K存储器的Honeywell DDP-516小型计算机)；
+						</div>
+<div style="line-height: 32px;">AT&amp;T公司提供速率为50kpbs的通信线路。
+						</div>
+
+
+
+					</div>
+<div><span style="line-height: 32px;">总之最初的阿帕网就是这四个节点，通过通信处理机和通信链路构成的一个&ldquo;局域网&rdquo;。</span>
+					</div>
+
+
+
+				</div>
+
+
+
+			</div>
+<div style="line-height: 200%;">1969年底，阿帕网正式投入运行。
+			</div>
+<div style="line-height: 200%;">从军事要求上是置于美国国防部高级机密的保护之下，从技术上它还不具备向外推广的条件。&nbsp;&nbsp;&nbsp; </div>
+
+
+</div>
+<div style="line-height: 200%;">
+<h3><span style="font-size: 18px;">通信协议
+			</span></h3>
+<div style="line-height: 200%;">在阿帕网（ARPA）产生运作之初，通过接口信号处理机实现互联的电脑并不多，大部分电脑相互之间不兼容。
+			</div>
+<div style="line-height: 200%;">在一台电脑上完成的工作，很难拿到另一台电脑上去用，想让硬件和软件都不一样的电脑联网，也有很多困难。
+			</div>
+<div style="line-height: 200%;">当时美国的状况是：陆军用的电脑是DEC系列产品，海军用的电脑是Honeywell中标机器，空军用的是IBM公司中标的电脑
+			</div>
+<div style="line-height: 200%;">每一个军种的电脑在各自的系里都运行良好，但却有一个大弊病：不能共享资源。
+			</div>
+<div style="line-height: 200%;">正是因为底层软硬件之间的差异，所以才需要一个适用于网络传输的统一的规则
+			</div>
+<div style="line-height: 200%;">也就是不管有何差别，只要大家遵循统一的网络通信协议，就能够实现通信。
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">1970年12月制定出来了最初的通信协议---由卡恩开发、瑟夫参与的&ldquo;网络控制协议&rdquo;（NCP）。
+			</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">卡恩&nbsp; Bob Kahn&nbsp; <a href="https://en.wikipedia.org/wiki/Bob_Kahn">https://en.wikipedia.org/wiki/Bob_Kahn</a>
+				</div>
+<div style="line-height: 200%;">在自己研究的基础上，认识到只有深入理解各种操作系统的细节才能建立一种对各种操作系统普适的协议
+				</div>
+<div style="line-height: 200%;">73年卡恩请 瑟夫Vint Cerf <a href="https://en.wikipedia.org/wiki/Vint_Cerf">https://en.wikipedia.org/wiki/Vint_Cerf</a>一起考虑这个协议的各个细节
+				</div>
+<div style="line-height: 200%;">他们这次合作的结果产生了在开放系统下的所有网民和网管人员都在使用的&ldquo;传输控制协议&rdquo;（TCP，Transmission-Control Protocol）和&ldquo;因特网协议&rdquo;（IP，Internet Protocol）
+				</div>
+<div style="line-height: 200%;">也就是TCP/IP协议
+				</div>
+<div style="line-height: 200%;">也就是至今为人们所熟知的TCP、IP
+				</div>
+
+
+
+			</div>
+
+
+
+		</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">这个体系结构在它的两个主要协议出现以后被称为TCP/IP参考模型(TCP/IP Reference Model)。
+			</div>
+<div style="line-height: 200%;">这一网络协议共分为四层：网络接口层、互联网层、传输层和应用层
+			</div>
+<div style="line-height: 200%;">TCP/IP不是一个协议，而是一个协议族的统称&nbsp; </div>
+<div style="line-height: 200%;">1983年1月1日，运行较长时期曾被人们习惯了的NCP被停止使用，TCP/IP协议作为因特网上所有主机间的共同协议，从此以后被作为一种必须遵守的规则被肯定和应用。
+			</div>
+
+
+
+		</div>
+<div style="line-height: 200%;">1984年，美国国防部将TCP/IP作为所有计算机网络的标准。&nbsp;&nbsp; </div>
+<h3><span style="font-size: 18px;">ip地址
+		</span></h3>
+<div style="line-height: 200%;">TCP/IP有四个版本被开发出来&mdash;&mdash;TCP v1、TCP v2、在1978年春天分成TCP v3和IP v3的版本，后来就是稳定的TCP/IP v4&mdash;&mdash;因特网仍然使用的标准协议
+		</div>
+<div style="line-height: 200%;">IPv4，是互联网协议（Internet Protocol，IP）的第四版，也是第一个被广泛使用，构成现今互联网技术的基石的协议。
+		</div>
+<div style="line-height: 200%;">1981年Jon Postel 在RFC791中定义了IP
+		</div>
+<div style="line-height: 200%;">IP地址被用来给Internet上的电脑一个编号。大家日常见到的情况是每台联网的PC上都需要有IP地址，才能正常通信。
+		</div>
+<div style="line-height: 200%;">IP地址（英语：Internet Protocol Address）是一种在Internet上的给主机编址的方式，也称为网络协议地址。
+		</div>
+<div style="line-height: 200%;">常见的IP地址，分为IPv4与IPv6两大类。
+		</div>
+<div style="line-height: 200%;">简言之就是一串数字标识一个网络上的主机
+		</div>
+<div style="line-height: 200%;">IP地址是计算机网络世界中，如同现实世界中门牌号地址一般的存在。&nbsp;&nbsp; </div>
+<h3><span style="font-size: 18px;">RFC
+		</span></h3>
+<div style="line-height: 200%;">Request for comments&nbsp; 请求评论，是一系列以编号排定的文件
+		</div>
+<div style="line-height: 200%;">RFC文件格式最初作为ARPA网计划的基础起源于1969年。
+		</div>
+<div style="line-height: 200%;">如今，它已经成为IETF、Internet Architecture Board (IAB）还有其他一些主要的公共网络研究社区的正式出版物发布途径。
+		</div>
+<div style="line-height: 200%;">这是互联网标准化的工作相关的文件
+		</div>
+<div style="line-height: 200%;">在Internet上，任何一个用户都可以对Internet某一领域的问题提出自己的解决方案或规范，作为Internet草案
+		</div>
+<div style="line-height: 200%;">目前有以下两个阶段
+		</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">建议标准(Proposed Standard)&mdash;从这个阶段开始就成为RFC文档
+			</div>
+<div style="line-height: 200%;">互联网标准((Internet Standard)&mdash;达到正式标准后，每个标准就分配到一个编号
+			</div>
+<div style="line-height: 200%;">RFC文件只有新增，不会有取消或中途停止发行的情形。但是对于同一主题而言，新的RFC文件可以声明取代旧的RFC文件。
+			</div>
+<div style="line-height: 200%;">简言之，RFC就是互联网标准的讨论以及最终确定的会议记录。&nbsp;&nbsp;&nbsp; </div>
+
+
+
+		</div>
+<h3><span style="font-size: 18px;">分层的网络结构
+		</span></h3>
+<div style="line-height: 200%;">相互通信的计算机必须高度协调才能够进行通信，仅仅一条线路是不可能的
+		</div>
+<div style="line-height: 200%;">为了处理这些复杂的网络问题，早在最初的阿帕网中，就提出了分层的方法
+		</div>
+<div style="line-height: 200%;">分层将庞大复杂的问题，转换成若干个局部较小的问题，较小的问题就更加易于研究分析。
+		</div>
+<div style="line-height: 200%;">比如，唐僧取经，西天路途遥远，如果整体的看待出行问题，势必非常复杂
+		</div>
+<div style="line-height: 200%;">如果将整条路拆分为多个小段，这一段适合坐船，那一段适合骑马，这样就能够更好地解决问题
+		</div>
+<div style="line-height: 200%;">通过分层，各层之间相互独立，整体功能进行分解，每层实现独立功能&nbsp; </div>
+<div style="line-height: 200%;">灵活型好，易于实现和维护，当一层发生变化，不会影响另一层，只要他们之间的协作接口不变
+		</div>
+<div style="line-height: 200%;">其实就是软件开发中的解耦
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">关于通信协议的分层，有下面三种形式
+		</div>
+<div style="line-height: 200%;">其实只有中间的TCP、IP是有用的
+		</div>
+<div style="line-height: 200%;">OSI理论虽然很完备，但是没有赶上互联网的发展，而且实现过于复杂
+		</div>
+<div style="line-height: 200%;">TCP/IP协议才是真正使用的协议
+		</div>
+<div style="line-height: 200%;">第三个则是一般的教科书中为了研究学习,结合两者&ldquo;造&rdquo;出来的一种层次结构
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103019368-831694236.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fd_5d1b" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103019618-106738097.png" alt="image_5c2ec3fd_5d1b" width="584" height="336" border="0" /></a>&nbsp;&nbsp; </div>
+<h3><span style="font-size: 18px;">现代网络
+		</span></h3>
+<div style="line-height: 200%;">从上面的简单介绍可以看得出来，为什么说互联网始于阿帕网了
+		</div>
+<div style="line-height: 200%;">阿帕网借助于通信处理机以及通信链路，通过TCP/IP协议进行数据传输，形成了现代计算机发展的雏形。
+		</div>
+<div style="line-height: 200%;">现在的计算机网络，从当初的阿帕网已经发展到世界上最大的覆盖全球的计算机网络了，是一个多层次的ISP结构的互联网
+		</div>
+<div style="line-height: 200%;">ISP 互联网服务提供者 Internet&emsp;Service Provider
+		</div>
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">网络互连，需要借助于通信链路以及路由器(通信处理机的今生)，此时此刻的你与大洋彼岸的另一台电脑主机之间，中间隔着很多的通信链路
+			</div>
+<div style="line-height: 200%;">这些网络设备都是需要费用和维护的，所以就催生出来了ISP（最初互联网是由政府管理的）
+			</div>
+
+
+
+		</div>
+<div style="line-height: 200%;">比如，中国电信，中国移动，中国联通
+		</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103019872-325967118.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fd_1f20" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103020191-594449444.png" alt="image_5c2ec3fd_1f20" width="691" height="379" border="0" /></a>
+		</div>
+
+
+</div>
+<div style="line-height: 200%;">所有的用户主机属于网络的边缘部分，大量的网络和连接网络的路由器构成了互联网的核心部分，ISP就是管理维护了这些核心部分
+	</div>
+<div style="line-height: 200%;">为边缘部分提供网络的联通以及交换。
+	</div>
+<div style="line-height: 200%;">简单地说就是，终端主机通过路由器与其他的终端进行连接，形成网络，网络与网络之间又通过路由器或者其他网络设备进行连接
+	</div>
+<div style="line-height: 200%;">就这样，网络，网络的网络，网络的网络的网络........就形成了目前世界上最大的覆盖全球的互联网。
+	</div>
+<h3><span style="font-size: 18px;">小结
+	</span></h3>
+<div style="line-height: 200%;">本文介绍了网络发展的最初动机、起源，对阿帕网简单了进行了介绍，并且就网络中的一些概念进行了简单的介绍
+	</div>
+<div style="line-height: 200%;">从最初的几台计算机，借助于接口消息处理机，然后通过通信线路以及一些软件，实现了最原始的网络互连，此后是在此基础上不断地发展的。
+	</div>
+<div style="line-height: 200%;">计算机网络互连的发展并不是一蹴而就的，而是在实现中不断完善的，理论也是在实际中不断成熟起来的，计算机网络的发展绝对不存在某些学科中从&rdquo;成熟的理论&ldquo;到&rdquo;完美的实践&ldquo;这种过程。
+	</div>
+<div style="line-height: 200%;">计算机网络是基于分组交换的，通过设备连接起来的一个个局域网，又借助于设备相互连接，构成了如今的网络（注：本文的网络侧重于网络的联通，而不是指常说的web）
+	</div>
+<div style="line-height: 200%;">分组交换是通信抽象的根本，借助于分层的设计理念，在不同的层次可以使用最合适的技术进行联通。
+	</div>
+<div style="line-height: 200%;">从网卡、驱动、计算机、操作系统，到出口路由器，交换机等等整个通信过程中所有的过程全部都是以分组交换为基础，然后以网络协议为契约，整个线路的联通以及数据的正确交换，每一段线路（范围）以及运行的协议，就如同积木的每一块以及其上的卡扣一样，一环扣一环紧密的结合在一起，组装成了通信的线路。
+	</div>
+<div style="line-height: 200%;">计算机网络的实现细节纵然很复杂，但是他想要完成的目标是很简单的，就是分组将数据从一个位置借助于网络转移到另一个位置。
+	</div>
+<div style="line-height: 200%;">就好比有序的十个包裹，从南京到北京，经过无数个快递员的手，大家都按照约定好的规则，默默地干活，最终成功的将包裹发送到收件人手中。
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如下图所示，每个积木模块相当于计算机、网络设备
+	</div>
+<div style="line-height: 200%;">积木模块上的凸起卡扣，相当于网线、网络协议
+	</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103020498-1890015193.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fd_5633" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103020810-989503575.png" alt="image_5c2ec3fd_5633" width="703" height="257" border="0" /></a>
+	</div>
+<div style="line-height: 200%;">类似地铁的修建，有&ldquo;洞通&rdquo;、&ldquo;轨通&rdquo;、&ldquo;电通&rdquo;、&ldquo;车通&rdquo;等步骤
+	</div>
+<div style="line-height: 200%;">计算机通过设备进行连接实现了物理上的连接，但是想要实现数据交互传递，还需要协议的实现。
+	</div>
+<div style="line-height: 200%;">有路有车（计算机、网线、网络设备），并不代表快递公司就可以正常运转，还需要良好的运行规范步骤（各种协议）。
+	</div>
+<div style="line-height: 200%;">所以，想要了解计算机网络，就是要了解到底有多少块积木，每个积木的连接方式。
+	</div>
+<div style="line-height: 200%;">而对于网络中的协议，现代计算机网络一套成熟的协议体系就是TCP/IP协议族，协议族指的是一族，而不是一个。
+	</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>阿帕网是开端，形成了以IP为标识，以线路为联通，以网络设备为中介，以协议为纲领的计算机网络</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>网络的发展又依赖于RFC不断地标准规范</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 14px;">最后附上一张照片，克劳德&middot;艾尔伍德&middot;香农（Claude Elwood Shannon ，1916年4月30日&mdash;2001年2月24日）
+	</span></div>
+<div style="line-height: 200%;"><span style="font-size: 14px;">作为CS学科的人，你不应该不认识他，他对计算机的发展有巨大贡献，信息论及数字通信时代的奠基人。
+	</span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103021087-1872813702.png"><img style="display: inline; background-image: none;" title="image_5c2ec3fe_4441" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190104103021386-246047950.png" alt="image_5c2ec3fe_4441" width="489" height="317" border="0" /></a></div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10218446.html" target="_blank">计算机网络起源 网络发展简介（一）</a>
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-04 10:35</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10218446" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10218446);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10218446, cb_entryCreatedDate = '2019-01-04 10:35', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

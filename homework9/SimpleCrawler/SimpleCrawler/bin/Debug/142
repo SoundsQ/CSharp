@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="分为秒杀器爱好者的技能点，京东商城的做法，苏宁易购的做法，建东的做法，特定商品秒杀的做法等小节。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题：对付秒杀器等恶意访问行为的简单梳理 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">电商课题：对付秒杀器等恶意访问行为的简单梳理</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><strong>201208<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://weibo.com/yunzheng">@郑昀</a></strong></p>
+<div><strong>-秒杀器爱好者的技能点-</strong>
+<blockquote style="font-family: 微软雅黑; font-size: 14px; font-style: normal; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<ul>
+<li><strong>OCR识别</strong></li>
+<ul>
+<li>掌握一般的验证码图片识别OCR技术，多数局限于英文和数字字符的OCR识别，随着背景干扰加大，识别率急剧降低</li>
+</ul>
+<li><strong>表单提交</strong></li>
+<ul>
+<li>提前准备好表单</li>
+<li>自动填写表单，自动提交</li>
+<li>自定义快捷键</li>
+</ul>
+<li><strong>题库</strong></li>
+<ul>
+<li>针对特定电商，提前收集秒杀问题的题库</li>
+</ul>
+<li><strong>录制回放</strong></li>
+<ul>
+<li>利用&ldquo;按键精灵&rdquo;软件录制鼠标键盘动作并进行回放</li>
+</ul>
+<li><strong>变换IP</strong></li>
+<ul>
+<li>每走完一遍流程，更换一下出口IP（重新ADSL拨号或更换代理IP地址与端口）</li>
+</ul>
+<li><strong>早期的cookie欺骗</strong></li>
+<ul>
+<li>早期有人把cookies校验放在浏览器端做，自然可以欺骗</li>
+</ul>
+<li><strong>提前获得验证码</strong></li>
+<ul>
+<li>拍拍至今所使用的图片验证码都是&nbsp;http://captcha.qq.com/getimage 提供的，可以与业务无关；它设置了一个会话级cookie，所以可以提前手动刷新拿到若干个verifycode和verifysession组合</li>
+</ul>
+<li><strong>强制使用过期cookie！</strong></li>
+<ul>
+<li>此办法可结合上一条</li>
+<li>一般是浏览器提交cookie里的verifysession（或一个Hash串）和手工输入的验证码字符串，服务器端按F(verifysession)==verifycode进行校验。那么秒杀器突破时，强制扔掉服务器之前给的Hash串，用自己手中掌握的 verifysession和 verifycode提交，这样就可以无视了。即使一组 verifysession和&nbsp;verifycode在服务器端验证后立即失效，也无所谓，已经突破了，就拼谁的秒杀器并发提交快即可</li>
+</ul>
+<li><strong>强制使用过期题目</strong></li>
+<ul>
+<li>如果本次秒杀商品对应的答题不是一对一锁定的（换其他题提交无效），那么也可以采用上一条的做法，强制使用过期题目</li>
+</ul>
+</ul>
+</div>
+</blockquote>
+<div>
+<div>
+<div>
+<div><a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/">郑昀</a><span class="Apple-converted-space">&nbsp;</span>:△&nbsp;<br />
+<div><strong>==京东商城的做法==</strong></div>
+<div>2010年的京东做法：</div>
+<blockquote style="font-family: 微软雅黑; font-size: 14px; font-style: normal; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>曾推出紧急公告：</div>
+
+
+
+
+</blockquote>
+<blockquote style="font-family: 微软雅黑; font-size: 14px; font-style: normal; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>『京东将根据服务器日志判断抢购者是否使用了&ldquo;秒杀器&rdquo;，京东有权取消该订单，然后剩余产品重新抢购</div>
+<div>我们会紧急开发一套临时防火墙，由系统自动屏蔽&ldquo;秒杀器&rdquo;并且自动封掉相关账号，取消其1元抢购权。』</div>
+
+
+
+
+</blockquote>
+<div>郑昀&nbsp;:△&nbsp;</div>
+<div><strong>==苏宁易购的做法==</strong></div>
+<div>2010年的易购做法：</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+<blockquote style="font-family: 微软雅黑; font-size: 14px; font-style: normal; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div>
+<div>❶ 系统会确认账户是否有秒杀资格：页面会提示&ldquo;恭喜您获得秒杀资格，待系统验证您的账户为有效账户，秒杀榜即会显示&ldquo;验证成功&rdquo;，您即可以秒杀价购买商品，请关注您的账户验证状态！&rdquo;，应该是在服务器端验证账户是否是有效账户的，而不是浏览器端；</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</blockquote>
+
+
+
+
+</div>
+<blockquote style="font-family: 微软雅黑; font-size: 14px; font-style: normal; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<blockquote style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>验证本次表单填写的手机号码的有效性</div>
+<div>验证账户的有效性</div>
+
+
+
+
+</blockquote>
+
+
+
+
+</div>
+
+
+
+
+</blockquote>
+<div>
+<div>
+<div>
+<div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">❷ 问题回答模式（注意是一个秒杀就会出多道题目，全部回答正确才能参与秒杀）：有考古诗的，有填字游戏，有算术题，譬如&ldquo;《三国演义》中周瑜是被谁气死的？&rdquo;；<br />❸ 根据算法生成表单中hidden input控件的name：据太平讲，每次会变化控件name或id，增加秒杀器自动组装表单的难度，但防不了录制回放；</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2011年的易购做法：</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">❶ 单个ip在单位时间内的表单提交数做了限制；</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/">郑昀</a>&nbsp;:△&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>==建东的做法==</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<p>在应用服务器上</p>
+<p>❶&nbsp;基于<span lang="EN-US">IP</span>的简单判断：连续<span lang="EN-US">1</span>分钟之内超过<span lang="EN-US">5</span>次做同一件事情（一般是注册、登录、下单、付款），即在应用层处理该<span lang="EN-US">IP</span>。这个数据放在<span lang="EN-US">jvm</span>中即可，只保存很少的数据量，不积累，不解决那种<span lang="EN-US">1</span>小时多少次重复一件事情的场景；</p>
+<p style="text-align: justify;"><span lang="EN-US">❷&nbsp;1</span>小时重复一件事情的场景，交给风险控制系统进行智能分析，然后把<span lang="EN-US">IP</span>加入黑名单，在应有层直接干掉；</p>
+<p>❸&nbsp;建立黑名单账户，通过分析发现有问题的账户，直接冻结掉；</p>
+<p>❹&nbsp;在应用上采用<span lang="EN-US">token</span>、图片等方式，减少<span lang="EN-US">&lsquo;</span>系统<span lang="EN-US">&rsquo;</span>处理的可能，例如：降低<span lang="EN-US">&lsquo;</span>系统自动登录<span lang="EN-US">&rsquo;</span>的可能。为了提高体验：第一次不出现图片验证码，第二次之后才出现；在<span lang="EN-US">cookie</span>中写入一个标记，如果用户更换了浏览器，也认为是第二次，出现图片验证码提示；</p>
+<p>郑昀&nbsp;:△&nbsp;</p>
+<p><strong>==特定商品秒杀的做法==</strong></p>
+<div>
+<p>一个登录用户（以UserID标识）和一个秒杀商品（以GoodsID标识）对应于一个Key，给用户的图片验证码与此Key绑定，且商品开卖之前访问此验证码无效。</p>
+<p>即图片验证码与业务、与用户、与时间有关，提前拿到其他业务的验证码无效。</p>
+<p>图片验证码一旦验证，立即失效。</p>
+<p>&nbsp;</p>
+
+
+
+
+</div>
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">相关报道：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a style="cursor: pointer;" href="http://news.sina.com.cn/c/2010-12-12/031521624405.shtml">疯狂的秒杀狂人</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">赠图一枚：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://weibo.com/1984395157/yzPgZsmts" target="_blank"><img id="pic" class="M_cur_zoom_out" src="http://ww2.sinaimg.cn/large/76477795gw1dwgs4xgv8wj.jpg" alt="" /></a></div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-09-18 03:51</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2689955" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2689955);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2689955, cb_entryCreatedDate = '2012-09-18 03:51', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

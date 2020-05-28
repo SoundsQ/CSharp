@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_周若梣</title>
+  <subtitle type="text">路漫漫其修远兮</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=817</id>
+  <updated>2020-04-28T13:15:46Z</updated>
+  <author>
+    <name>周若梣</name>
+    <uri>http://www.cnblogs.com/gongyanzh/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12797077.html</id>
+    <title type="text">面试题56 - I. 数组中数字出现的次数 - 周若梣</title>
+    <summary type="text">"面试题56 I. 数组中数字出现的次数" 一个整型数组 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。 示例 1： 示例 2： 思路 相同数的异或结果为0。题目中有两个数（a,b）只出现一次，其余的数出现了两次，如果将数</summary>
+    <published>2020-04-28T12:38:00Z</published>
+    <updated>2020-04-28T12:38:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12797077.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12797077.html" />
+    <content type="html">【摘要】"面试题56 I. 数组中数字出现的次数" 一个整型数组 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。 示例 1： 示例 2： 思路 相同数的异或结果为0。题目中有两个数（a,b）只出现一次，其余的数出现了两次，如果将数 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12797077.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12783474.html</id>
+    <title type="text">SVM之不一样的视角 - 周若梣</title>
+    <summary type="text">在 "上一篇学习SVM中" 从最大间隔角度出发，详细学习了如何用拉格朗日乘数法求解约束问题，一步步构建SVM的目标函数，这次尝试从另一个角度学习SVM。 回顾监督学习要素 数据：（$x_i,y_i$） 模型 $\hat{y_i} = f(x_i)$ 目标函数（损失函数+正则项） $l(y_i,\ha</summary>
+    <published>2020-04-26T15:25:00Z</published>
+    <updated>2020-04-26T15:25:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12783474.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12783474.html" />
+    <content type="html">【摘要】在 "上一篇学习SVM中" 从最大间隔角度出发，详细学习了如何用拉格朗日乘数法求解约束问题，一步步构建SVM的目标函数，这次尝试从另一个角度学习SVM。 回顾监督学习要素 数据：（$x_i,y_i$） 模型 $\hat{y_i} = f(x_i)$ 目标函数（损失函数+正则项） $l(y_i,\ha &lt;a href="http://www.cnblogs.com/gongyanzh/p/12783474.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12775231.html</id>
+    <title type="text">学习SVM - 周若梣</title>
+    <summary type="text">[TOC] SVM家族简史 故事要从20世纪50年代说起，1957年，一个叫做感知器的模型被提出， 1963年， "Vapnik " and "Chervonenkis" , 提出了最大间隔分类器，SVM诞生了。 1992年，Vapnik 将核方法用于SVM，使SVM可以处理线性不可分数据 1995</summary>
+    <published>2020-04-25T13:00:00Z</published>
+    <updated>2020-04-25T13:00:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12775231.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12775231.html" />
+    <content type="html">【摘要】[TOC] SVM家族简史 故事要从20世纪50年代说起，1957年，一个叫做感知器的模型被提出， 1963年， "Vapnik " and "Chervonenkis" , 提出了最大间隔分类器，SVM诞生了。 1992年，Vapnik 将核方法用于SVM，使SVM可以处理线性不可分数据 1995 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12775231.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12743501.html</id>
+    <title type="text">python嵌套列表知多少 - 周若梣</title>
+    <summary type="text">今天在创建嵌套列表时遇到一个问题，决定看看到底是谁在背后捣鬼 没错，看起来两种方法都可以创建嵌套列表，但是赋值的时候却出现了问题 查阅资料，发现这是 board2 列表内的 3 个引用指向同一个对象的原因。作为一只菜鸟，仍然不解其意，又看到了下面的例子 board3 和 board1 是一样的，每次</summary>
+    <published>2020-04-21T03:46:00Z</published>
+    <updated>2020-04-21T03:46:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12743501.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12743501.html" />
+    <content type="html">【摘要】今天在创建嵌套列表时遇到一个问题，决定看看到底是谁在背后捣鬼 没错，看起来两种方法都可以创建嵌套列表，但是赋值的时候却出现了问题 查阅资料，发现这是 board2 列表内的 3 个引用指向同一个对象的原因。作为一只菜鸟，仍然不解其意，又看到了下面的例子 board3 和 board1 是一样的，每次 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12743501.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12737384.html</id>
+    <title type="text">旋转图像 - 周若梣</title>
+    <summary type="text">"48. 旋转图像" 给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在 "原地" 旋转图像，这意味着你需要直接修改输入的二维矩阵。 请不要 使用另一个矩阵来旋转图像。 示例 1: 示例 2: 思路 元素 对应的四个位置分别是： 如果 n 是偶数的话，这相</summary>
+    <published>2020-04-20T05:57:00Z</published>
+    <updated>2020-04-20T05:57:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12737384.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12737384.html" />
+    <content type="html">【摘要】"48. 旋转图像" 给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在 "原地" 旋转图像，这意味着你需要直接修改输入的二维矩阵。 请不要 使用另一个矩阵来旋转图像。 示例 1: 示例 2: 思路 元素 对应的四个位置分别是： 如果 n 是偶数的话，这相 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12737384.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12733179.html</id>
+    <title type="text">打家劫舍 - 周若梣</title>
+    <summary type="text">"198. 打家劫舍" 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统， 如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。 给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下， 能够偷</summary>
+    <published>2020-04-19T12:01:00Z</published>
+    <updated>2020-04-19T12:01:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12733179.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12733179.html" />
+    <content type="html">【摘要】"198. 打家劫舍" 你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统， 如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。 给定一个代表每个房屋存放金额的非负整数数组，计算你 在不触动警报装置的情况下， 能够偷 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12733179.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12727256.html</id>
+    <title type="text">动手学Transformer - 周若梣</title>
+    <summary type="text">动手实现Transformer，所有代码基于tensorflow2.0，配合 "illustrated transformer" 更香。 模型架构 Encoder+Decoder Encoder Decoder Attention Add&amp;Norm FeedForward Embedding Pos</summary>
+    <published>2020-04-18T10:13:00Z</published>
+    <updated>2020-04-18T10:13:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12727256.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12727256.html" />
+    <content type="html">【摘要】动手实现Transformer，所有代码基于tensorflow2.0，配合 "illustrated transformer" 更香。 模型架构 Encoder+Decoder Encoder Decoder Attention Add&amp;Norm FeedForward Embedding Pos &lt;a href="http://www.cnblogs.com/gongyanzh/p/12727256.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12725830.html</id>
+    <title type="text">二叉树的深度 - 周若梣</title>
+    <summary type="text">"104. 二叉树的最大深度" 给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例： 给定二叉树 ， 返回它的最大深度 3 。 "111. 二叉树的最小深度" 给定一个二叉树，找出其最小深度。 最小深度是从根节点到</summary>
+    <published>2020-04-18T06:34:00Z</published>
+    <updated>2020-04-18T06:34:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12725830.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12725830.html" />
+    <content type="html">【摘要】"104. 二叉树的最大深度" 给定一个二叉树，找出其最大深度。 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。 说明: 叶子节点是指没有子节点的节点。 示例： 给定二叉树 ， 返回它的最大深度 3 。 "111. 二叉树的最小深度" 给定一个二叉树，找出其最小深度。 最小深度是从根节点到 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12725830.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12725810.html</id>
+    <title type="text">二叉搜索树 - 周若梣</title>
+    <summary type="text">每个节点比它左子树的任意节点大，而且比它右子树的任意节点小 "98. 验证二叉搜索树" 给定一个二叉树，判断其是否是一个有效的二叉搜索树。 假设一个二叉搜索树具有如下特征： 节点的左子树只包含 小于 当前节点的数。 节点的右子树只包含 大于 当前节点的数。 所有左子树和右子树自身必须也是二叉搜索树。</summary>
+    <published>2020-04-18T06:31:00Z</published>
+    <updated>2020-04-18T06:31:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12725810.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12725810.html" />
+    <content type="html">【摘要】每个节点比它左子树的任意节点大，而且比它右子树的任意节点小 "98. 验证二叉搜索树" 给定一个二叉树，判断其是否是一个有效的二叉搜索树。 假设一个二叉搜索树具有如下特征： 节点的左子树只包含 小于 当前节点的数。 节点的右子树只包含 大于 当前节点的数。 所有左子树和右子树自身必须也是二叉搜索树。 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12725810.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/gongyanzh/p/12722438.html</id>
+    <title type="text">二叉树遍历 - 周若梣</title>
+    <summary type="text">[TOC] 二叉树遍历 前序：根左右 中序：左根右 后序：左右根 深度优先 前序遍历 "144. 二叉树的前序遍历" 给定一个二叉树，返回它的 前序 遍历。 示例: 中序遍历 "94. 二叉树的中序遍历" 给定一个二叉树，返回它的 中序 遍历。 示例: 后序遍历 "145. 二叉树的后序遍历" 给定</summary>
+    <published>2020-04-17T12:59:00Z</published>
+    <updated>2020-04-17T12:59:00Z</updated>
+    <author>
+      <name>周若梣</name>
+      <uri>http://www.cnblogs.com/gongyanzh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/gongyanzh/p/12722438.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/gongyanzh/p/12722438.html" />
+    <content type="html">【摘要】[TOC] 二叉树遍历 前序：根左右 中序：左根右 后序：左右根 深度优先 前序遍历 "144. 二叉树的前序遍历" 给定一个二叉树，返回它的 前序 遍历。 示例: 中序遍历 "94. 二叉树的中序遍历" 给定一个二叉树，返回它的 中序 遍历。 示例: 后序遍历 "145. 二叉树的后序遍历" 给定 &lt;a href="http://www.cnblogs.com/gongyanzh/p/12722438.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

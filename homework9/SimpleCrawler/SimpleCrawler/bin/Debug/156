@@ -1,0 +1,1136 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="享元模式是一种很常用的思想，核心就是共享，剥离事物的内部状态与外部状态，本文对享元模式 FlyWeight进行了简单介绍，并且给出了该模式的意图，结构，并且介绍了享元模式的两种应用方式单纯享元模式与复" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>享元模式  FlyWeight 结构型  设计模式（十五） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10074969.html">享元模式  FlyWeight 结构型  设计模式（十五）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        享元模式是一种很常用的思想，核心就是共享，剥离事物的内部状态与外部状态，本文对享元模式 FlyWeight进行了简单介绍，并且给出了该模式的意图，结构，并且介绍了享元模式的两种应用方式单纯享元模式与复合享元模式，并且给出来了Java的示例代码。享元模式的特点，结构，使用场景，都可以在本文中找到。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div>享元模式（FlyWeight）&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #0000ff;"><span style="font-size: 13.5pt;"><strong>&ldquo;</strong></span><span style="font-size: 13.5pt;"><strong>享</strong><strong>&rdquo;取&ldquo;共享&rdquo;之意，&ldquo;</strong><strong>元</strong><strong>&rdquo;取&ldquo;单元&rdquo;之意。</strong></span></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093607753-1985359767.png"><img style="display: inline; background-image: none;" title="image_5c087c0a_b27" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093609691-379965780.png" alt="image_5c087c0a_b27" width="714" height="449" border="0" /></a></div>
+<h3><span style="font-size: 18px;">意图</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>运用共享技术，有效的支持大量细粒度的对象。</strong></span></div>
+<h3><span style="font-size: 18px;">意图解析</span></h3>
+<div style="line-height: 200%;">面向对象的程序设计中，一切皆是对象，这也就意味着系统的运行将会依赖大量的对象。</div>
+<div style="line-height: 200%;">试想，如果对象的数量过多，势必会增加系统负担，导致运行的代价过高。</div>
+<div style="line-height: 200%;">下面看两个小例子理解下</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>1.）</strong></span>有一首歌曲叫做《大舌头》</div>
+<div style="line-height: 200%;">其中有一句歌词&ldquo;说说说说 说你爱我 我我我我 说不出口&rdquo;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093610223-135819956.png"><img style="display: inline; background-image: none;" title="image_5c087c0a_3c7e" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093610830-1624057401.png" alt="image_5c087c0a_3c7e" width="717" height="402" border="0" /></a>
+<div style="line-height: 200%;">如果使用面向对象的编程方式对这段歌词进行描述，假设一个汉字表示一个对象，你会怎么做？</div>
+<div style="line-height: 200%;">你会用七个还是十六个对象进行表示？</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093611645-763229360.png"><img style="display: inline; background-image: none;" title="image_5c087c0a_1241" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093611924-854264630.png" alt="image_5c087c0a_1241" width="657" height="293" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>2.）</strong></span>有一个文本编辑器软件，对于每一个字符使用对象进行表示</div>
+<div style="line-height: 200%;">当打开一篇有很多重复字符的、数万字的文章时，你会使用几个对象进行表示？</div>
+<div style="line-height: 200%;">如果仍旧采用每个字符占用一个对象，系统势必崩溃，必然需要共享对象</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">上面的两个例子中，都涉及到重复对象的概念&nbsp;</div>
+<div style="line-height: 200%;">而享元模式的意图就是如此，将<span style="color: #000000; font-size: 13.5pt;"><strong>重复的对象进行共享以达到支持大量细粒度对象的目的</strong></span>。</div>
+<div style="line-height: 200%;">如果不进行共享，如例2中描述的那样，一篇数万字符的文章将会产生数万个对象，这将是一场可怕的灾难。</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093612128-1743094914.png"><img style="display: inline; background-image: none;" title="image_5c087c0a_7394" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093612395-560542170.png" alt="image_5c087c0a_7394" width="399" height="145" border="0" /></a></div>
+<div style="line-height: 200%;">flyweight意为轻量级</div>
+<div style="line-height: 200%;">在我们当前的场景下，寓意为通过共享技术，轻量级的---也就是内存占用更小</div>
+<div style="line-height: 200%;">本质就是&ldquo;共享&rdquo;所以中文翻译过来多称之为享元</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>简言之，享元模式就是要&ldquo;共享对象&rdquo;</strong></span></div>
+<div style="line-height: 200%;">对于Java语言，我们熟悉的String，就是享元模式的运用</div>
+<div style="line-height: 200%;">String是不可变对象，一旦创建，将不会改变</div>
+<div style="line-height: 200%;">在JVM内部，String对象都是共享的</div>
+<div style="line-height: 200%;">如果一个系统中的两个String对象，包含的字符串相同，只会创建一个String对象提供给两个引用</div>
+<div style="line-height: 200%;">从而实现String对象的共享（new 的对象是两个不同的）</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093612742-209313186.png"><img style="display: inline; background-image: none;" title="image_5c087c0a_149c" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093613669-300758631.png" alt="image_5c087c0a_149c" width="317" height="158" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>享元模式又不仅仅是简单的&ldquo;共享对象&rdquo;</strong></span></div>
+<div style="line-height: 200%;">上面的两个小例子中，对于文字中的重复字符</div>
+<div style="line-height: 200%;">可以通过共享对象的方式，对某些对象进行共享，从而减少内存开销。</div>
+<span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #000000; font-size: 13.5pt;"><strong>考虑下图中的情景，这里面所有的&ldquo;你&rdquo;字，到底是不是同样的？</strong></span></span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">是，因为全部都是汉字&ldquo;你&rdquo;</span></li>
+<li><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">不是，因为尽管都是汉字&ldquo;你&rdquo;，但是他们的字体，颜色，字号，却又明显不同，所以不是同样的</span></li>
+</ul>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093613867-1527671689.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_388b" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093614066-1482369814.png" alt="image_5c087c0b_388b" width="674" height="304" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>如果将字体、颜色、字号，作为&ldquo;你&rdquo;这个汉字的状态</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>是不是可以认为：他们都是一样的汉字，但是他们却又具有不同的状态？</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>其实享元模式不仅仅用来解决大量重复对象的共享问题，还能够用来解决相似对象的问题。</strong></span></div>
+<div style="line-height: 200%;">享元对象能够共享的关键在于：区分对象的<span style="color: #ff0000; font-size: 13.5pt;"><strong>内部状态</strong></span>和<span style="color: #ff0000; font-size: 13.5pt;"><strong>外部状态</strong></span></div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff; font-size: 13.5pt;"><strong>内部状态是存储在享元对象内部的，并且不会随环境的变化而有所改变。</strong></span></div>
+<div style="line-height: 200%;">比如上面的汉字&ldquo;你&rdquo;，无论在任何情况下，汉字&ldquo;你&rdquo;，始终是&ldquo;你&rdquo;，不会变成&ldquo;她&rdquo;</div>
+<div style="line-height: 200%;">所以说享元模式解决共享问题，本质是共享内部状态</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>外部状态是随外部环境变化而变化，不能共享的状态。</strong></span></div>
+<div style="line-height: 200%;">享元对象的外部状态通常由客户端保存，在必要的时候在传递到享元对象内部</div>
+<div style="line-height: 200%;">比如上面汉字&ldquo;你&rdquo;的字体、颜色、字号就是外部状态。&nbsp;&nbsp;&nbsp;</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">小结 </span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>享元模式就是为了避免系统中出现大量相同或相似的对象，同时又不影响客户端程序通过面向对象的方式对这些对象进行操作</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>享元模式通过共享技术，实现相同或相似对象的重用</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">比如文编编辑器读取文本</div>
+<div style="line-height: 200%;">在逻辑上每一个出现的字符都有一个对象与之对应，然而在物理上它们却共享同一个享元对象</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">在享元模式中，存储这些共享实例对象的地方通常叫做享元池(Flyweight&nbsp; Pool)</div>
+<div style="line-height: 200%;">享元模式可以结合String的<span style="color: #000000; font-size: 13.5pt;"><strong>intern()</strong></span>方法一起进行理解</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">通过区分了内部状态和外部状态，就可以将相同内部状态的对象存储在池中，池中的对象可以实现共享</div>
+<div style="line-height: 200%;">需要的时候将对象从池中取出，实现对象的复用</div>
+<div style="line-height: 200%;">通过向取出的对象注入不同的外部状态，进而得到一些列相似的对象</div>
+<div style="line-height: 200%;">而这些看似各异的对象在内存中，仅仅存储了一份，大大节省了空间，所以说很自然的命名为&ldquo;flyweight&rdquo;轻量级</div>
+<h3><span style="font-size: 18px;">享元工厂 </span></h3>
+<div style="line-height: 200%;">通过对意图的认识，可以认为，<span style="color: #ff0000; font-size: 13.5pt;"><strong>享元模式其实就是对于&ldquo;程序中会出现的大量重复或者相似对象&rdquo;的一种&ldquo;重构&rdquo;</strong></span></div>
+<div style="line-height: 200%;">当然，你应该是在设计之初就想到这个问题，而不是真的出现问题后再去真的重构</div>
+<div style="line-height: 200%;">比如，你想要设计&ldquo;字符&rdquo;这种对象时，就应该考虑到他的&ldquo;大量&rdquo;&rdquo;重复&ldquo;&ldquo;相似&rdquo;的特点</div>
+<div style="line-height: 200%;">所以需要分析出字符的内部状态，与外部状态</div>
+<div style="line-height: 200%;">上面也提到对于享元对象，通过享元池进行管理</div>
+<div style="line-height: 200%;">对于池的管理通常使用工厂模式，借助于工厂类对享元池进行管理</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>用户需要对象时，通过工厂类获取</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>工厂提供一个存储在享元池中的已创建的对象实例，或者创建一个新的实例</strong></span></div>
+<h3><span style="font-size: 18px;">示例代码</span></h3>
+<div style="line-height: 200%;">
+<div>针对于上面的例子，汉字&ldquo;你&rdquo;作为内部状态，可以进行共享</div>
+<div style="line-height: 200%;">&ldquo;颜色&rdquo;作为外部状态，由客户端保存传递</div>
+</div>
+<div style="line-height: 200%;">创建字符类 Character、汉字字符类ChineseCharacter、颜色类Color以及工厂类CharacterFactory</div>
+<div style="line-height: 200%;">Color含有颜色属性,通过构造方法设置,getter方法获取</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Color {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String Color;
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Color(String color) {
+        </span><span style="color: #0000ff;">this</span>.Color =<span style="color: #000000;"> color;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getColor() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> Color;
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div>Character 抽象的字符类,用于描述字符</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Character {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span><span style="color: #000000;"> String getValue();
+     
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> display(Color color) {
+        System.out.println(</span>"字符: " + getValue() + " ,颜色: " +<span style="color: #000000;"> color.getColor());
+    }
+}</span></pre>
+</div>
+</div>
+<div>汉字字符类，为了简化，直接设置value为汉字&ldquo;你&rdquo;</div>
+</div>
+<div style="line-height: 200%;">
+<p style="margin: 0px;">&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ChineseCharacter <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Character {
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getValue() {
+        </span><span style="color: #0000ff;">return</span> "你"<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">CharacterFactory字符工厂类</div>
+<div style="line-height: 200%;">通过单例模式创建工厂</div>
+<div style="line-height: 200%;">内部HashMap用于存储字符，并且提供获取方法</div>
+<div style="line-height: 200%;">为了简化程序，初始就创建了一个汉字字符&ldquo;你&rdquo;存储于字符中</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.HashMap;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> CharacterFactory {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例模式 饿汉式创建
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> CharacterFactory instance = <span style="color: #0000ff;">new</span><span style="color: #000000;"> CharacterFactory();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 使用HashMap管理享元池
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> HashMap&lt;String, Object&gt; hm = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">();
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> CharacterFactory() {
+        Character character </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ChineseCharacter();
+        hm.put(</span>"你"<span style="color: #000000;">, character);
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例全局访问接口获取工厂
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> CharacterFactory getInstance() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> instance;
+    }
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 根据key获取池中的对象
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Character getCharacter(String key) {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> (Character) hm.get(key);
+    }
+}</span></pre>
+</div>
+</div>
+<div>测试代码</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093614268-769111866.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_6037" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093614513-1100880847.png" alt="image_5c087c0b_6037" width="574" height="596" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">示例中,我们通过工厂,从享元池中获取了三个汉字字符&ldquo;你&rdquo;。</div>
+<div style="line-height: 200%;">通过 == 可以看得出来，他们都是同一个对象</div>
+<div style="line-height: 200%;">在分别调用他们的display方法时，在客户端（此处为我们的Test main方法）中创建，并且传递给享元对象</div>
+<div style="line-height: 200%;">通过方法参数的形式进行外部状态的设置。</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093614705-1518620311.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_2137" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093614902-1084214569.png" alt="image_5c087c0b_2137" width="426" height="327" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">CharacterFactory 单例模式，返回自身实例</div>
+<div style="line-height: 200%;">CharacterFactory内部维护Character的享元池</div>
+<div style="line-height: 200%;">Character 依赖Color</div>
+<div style="line-height: 200%;">ChineseCharacter是Character的实现类</div>
+<h3><span style="font-size: 18px;">结构 </span></h3>
+<div style="line-height: 200%;">将上面的示例转换为标准的享元模式的名称</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093615128-916705556.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_1edf" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093615334-456552500.png" alt="image_5c087c0b_1edf" width="434" height="226" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff; font-size: 13.5pt;"><strong>抽象享元角色 FlyWeight</strong></span></div>
+<div style="line-height: 200%;">所有具体享元类的超类，为这些类规定了需要实现的公共接口</div>
+<div style="line-height: 200%;">外部状态可以通过业务逻辑方法的参数形式传递进来</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>具体享元角色ConcreteFlyWeight</strong></span></div>
+<div style="line-height: 200%;">实现抽象享元角色所规定的的接口</div>
+<div style="line-height: 200%;">需要保存内部状态，而且，内部状态必须与外部状态无关</div>
+<div style="line-height: 200%;">从而才能使享元对象可以在系统内共享</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>享元工厂角色 FlyWeightFactory</strong></span></div>
+<div style="line-height: 200%;">负责创建和管理享元角色，也就是维护享元池</div>
+<div style="line-height: 200%;">必须保证享元对象可以被系统适当的共享</div>
+<div style="line-height: 200%;">接受客户端的请求</div>
+<div style="line-height: 200%;">如果有适当符合要求的享元对象，则返回</div>
+<div style="line-height: 200%;">如果没有一个适当的享元对象，则创建</div>
+</div>
+<span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>客户端角色Client</strong></span><br />客户端角色维护了对所有享元对象的引用</span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093615523-67763704.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_69dd" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093615729-611110664.png" alt="image_5c087c0b_69dd" width="501" height="68" border="0" /></a></span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">需要保存维护享元对象的外部状态，然后通过享元对象的业务逻辑方法作为参数形式传递</span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093615905-206503166.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_6b32" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093616101-1423534050.png" alt="image_5c087c0b_6b32" width="345" height="74" border="0" /></a><br /></span></div>
+<div style="line-height: 200%;">
+<h3><span style="font-size: 18px;">分类</span></h3>
+<h4><span style="font-size: 16px;">单纯享元模式</span></h4>
+<div style="line-height: 200%;">在上面的结构中，如果所有的ConcreteFlyWeight都可以被共享</div>
+<div style="line-height: 200%;">也就是所有的FlyWeight子类都可以被共享，那就是所有的享元对象都可以被共享</div>
+<div style="line-height: 200%;">这种形式被称之为<span style="color: #000000; font-size: 13.5pt;"><strong>单纯享元模式</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>单纯享元代码</strong></span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.simple;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> FlyWeight {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 抽象的业务逻辑方法,接受外部状态作为参数
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation(String outerState);
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.simple;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreteFlyWeight <span style="color: #0000ff;">extends</span><span style="color: #000000;"> FlyWeight {
+    </span><span style="color: #0000ff;">private</span> String innerState = <span style="color: #0000ff;">null</span><span style="color: #000000;">; 
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> ConcreteFlyWeight(String innerState) {
+        </span><span style="color: #0000ff;">this</span>.innerState =<span style="color: #000000;"> innerState;
+    } 
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 外部状态作为参数传递
+    </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation(String outerState) {
+        System.out.println(</span>"innerState = " + innerState + " outerState = " +<span style="color: #000000;"> outerState);
+    }
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.simple;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.HashMap;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> FlyWeightFactory {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例模式 饿汉式创建
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> FlyWeightFactory instance = <span style="color: #0000ff;">new</span><span style="color: #000000;"> FlyWeightFactory();
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 使用HashMap管理享元池
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> HashMap&lt;String, Object&gt; hm = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">();
+     
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> FlyWeightFactory() {
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例全局访问接口获取工厂
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> FlyWeightFactory getInstance() {
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> instance;
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 根据innerState获取池中的对象
+    * 存在返回，不存在创建并返回
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> FlyWeight getFylWeight(String innerState) {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(hm.containsKey(innerState)){
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> (FlyWeight) hm.get(innerState);
+        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+        FlyWeight flyWeight </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteFlyWeight(innerState);
+        hm.put(innerState,flyWeight);
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> flyWeight;
+        }
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.simple;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+FlyWeightFactory flyWeightFactory </span>=<span style="color: #000000;"> FlyWeightFactory.getInstance();
+FlyWeight flyWeight1 </span>= flyWeightFactory.getFylWeight("First"<span style="color: #000000;">);
+FlyWeight flyWeight2 </span>= flyWeightFactory.getFylWeight("Second"<span style="color: #000000;">);
+FlyWeight flyWeight3 </span>= flyWeightFactory.getFylWeight("First"<span style="color: #000000;">);
+
+System.out.println(flyWeight1);
+System.out.println(flyWeight2);
+System.out.println(flyWeight3);
+System.out.println();
+
+flyWeight1.operation(</span>"outer state XXX"<span style="color: #000000;">);
+flyWeight2.operation(</span>"outer state YYY"<span style="color: #000000;">);
+flyWeight3.operation(</span>"outer state ZZZ"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093616305-469930294.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_75b6" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093616501-2119859399.png" alt="image_5c087c0b_75b6" width="521" height="186" border="0" /></a>&nbsp;&nbsp;&nbsp;</div>
+</div>
+</div>
+<h4><span style="font-size: 16px;">复合享元模式</span></h4>
+<div style="line-height: 200%;">与单纯享元模式对应的是复合享元模式</div>
+<div style="line-height: 200%;">单纯享元模式中，所有的享元对象都可以共享</div>
+<div style="line-height: 200%;">复合享元模式中，则并不是所有的ConcreteFlyWeight都可以被共享</div>
+<div style="line-height: 200%;">也就是说：<span style="color: #0000ff; font-size: 13.5pt;"><strong>不是所有的享元对象都可以被共享</strong></span></div>
+<div style="line-height: 200%;">实际上，并不是所有的FlyWeight子类都需要被共享</div>
+<div style="line-height: 200%;">FlyWeight接口使的可以进行共享，但是没有任何必要 强制必须共享</div>
+<div style="line-height: 200%;">实践中，UnsharedConcreteFlyWeight对象通常将ConcreteFlyWeight对象作为子节点</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093616730-2146302021.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_4a4f" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093616926-859746290.png" alt="image_5c087c0b_4a4f" width="895" height="364" border="0" /></a></div>
+<div style="line-height: 200%;">与单纯享元模式相比，仅仅是拥有了不可共享的具体子类</div>
+<div style="line-height: 200%;">而且，这个子类往往是应用了组合模式，将ConcreteFlyWeight对象作为子节点</div>
+<span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>复合享元角色UnsharedConcreteFlyWeight</strong></span><br />复合享元角色，也就是不可共享的，也被称为 不可共享的享元对象<br />但是一个复合享元对象可以分解为多个本身是单纯享元对象的组合<br />这些单纯的享元对象就又是可以共享的</span>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>复合享元代码</strong></span>
+	</div>
+<div style="line-height: 200%;">将简单模式中的示例代码进行改造
+	</div>
+<div style="line-height: 200%;">FlyWeight不变
+	</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.composite;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> FlyWeight {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 抽象的业务逻辑方法,接受外部状态作为参数
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation(String outerState);
+}</span></pre>
+</div>
+</div>
+<div>ConcreteFlyWeight不变</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.composite;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ConcreteFlyWeight <span style="color: #0000ff;">extends</span><span style="color: #000000;"> FlyWeight {
+</span><span style="color: #0000ff;">private</span> String innerState = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> ConcreteFlyWeight(String innerState) {
+</span><span style="color: #0000ff;">this</span>.innerState =<span style="color: #000000;"> innerState;
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 外部状态作为参数传递
+</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation(String outerState) {
+System.out.println(</span>"innerState = " + innerState + " outerState = " +<span style="color: #000000;"> outerState);
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">新增加不共享的子类也就是组合的享元子类</div>
+<div style="line-height: 200%;">内部使用list 维护单纯享元模式对象，提供add方法进行添加</div>
+<div style="line-height: 200%;">提供operation操作</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.composite;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.ArrayList;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> UnsharedConcreateFlyWeight <span style="color: #0000ff;">extends</span><span style="color: #000000;"> FlyWeight {
+</span><span style="color: #0000ff;">private</span> String innerState = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> UnsharedConcreateFlyWeight(String innerState) {
+</span><span style="color: #0000ff;">this</span>.innerState =<span style="color: #000000;"> innerState;
+}
+
+</span><span style="color: #0000ff;">private</span> List&lt;FlyWeight&gt; list = <span style="color: #0000ff;">new</span> ArrayList&lt;&gt;<span style="color: #000000;">();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> add(FlyWeight flyWeight) {
+list.add(flyWeight);
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> operation(String outerState) {
+</span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (FlyWeight flyWeight:list) {
+flyWeight.operation(outerState);
+    }
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">FlyWeightFactory工厂类进行改造</div>
+<div style="line-height: 200%;">新增加public UnsharedConcreateFlyWeight getCompositeFylWeight(String state)&nbsp;</div>
+<div style="line-height: 200%;">用于获得组合享元对象</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.composite;
+ 
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.HashMap;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> FlyWeightFactory {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例模式 饿汉式创建
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> FlyWeightFactory instance = <span style="color: #0000ff;">new</span><span style="color: #000000;"> FlyWeightFactory();
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 使用HashMap管理享元池
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> HashMap&lt;String, Object&gt; hm = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">();
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 管理复合享元对象
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">private</span> HashMap&lt;String, Object&gt; compositeHm = <span style="color: #0000ff;">new</span> HashMap&lt;&gt;<span style="color: #000000;">();
+     
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> FlyWeightFactory() {
+    }
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 单例全局访问接口获取工厂
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> FlyWeightFactory getInstance() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> instance;
+    }
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 根据innerState获取池中的对象
+    * 存在返回，不存在创建并返回
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> FlyWeight getFylWeight(String innerState) {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(hm.containsKey(innerState)){
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> (FlyWeight) hm.get(innerState);
+        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            FlyWeight flyWeight </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteFlyWeight(innerState);
+            hm.put(innerState,flyWeight);
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> flyWeight;
+        }
+    }
+     
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+    * 根据innerState获取池中的对象
+    * 存在返回，不存在创建并返回
+    </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> UnsharedConcreateFlyWeight getCompositeFylWeight(String state) {
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(compositeHm.containsKey(state)){
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> (UnsharedConcreateFlyWeight) compositeHm.get(state);
+        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+            UnsharedConcreateFlyWeight flyWeight </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> UnsharedConcreateFlyWeight(state);
+            compositeHm.put(state,flyWeight);
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> flyWeight;
+        }
+    }
+ 
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">测试类也进行改造</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> flyweight.composite;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+    FlyWeightFactory flyWeightFactory </span>=<span style="color: #000000;"> FlyWeightFactory.getInstance();
+    FlyWeight flyWeight1 </span>= flyWeightFactory.getFylWeight("First"<span style="color: #000000;">);
+    FlyWeight flyWeight2 </span>= flyWeightFactory.getFylWeight("Second"<span style="color: #000000;">);
+    FlyWeight flyWeight3 </span>= flyWeightFactory.getFylWeight("First"<span style="color: #000000;">);
+     
+    System.out.println(flyWeight1);
+    System.out.println(flyWeight2);
+    System.out.println(flyWeight3);
+     
+    System.out.println(</span>"###########################################"<span style="color: #000000;">);
+     
+    flyWeight1.operation(</span>"outer state XXX"<span style="color: #000000;">);
+    flyWeight2.operation(</span>"outer state YYY"<span style="color: #000000;">);
+    flyWeight3.operation(</span>"outer state ZZZ"<span style="color: #000000;">);
+    System.out.println(</span>"###########################################"<span style="color: #000000;">);
+    UnsharedConcreateFlyWeight compositeFlyWeight </span>= flyWeightFactory.getCompositeFylWeight("composite"<span style="color: #000000;">);
+    compositeFlyWeight.add(flyWeight1);
+    compositeFlyWeight.add(flyWeight2);
+    compositeFlyWeight.operation(</span>"composite out state OOO"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093617164-2023768278.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_5108" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093617363-1168855663.png" alt="image_5c087c0b_5108" width="566" height="255" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">测试程序在原来的基础上，新获得了一个组合享元对象</div>
+<div style="line-height: 200%;">然后将两个单纯享元对象添加到组合享元对象中</div>
+<div style="line-height: 200%;">然后调用operation，通过打印信息可以看得出来</div>
+<div style="line-height: 200%;">不同的单纯享元对象，他们却有了一致的外部状态</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093617595-167798865.png"><img style="display: inline; background-image: none;" title="image_5c087c0b_4c7c" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181206093617802-2022395500.png" alt="image_5c087c0b_4c7c" width="528" height="75" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">所以使用复合享元模式的一个常用目的就是：</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>多个内部状态不同的单纯享元对象，拥有一致的外部状态</strong></span></div>
+<div style="line-height: 200%;">这种场景下，就可以考虑使用复合享元模式</div>
+<h3><span style="font-size: 18px;">使用场景 </span></h3>
+<div style="line-height: 200%;">如果有下列情况，则可以考虑使用享元模式</div>
+<div style="line-height: 200%;">
+<ul>
+<li>应用程序中使用了大量的对象</li>
+<li>大量的对象明显增加了程序的存储运行开销</li>
+<li>对象可以提取出内部状态，并且可以分离外部状态</li>
+</ul>
+</div>
+<div style="line-height: 200%;">
+<div><span style="color: #ff0000; font-size: 13.5pt;"><strong>使用享元模式有一点需要特别注意：应用程序运行不依赖这些对象的身份</strong></span></div>
+<div style="line-height: 200%;">换句话说这些对象是不做区分的，适用于&ldquo;在客户端眼里，他们都是一样的&rdquo;这种场景</div>
+<div style="line-height: 200%;">比如单纯的使用对象的方法，而不在意对象是否是创建而来的，否则如果客户端鉴别对象的身份（equals），当他们是同一个对象时将会出现问题&nbsp;&nbsp;</div>
+</div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>享元模式的核心就是共享</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>共享就需要找准内部状态，以及分离外部状态</strong></span>，<span style="color: #0000ff; font-size: 13.5pt;"><strong>外部状态由客户端维护，在必要时候，通过参数的形式注入到享元对象中</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>在有大量重复或者相似对象的场景下，都可以考虑到享元模式</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">而且为了达到共享的目的，需要通过<span style="color: #000000; font-size: 13.5pt;"><strong>工厂</strong></span>对象进行控制</div>
+<div style="line-height: 200%;">只有通过工厂来维护享元池才能达到共享的目的，如果任意创建使用则势必不能很好地共享</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 32px;">享元模式大大的减少了对象的创建，降低了系统所需要的内存空间</div>
+<div style="line-height: 32px;">但是由于<span style="color: #ff0000; font-size: 13.5pt;"><strong>将状态分为内部状态和外部状态，而外部状态是分离的，那么状态的读取必然会增大开销</strong></span></div>
+<div style="line-height: 32px;">所以说<span style="color: #000000; font-size: 13.5pt;"><strong>享元模式是时间换空间</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果确定需要使用享元模式，如果对于多个内部状态不同的享元对象，希望他们拥有一致性的外部状态</div>
+<div style="line-height: 200%;">那么就可以考虑复合享元模式，复合享元模式是与合成模式的结合。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10074969.html" target="_blank">享元模式 FlyWeight 结构型 设计模式（十五）</a></div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-12-06 09:52</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10074969" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10074969);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10074969, cb_entryCreatedDate = '2018-12-06 09:52', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

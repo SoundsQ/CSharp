@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_痴者工良</title>
+  <subtitle type="text">一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=541</id>
+  <updated>2020-04-28T13:08:36Z</updated>
+  <author>
+    <name>痴者工良</name>
+    <uri>http://www.cnblogs.com/whuanle/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12797269.html</id>
+    <title type="text">C#多线程(14)：任务基础② - 痴者工良</title>
+    <summary type="text">[TOC] 上一篇，我们学习了任务的基础，学会多种方式场景任务和执行，异步获取返回结果等。上一篇讲述的知识比较多，这一篇只要是代码实践和示例操作。 判断任务状态 | 属性 | 说明 | | | | | IsCanceled | 获取此 Task 实例是否由于被取消的原因而已完成执行。 | | IsC</summary>
+    <published>2020-04-28T13:09:00Z</published>
+    <updated>2020-04-28T13:09:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12797269.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12797269.html" />
+    <content type="html">【摘要】[TOC] 上一篇，我们学习了任务的基础，学会多种方式场景任务和执行，异步获取返回结果等。上一篇讲述的知识比较多，这一篇只要是代码实践和示例操作。 判断任务状态 | 属性 | 说明 | | | | | IsCanceled | 获取此 Task 实例是否由于被取消的原因而已完成执行。 | | IsC &lt;a href="http://www.cnblogs.com/whuanle/p/12797269.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12792639.html</id>
+    <title type="text">C#多线程(13)：任务基础① - 痴者工良</title>
+    <summary type="text">[TOC] 多线程编程 多线程编程模式 .NET 中，有三种异步编程模式，分别是基于任务的异步模式(TAP)、基于事件的异步模式(EAP)、异步编程模式(APM)。 基于任务的异步模式 (TAP) ：.NET 推荐使用的异步编程方法，该模式使用单一方法表示异步操作的开始和完成。包括我们常用的 asy</summary>
+    <published>2020-04-28T03:00:00Z</published>
+    <updated>2020-04-28T03:00:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12792639.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12792639.html" />
+    <content type="html">【摘要】[TOC] 多线程编程 多线程编程模式 .NET 中，有三种异步编程模式，分别是基于任务的异步模式(TAP)、基于事件的异步模式(EAP)、异步编程模式(APM)。 基于任务的异步模式 (TAP) ：.NET 推荐使用的异步编程方法，该模式使用单一方法表示异步操作的开始和完成。包括我们常用的 asy &lt;a href="http://www.cnblogs.com/whuanle/p/12792639.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12787505.html</id>
+    <title type="text">C#多线程(12)：线程池 - 痴者工良</title>
+    <summary type="text">[TOC] 线程池 线程池全称为托管线程池，线程池受 .NET 通用语言运行时(CLR)管理，线程的生命周期由 CLR 处理，因此我们可以专注于实现任务，而不需要理会线程管理。 线程池的应用场景：任务并行库 (TPL)操作、异步 I/O 完成、计时器回调、注册的等待操作、使用委托的异步方法调用和套接</summary>
+    <published>2020-04-27T08:19:00Z</published>
+    <updated>2020-04-27T08:19:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12787505.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12787505.html" />
+    <content type="html">【摘要】[TOC] 线程池 线程池全称为托管线程池，线程池受 .NET 通用语言运行时(CLR)管理，线程的生命周期由 CLR 处理，因此我们可以专注于实现任务，而不需要理会线程管理。 线程池的应用场景：任务并行库 (TPL)操作、异步 I/O 完成、计时器回调、注册的等待操作、使用委托的异步方法调用和套接 &lt;a href="http://www.cnblogs.com/whuanle/p/12787505.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12783086.html</id>
+    <title type="text">C#多线程(11)：线程等待 - 痴者工良</title>
+    <summary type="text">[TOC] 前面我们学习了很多用于线程管理的 类型，也学习了多种线程同步的使用方法，这一篇主要讲述线程等待相关的内容。 在笔者认真探究多线程前，只会 ；锁？ ；线程等待？ 。 前面已经探究了创建线程的创建姿势和各种锁的使用，也学习了很多类型，也使用到了很多种等待方法，例如 、`Thread.Spin</summary>
+    <published>2020-04-26T14:58:00Z</published>
+    <updated>2020-04-26T14:58:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12783086.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12783086.html" />
+    <content type="html">【摘要】[TOC] 前面我们学习了很多用于线程管理的 类型，也学习了多种线程同步的使用方法，这一篇主要讲述线程等待相关的内容。 在笔者认真探究多线程前，只会 ；锁？ ；线程等待？ 。 前面已经探究了创建线程的创建姿势和各种锁的使用，也学习了很多类型，也使用到了很多种等待方法，例如 、`Thread.Spin &lt;a href="http://www.cnblogs.com/whuanle/p/12783086.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12773894.html</id>
+    <title type="text">C#多线程(10)：读写锁 - 痴者工良</title>
+    <summary type="text">[TOC] 本篇的内容主要是介绍 ReaderWriterLockSlim 类，来实现多线程下的读写分离。 ReaderWriterLockSlim ReaderWriterLock 类：定义支持单个写线程和多个读线程的锁。 ReaderWriterLockSlim 类：表示用于管理资源访问的锁定状</summary>
+    <published>2020-04-25T08:56:00Z</published>
+    <updated>2020-04-25T08:56:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12773894.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12773894.html" />
+    <content type="html">【摘要】[TOC] 本篇的内容主要是介绍 ReaderWriterLockSlim 类，来实现多线程下的读写分离。 ReaderWriterLockSlim ReaderWriterLock 类：定义支持单个写线程和多个读线程的锁。 ReaderWriterLockSlim 类：表示用于管理资源访问的锁定状 &lt;a href="http://www.cnblogs.com/whuanle/p/12773894.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12771578.html</id>
+    <title type="text">C#多线程(9)：多阶段并行线程 - 痴者工良</title>
+    <summary type="text">[TOC] 前言 这一篇，我们将学习用于实现并行任务、使得多个线程有序同步完成多个阶段的任务。 应用场景主要是控制 N 个线程(可随时增加或减少执行的线程)，使得多线程在能够在 M 个阶段中保持同步。 线程工作情况如下： 我们接下来 将学习C 中的 Barrier ，用于实现并行协同工作。 Barr</summary>
+    <published>2020-04-25T01:22:00Z</published>
+    <updated>2020-04-25T01:22:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12771578.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12771578.html" />
+    <content type="html">【摘要】[TOC] 前言 这一篇，我们将学习用于实现并行任务、使得多个线程有序同步完成多个阶段的任务。 应用场景主要是控制 N 个线程(可随时增加或减少执行的线程)，使得多线程在能够在 M 个阶段中保持同步。 线程工作情况如下： 我们接下来 将学习C 中的 Barrier ，用于实现并行协同工作。 Barr &lt;a href="http://www.cnblogs.com/whuanle/p/12771578.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12733958.html</id>
+    <title type="text">C#多线程(8)：线程完成数 - 痴者工良</title>
+    <summary type="text">[TOC] 解决一个问题 假如，程序需要向一个 Web 发送 5 次请求，受网路波动影响，有一定几率请求失败。如果失败了，就需要重试。 示例代码如下： 代码太糟糕了，但我们可以使用 CountdownEvent 类来改造它。 CountdownEvent 类 表示在计数变为零时处于有信号状态的同步基</summary>
+    <published>2020-04-19T13:50:00Z</published>
+    <updated>2020-04-19T13:50:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12733958.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12733958.html" />
+    <content type="html">【摘要】[TOC] 解决一个问题 假如，程序需要向一个 Web 发送 5 次请求，受网路波动影响，有一定几率请求失败。如果失败了，就需要重试。 示例代码如下： 代码太糟糕了，但我们可以使用 CountdownEvent 类来改造它。 CountdownEvent 类 表示在计数变为零时处于有信号状态的同步基 &lt;a href="http://www.cnblogs.com/whuanle/p/12733958.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12731803.html</id>
+    <title type="text">C#多线程(7)：手动线程通知 - 痴者工良</title>
+    <summary type="text">[TOC] 区别与示例 AutoResetEvent 和 ManualResetEvent 十分相似。两者之间的区别，在于前者是自动(Auto)，后者是手动(Manua)。 你可以先运行下面的示例，再测试两者的区别。 AutoResetEvent 示例： ManualResetEvent 类示例： </summary>
+    <published>2020-04-19T07:40:00Z</published>
+    <updated>2020-04-19T07:40:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12731803.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12731803.html" />
+    <content type="html">【摘要】[TOC] 区别与示例 AutoResetEvent 和 ManualResetEvent 十分相似。两者之间的区别，在于前者是自动(Auto)，后者是手动(Manua)。 你可以先运行下面的示例，再测试两者的区别。 AutoResetEvent 示例： ManualResetEvent 类示例：  &lt;a href="http://www.cnblogs.com/whuanle/p/12731803.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12730169.html</id>
+    <title type="text">C#多线程(6)：线程通知 - 痴者工良</title>
+    <summary type="text">[TOC] 回顾一下，前面 lock、Monitor 部分我们学习了线程锁，Mutex 部分学习了进程同步，Semaphor 部分学习了资源池限制。 这一篇将学习 C 中用于发送线程通知的 AutoRestEvent 类。 AutoRestEvent 类 用于从一个线程向另一个线程发送通知。 微软文</summary>
+    <published>2020-04-19T00:58:00Z</published>
+    <updated>2020-04-19T00:58:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12730169.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12730169.html" />
+    <content type="html">【摘要】[TOC] 回顾一下，前面 lock、Monitor 部分我们学习了线程锁，Mutex 部分学习了进程同步，Semaphor 部分学习了资源池限制。 这一篇将学习 C 中用于发送线程通知的 AutoRestEvent 类。 AutoRestEvent 类 用于从一个线程向另一个线程发送通知。 微软文 &lt;a href="http://www.cnblogs.com/whuanle/p/12730169.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/whuanle/p/12728416.html</id>
+    <title type="text">C#多线程(5)：资源池限制 - 痴者工良</title>
+    <summary type="text">[TOC] Semaphore、SemaphoreSlim 类 两者都可以限制同时访问某一资源或资源池的线程数。 这里先不扯理论，我们从案例入手，通过示例代码，慢慢深入了解。 Semaphore 类 这里，先列出 Semaphore 类常用的 API。 其构造函数如下： | 构造函数 | 说明 | </summary>
+    <published>2020-04-18T13:57:00Z</published>
+    <updated>2020-04-18T13:57:00Z</updated>
+    <author>
+      <name>痴者工良</name>
+      <uri>http://www.cnblogs.com/whuanle/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/whuanle/p/12728416.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/whuanle/p/12728416.html" />
+    <content type="html">【摘要】[TOC] Semaphore、SemaphoreSlim 类 两者都可以限制同时访问某一资源或资源池的线程数。 这里先不扯理论，我们从案例入手，通过示例代码，慢慢深入了解。 Semaphore 类 这里，先列出 Semaphore 类常用的 API。 其构造函数如下： | 构造函数 | 说明 |  &lt;a href="http://www.cnblogs.com/whuanle/p/12728416.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

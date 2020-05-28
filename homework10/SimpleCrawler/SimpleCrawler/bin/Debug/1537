@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第14页 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=13">上一页</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+    ···
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=10">10</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=11">11</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=12">12</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=13">13</a>
+    14
+    
+    
+    
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2018/03/23.html">2018年3月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8634930.html">
+    为什么会有可恶的腾讯电脑管家&amp;怎么干掉它-电脑开机出现腾讯电脑管家-无法卸载腾讯电脑管家
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：为什么会有可恶的腾讯电脑管家 怎么干掉它 电脑开机出现腾讯电脑管家 无法卸载腾讯电脑管家 某天，趁空闲，升级了一些常用软件，其中就升了新版电脑qq，晚上玩完电脑后关机睡觉，第二天早上开机。出现了图一： ①图一 我擦，我有下载过？我有安装过？我的笔记本是windows10，如果在关机前，有软件不能正常            <a href="https://www.cnblogs.com/whuanle/p/8634930.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-23 21:23 痴者工良 阅读 (597) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8634930" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8634830.html">
+    各种服务器环境的区别
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：服务器环境的区别 *数据和内容来自互联网 一．软件介绍(apache lighttpd nginx) 1. lighttpd Lighttpd是一个具有非常低的内存开销，cpu占用率低，效能好，以及丰富的模块等特点。lighttpd是众多OpenSource轻量级的web server中较为优秀的一            <a href="https://www.cnblogs.com/whuanle/p/8634830.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-23 21:15 痴者工良 阅读 (998) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8634830" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8634748.html">
+    windows服务器架设Vpn翻墙
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：服务器架设Vpn 翻墙 Windows&#160;Server 2003/2008/2008 R2/2012这些系统的方法是完全一致的，没有任何区别，甚至Windows7/8/10也是如此，笔者在此使用的是Windows&#160;Server&#160;2008 R2。 废话不多说，教程开始。 *本文图片有部分图片从互联网下载            <a href="https://www.cnblogs.com/whuanle/p/8634748.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-23 21:11 痴者工良 阅读 (35) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8634748" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8634313.html">
+    企业公众号策划书
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：为企业分析需求，打造优质公众号，建立管理体系，设计小程序、门店小程序、微商城，策划活动营销、线上线下推广，数据可视化、数据统计。 --深圳大学生计算机社团 深职院计算机社团软创工作室 目的 建立企业公众号(服务号)模板体系、提高公司业务、推广企业形象、打造企业品牌、丰富文章等资源内容、提供售前咨询和            <a href="https://www.cnblogs.com/whuanle/p/8634313.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-23 20:43 痴者工良 阅读 (2812) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8634313" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2018/03/22.html">2018年3月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8622830.html">
+    c#listbox使用详解和常见问题解决
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：关于ListBox ListBox是WinForm中的&#160;列表&#160;控件，它提供了一个项目列表(一组数据项)，用户可以选择一个或者多个条目，当列表项目过多时，ListBox会自动添加滚动条，使用户可以滚动查阅所有选项。ListBox可以预先设定列表内容，也可以绑定其他控件或数据库，自动更新条目，把数据逐一            <a href="https://www.cnblogs.com/whuanle/p/8622830.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-22 13:25 痴者工良 阅读 (23172) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8622830" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2018/03/05.html">2018年3月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8507478.html">
+    visual studio 2017安装教程以及各类问题解决方案
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：文章的关键词和所含教程： VS2017安装/visual studio 2017安装/Xamarin/Android for&#160;visual studio 2017/VS2017找不到网站/VS2017找不到Xamarin/install Microsoft.VisualStudio.AspNet45            <a href="https://www.cnblogs.com/whuanle/p/8507478.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-05 17:52 痴者工良 阅读 (42296) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8507478" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8507523.html">
+    电脑双系统--我想体验不一样的感觉
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：目前互联网上主要有Windows、Uniux、Linux、Mac等不同功能特性的系统... ...废话不多说，教程马上开始。 电脑双系统，是指将两个操作系统安装在电脑的不同分区，两个系统互不干扰。能装什么系统需要看系统兼容性及硬件架构是否支持，如果支持，你可以选择双Windows或Windows+L            <a href="https://www.cnblogs.com/whuanle/p/8507523.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-05 10:06 痴者工良 阅读 (365) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8507523" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8507501.html">
+    重装Win10系统的非常简单的操作教程
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：这是回到学校的第二天，准备搞一份实习证明，然而宿舍宽带停了，于是我来到了社团办公室，打开了其中一台电脑。 各位师弟师妹。。。你们也太厉害，把电脑折腾成这样。。。电脑装了各种各样的工具， Adobe Photoshop、MediaCreationTool、EditPlus、C-Free、SQL Ser            <a href="https://www.cnblogs.com/whuanle/p/8507501.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-03-05 10:04 痴者工良 阅读 (1696) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8507501" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2018/01/10.html">2018年1月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8260434.html">
+    2017年中国大数据发展趋势和展望解读(下)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：导读：2015年8月，国务院印发《促进大数据发展行动纲要》，首次明确提出建设数据强国；2015年10月，党的十八届五中全会提出“实施国家大数据战略”，将大数据上升为国家战略。其后，国家政府部门、科技研究院、互联网大企业、传统工业企业等不断发布战略蓝皮书，对未来进行规划布局。 神奇的大数据 现在的社会            <a href="https://www.cnblogs.com/whuanle/p/8260434.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-01-10 19:37 痴者工良 阅读 (120) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8260434" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/8260423.html">
+    2017年中国大数据发展趋势和展望解读(上)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：导读：2015年8月，国务院印发《促进大数据发展行动纲要》，首次明确提出建设数据强国；2015年10月，党的十八届五中全会提出“实施国家大数据战略”，将大数据上升为国家战略。其后，国家政府部门、科技研究院、互联网大企业、传统工业企业等不断发布战略蓝皮书，对未来进行规划布局。 神奇的大数据 现在的社会            <a href="https://www.cnblogs.com/whuanle/p/8260423.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-01-10 19:34 痴者工良 阅读 (137) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8260423" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=13">上一页</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+    ···
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=10">10</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=11">11</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=12">12</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=13">13</a>
+    14
+    
+    
+    
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

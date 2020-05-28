@@ -1,0 +1,886 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>葡萄城技术团队 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=MH15aYd6DmX-6TABpA2xkiKENy3GAhiM2dh5rOPH89I" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/powertoolsteam/custom.css?v=KDTRb5vfz/nVENrK/SKAmf5xzTs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=X7swQJ1TyCJAf6FMVjDPbYhUAiMdNFddEy1-m0_TbFQ" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/powertoolsteam/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/powertoolsteam/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/powertoolsteam/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 71844;
+        var currentBlogApp = 'powertoolsteam';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleBlue';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/powertoolsteam/">葡萄城技术团队</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/powertoolsteam/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%91%A1%E8%90%84%E5%9F%8E%E6%8A%80%E6%9C%AF%E5%9B%A2%E9%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/powertoolsteam/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+532&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+4459</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12791820.html">
+[置顶]    还学的动吗？ 盘点下Vue.js 3.0.0 那些让人激动的功能
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/vuejs-3-0-0-beta-features-im-excited-about-c70b82fac163 路漫漫其修远兮，吾将上下而求索。——献给            <a href="https://www.cnblogs.com/powertoolsteam/p/12791820.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-28 09:00 葡萄城技术团队 阅读 (2463) 评论 (32)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12791820" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12791820.html">
+    还学的动吗？ 盘点下Vue.js 3.0.0 那些让人激动的功能
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/vuejs-3-0-0-beta-features-im-excited-about-c70b82fac163 路漫漫其修远兮，吾将上下而求索。——献给            <a href="https://www.cnblogs.com/powertoolsteam/p/12791820.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-28 09:00 葡萄城技术团队 阅读 (2463) 评论 (32)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12791820" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/23.html">2020年4月23日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12758531.html">
+    终于有一款组件可以全面超越Apache POI
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队原创并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 在 GrapeCity Documents出现以前，服务端文档组件向来以Apache POI为代表，作为一款由Java编写的开源API库，Apache POI 主要应用于对Mi            <a href="https://www.cnblogs.com/powertoolsteam/p/12758531.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-23 09:19 葡萄城技术团队 阅读 (92) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12758531" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12758496.html">
+    每个优秀程序员都应遵循的代码原则和规范
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队原创并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 什么是优秀的程序员? 首先我们会先提出这个问题，如果你向10个人问这个问题，尽管可能答案不同，但是少有一点应该是一致的。而对我个人而言，一个优秀的程序员应该是一个能够充分理解需            <a href="https://www.cnblogs.com/powertoolsteam/p/12758496.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-23 09:11 葡萄城技术团队 阅读 (2424) 评论 (5)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12758496" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/16.html">2020年4月16日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12710386.html">
+    合理使用CSS框架，加速UI设计进程
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：由于CSS的出现，现在的网站风格已经与它们很早之前的样子有了很大的不同。CSS的出现为原本平平无奇的网页注入了活力。这也是网站的用户体验得到进一步进化的原因。这可能就是当今几乎所有的网站或多或少都在使用CSS的原因之一。在本文，我们将会介绍一些CSS框架，想信它能为你的前端开发提供一些帮助。            <a href="https://www.cnblogs.com/powertoolsteam/p/12710386.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-16 09:05 葡萄城技术团队 阅读 (610) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12710386" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/09.html">2020年4月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12666382.html">
+    为什么我建议每个开发人员都需要学Python？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://dzone.com/articles/10-reasons-why-every-developer-should-learn-python 世界上只有几种编程语言提供多种功能。 在当            <a href="https://www.cnblogs.com/powertoolsteam/p/12666382.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-09 13:36 葡萄城技术团队 阅读 (2765) 评论 (21)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12666382" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/04/02.html">2020年4月2日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12617362.html">
+    2020年了，跨平台开发框架现在怎样了？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://dzone.com/articles/cross-platform-mobile-development-2020-trends-and 多年来，跨平台移动开发已经获得了最流行软件开            <a href="https://www.cnblogs.com/powertoolsteam/p/12617362.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-02 08:27 葡萄城技术团队 阅读 (4924) 评论 (16)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12617362" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/03/27.html">2020年3月27日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12579122.html">
+    您知道SASS吗？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/4-reasons-to-use-sass-in-your-frontend-project-bce88631c602 SASS是一种预处理器及样式表语            <a href="https://www.cnblogs.com/powertoolsteam/p/12579122.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-03-27 08:27 葡萄城技术团队 阅读 (412) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12579122" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/03/19.html">2020年3月19日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12524618.html">
+    打破技术壁垒， 用SpreadJS 抢占“表格文档协同编辑系统”的入市先机
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队于博客园原创并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 在线文档的发展机遇与挑战 现阶段，复工复产成为企业的迫切诉求。线上“远程办公”，作为一种更安全高效的工作模式，正在被越来越多的企业所推崇，这也为办公软件 SaaS 化及            <a href="https://www.cnblogs.com/powertoolsteam/p/12524618.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-03-19 15:29 葡萄城技术团队 阅读 (80) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12524618" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/03/13.html">2020年3月13日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12486065.html">
+    7种你应该知道的JavaScript常见的错误
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/types-of-native-errors-in-javascript-you-must-know-b8238d40e492 从浏览器的控制台到运行N            <a href="https://www.cnblogs.com/powertoolsteam/p/12486065.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-03-13 13:53 葡萄城技术团队 阅读 (556) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12486065" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/02/26.html">2020年2月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12365140.html">
+    前端开发：这10个Chrome扩展你不得不知
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/10-top-chrome-extensions-for-front-end-developers-db23a01dce1e 1. CSSViewer             <a href="https://www.cnblogs.com/powertoolsteam/p/12365140.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-26 09:12 葡萄城技术团队 阅读 (1106) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12365140" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/02/19.html">2020年2月19日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12330650.html">
+    疫情下，买菜难，其实卖菜的也是这么想的
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：最近新冠肺炎疫情牵动着全国人民的心，很多小区都积极响应“减少聚集、减少外出”的号召，进行封闭管理。在这种情况下，人们如何才能方便的采购蔬菜水果、肉禽蛋奶等生活必需品，维持正常生活呢？至少在小编小区里，很多原本不做配送的小店和小超市都开始了配送，接单也基本都是依靠拉群接龙的方式来进行的。不过这种形式人            <a href="https://www.cnblogs.com/powertoolsteam/p/12330650.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-19 13:44 葡萄城技术团队 阅读 (227) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12330650" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/02/12.html">2020年2月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12297746.html">
+    疫情之下远程办公，开启企业办公的全新时代！
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：2020年开春，新冠肺炎肆虐，为了切实落实疫情防控，保障业务有序开展，各大企业纷纷出台延期复工政策，被动开启【远程办公】模式。 每一次大的疫情都将深刻改变世界。这也让人不禁好奇：当疫情过后，远程办公能否从非常时期的“不得不”，变成更多企业主动选择的新趋势? 带着这个问题，小编综合分析了国内外“远程办            <a href="https://www.cnblogs.com/powertoolsteam/p/12297746.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-12 08:45 葡萄城技术团队 阅读 (2343) 评论 (10)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12297746" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/02/04.html">2020年2月4日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12259206.html">
+    “泛在电力物联网”究竟是什么？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在国家电网有限公司（下称：国网公司）2019年初发布的1号文件中，着力于构建“三型两网、世界一流”的能源互联网被排在年度重点工作首位，即由承载电力流的坚强智能电网与承载数据流的泛在电力物联网共同构成能源流、业务流、数据流“三流合一”的能源互联网。 国网公司提出，要在未来几年继续建设运营好以特高压为骨            <a href="https://www.cnblogs.com/powertoolsteam/p/12259206.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-04 13:48 葡萄城技术团队 阅读 (308) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12259206" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/01/14.html">2020年1月14日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12191922.html">
+    2020 春节集五福最详细收集攻略
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队于博客园原创并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 一年一度的支付宝集五福活动已经开始了，不知从什么时候开始，集五福已经成为了惯例，昨天在和同事在聊天过程里还说到了这样的话题：每年只要这个“集五福”的活动一出来，这年的味            <a href="https://www.cnblogs.com/powertoolsteam/p/12191922.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-14 14:42 葡萄城技术团队 阅读 (560) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12191922" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2020/01/08.html">2020年1月8日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12164816.html">
+    怎样使我们的用户不再抵触填写Form表单？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/8-tips-for-an-awesome-signup-form-30300816282c 大多数人并不喜欢填表，我想这应该是不争的事实，但为什么呢？            <a href="https://www.cnblogs.com/powertoolsteam/p/12164816.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-08 09:15 葡萄城技术团队 阅读 (1137) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12164816" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2019/12/27.html">2019年12月27日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12105462.html">
+    你的按钮到底在帮助用户还是在误导用户？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 原文出处：https://blog.bitsrc.io/do-your-buttons-lead-or-mislead-your-users-d5d83531238b 按钮是UI/UX最关键的组件之一，在不同            <a href="https://www.cnblogs.com/powertoolsteam/p/12105462.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-27 08:48 葡萄城技术团队 阅读 (1951) 评论 (17)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12105462" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2019/12/20.html">2019年12月20日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/12071440.html">
+    2020年值得你去试试的10个React开发工具
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队翻译并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 JavaScript每天都在出现大量的框架和工具，而React是除了上次我们提到的Vue和Ember之外另一款比较流行的框架。但因为新的工具每天都在不断的出现，开发者在尝试时总            <a href="https://www.cnblogs.com/powertoolsteam/p/12071440.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-20 09:34 葡萄城技术团队 阅读 (1108) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12071440" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2019/12/11.html">2019年12月11日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/onlineexcel.html">
+    想实现多人协作的“在线Excel”？真没那么简单
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队原创并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 Excel是我们办公中常用的工具 ，它几乎能为我们处理大部分数据，友好的交互界面、丰富的公式函数和易于上手的图表为我们在数据统计方面提供了不小的帮助，但经过一段时期运行，就会出            <a href="https://www.cnblogs.com/powertoolsteam/p/onlineexcel.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-11 14:42 葡萄城技术团队 阅读 (1462) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12022484" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2019/12/05.html">2019年12月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/urlobject.html">
+    不要再造轮子了：聊一聊 JavaScript 的 URL 对象是什么？
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：本文由葡萄城技术团队于博客园翻译并首发 转载请注明出处：葡萄城官网，葡萄城为开发者提供专业的开发工具、解决方案和服务，赋能开发者。 如果我们自己编写从URL中分析和提取元素的代码，那么有可能会比较痛苦和麻烦。程序员作为这个社会中最“懒”的群体之一，无休止的重复造轮子必然是令人难以容忍的，所以大多数浏            <a href="https://www.cnblogs.com/powertoolsteam/p/urlobject.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-12-05 10:52 葡萄城技术团队 阅读 (1106) 评论 (6)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11987837" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/powertoolsteam/archive/2019/11/26.html">2019年11月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/powertoolsteam/p/redis.html">
+    Redis是什么？看这一篇就够了
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在Web应用发展的初期，那时关系型数据库受到了较为广泛的关注和应用，原因是因为那时候Web站点基本上访问和并发不高、交互也较少。而在后来，随着访问量的提升，使用关系型数据库的Web站点多多少少都开始在性能上出现了一些瓶颈，为了克服这一问题，Redis应运而生，让我们通过本文一起来了解下Redis 是什么，它有什么优点？            <a href="https://www.cnblogs.com/powertoolsteam/p/redis.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-26 14:19 葡萄城技术团队 阅读 (2285) 评论 (5)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11935143" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/powertoolsteam/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 葡萄城技术团队
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <div style="display:none;"><script language="javascript" type="text/javascript" src="//js.users.noscript.cnitblog.com/19083604.js"></script>
+<noscript><a href="//www.noscript.cnitblog.com/?19083604" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="//img.users.noscript.cnitblog.com/19083604.asp" style="border:none" /></a></noscript></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98869130-1', {'allowAnchor': true});
+  ga('send', 'pageview', {'page': location.pathname+location.search+location.hash});
+
+</script>
+    </div>
+</body>
+</html>

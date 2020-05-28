@@ -1,0 +1,953 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="编码简介，什么是编码，什么是Unicode编码，Unicode编码方式有哪些 utf8 utf-8 utf16 utf-16编码方式的实现  Unicode平面 BMP 字节序 大小端排序 Unico" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[十]基础数据类型之Unicode编码简介 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9771885.html">[十]基础数据类型之Unicode编码简介</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        编码简介，什么是编码，什么是Unicode编码，Unicode编码方式有哪些 utf8 utf-8 utf16 utf-16编码方式的实现  Unicode平面 BMP 字节序 大小端排序 Unicode与utf8 utf16
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3><span style="font-family: 微软雅黑; font-size: 16px;">编码含义</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">关于编码的含义,之前也说过,计算机只能存储二进制序列 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以对于字符,保存的时候,需要进行编码为二进制,进行存储 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">呈现的时候,需要将二进制进行解码,转换成字符的形式 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">有很多种编码方式,比如ASCII </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">(American Standard Code for Information Interchange，美国信息交换标准代码） </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">使用一个字节进行编码,一个字节可以表示的最大值为255 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">很显然,对于英语和其他一些西欧语言来说,足够了,英文字母总共才几个对吧 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">那么对于汉字呢?ASCII显然是不够用的,所以出现了GBK等以支持汉字 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">那么,日语 韩语呢?他们当然也搞出来一些支持他们文字的编码 </span></div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;">Unicode诞生</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">于是,人们意识到他们应该提出一种标准方案来展示世界上所有语言中的所有字符，出于这个目的，Unicode诞生了 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-weight: bold;">Unicode 是一种字符集,规定了符号对应的二进制代码</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">至于这个二进制代码如何存储则没有任何规定,也就是说它是一种编码规定 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-weight: bold;">是编码字符集,而不是实际的编码方案</span> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">最初Unicode使用一个16位长度的二进制序列,也就是最多支持&nbsp;&nbsp; (2的16次方-1) 65536个字符,也就是0&nbsp; ~ 65535 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">范围是 0x0000 ~0xFFFF&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">Unicode使用U+前缀, 加上编码的值,来表示Unicode中的字符编码 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">也就是&nbsp; U+0000&nbsp;&nbsp; ~&nbsp; U+FFFF&nbsp; </span></div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;"><span style="font-weight: bold;">Unicode不够用了</span> </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">显然,随着更多字符的增加,&nbsp; 65536 是不够用的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">于是Unicode 不得不进行扩展,于是使用8位用作扩展位,形式如下 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132604499-1078161192.png"><span style="font-family: 微软雅黑;"><img style="display: inline; background-image: none;" title="image_5bbedd5d_2d72" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132605264-1007831393.png" alt="image_5bbedd5d_2d72" width="384" height="64" border="0" /></span></a></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">一个字节8位可以表示 2的8次方-1 = 256 个数,最大可以扩展为 256 *65526=16777216 个 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">不过也不需要那么多的字符, 仅仅使用了前面的17个 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">也就是 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">00 01 02 03 04 05 06 07 08 0A 0B 0C 0D 0E 0F 10 </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132606030-2045813677.png"><span style="font-family: 微软雅黑;"><img style="display: inline; background-image: none;" title="image_5bbedd5d_5f71" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132606843-1841878166.png" alt="image_5bbedd5d_5f71" width="401" height="664" border="0" /></span></a></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">于是按照扩展位,划分了17个维度,这每个维度,叫做一个<span style="font-weight: bold;">平面</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">17个平面,编号从 0~16 </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">每个平面 65536个字符 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">17个平面,扩展后总共可以表示1114112个字符 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">扩展后的范围为 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">U+000000&nbsp;&nbsp; ~&nbsp; U+10FFFF&nbsp;&nbsp; </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">其中对于第一个U+00&nbsp; 也就是U+0000到U+FFFF ,包含了最常见的字符&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">被称作 <span style="font-size: 13.5pt;"><strong>基本多语言平面</strong></span>&nbsp; Basic Multilingual Plane, BMP </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">其余的U+010000&nbsp;&nbsp; ~&nbsp; U+10FFFF&nbsp;&nbsp; 被称作辅助平面 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">至此你应该了解到了,什么是Unicode的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">他就是一个具有17个平面,每个平面可以容纳65536个字符的一张巨大的字符码表 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">一个字符对应一个二进制序列 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">基本平面中使用四位十六进制数 在零号平面以外的字符则需要使用五位或六位十六进制数了 </span></div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;"><span style="font-weight: bold;"><span>编码方式</span></span> </span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">Unicode 没有规定字符对应的二进制码在计算机中如何存储,只是规定了他的值是多少而已 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">一个字符对应的实际的值,我们称之为<span style="font-weight: bold;">代码点 code point</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">那么一个码点实际的值怎么存储呢? </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">可能需要1个,可能需要2个,甚至可能需要3个或者4个字节来表示 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">对于计算机来说,面对着一堆字节,他们知道到底哪个或者哪几个是一个字符呢? </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">听起来可能有点迷惑,不是知道具体的值了么?怎么还不知道如何表示?<br /><br />比如数字1 他的码点是1 <br />假如我用两个字节来存储,每个字节的前两位我当做其他的标志位, 设置为11 <br />那么可能结果是这样子的11000000 11000001<br />显然,他的值并不是1 <br />编码方式只是可以保证,你的字符是按照指定的字符集进行编码的<br />也就是说如果你告诉我拿出来码点为1 的,我会把1100 0000 1100 0001 解析成数字1 <br />但是并不能保证我保存的数据就是他的码点的真值,0000 0001 ,中间形式是编码方式说了算的<br /><br />最直观的例子就是网络中报文的传输,都会附加自己的头信息<br />所以中间传输的数据并不是跟你发送的数据一模一样,中间的数据就是编码形式的存储<br />但是,接收端接受解析后,就是跟你发送的数据一样的,这就好像是你的字符<br />
+					</span></td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">存储的问题就是编码方式的问题,就是表示成什么形式的问题
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">编码方式有UTF-8 UTF-16&nbsp; UTF-32
+</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 1155px; color: #424242; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">UTF-8 是变长
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">UTF-32 是定长
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">UTF-16介于他们之间 2个字节或者4个字节
+						</span></div>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">&nbsp;</span></div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;"><span style="font-weight: bold;">utf-16</span>
+</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">UTF-16编码以16位无符号整数为单位
+					</span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">我们把Unicode编码记作U&nbsp; 编码规则如下
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果U&lt;0x010000， 也就是0x000000 ~ 0x00FFFF
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">U的UTF-16编码,&nbsp; 就是U对应的16位无符号整数
+						</span></div>
+
+
+</td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;">如果U&ge;0x010000&nbsp;&nbsp;&nbsp; 也就是0x010000 ~ 0x10FFFF<br />我们先计算下 U'=U-0x010000&nbsp; <br />可以得出来 U'&nbsp; 范围是 0x000000 ~ 0x0FFFFF<br />显然,&nbsp; U'的最大值为0xFFFFF&nbsp;&nbsp; 也就是最多20个1&nbsp;&nbsp;&nbsp; 也就是可以被写成20个二进制位<br />既然是20个二进制位,那么我们是不是可以把它拆分成两组呢?<br />每组10个二进制位&nbsp;&nbsp;&nbsp; 00&nbsp; 0000&nbsp; 0000<br />它能表示的范围是2的10次方=1024个&nbsp; <br /><br />BMP是2个字节,16位, 很显然,如果把U' 拆分成两组,每组10个二进制位的话<br />每一个都能够保存到2个字节内<br /><br />所以Unicode标准规定：基本多语言平面内，<span style="font-size: 13.5pt;"><strong>U+D800..U+DFFF</strong></span>的值不对应于任何字符，为<span style="font-size: 13.5pt;"><strong>代理区</strong></span> ,其中又分为高代理区和低代理区<br /><br />U+D800 加上10个二进制位的数值的最大值,可以得到高代理区的范围<br />U+D800 ---&gt;1101 10 00&nbsp; 0000&nbsp; 0000&nbsp; + 0000 00 11&nbsp; 1111 1111 = 1101 1011 1111 1111 = <span style="font-weight: bold;">0xDBFF</span><br /><br />下一个就是0xDBFF +1 = 0xDC00,所以低代理区从0xDC00&nbsp; 开始<br />0xDC00 加上10个二进制位的数值的最大值,可以得到低代理区的范围<br />0xDC00----&gt; 1101&nbsp; 1100&nbsp; 0000&nbsp; 0000 + 0000 00 11&nbsp; 1111 1111 = 1101111111111111 = <span style="font-weight: bold;">0xDFFF</span>
+					</span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: 13.5pt;"><strong>高代理区范围&nbsp; U+D800 ~0xDBFF<br />低代理区范围&nbsp;&nbsp; 0xDC00 ~ 0xDFFF<br /><br />代理区间是U+D800....U+DFFF</strong></span>
+					</span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以UTF-16的编码方式就是<br />先计算 U'=U-0x010000 <br />然后将U'写成二进制形式：yyyy yyyy yyxx xxxx xxxx <br />然后分别计算高位代理和低位代理<br />U+D800 ---&gt;1101 10 00&nbsp; 0000&nbsp; 0000 +&nbsp;&nbsp; 0000 00 yy&nbsp; yyyy yyyy = 1101 10 yy&nbsp; yyyy&nbsp; yyyy<br /><br />0xDC00----&gt; 1101&nbsp; 1100&nbsp; 0000&nbsp; 0000 + 0000 00 xx&nbsp; xxxx&nbsp; xxxx =&nbsp; 1101&nbsp; 11xx&nbsp; xxxx&nbsp; xxxx<br /><br />
+					</span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑;">再精简下步骤<br />1. 先计算 U'=U-0x010000 <br />2. 然后将U'写成二进制形式：yyyy yyyy yyxx xxxx xxxx <br />3.两个值为&nbsp;&nbsp; 1101 10 yy&nbsp; yyyy&nbsp; yyyy&nbsp; /&nbsp;&nbsp;&nbsp; 1101&nbsp; 11xx&nbsp; xxxx&nbsp; xxxx
+					</span></td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">在这种处理方式下
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果一旦读取到值为U+D800 ~0xDBFF&nbsp; ,他必然是代理区间中的一部分,也就非 0号平面中的字符
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">而且,我们还能够根据值判断出来,到底是高位还是低位,也就是第一个还是第二个数值
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">只需要取出来这20位,然后再加上0x010000&nbsp; 这就是这个字符的码点
+	</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">可以看得出来,对于基本平面中的字符,使用2个字节长度,16位表示,这被称之为一个<span style="font-size: 13.5pt;"><strong>代码单元</strong></span>
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">对于除了基本平面外的辅助平面,使用4个字节长度来表示,也就是两个代码单元
+	</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">之前我们提到过,Unicode中的一个字符的值,被称之为一个<span style="font-size: 13.5pt;"><strong>码点</strong></span>
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">显然,一个码点,可能被一个代码单元存储,也可能被两个连续的代码单元存储
+						</span></div>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: 16px;">
+	<strong><span>UTF-32</span></strong>
+</span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">UTF-32编码以32位无符号整数为单位
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">Unicode的UTF-32编码就是其对应的32位无符号整数
+	</span></div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">32位可以表示的个数为&nbsp; 2的32次方&nbsp; 为4294967296,显然绰绰有余,没什么好说的了
+</span></div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;"><span style="font-weight: bold;">UTF-8</span>
+</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="text-align: justify; color: #4f4f4f; text-transform: none; text-indent: 0px; letter-spacing: normal; font-size: 16px; font-style: normal; font-weight: 400; word-spacing: 0px; float: none; display: inline !important; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; font-variant-ligatures: common-ligatures; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">UTF-8 是目前互联网上使用最广泛的一种 Unicode 编码方式,可变长</span>
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="text-align: justify; color: #4f4f4f; text-transform: none; text-indent: 0px; letter-spacing: normal; font-size: 16px; font-style: normal; font-weight: 400; word-spacing: 0px; float: none; display: inline !important; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; font-variant-ligatures: common-ligatures; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">使用 1 - 4 个字节表示一个字符，根据字符的不同变换长度&emsp;&emsp;</span>
+</span></div>
+<div style="text-align: justify; line-height: 200%;">&nbsp;</div>
+<div style="text-align: justify; line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: large; font-weight: bold;">规则</span><br />可以把编码分解成两部分,<span style="font-size: large; font-weight: bold;">head</span>和<span style="font-size: large; font-weight: bold;">body</span><br />head中记录需要字节的个数,使用第一个字节中1 的个数来表示<br />body记录真实的数据, 如果需要不止一个字节,那么body自然由多个字节组成,每个body的前两个字节为10&nbsp; 其余为数据<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132607037-1258221364.png"><span style="font-family: 微软雅黑;"><img style="display: inline; background-image: none;" title="image_5bbedd5d_aec" src="https://img2018.cnblogs.com/blog/897393/201810/897393-20181011132607233-1337249008.png" alt="image_5bbedd5d_aec" width="758" height="212" border="0" /></span></a><br /><span style="font-family: 微软雅黑;">UTF-8编码的最大长度是4个字节,也就是最多有21个x 表示<br />Unicode的最大码位0x10FFFF&nbsp;&nbsp; 0001 0000 1111 1111 1111 1111也只有21位
+				</span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果一个字节足够表示<br />只需要一个字节即可表示,那么第一位为0&nbsp; 其余7位用于表示字符编码的值<br />看得出来明显的好处,可以兼容ASCII&nbsp; </span></td>
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果一个字节不够表示,根据范围选择,需要几个字节,就有几个1,然后补一个0&nbsp;&nbsp; 后面的body依次存放数据即可<br />
+				</span></td>
+
+
+</tr>
+<tr>
+<td><span style="font-family: 微软雅黑;">想要确定一个码点的编码<br />1. 查看范围,根据上表确定格式<br />2.转换为对应的二进制序列<br />3. 替换掉x即可
+				</span></td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<h3><span style="font-family: 微软雅黑; font-size: 16px;">字节序
+</span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">根据我们上面描述的utf8 以及utf16都有可能使用不止一个字节进行编码
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">其实还有很多其他数据也不仅仅是一个字节进行表达
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">在计算机中最终都是二进制序列的形式
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">比如utf-16中,虽然我可以根据值确定是否在0号平面内,还是在扩展辅助平面的
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">但是,如何把一个二进制序列解析为他的值,这是一个问题
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">比如
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">0000 0001&nbsp; 0000 0010 假如说这是一个十六进制数
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">他到底表示的是0102 还是0201? 从哪边开始解读?
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">人会很自然的把左边当高位,右边当低位, 但是, 计算机, 你必须对他进行说明
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">这就是字节序的问题
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">其实就是高位和低位与内存地址高低的对应关系
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">分为大端排序( Big endian&nbsp; BE)和小端排序(Little endian&nbsp; LE)
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">大端排序----高地址存储低位&nbsp; 低地址存储高位
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">小端排序----高地址存储高位&nbsp; 低地址存储低位
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-family: 微软雅黑;">在内存中0x01020304的存储方式
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑;">内存地址 4000 4001 4002 4003
+					</span></div>
+<div><span style="font-family: 微软雅黑;">BE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 01&nbsp;&nbsp;&nbsp;&nbsp; 02&nbsp;&nbsp;&nbsp;&nbsp; 03&nbsp;&nbsp;&nbsp;&nbsp; 04
+					</span></div>
+<div><span style="font-family: 微软雅黑;">LE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 04&nbsp;&nbsp;&nbsp;&nbsp; 03&nbsp;&nbsp;&nbsp;&nbsp; 02&nbsp;&nbsp;&nbsp;&nbsp; 01
+					</span></div>
+<div>&nbsp;</div>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">其实只要记住,大小端说的都是低地址
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">大端就是低地址存储高位
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">小端就是低地址存储低位
+	</span></div>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-10-11 13:34</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9771885" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9771885);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9771885, cb_entryCreatedDate = '2018-10-11 13:34', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

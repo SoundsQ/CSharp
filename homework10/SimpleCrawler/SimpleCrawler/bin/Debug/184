@@ -1,0 +1,781 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="白皮书首次完整介绍了我司数据中台的数据资产管理、数据开放共享、开发协作调度、数据采集与迁移管理、数据可视化及自助分析、平台运维管控六大技术领域，并从抽象出来的平台支撑、数据管理和数据产品三大体系逐一拆" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>禧云数芯大数据平台技术白皮书 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/whitepaper.html">禧云数芯大数据平台技术白皮书</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        白皮书首次完整介绍了我司数据中台的数据资产管理、数据开放共享、开发协作调度、数据采集与迁移管理、数据可视化及自助分析、平台运维管控六大技术领域，并从抽象出来的平台支撑、数据管理和数据产品三大体系逐一拆开讲解。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span>白皮书作者：赵兴申</span></p>
+<p><span>顾问：郑昀</span></p>
+<p><span>出品方：禧云集团-基础技术中心-大数据与算法部</span></p>
+<p><span>&nbsp;</span></p>
+<p><span>数据分析组：谭清勇、王明军、徐蕊、曹寿波</span></p>
+<p><span>平台开发组：刘永飞、李喜延</span></p>
+<p><span>数据可视化组：陈少明、董建昌</span></p>
+<p><span>基础架构组：崔明黎、邱志伟、陈赏</span></p>
+<p>&nbsp;</p>
+<h1><strong>第一章：</strong><strong>数芯大数据平台</strong></h1>
+<h2><strong>1</strong><strong>.</strong><strong>1 禧云大数据发展历程</strong></h2>
+<p>知名咨询公司麦肯锡称：『数据，已经渗透到当今每一个行业和业务职能领域，成为重要的生产因素。人们对海量数据的挖掘和运用，预示着新一波生产率增长和消费盈余浪潮的到来。』良好的数据管理和处理技术，已经成为企业不可或缺的竞争优势。</p>
+<p>禧云集团（以下简称禧云）将大数据列为企业发展战略，始终秉持『数据驱动』的理念，时刻跟随大数据发展趋势。经过几年的探索和发展，逐步构建起集数据管理、开发协作、自助分析、数据开放和运维管控等于一体的数芯大数据平台。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102225954997-706591694.png" alt="" width="759" height="417" /></p>
+<p style="text-align: center;"><span>&nbsp;图1：数芯大数据平台</span></p>
+<h2><strong>1</strong><strong>.2&nbsp;</strong><strong>数芯大数据平台介绍</strong></h2>
+<p>数芯大数据平台建设始终围绕『开放共享、数据赋能』的理念，为集团、合作伙伴的运营发展提供强有力的支撑和助力。经过多年的实践，逐步构建了从底层数据采集、数据处理，到数据应用服务以及数据产品的全链路、高管控、开放式的大数据体系。图2所示，是数芯大数据平台赋能业务全景图。</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230105172-1859741718.png" alt="" width="904" height="590" /></p>
+<p style="text-align: center;"><span>&nbsp;图2：数芯大数据平台赋能业务全景图</span></p>
+<p>为覆盖数据处理的整个链路环节，数芯大数据平台建设之初，规划了数据资产管理、数据开放共享、开发协作调度、数据采集与迁移管理、数据可视化及自助分析、平台运维管控六大技术领域，分别对应数芯大数据平台的不同子系统，我们将在下章节中详细展开。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230159025-855100926.png" alt="" width="434" height="402" /></p>
+<p style="text-align: center;"><span>图3：数芯六大技术领域</span></p>
+<p>&nbsp;</p>
+<p>从数据生产效率和对外赋能角度，数芯大数据平台又可抽象出数据产品体系、平台支撑体系和数据管理体系三大支撑体系。具体作用如图4所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230232421-1682929283.png" alt="" width="622" height="432" /></p>
+<p style="text-align: center;"><span>&nbsp;图4：数芯三大支撑体系</span></p>
+<p>&nbsp;</p>
+<p>本文以数芯三大支撑体系为章节，本着相互学习、交流的态度，详细介绍数芯大数据平台的建设过程。在当前『一切业务数据化，一切数据业务化』的背景下，数据已经成为企业战略和在市场竞争中取得优势的关键，因此我们以数芯大数据平台的数据管理体系开篇。</p>
+<p><span>&nbsp;</span></p>
+<h1><strong>第二章：</strong><strong>数据管理体系</strong></h1>
+<p>禧云下设信息、数科、世纪品牌等诸多子公司，每个下属公司或关联ISV都独立运营，专注于解决团餐的某一领域业务问题。如果没有良好的数据管理体系，很容易造成数据烟囱式生产、信息孤岛等现象，无法为集团决策部门提供全面立体的数据支撑，大大地降低子公司间的协同增幅能力。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230309060-2093047608.png" alt="" width="858" height="419" /></p>
+<p style="text-align: center;">图5：数据管理体系图</p>
+<p>如图5所示，数芯大数据平台数据管理体系在数据接入、数据仓库规划建设、数据集市方面制定了统一的规范，对接集团各子公司和关联ISV，可以构建同时面向集团、各业务单元和子公司的数据分析系统。数据湖、数据仓库和数据集市加上数据接入、数据清洗、数据生产等规范共同组成了数据管理体系。</p>
+<p><span>&nbsp;</span></p>
+<h2><strong>2</strong><strong>.1&nbsp;</strong><strong>数据湖</strong></h2>
+<p><strong>&middot;</strong><strong>数据湖作用</strong></p>
+<p>数据湖的定义以及与数据仓库的区别，目前业内还没有达成一致的意见，但许多企业已经开始实践。数据湖在禧云的实践是<strong>作为存储集团各子公司、ISV各种各样原始数据的大型仓库，其中的数据可供存取、处理、分析和传输</strong><span>。这样处理主要有以下两方面优点：</span></p>
+<p><strong>1.&nbsp;</strong><strong>数据统一存储，统一规划，可同时支持集团、各子公司和ISV的数据分析业务；</strong></p>
+<p><strong>2.&nbsp;</strong><strong>与上游系统解耦，数据一次接入，多次利用，接入后的数据可用于实时分析和数据仓库建设等不同用途，减少与上游系统的耦合。</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>&middot;</strong><strong>技术解决方案</strong></p>
+<p>禧云数据大多为关系型数据库和键值数据存储等结构化、半结构化数据，基于数据吞吐性能和查询分析能力，我们选择Apache HBase（一个高可靠性、高性能、面向列、可伸缩的分布式数据库）作为数据湖的技术解决方案。</p>
+<p>如图5所示，上游数据经过自研的数据迁移平台（第三章：平台支撑体系部分介绍）会批量或实时写入数据湖，利用Apache HBase列式存储的特点，数据迁移平台解决了上游数据元数据发生变更（例如：增加或删除字段）对数据湖的写入无感知问题。</p>
+<p><span>&nbsp;</span></p>
+<p><strong>&middot;</strong><strong>数据存储规范</strong></p>
+<p>为合理利用存储资源，根据数据的不同特点，对存储在数据湖中的数据制定了相应的数据存储规范，例如对交易流水等数据量较大的表，在数据仓库中做好数据分区和备份后，利用Apache HBase TTL（数据生存时间）特性，设置相应的生命周期（生命周期默认保存六个月，指从当前时刻开始向前六个月时间内产生的数据）。</p>
+<p><span>&nbsp;</span></p>
+<h2><strong>2</strong><strong>.2&nbsp;</strong><strong>数据仓库</strong></h2>
+<p>为支撑集团运营发展和决策分析，禧云起建之初构建了完善的数据仓库体系，我们称之为离线数据仓库阶段。</p>
+<p>随着市场竞争环境的不断加剧，企业对数据的时效性要求越来越高，为应对市场变化，从2019年3月份开始规划实时数据仓库的建设，到2019年9月份历时六个月实时数据仓库结项，中间实时数仓顺利支撑了团餐峰值周运营活动。</p>
+<p>如图5所示，现阶段数据管理体系中的数据仓库包含离线数据仓库和实时数据仓库两大部分。</p>
+<p><span>&nbsp;</span></p>
+<h3><strong>2.</strong><strong>2.1&nbsp;</strong><strong>离线数据仓库</strong></h3>
+<p><strong>&middot;</strong><strong>数据仓库作用</strong></p>
+<p>离线数据仓库处理T+1（当日产生的数据，下一日才能看到）场景的数据，为企业运营发展提供决策支持。</p>
+<p>如图5所示，离线数据仓库的数据来源为数据湖，可对接不同子公司的数据，为保证公司间数据相互独立和权限划分，禧云离线数据仓库以公司为主线进行建设。</p>
+<p><span>&nbsp;</span></p>
+<p><strong>&middot;</strong><strong>技术解决方案</strong></p>
+<p>数据仓库依托数芯大数据平台完整的大数据生态体系进行构建，数据存储为HDFS、离线计算框架为Hive、Spark、SparkSQL，采用Yarn作为资源隔离与调度框架。在数据分析处理方面，我们通过开发协作平台（详见第三章：平台支撑体系部分）来完成离线计算任务的提交、工作流调度、运行监控等工作。</p>
+<p><span>&nbsp;</span></p>
+<p><strong>&middot;</strong><strong>数据存储规范</strong></p>
+<p>这里的数据存储规范包括数据分层规范和数据命名规范两种，数据分层是数据仓库设计中重要的一环，良好的分层设计能够让整个数据体系更易理解和使用。三层模型、四层模型是业内比较通用的分层模型，由于数据湖的存在，我们省去了ODS层（操作数据存储层，存储原始数据），采用三层模型，为更好的理解和使用数据，我们重新命名了仓库层级。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230345209-835094644.png" alt="" width="591" height="608" /></p>
+<p style="text-align: center;">表1：数据存储规范</p>
+<p>&nbsp;</p>
+<h3><strong>2</strong><strong>.2</strong><strong>.</strong><strong>2&nbsp;</strong><strong>实时数据仓库</strong></h3>
+<p><strong>&middot;</strong><strong>数据仓库作用</strong></p>
+<p>实时数据仓库主要解决数据时效性问题，禧云有许多业务场景需要数据的实时支撑，例如不定期举行的团餐峰值周活动，峰值周会将目标分拆到每一天，运营人员需要实时把控目标完成情况，及时调整策略，确保目标完成。换句话说实时数据仓库完成T+0（当日产生的数据，当日看到）场景的数据分析工作。</p>
+<p>&nbsp;</p>
+<p><strong>&middot;</strong><strong>技术解决方案</strong></p>
+<p>实时数仓内部数据流转如图6所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230422782-2002288546.png" alt="" width="754" height="324" /></p>
+<p style="text-align: center;"><span>图6：实时数仓技术架构图</span></p>
+<p>&nbsp;</p>
+<p>实时数据仓库的流式计算框架为Apache Flink和Apache Storm，在实时数据仓库未正式商用前，Apache Storm是主要的流式计算框架。随着Apache Flink的普及&ldquo;批流合一&rdquo;的计算特性，禧云内部Flink已经逐步取代Storm。实时数据流在计算框架里计算汇总后，写入Kafka消息队列，存入基于Druid存储的数据集市主题域中。关于Druid部分将在数据集市中详细介绍。</p>
+<p>&nbsp;</p>
+<p><strong>&middot;</strong><strong>数据处理规范</strong></p>
+<p>实时数据仓库层级概念体现在实时计算部分，我们大致可以遵循以下规范，即根据计算指标的复杂度，可直接计算完成（复杂度低），也可像离线数据仓库一样分层处理，分层之间用消息队列桥接。上述规范不强制遵循，但从数据重复利用（每层数据可用于不同用途）、出现问题排查角度考虑，建议分层处理。</p>
+<p><span>&nbsp;</span></p>
+<h2><strong>2.</strong><strong>3</strong><strong>&nbsp;数据集市</strong></h2>
+<p>数据集市的建设在禧云一直是个痛点，整个集团目前还处于快速成长期，业务发展变化快，阶段不同侧重点不同，因此相同数据指标的定义在不同阶段会发生变化，很难固化成某一纬度的主题数据。再加上数据开发需求多，数据指标缺乏统一的规划和梳理，经常造成相同数据指标重复开发，不同报表相同指标项数据不一致的现象，给数据使用人员造成了一定的困扰。</p>
+<p>为解决上述痛点，我们对数据指标项进行了统一的梳理，发现分类治理可以解决当前问题。我们将数据指标分为活跃指标和稳定指标两类，具体定义和处理方式如下：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230459376-1497028103.png" alt="" width="547" height="296" /></p>
+<p style="text-align: center;">表2：数据集市数据指标定义</p>
+<p>&nbsp;</p>
+<p>在技术解决方案上，我们调研了市面上比较流行的OLAP引擎，从社区活跃度、查询性能、自身数据特点等方面考虑，我们采用Apache Druid作为数据集市的载体。禧云数据集市已经开始支持运营人员自助分析和可视化。</p>
+<p><span>&nbsp;</span></p>
+<p><strong>&middot;</strong><strong>数据集市作用</strong></p>
+<p>数据集市在不同企业的实践过程中有的划分到数据仓库中，作为数据仓库的一个层级，有的作为数据仓库的下游。数据集市中的数据根据特定的业务或主题组织起来，可以被部门或子公司直接使用。</p>
+<p>禧云数据集市按照各部门或子公司进行划分，下属不同主题，例如：交易主题、用户主题、营销主题等。集市数据可以直接用于部门或子公司自助分析，也可以经过数据接口服务封装后供数据报表平台、数据可视化平台和其他平台使用。其中数据接口服务、数据报表平台、数据可视化平台将在《第三章：平台支撑体系》和《第四章：数据产品体系》部分详细介绍。</p>
+<p><span>&nbsp;</span></p>
+<p><strong>&middot;</strong><strong>技术解决方案</strong></p>
+<p>技术上，禧云数据集市主要围绕着Apache Druid来建设，Apache Druid是一个分布式时序数据库，可满足以下场景：</p>
+<p>- Historical（历史节点）数据存储使用HDFS等分布式文件存储系统，高可用，支持水平扩容；</p>
+<p>- Lambda架构（详见附录2），Realtime（实时节点）使用LSM-Tree实现，满足流数据的即时查询需求。</p>
+<p>-&nbsp;支持SQL查询。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230537089-2070083348.png" alt="" width="882" height="524" /></p>
+<p style="text-align: center;">&nbsp;图7：数据集市技术架构图</p>
+<p>从上图可以看出，数据仓库生产的数据通过Apache Druid提供的写入服务进入数据集市，实时数据仓库的数据，可以支持快速查询，分析。离线数据仓库的数据根据具体业务场景，进行冷热分层处理，经常被使用的数据做到高效查询。</p>
+<p>&nbsp;</p>
+<p><strong>&middot;</strong><strong>数据存储规范</strong></p>
+<p>禧云数据集市目前处于刚起步阶段，我们现在仅制定了比较简单的命名规范，来区分一级部门或子公司、所属主题和具体使用场景。命名规范如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230641084-2049824977.png" alt="" /></p>
+<p style="text-align: center;">图8：数据集市命名规范</p>
+<p><span>&nbsp;</span></p>
+<h2><strong>2</strong><strong>.4&nbsp;</strong><strong>本章小结</strong></h2>
+<p>数据湖、数据仓库、数据集市以及相应的管理规范共同构成了禧云的数据管理体系。我们在讲述过程中没有过多介绍数据仓库和数据集市的概念、模型（星型、雪花、星座等）等约定俗成的东西，而是将重点放在数据流程和技术实现上，主要是想跟大家探讨我们在数据体系建设过程中遇到的痛点和如何解决的，抛砖引玉，起到相互促进的作用。</p>
+<p>本章内容在讲述数据管理体系的基础上，同时引出了我们的数据生产流程，稳定、高效的生产流程是支撑决策分析的前提条件，为此我们构建了比较完善的平台支撑体系。</p>
+<h1><strong>第三章：</strong><strong>平台支撑体系</strong></h1>
+<p>禧云数据平台支撑体系旨在提供高效的开发工具，提升数据开发人员工作效率，提供完善的运维、监控能力，保证数据生产的正确性和时效性。平台支撑体系从数据接入、数据计算、数据服务和数据应用四个层级为数据生产提供全方位的支持和保障。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230726046-1305356529.png" alt="" width="878" height="368" /></p>
+<p style="text-align: center;">图9：数芯大数据平台技术架构图</p>
+<p>&nbsp;</p>
+<p>如上图所示，平台支撑体系由数据迁移平台、开发协作平台、数据质量平台、数据开放平台、数据接口服务，以及贯穿数据接入层、计算层和服务层的运维监控平台六大子系统组成。我们按照上述顺序展开每个子系统的具体实现方式。</p>
+<p><span>&nbsp;</span></p>
+<h2><strong>3</strong><strong>.1&nbsp;</strong><strong>数据迁移平台</strong></h2>
+<p>数据迁移平台（代号：移山，以下简称移山），是集第三方数据接入、实时数据同步、异构数据源间迁移于一体的一站式解决方案。提供简洁、易用的图像化界面，完成数据接入、同步或迁移等配置工作。目前移山每日完成千万级第三方数据接入、亿级内部数据迁移和实时数据同步工作。</p>
+<p><strong>&middot;</strong><strong>产生背景</strong></p>
+<p>在移山之前，禧云在数据迁移方面主要面临以下三个问题：</p>
+<p><strong>1.&nbsp;</strong><strong>实时同步：</strong><span>禧云采用阿里开源的Canal（主要用途是基于MySQL数据库增量日志解析，提供增量数据订阅和消费）作为数据实时同步组件，下游解析数据库数据变更事件写入Kafka消息队列，消息队列里的数据供实时数仓分析使用或写入数据湖。上述实现通过脚本的方式配置完成，操作复杂并且容易出错。</span></p>
+<p><strong>2.&nbsp;</strong><strong>数据迁移：</strong><span>离线数仓分析结果导出和计算任务封装在一个Spark计算任务中，数据计算和数据导出耦合性较高，数据导出时间过长会出现计算资源不能释放或计算任务假死等现象。除此之外，缺少统一的异构数据源迁移工具。</span></p>
+<p><strong>3.&nbsp;</strong><strong>第三方数据接入：</strong><span>第三方数据接入主要采用点对点方式，每次对接都需要单独开发程序，没有统一的数据标准，数据接入时间周期较长。</span></p>
+<p><strong>&middot;</strong><strong>技术实现</strong></p>
+<p>为解决上述三个问题，构建一个通用的数据迁移平台，我们对现有程序重新设计、开发，调研业界开源的异构数据源迁移工具。移山在上述整合的基础上产生，移山提供以下三种数据迁移服务能力：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230829008-480180774.png" alt="" /></p>
+<p style="text-align: center;"><span>&nbsp;图10：移山技术架构图</span></p>
+<p>- 数据接入服务</p>
+<p>数据接入服务约定JSON格式为统一的数据传输格式，支持HTTP请求和FTP文件采集两种数据接入能力。数据接入服务通过暴露HTTP请求接口的方式对外提供服务，请求类型根据接口参数不同分为消息指令和业务数据上报两种。数据接入流程如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102230927405-365887079.png" alt="" /></p>
+<p style="text-align: center;">图11：数据接入服务流程图</p>
+<p>&nbsp;</p>
+<p>- 数据迁移服务</p>
+<p>我们采用阿里开源的DataX（详见附录1）作为数据迁移服务组件。DataX配置过程比较复杂，并且只支持命令行方式执行，为降低使用难度，我们将配置过程进行了图形化处理，采用Python的Flask框架进行封装，任务执行支持HTTP请求调用。数据迁移服务支持定时或指令两种执行方式，具体作用如下：</p>
+<p>定时执行：定时拉取数据湖数据到数据仓库中或定时执行业务库间数据迁移工作。</p>
+<p>指令执行：接收离线任务计算发送的数据迁移指令，将分析结果数据迁移至数据集市对应存储中。</p>
+<p>依托DataX强大的插件体系，数据迁移服务支持目前主流的RDBMS数据库、NOSQL数据库、HDFS大数据存储之间的数据迁移能力。</p>
+<p>&nbsp;</p>
+<p>- 实时同步服务</p>
+<p>禧云各子公司的数据大多以关系型数据库MySQL为主，目前的实时同步服务只针对MySQL进行同步，数据同步服务采用阿里开源的Canal作为同步组件，业务数据经过Canal写入Kafka消息队列，Kafka中的数据根据需要写入数据库或供实时分析使用。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231013743-2131001197.png" alt="" /></p>
+<p style="text-align: center;"><span>&nbsp;图12：实时同步服务流程图</span></p>
+<p>业务系统会产生各种类型的数据，例如订单数据、日志数据等，而下游数据分析往往只针对某一类型数据，为了不造成存储等资源浪费，实时同步服务通过对应关系表来管理数据同步，例如，离线数据分析要用到业务库的订单表t_order，需要在移山实时同步任务中添加t_order对应关系，上游数据才能同步到数据湖或数据库中。如图12所示，同步到数据湖中的数据与上游业务库数据需要保持最终一致性，数据在Kafka消息队列传输过程中可能会出现乱序，导致数据最终不一致。我们在实时同步服务中通过比对binary log时间戳和偏移量，结合HBase特性解决上述乱序问题。我们以t_order表数据写入来解释乱序的处理过程。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231112715-2040626422.png" alt="" />&nbsp;</p>
+<p style="text-align: center;">图13：实时同步乱序处理过程</p>
+<p>移山将数据接入、数据迁移和实时同步整合在一个平台中，开发人员只需要简单的界面化配置，就可完成上述三种操作。为保障数据迁移的稳定性和可靠性，移山同时具备完善的监控报警和数据分析能力。</p>
+<h2><strong>3</strong><strong>.2&nbsp;</strong><strong>开发协作平台</strong></h2>
+<p>开发协作平台（代号：魔盒，以下简称魔盒），是一套帮助数据开发人员完成离线、实时计算任务打包、测试、数据核验和发布上线等工作的一套调度和管理系统。魔盒对离线计算任务提供串行、并行等复杂工作流设置，并提供完善的任务运行监控报警体系。</p>
+<p><strong>&middot;产生背景</strong></p>
+<p>禧云数据分析主要分为实时计算任务和离线计算任务两种。在魔盒之前，上述两种任务主要通过在终端服务器上运行命令行方式执行，任务之间的依赖依靠脚本来控制。在任务比较多的情况下，管理起来比较困难，出现问题难以排查，直接影响数据生产。</p>
+<p><strong>&middot;</strong><strong>技术实现</strong></p>
+<p>为保障数据正常生产，提高开发人员工作效率，我们从资源划分（测试环境资源、生产环境资源）、任务管理、程序打包上线和运行监控报警等方面重新规划，开发出了开发协作平台魔盒。</p>
+<p>- 离线计算</p>
+<p>离线计算为多种业务场景提供基础计算能力，针对不再变化的数据进行分析，具有计算数据量大、业务逻辑复杂等特点，禧云离线计算支持Hive、Spark等计算框架，Hive主要用于临时数据分析，Spark为离线计算任务的主要开发框架。开发人员用Spark或SparkSQL编写完分析代码后，通过魔盒打包上线。测试、上线流程如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231200181-882419661.png" alt="" /></p>
+<p style="text-align: center;">图14：离线计算任务测试上线流程</p>
+<p><br />禧云每天运行着上百个离线分析任务，每个分析任务服务于不同子公司或业务场景，任务之间会有依赖关系，不同优先级的任务调度时机不同。基于以上问题，魔盒的离线计算部分集成了Linkedin开源的工作流引擎Azkaban。离线计算任务工作流提交过程如下图：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231307821-1595201039.png" alt="" /></p>
+<p style="text-align: center;"><span>图15：离线计算任务工作流提交过程</span></p>
+<p>1. 魔盒提交请求到AzkabanWebServer；</p>
+<p>2. AzkabanWebServer将任务分发到可运行的执行器上；</p>
+<p>3. 执行工作流；</p>
+<p>4. 将执行过程产生的元数据信息写入MySql数据库。</p>
+<p>5. AzkabanWebServer读取MySql数据监控任务执行状态。</p>
+<p>6. 魔盒读取MySql数据监控任务执行状态。</p>
+<p>目前魔盒离线计算任务支持串行、并行等复杂工作流设置，如下图：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231404824-198169865.png" alt="" width="940" height="383" /></p>
+<p style="text-align: center;"><span>&nbsp;图16：复杂工作流设置</span></p>
+<p>&nbsp;</p>
+<p>- 实时计算</p>
+<p>禧云目前在用的实时计算框架为Apache Storm和Apache Flink。Storm主要兼容以前的实时分析任务，随着Flink开源社区的活跃和批、流合一的优势，在禧云内部Flink将逐渐取代Storm。因此魔盒实时计算目前仅支持Flink计算框架。魔盒实时计算的测试和上线过程如下图17所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231455438-199965744.png" alt="" /></p>
+<p style="text-align: center;">图17：实时计算任务测试上线流程</p>
+<p>实时计算任务（流计算）上线后会长期运行，运行中可能由于服务器宕机等原因导致任务运行失败、数据丢失。为避免上述问题发生，魔盒报警体系会检测实时任务运行状态，一旦失败将立即报警。为防止数据丢失，结合Flink的CheckPoint机制，魔盒对运行失败的任务提供重新拉起操作。重新拉起时魔盒会自动检测失败任务的上一个检查点（CheckPoint），默认从上一个检查点处开始执行，开发人员也可以手动输入检查点路径进行拉起。</p>
+<p>&nbsp;</p>
+<p>- 监控报警</p>
+<p>为保证计算任务正常运行，魔盒具备完善的监控报警体系，魔盒报警体系根据计算任务分为以下两类：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231546535-19696545.png" alt="" width="564" height="537" /></p>
+<p style="text-align: center;">表3：魔盒监控报警分类</p>
+<p>&nbsp;</p>
+<p>魔盒已经成为禧云数据开发人员主要的工作平台。在流程规范性和开发效率上极大地提高了开发人员的工作效率。完善的监控报警体系能够保障数据生产的稳定性和时效性。</p>
+<p>&nbsp;</p>
+<h2><strong><strong>3.3&nbsp;</strong></strong><strong><strong>数据质量平台</strong></strong></h2>
+<p>随着大数据技术的普及，『数据即资产』的观念已经成为共识。数据资产化需要将杂乱无章的数据进行合理有效的组织，同时需要考虑到隐私、合法、合规等数据确权问题，因此数据资产化进程必将是一个缓慢、复杂的过程。然而，良好的数据质量是数据资产化的前提条件。数据质量平台（代号：能量块或元数据管理系统，以下简称能量块），是禧云进行数据资产化的第一步，主要解决数据仓库元数据管理、数据血缘关系、生命周期和业务数据监控等当前工作中亟需解决的问题。</p>
+<p><strong>&middot;</strong><strong><strong>产生背景</strong></strong></p>
+<p>禧云在生产过程中产生了大量的业务数据，数据在进入数据仓库的过程中会产生大量的元数据信息。上述元数据信息在使用过程中主要面临以下问题：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231657861-52957659.png" alt="" width="898" height="369" /></p>
+<p style="text-align: center;">图18：数据质量管理面临的问题</p>
+<p>为解决上述问题，迈好数据资产化进程的第一步，我们首先从数据归属、元数据统一备查和数据管理三个方面入手，来建设数据质量平台。</p>
+<p><strong>&middot;</strong><strong><strong>技术实现</strong></strong></p>
+<p>- 基本概念</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231729499-1292813600.png" alt="" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231742194-576340190.png" alt="" /></p>
+<p style="text-align: center;">表4：数据质量平台基本概念</p>
+<p>&nbsp;</p>
+<p>- 元数据管理</p>
+<p>能量块中的元数据管理主要从数据仓库表级确定数据归属（例如禧云信息团餐业务线），按照技术元数据和业务元数据为数据开发人员和使用人员提供统一查询入口。元数据信息包含以下信息：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231822776-896236365.png" alt="" /></p>
+<p>图19：元数据管理详细信息</p>
+<p>为实现上述功能，我们调研了很多业内元数据管理方面的开源框架，从体系结构完整度和自身技术特点方面考虑，我们选择Apache Atlas作为能量块的元数据管理框架。</p>
+<p>- 血缘关系采集</p>
+<p>在禧云一个复杂的离线数据分析任务，需要经过多表关联，外加很多约束条件限制。业务人员对某个数据指标提出质疑时，数据开发人员需要重新梳理该指标的逻辑，甚至需要翻看代码，费时费力。</p>
+<p>为降低问题排查和解释成本，我们在离线计算任务中集成Spline（from Spark lineage），通过解析Spark执行计划动态生成计算任务血缘关系图谱。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231853664-1546723091.png" alt="" width="1217" height="493" /></p>
+<p style="text-align: center;"><span>&nbsp;图20：离线计算血缘关系图谱</span></p>
+<p>开发人员或业务人员在能量块的图形化界面上，可以清晰地了解数据指标的计算过程，极大地提高了问题排查和逻辑梳理效率。</p>
+<p>&nbsp;</p>
+<p>- 数据质量监控</p>
+<p>数据仓库作为业务数据的下游，经常会出现上游业务数据发生变更，导致数据分析结果不正确的现象。为避免上述问题产生，我们在与上游业务方建立沟通机制的基础上，在能量块中增加了数据质量监控模块。</p>
+<p>数据质量监控模块用于监控数据指标的上下游数据情况，例如：每日订单数据是否在合理的数据范围内。对此，我们根据业务线制定了不同的规则引擎，在关键数据指标计算前，首先触发规则引擎，规则引擎校验通过后，才能进行数据计算。对校验不通过的数据，第一时间通知到上游业务方处理。</p>
+<p>能量块除上述功能外，还具有数据使用情况统计功能，对未使用的数据提供下线清理操作。目前能量块仅仅解决了数据归属、元数据统一备查和简单的数据监控管理功能，数据质量和资产管理是个很大的课题，禧云刚刚完成了小升初，后续还有很多东西要学，数据质量的好坏直接关系到信息的精准度，影响到企业的生存和竞争力，禧云将在该方面加大投入力度。</p>
+<p>&nbsp;</p>
+<h2><strong><strong>3.</strong></strong><strong><strong>4&nbsp;</strong></strong><strong><strong>数据开放平台</strong></strong></h2>
+<p>禧云数据开放平台（代号：数据开放实验室，以下简称实验室），是一套安全、高效、自助式的数据开放平台，实验室在不暴露隐私数据的前提下，通过多种安全机制实现数据授权，为使用人员提供SQL交互式查询分析、数据定制下载能力，对分析结果提供自助式报表配置功能。</p>
+<p><strong>&middot;</strong><strong><strong>产生背景</strong></strong></p>
+<p>随着业务的发展，禧云在数据支撑方面的需求越来越多，单纯依靠数据部门提供数据支持，已日渐捉襟见肘。再结合禧云数据方向的发展战略，亟需将数据分析能力下放到各部门、子公司或ISV手中。数据开放实验室在此背景下产生。</p>
+<p><strong>&middot;</strong><strong><strong>技术实现</strong></strong></p>
+<p>实验室可将数据仓库、数据集市中的数据授权给各部门、子公司或ISV进行查询分析。为保证数据安全和企业间数据相互隔离，实验室在实现过程中定义了企业专区的概念，一个企业专区可以理解为一个部门、子公司或ISV。企业专区由实验室后台管理负责开通，专区内设管理员和操作员，管理员负责添加操作员账号，操作员可在实验室内进行查询分析、数据下载、报表配置等操作。实验室架构图如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102231943811-785943915.png" alt="" /></p>
+<p style="text-align: center;">图21：数据开放实验室架构图</p>
+<p>专区内又分为实验区、生产区和报表区，具体概念如下表所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232015557-876870974.png" alt="" /></p>
+<p style="text-align: center;">表5：分区定义</p>
+<p>数据开放实验室在技术实现上分为后台管理（实验室管控端）和查询分析（数据开放实验室）两部分。</p>
+<p><span>&nbsp;</span></p>
+<p>- 实验室管控端</p>
+<p>适用人员为数据部门的数据管理人员，管控端主要完成数据仓库、集市等元数据同步、企业专区开通、数据授权等操作。</p>
+<p>数据管理人员根据各部门、子公司或ISV申请，开通企业专区账号，账号开通后由企业专区负责人添加操作员账号。</p>
+<p>企业专区账号开通后，数据管理人员根据数据授权申请，向企业专区进行数据授权，授权流程如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232103908-157373347.png" alt="" /></p>
+<p style="text-align: center;">图22：实验室管控端授权流程</p>
+<p>为做到相互隔离和数据安全，实验室管控端通过条件限制控制数据的授权，对手机号、身份证号、邮箱等敏感信息管控端采用加密算法防止数据泄露。</p>
+<p>&nbsp;</p>
+<p>- 数据开放实验室</p>
+<p>数据开放实验室适用人员主要为部门、子公司、ISV的查询分析人员。实验室对查询分析结果提供定制下载、API接口调用和报表配置三种数据输出能力。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232138325-986087944.png" alt="" /></p>
+<p style="text-align: center;">图23：实验室查询发布流程</p>
+<p>为方便查询使用，实验室对已授权数据提供详细的元数据信息。此外，实验室还集成了可视化平台用于报表配置。数据开放共享是指按照统一的管理策略对组织内部的数据进行有选择的对外开放，是实现数据跨组织、跨行业流转的重要前提，也是数据价值最大化的基础。数据开放共享能力，是衡量企业数据管理能力成熟度的重要衡量指标。数据开放实验室通过安全、高效的授权策略打通了数据仓库与各部门、子公司和ISV之间的数据壁垒，通过交互式查询和可视化报表配置等功能将数据分析能力赋予禧云各下属企业。数据开放实验室标志着禧云数据的开放共享能力得到了进一步的提高。</p>
+<p><span>&nbsp;</span></p>
+<h2><strong><strong>3</strong></strong><strong><strong>.5&nbsp;</strong></strong><strong><strong>数据接口服务</strong></strong></h2>
+<p>数据接口服务（代号：API服务），对外提供统一的数据调用接口和数据返回格式，用于数据报表平台、可视化平台和其他平台的数据请求调用。数据接口服务基于RESTFul架构进行接口封装，实现了数据与应用程序的解耦，有利于数据复用和各应用系统集成。</p>
+<p><strong>&middot;产生背景</strong></p>
+<p>随着业务的发展，禧云各下属企业需要数据支撑的场景越来越多（例如支付宝和微信小程序，移动客户端等），数据获取方式日渐多样化，禧云数据部门在数据提供方式上的局限性越来越明显。主要表现在以下两方面：</p>
+<p>- 报表平台与数据耦合性太严重，数据复用性不高；</p>
+<p>- 数据提供方式单一，其他业务系统集成难度较高。</p>
+<p><strong>&middot;</strong><strong><strong>技术实现</strong></strong></p>
+<p>不同业务场景对数据的时效性和灵活性要求不同，例如：运营调度对数据时效性要求比较高；运营分析对数据统计的灵活性要求比较高。因此，禧云数据集市采用MySql、Druid、HBase、Redis等不同存储方式应对上述场景。</p>
+<p>数据接口服务将不同的数据存储封装成不同的数据服务群，采用Spring Cloud微服务框架进行统一管理。总体架构如下图所示：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232240026-87170809.png" alt="" /></p>
+<p style="text-align: center;">图24：数据接口服务架构图</p>
+<p>&nbsp;</p>
+<p>数据开发人员根据具体业务场景，将数据集市中的数据通过数据迁移平台输出到不同的数据存储中。数据使用方通过调用数据接口服务对外暴露的接口来获取数据。- 后台管理数据接口服务以应用为单位对外提供数据，后台管理负责开通应用访问权限和服务监控报警等工作。应用访问权限开通主要包含应用注册（生成appId），生成应用访问公私钥，应用访问安全限制（IP白名单，数据访问权限等）。- 数据请求流程应用访问权限开通后，数据使用方按照接口参数标准来获取数据，获取数据流程如下：</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232306232-556264035.png" alt="" /></p>
+<p style="text-align: center;">图25：API服务数据获取流程</p>
+<p>数据接口服务通过统一的传入和输出标准对外提供数据，实现了数据与应用程序的解耦，极大地提升了数据的复用性。灵活的数据输出方式方便了其他业务系统的集成，加快了数据流通速度。</p>
+<h2><strong><strong>3</strong></strong><strong><strong>.6&nbsp;</strong></strong><strong><strong>运维监控平台</strong></strong></h2>
+<p>考虑到目前正在使用的大数据生态体系，禧云运维监控平台（代号：磐石）直接使用Ambari大数据生态组件管理系统。Ambari包含安装部署、配置管理、监控告警等大数据组件与集群管理功能，完全满足禧云在大数据集群上的运维和监控要求。</p>
+<table style="width: 414px;">
+<tbody>
+<tr>
+<td>
+<p><span style="font-size: 14px;">组件名称</span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">版本</span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">说明</span></p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>A</strong></strong><strong><strong>mbari</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">2.7.3.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong>Hadoop</strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">3.1.1</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong>Yarn</strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">3.1.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>T</strong></strong><strong><strong>ez</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">0.9.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>H</strong></strong><strong><strong>ive</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">3.1.0</span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">对时间函数进行改造</span></p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>HB</strong></strong><strong><strong>ase</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">2.0.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>S</strong></strong><strong><strong>qoop</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">1.4.7</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>Zoo</strong></strong><strong><strong>Keeper</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">3.4.9</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>S</strong></strong><strong><strong>torm</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">1.2.1</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>I</strong></strong><strong><strong>nfra&nbsp;Solr</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">0.1.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>A</strong></strong><strong><strong>tlas</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">0.7.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>K</strong></strong><strong><strong>afka</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">1.0.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>S</strong></strong><strong><strong>park2</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">2.3.0</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>D</strong></strong><strong><strong>ruid</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">0.15.1</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong><strong>F</strong></strong><strong><strong>link</strong></strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">1.7.2</span></p>
+
+
+</td>
+<td><span style="font-size: 14px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: 14px;"><strong>Superset</strong></span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">0.28.1</span></p>
+
+
+</td>
+<td>
+<p><span style="font-size: 14px;">二次开发</span></p>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+<p style="text-align: center;">表6：大数据生态组件版本</p>
+<p>
+Ambari相关介绍在这里不再阐述，详细细节请参照附录3。上表为禧云正在使用的大数据各组件版本信息。</p>
+<h2><strong><strong>3</strong></strong><strong><strong>.7&nbsp;</strong></strong><strong><strong>本章小结</strong></strong></h2>
+<p>
+数据迁移平台、开发协作平台、数据质量平台和运维监控平台涵盖了禧云数据生产输出、开发协作、质量监控和大数据集群运维监控整个数据生产流程。合理有效的的架构体系和方便易用的图形化操作界面，极大地提高了数据开发人员和运维人员的工作效率。数据开放平台和数据接口服务，通过安全灵活的方式为数据使用方赋能。平台支撑体系和数据管理体系从技术和数据角度阐述了禧云大数据体系的建设过程，在此基础上禧云还构建了完善的数据产品体系。</p>
+<h1><strong><strong>第四章：</strong></strong><strong><strong>数据产品体系</strong></strong></h1>
+<p>
+随着大数据的发展，数据产品的概念变得更加宽泛，我们在平台支撑体系里讲的数据迁移平台、数据质量平台等广义上也可以归结到数据产品体系中。在本章内容中所说的数据产品体系是指报表平台、可视化大屏等数据应用产品。为提供更方便快捷的大数据应用服务，禧云打造了服务于集团各子公司和部门的数据产品体系。根据数据使用角度不同，产品体系分为数据报表平台、自助分析平台和数据可视化平台三部分。</p>
+<h2>4.1&nbsp;数据报表平台</h2>
+<p>
+数据报表平台（代号：禧鹊数据）是专门为业务运营人员和管理层打造的一款提升运营效率和决策效率的数据化运营产品。报表平台整合了高校、中学等多个业务单元的相关指标，提供一站式数据展现服务。纬度方面覆盖商户、门店、项目、设备等，便于业务人员从不同角度分析数据指标。数据报表平台提供列表、曲线图等丰富图形组件来完成报表配置工作，通过完善的权限设计，可以为管理层、业务运营人员分配不同的数据权限。- 适用范围管理层、业务运营人员等。</p>
+<h2>4.2&nbsp;自助分析平台</h2>
+<p>自助分析平台（代号：天演）是一款为数据分析师或数据分析人员开发的一站式自助分析平台。自助分析平台已与数据开放实验室打通，数据分析人员可将实验室中发布的报表数据通过天演进行可视化分析。我们在数据开放平台部分已经介绍了数据开放实验室，实验室通过安全灵活的授权方式将数据授权给数据分析人员，分析人员在实验室中完成数据分析工作后，可在天演中探索数据，生成报表等操作。- 适用范围数据分析师、数据分析人员等。</p>
+<h2>4.3&nbsp;数据可视化平台</h2>
+<p>数据可视化平台（代号：数屏），是禧云自主研发的数据可视化平台，它可以通过图形化界面快速搭建运营监控大屏、峰值日数据战报，提供丰富的可视化组件，满足业务监控、会议展览、投资咨询等多种展示需求，同时还可以自适应手机等移动设备。</p>
+<p>- 适用范围</p>
+<p>业务监控、会议展览、投资咨询等。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102233214512-1908531531.png" alt="" width="884" height="508" /></p>
+<h2><strong><strong>4.</strong></strong><strong><strong>4</strong></strong><strong><strong>&nbsp;本章小结</strong></strong></h2>
+<p>数据产品体系依托完善的数据管理体系和平台支撑体系，满足禧云管理层、数据分析人员、运营人员等不同角色的数据需求。随着『业务数据化，数据业务化』观念的逐步深入，禧云将在数据智能、数据创新等方面投入力度，利用数据为企业赋能，为禧云服务的商家赋能。</p>
+<h1><strong><strong>第五章：</strong></strong><strong><strong>未来规划及展望</strong></strong></h1>
+<p>
+2019年数据中台概念变得火热，被誉为大数据的下一站，核心思想是数据共享。数据中台以数据仓库和数据中心为基础，通过数据技术，对海量数据进行采集、计算、存储、加工，同时统一标准和口径，形成大数据资产层，进而为企业、客户提供高效服务。禧云始终围绕『开放共享，数据赋能』的理念来进行数据建设，与数据中台的构建思路不谋而合。数据管理体系、平台支撑体系和数据产品体系从数据资产管理、数据开放共享、开发协作调度、数据采集迁移、数据可视化及自助分析和平台运维监控六个维度共同构成了禧云的数据中台体系。随着市场竞争环境日益加剧，如何利用数据推动企业发展，保持市场竞争力是目前大多数企业面临的问题。禧云将在现有数据中台的基础上，稳步提升数据资产质量，加大数据智能投入，利用数据赋能业务，完成企业的数字化转型。逐步实现『一切业务数据化，一切数据业务化』的生产闭环，为商家、合作伙伴、集团提供更好的服务，利用数据为产业赋能，让天下没有难做的团餐生意！</p>
+<p><span>&nbsp;</span>&nbsp;</p>
+<h1>附录</h1>
+<p>1：<strong><strong>DataX</strong></strong><strong><strong>：</strong></strong><span>阿里巴巴开源的离线数据同步工具，实现多种异构数据源间的数据同步功能。具体使用参照：https://github.com/alibaba/DataX。</span></p>
+<p>2：<strong><strong>Lambda</strong></strong><strong><strong>架</strong></strong><strong><strong>构</strong></strong><strong><strong>：</strong></strong><span>大数据平台比较通用的架构，由Apache Storm作者Nathan Marz提出，是为了在处理大规模数据时，同时发挥流处理和批处理的优势。http://lambda-architecture.net/。</span></p>
+<p>3：<strong><strong>Ambari</strong></strong><strong><strong>：</strong></strong><span>Apache<span>基金会顶级开源项目，是一个集中部署、管理、监控大数据生态集群的工具。https://ambari.apache.org/。</span></span></p>
+<p>&nbsp;</p>
+<p>关注&ldquo;云纵达摩院&rdquo;公众号，回复关键词&ldquo;白皮书&rdquo;即可获得白皮书PDF下载链接。</p>
+<p><img src="https://img2018.cnblogs.com/blog/7438/202001/7438-20200102232557373-762039820.png" alt="" /></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-02 23:33</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12142805" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12142805);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 12142805, cb_entryCreatedDate = '2020-01-02 23:33', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

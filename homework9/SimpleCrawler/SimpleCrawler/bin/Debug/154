@@ -1,0 +1,2589 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="Java IO体系类个数繁多,复杂,初学者往往一头雾水,根本理不清楚到底IO是什么,为什么要有那么多的类,其实他们都是有章可循的,类库的设计者给我们展示了清晰地设计思路,本文就是从整体的设计思路对IO" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[三]JavaIO之IO体系类整体设计思路 流的概念以及四大基础分类 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9613518.html">[三]JavaIO之IO体系类整体设计思路 流的概念以及四大基础分类</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        Java IO体系类个数繁多,复杂,初学者往往一头雾水,根本理不清楚到底IO是什么,为什么要有那么多的类,其实他们都是有章可循的,类库的设计者给我们展示了清晰地设计思路,本文就是从整体的设计思路对IO进行讲解,包括流的基本含义与概念,以及四大基础接口的主要功能与理念,相信你一定可以对java io的设计有一个全面的了解
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 15px;">从本文开始,将正式进入JavaIO的简介</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在继续javaIO系列的文章之前 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可以过去看一下 本人博客上的设计模式中的 适配器模式和装饰器模式 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这会对接下来的阅读大有帮助 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本文是从逻辑上介绍整个的Java IO类家谱画像.</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 24pt;">1.流</span></strong></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">计算机以及互联网的世界发展不过短短几十年,但是这几十年却是日新月异 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">系统的复杂度也越来越高,程序设计语言的抽象程度也越来越高 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是无论如何都绕不开一个话题,那就是IO </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">之前已经介绍过,IO 就是输入 和 输出, 入和出是相对于应用程序来说的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而且,经常一个程序的输出可能是另一个程序的输入 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这本身就是一个抽象的概念 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">并没有"必须怎么样,那才叫IO"的说法 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">从数据库,从文件,从内存,从网络拿数据,你都可以叫做输入,数据写出,都可以叫做输出,这并没有什么好纠结的 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在java中使用流这一概念来描述输入和输出 </span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>流的字面含义</strong></span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135824840-227743658.png"><img style="display: inline; background-image: none;" title="image_5b94b200_4459" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135826215-1842288392.png" alt="image_5b94b200_4459" width="871" height="142" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">百度百科中是这样描述流的, 可以看得出来 , 流本身就包含了 这样一层含义&nbsp; </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">物质&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 一个地方&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 流向了&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 另一个地方 </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在继续之前,我们先回想下放暑假或者开学时候的场景 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">假定你需要做汽车和火车,如下图所示 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135826411-488811101.png"><img style="display: inline; background-image: none;" title="image_5b94b200_4484" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135826655-2077056702.png" alt="image_5b94b200_4484" width="625" height="244" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">上图中有几个关键概念 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">主体 </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">人&nbsp;&nbsp;&nbsp;&nbsp; 人从一个地方到了另一个地方 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">源/目的&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">学校/家 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">方向 </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">回家或者返校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 图中的两个箭头 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">中间形式 </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">火车和汽车 </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">
+<h3 style="line-height: 32px;"><span style="font-size: 18pt;"><strong>1.1流到底是什么</strong></span></h3>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">我们再举一个比较简单的例子, 使用 水管 往桶里面加水或者抽水</span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 1115px; color: #424242; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray;">
+<div style="line-height: 24px;"><span style="font-size: 13.5pt;"><strong>源/主体内容/方向</strong></span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">水桶, 作为一个容器,他就是&nbsp; 源 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">里面可能装了水,也可能装了酒,还可能装了别的, 这就是数据形式主体 </span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">箭头表示方向,到底是往里面流还是往外抽 </span></div>
+<div style="line-height: 24px;">&nbsp;</div>
+<a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135826880-842662417.png"><img style="display: inline; background-image: none;" title="image_5b94b200_7e4f" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135827132-272693385.png" alt="image_5b94b200_7e4f" width="617" height="254" border="0" /></a></td>
+</tr>
+<tr style="background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray;"><span style="font-size: 13.5pt;"><strong>中间形式</strong></span><br /><span style="font-size: 15px;">我们都知道,水管可不全都是一种规格的,就拿家里装修常用的水管就有 4/6分管 两种</span><br /><span style="font-size: 15px;">如果有一个阀门或者水龙头是6分管,而你接入桶里面的是4分管</span><br /><span style="font-size: 15px;">怎么办?</span><br /><span style="font-size: 15px;">显然,你会找一个转接头一类的东西,这就是下图中的黄色,橙红色,绿色代表的部分,他们就是不同的水管</span><br /><span style="font-size: 15px;">通过转接头与另外一种规格的水管能够连接起来,这就是中间形式</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135827367-1329657405.png"><img style="display: inline; background-image: none;" title="image_5b94b200_63b" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135827615-461343735.png" alt="image_5b94b200_63b" width="683" height="317" border="0" /></a>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray;"><span style="font-size: 13.5pt;"><strong>抽水模型中的流</strong></span><br /><span style="font-size: 15px;">在这个例子中,流就是对于抽水这一过程的抽象描述.</span><br /><span style="font-size: 15px;">一个水管里面的水的走向, 设定好了之后, 就是固定了的, 他要么往这头, 要么往另一头</span><br /><span style="font-size: 15px;">而且,他肯定有一个源头/目的,水管得水不能凭空来,水管也不能凭空抽取水</span><br /><span style="font-size: 15px;">另外,水管显然不仅仅只是能抽取水, 他还可以输送别的液体,比如酒,水,饮料,酱油醋......</span><br /><span style="font-size: 15px;">而且,如果有了各种不同规格的水管以及转接头,你的这个管道将会更加强大</span><br /><br /><strong><span style="font-size: 13.5pt;">所以说,容器 桶 接上了水管,就有能力提供水或者存储水,他就是一个流<br />如果这个流在整合上各种不同规格的转接头和水管,能力将会大大提升</span></strong>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+<h3><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><strong><span style="font-size: 18pt;">1.2程序语言中的流的主要概念</span></strong></span></h3>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>含义/源/方向/数据形式/中间形式</strong></span>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">流的含义:
+						</span></div>
+<div><span style="font-size: 15px;">在程序设计中,流是对于数据流动传输的一种抽象描述
+						</span></div>
+<div><span style="font-size: 15px;">任何有能力产出数据的数据源,或者有能力接受数据的接收端对象都是一个流 (也就是上面例子中的一个容器接上水管)
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">流的源和目的:
+						</span></div>
+<div><span style="font-size: 15px;">数据可能从本地文件读取,或者写入,&nbsp; 也可能发送到网络上,这就是源和目的
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">流的方向:
+						</span></div>
+<div><span style="font-size: 15px;">同水管里面的流水一样,也是只有两个方向,流进或者流出,也就是我们常说的输入&nbsp; 和&nbsp; 输出
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">流的数据形式:</span><br /><span style="font-size: 15px;">数据的具体形式就是流传送的内容,可能是字节,也能是字符,这就是数据的形式
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">流的中间形式:</span><br /><span style="font-size: 15px;">对于任何一个流对它的功能进行一些必要的扩充,就好像接上了转接头的流可以接到其他规格的水管一样</span><br /><span style="font-size: 15px;">在一个流的基础上 包装,装饰上其他的一些功能,流就会变得更加强大
+					</span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+<h3 style="line-height: 32px;"><span style="font-size: 18pt;"><strong>1.3 流相关概念详细解读</strong></span></h3>
+<div style="line-height: 32px;">&nbsp;</div>
+<h4 style="line-height: 32px;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><strong><span style="font-size: 13.5pt;">1.3.1 流的源和目的</span></strong></span>
+	</h4>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 1115px; color: #424242; line-height: 32px; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 32px;">
+<tr>
+<td>
+<div><span style="font-size: 13.5pt;"><strong>1.文件</strong></span>
+						</div>
+<div><span style="font-size: 15px;">最基本的一个数据源就是我们前文提到过的文件,文件不仅java中有,其他语言中也拥有文件的概念
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 13.5pt;"><strong>2.字节数组</strong></span>
+						</div>
+<div><span style="font-size: 15px;">数据最基本的单位是字节
+						</span></div>
+<div><span style="font-size: 15px;">数组是在程序设计中，为了处理方便， 把具有相同类型的若干变量按有序的形式组织起来的一种形式
+						</span></div>
+<div><span style="font-size: 15px;">这些按序排列的同类数据元素的集合称为数组
+						</span></div>
+<div><span style="font-size: 15px;">所以字节数组,自然是为了更方便操作字节的一种数据组织形式
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 13.5pt;"><strong>3. 字符数组/String对象</strong></span>
+						</div>
+<div><span style="font-size: 15px;">既然数组可以简化更方便的进行操作,而且也有字节数组
+						</span></div>
+<div><span style="font-size: 15px;">是不是还应该有字符数组呢?
+						</span></div>
+<div><span style="font-size: 15px;">而且,java中的String对象 ,它的内部实现也是char数组,java中使用char表示字符,这不就是字符数组么
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 13.5pt;"><strong>4. 管道</strong></span>
+						</div>
+<div><span style="font-size: 15px;">"管道"的概念也是类似字面含义,一端输入,就可以从一端流出,就好像一个水管一样,
+						</span></div>
+<div><span style="font-size: 15px;">主要用来多线程之间直接进行数据交互,所以说数据来源也可能是一个管道
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 13.5pt;"><strong>5.网络等</strong></span>
+						</div>
+<div><span style="font-size: 15px;">其他数据源比如网络等,java的强项就是WEB,从网络接收数据是再自然不过的事情
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 13.5pt;"><strong>6.流</strong></span><br /><span style="font-size: 15px;">另外流本身也可以作为一种源,所以一个流的源可以来自另外的一个流</span><br />
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<h4 style="line-height: 32px;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><strong><span style="font-size: 13.5pt;">1.3.2 流的方向</span></strong></span>
+	</h4>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 1115px; color: #424242; line-height: 32px; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 32px;">
+<tr style="line-height: 32px;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">流的方向很简单,只有两个方向,输入 或者 输出
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+</div>
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><strong><span style="font-size: 13.5pt;">1.3.3 流的数据形式</span></strong></span>
+</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">计算机存储数据是二进制的 0 1 序列
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">计算机中存储容量的最小的单位是位（bit）最基本的单位是</span><strong><span style="font-size: 13.5pt;">字节</span></strong><span style="font-size: 15px;">（byte）
+					</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">字节是通过网络传输信息（或在硬盘或内存中存储信息）的单位
+						</span></div>
+
+
+					</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也就是说任何其他形式的数据,都可以而且,最终也都是用字节来表示
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以数据最基本的形式就是字节&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">1&nbsp; byte = 8 bit&nbsp;&nbsp; </span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td>
+<div>
+<div><span style="font-size: 15px;">我们的世界充满了各种符号
+						</span></div>
+<div><span style="font-size: 15px;">字符是表示数据和信息的字母、数字或其他符号
+						</span></div>
+<div><span style="font-size: 15px;">在电子计算机中，每一个字符与一个二进制编码相对应,这是一个编码的过程
+						</span></div>
+
+
+					</div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><strong><span style="font-size: 13.5pt;">所以说,数据的基本形式有&nbsp; 字节 和 字符两种形式</span></strong>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">1.3.4流的中间形式</span></strong>
+</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">放学回家的例子,我们很清楚的知道,火车和汽车是我们 人的中间形式过程,经过转换(买票上车),&nbsp; 地上的人看不到我们了,看到的只是火车</span><br /><span style="font-size: 15px;">对于流来说,中间形式是什么样子的呢?</span><br /><span style="font-size: 15px;">比如我们想要把一个Int类型直接写入到文件中,怎么办呢?</span><br /><span style="font-size: 15px;">我们是不是需要把这个类型的数据处理下 转换下呢&nbsp; 或者说包装下 就如同你坐上了车(车把你装了进去,形式就是车),总之就是要处理下</span><br /><span style="font-size: 15px;">比如想要缓冲,按照行,按照字等等</span><br /><span style="font-size: 15px;">这就是一种中间形式,后面我们会详细介绍涉及到的中间形式</span><br />
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">不过很显然,中间形式并没有向从某种数据源读取数据那么刚需</span><br /><span style="font-size: 15px;">但是他会给你提供更多的功能,让你的流功能更加多变,扩展</span><br /><span style="font-size: 15px;">如果有了中间形式,你可能就能够直接把一个int写入到文件上,这不是很方便么&nbsp; </span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">1.3.5流的种类-基本功能 扩展功能</span></strong>
+</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 13.5pt;"><strong>想要完成一个IO类库的基本功能,只需要把握住三点</strong></span>
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">1. 流的源和目的
+					</span></div>
+<div><span style="font-size: 15px;">2. 流的数据形式&nbsp; </span></div>
+<div><span style="font-size: 15px;">3. 流的方向&nbsp;&nbsp; </span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 13.5pt;"><strong>想要做得更好就需要把握好流的中间形式,提供更强大的功能</strong></span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">流的源和目的
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">文件 / 字节数组 /管道 /字符数组/String对象 / 网络 / 流
+				</span></td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">流的数据形式
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">字符&nbsp; /&nbsp; 字节
+				</span></td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">流的方向 
+				</span></td>
+<td><span style="font-size: 15px;">输入&nbsp; / 输出
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">现在我们掌握了流的基本属性,上表中的三种,也掌握了他们可能的变量值&nbsp; </span></div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">很简单,只需要使用简单的组合进行计算,我们就可以列举出来所有可能的组合
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">下面我们试着列一些(并不会列出来全部内容)
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">文件(源)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">文件(源)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输入
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字符
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">文件(目的地)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输出
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">文件(目的地)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输出
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字符
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节数组(源)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输入
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节数组(源)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输入
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字符
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节数组(目的地)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输出
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字节数组(目的地)
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">输出
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">字符
+				</td>
+
+
+			</tr>
+<tr>
+<td>管道(源)
+				</td>
+<td>输入
+				</td>
+<td>字节
+				</td>
+
+
+			</tr>
+<tr>
+<td>管道(源)
+				</td>
+<td>输入
+				</td>
+<td>字符
+				</td>
+
+
+			</tr>
+<tr>
+<td>管道(目的地)
+				</td>
+<td>输出
+				</td>
+<td>字节
+				</td>
+
+
+			</tr>
+<tr>
+<td>管道(目的地)
+				</td>
+<td>输出
+				</td>
+<td>字符
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 18pt;">等等................等等................</span>
+</div>
+<div style="line-height: 200%;">还有很多种组合,&nbsp;&nbsp; 我相信你肯定可以排列的出来
+</div>
+<div style="line-height: 200%;">不过很显然,我们此处只是简单的罗列,穷举出所有组合的可能
+</div>
+<div style="line-height: 200%;">对于类库的设计自然不能这么简单暴力,或许有些组合没有必要,或许有些组合不符合逻辑
+</div>
+<div style="line-height: 200%;">去掉那些无用的,不合逻辑的,无意义的,那么剩下来的组合形式,其实就是IO类库要解决的问题
+</div>
+<div style="line-height: 200%;">也就是就剩下了我们现在看得到的JavaIO类库了 接下来从整体上对IO类库进行介绍</div>
+<h3 style="line-height: 200%;"><span style="font-size: 24pt;"><strong>2. JAVA&nbsp; IO类库体系结构</strong></span></h3>
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>java.io</strong></span>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135827907-333173850.png"><img style="display: inline; background-image: none;" title="image_5b94b200_5fdd" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135828220-1844696684.png" alt="image_5b94b200_5fdd" width="674" height="647" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">java.io包中(JDK8),有87个类,其中有一些辅助类 还有一些异常类
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">去掉这些之后,剩下的绝大多数都是IO类体系的直接相关类,看起来很杂乱繁多
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们接下来讲从整体上对涉及到的IO类进行介绍,等看完本篇文章,相信你应该能有一个整体的把控
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">只有从整体把控才有可能掌握整个完整的类家族</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>2.1 流的四大家族</strong></span>
+</h3>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果先不考虑数据的来源,根据流的方向(输入 和 输出)以及流的数据形式(字符 和 字节) 我们有四种形式
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">输入
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">字节
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">输出
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">字节
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">输入
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">字符
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">输出
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">字符
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">四种形式
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><strong><span style="font-size: 13.5pt;"> 输入字节&nbsp; </span></strong>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>输出字节 </strong></span>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">&nbsp;<span style="font-size: 13.5pt;"><strong>输入字符</strong></span>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">&nbsp; <span style="font-size: 13.5pt;"><strong>输出字符</strong></span>
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">Java中名称
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>InputStream</strong></span>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>OutPutStream</strong></span>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>Reader</strong></span>
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 13.5pt;"><strong>Writer</strong></span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">可以看得出来在命名上,类库设计者的一些想法
+					</span></div>
+<div><span style="font-size: 15px;">把字节使用Stream作为后缀,或许因为字节是最基本的单位,所以他才是流Stream
+					</span></div>
+<div><span style="font-size: 15px;">我们平时阅读&nbsp; read和书写write的都是字符,所以使用Reader 和 Writer表示字符的输入和输出也很自然
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135828599-303909011.png"><img style="display: inline; background-image: none;" title="image_5b94b201_583f" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135828903-946702287.png" alt="image_5b94b201_583f" width="835" height="347" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">节点流与过滤流</span></strong>
+</h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们上面讲述流的含义概念时,反复提到了流的基本功能以及中间形式
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">基本功能就是针对于不同数据源的操作,属于刚需范围
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而中间形式则是刚需的强有力的增强
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">流的数据源/目的&nbsp; 流的方向&nbsp; 流的数据类型的组合,构成了基本功能的完整集合
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而对于增强型的流的形式,则是Java IO出彩的地方,属于增强型的功能
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">java中针对于基本数据源进行操作的流叫做</span> <span style="font-size: 13.5pt;"><strong>节点流</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而对于那些起到增强装饰功能的流,叫做</span><span style="font-size: 13.5pt;"><strong>过滤流</strong></span>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">按照我们上面的思维逻辑
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">只需要把相关的数据源与我们上面的这四种基本形式进行组合
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">就可以得到流的基本功能家族,也就是节点流
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">根据节点流需要的拓展功能,我们就可以推演出来过滤流
+	</span></div>
+<div style="line-height: 32px;">
+<div>&nbsp;</div>
+
+
+	</div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 18pt;"><strong>2.2&nbsp; 流体系类层次结构详解</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">2.2.1&nbsp; InputStream</span></strong></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">2.2.1.1&nbsp; InputStream节点流</span></strong></h4>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">数据源与InputStream的结合</span></strong>
+</div>
+<div style="line-height: 150%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 150%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 150%;">
+<tr style="line-height: 150%;">
+<td><span style="font-size: 15px;">字节数组
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 150%;"><span style="font-size: 15px;">ByteArrayInputStream (java.io)</span><br />
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">文件
+				</span></td>
+<td>
+<div><span style="font-size: 15px;">FileInputStream (java.io)
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">管道
+				</span></td>
+<td>
+<div><span style="font-size: 15px;">PipedInputStream (java.io)
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">String
+				</span></td>
+<td>
+<div><span style="font-size: 15px;"><del>StringBufferInputStream (java.io) </del>&nbsp; </span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">对象
+				</span></td>
+<td><span style="font-size: 15px;">ObjectInputStream (java.io)
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">上面就是IO类库提供给我们的基础功能
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也就是可用的有效的合理的数据源与InputStream的组合(InputStream&nbsp; 流的方向与流的数据形式的组合)
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">类名
+				</span></td>
+<td><span style="font-size: 15px;">功能
+				</span></td>
+<td><span style="font-size: 15px;">构造方法
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">ByteArrayInputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">从字节数组中读取数据,也就是从内存中读取数据 </span><br />
+<div><span style="font-size: 15px;">包含一个内部缓冲区，指向该字节数组
+					</span></div>
+<div><span style="font-size: 15px;">内部计数器跟踪 read 方法要提供的下一个字节
+					</span></div>
+<div><span style="font-size: 15px;">关闭 ByteArrayInputStream 无效
+					</span></div>
+<div><span style="font-size: 15px;">此类中的方法在关闭此流后仍可被调用，而不会产生任何 IOException
+					</span></div>
+
+
+				</td>
+<td><span style="font-size: 15px;">ByteArrayInputStream(byte buf[])</span><br /><span style="font-size: 15px;">ByteArrayInputStream(byte buf[], int offset, int length)</span><br /><span style="font-size: 15px;">不是复制而来,直接指向地址</span><br /><span style="font-size: 15px;">多参数的带偏移量
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileInputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">用于从文件中读取信息
+				</span></td>
+<td><span style="font-size: 15px;">FileInputStream(String name)</span><br /><span style="font-size: 15px;">FileInputStream(File file)</span><br /><span style="font-size: 15px;">FileInputStream(FileDescriptor fdObj)</span><br /><span style="font-size: 15px;">使用文件路径名&nbsp; 抽象路径名File 或者文件描述符
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedInputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">产生用于写入相关Pipe的OutputStream的数据</span><br /><span style="font-size: 15px;">实现管道化的概念</span><br /><span style="font-size: 15px;">管道输入流应该连接到管道输出流；</span><br /><span style="font-size: 15px;">管道输入流提供要写入管道输出流的所有数据字节</span><br /><br /><span style="font-size: 15px;">通常，数据由某个线程从 PipedInputStream 对象读取</span><br /><span style="font-size: 15px;">并由其他线程将其写入到相应的 PipedOutputStream</span><br /><span style="font-size: 15px;">不建议对这两个对象尝试使用单个线程，因为这样可能死锁线程
+				</span></td>
+<td><span style="font-size: 15px;">PipedInputStream(PipedOutputStream src)</span><br /><span style="font-size: 15px;">PipedInputStream(PipedOutputStream src, int pipeSize)</span><br /><span style="font-size: 15px;">PipedInputStream()</span><br /><span style="font-size: 15px;">PipedInputStream(int pipeSize)&nbsp; </span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;"><del>StringBufferInputStream</del>
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">弃用,如果条件允许可以考虑使用StringReader
+				</span></td>
+<td><br />
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">ObjectInputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">对以前使用 ObjectOutputStream 写入的基本数据和对象进行反序列化
+					</span></div>
+<div>
+<div><span style="font-size: 15px;">ObjectOutputStream 和 ObjectInputStream 分别与 FileOutputStream 和 FileInputStream 一起使用时
+						</span></div>
+<div><span style="font-size: 15px;">可以为应用程序提供对对象图形的持久存储
+						</span></div>
+<div><span style="font-size: 15px;">ObjectInputStream 用于恢复那些以前序列化的对象
+						</span></div>
+<div><span style="font-size: 15px;">其他用途包括使用套接字流在主机之间传递对象，或者用于编组和解组远程通信系统中的实参和形参。 
+						</span></div>
+<div>&nbsp;</div>
+
+
+					</div>
+
+
+				</td>
+<td><span style="font-size: 15px;">ObjectInputStream(InputStream in)</span><br /><span style="font-size: 15px;">ObjectInputStream()
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">SequenceInputStream可以说既不是节点流也不是过滤流,硬要算的话,可以说是节点流 算是一个工具类一样的存在
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">SequenceInputStream (java.io)
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">两个或者多个InputStream对象转换为单一的InputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">SequenceInputStream(InputStream s1, InputStream s2)</span><br /><span style="font-size: 15px;">SequenceInputStream(Enumeration&lt;? extends InputStream&gt; e)
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135829130-1400647818.png"><img style="display: inline; background-image: none;" title="image_5b94b201_33ff" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135829365-994501942.png" alt="image_5b94b201_33ff" width="656" height="348" border="0" /></a></div>
+<h4><span style="font-size: 13.5pt;"><strong>2.2.1.2&nbsp; InputStream过滤流</strong></span>
+</h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">介绍过了InputStream的节点流,我们看下,我们还希望InputStream能够哪些扩展的功能,也就是上面提到过的 <strong>流的中间形式</strong>
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">我们之前就提到过,希望能够有直接操作数据类型的流,通过这个流可以直接操作基本数据类型的读写,而不需要自己去处理字节或者字节数组等
+					</span></div>
+<div><span style="font-size: 15px;">也就是说我们希望能够对基本数据类型进行支持
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">IO是操作系统的瓶颈,如果过于频繁的直接对磁盘IO进行读写,势必会增加CPU的空闲,性能降低,我们希望能够有缓冲的功能
+					</span></div>
+
+
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">IDE开发工具的编辑器都有行号的标志,行号可以给我们提供很多的便捷性,所以希望能够跟踪展示行号
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">比如当我们用程序读取一行代码,识别其中的关键字</span><br /><span style="font-size: 15px;">比如 int i = 0; 读取到int时,我们不知道他是不是关键字,可能是一个int0的变量名</span><br /><span style="font-size: 15px;">读取到下一个的时候,发现是空格,我们才能确定,他就是一个关键字</span><br /><span style="font-size: 15px;">但是下面的空格已经被读取了,我们可能希望接下来的扫描能够读取到空格,可是流是顺序的,被消费了就不存在了</span><br /><span style="font-size: 15px;">所以希望能够把读取到的字节回退到原来的流中
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">于是就有了&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">支持基本数据类型/缓存/行号/回退&nbsp; 这几种扩展功能的想法
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">功能点和InputStream组合下可以得到如下四种扩展功能&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">Data表示基本数据类型&nbsp; Buffer 表示缓冲&nbsp; LineNumber表示行号 PushBack表示回退
+</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">DataInputStream (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">BufferedInputStream (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">LineNumberInputStream (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">PushbackInputStream (java.io)
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135829569-164266919.png"><img style="display: inline; background-image: none;" title="image_5b94b201_2db9" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135829816-1995470497.png" alt="image_5b94b201_2db9" width="689" height="471" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">到底怎么实现呢?
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">显然我们可以直接通过实现InputStream来实现这几个子类,用于表示这几个功能
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是就又出现了一个问题,如果既想要 支持基本数据类型,又想具有缓冲的功能怎么办? 如果还用继承的想法会出现什么问题?
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">那就又回到了组合的问题上来了,4种功能就会出现4*3*2*1=24 中组合,类的个数直接爆炸了.....
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">回想下我们之前想到过的设计模式---&gt; 装饰器模式
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">就可以完美的解决这个问题,装饰器模式是继承的一种良好替代方式,能过有效的避免类的个数的爆炸问题
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">并且还能够动态的增加或者减少功能
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">看下UML图
+</span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135830225-1611815538.png"><img style="display: inline; background-image: none;" title="image_5b94b201_78e7" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135830436-613487816.png" alt="image_5b94b201_78e7" width="502" height="408" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">通过UML图可以看得到,我们还需要一个Decorator类,我们的具体的装饰类个数不止一个,显然不能省略这个Decorator抽象类
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">(不清楚装饰器模式的没办法理解这种逻辑,请务必看明白装饰器模式)
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">这个Decorator就是我们的</span><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;">FilterInputStream (java.io)&nbsp;&nbsp; </span>
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">看下类图,黑色部分为装饰器模式的角色</span><br /><span style="font-size: 15px;">节点流表示上面说到的节点流 </span><br /><span style="font-size: 15px;">ByteArrayInputStream/FileInputStream/PipedInputStream/ObjectInputStream/<del>StringBufferInputStream <br /></del></span><br /><span style="font-size: 15px;">FilterInputStream中包含一个InputStream属性(是你还有你)</span><br /><del><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135830636-683582643.png"><img style="display: inline; background-image: none;" title="image_5b94b201_17ba" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135830827-1009627718.png" alt="image_5b94b201_17ba" width="431" height="141" border="0" /></a></del>
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135831050-2060822203.png"><img style="display: inline; background-image: none;" title="image_5b94b201_7ddb" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135831314-725575681.png" alt="image_5b94b201_7ddb" width="628" height="408" border="0" /></a>
+				</td>
+
+
+			</tr>
+<tr>
+<td><br />
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;"><br />
+</span></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;">下面我们看下InputStream下的类继承体系
+</span></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;">现在你是否已经可以大致的明白,这些类都是做什么的了呢?
+</span></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135831571-121474047.png"><img style="display: inline; background-image: none;" title="image_5b94b201_789e" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135831826-269648918.png" alt="image_5b94b201_789e" width="1474" height="239" border="0" /></a></span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;">另外还有一些不在java.io包中的类
+</span></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;">这些不是IO主体系内的东西,但是依赖于IO ,从事着跟IO相关的一些工作,所以也扩展自InputStream
+</span></div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;">后面将会单独进行介绍,此处不展开讨论
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>
+<div><span style="font-size: 15px;">SocketInputStream (java.net)
+						</span></div>
+<div><span style="font-size: 15px;">CheckedInputStream (java.util.zip)
+						</span></div>
+<div><span style="font-size: 15px;">DeflaterInputStream (java.util.zip)
+						</span></div>
+<div><span style="font-size: 15px;">GZIPInputStream (java.util.zip)
+						</span></div>
+<div><span style="font-size: 15px;">InflaterInputStream (java.util.zip)
+						</span></div>
+<div><span style="font-size: 15px;">ZipInputStream (java.util.zip)
+						</span></div>
+<div><span style="font-size: 15px;">JarInputStream (java.util.jar)
+						</span></div>
+
+
+					</div>
+
+
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135832050-233422762.png"><img style="display: inline; background-image: none;" title="image_5b94b201_6211" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135832411-121875215.png" alt="image_5b94b201_6211" width="772" height="318" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<h3><span style="font-size: 13.5pt;"><strong>2.2.2 OutputStream</strong></span>
+	</h3>
+<div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">2.2.2.1&nbsp; OutputStream节点流</span></strong></h4>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">数据源与OutputStream的结合</span></strong>
+		</div>
+<div style="line-height: 150%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 150%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 150%;">
+<tr style="line-height: 150%;">
+<td><span style="font-size: 15px;">字节数组
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 150%;"><span style="font-size: 15px;">ByteArrayOutputStream (java.io)</span><br />
+						</td>
+
+
+					</tr>
+<tr>
+<td><span style="font-size: 15px;">文件
+						</span></td>
+<td>
+<div><span style="font-size: 15px;">FileOutputStream (java.io)
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr>
+<td><span style="font-size: 15px;">管道
+						</span></td>
+<td>
+<div><span style="font-size: 15px;">PipedOutputStream (java.io)
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr>
+<td><span style="font-size: 15px;">对象
+						</span></td>
+<td><span style="font-size: 15px;">ObjectOutputStream (java.io)
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+</div>
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">仍旧是数据源与OutputStream的组合
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">ByteArrayOutputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">其中的数据被写入一个 byte 数组
+					</span></div>
+<div><span style="font-size: 15px;">缓冲区会随着数据的不断写入而自动增长, 可使用 toByteArray() 和 toString() 获取数据
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">关闭 ByteArrayOutputStream 无效
+					</span></div>
+<div><span style="font-size: 15px;">此类中的方法在关闭此流后仍可被调用，而不会产生任何 IOException
+					</span></div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">ByteArrayOutputStream()</span><br /><span style="font-size: 15px;">ByteArrayOutputStream(int size)</span><br /><span style="font-size: 15px;">无参会调用有参,设置默认值
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileOutputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">信息写入文件
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileOutputStream(String name)</span><br /><span style="font-size: 15px;">FileOutputStream(String name, boolean append)</span><br /><span style="font-size: 15px;">FileOutputStream(File file)</span><br /><span style="font-size: 15px;">FileOutputStream(File file, boolean append)</span><br /><span style="font-size: 15px;">FileOutputStream(FileDescriptor fdObj)</span><br /><span style="font-size: 15px;">与FileInputStream几乎一样,不同的是第二个参数用于设置是否是append追加
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedOutputStream
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">可以将管道输出流连接到管道输入流来创建通信管道</span><br /><span style="font-size: 15px;">管道输出流是管道的发送端</span><br /><span style="font-size: 15px;">通常，数据由某个线程写入 PipedOutputStream 对象</span><br /><span style="font-size: 15px;">并由其他线程从连接的 PipedInputStream 读取</span><br /><span style="font-size: 15px;">不建议对这两个对象尝试使用单个线程，因为这样可能会造成该线程死锁
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedOutputStream(PipedInputStream snk)</span><br /><span style="font-size: 15px;">PipedOutputStream()
+				</span></td>
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">ObjectOutputStream
+				</span></td>
+<td><span style="font-size: 15px;">ObjectOutputStream 将 Java 对象的基本数据类型和图形写入 OutputStream</span><br /><span style="font-size: 15px;">可以使用 ObjectInputStream 读取（重构）对象</span><br /><span style="font-size: 15px;">通过在流中使用文件可以实现对象的持久存储</span><br /><span style="font-size: 15px;">如果流是网络套接字流，则可以在另一台主机上或另一个进程中重构对象
+				</span></td>
+<td><span style="font-size: 15px;">ObjectOutputStream(OutputStream out)</span><br /><span style="font-size: 15px;">ObjectOutputStream()
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135832726-2084268245.png"><img style="display: inline; background-image: none;" title="image_5b94b201_34f3" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135832999-1162136280.png" alt="image_5b94b201_34f3" width="689" height="280" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>2.2.2.2&nbsp; OutputStream过滤流</strong></span>
+</h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">类似InputStream,OutputStream也需要有支撑基本数据类型的功能,以及缓冲的功能
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外,既然是输出,还希望能够输出各种类型的数据,这样子将会更加方便
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也就是&nbsp; </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">基本数据类型支持/缓冲/便捷输出
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">DataOutputStream (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">BufferedOutputStream (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">PrintStream (java.io)
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135833381-650315457.png"><img style="display: inline; background-image: none;" title="image_5b94b201_794b" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135833683-1179118549.png" alt="image_5b94b201_794b" width="674" height="372" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">同InputStream 一样
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">扩展的功能,类库设计者依然是使用装饰器模式
+</span></div>
+<div style="line-height: 200%;"><span style="line-height: 24px; font-size: 15px;">FilterOutputStream (java.io)&nbsp; 是我们的Decorator
+</span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135833911-1639787346.png"><img style="display: inline; background-image: none;" title="image_5b94b201_7535" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135834169-1151269976.png" alt="image_5b94b201_7535" width="620" height="412" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 15px;">完整的家谱</span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135834469-940941886.png"><img style="display: inline; background-image: none;" title="image_5b94b202_66d1" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135834772-1402824663.png" alt="image_5b94b202_66d1" width="1203" height="236" border="0" /></a>
+	</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">非IO包中的,但是却跟IO相关的一些功能点,跟OutputStream相关的类
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">SocketOutputStream (java.net)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">CheckedOutputStream (java.util.zip)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">DeflaterOutputStream (java.util.zip)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">GZIPOutputStream (java.util.zip)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">InflaterOutputStream (java.util.zip)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">JarOutputStream (java.util.jar)
+						</span></div>
+<div style="line-height: 150%;"><span style="font-size: 15px;">ZipOutputStream (java.util.zip)
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;">扩展的家谱</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135834992-1977432868.png"><img style="display: inline; background-image: none;" title="image_5b94b202_6163" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135835226-1084066404.png" alt="image_5b94b202_6163" width="923" height="314" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<h3><span style="font-size: 13.5pt;"><strong>2.2.3 Reader</strong></span></h3>
+<div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">2.2.3.1&nbsp; Reader节点流</span></strong></h4>
+
+</div>
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>数据源与Reader的结合</strong></span>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div>
+<div style="line-height: 150%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 150%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 150%;">
+<tr style="line-height: 150%;">
+<td><span style="font-size: 15px;">字符数组
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 150%;"><span style="font-size: 15px;">CharArrayReader (java.io)
+							</span></td>
+
+
+						</tr>
+<tr>
+<td><span style="font-size: 15px;">String
+							</span></td>
+<td><span style="font-size: 15px;">StringReader (java.io)
+							</span></td>
+
+
+						</tr>
+<tr>
+<td><span style="font-size: 15px;">文件
+							</span></td>
+<td>
+<div><span style="font-size: 15px;">FileReader (java.io)
+								</span></div>
+
+
+							</td>
+
+
+						</tr>
+<tr>
+<td><span style="font-size: 15px;">管道
+							</span></td>
+<td>
+<div><span style="font-size: 15px;">PipedReader (java.io)
+								</span></div>
+
+
+							</td>
+
+
+						</tr>
+
+
+					</tbody>
+
+
+				</table>
+
+
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+		</div>
+
+
+	</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">CharArrayReader
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">实现一个可用作字符输入流的字符缓冲区
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">CharArrayReader(char buf[])</span><br /><span style="font-size: 15px;">CharArrayReader(char buf[], int offset, int length)&nbsp; </span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">StringReader
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">其源为一个字符串的字符流
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">StringReader(String s)
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileReader
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">用来读取字符文件的便捷类
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileReader(String fileName)</span><br /><span style="font-size: 15px;">FileReader(File file)</span><br /><span style="font-size: 15px;">FileReader(FileDescriptor fd)
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedReader
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">管道字符输入流
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedReader(PipedWriter src)</span><br /><span style="font-size: 15px;">PipedReader(PipedWriter src, int pipeSize)</span><br /><span style="font-size: 15px;">PipedReader()</span><br /><span style="font-size: 15px;">PipedReader(int pipeSize)&nbsp; </span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">字节和字符作为数据的存储单位,自然经常有转换的需要
+	</span></div>
+<div><span style="font-size: 15px;">InputStreamReader 就是InputStream 转换为Reader的类
+	</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">InputStreamReader
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">转换为Reader</span><br /><span style="font-size: 15px;">InputStreamReader 是字节流通向字符流的桥梁</span><br /><span style="font-size: 15px;">它使用指定的 charset 读取字节并将其解码为字符</span><br /><span style="font-size: 15px;">它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集</span><br /><span style="font-size: 15px;">每次调用 InputStreamReader 中的一个 read() 方法都会导致从底层输入流读取一个或多个字节</span><br /><span style="font-size: 15px;">为了达到最高效率，可要考虑在 BufferedReader 内包装 InputStreamReader
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">InputStreamReader(InputStream in)</span><br /><span style="font-size: 15px;">InputStreamReader(InputStream in, String charsetName)</span><br /><span style="font-size: 15px;">InputStreamReader(InputStream in, Charset cs)</span><br /><span style="font-size: 15px;">InputStreamReader(InputStream in, CharsetDecoder dec)</span><br /><span style="font-size: 15px;">构造方法很清晰,接受一个InputStream 并且可以自定义字符编码
+					</span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">对于类的转换,设计模式中使用了适配器模式
+	</span></div>
+<div><span style="font-size: 15px;">通过构造方法接收InputStream,然后通过内部的StreamDecoder处理
+	</span></div>
+<div><span style="font-size: 15px;">StreamDecoder&nbsp; 和 StreamEncoder&nbsp; 是作为字符输入和输出转换的关键类,后续有时间会介绍到
+	</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135835439-1567934013.png"><img style="display: inline; background-image: none;" title="image_5b94b202_452d" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135835622-1974507459.png" alt="image_5b94b202_452d" width="439" height="116" border="0" /></a>
+	</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135835854-1686866050.png"><img style="display: inline; background-image: none;" title="image_5b94b202_1a39" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135836211-1620553476.png" alt="image_5b94b202_1a39" width="461" height="99" border="0" /></a>
+	</div>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">属于适配器模式中的对象适配器模式
+						</span></div>
+<div><span style="font-size: 15px;">Reader 是Target
+						</span></div>
+<div><span style="font-size: 15px;">InputStream&nbsp;&nbsp; 是 被适配者 Adaptee 
+						</span></div>
+<div><span style="font-size: 15px;">InputStreamReader&nbsp;&nbsp; 是&nbsp; Adapter&nbsp; </span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+
+
+</div>
+<div><span style="font-size: 15px;">需要注意的是,FileReader&nbsp;&nbsp; 与字节流中的FileInputStream 和 FileOutputStream 也是不一样的
+</span></div>
+<div><span style="font-size: 15px;">FileReader 继承 InputStreamReader</span></div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>2.2.3.2&nbsp; Reader过滤流</strong></span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;"><span style="font-size: 15px;">字符流Reader也依然有装饰器模式的应用
+	</span></div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">BufferedReader (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">LineNumberReader (java.io)
+						</span></div>
+<div><span style="font-size: 15px;">PushbackReader (java.io)
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135836415-437670806.png"><img style="display: inline; background-image: none;" title="image_5b94b202_6908" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135836659-1035998269.png" alt="image_5b94b202_6908" width="593" height="393" border="0" /></a>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;"><span style="font-size: 15px;">不过需要注意,Reader字符流的装饰器模式应用跟字节流的有些差别
+	</span></div>
+<div><span style="font-size: 15px;">在字节流中,扩展功能都是通过FilterInputStream 或者 FilterOutputStream&nbsp; </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">然而,在我们的Reader中
+	</span></div>
+<div><span style="font-size: 15px;">BufferedReader&nbsp; 和 FilterReader 各自是一个装饰器模式
+	</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">在BufferedReader中,可以理解为只有一个具体的装饰器的简化版本
+						</span></div>
+<div><span style="font-size: 15px;">省略了抽象类
+						</span></div>
+<div><span style="font-size: 15px;">直接继承自Reader 
+						</span></div>
+<div><span style="font-size: 15px;">BufferedReader&nbsp; 融合了Decoder 和 ConcreteDecoder两者
+						</span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135836864-1861270461.png"><img style="display: inline; background-image: none;" title="image_5b94b202_6536" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135837068-1215740502.png" alt="image_5b94b202_6536" width="513" height="91" border="0" /></a>
+						</div>
+<div><span style="font-size: 15px;">是你还有你 BufferedReader 是Reader 还有一个Reader
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">在FilterReader中就跟之前的字节流中的装饰器模式的应用基本一致了</span><br /><span style="font-size: 15px;">FilterReader 表示抽象的装饰器部件&nbsp; Decoder</span><br /><span style="font-size: 15px;">PushbackReader 表示具体的装饰器</span><br /><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135837267-1609606218.png"><img style="display: inline; background-image: none;" title="image_5b94b202_7f8c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135837489-1994494619.png" alt="image_5b94b202_7f8c" width="506" height="133" border="0" /></a></span><br /><span style="font-size: 15px;">是你还有你&nbsp; FilterReader 是 Reader 还有 Reader
+					</span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">Reader家族完整的族谱
+	</span></div>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135837707-1642802473.png"><img style="display: inline; background-image: none;" title="image_5b94b202_69d9" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135837937-1127614567.png" alt="image_5b94b202_69d9" width="1016" height="284" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>2.2.4 Writer</strong></span></h3>
+<div style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">数据源与writer的结合</span></strong>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div>
+<div style="line-height: 150%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 150%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 150%;">
+<tr style="line-height: 150%;">
+<td><span style="font-size: 15px;">字符数组
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 150%;"><span style="font-size: 15px;">CharArrayWriter (java.io)
+								</span></td>
+
+
+							</tr>
+<tr>
+<td><span style="font-size: 15px;">String
+								</span></td>
+<td><span style="font-size: 15px;">StringWriter (java.io)
+								</span></td>
+
+
+							</tr>
+<tr>
+<td><span style="font-size: 15px;">文件
+								</span></td>
+<td>
+<div><span style="font-size: 15px;">FileWriter (java.io)
+									</span></div>
+
+
+								</td>
+
+
+							</tr>
+<tr>
+<td><span style="font-size: 15px;">管道
+								</span></td>
+<td>
+<div><span style="font-size: 15px;">PipedWriter (java.io)
+									</span></div>
+
+
+								</td>
+
+
+							</tr>
+
+
+						</tbody>
+
+
+					</table>
+
+
+				</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">CharArrayWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">实现一个可用作 Writer 的字符缓冲区
+					</span></div>
+<div><span style="font-size: 15px;">缓冲区会随向流中写入数据而自动增长&nbsp; 可使用 toCharArray() 和 toString() 获取数据。 
+					</span></div>
+<div><span style="font-size: 15px;">在此类上调用 close() 无效
+					</span></div>
+<div><span style="font-size: 15px;">并且在关闭该流后可以调用此类中的各个方法，而不会产生任何 IOException
+					</span></div>
+<div>&nbsp;</div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">CharArrayWriter()</span><br /><span style="font-size: 15px;">CharArrayWriter(int initialSize)</span><br /><span style="font-size: 15px;">内部包含char buf[] size为大小</span><br /><span style="font-size: 15px;">构造方法用来初始化缓冲区
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">StringWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">将输出收集到一个字符缓冲区 StringBuffer的字符流,可以用来构造字符串</span><br /><span style="font-size: 15px;">关闭 StringWriter 无效</span><br /><span style="font-size: 15px;">此类中的方法在关闭该流后仍可被调用，而不会产生任何 IOException
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">StringWriter()</span><br /><span style="font-size: 15px;">StringWriter(int initialSize)</span><br /><span style="font-size: 15px;">构造方法初始化缓冲区
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">用来写入字符文件的便捷类</span><br /><span style="font-size: 15px;">类似FileReader继承自InputStreamReader</span><br /><span style="font-size: 15px;">他继承自OutputStreamWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FileWriter(String fileName)</span><br /><span style="font-size: 15px;">FileWriter(String fileName, boolean append)</span><br /><span style="font-size: 15px;">FileWriter(File file)</span><br /><span style="font-size: 15px;">FileWriter(File file, boolean append)</span><br /><span style="font-size: 15px;">FileWriter(FileDescriptor fd)</span><br /><span style="font-size: 15px;">构造方法都是用来设置文件
+				</span></td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">管道字符流
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">PipedWriter(PipedReader snk)</span><br /><span style="font-size: 15px;">PipedWriter()&nbsp; </span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">转换流
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">OutputStreamWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">类似InputStreamReader 作为转换器使用</span><br /><span style="font-size: 15px;">OutputStreamWriter 是字符流通向字节流的桥梁</span><br /><span style="font-size: 15px;">可使用指定的 charset 将要写入流中的字符编码成字节</span><br /><span style="font-size: 15px;">使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集</span><br /><span style="font-size: 15px;">每次调用 write() 方法都会导致在给定字符（或字符集）上调用编码转换器</span><br />
+<div><span style="font-size: 15px;">为了获得最高效率，可考虑将 OutputStreamWriter 包装到 BufferedWriter 中
+					</span></div>
+<div><span style="font-size: 15px;">例如：
+					</span></div>
+<div><span style="font-size: 15px;"> Writer out = new BufferedWriter(new OutputStreamWriter(System.out));
+					</span></div>
+<div>&nbsp;</div>
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">OutputStreamWriter(OutputStream out, String charsetName)</span><br /><span style="font-size: 15px;">OutputStreamWriter(OutputStream out)</span><br /><span style="font-size: 15px;">OutputStreamWriter(OutputStream out, Charset cs)</span><br /><span style="font-size: 15px;">OutputStreamWriter(OutputStream out, CharsetEncoder enc)</span><br /><span style="font-size: 15px;">获取OutputStream然后进行转换,或者指定具体的字符编码
+				</span></td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">FilterWriter
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">类似其他的Filter类,作为装饰器模式的Decoder角色</span><br /><span style="font-size: 15px;">以便具体的装饰器角色可以使用
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><br />
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">&nbsp;</div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">BufferedWriter&nbsp;&nbsp; 以及&nbsp; PrintWriter类似Reader&nbsp; 不同于字节流的装饰器模式应用
+	</span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">他们都自成一个模式的应用
+	</span></div>
+<div style="line-height: 24px;"><span style="font-size: 15px;">他俩都单独是Writer 也都包含一个Writer
+	</span></div>
+
+
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135838199-907762612.png"><img style="display: inline; background-image: none;" title="image_5b94b202_d38" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135838413-543223574.png" alt="image_5b94b202_d38" width="557" height="296" border="0" /></a>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">Writer下完整的家谱
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135838660-1558028950.png"><img style="display: inline; background-image: none;" title="image_5b94b202_11b8" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180909135838897-524085517.png" alt="image_5b94b202_11b8" width="1086" height="261" border="0" /></a>
+</span></div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<h3><span style="font-size: 18pt;"><strong>2.3 IO类层次结构总结</strong></span></h3>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">前面已经对IO类的基本层次结构进行了一个逻辑上的概述
+	</span></div>
+<div><span style="font-size: 15px;">我们现在归纳概括下一些基本特点
+	</span></div>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">IO的逻辑功能设计点 由 数据源,流的方向,流的数据形式三部分组合而成,这个组合构成了IO的基本功能</span><br /><span style="font-size: 15px;">另外还有扩展功能,扩展功能以基础功能作为依托,底层依赖基本功能</span><br /><span style="font-size: 15px;">每种形式的基本功能和扩展功能构成了该形式的功能的集合
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">数据源形式比较多,但是对于流的数据形式以及流的方向是固定的</span><br /><span style="font-size: 15px;">所以所有的类的基础,都是基于&nbsp; 流的数据形式以及流的方向的组合</span><br /><span style="font-size: 15px;">也就是 字节输入 字节输出&nbsp;&nbsp; 字符输入&nbsp; 字符输出</span><br /><span style="font-size: 15px;">这四个形式是固定的</span><br /><span style="font-size: 15px;">分别使用 InputStream&nbsp; OutputStream&nbsp; Reader&nbsp; Writer来表示这四大家族</span><br /><span style="font-size: 15px;">前面两个表示字节&nbsp; 后面两个表示字符
+					</span></td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">绝大多数的扩展都以 上面四个名词作为后缀,表示是他的家族成员
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">基本功能对于字节涉及下面几个关键词&nbsp;&nbsp; </span><br /><span style="font-size: 15px;">ByteArray&nbsp;&nbsp; File&nbsp; Piped&nbsp; Object </span><br />
+<div><span style="font-size: 15px;">扩展功能对于字节涉及涉及下面几个关键词&nbsp; </span></div>
+<div><span style="font-size: 15px;">Data&nbsp; Buffered&nbsp; Pushback&nbsp; LineNumber print
+						</span></div>
+
+
+					</td>
+
+
+				</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">基本功能对于字符涉及涉及下面几个关键词&nbsp; </span></div>
+<div><span style="font-size: 15px;">CharArray&nbsp; String File&nbsp; Piped
+						</span></div>
+
+<span style="font-size: 15px;">扩展功能对于字符涉及涉及下面几个关键词&nbsp;&nbsp; </span><br /><span style="font-size: 15px;">Buffered&nbsp;&nbsp;&nbsp; Print
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">虽然四大家族都由基本功能以及扩展功能组成</span><br /><span style="font-size: 15px;">但是字符和字节的实现形式却并不完全相同</span><br /><span style="font-size: 15px;">字节流的扩展功能比较依赖装饰器角色FilterInputStream&nbsp; 以及 FilterOutputStream</span><br /><span style="font-size: 15px;">但是字符流的扩展功能不完全依赖FilterReader&nbsp; 以及&nbsp; FilterWriter
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">数据源与四大家族的结合组合成了基本功能&nbsp; 也就是节点流</span><br /><span style="font-size: 15px;">扩展功能点与四大家族的结合组成了扩展功能 也就是过滤流
+					</span></td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: 15px;">另外还有几个工具一样的存在</span><br /><span style="font-size: 15px;">SequenceInputStream&nbsp;&nbsp; 用于合并InputStream</span><br /><span style="font-size: 15px;">InputStreamReader 以及OutputStreamWriter 用于转换 使用了适配器模式
+					</span></td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">本文主要是从逻辑上介绍了IO家族,虽然实现上都略有差异
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是基本的命名习惯和功能点四个家族是非常类似的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">只有理解了类库的逻辑出发点,才能理解IO整个的类库,而本文正是从逻辑上去解读类库的设计
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-09 13:59</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9613518" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9613518);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9613518, cb_entryCreatedDate = '2018-09-09 13:59', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

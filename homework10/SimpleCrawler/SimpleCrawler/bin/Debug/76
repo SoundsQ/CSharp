@@ -1,0 +1,505 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="当你搜索 &amp;quot;获取当前文件路径&amp;quot; 时，有的文章会提到用os.getcwd()，但是这玩意要慎用！ 废话不多说，直接上例子： E:\program_software\Pycharm\y" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>python慎用os.getcwd() ，除非你知道【文件路径与当前工作路径的区别】 - 暮良文王 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey.min.css?v=_wtKGIz9sYqjm3oTTk7YRXg9g-RHiRw9EHTGXG3FSu8" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/liangmingshen/custom.css?v=0DL1sYbPeiR0A7Ixwd8sIsT8z3Q=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey-mobile.min.css?v=cYvlxMu_nd6MVfg-vi7YqOC6FaZ7VHFsDM166vO_ekA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/liangmingshen/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/liangmingshen/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/liangmingshen/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 413383;
+        var currentBlogApp = 'liangmingshen';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BlackLowKey';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <a href="https://github.com/Jokertion">
+ <img style="position: absolute; top: 0; right: 0; border: 0" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+</a>
+
+
+<!-- 使用火箭返回顶部start -->
+
+
+
+
+
+
+<!--script src="js/jquery.js?v=1.83.min" type="text/javascript"></script-->
+<div style="display: none" id="__document_write_ajax_div-1"></div><script type="text/javascript">window['__document_write_ajax_callbacks__']['1']();</script>
+
+<style type="text/css">
+
+body{height:3000px;}
+
+/*回到顶部*/
+#rocket-to-top div {
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 149px;
+}
+#rocket-to-top .level-2 {
+    background: url("https://files.cnblogs.com/files/liangmingshen/o_rocket_button_up.bmp") no-repeat scroll -149px 0 transparent;
+    display: none;
+    height: 250px;
+    opacity: 0;
+    z-index: 1;
+}
+#rocket-to-top .level-3 {
+    background: none repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: block;
+    height: 150px;
+    z-index: 2;
+}
+#rocket-to-top {
+    background: url("https://files.cnblogs.com/files/liangmingshen/o_rocket_button_up.bmp") no-repeat scroll 0 0 transparent;
+    cursor: default;
+    display: block;
+    height: 250px;
+    margin: -125px 0 0;
+    overflow: hidden;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 80%;
+    width: 149px;
+    z-index: 11;
+}
+
+
+    
+</style>
+
+
+<script type="text/javascript">window['__document_write_ajax_callbacks__']['4']();</script><script type="text/javascript">window['__document_write_ajax_callbacks__']['2']();</script>
+
+
+
+
+
+<center>
+</center>
+
+
+<!-- 火箭 -->
+<div style="display: block;" id="rocket-to-top">
+    <div style="opacity: 0; display: block;" class="level-2"></div>
+    <div class="level-3"></div>
+</div>
+
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+
+
+
+
+<!-- 使用火箭返回顶部end -->
+
+
+
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/liangmingshen/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/liangmingshen/">暮良文王</a>
+</h1>
+<h2>
+不奋发，则心日颓靡；
+不检束，则心日恣肆。
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/liangmingshen/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%9A%AE%E8%89%AF%E6%96%87%E7%8E%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/liangmingshen/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+98&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+36</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/liangmingshen/p/12794631.html">python慎用os.getcwd() ，除非你知道【文件路径与当前工作路径的区别】</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>当你搜索 "获取当前文件路径" 时，有的文章会提到用os.getcwd()，但是这玩意要慎用！</p>
+<p>废话不多说，直接上例子：</p>
+<p>E:\program_software\Pycharm\ytb\ytb_api\api\views.py 文件内容如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">path1 = os.path.abspath(os.path.dirname(os.getcwd()))
+print('path1: ', path1)</pre>
+</div>
+<p>在别处调用后：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428213654027-1630506592.png" alt="" width="680" height="54"></p>
+<p>结果并不是想要的当前文件路径。</p>
+<p>&nbsp;</p>
+<p>为什么会这样？</p>
+<p>去看getcwd源码：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428170425792-1233193755.png" alt="" width="680" height="69"></p>
+<p>解释：return 得到<span style="color: #ff0000;">当前工作路径（working directory)</span></p>
+<p>&nbsp;</p>
+<p>那这个working directory到底是什么？</p>
+<p>继续搜索：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428214805888-1680487439.png" alt="" width="680" height="87"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428214838406-1445369219.png" alt="" width="680" height="95"></p>
+<p>&nbsp;翻译一下：</p>
+<p>当前工作路径 working directory 就是脚本运行/调用/执行的地方，而不是脚本本身的地方。</p>
+<p>&nbsp;</p>
+<p>也就是说<span style="color: #ff0000;">「当前文件路径」</span>跟<span style="color: #ff0000;">「当前工作路径」</span>没关系，</p>
+<p>即os.getcwd() 返回值跟你的 Python 文件路径没关系，</p>
+<p>如果要获得「文件路径」你得使用&nbsp;<span style="background-color: #ffff00;">__file__</span>。</p>
+<p>&nbsp;</p>
+<p>比如，我想要的是当前文件的绝对路径，那就需要这俩哥出场了：</p>
+<p>还以E:\program_software\Pycharm\ytb\ytb_api\api\views.py 举例子：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># Return the absolute version of a path. 获取当前文件的绝对路径
+print(os.path.abspath(__file__)) 
+# E:/program_software/Pycharm/ytb/ytb_api/api/views.py
+
+
+# Returns the directory component of a pathname 获取当前文件所属的文件夹
+print(os.path.dirname(__file__))  
+# E:/program_software/Pycharm/ytb/ytb_api/api
+</pre>
+</div>
+<p>　　</p>
+<p>搭配使用，返回当前文件所在文件夹的绝对路径（这两个结果是一样的）：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">path1 = os.path.dirname(os.path.abspath(__file__))
+print(path1)
+# E:/program_software/Pycharm/ytb/ytb_api/api
+
+path2 = os.path.abspath(os.path.dirname(__file__))
+print(path2)
+# E:/program_software/Pycharm/ytb/ytb_api/api
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>如果看过些源码的话，会发现很多源码都这么用：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428220639997-1774549291.png" alt="" width="680" height="407"></p>
+<p><img src="https://img2020.cnblogs.com/blog/1337485/202004/1337485-20200428220704229-1908959696.png" alt="" width="680" height="407"></p>
+<p>&nbsp;</p>
+<p>&nbsp;总结一下：</p>
+<p>「当前文件路径」用&nbsp;&nbsp;os.path.abspath(os.path.dirname(__file__))</p>
+<p>&nbsp;</p>
+<p>「当前工作路径」用&nbsp;os.path.abspath(os.path.dirname(os.getcwd()))</p>
+<p>&nbsp;</p>
+<p>手敲不易，如果有帮助，请您给我点个推荐，感谢。</p>
+<p>&nbsp;</p>
+<p>　　</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 22:36</span>&nbsp;
+<a href="https://www.cnblogs.com/liangmingshen/">暮良文王</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12794631" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12794631);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 413383, cb_blogApp = 'liangmingshen', cb_blogUserGuid = 'f446b3dc-7545-40f4-932f-08d5782f1af4';
+    var cb_entryId = 12794631, cb_entryCreatedDate = '2020-04-28 22:36', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 暮良文王
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+    /* 鼠标特效 */
+    var a_idx = 0;
+    jQuery(document).ready(function($) {
+        $("body").click(function(e) {
+            var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 9999999999999999999999999999999999999999,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#ff6651"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove();
+            });
+        });
+    });
+    </script>
+
+
+
+</script>
+
+</script>
+<script type="text/javascript" language="javascript">
+　　//Setting ico for cnblogs
+　　var linkObject = document.createElement('link');
+　　linkObject.rel = "shortcut icon";
+　　linkObject.href = "https://files.cnblogs.com/files/liangmingshen/lms_icon.ico";
+　　document.getElementsByTagName("head")[0].appendChild(linkObject);
+</script>
+
+<script type="text/javascript">
+
+
+$(function() {
+    var e = $("#rocket-to-top"),
+    t = $(document).scrollTop(),
+    n,
+    r,
+    i = !0;
+    $(window).scroll(function() {
+        var t = $(document).scrollTop();
+        t == 0 ? e.css("background-position") == "0px 0px" ? e.fadeOut("slow") : i && (i = !1, $(".level-2").css("opacity", 1), e.delay(100).animate({
+            marginTop: "-1000px"
+        },
+        "normal",
+        function() {
+            e.css({
+                "margin-top": "-125px",
+                display: "none"
+            }),
+            i = !0
+        })) : e.fadeIn("slow")
+    }),
+    e.hover(function() {
+        $(".level-2").stop(!0).animate({
+            opacity: 1
+        })
+    },
+    function() {
+        $(".level-2").stop(!0).animate({
+            opacity: 0
+        })
+    }),
+    $(".level-3").click(function() {
+        function t() {
+            var t = e.css("background-position");
+            if (e.css("display") == "none" || i == 0) {
+                clearInterval(n),
+                e.css("background-position", "0px 0px");
+                return
+            }
+            switch (t){
+            case "0px 0px":
+                e.css("background-position", "-298px 0px");
+                break;
+            case "-298px 0px":
+                e.css("background-position", "-447px 0px");
+                break;
+            case "-447px 0px":
+                e.css("background-position", "-596px 0px");
+                break;
+            case "-596px 0px":
+                e.css("background-position", "-745px 0px");
+                break;
+            case "-745px 0px":
+                e.css("background-position", "-298px 0px");
+            }
+        }
+        if (!i) return;
+        n = setInterval(t, 50),
+        $("html,body").animate({scrollTop: 0},"slow");
+    });
+});
+
+</script>
+
+
+    </div>
+</body>
+</html>

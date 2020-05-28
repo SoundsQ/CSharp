@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_卷卷子</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=579</id>
+  <updated>2020-04-28T13:17:28Z</updated>
+  <author>
+    <name>卷卷子</name>
+    <uri>http://www.cnblogs.com/jrjrzivvv/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/jrjrzivvv/p/12797310.html</id>
+    <title type="text">如何让ThreadPoolExecutor更早地创建非核心线程 - 卷卷子</title>
+    <summary type="text">最近在项目中遇到一个需要用线程池来处理任务的需求，于是我用 来实现，但是在实现过程中我发现提交大量任务时它的处理逻辑是这样的（提交任务还有一个 方法内部也调用了 方法）： java public void execute(Runnable command) { if (command == null</summary>
+    <published>2020-04-28T13:17:00Z</published>
+    <updated>2020-04-28T13:17:00Z</updated>
+    <author>
+      <name>卷卷子</name>
+      <uri>http://www.cnblogs.com/jrjrzivvv/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jrjrzivvv/p/12797310.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jrjrzivvv/p/12797310.html" />
+    <content type="html">【摘要】最近在项目中遇到一个需要用线程池来处理任务的需求，于是我用 来实现，但是在实现过程中我发现提交大量任务时它的处理逻辑是这样的（提交任务还有一个 方法内部也调用了 方法）： java public void execute(Runnable command) { if (command == null &lt;a href="http://www.cnblogs.com/jrjrzivvv/p/12797310.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jrjrzivvv/p/12741203.html</id>
+    <title type="text">Spring Boot中只能有一个WebMvcConfigurationSupport配置类 - 卷卷子</title>
+    <summary type="text">首先将结论写文章的最前面，一个项目中只能有一个继承WebMvcConfigurationSupport的@Configuration类（使用@EnableMvc效果相同），如果存在多个这样的类，只有一个配置可以生效。推荐使用 implements WebMvcConfigurer 的方法自定义mvc</summary>
+    <published>2020-04-20T14:44:00Z</published>
+    <updated>2020-04-20T14:44:00Z</updated>
+    <author>
+      <name>卷卷子</name>
+      <uri>http://www.cnblogs.com/jrjrzivvv/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jrjrzivvv/p/12741203.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jrjrzivvv/p/12741203.html" />
+    <content type="html">【摘要】首先将结论写文章的最前面，一个项目中只能有一个继承WebMvcConfigurationSupport的@Configuration类（使用@EnableMvc效果相同），如果存在多个这样的类，只有一个配置可以生效。推荐使用 implements WebMvcConfigurer 的方法自定义mvc &lt;a href="http://www.cnblogs.com/jrjrzivvv/p/12741203.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

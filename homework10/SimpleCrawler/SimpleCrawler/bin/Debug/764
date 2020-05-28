@@ -1,0 +1,775 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="Instrumentation基础 openrasp中用到了Instrumentation技术，它的最大作用，就是类的动态改变和操作。 使用Instrumentation实际上也可以可以开发一个代理来" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java Instrumentation插桩技术学习 - tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12709402.html">Java Instrumentation插桩技术学习</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1><span style="color: #333300;">Instrumentation基础</span></h1>
+<p><span style="color: #ff0000;">openrasp中用到了Instrumentation技术，它的最大作用，就是类的动态改变和操作。</span></p>
+<p>使用Instrumentation实际上也可以可以开发一个代理来监视jvm的上运行的程序，可以动态的替换类的定义，就可以达到虚拟机级别的AOP实现，随时可以为应用增加新的功能。</p>
+<p>基本功能和用法：</p>
+<p>java.lang.instrument包提供的实现依赖于JVMTI，JVMTI（Java Virtual Machine Tool Interface）就是java虚拟机提供的一些本地变成的接口，通过代理的形式来访问JVM。在instrument包当中通过jvmti代理程序来进行类的动态操作，还可以进行虚拟机内存管理、线程控制等</p>
+<p>如何启动代理？(有两种方法)</p>
+<p>1.启动程序时指定代理(main之前运行)</p>
+<p>2.程序启动后用agentmain方法通过attach附加启动代理(main之后运行)</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418174138929-1837061336.png" alt="" width="655" height="81"></p>
+<p>代理何时起作用：</p>
+<p>1.addTransformer，当class被装载时(loadclasss)，与ClassFileTransformer(我们需要实现其transform方法)结合，转换单个class文件(可以根据拿到的classname进行匹配)</p>
+<p>2.redefineClasses，支持多个class文件的转换(自己指定好要转换哪些类，比如类aaa，即aaa.class)</p>
+<p>第一种：</p>
+<p><code>在一个含有main函数的java类启动时，通过指定&ndash;javaagent</code>参数指定一个特定的 jar 文件（包含 Instrumentation 代理）来启动 Instrumentation 的代理程序。</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416145554598-1349384355.png" alt="" width="628" height="44"></p>
+<p>Instrumentation是instrument包中的一个接口，jdk1.5引入</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416150230500-2084355476.png" alt="" width="1003" height="222"></p>
+<p>&nbsp;在jdk1.5中，可以通过premain方法来让instrumentation在main函数之前执行</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> premain(String agentArgs, Instrumentation inst);<br /> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> premain(String agentArgs)</pre>
+</div>
+<p>只需要将需要进行的操作(使用addtransformer或者redefineclasses)定义在premain方法中即可对类进行任意操作，agentArgs是命令行下启动javaagent时传入的参数，inst是insructation的实例(后面都靠它)，由jvm传入</p>
+<p>之前在学习javacodeview时也做过一个类似的例子&nbsp;<a href="https://www.cnblogs.com/tr1ple/p/12260662.html">https://www.cnblogs.com/tr1ple/p/12260662.html</a>，这里拿来再分析一下</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.ClassFileTransformer;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.IllegalClassFormatException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.Instrumentation;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.security.ProtectionDomain;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Arrays;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> testagent {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">byte</span>[] relaceBytes(String classname,<span style="color: #0000ff;">byte</span><span style="color: #000000;">[] classbuffer)
+    {
+        String bufferStr </span>= Arrays.toString(classbuffer).replace("[","").replace("]",""<span style="color: #000000;">);
+        System.out.println(</span>"classname:"+<span style="color: #000000;">classname);
+        System.out.println(</span>"byes:"+<span style="color: #000000;"> bufferStr);
+
+        </span><span style="color: #0000ff;">byte</span>[] findBytes = "hello world"<span style="color: #000000;">.getBytes();
+        String findStr </span>= Arrays.toString(findBytes).replace("[","").replace("]",""<span style="color: #000000;">);
+        System.out.println(</span>"world"+<span style="color: #000000;">findStr);
+        </span><span style="color: #0000ff;">byte</span>[] replaceBytes = "hello agent"<span style="color: #000000;">.getBytes();
+        String replaceStr </span>= Arrays.toString(replaceBytes).replace("[","").replace("]",""<span style="color: #000000;">);
+        System.out.println(</span>"agent"+<span style="color: #000000;">replaceStr);
+        bufferStr </span>=<span style="color: #000000;"> bufferStr.replace(findStr,replaceStr);
+
+        System.out.println(bufferStr);
+
+        String[]  bytearr </span>= bufferStr.split("\\s*,\\s*"<span style="color: #000000;">);
+
+        </span><span style="color: #0000ff;">byte</span>[] bytes = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[bytearr.length];
+
+        </span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">int</span> i=0;i &lt; bytearr.length;i++<span style="color: #000000;">)
+        {
+            bytes[i] </span>=<span style="color: #000000;"> Byte.parseByte((bytearr[i]));
+
+        }
+
+        System.out.println(</span>"new byte :"+<span style="color: #000000;">Arrays.toString(bytes));
+
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> bytes;
+
+
+
+
+    }<br />　　 //主要还是premain方法的定义与agent相关，通过instrucmentation的实例inst来添加一个transformer
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> premain(String args,<span style="color: #0000ff;">final</span><span style="color: #000000;"> Instrumentation inst){
+        inst.addTransformer(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassFileTransformer() {
+            </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">byte</span>[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined, ProtectionDomain protectionDomain, <span style="color: #0000ff;">byte</span>[] classfileBuffer) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IllegalClassFormatException {
+
+            className </span>= className.replace("/","."<span style="color: #000000;">);
+               </span><span style="color: #0000ff;">if</span>(className.equals("helloWorld"<span style="color: #000000;">)){
+                 </span><span style="color: #0000ff;">return</span><span style="color: #000000;">   relaceBytes(className,classfileBuffer);
+
+               }
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> classfileBuffer;
+            }
+        },</span><span style="color: #0000ff;">true</span><span style="color: #000000;">);
+
+    }
+}</span></pre>
+</div>
+<p>先看一下instrumentation，其中addtransformer添加的transformer在每一次类被加载进jvm时都将被调用，并且转换是可以有多个的（自己添加多个classfiletransformer），当一个类转换报错时，jvm将按顺序调用其它的transformer进行类文件的转换</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416155714735-1412780460.png" alt="" width="729" height="152"></p>
+<p>addTransformer实际上添加的是一个classfileTransfoemer的实例，第二个参数则代表当前转换的结果时候能够被再次转换</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416160207870-2126176199.png" alt="" width="665" height="97"></p>
+<p>也存在addtransformer只传一个transformer进来，则默认只转换一次</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416160505730-260786610.png" alt="" width="687" height="232"></p>
+<p>在classfiletransformer中可以看到其可以对类文件进行转换并返回一个替换后的文件(我们可以选择只替换我们想要替换的部分)</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416155527109-740414352.png" alt="" width="878" height="116"></p>
+<p>这个类就只有一个transform方法，loader就是类文件被转换时的类加载器</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416161229287-770734774.png" alt="" width="527" height="180"></p>
+<p>classname即jvm中定义的完整的类名或接口名，比如java/util/List，那么在每个类都要进行加载时就需要进行一个判断，只对满足我们需求的类进行匹配</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416162840552-132294857.png" alt="" width="573" height="67"></p>
+<p>classBeingRedefined指transform是类加载时触发还是类被重新转换时触发，感觉像个标志的作用</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416171342762-2099529750.png" alt="" width="847" height="78"></p>
+<p>保护域，这里涉及到了类的加载，所以涉及到了<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/f1194361820/p/4189269.html">Java Securit</a>y(主要是一种定义了一些代码执行行为的约束)</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416171544270-100079722.png" alt="" width="993" height="24"></p>
+<p>java类加载时会形成sandbox，再根据security policy为沙盒生成安全策略，程序执行时再根据安全策略进行程序相应检查，从而保护资源不被恶意操作。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418171336262-274907386.png" alt="" width="1012" height="28"></p>
+<p>还有最后一个参数即传入的字节码文件所在的字节数组，有了这个字节数组我们就可以对想要转换的class进行操作了</p>
+<p>上面的的代码对应的操作实际上就是匹配类名为helloworld的类，然后直接暴力将字节数组转string，然后用等长的字符串替换对应的字节码world为agent，所以原理并不复杂，因为长度未发生变化，若是长度变化，则需要改的就不仅仅是简单的替换，需要结合一些字节码操作类，比如javaassist操作字节码就很方便</p>
+<p>第二种：</p>
+<p>整个重新替换class的字节码(可以重新用javaassist重新构造一个新的类的各种方法体，成员变量值，然后用其字节码进行替换)：</p>
+<p>test_agent.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.File;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileInputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.ClassDefinition;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.Instrumentation;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.UnmodifiableClassException;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> testagent {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> premain(String agentArgs, Instrumentation inst) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException,  UnmodifiableClassException, ClassNotFoundException {
+            File file;
+            file </span>= <span style="color: #0000ff;">new</span> File("hello_world"<span style="color: #000000;">);
+            FileInputStream fi </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> FileInputStream(file);
+            </span><span style="color: #0000ff;">byte</span>[] fb = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[fi.available()];
+            fi.read(fb);
+            ClassDefinition cla </span>= <span style="color: #0000ff;">new</span> ClassDefinition(hello_world.<span style="color: #0000ff;">class</span><span style="color: #000000;">, fb);
+            inst.redefineClasses(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> ClassDefinition[]{cla});
+            System.out.println(</span>"agent success"<span style="color: #000000;">);
+
+    }
+}</span></pre>
+</div>
+<p>main_pro.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> main_pro {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        System.out.println(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> hello_world().print());
+    }
+}</span></pre>
+</div>
+<p>hello_world.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> hello_world {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String print() {
+        </span><span style="color: #0000ff;">return</span> "hello_world"<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>如上面代码所示，main_pro.java尝试调用hello_world类的print方法输出，<span style="color: #ff0000;">此时要用到hello_world这个类，那么要涉及到该类的装载，所以redefinedclass在这里精确拦截的类即为hello_world.class</span>，拦截并重新替换其字节码</p>
+<p>更改后的hello_world.java如下所示，因为我们只需要其字节码即可，因此直接编译为class字节码文件，然后该文件名可任意(读取字节码时用)</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> hello_world {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String print() {
+        </span><span style="color: #0000ff;">return</span> "hello_agent"<span style="color: #000000;">;
+    }
+}</span></pre>
+</div>
+<p>然后编辑MANIFEST.MF文件，设置premain路径以及能够重定义字节码属性，如果没有该属性将报错如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418214109245-1065810434.png" alt=""></p>
+<p>MANIFEST.MF：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418213948359-1535142619.png" alt="" width="500" height="90"></p>
+<p>然后打包：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418214205885-563247734.png" alt="" width="626" height="96"></p>
+<p>不加代理之前：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419204452397-629236007.png" alt=""></p>
+<p>加上代理之后运行：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418214239861-1741244103.png" alt="" width="604" height="76"></p>
+<p>可以看到此时已经替换要加载的hello_world类的字节码文件，所以实际上加载进jvm的就是替换后的字节码文件，然后调用print方法时就输入是我们替换之后的了，这里的替换可以看到是整个文件的替换。如果单纯只是插桩在指定的方法内，只要掌握好上面说的第一种addtransformer就好了，针对具体要hook某个类，感觉要针对某种具体的漏洞所经过的最终函数调用栈而言。(具体使用的时候针对我们不同的需求来定义，要是在某个类基础上改，则采用addtransformer，如是新定义类，则用redefineclasses)</p>
+<p>上面说的都是在实际的main方法之前加载相应的class字节码文件到jvm中，然后执行代理进行对指定的class进行相应的操作，那么还有另一种就是main之后再用Instrumentation来做代理，openrasp中不仅用到了premain也用到了agentmain，所以两种都得学学（agentmain是jdk1.6中提出来的）</p>
+<p>agentmain和premain也有两种定义方法：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> agentmain (String agentArgs, Instrumentation inst);    //优先级大   <br /><br /><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> agentmain (String agentArgs);</pre>
+</div>
+<p>第一种优先级高于第二种，agentmain通常和retransformClasses结合在一起用，当然addtransformer的时候要设定标志位为true，允许再次转换jvm已经加载的类</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419211238604-495716749.png" alt="" width="936" height="268"></p>
+<p>&nbsp;Transformer.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileInputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.ClassFileTransformer;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.instrument.IllegalClassFormatException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.security.ProtectionDomain;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Transformer <span style="color: #0000ff;">implements</span><span style="color: #000000;"> ClassFileTransformer {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">byte</span>[] getByteFromFile() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+    FileInputStream fi </span>= <span style="color: #0000ff;">new</span> FileInputStream("hello_world"<span style="color: #000000;">);
+    </span><span style="color: #0000ff;">byte</span>[] fileByte = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[fi.available()];
+    fi.read(fileByte);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> fileByte;
+
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">byte</span>[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined, ProtectionDomain protectionDomain, <span style="color: #0000ff;">byte</span>[] classfileBuffer) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IllegalClassFormatException {
+        </span><span style="color: #0000ff;">if</span> (className.equals("hello_world"<span style="color: #000000;">)) {
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> getByteFromFile();
+            } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> classfileBuffer;
+    }
+}</span></pre>
+</div>
+<p>main_pro.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> main_pro {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> InterruptedException {
+        System.out.println(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> hello_world().print());
+        </span><span style="color: #0000ff;">int</span> count = 0<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span>(<span style="color: #0000ff;">true</span><span style="color: #000000;">){
+            Thread.sleep(</span>600<span style="color: #000000;">);
+            count</span>++<span style="color: #000000;">;
+            System.out.println(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> hello_world().print());
+            </span><span style="color: #0000ff;">if</span>(count==10<span style="color: #000000;">){
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+        }
+    }
+}</span></pre>
+</div>
+<p>这里具体的替换方法还是与premain一样，我们替换hello_world为hello_agent,只需要在retransformClasses中指定要重新转换的类hello_world，那么main_pro在实例化hello_world的时候，被agent捕获到，重新返回新的class字节码文件，因为agentmain是启动后附加到应用程序的代理，所以需要定义一个附加过程（代码来自网上）：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachine;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachineDescriptor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #0000ff;">class</span> AttachThread <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Thread {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span> List&lt;VirtualMachineDescriptor&gt;<span style="color: #000000;"> listBefore;
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span><span style="color: #000000;"> String jar;
+
+    AttachThread(String attachJar, List</span>&lt;VirtualMachineDescriptor&gt;<span style="color: #000000;"> vms) {
+        listBefore </span>= vms;  <span style="color: #008000;">//</span><span style="color: #008000;"> 记录程序启动时的 VM 集合</span>
+        jar =<span style="color: #000000;"> attachJar;
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> run() {
+        VirtualMachine vm </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        List</span>&lt;VirtualMachineDescriptor&gt; listAfter = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">int</span> count = 0<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+                listAfter </span>=<span style="color: #000000;"> VirtualMachine.list();
+                </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (VirtualMachineDescriptor vmd : listAfter) {
+                    </span><span style="color: #0000ff;">if</span> (!<span style="color: #000000;">listBefore.contains(vmd)) {
+                     //新的jvm虚拟机启动则认为是需要附加的进程(不够精准)</span>
+                        vm =<span style="color: #000000;"> VirtualMachine.attach(vmd);
+                        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                    }
+                }
+                Thread.sleep(</span>500<span style="color: #000000;">);
+                count</span>++<span style="color: #000000;">;
+                </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">null</span> != vm || count &gt;= 10<span style="color: #000000;">) {
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            }
+            vm.loadAgent(jar);
+            vm.detach();
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+
+        }
+    }
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> InterruptedException {
+    </span><span style="color: #0000ff;">new</span> AttachThread("testagent1.jar"<span style="color: #000000;">, VirtualMachine.list()).start();
+}
+}</span></pre>
+</div>
+<p>这里要用到virtualmachine这个类，默认没在rt.jar里面，所以bootstrap 和extend都没把它加载进来，在idea里只要把jdk下lib下的tools.jar添加进来即可，先学习一下这个类：</p>
+<p>virtualmachine这个类就是oracle提供给我们的在目标java虚拟机运行过程中，可以使用该类提供的方法附加到目标java虚拟机中，也就是满足我们在应用运行过程中通过添加代理来探测应用运行的目的。关于什么是java虚拟机，可以把它就当做一个运行的jvm进程。而VirtualMachineDescriptor就是具体去描述这java虚拟机的一个容器类，封装着对目标java虚拟机的描述符和最终提供attach操作的AttachProvider的引用。那么其对应的描述符一般就用操作系统的进程id来唯一标示该虚拟机，可以通过ps拿到进程id信息，或者用jdk提供的工具jps.exe:</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200420232844369-798526668.png" alt="" width="1049" height="478"></p>
+<p>那么通过virtualmachine的attach方法就能够通过虚拟机描述符来获得该进程对应的java 虚拟机的引用，关于拿到virtualmachine的实例，官方文档有一句话：</p>
+<div class="cnblogs_code">
+<pre>Alternatively, a VirtualMachine instance <span style="color: #0000ff;">is</span> obtained by invoking the attach method with a VirtualMachineDescriptor obtained <span style="color: #0000ff;">from</span> the list of <span style="color: #0000ff;">virtual</span> machine descriptors returned by the list method. </pre>
+</div>
+<p>那么首先我们可以通过调用virtualmachine的list方法拿到返回的虚拟接描述符，可以看到其返回一个虚拟机描述符实例的list，那么应该对应着一些进程id</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200420231552498-386004880.png" alt="" width="753" height="297"></p>
+<p>上面的方法体中可以看到虚拟机描述符通过迭代attachProvider拿到的，所以有必要弄清attachProvider是什么，它就是最终为我们提供attach到jvm虚拟机的，可以看到此时通过虚拟机描述符拿到对应的jvm虚拟机进程id作为最终attach的依据，然后到attachVirtualMachine方法进行附加，这个是个抽象方法，oracle中也说了该类是交给具体的平台去实现的(sun的providerAttach只能拿来实现sun平台jvm虚拟机程序的热部署)，不同的平台jvm虚拟机的实现和工作模式都是不一样的，所以提供抽象方法，具体实现交给子类实现。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421011549298-1400914996.png" alt="" width="1057" height="238"></p>
+<p>拿到目标要被附加的jvm实例后，此时要做的就是附加代理进程了，virtualmachine提供了三种方法：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200420235944124-789452381.png" alt="" width="911" height="243"></p>
+<p>第一种loadagent，也就是直接加载我们定义好的jar包中的代理类，比如上面用agentmain编的代理类，里面写好代理逻辑，和MANIFEST.MF一起打包成jar，那么传入该jar包的名字后，目标jvm将把该jar包添加到它的jvm的classpath中，其中options是提供给代理类agentmain方法的入口第一个参数</p>
+<p>第二种即为loadAgentLibrary</p>
+<p>这种是使用jvmti编写本地的动态链接库，然后将动态链接库附加到目标jvm中，比如有一个libtr1ple.so的代理动态链接库，此时只要传一个tr1ple给该函数，它将到系统环境变量LD_LIBRARY_PATH的路径下去找该so文件，并且会将传入的tr1ple扩展为libtr1ple.so进行查找然后进行附加</p>
+<p>第三种是loadAgentpath</p>
+<p>这个和第二种很类似，也是加载so文件，不过不需要到环境变量中找so，而是直接提供一个代理so文件的绝对路径来进行加载</p>
+<p>其中MANIFEST.MF为：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419231722836-843800716.png" alt="" width="546" height="112"></p>
+<p>&nbsp;运行结果如下(本来应该输出hello_world,附加agent以后调用transform转换class 字节码文件)：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419231956501-1887193471.png" alt=""></p>
+<p>打包testagent1.jar作为要添加的代理：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419232117539-511494567.png" alt=""></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419232131998-1246999321.png" alt="" width="579" height="109"></p>
+<p>然后同时运行附加程序，attack到java虚拟机</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200419232012395-44861169.png" alt=""></p>
+<p>上面的监控jvm进程的来附加代理的代码感觉还不够精准，因为只是针对选择新增的jvm进程id来附加，那么对于要被附加代理的java虚拟机，能否准确地获得其虚拟机描述符？如下图的方法是显示虚拟机描述符</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421131754693-1315007392.png" alt="" width="479" height="152"></p>
+<p>看VirtualMachineDescriptor的构造方法，也就是当我们创建虚拟机描述符时如果没有指定displayname的时候，默认将进程id作为虚拟机描述符</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421131902427-676698397.png" alt="" width="814" height="359"></p>
+<p>那么很容易来看一下现在机器上运行的java虚拟机的虚拟机描述符</p>
+<p>virtual.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachine;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachineDescriptor;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> virtual {
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+        List</span>&lt;VirtualMachineDescriptor&gt;  vmList =<span style="color: #000000;"> VirtualMachine.list();
+        </span><span style="color: #0000ff;">for</span><span style="color: #000000;">(VirtualMachineDescriptor vmd:vmList){
+            System.out.println(vmd.displayName());
+        }
+    }
+}</span></pre>
+</div>
+<p>此时运行main_pro，作为要被附加的java虚拟机</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421142439674-497614834.png" alt=""></p>
+<p>并且运行virtual.java，此时由输出可以看到目前有4个java虚拟机</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421142248684-1724672330.png" alt="" width="1402" height="178"></p>
+<p>&nbsp;</p>
+<p>virtual -&gt; 当前运行的主程序</p>
+<p>jetbrains -&gt; idea</p>
+<p>finalshell&nbsp;</p>
+<p>main_pro 要被附加的java虚拟机程序&nbsp;</p>
+<p>所以很容易看到此时jvm已经给运行的程序在初始化虚拟机描述符时传入了diplayname，基本就是main方法所在的类名相关了，所有为了精确附加代理，所以可以通过displayname来进行捕获目标java虚拟机：</p>
+<p>那么假设提前知道要捕获的目标虚拟机的类名，则用以下代码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachine;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.sun.tools.attach.VirtualMachineDescriptor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #0000ff;">class</span> AttachThread <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Thread {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">final</span><span style="color: #000000;"> String jar;
+    AttachThread(String attachJar) {
+        jar </span>=<span style="color: #000000;"> attachJar;
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> run() {
+        VirtualMachine vm </span>= <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">int</span> count = 0<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">while</span> (<span style="color: #0000ff;">true</span><span style="color: #000000;">) {
+                List</span>&lt;VirtualMachineDescriptor&gt;list =<span style="color: #000000;"> VirtualMachine.list();
+                </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (VirtualMachineDescriptor vmd : list) {
+                    String vmDisplayName  </span>=<span style="color: #000000;"> vmd.displayName();
+                    </span><span style="color: #0000ff;">if</span> (vmDisplayName.equals("main_pro"<span style="color: #000000;">)) {
+                        vm </span>=<span style="color: #000000;"> VirtualMachine.attach(vmd);
+                        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                    }
+                }
+                Thread.sleep(</span>500<span style="color: #000000;">);
+                count</span>++<span style="color: #000000;">;
+                </span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">null</span> != vm || count &gt;= 10<span style="color: #000000;">) {
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+            }
+            vm.loadAgent(jar);
+            vm.detach();
+        } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (Exception e) {
+
+        }
+    }
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> InterruptedException {
+    </span><span style="color: #0000ff;">new</span> AttachThread("testagent1.jar").start()<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+<p>打包为jar</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421144228416-663433116.png" alt=""></p>
+<p>接着运行java -jar attach.jar去附加代理</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200421150039528-1199474009.png" alt="" width="722" height="234"></p>
+<p>&nbsp;</p>
+<p>&nbsp;此时就能看到第一次输出是hello_world,接着新的线程装载类hello_world时将被retransformClasses捕获，此时附加testagent1.jar到main_pro对应的java虚拟机中实现程序运行中附加代理</p>
+<h1>java程序的执行过程</h1>
+<h2>1.源码编译</h2>
+<p>首先java源文件要编译生成.class文件肯定要经过一些强制性的语法规则检测，那么最常见的情况就是语法不正确将直接编译不通过产生错误。</p>
+<h2>2.class字节码装载、链接</h2>
+<p>classloader加载相应的class文件来生成class对象(loadclass-&gt;findclass-&gt;defineclass-&gt;resolveclass)，而类的加载也要经过验证，因为并不能保证加载进来的字节码文件是未经过篡改的，比如直接在更改class文件添加相应的后门，或字节码文件更改错误，所以字节码的验证应该是class 字节码被加载到jvm中由jvm进行验证</p>
+<p>tips：jvm启动时运行过程中已经加载到jvm的class文件的class对象获取其classloader为null(rt.jar下的class，由bootstrap classloader加载)，比如像maven中管理的第三方仓管中class文件，那么此时要在程序中使用，获取到的classloader也为appclassloader，这里加载yyy和instruction属于新的需要加载到jvm的类，因此默认也使用appclassloader。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416175949380-1466733658.png" alt="" width="751" height="439"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200416180005241-813803814.png" alt="" width="533" height="128"></p>
+<h2>3.应用程序访问相关资源</h2>
+<p>资源包括文件资源、配置选项，我们可以检查是否可读、可写、远程端口是否可以进行连接等，具体的权限包括以下这些</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417171615061-315497472.png" alt=""></p>
+<p>那么这些检查都是通过java SecurityManager来实现的，该类感觉是jdk为java 应用设计的一种安全检查，其中内置了多种方法在当前应用要进行某种操作时可以调用checkxxx对应的方法来检测是否允许执行</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417165823054-1541340835.png" alt=""></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417165828103-2072324762.png" alt="" width="639" height="87"></p>
+<p>下图中说的方法可以用来检测是否拥有某种操作权限</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417170050129-448415575.png" alt=""></p>
+<p>checkPermission如果只接受一个参数，那么对应的只是当前执行的线程的上下文是否有某种操作权限，那么有时候需要在多线程下检查权限，所以使用getSecurityContext来拿到调用线程的context(默认都是AccessControlContext)，然后再调用可以传入context的checkPermission进行相应的权限检查</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417170518522-1326373305.png" alt="" width="826" height="226"></p>
+<p>那么最终的permission对比是由抽象类permission的具体某种操作的子类的implies方法来实现检查，比如URLPermission，通过给定的url、指定的http方法(GET POST等)、http header进行匹配，来检查能否访问某个资源(检查的前提当然要提前设置好相应的权限new URLPermission)</p>
+<p>大多数Permission都对应着一个action列表(初始化设置)，后面进行check的时候将对应着进行检查</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417174607335-1788483269.png" alt="" width="682" height="312"></p>
+<p>比如通过以下方法就能定义一个URLPermission</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200417175751798-203182623.png" alt=""></p>
+<p>这里又学习了一下security manager的相关知识，这里涉及到了jdk本身的安全机制，java sandbox，安全管理器只是其中一个组件，提供了一些jdk的api与操作系统之间联系的一些权限限制，比如最常用的就是获取操作系统的一些相关信息，如下图所示，%java_home%/jre/lib/securicy/java.policy中就包含了一些默认的安全限制选项，或者通常用的默认policy文件即为家目录下的.java.policy，安全选项也就是之前所说的Perminssion的一些子类以及其对应的action操作</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418133303898-1082589076.png" alt="" width="553" height="217"></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418133151244-1473052468.png" alt="" width="927" height="189"></p>
+<p>关于oracle的相关permission说明见此链接，<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/security/permissions.html">https://docs.oracle.com/javase/7/docs/technotes/guides/security/permissions.html</a></p>
+<p>其中每一条就是权限(就是相应的类名)+属性+操作</p>
+<p>其中security目录下面还有一个java.security文件主要是对沙箱做一些配置的定义，比如如下两个就是其定义的默认policy的寻找地址</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418140449043-1495192606.png" alt="" width="646" height="90"></p>
+<p>因为默认情况下有下面的这个配置，所以是允许自定义策略文件的，还有一些其他配置等以后再单独研究java 沙箱再详细学习</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418140652633-1473785573.png" alt="" width="795" height="85"></p>
+<p>使用policy方式：&nbsp;</p>
+<p><span class="pln">java <span class="pun">-<span class="typ">Djava<span class="pun">.<span class="pln">security<span class="pun">.<span class="pln">policy<span class="pun">=&lt;<span class="pln">URL<span class="pun">&gt;&nbsp; （这种一个等号还是会用java.policy）</span></span></span></span></span></span></span></span></span></span></p>
+<p>java&nbsp;<span class="pun">-<span class="typ">Djava<span class="pun">.<span class="pln">security<span class="pun">.<span class="pln">policy<span class="pun">==&lt;<span class="pln">URL<span class="pun">&gt; （这种两个等号只用我们指定的policy来进行检查）</span></span></span></span></span></span></span></span></span></p>
+<p><span class="pun"><span class="typ"><span class="pun"><span class="pln"><span class="pun"><span class="pln"><span class="pun"><span class="pln"><span class="pun">如何使用security manager：</span></span></span></span></span></span></span></span></span></p>
+<p><span class="pun"><span class="typ"><span class="pun"><span class="pln"><span class="pun"><span class="pln"><span class="pun"><span class="pln"><span class="pun">1.使用默认的manager</span></span></span></span></span></span></span></span></span></p>
+<p>开启方式：</p>
+<p><code class="  language-css">java -Djava.security.manager</code></p>
+<p>或者在代码中添加：</p>
+<p>System.setSecurityManager(new SecurityManager());</p>
+<p>使用默认的manager的话，最终调用checkxxx方法时则是如下所示，直接调用securitymanager的checkPermission来进行相应的检查，然后调用AccessController的检查权限的方法来对要进行的操作能否执行进行检查</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418145041184-194997067.png" alt="" width="726" height="116"></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418145239743-835076459.png" alt="" width="601" height="77"></p>
+<p>所以也可以直接实例化某种权限的实例，然后调用AccessController来进行权限检查，比如如下所示，如果对应的操作不允许，则抛出错误</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418145524829-334351857.png" alt="" width="813" height="97"></p>
+<p>2.自定义securityManager，复写checkxxx，</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span> java.io.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.lang.instrument.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> java.security.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.security.cert.Certificate;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.ArrayList;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Arrays;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Set;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.regex.Pattern;
+
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Instruction {
+
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span> MySecurityManager <span style="color: #0000ff;">extends</span><span style="color: #000000;"> SecurityManager {
+        @Override
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> checkRead(String file) {
+            Boolean match </span>= Pattern.matches("/proc.*|/etc.*|/var.*","/proc/self/environ"<span style="color: #000000;">);
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> (match) {
+                </span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> AccessControlException("cannot read file:" +<span style="color: #000000;"> file);
+            }
+            </span><span style="color: #0000ff;">super</span><span style="color: #000000;">.checkRead(file);
+        }
+    }
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span>  <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException, PrivilegedActionException {
+
+        </span><span style="color: #0000ff;">final</span> String file = "./com/1.txt"<span style="color: #000000;">;
+               System.setSecurityManager(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> SecurityManager());
+        SecurityManager sm </span>=<span style="color: #000000;"> System.getSecurityManager();
+        </span><span style="color: #0000ff;">if</span>(sm!=<span style="color: #0000ff;">null</span><span style="color: #000000;">){
+               sm.checkRead(file);
+
+        }
+        FileInputStream fi </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> FileInputStream(file);
+        </span><span style="color: #0000ff;">int</span> a =<span style="color: #000000;">fi.available();
+        </span><span style="color: #0000ff;">byte</span>[] aa = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[a];
+        fi.read(aa);
+        String out </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> String(aa);
+        System.out.println(out);
+
+
+    }
+}</span></pre>
+</div>
+<p>比如想在读文件前，这里不仅检测你有没有读的权限，还想检测你一下你读的文件是不是在应用想让你读的范围之内，则可以直接定义自己的security manager来重写checkread方法，上面的代码就比如想读取/proc/self/environ文件，但是在正则中匹配到了，因此不允许进行读取，那么我们想要进行的操作进行完之后，只需再次调用父类的checkread方法接着后面的权限检查即可。</p>
+<p>以checkread为例，对应其他的一些api我们也可以进行相应的限制，比如这里是读，那么我们可以想到：</p>
+<p>1.对应的输出流，checkWrite,那么就可以去检查输出的文件是否满足我们的要求，比如限制写文件的目录，限制写文件的后缀等</p>
+<p>2.checkConnect可以检查我们连接的主机和端口，那么在发送连接请求时可以检查是否在允许连接的ip和port范围内等</p>
+<p>3.checkExec可以拿到所要执行的命令，对命令来进行权限检查</p>
+<p>.....</p>
+<p>jdk提供的这一套api，我们都能够在开启security manager的情况下加以利用，使得应用更加安全，比如tomcat中就支持security manager的模式</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418160135798-181984920.png" alt="" width="648" height="281"></p>
+<p>tomcat cve里面也有几个security bypass的，不过都是低危，并且都是4年前的洞，大多数都是tomcat团队发现的，由下面注释可以看到-security模式将启动security manager，默认情况下webapps下的目录只有读权限，work下的对应的应用目录具有读、写、删除权限</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418155528911-705484565.png" alt="" width="979" height="243"></p>
+<p>&nbsp;那么如何指定自定义的pollicy来进行安全限制：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FileInputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.FilePermission;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.security.AccessController;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.security.PrivilegedActionException;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Instruction {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Instruction() {
+    }
+
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> &lt;PriviliegedAction&gt; <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException, PrivilegedActionException {
+   </span><span style="color: #000000;">        String file </span>= "./com/1.txt"<span style="color: #000000;">;
+        System.setSecurityManager(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> SecurityManager()); //开启security manager
+        SecurityManager sm </span>=<span style="color: #000000;"> System.getSecurityManager();  //拿到sm
+        </span><span style="color: #0000ff;">if</span> (sm != <span style="color: #0000ff;">null</span><span style="color: #000000;">) { 
+            FilePermission fp </span>= <span style="color: #0000ff;">new</span> FilePermission("./com/1.txt", "read"<span style="color: #000000;">);  //声明对文件的读权限
+            FilePermission fp1 </span>= <span style="color: #0000ff;">new</span> FilePermission("./com/1.txt", "write"<span style="color: #000000;">); //声明对文件的写权限
+            AccessController.checkPermission(fp); //直接检查读
+            AccessController.checkPermission(fp1); //直接检查写
+            System.out.println(</span>"sss"<span style="color: #000000;">);
+            sm.checkRead(</span>"./com/1.txt"<span style="color: #000000;">); //用sm间接检查读
+        }
+
+        FileInputStream fi </span>= <span style="color: #0000ff;">new</span> FileInputStream("./com/1.txt"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">int</span> a =<span style="color: #000000;"> fi.available();
+        </span><span style="color: #0000ff;">byte</span>[] aa = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">byte</span><span style="color: #000000;">[a];
+        fi.read(aa);
+        String out </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> String(aa);
+        System.out.println(out);
+    }
+}</span></pre>
+</div>
+<p>上面的文件执行编译后运行，然后不制定策略文件的情况下，开启sm，此时默认是对com/1.txt没有读写权限的，所以到read权限检查时直接报错退出，第二次执行指定my.policy为策略文件，此时只指定读不指定写，此时将在写权限检查时退出，即my.policy对当前运行环境生效了</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418165521436-710431120.png" alt="" width="1144" height="74"></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418163623755-748170287.png" alt="" width="1255" height="225"></p>
+<p>&nbsp;tips：1.这里将class打包成jar然后再执行比较好，如果要进行签名的话也是jar包形式&nbsp; &nbsp;2.policy中指定文件位置时要相对于执行的class字节码，文件路径我用绝对路径H:\JavaSecStudy\javasec-rasp\target\classes\kk\com\1.txt(单换双杠)竟然不识别，坑了我好长时间，并且只支持下图这种相对路径寻址方法</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418164938462-289007129.png" alt=""></p>
+<p>如下所示直接执行class字节码文件指定policy也可以，只要路径对就行&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200418165938659-1330466381.png" alt="" width="1190" height="82"></p>
+<h1>总结</h1>
+<p>写这篇总结写看了不少文章，也将相关的链接放到下面，如果想多了解可以点开学习，不过大多数还是得去jdk源码中的注释或者jdk官方文档去查看类的定义去理解某个类的设计意义及用法，文中不免有表述不清，若有不对，还请指出，如果觉得有用，麻烦点个推荐 哈哈~</p>
+<h1>参考</h1>
+<p><a href="http://ouyblog.com/2019/03/%E5%9F%BA%E4%BA%8EJava-Agent%E4%B8%8EJavassist%E5%AE%9E%E7%8E%B0%E9%9B%B6%E4%BE%B5%E5%85%A5AOP">http://ouyblog.com/2019/03/%E5%9F%BA%E4%BA%8EJava-Agent%E4%B8%8EJavassist%E5%AE%9E%E7%8E%B0%E9%9B%B6%E4%BE%B5%E5%85%A5AOP</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jse61/">https://www.ibm.com/developerworks/cn/java/j-lo-jse61/</a>&nbsp;&nbsp;Instrumentation 新功能</p>
+<p><a href="https://www.jianshu.com/p/9f4e8dcb3e2f">https://www.jianshu.com/p/9f4e8dcb3e2f</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-dyn0203/">https://www.ibm.com/developerworks/cn/java/j-dyn0203/</a>&nbsp; 动态类转换</p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-dyn0414/">https://www.ibm.com/developerworks/cn/java/j-dyn0414/</a>&nbsp; 利用bcel涉及字节码</p>
+<p><a href="https://www.cnblogs.com/f1194361820/p/4189269.html">https://www.cnblogs.com/f1194361820/p/4189269.html</a>&nbsp;java security</p>
+<p><a href="https://www.cnblogs.com/youxia/p/java004.html">https://www.cnblogs.com/youxia/p/java004.html</a>&nbsp; &nbsp; security manager</p>
+<p><a href="https://www.cnblogs.com/MyStringIsNotNull/p/8268351.html">https://www.cnblogs.com/MyStringIsNotNull/p/8268351.html</a>&nbsp;java 沙箱机制</p>
+<p><a href="http://www.blogjava.net/china-qd/archive/2006/04/25/42931.html">http://www.blogjava.net/china-qd/archive/2006/04/25/42931.html</a>&nbsp; 使用policy设置安全策略</p>
+<p><a href="https://blog.spoock.com/2019/12/21/Getting-Started-with-Java-SecurityManager-from-Zero/">https://blog.spoock.com/2019/12/21/Getting-Started-with-Java-SecurityManager-from-Zero/</a>&nbsp; security manager</p>
+<p><a href="https://www.infoq.cn/article/javaagent-illustrated/">https://www.infoq.cn/article/javaagent-illustrated/</a>&nbsp;javaagent解读</p>
+<p><a href="https://docs.oracle.com/javase/7/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html">https://docs.oracle.com/javase/7/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html</a>&nbsp;jvm虚拟机attach</p>
+<p><a href="https://blog.csdn.net/qinhaotong/article/details/100693414">https://blog.csdn.net/qinhaotong/article/details/100693414</a>&nbsp;java agent 不错的文章</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p></p>
+<p><audio controls="controls" style="display: none;"></audio></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 10:22</span>&nbsp;
+<a href="https://www.cnblogs.com/tr1ple/">tr1ple</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12709402" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12709402);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 316934, cb_blogApp = 'tr1ple', cb_blogUserGuid = 'f3d76e0f-51aa-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12709402, cb_entryCreatedDate = '2020-04-28 10:22', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

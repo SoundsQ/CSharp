@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="与分布式缓存在高并发和高可用下所要解决问题差不多。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题VI：分布式Session - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html">电商课题VI：分布式Session</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        与分布式缓存在高并发和高可用下所要解决问题差不多。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><a style="cursor: pointer;" href="http://weibo.com/yunzheng/">@郑昀</a>汇总</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">与分布式缓存在高并发和高可用下所要解决问题差不多。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">一.图示：</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard35.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard35.png" /></a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">二.高并发下分布式Session需解决的问题：</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li><span style="color: #ff0000;">透明处理存储介质的故障转移</span></li>
+<li><span style="color: #ff0000;">动态增删节点，减小&ldquo;缓存颠簸&rdquo;问题</span></li>
+<li><span style="color: #ff0000;">保证数据在各个节点的分布均衡</span></li>
+<li><span style="color: #ff0000;">Session<span class="Apple-converted-space">&nbsp;</span></span><a style="cursor: pointer;" href="http://www.ibm.com/developerworks/cn/java/j-5things1/"><span style="color: #ff0000;">序列化和反序列化</span></a></li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">三.保证&ldquo;基本可用 Basically Available&rdquo;的分布式Session方案：</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">Eric A. Brewer 在 1988 年提出的&nbsp;BASE 策略，即<span class="Apple-converted-space">&nbsp;</span><span style="text-decoration: underline;">Basically Available</span>、<span style="text-decoration: underline;">Soft state</span>、和<span style="text-decoration: underline;">Eventually consistent</span>。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">互联网大多数应用更强调可用性，即牺牲高一致性，获得可用性或可靠性。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div><strong>基本可用<span class="Apple-converted-space">&nbsp;</span><span style="text-decoration: underline;">Basically Available</span><span class="Apple-converted-space">&nbsp;</span>的定义：</strong></div>
+<div>在分布式系统部分损坏的时候，允许部分内容不可用，但是其他部分仍旧可用。因此称这种系统为&ldquo;基本可用&rdquo;。比如，一个数据存储系统由 五个节点构成。其中一个发生了损坏，这时只有20%的数据不能访问，其他80%数据仍然可用。那么就可以称这种系统为基本可用的。</div>
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">基于 memcache 的<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">Hash取模算法</span></strong>（hash() mod n，hash() 取用户ID，n为节点数） 实现的分布式 Session 方案，就属于基本可用：</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>第一，如果节点发生故障，该节点上的所有用户 Session 丢失，系统无法自恢复。</div>
+<div>第二，如果系统压力突然增大，需要临时增加机器节点。按照 Hash取模的算法，在增加机器节点的这一时刻，大量缓存无法命中（其实还都存在之前的节点上），导致大范围的缓存穿透，压力会直接打到数据库上。</div>
+<div>第三，根据 LRU 缓存失效算法，memcache 里存储的 key/value 有可能被踢出，用户 Session 容易丢失。</div>
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">针对 Hash取模 的<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html" target="_blank">改进办法</a>是：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">四.基于一致性哈希算法的 memcache 解决方案</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）一致性哈希帮我们解决的是，当机器节点减少时，缓存数据能进行最少重建。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）还能解决 Session 数据的分布均衡问题。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）当机器节点宕机，这部分数据必然丢失。由于节点数目变化，有可能对部分没有丢失的数据也要重建。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">但上面的方案都解决不了&ldquo;<span style="color: #ff0000;">一个节点失败后，它所存储的 Session 如何由其他节点获取以便接替失效节点，实现集群的容错（Failover）</span>&rdquo;。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html" target="_blank">郑昀</a>先介绍下面几个概念：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">五.Sticky Session、Non-sticky Session和Replicated Sessions</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li><strong><span style="text-decoration: underline;">Sticky Sessions</span></strong>：粘性会话。即同一个会话中的请求必须被转发到同一个节点上，除非该节点宕机才转发到故障转移节点。一个节点宕机，所存储的 Sessions 完全丢失。通俗的话就是，将用户&ldquo;粘&rdquo;在某一个服务器节点上。</li>
+<li><strong><span style="text-decoration: underline;">Non-Sticky Sessions</span></strong>：非粘性会话。每一次请求都可能转发到不同节点。</li>
+<li><strong><span style="text-decoration: underline;">Replicated Sessions</span></strong>：把一个节点上的 Sessions 复制到集群的其他节点上，防止数据丢失，允许失效无缝转移。如node 0复制到node 5，node 1复制到node 6，以此类推。多数应用服务器（如 Tomcat ）都支持会话复制机制。</li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">当用户数量和集群数量达到一定规模后，Session 复制就可能成为性能瓶颈。于是人们提出了&nbsp;<strong><span style="text-decoration: underline;">从第三方缓存恢复失效节点数据</span>&nbsp;</strong>的方案，开源产品<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://code.google.com/p/memcached-session-manager/">Memcached-Session-Manager</a>（下面简称MSM）就是基于这个思想。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">六.MSM的工作原理</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">MSM 支持 Tomcat 6 和 7，即它主要解决的是 Tomcat 的高可用性。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">它的特性为：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>支持 sticky sessions 和 non-ticky sessions 模式。</li>
+<li>没有单点故障。</li>
+<li>能处理 tomcat 故障转移</li>
+<li>能处理 memcache 故障转移</li>
+<li>pluggable session serialization</li>
+<li>允许异步存储 session，提高响应速度</li>
+<li>sessions 只有真正被修改时，才会发给 memcache</li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #a52a2a;">6.1.Sticky Session 模式下的工作原理</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即，<strong>Tomcat 的本地 session &nbsp;为主 session，memcache 中的 session 为备 session</strong>。</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>第一步，所有 Tomcat 节点都需要安装 MSM；每一个 Tomcat 会有自己的本地 session。</div>
+<div>第二步，当一个请求执行完毕之后，如果对应的 session 在本地不存在（即这是某一个用户的第一次请求），则将该 session 复制一份至 memcache 。</div>
+<div>第三步，当该 session 的下一个请求到达时，会使用 Tomcat 的本地 session。请求处理结束之后，session 的变化会同步更新到 memcache，保证数据一致。</div>
+<div>第四步，如果当前 Tomcat 节点失效，下一个请求会被路由给其他 Tomcat。这个 Tomcat 发现请求所对应的 session 并不存在，于是它将查询 memcache，如果查询到了，则恢复到本地 session。</div>
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">这样就完成了容错处理。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a;">6.2.Non-sticky Session 模式下的工作原理</span></strong></div>
+<div>即，<strong>Tomcat 的本地 session &nbsp;为中转 session，memcache 1 为主 session，memcache 2为备 session</strong>。</div>
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>第一步，收到请求，加载备 session 到本地容器；</div>
+<blockquote style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>备 session 加载失败，则从主 session 加载；</div>
+</blockquote>
+<div>第二步，请求处理结束之后，session 的变化会同步更新到 memcache 1和 memcache 2，并清除Tomcat 的本地 session 。</div>
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">session data 要想存入 memcache，必须能序列化和反序列化。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">七.基于 kryo 的序列化方案</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">所有序列化策略都必须提供下面的特性：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>序列化：能处理循环引用。</li>
+<li>序列化/反序列化：支持对一个共享对象（Shared Object）的引用。</li>
+<li>反序列化：支持 private classes 。</li>
+<li>反序列化：支持没有默认构造函数的类。</li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">下面是 MSM<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://code.google.com/p/memcached-session-manager/wiki/SerializationStrategies">Wiki 所列出的表格</a>：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="wikitable">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Serialization Strategy</strong><span class="Apple-converted-space">&nbsp;</span></span><br /><br /><span style="font-size: 13px;"><em>Value for<span class="Apple-converted-space">&nbsp;</span><tt>transcoderFactoryClass</tt><span class="Apple-converted-space">&nbsp;</span>attribute</em></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Requires<span class="Apple-converted-space">&nbsp;</span><br /><br /><tt>java.io.Serializable</tt></strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Cyclic<br /><br />Dependencies</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Shared<br /><br />objects</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Private classes</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Classes without<br /><br />default constructor</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong><span style="color: #ff0000;">Different class versions</span></strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Copy Collections<span class="Apple-converted-space">&nbsp;</span><br /><br />before<br /><br />serialization</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Custom<span class="Apple-converted-space">&nbsp;</span><br /><br />Converter</strong></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>Comment</strong></span></td>
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>java serialization</strong>(default, bundled with msm)<span class="Apple-converted-space">&nbsp;</span></span><br /><br /><span style="font-size: 13px;"><tt>de.javakaffee.web.msm.JavaSerializationTranscoderFactory</tt></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="color: #ff0000; font-size: 13px;">No (Though,<span class="Apple-converted-space">&nbsp;</span><br />if the serialVersionUID is set to 1L,<span class="Apple-converted-space">&nbsp;</span><br />classes can be deserialized<span class="Apple-converted-space">&nbsp;</span><br />even if the new class version has new fields)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">No</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">No</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">&nbsp;</span></td>
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>msm-kryo-serializer</strong><span class="Apple-converted-space">&nbsp;</span></span><br /><br /><span style="font-size: 13px;"><tt>de.javakaffee.web.msm.serializer.kryo.KryoTranscoderFactory</tt></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">No</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (for Sun JVMs)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (for Sun JVMs)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="color: #ff0000; font-size: 13px;">No (not yet)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (Converter must extend<span class="Apple-converted-space">&nbsp;</span><tt>KryoCustomization</tt>,<span class="Apple-converted-space">&nbsp;</span><tt>SerializerFactory</tt><span class="Apple-converted-space">&nbsp;</span>or<span class="Apple-converted-space">&nbsp;</span><tt>UnregisteredClassHandler</tt>)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Reflection based,<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://code.google.com/p/kryo/" rel="nofollow">Kryo</a><span class="Apple-converted-space">&nbsp;</span>is used for binary serialization/deserialization</span></td>
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;"><strong>msm-javolution-serializer</strong><span class="Apple-converted-space">&nbsp;</span></span><br /><br /><span style="font-size: 13px;"><tt>de.javakaffee.web.msm.serializer.javolution.JavolutionTranscoderFactory</tt></span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">No</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (for Sun JVMs)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (for Sun JVMs)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="color: #ff0000; font-size: 13px;">Yes (During deserialization, fields that are not existing in a class are ignored)</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Yes (Converter must extend [apidocs/javolution/xml/CustomXMLFormat.html CustomXMLFormat])</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #cccccc; border-style: solid; padding: 5px;"><span style="font-size: 13px;">Reflection based,<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://javolution.org/" rel="nofollow">Javolution</a>is used for actual xml encoding/decoding, it also does the object reference handling</span></td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">MSM 作者的观点是：</div>
+<ol style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<li>Java serialization 是一个鲁棒性非常好、也被广泛证明了的技术，但 IMHO（恕我直言），它最大问题就是无法处理类的版本：向下兼容时新版本如何反序列化老版本序列化的数据流，如还要向上兼容的话老版本如何反序列化新版本序列化的数据流。为了确认兼容性，测试量将是版本数的平方。</li>
+<li><a style="cursor: pointer;" href="http://code.google.com/p/kryo/" rel="nofollow">Kryo</a>&nbsp;是一个非常快的二进制序列化库。在<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://code.google.com/p/thrift-protobuf-compare/wiki/Benchmarking">thrift 与 protobuf 的性能 benchmark</a><span class="Apple-converted-space">&nbsp;</span>中，kryo 也是最快的序列化工具库之一。他推荐使用&nbsp;<a style="cursor: pointer;" href="http://code.google.com/p/kryo/" rel="nofollow">Kryo</a>&nbsp;，就是因为<a style="cursor: pointer;" href="http://code.google.com/p/memcached-session-manager/wiki/SerializationStrategyBenchmark">超凡的性能</a>。</li>
+
+
+</ol>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #800000; font-size: medium;">八.基于 ZooKeeper 集群的分布式 Session 方案</span></strong></div>
+<div>要解决基于 memcache 方案的数据丢失问题，可以引入持久化存储介质&nbsp;<a style="cursor: pointer;" href="http://xn--zookeepersession-tk1z707b9u0adfqu0lqsfvu2lego/">ZooKeeper</a>（下面简称 ZK）。</div>
+<div>依托于 ZK 的一致性复制（在多个副本间保证数据的强一致性）和容错能力，结合上面的 MSM 思想，</div>
+<div>由 ZK 负责 session 数据的存储，而我们自己实现的 session manager 将负责 session 生命周期的管理。</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html" target="_blank"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard36.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard36.png" /></a></div>
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">九.微软系的解决方法</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">ASP.NET 有自己的分布式 Session 解决方案，Session State Server ，即 web.config 里指定 sessionState 的 mode 为&ldquo;StateServer&rdquo;即可。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">郑昀既可以在 web.config 里指定一个 State Server ：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard37.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard37.png" /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">也可以实现 System.Web.IPartitionResolver 的接口，自行决定如何构造 Session State Server 连接字符串，从而支持一组 State Servers。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html" target="_blank">郑昀</a>也可以用 sessionState 的 partitionResolverType 属性设定即可：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard38.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard38.png" /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">微软的这个解决方案缺点是，Session State 中的序列化和反序列化对象将成为主要性能消耗之一，最好使用基本类型来存储所有的 Session State 数据。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><br class="Apple-interchange-newline" />参考资源：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1） 开源代码，<a style="cursor: pointer;" href="http://code.google.com/p/memcached-session-manager/">http://code.google.com/p/memcached-session-manager</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）&nbsp;jacktan，2011，<a style="cursor: pointer;" href="http://blog.csdn.net/jacktan/article/details/6112806">基于ZooKeeper的分布式Session实现</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）&nbsp;Maarten Balliauw，2008，<a class="taggedlink" style="cursor: pointer;" href="http://blog.maartenballiauw.be/post/2008/01/23/ASPNET-Session-State-Partitioning.aspx">ASP.NET Session State Partitioning</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）timyang，2009，<a style="cursor: pointer;" title="Permanent Link to 某分布式应用实践一致性哈希的一些问题" href="http://timyang.net/architecture/consistent-hashing-practice/" rel="bookmark">某分布式应用实践一致性哈希的一些问题</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">5）<a href="http://www.oschina.net/question/12_36572" target="_blank">构建一个高效无单点故障的分布式session服务</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">7）developerWorks，2010，<a style="cursor: pointer;" href="http://www.ibm.com/developerworks/cn/java/j-5things1/">关于 Java 对象序列化您不知道的 5 件事</a></div>
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-17 22:30</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2775414" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2775414);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2775414, cb_entryCreatedDate = '2012-11-17 22:30', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

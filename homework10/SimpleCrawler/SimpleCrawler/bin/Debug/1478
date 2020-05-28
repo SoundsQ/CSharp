@@ -1,0 +1,528 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第4页 - 痴者工良 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/whuanle/custom.css?v=mA&#x2B;FpFQUS/JIlY1IQJTjcdZUvw0=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/whuanle/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/whuanle/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/whuanle/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 406195;
+        var currentBlogApp = 'whuanle';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/whuanle/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/whuanle/">痴者工良</a>
+</h1>
+<h2>
+一个逗B的大学生，爱好技术交流，目前专注于.NET 全栈开发
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/whuanle/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%97%B4%E8%80%85%E5%B7%A5%E8%89%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/whuanle/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+140&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+186</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=3">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+    4
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=5">下一页</a>
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/02/02.html">2020年2月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12252754.html">
+    C#反射与特性(九)：全网最全-解析反射
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 【微信平台，此文仅授权《NCC 开源社区》订阅号发布】 本篇主要研究类型、类型成员的各种信息和标识，通过反射的操作将信息解析出来。 本文主目的的通过反射操作，生成输出类似下图的信息。 在此之前记一下： C 中的访问修饰符：public、private、protected、internal            <a href="https://www.cnblogs.com/whuanle/p/12252754.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-02 16:51 痴者工良 阅读 (871) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12252754" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/01/18.html">2020年1月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12210341.html">
+    C#反射与特性(八)：反射操作的示例大全
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 微信平台，此文仅授权《NCC 开源社区》订阅号发布】 《C 反射与特性》已经完成了七篇，讲解了反射的使用和实践应用，第六和第七篇对反射特性等进行了实践总结练习，学习完毕后，可以对一般的实际场景进行应用，解决问题。 前面主要考虑入门基础和练习，学习完毕后可以掌握基本知识；本篇是对前面七篇的            <a href="https://www.cnblogs.com/whuanle/p/12210341.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-18 21:39 痴者工良 阅读 (479) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12210341" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/01/12.html">2020年1月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12182962.html">
+    C#反射与特性(七)：自定义特性以及应用
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 【微信平台，此文仅授权《NCC 开源社区》订阅号发布】 本章的内容，主要是对 属性和字段进行赋值和读值 、自定义特性、将特性应用到实际场景。 本文内容已经上传到 https://gitee.com/whuanle/reflection_and_properties/blob/master            <a href="https://www.cnblogs.com/whuanle/p/12182962.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-12 16:15 痴者工良 阅读 (288) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12182962" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12181308.html">
+    C#反射与特性(六)：设计一个仿ASP.NETCore依赖注入Web
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：【微信平台，此文仅授权《NCC 开源社区》订阅号发布】 从前面第四篇开始，进入了实践练习；第五篇实现了实例化一个类型以及对成员方法等的调用。当然，还有一些操作尚将在后面的章节进行介绍。 因为本系列属于实践练习，所以系列文章可能比较多，内容比较长。要学会一种技术，最好的方法是跟着例子代码写一次，运行调            <a href="https://www.cnblogs.com/whuanle/p/12181308.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-12 08:39 痴者工良 阅读 (647) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12181308" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/01/11.html">2020年1月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12180972.html">
+    C#反射与特性(五)：类型成员操作
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：【微信平台，此文仅授权《NCC 开源社区》订阅号发布】 前面三篇中，介绍了反射的基本内容和信息对象，反射主要作用于构造函数、属性、字段、方法、事件等类型成员对象；第四篇介绍了类型的实例化和事件操作。 本篇介绍类型的成员操作和实践练习。 由于内容较多，多动手实践一下。 [TOC] [图片1 来源：《C            <a href="https://www.cnblogs.com/whuanle/p/12180972.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-11 20:11 痴者工良 阅读 (413) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12180972" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/01/06.html">2020年1月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12153304.html">
+    C#反射与特性(四)：实例化类型
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前面三篇文章，介绍了使用程序集、获取 Type 类型、使用 Type 类型获取成员信息。 通过前面的学习，我们大概了解到 Assembly、PropertyInfo、FieldInfo、ConstructorInfo、MethodInfo、ParameterInfo、EventInfo、Member            <a href="https://www.cnblogs.com/whuanle/p/12153304.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-06 08:25 痴者工良 阅读 (268) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12153304" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2020/01/05.html">2020年1月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12152660.html">
+    C#反射与特性(三)：反射类型的成员
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：上一篇文章中，介绍如何获取 Type 类型，Type 类型是反射的基础。 本篇文章中，将使用 Type 去获取成员信息，通过打印出反射获取到的信息，为后续操作反射打好基础。 [TOC] 1，获取类型的信息 我们常常可以看到 函数、方法这两个词，很多人对此进行了混用。 方法，就是 这样的形式； 函数，            <a href="https://www.cnblogs.com/whuanle/p/12152660.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-05 20:14 痴者工良 阅读 (367) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12152660" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12152268.html">
+    C#反射与特性(二)：探究反射
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在上一章中，我们探究了 C 引入程序集的各种方法，这一章节笔者将探究 C 中使用反射的各种操作和代码实践。 [TOC] 1，反射的使用概述 1.1 什么是反射 《C 7.0 本质论》中： 反射 是指对程序集中的元数据进行检查的过程。 《C 7.0 核心技术指南》中： 在运行时检查并使用元数据和编译代            <a href="https://www.cnblogs.com/whuanle/p/12152268.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-05 13:59 痴者工良 阅读 (346) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12152268" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/12/29.html">2019年12月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/12115505.html">
+    C#反射与特性(一)：反射基础
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：C 反射与特性(一)：反射基础 [TOC] 1. 说明 1.1 关于反射、特性 在 《C 7.0 本质论》中，关于这方面的知识在 《第十八章 反射、特性和动态编程》；在《C 7.0 核心技术指南》中，这部分内容在《第19章 反射和元数据》。 [图片来自 《C 7.0 本质论》] 在这里我们可以获得一            <a href="https://www.cnblogs.com/whuanle/p/12115505.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-29 17:03 痴者工良 阅读 (472) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12115505" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/whuanle/archive/2019/12/09.html">2019年12月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/whuanle/p/10013243.html">
+    [凌烟阁二十四功臣之长孙无忌]唐太宗李世民的好基友
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[凌烟阁二十四功臣之长孙无忌]唐太宗李世民的好基友 长孙无忌介绍 长孙无忌，字辅机（生卒时间：597年-659年），他一生从隋朝末年到唐高宗封武则天为皇后。长孙无忌是隋朝的长孙晟(右骁卫将军)之子，自幼被其高士廉(舅父)抚养长大，跟李世民是布衣之交。隋朝末年，李渊起兵后，无忌前去投奔，跟随李世民征战            <a href="https://www.cnblogs.com/whuanle/p/10013243.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-12-09 21:12 痴者工良 阅读 (121) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10013243" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=3">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=3">3</a>
+    4
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/whuanle/default.html?page=8">8</a>
+    ···
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=14">14</a>
+    <a href="https://www.cnblogs.com/whuanle/default.html?page=5">下一页</a>
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 痴者工良
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="从今天开始从源码去学习一些Java的常用数据结构，打好基础:) Arraylist源码阅读： jdk版本：1.8.0 首先看其构造方法： 构造方法一： 第一种支持初始化容量大小，其中声明一个对象数组，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>从JDK源码学习ArrayList - tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12662603.html">从JDK源码学习ArrayList</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>从今天开始从源码去学习一些Java的常用数据结构，打好基础:)</p>
+<h1>Arraylist源码阅读：</h1>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409202016812-2086162392.png" alt=""></p>
+<p>jdk版本：1.8.0</p>
+<p>首先看其构造方法：</p>
+<h2>构造方法一：</h2>
+<p>第一种支持初始化容量大小，其中声明一个对象数组，赋值给this.elementdata</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409203739022-993893653.png" alt=""></p>
+<h2>构造方法二：</h2>
+<p>第二种无参构造函数，即不指定初始容量大小，则默认赋值this.elementdata为一个空的对象数组，但是由注释可以看到其无参构造实际上初始容量为10</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409204312196-1287424427.png" alt=""></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409203957558-1531622542.png" alt=""></p>
+<p>在elementData的注释中也说了该变量是实际存储Arrylist数据的存储结构，任何空的arraylist，当第一次被调用add放进元素时，将会扩充容量为default_capacity也就是10</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409204843223-1946456904.png" alt=""></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409202241102-1289953317.png" alt="" width="425" height="72"></p>
+<p>看看其add方法，因为arraylist也是有序的，因此加入的元素在列表尾部，在添加元素之前，调用ensureCapacityInternal，确保内部容量大小</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409205452947-824193817.png" alt="" width="693" height="252"></p>
+<p>在ensureCapacityInternal中将判断当前的elementdata的值是否为空数组，若为空则赋值minCapacity为默认容量和入口参数minCapacity的较大值，然后进一步调用ensureExplicitCapacity明确容量大小</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409205812910-1283506211.png" alt="" width="580" height="148"></p>
+<p>在ensureExplicitCapacity中，modCount自增，判断当前最小容量和arraylist的实际元素个数差值若大于零，则调用grow函数来进行实际的容量扩充</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409210106732-932842409.png" alt="" width="566" height="159"></p>
+<p>&nbsp;</p>
+<p>扩容函数grow先取到当前arraylist的实际长度，然后将其扩大1.5倍，然后判断该值和最小容量的大小，若扩充1.5倍小于所需要的最小容量，则赋值新的容量为需要的最小容量，此时并判断是否产生溢出情况，也就是注释里面的overflow conscious mode的含义，所以arraylist不是无限扩容，看下其max_array_size的值</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409210506074-2081996729.png" alt="" width="684" height="371"></p>
+<p>数组最大值为integer.max_value-8，也就是2的31次-1-8</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409213151415-1609205043.png" alt=""></p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409212900319-1364516504.png" alt=""></p>
+<p>至于为什么要-8，这里有些vm要存储其最大值的大小需要八个字节，如下图所示</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409213417016-1176125664.png" alt=""></p>
+<p>&nbsp;如果扩充的新容量比max还大，则调用hugeCapacity，判断最小的容量和2的31次-1的大小，若大于则赋值max_value,否则说明此时最小容量介于max_value-8和max_value之间，则赋值为max_value-8</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409213711331-659278320.png" alt=""></p>
+<p>&nbsp;</p>
+<p>然后调用Array.copyof将旧的arraylist中的值拷贝到新的扩充后的arraylist中，所以默认空数组的add操作后容量即为10</p>
+<h2>构造方法三：</h2>
+<p>可以传递任何实现了Collection接口的类，其调用collection的toarray方法返回一个对象数组，也就是将集合中的元素以对象数组形式返回，toarray的注释里也说明了这个方法是array和collection的桥梁<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409222402606-1544562168.png" alt="" width="790" height="338"></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409222658655-1181690302.png" alt=""></p>
+<p>&nbsp;为了防止重写toArray方法返回的并不是对象数组，因此这里判断一下elementData的类是否是对象数组，如果不是的话，则将element中的数组copy到对象数组中</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">比如有MySubClass是MyClass的子类。
+Collection</span>&lt;MyClass&gt; myCollection;  <span style="color: #008000;">//</span><span style="color: #008000;">myCollection里有很多元素。</span>
+Collection&lt;MySubClass&gt; mySubCollection;  <span style="color: #008000;">//</span><span style="color: #008000;">mySubCollection里有很多元素。</span>
+ArrayList&lt;MyClass&gt; myList = <span style="color: #0000ff;">new</span> ArrayList&lt;MyClass&gt;<span style="color: #000000;">(myCollection);
+也可以：
+ArrayList</span>&lt;MyClass&gt; myList = <span style="color: #0000ff;">new</span> ArrayList&lt;MyClass&gt;(mySubCollection);</pre>
+</div>
+<p>意思就是这里用extends e，来指定定义一个父类的arraylist，则其所有子类的集合都能放进该父类的arraylist，从而编译器才能够知道放入的元素都是满足？也就是，初始定义arraylist的类型声明</p>
+<h2>关于线程安全：</h2>
+<p>&nbsp;上面遗留了一个modcount++的自增操作的解释，看一下jdk对modcount的解释</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409225506854-328010303.png" alt=""></p>
+<p>&nbsp;该参数是对arraylist容量大小修改的次数，也就是删减元素改变大小时可能会使正常的迭代过程出现错误，那么针对单线程而言，不存在又读又写，但在多线程情况下，可能存在读写同时进行的操作，参考知乎一个很精简明确的答案，看完真的是一目了然，如果结构发生变化则抛出ConcurrentModificationException</p>
+<p><img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409225944918-1778414007.png" alt="" width="758" height="241"></p>
+<p>&nbsp;<img src="https://img2020.cnblogs.com/blog/1063309/202004/1063309-20200409230618697-1308254281.png" alt=""></p>
+<p>&nbsp;通过调用上面这个方法来判断是否结构发生变化，调用add remove时都将修改modcount，通过迭代时先保存一份modcount，若迭代过程中再取modcount和保存的值不等则抛出异常</p>
+<h1>总结：</h1>
+<p>①.初始不指定容量时设置为10</p>
+<p>②.每次扩充为实际长度的1.5倍与所需最小容量比较</p>
+<p>③.arraylist是非线程安全的</p>
+<p>④.其最大值为2的31次-1</p>
+<p>⑤.为避免连续扩容消耗内存，能初始化容量大小尽量指定容量</p>
+<p>⑥.为啥会非线程安全，因为方法内部并非原子操作</p>
+<p>&nbsp;</p>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/72296421">https://zhuanlan.zhihu.com/p/72296421</a>&nbsp; hashmap</p>
+<p><a href="https://zhuanlan.zhihu.com/p/73283922">https://zhuanlan.zhihu.com/p/73283922</a>&nbsp; linkedhashmap</p>
+<p><a href="https://zhuanlan.zhihu.com/p/72463637">https://zhuanlan.zhihu.com/p/72463637</a>&nbsp;hashset</p>
+<p><a href="https://zhuanlan.zhihu.com/p/72156592">https://zhuanlan.zhihu.com/p/72156592</a>&nbsp;arraylist</p>
+<p><a href="https://www.jianshu.com/p/f174d49b391c">https://www.jianshu.com/p/f174d49b391c</a></p>
+<p><a href="https://www.cnblogs.com/LiaHon/p/11089988.html">https://www.cnblogs.com/LiaHon/p/11089988.html</a>&nbsp; arraylist</p>
+<p><a href="https://blog.csdn.net/u012859681/article/details/78206494">https://blog.csdn.net/u012859681/article/details/78206494</a>&nbsp;线程安全问题</p>
+<p></p>
+<p><audio controls="controls" style="display: none;"></audio></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-09 23:28</span>&nbsp;
+<a href="https://www.cnblogs.com/tr1ple/">tr1ple</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12662603" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12662603);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 316934, cb_blogApp = 'tr1ple', cb_blogUserGuid = 'f3d76e0f-51aa-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12662603, cb_entryCreatedDate = '2020-04-09 23:28', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1212 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本文就官方文档对Mybatis的SQL映射文件，字段，属性等进行了宏观上的简介，有助于对Mybatis的详细结构进行理解" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Mybatis sql映射文件浅析 Mybatis简介（三） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10340536.html">Mybatis sql映射文件浅析 Mybatis简介（三）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        本文就官方文档对Mybatis的SQL映射文件，字段，属性等进行了宏观上的简介，有助于对Mybatis的详细结构进行理解
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-weight: bold;"><span style="color: #000000; font-size: 18pt;">简介</span></span></div>
+<div style="line-height: 200%;">除了配置相关之外，另一个核心就是SQL映射，MyBatis 的真正强大也在于它的映射语句。</div>
+<div style="line-height: 200%;">Mybatis创建了一套规则以XML为载体映射SQL</div>
+<div style="line-height: 200%;">之前提到过，<span style="color: #ff0000; font-size: 13.5pt;"><strong>各项配置信息将Mybatis应用的整体框架搭建起来，而映射部分则是准备了一次SQL操作所需的信息</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: large; font-weight: bold;">一次SQL执行的主要事件是什么？</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="color: #000000; font-size: large; font-weight: bold;">输入参数解析</span>，绝大多数SQL都是需要参数的</div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: large; font-weight: bold;">SQL</span>，通过SQL与数据库交互，所以最根本的是SQL，如果连SQL都没有，还扯个蛋蛋？</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: large; font-weight: bold;">结果映射</span>，Mybatis可以帮我们完成字段与Java类型的映射</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092202970-725148654.png"><img style="display: inline; background-image: none;" title="image_5c524d1f_4a9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092204225-1303440999.png" alt="image_5c524d1f_4a9" width="390" height="254" border="0" /></a></div>
+<div style="line-height: 200%;">所以说SQL映射的核心内容为：</div>
+<div style="line-height: 200%;">
+<ul>
+<li>SQL内容指定</li>
+<li>参数信息设置</li>
+<li>输出结果设置</li>
+</ul>
+</div>
+<div style="line-height: 200%;">当然，每个SQL都需要指定一个ID作为用于执行时的唯一标识符</div>
+<div style="line-height: 200%;">比如下面示例</div>
+<div style="line-height: 200%;">
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<div class="cnblogs_code">
+<pre>&lt;select id="selectPerson"parameterType="int"resultType="hashmap"&gt;<span style="color: #000000;">
+  SELECT </span>* FROM PERSON WHERE ID =<span style="color: #000000;"> #{id}
+</span>&lt;/select&gt;</pre>
+</div>
+<div>
+<div style="line-height: 32px;">SELECT * FROM PERSON WHERE ID = #{id}&nbsp; 为SQL内容部分</div>
+<div style="line-height: 32px;">parameterType="int" 以及SQL中的#{id}为参数信息设置部分</div>
+<div style="line-height: 32px;">resultType="hashmap" 为输出结果设置部分</div>
+</div>
+</div>
+</div>
+<h3><span style="font-size: 18px;">概况 </span></h3>
+<div style="line-height: 200%;">如上所述，核心内容为：</div>
+<div style="line-height: 200%;">
+<ul>
+<li>ID</li>
+<li>SQL内容</li>
+<li>入参设置</li>
+<li>结果配置</li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>ID</strong></span>用于执行时唯一定位一个映射</div>
+<div style="line-height: 200%;">对于<span style="color: #000000; font-size: 13.5pt;"><strong>SQL内容</strong></span>，也没有什么特别的，就是平常所说的数据库可以执行的SQL语句</div>
+<div style="line-height: 200%;">对于<span style="color: #000000; font-size: 13.5pt;"><strong>SQL内容中的参数</strong></span>，MyBatis 会通过 JDBC创建一个预处理语句参数</div>
+<div style="line-height: 200%;">这样的一个参数在 SQL 中会由一个&ldquo;?&rdquo;来标识，并被传递到一个新的预处理语句中，类似这样：</div>
+<div style="line-height: 200%;">
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> Similar JDBC code, NOT MyBatis&hellip;String selectPerson ="SELECT * FROM PERSON WHERE ID=?";PreparedStatement ps = conn.prepareStatement(selectPerson);</span>
+ps.setInt(1,id);</pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>输入的类型使用parameterType进行指定（parameterMap &ndash; 已废弃！）</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>输出信息使用resultMap或者resultType进行指定</strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>从包含的信息的角度分析Mybatis 映射文件的核心内容</strong></span></div>
+<div style="line-height: 200%;">如下图所示:</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092204635-887397684.png"><img style="display: inline; background-image: none;" title="image_5c524d1f_63d" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092205115-1542613448.png" alt="image_5c524d1f_63d" width="908" height="431" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;">而对于数据库的CRUD操作，Mybatis的XML配置中分别使用了 insert、select、update、delete四个标签进行分别处理</div>
+<div style="line-height: 32px;">所以一个映射（映射文件中的一个）常见的形式如下，parameterType以及resultType | resultMap 会根据SQL的类型需要或者不需要</div>
+<div style="line-height: 32px;">
+<div style="line-height: 24px;"><strong><span style="color: #ff0000;">&lt;<span style="background-color: #ffffff;">select | insert | update | delete</span></span>&nbsp; <span style="color: #000000;">id="......" </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #0000ff;">parameterType="......"</span>&nbsp;&nbsp;&nbsp; <span style="color: #339966;">resultType | resultMap="......"</span>&gt;</strong></div>
+<div style="line-height: 24px;"><strong><span style="color: #993366;"> SQL内容......</span></strong></div>
+<div style="line-height: 24px;"><span style="color: #ff0000;"><strong>&lt;/select | insert | update | delete&gt;</strong></span></div>
+<div>&nbsp;</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>核心信息为通过Mybatis执行一次SQL的必备信息，Mybatis还可以提供更多的功能设置</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>所以对于不同类型的SQL，还会有更多的一些配置条目</strong></span></div>
+<div style="line-height: 200%;">比如之前提到过的数据库厂商标识符 databaseId，所有类型的SQL映射都可以设置这一属性</div>
+<div style="line-height: 200%;">而对于其他的附加辅助属性配置，有些是所有类型共同的，而有些是特有的</div>
+<div style="line-height: 200%;">databaseId就是共有的，比如用于返回自动生成的键的配置useGeneratedKeys 只有insert与update才拥有</div>
+<h3><span style="font-size: 18px;">文档结构解析 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>所以从文档结构的形式角度看SQL映射，有四种类型的映射 select、insert、update、delete</strong></span>&nbsp;</div>
+<div style="line-height: 200%;">每种类型又都有各自的属性设置，有一些是共同的，有一些是特有的</div>
+<div style="line-height: 200%;">下图如果不清楚，请到评论区中，右键，新标签查看图片，可以查看到大图</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092205770-1877625277.png"><img style="display: inline; background-image: none;" title="image_5c524d20_637b" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092206466-1935991272.png" alt="image_5c524d20_637b" width="1613" height="2238" border="0" /></a></div>
+<h3><span style="font-size: 18px;">属性角度解析 </span></h3>
+<div style="line-height: 200%;">如果<span style="color: #ff0000; font-size: 13.5pt;"><strong>从属性的角度去看待各自的归属</strong></span>，每种属性都有各自的作用功能</div>
+<div style="line-height: 200%;">他们自身的功能也决定了那些类型才能拥有他</div>
+<div style="line-height: 200%;">比如键值的返回相关的useGeneratedKeys，就只可能发生在insert或者update中，只有他们才可能自动生成键</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092206963-973071290.png"><img style="display: inline; background-image: none;" title="image_5c524d20_c2" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092207261-1661689046.png" alt="image_5c524d20_c2" width="1088" height="1498" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>以上为SQL映射文件的核心关键信息以及属性的解读</strong></span></div>
+<div style="line-height: 200%;">有些细节还需要注意，<span style="color: #0000ff; font-size: 13.5pt;"><strong>关于flushCache以及userCache，前者是是否清空清空本地缓存和二级缓存，后者是本条语句的结果是否进行二级缓存，含义完全不一样</strong></span></div>
+<div style="line-height: 200%;">四种类型都有flushCache属性，对于select默认false，对于insert、update、delete默认是true</div>
+<div style="line-height: 200%;">而userCache只有select有，默认是true</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">因为缓存机制，比如<span style="line-height: 24px;">update 的时候如果 设置flushCache="false"，则当你更新后，查询的数据数据还是老的数据。</span></div>
+<h3><span style="font-size: 18px;">额外的馈赠-语法糖 </span></h3>
+<div style="line-height: 200%;">在编程实践中，经常有一些公共的方法或者处理逻辑，我们通常将他们提取单独封装，以便提高代码复用程序</div>
+<div style="line-height: 200%;">那么，对于SQL的编写呢？</div>
+<div style="line-height: 200%;">Mybatis也提供了封装提取的手段---<span style="color: #ff0000; font-size: 13.5pt;"><strong>SQL元素标签</strong></span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">sql </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="xxx"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+
+........
+
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">sql</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div>然后可以使用include，将他包含到指定的位置</div>
+<div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">include </span><span style="color: #ff0000;">refid</span><span style="color: #0000ff;">="xxx"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">include</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div>这是一种<span style="color: #ff0000; font-size: 13.5pt;"><strong>静态的织入</strong></span>，通过SQL元素，你可以方便的完成公共SQL片段的提取封装</div>
+</div>
+</div>
+<div style="line-height: 200%;">如果有两个表，都有name、age等字段，我想将他们封装，但是表名却又不一样怎么办？</div>
+<div style="line-height: 200%;">SQL元素还提供了别名的设置，可以很容易的解决这个问题，请参考官方文档</div>
+<div style="line-height: 200%;">
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">sql </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="userColumns"</span><span style="color: #0000ff;">&gt;</span> ${alias}.id,${alias}.username,${alias}.password <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">sql</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre class="prettyprint">这个 SQL 片段可以被包含在其他语句中，例如：</pre>
+</div>
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectUsers"</span><span style="color: #ff0000;">resultType</span><span style="color: #0000ff;">="map"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  select
+    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">include </span><span style="color: #ff0000;">refid</span><span style="color: #0000ff;">="userColumns"</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">propertyname</span><span style="color: #0000ff;">="alias"</span><span style="color: #ff0000;">value</span><span style="color: #0000ff;">="t1"</span><span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">include</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">,
+    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">include </span><span style="color: #ff0000;">refid</span><span style="color: #0000ff;">="userColumns"</span><span style="color: #0000ff;">&gt;&lt;</span><span style="color: #800000;">propertyname</span><span style="color: #0000ff;">="alias"</span><span style="color: #ff0000;">value</span><span style="color: #0000ff;">="t2"</span><span style="color: #0000ff;">/&gt;&lt;/</span><span style="color: #800000;">include</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  from some_table t1
+    cross join some_table t2
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+</div>
+<div style="line-height: 200%;">上面示例中包含了两次SQL片段，第一次中alias被替换为t1 ，第二次中的alias被替换为t2，最终的结果形式为：</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">select
+t1.id,
+t1.username,
+t1.password,
+t2.id,
+t2.username,
+t2.password
+from
+some_table t1
+cross join some_table t2</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<p><strong><span style="font-size: 18px;">深入映射</span></strong></p>
+<h3><span style="font-size: 18px;">参数（Parameters）细节配置</span></h3>
+<div style="line-height: 200%;">
+<div class="source" style="text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; -webkit-text-stroke-width: 0px;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">selectid</span><span style="color: #0000ff;">="selectPerson"</span><span style="color: #ff0000;">parameterType</span><span style="color: #0000ff;">="int"</span><span style="color: #ff0000;">resultType</span><span style="color: #0000ff;">="hashmap"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  SELECT * FROM PERSON WHERE ID = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">示例中入参类型通过parameterType指定为int，参数占位符为#{id}，这是最简单的一种形式了，入参只是一个Java基本类型（非自定义的对象类型）</div>
+<div style="line-height: 200%;">对于对象类型Mybatis也可以很好的完成工作，不管是入参时的解析，还是输出结果的映射解析</div>
+<div style="line-height: 200%;">能够根据属性的名称进行自动的配对</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectUsers"</span><span style="color: #ff0000;">resultType</span><span style="color: #0000ff;">="User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  select id, username, password
+  from users
+  where id = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">insert </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="insertUser"</span><span style="color: #ff0000;">parameterType</span><span style="color: #0000ff;">="User"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  insert into users (id, username, password)
+  values (#{id}, #{username}, #{password})
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">insert</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">不仅仅支持对象，而且还<span style="color: #ff0000; font-size: 13.5pt;"><strong>支持map</strong></span>，当parameterType="map"时，map的key会被用来和占位符中的名称进行匹配</div>
+<div style="line-height: 200%;">也就是说对于： SELECT * FROM PERSON WHERE ID = #{id}&nbsp;&nbsp;&nbsp; ，当parameterType="map"时，你的参数map需要存在&nbsp; key=id&nbsp; 的元素</div>
+<div style="line-height: 200%;">parameterType<span style="color: #ff0000; font-size: 13.5pt;"><strong>也支持list</strong></span>，当parameterType="list"时，可以借助于动态SQL的foreach 进行循环</div>
+<div style="line-height: 200%;">如果是基本数据类型的List，比如List&lt;Integer&gt; 那么直接循环即可；如果是List&lt;User&gt;，可以通过遍历每个元素，然后通过#{item.username}、#{item.password}的形式进行读取</div>
+<div style="line-height: 200%;">
+<div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">insert </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="..."</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="List"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+INSERT INTO xxx_table(
+username,
+password,
+createTime
+)
+values
+</span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">foreach </span><span style="color: #ff0000;">collection</span><span style="color: #0000ff;">="list"</span><span style="color: #ff0000;"> item</span><span style="color: #0000ff;">="item"</span><span style="color: #ff0000;"> index</span><span style="color: #0000ff;">="index"</span><span style="color: #ff0000;"> separator</span><span style="color: #0000ff;">=","</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+(
+#{item.username},
+#{item.password},
+#{item.createTime}
+)
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">foreach</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">insert</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p style="margin: 0px; -qt-paragraph-type: empty;"><code>&nbsp;</code></p>
+</div>
+<div>可以看得出来，类型的形式很丰富，Mybatis很多时候都可以自动处理，但是你可以对他进行显式的明确指明，比如</div>
+</div>
+<div>&nbsp;</div>
+<div>
+<div class="source" style="text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; -webkit-text-stroke-width: 0px;">
+<pre class="prettyprint"><span class="com" style="color: #880000; user-select: text;">#{property,javaType=int,jdbcType=NUMERIC}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>property表示字段名称，javaType为int，jdbcType为NUMERIC</strong></span></div>
+<div style="line-height: 200%;">（jdbcType是JDBC对于数据库类型的抽象定义，详见java.sql.JDBCType 或者java.sql.Types，可以简单认为数据库字段类型</div>
+<div style="line-height: 200%;">javaType 通常可以由参数对象确定，除非该对象是一个 HashMap，是map的时候通常也可以很好的工作，但是建议在入参类型是Map对他进行明确的指定</div>
+<div style="line-height: 200%;">需要注意的是：如果一个列允许 null 值，并且会传递值 null 的参数，就必须要指定 JDBC Type</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">当你在插入时，如果需要使用自定义的typeHandler ,也应该在此处进行指定</div>
+<div style="line-height: 200%;">
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<pre class="prettyprint"><span class="com" style="color: #880000; user-select: text;">#{age,javaType=int,jdbcType=NUMERIC,typeHandler=MyTypeHandler}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">对于数值类型，还可以设置保留小数的位数</div>
+<div style="line-height: 200%;">
+<div class="source" style="text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; -webkit-text-stroke-width: 0px;">
+<pre class="prettyprint"><span class="com" style="color: #880000; user-select: text;">#{height,javaType=double,jdbcType=NUMERIC,numericScale=2}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">对于参数的细化配置也很容易理解，他要么是用于使用时确定入参或者数据库字段的具体类型，如javaType或者jdbcType</div>
+<div style="line-height: 200%;">要么就是在字段处理过程中增加的一些处理所需要的信息，比如是不是需要按照自定义处理器处理后在执行到数据库？是不是将数值的小数位数处理后在去执行数据库？</div>
+<div style="line-height: 200%;">另外对于存储过程的调用Mybatis也是有支持的，mode 属性允许你指定 IN，OUT 或 INOUT 参数。</div>
+<div style="line-height: 200%;">通常我们使用#{}的格式进行字符串处理，这样可以安全，是通常的首选，但是如果你就是想直接插入一个字符串到SQL中，可以使用${}，不过很显然，$的使用你要非常慎重</div>
+<h3><span style="font-size: 18px;">ResultMap-别名映射</span></h3>
+<div style="line-height: 200%;">Mybatis好用的一大神器就是ResultMap，可以让你高效灵活的从结果集映射到你想要的类型中，能够进行很多高级的映射</div>
+<div style="line-height: 200%;">&emsp;一般的映射可以借助于resultType就可以解决了，resultType后面的值同parameterType类似</div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 13.5pt;"><strong>parameterType&nbsp; resultType的值都用于明确类型，可以使用完全限定名</strong></span></div>
+<div style="line-height: 32px;">不过你是否还记得入门简介中关于typeAlias中的介绍？</div>
+<div style="line-height: 200%;">Mybatis内置了Java基础类型的别名，你都可以直接使用</div>
+<div style="line-height: 200%;">借助于resultType可以完成一些基本的诉求，比如从单表到对应实体类对象的映射，能够自动的根据字段名称和属性名称进行匹配</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092207489-176712769.png"><img style="display: inline; background-image: none;" title="image_5c524d21_3917" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092207946-453268030.png" alt="image_5c524d21_3917" width="846" height="269" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">但是如果名称不对应又该怎么办？</div>
+<div style="line-height: 200%;">如果你的实体中的属性名称为userName，数据库字段名为name，Mybatis真的敢擅自的将这两者对应起来么？</div>
+<div style="line-height: 200%;">如下图所示，将之前的第一个示例稍作修改，增加一个StudentAnother，name更改为了userName，并将测试代码稍作修改</div>
+<div style="line-height: 200%;">从结果可以看得到，实体中的userName是null ，Mybatis肯定不敢擅自映射</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092208235-54078725.png"><img style="display: inline; background-image: none;" title="image_5c524d21_120a" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092208572-802986449.png" alt="image_5c524d21_120a" width="762" height="475" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>一种可行的方式是使用别名，通过数据库字段AS设置别名，就可以成功的完成映射</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092208921-1550838798.png"><img style="display: inline; background-image: none;" title="image_5c524d21_2a0a" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092209164-812539392.png" alt="image_5c524d21_2a0a" width="604" height="295" border="0" /></a></div>
+<div style="line-height: 200%;">通过别名，将数据库列名通过别名与属性字段建立映射关系，然后Mybatis就可以进行自动匹配了</div>
+<div style="line-height: 200%;">但是这种形式如果有多条SQL，每个SQL中都需要有别名，而且，如果后续有原因修改对象的字段名字，怎么办？</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>另外的方式就是使用ResultMap，ResultMap的基础用法就是相当于设置别名</strong></span></div>
+<div style="line-height: 200%;">但是借助于ResultMap，将别名的映射关系，维护在ResultMap中，所有使用到此映射类型的SQL都只需要关联这个ResultMap即可，如果有变更，仅仅需要变更ResultMap中的属性字段对应关系</div>
+<div style="line-height: 200%;">所有的SQL中的内容并不需要变动</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如下图所示，SQL中字段与实体类中不匹配，查询的结果为null</div>
+<div style="line-height: 200%;">右侧通过ResultMap将userName与列名name进行了映射，就可以成功读取数据</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092209412-861773440.png"><img style="display: inline; background-image: none;" title="image_5c524d21_3f71" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092209804-1641178720.png" alt="image_5c524d21_3f71" width="1175" height="427" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">ResultMap最基础的形式如下</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="................."</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>ResultMap需要id和type，id用于唯一标识符，type用于指明类型，比如Blog </strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>ResultMap最基础的两个信息是id和result元素</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>他们的内容均为property="......." column="..........."，property（对象的属性字段）和clumn（数据库的列名） </strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">对于基础性的映射借助于id和result就可以完全搞定， id 表示的结果将是对象的标识属性，可以认为对象的唯一标识符用id指定，这对于性能的提高很有作用</div>
+<div style="line-height: 200%;">
+<p><strong><span style="font-size: 18px;">小结</span></strong></p>
+对于ResultMap就是做字段到属性的映射，id和result都是这个作用，但是如果是唯一标识符请使用id来指定</div>
+<div>另外对于每一个字段，还可以明确的声明javaType和jdbcType，以及typeHandler用于更加细致的解析映射</div>
+<div>所以说基本元素为：</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092210195-957808394.png"><img style="display: inline; background-image: none;" title="image_5c524d21_553b" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092210469-1225102696.png" alt="image_5c524d21_553b" width="824" height="456" border="0" /></a></div>
+<h3><span style="font-size: 18px;">ResultMap-高级映射 </span></h3>
+</div>
+<div style="line-height: 200%;">ResultMap当然不仅仅是像上面那样只是别名的转换，还可以进行更加复杂的映射</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>对于结果集返回有哪些场景？</strong></span></div>
+<div style="line-height: 200%;">&ldquo;将一行记录映射为一个对象&rdquo;与&ldquo;将多行记录映射为对象列表&rdquo;这两者本质是一样的，因为所需要做的映射是一样的</div>
+<div style="line-height: 200%;">比如上面数据库列名name到字段userName 的映射，不管是一行记录还是多行记录，他们都是一样的</div>
+<div style="line-height: 200%;">所以下面就以一个对象为例</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>单纯的映射</strong></span></div>
+<div style="line-height: 200%;">比如上面的例子，数据库列名与实体类中的字段一一对应（尽管名称不完全匹配，但是仍旧是一一对应的）</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>组合的映射</strong></span></div>
+<div style="line-height: 200%;">对于关系型数据库存在着关联关系的说法，一对一，一对多等</div>
+<div style="line-height: 200%;">这些关联关系最终也是要映射到对象中的， 所以对象中经常也会存在多种对应关系</div>
+<div style="line-height: 200%;">比如下面官方文档中的示例----查询博客详情&nbsp;</div>
+<div style="line-height: 200%;">一个博客Blog 对应着一个作者Author ，一个作者可能有多个博文Post，每篇博文有零或多条的评论Post_Tag 和标签Tag</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092210805-1765588537.png"><img style="display: inline; background-image: none;" title="image_5c524d21_751" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092211081-614294536.png" alt="image_5c524d21_751" width="638" height="362" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Very Complex Statement </span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">selectid</span><span style="color: #0000ff;">="selectBlogDetails"</span><span style="color: #ff0000;">resultMap</span><span style="color: #0000ff;">="detailedBlogResultMap"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  select
+       B.id as blog_id,
+       B.title as blog_title,
+       B.author_id as blog_author_id,
+       A.id as author_id,
+       A.username as author_username,
+       A.password as author_password,
+       A.email as author_email,
+       A.bio as author_bio,
+       A.favourite_section as author_favourite_section,
+       P.id as post_id,
+       P.blog_id as post_blog_id,
+       P.author_id as post_author_id,
+       P.created_on as post_created_on,
+       P.section as post_section,
+       P.subject as post_subject,
+       P.draft as draft,
+       P.body as post_body,
+       C.id as comment_id,
+       C.post_id as comment_post_id,
+       C.name as comment_name,
+       C.comment as comment_text,
+       T.id as tag_id,
+       T.name as tag_name
+  from Blog B
+       left outer join Author A on B.author_id = A.id
+       left outer join Post P on B.id = P.blog_id
+       left outer join Comment C on P.id = C.post_id
+       left outer join Post_Tag PT on PT.post_id = P.id
+       left outer join Tag T on PT.tag_id = T.id
+  where B.id = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">对于实体类，一种可能的形式如下</div>
+<div style="line-height: 200%;">Blog中有一个Author，有一个List&lt;Post&gt; ，每一个Post中又有List&lt;Comment&gt; 和&nbsp; List&lt;Tag&gt;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092211287-720263718.png"><img style="display: inline; background-image: none;" title="image_5c524d21_7662" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092211498-127214663.png" alt="image_5c524d21_7662" width="858" height="200" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">可以看得出来对于组合映射又有一对一以及一对多两种形式</div>
+<div style="line-height: 200%;">（尽管Blog存在List&lt;Post&gt; postList; 但是在Mybatis中使用时，对于关系是从紧邻的上一层确定的，比如对于Comment看Post，对于Post看Blog，而不是从Blog看Comment&nbsp; ）</div>
+<div style="line-height: 200%;">Mybatis的ResultMap可以完成类似上述SQL与实体类的映射</div>
+<div style="line-height: 200%;">在Mybatis中只有两种情况，一对一和一对多</div>
+<h4><span style="font-size: 16px;">一对一Association </span></h4>
+<div style="line-height: 200%;">对于一对一被称作关联，在ResultMap中使用association元素表示这种关系&nbsp;</div>
+<div style="line-height: 200%;">含义为：</div>
+<div style="line-height: 200%;">association中的所有的字段 映射为association元素上property指定的一个属性</div>
+<div style="line-height: 200%;">比如下面示例，将id和username 映射为author，谁的author？他的直接外层是谁就是谁！</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">association </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="author"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="blog_author_id"</span><span style="color: #ff0000;">javaType</span><span style="color: #0000ff;">="Author"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="author_id"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="username"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="author_username"</span><span style="color: #0000ff;">/&gt;</span>
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">association</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">对于association的基本格式如下，相当于在基础的ResultMap中插入了一个&ldquo;一对一&rdquo;的对应</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="................."</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">association </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> javaType</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">association</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">association中对于字段和属性的映射也是使用id和result，对于唯一标志使用id来表示</div>
+<h4><span style="font-size: 16px;">关联的嵌套查询 </span></h4>
+<div style="line-height: 200%;">对于一个association还可以对他进行嵌套查询，也就是在查询中进行查询</div>
+<div style="line-height: 200%;">比如官方示例中</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="blogResult"</span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="Blog"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">association </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="author"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="author_id"</span><span style="color: #ff0000;">javaType</span><span style="color: #0000ff;">="Author"</span><span style="color: #ff0000;">select</span><span style="color: #0000ff;">="selectAuthor"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectBlog"</span><span style="color: #ff0000;">resultMap</span><span style="color: #0000ff;">="blogResult"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  SELECT * FROM BLOG WHERE ID = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">selectid</span><span style="color: #0000ff;">="selectAuthor"</span><span style="color: #ff0000;">resultType</span><span style="color: #0000ff;">="Author"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  SELECT * FROM AUTHOR WHERE ID = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">当执行selectBlog时，会执行 SELECT * FROM BLOG WHERE ID = #{id}&nbsp; ，查询得到的结果映射到blogResult，在这个ResultMap中使用了association元素</div>
+<div style="line-height: 200%;">这个association元素使用select标签进行了嵌套查询，也就是使用另外的一个映射selectAuthor进行处理</div>
+<div style="line-height: 200%;">处理流程：</div>
+<div style="line-height: 200%;"><ol>
+<li>先查询selectBlog查询所有的结果</li>
+<li>对于每一条结果，然后又再一次的select，这就是嵌套查询</li>
+</ol></div>
+<div style="line-height: 200%;">这会出现&ldquo;N+1 查询问题&rdquo;，查询一次SQL查询出一个列表（这是1）然后对于这个列表的每一个结果都再次的查询（这是N）性能有些时候很不好</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">嵌套查询使用select，还有一个重要的就是association 上的 column，这个column用于指定嵌套查询的参数</div>
+<div style="line-height: 200%;">比如上面的例子，将会使用author_id传递给 SELECT * FROM AUTHOR WHERE ID = #{id}中的id，然后进行查询</div>
+<div style="line-height: 200%;">此处仅仅只是一个参数，如果是多个参数仍旧可以，使用 column= &rdquo; {prop1=col1,prop2=col2} &rdquo;的形式</div>
+<div style="line-height: 200%;">
+<div>比如：</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092211718-1777280354.png"><img style="display: inline; background-image: none;" title="image_5c524d21_1931" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092212187-1639811438.png" alt="image_5c524d21_1931" width="1101" height="398" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>上面就是通过column指定将要传递给嵌套内查询的参数</div>
+<div>&nbsp;</div>
+<div>鉴于ResultMap可以提供很好地映射，所以上面的示例完全可以修改为普通的association形式，通过join将关联查询的结果映射到指定的对象中，而不是借助于select元素进行嵌套查询</div>
+<h4><span style="font-size: 16px;">一对多collection </span></h4>
+</div>
+<div style="line-height: 200%;">对于一对多关系，Mybatis使用collection</div>
+<div style="line-height: 200%;">collection的逻辑本质上与association是一样的，都是对象字段映射</div>
+<div style="line-height: 200%;">只不过用于区分，也用于在除了数据时，具体的指定类型</div>
+<div style="line-height: 200%;">一个collection形式为:</div>
+<div class="source" style="color: #333333; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">collection </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="posts"</span><span style="color: #ff0000;">ofType</span><span style="color: #0000ff;">="domain.blog.Post"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="post_id"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="subject"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="post_subject"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="body"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="post_body"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">collection</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div style="line-height: 200%;">内部依然是使用id和result完成字段和属性的映射</div>
+<div style="line-height: 200%;">但是collection上使用ofType来指定这个属性的类型，而不是之前的javaType</div>
+<div style="line-height: 200%;">这也很好理解，对于一对一或者检查的查询，他就是一个对象类型，所以使用JavaType</div>
+<div style="line-height: 200%;">对于集合的映射，我们很清楚的知道他是一个集合，所以集合类型是他的javaType，比如 javaType="ArrayList"，Mybatis 在很多情况下会为你算出来，所以可以省略javaType</div>
+<div style="line-height: 200%;">但是，什么类型的集合？还需要说明，所以使用ofType进行指定，看起来更加清晰</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">使用collection的基础形式为：</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="................."</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+
+ 
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">collection </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> ofType</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="............"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="............"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">collection</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<h4><span style="font-size: 16px;">集合的嵌套查询</span></h4>
+<div style="line-height: 200%;">对于collection也可以采用类似association中的select元素进行嵌套查询</div>
+<div style="line-height: 200%;">原理也是类似，当检索出来结果后，借助于select指定的查询语句，循环查询</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="blogResult"</span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="Blog"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">collection </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="posts"</span><span style="color: #ff0000;">javaType</span><span style="color: #0000ff;">="ArrayList"</span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;">ofType</span><span style="color: #0000ff;">="Post"</span><span style="color: #ff0000;">select</span><span style="color: #0000ff;">="selectPostsForBlog"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="selectBlog"</span><span style="color: #ff0000;">resultMap</span><span style="color: #0000ff;">="blogResult"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  SELECT * FROM BLOG WHERE ID = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">selectid</span><span style="color: #0000ff;">="selectPostsForBlog"</span><span style="color: #ff0000;">resultType</span><span style="color: #0000ff;">="Post"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+  SELECT * FROM POST WHERE BLOG_ID = #{id}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<h4><span style="font-size: 16px;">ResultMap的嵌套 </span></h4>
+<div style="line-height: 200%;">在前面的叙述中，所有的内部的关联或者集合的属性映射都是直接嵌套在外部ResultMap中的</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092212617-1736346271.png"><img style="display: inline; background-image: none;" title="image_5c524d21_2587" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092213058-2103576128.png" alt="image_5c524d21_2587" width="820" height="523" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">借助于嵌套查询的形式 select属性，可以进行嵌套查询，通过嵌套查询的方式，相当于经过这个select，内部的字段映射部分被路由到另一个ResultMap（ResultType）中了</div>
+<div style="line-height: 200%;">而不需要在这个ResultMap中逐个重新的进行字段的映射指定</div>
+<div style="line-height: 200%;">但是select会有1+N的问题，但是使用select时这种使用外部ResultMap（resultType）的形式却是很有实用意义</div>
+<div style="line-height: 200%;">因为如果可以进行分离，被剥离的那一部分既可以单独使用，又可以嵌套在其他的ResultMap中，组合成更加强大的形式</div>
+<div style="line-height: 200%;">Mybatis是支持ResultMap嵌套的</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092213540-1344297280.png"><img style="display: inline; background-image: none;" title="image_5c524d21_4ab0" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092214443-1302331621.png" alt="image_5c524d21_4ab0" width="819" height="300" border="0" /></a></div>
+<div style="line-height: 200%;">不仅仅association支持ResultMap的嵌套，collection也是支持的</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092214681-1012477940.png"><img style="display: inline; background-image: none;" title="image_5c524d21_68a6" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092214938-1048284988.png" alt="image_5c524d21_68a6" width="765" height="251" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">可以看得出来，不管是借助于select的嵌套查询，还是ResultMap的嵌套，都只是在association上或者collection上附加select或者resultMap属性即可</div>
+<div style="line-height: 200%;">然后就可以省略掉标签内部的字段映射处理了（id和result）</div>
+<div style="line-height: 200%;">除非开发前对ResultMap的层级结构进行过统一设计布局，否则，内嵌其他人开发的ResultMap，也并不一定总是好事，当内嵌的ResultMap发生变动时，某些情况可能会导致问题</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">嵌套的ResultMap一定需要是本文件中的吗？当然不是必须的，比如下面示例中借助于：接口的全限定名称进行索引</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">association </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="courseEntity"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="course_id"</span><span style="color: #ff0000;">
+javaType</span><span style="color: #0000ff;">="com.xxx.xxx.domain.CourseEntity"</span><span style="color: #ff0000;"> resultMap</span><span style="color: #0000ff;">="com.xxx.xxx.dao.CourseMapper.courseResultMap"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">association</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<h4><span style="font-size: 16px;">ResultMap的重用 </span></h4>
+<div style="line-height: 200%;">ResultMap的嵌套也是一种复用，此处说的重用非解耦后的复用</div>
+<div style="line-height: 200%;">在ResultMap中，我们通过id或者result 将数据库字段和实体类中的属性名进行对应</div>
+<div style="line-height: 200%;">列名和属性名的对应，以及列名和属性名全部都是固定的了，如下图所示，username就是和author_username对应</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092215271-16978260.png"><img style="display: inline; background-image: none;" title="image_5c524d21_62a1" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092215566-851399253.png" alt="image_5c524d21_62a1" width="493" height="172" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">在之前的例子中，一个blog有一个作者，但是如果一个博客还有一个联合作者怎么办？就像很多书可能不仅仅只有一个作者</div>
+<div style="line-height: 200%;">在这种场景下：有两个作者，他们的java类型必然都是Author</div>
+<div style="line-height: 200%;">而且他们的字段也是相同的，但是你不得不将他们进行区分，如下面SQL中所示，关联了两次Author表，通过前缀进行了区分</div>
+<div style="line-height: 200%;">一种解决方法就是将映射部分也重写两次，就像关联两次那样，仅仅是列名column前缀不同（可以将这两个ResultMap嵌入到blogResult中或者内容移入到外层ResultMap中，总之是写两遍映射）</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092215886-657986570.png"><img style="display: inline; background-image: none;" title="image_5c524d22_448c" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092216447-767935461.png" alt="image_5c524d22_448c" width="997" height="424" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">还有一种方法就是借助于columnPrefix，如下图所示，Blog中有两个Author的实例，一个是author另一个是coAuthor，关联关系，使用association</div>
+<div style="line-height: 200%;">他们都是Author类的实例，所以使用同样的ResultMap，通过columnPrefix对其中一个映射添加列前缀</div>
+<div style="line-height: 200%;">通过这个列前缀，就相当于有了另外的一个ResultMap，这个ResultMap就是指定的ResultMap中的column中每一个值都加上一个前缀</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092216823-1421500914.png"><img style="display: inline; background-image: none;" title="image_5c524d22_ce9" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092217013-240466940.png" alt="image_5c524d22_ce9" width="411" height="212" border="0" /></a></div>
+<h4><span style="font-size: 16px;">构造方法字段值注入 </span></h4>
+<div style="line-height: 200%;">使用Mybatis的核心就是为了执行SQL以及完成结果映射，结果的映射必然要创建最终需要映射的结果的对象</div>
+<div style="line-height: 200%;">通过ResultMap中的id和result指定的字段值都是通过setter设置器方法进行值的设置的</div>
+<div style="line-height: 200%;">既然最终就是要创建一个指定类型并且具有指定属性的对象结果，那么为什么一定非得是通过setter,难道不能在创建对象的时候通过构造方法初始化对象吗？</div>
+<div style="line-height: 200%;">Mybatis的ResultMap是支持构造方法设置的</div>
+<div style="line-height: 200%;">对于构造方法的属性值设置，通过constructor进行</div>
+<div style="line-height: 200%;">将之前的例子稍作修改，增加一个构造方法，复制一个ResultMap，添加constructor，就可以完成映射</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092217274-1243654818.png"><img style="display: inline; background-image: none;" title="image_5c524d22_106a" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092217631-112992798.png" alt="image_5c524d22_106a" width="807" height="479" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">借助于constructor与使用id和result映射在业务逻辑上没有什么本质的区别，都是将列名与字段进行映射，变的是形式</div>
+<div style="line-height: 200%;">因为是借助于构造函数，所以constructor中与ResultMap中的其他字段映射是有区别的，不是使用id和result 使用的是 <span style="color: #000000; font-size: 13.5pt;"><strong>arg</strong></span> 参数</div>
+<div style="line-height: 200%;">简言之，使用构造方法需要根据方法签名进行匹配，方法签名就是类型和个数的匹配，所以需要javaType</div>
+<div style="line-height: 200%;">对于有些场景你可能不希望暴露某些属性的共有setter设置器，就可以使用构造方法的形式</div>
+<div style="line-height: 200%;">上面的示例中没有通过constructor对id进行映射，如果对id进行映射需要使用<span style="line-height: 24px;">&nbsp;&nbsp; &lt;idArg column="id" javaType="int"/&gt;（没写错 就是</span><span style="line-height: normal;"><tt style="padding: 1px 3px; border-radius: 3px; text-align: left; color: rgba(0, 0, 0, 0.75); text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: monaco, 'Andale Mono', 'Courier New', monospace; font-size: 0.9em; font-style: normal; font-weight: 400; word-spacing: 0px; white-space: normal; orphans: 2; widows: 2; background-color: #fee9cc; user-select: text; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">idArg</tt><span style="text-align: left; color: #404040; text-transform: none; text-indent: 0px; letter-spacing: normal; font-family: 'Helvetica Neue', helvetica, arial, sans-serif; font-size: 14px; font-style: normal; font-weight: 400; word-spacing: 0px; float: none; display: inline !important; white-space: normal; orphans: 2; widows: 2; background-color: #ffffff; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;"><span> ）</span></span></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">对于使用constructor对值进行解析映射，根本就是匹配正确的构造方法，除了使用javaType还有name，通过name指定构造方法参数的名称</div>
+<div style="line-height: 200%;">从版本 3.4.3 开始，如果指定了名称name，就不需要严格死板的按照顺序对应了，可以打乱顺序。</div>
+<div style="line-height: 200%;">没有人会刻意的打乱顺序，但是永远的保证映射的顺序不变动是很难得</div>
+<div><span style="line-height: normal;"><span style="line-height: 24px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092219063-524825751.png"><img style="display: inline; background-image: none;" title="image_5c524d22_3b4c" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092219393-865962658.png" alt="image_5c524d22_3b4c" width="531" height="134" border="0" /></a></span></span></div>
+<h4><span style="font-size: 16px;">鉴别器 </span></h4>
+<div style="line-height: 200%;">重新建一个表作为示例，配置信息还是如原来一样，SQL映射文件也是在第一个示例中的XML中编写的</div>
+<div style="line-height: 200%;">主要的信息如下，表以及数据以及实体类以及映射文件等</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092219740-1106226839.png"><img style="display: inline; background-image: none;" title="image_5c524d22_78e7" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092220024-1105628945.png" alt="image_5c524d22_78e7" width="863" height="492" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">定义了三个类，一个Person类作为抽象模型（尽管我这个不是抽象类）</div>
+<div style="line-height: 200%;">一个成人类Adult和一个儿童类Child</div>
+<div style="line-height: 200%;">Adult增加了company属性，Child增加了school属性</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092220255-1009313328.png"><img style="display: inline; background-image: none;" title="image_5c524d22_2a00" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092221059-801092157.png" alt="image_5c524d22_2a00" width="804" height="353" border="0" /></a></div>
+<div style="line-height: 200%;">每个类都有setter和getter方法，并且还重写了toString方法</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">映射文件</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092221539-1329547737.png"><img style="display: inline; background-image: none;" title="image_5c524d22_2ae3" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092221913-266265870.png" alt="image_5c524d22_2ae3" width="579" height="550" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">测试类</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> third;
+ 
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> first.StudentAnother;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.InputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Collections;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.io.Resources;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSession;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactoryBuilder;
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+ 
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+ 
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 每个基于 MyBatis 的应用都是以一个 SqlSessionFactory 的实例为中心的。
+* SqlSessionFactory 的实例可以通过 SqlSessionFactoryBuilder 获得。
+* 而 SqlSessionFactoryBuilder 则可以从 XML 配置文件或一个预先定制的 Configuration 的实例构建出 SqlSessionFactory 的实例。
+* </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+String resource </span>= "config/mybatis-config.xml"<span style="color: #000000;">;
+InputStream inputStream </span>=<span style="color: #000000;"> Resources.getResourceAsStream(resource);
+SqlSessionFactory sqlSessionFactory </span>= <span style="color: #0000ff;">new</span> SqlSessionFactoryBuilder().build(inputStream,"development"<span style="color: #000000;">);
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 从 SqlSessionFactory 中获取 SqlSession
+* </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+SqlSession session </span>=<span style="color: #000000;"> sqlSessionFactory.openSession();
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+List</span>&lt;Person&gt; personList = session.selectList("mapper.myMapper.selectPerson"<span style="color: #000000;">);
+personList.stream().forEach(i</span>-&gt;<span style="color: #000000;">{
+System.out.print(i);
+
+        System.out.println(i.getClass().getName());
+      });
+} </span><span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+session.close();
+}
+}
+ 
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><span style="color: #000000; font-size: 13.5pt;"><strong>测试结果</strong></span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092222374-218512698.png"><img style="display: inline; background-image: none;" title="image_5c524d22_35e4" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092222581-1196380941.png" alt="image_5c524d22_35e4" width="605" height="104" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>Mybatis很神奇的将结果映射为了不同的子类对象</div>
+<div>&nbsp;</div>
+<div>所以说如果一条记录可能会对应多种不同类型的对象，就可以借助于discriminator，通过某个字段的数据鉴别，映射为不同的类</div>
+</div>
+<div style="line-height: 200%;">ResultMap中的type对应了父类型，discriminator上的column对应了需要鉴别的列名</div>
+<div style="line-height: 200%;">每一个case对应着一种类型或者一个ResultMap，通过discriminator就可以根据鉴别的值的不同进行动态的选择</div>
+<div style="line-height: 200%;">discriminator可以很轻松的处理者中类层次关系中数据的映射</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">使用discriminator的结果处理步骤</div>
+<div style="line-height: 200%;">
+<ul>
+<li>MyBatis将会从结果集中取出每条记录，然后比较它的指定鉴别字段的值。</li>
+<li>如果匹配任何discriminator中的case，它将使用由case指定的resultMap（resultType）</li>
+<li>如果没有匹配到任何case，MyBatis只是简单的使用定义在discriminator块外面的resultMap</li>
+</ul>
+</div>
+<div style="line-height: 200%;">如果将映射关系中case后面的值设置为3和4（数据库中只有1和2）</div>
+<div style="line-height: 200%;">结果如下，仅仅匹配了discriminator外面的部分</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092222801-1828366263.png"><img style="display: inline; background-image: none;" title="image_5c524d22_4d54" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190131092222996-670194043.png" alt="image_5c524d22_4d54" width="522" height="113" border="0" /></a></div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10340536.html" target="_blank">Mybatis sql映射文件浅析 Mybatis简介（三）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-31 10:13</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10340536" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10340536);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10340536, cb_entryCreatedDate = '2019-01-31 10:13', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

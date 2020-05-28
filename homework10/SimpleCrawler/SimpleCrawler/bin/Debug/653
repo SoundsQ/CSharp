@@ -1,0 +1,863 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="hibernate的级联可以说是hibernate最重要的部分，只有深入了解了级联的特性与用法，才能运用自如。 这次讨论一对多的情况，所以就使用博客项目的用户表和博客表作为示例，来一起学习hibern" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Hibernate级联之一对多和inverse解析 - 宇的季节 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismore/bundle-lessismore.min.css?v=zbVMf2M2JAlJ02H61dM8SlvD_g-Qf1GNTSQ53ByHeUE" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/chenkeyu/custom.css?v=PWorSHehbhqUHKV6xDqPdT&#x2B;w/4Q=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismore/bundle-lessismore-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenkeyu/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenkeyu/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenkeyu/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 347497;
+        var currentBlogApp = 'chenkeyu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'LessIsMore';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <style type="text/css">
+    .Abstract
+    {
+        padding: 15px;
+        border: dotted 2px #999;
+        color: #999;
+        font-family: 'Microsoft Yahei';
+        border-radius: 4px;
+    }
+        
+    .First
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        text-align: left;
+        padding: 6px 20px;
+        color: #fff;
+        background: #55895B;
+        font-size: 20px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Second
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        padding: 6px 20px;
+        background: #93C8A2;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Third
+    {
+        margin: 10px 0;
+        padding: 6px 20px;
+        font-family: 'Microsoft Yahei';
+        margin: 15px 0;
+        font-size: 16px;
+        color: fff;
+        background: #C6EFD2;
+        color: #999;
+        border-radius: 4px;
+        clear: both;
+    }
+    .note
+    {
+        margin: 10px 0;
+        padding: 15px 20px 15px 60px;
+        background: #FCFAA9 url('http://images.cnblogs.com/cnblogs_com/libaoheng/305804/o_yellow-pin.png') no-repeat 20px 0;
+        font-size: 15px;
+        font-family: 'Microsoft Yahei';
+        box-shadow: 0 0 8px #aaa;
+        clear: both;
+    }
+        
+    .demo
+    {
+        text-align: left;
+        padding: 6px 20px;
+        overflow: auto;
+        border-radius: 4px;
+        background: orange;
+        color: #fff;
+        font-size: 16px;
+        clear: both;
+    }
+        
+    .cnblogs_Highlighter
+    {
+        border: solid 1px #ccc;
+        clear: both;
+    }
+        
+    .cnblogs_code
+    {
+        background: #EFFFF4;
+        border: solid 0px #939393;
+        font-size: 14px;
+        clear: both;
+        padding: 10px 20px;
+    }
+    .cnblogs_code pre
+    {
+        font-size: 14px;
+    }
+    .cnblogs_code span
+    {
+        font-family: Courier New;
+        font-size: 14px;
+    }
+</style>
+    </div>
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenkeyu/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%AE%87%E7%9A%84%E5%AD%A3%E8%8A%82">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/chenkeyu/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+141&nbsp;</span>
+<span id="stats_article_count">文章 - 
+1&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+40</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/7881818.html">Hibernate级联之一对多和inverse解析</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>hibernate的级联可以说是hibernate最重要的部分，只有深入了解了级联的特性与用法，才能运用自如。</p>
+<p>　　这次讨论一对多的情况，所以就使用博客项目的用户表和博客表作为示例，来一起学习hibernate的级联</p>
+<h2 class="p">基本准备</h2>
+<p>文件结构：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123092930727-1697957635.png" alt="" /></p>
+<p>hibernate核心配置文件hibernate.cfg.xml：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('057e4112-9724-4fd3-80fd-4ab871083736')"><img id="code_img_closed_057e4112-9724-4fd3-80fd-4ab871083736" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_057e4112-9724-4fd3-80fd-4ab871083736" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('057e4112-9724-4fd3-80fd-4ab871083736',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_057e4112-9724-4fd3-80fd-4ab871083736" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"</span><span style="color: #0000ff;">&gt;</span>
+    
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hibernate-configuration</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 先配置SessionFactory标签，一个数据库对应一个SessionFactory标签 </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">session-factory</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 必须的配置的参数5个，4个连接参数，1个数据库方言 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">
+        #hibernate.connection.driver_class com.mysql.jdbc.Driver
+        #hibernate.connection.url jdbc:mysql:///test
+        #hibernate.connection.username gavin
+        #hibernate.connection.password 
+        数据库方言
+        #hibernate.dialect org.hibernate.dialect.MySQLDialect
+         </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.connection.driver_class"</span><span style="color: #0000ff;">&gt;</span>com.mysql.jdbc.Driver<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.connection.url"</span><span style="color: #0000ff;">&gt;</span>jdbc:mysql:///blog<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.connection.username"</span><span style="color: #0000ff;">&gt;</span>root<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.connection.password"</span><span style="color: #0000ff;">&gt;</span>123456<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+         <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.dialect"</span><span style="color: #0000ff;">&gt;</span>org.hibernate.dialect.MySQLDialect<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 可选配置 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 显示sql语句 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.show_sql"</span><span style="color: #0000ff;">&gt;</span>true<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 格式化sql语句 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.format_sql"</span><span style="color: #0000ff;">&gt;</span>false<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 生成数据库的表结构 
+        (hbm2dd全称hibernate mapping to db define language auto create)
+        update 没表会自动创建，有表添加数据。
+            如果开发中间需要添加字段，可以在实体类添加属性。update会自动在数据库添加字段，并且不改变原来数据库值
+        validate 校验实体属性和数据库是否一致
+        </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="hibernate.hbm2ddl.auto"</span><span style="color: #0000ff;">&gt;</span>update<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 映射配置文件，可以在map配置文件右键copy qualified name</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapping </span><span style="color: #ff0000;">resource</span><span style="color: #0000ff;">="com/cky/domain/User.hbm.xml"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapping </span><span style="color: #ff0000;">resource</span><span style="color: #0000ff;">="com/cky/domain/Blog.hbm.xml"</span><span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">session-factory</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">hibernate-configuration</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p class="p">如果对hibernate的配置还不是很清楚，可以看看<a title="如何完全根据官方下载包搭建hibernate框架" href="http://www.cnblogs.com/chenkeyu/p/7874998.html" target="_blank">这里</a></p>
+<h2 class="p"><strong>实体类的创建</strong></h2>
+<p>　　Hibernate<span style="font-family: 宋体;">中，可以直接将表的关系用对象表示。</span></p>
+<p><span style="font-family: 宋体;">　　如本例中，一个博客只能有一个作者，所以</span>Blog<span style="font-family: 宋体;">就可以添加一个</span><span style="font-family: Calibri;">User</span><span style="font-family: 宋体;">对象。</span></p>
+<p><span style="font-family: 宋体;">　　一个用户有多个博客，所以可以在</span>User<span style="font-family: 宋体;">中添加一个</span><span style="font-family: Calibri;">Blog</span><span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">Set</span><span style="font-family: 宋体;">集合。</span></p>
+<p>　　<strong><span style="font-family: 宋体; color: #ff0000;">这里需要注意的是如果关联的是一个对象，那么<span style="background-color: #00ff00;">不能</span>在类中进行初始化new操作。</span></strong></p>
+<p><strong><span style="font-family: 宋体; color: #ff0000;">　　如果关联的是一个集合，那么<span style="background-color: #00ff00;">必须用</span>HashSet在类中进行初始化new操作</span></strong></p>
+<p>实体类Blog.java</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('85a1b39b-a36d-418c-934d-a332797f5283')"><img id="code_img_closed_85a1b39b-a36d-418c-934d-a332797f5283" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_85a1b39b-a36d-418c-934d-a332797f5283" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('85a1b39b-a36d-418c-934d-a332797f5283',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_85a1b39b-a36d-418c-934d-a332797f5283" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.cky.domain;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Timestamp;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Blog {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> bId;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String bSubject;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String bContent;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Timestamp createtime;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Timestamp updatetime;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">hibernate中关联对象不能初始化</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> User user;
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">...getter setter 方法省略</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getbId() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> bId;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setbId(<span style="color: #0000ff;">int</span><span style="color: #000000;"> bId) {
+        </span><span style="color: #0000ff;">this</span>.bId =<span style="color: #000000;"> bId;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getbSubject() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> bSubject;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setbSubject(String bSubject) {
+        </span><span style="color: #0000ff;">this</span>.bSubject =<span style="color: #000000;"> bSubject;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getbContent() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> bContent;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setbContent(String bContent) {
+        </span><span style="color: #0000ff;">this</span>.bContent =<span style="color: #000000;"> bContent;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Timestamp getCreatetime() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> createtime;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setCreatetime(Timestamp createtime) {
+        </span><span style="color: #0000ff;">this</span>.createtime =<span style="color: #000000;"> createtime;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Timestamp getUpdatetime() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> updatetime;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setUpdatetime(Timestamp updatetime) {
+        </span><span style="color: #0000ff;">this</span>.updatetime =<span style="color: #000000;"> updatetime;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User getUser() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> user;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setUser(User user) {
+        </span><span style="color: #0000ff;">this</span>.user =<span style="color: #000000;"> user;
+    }
+    
+    
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>实体类User.java</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('48eeddc4-2db7-4f09-b2fd-1218cfb07f13')"><img id="code_img_closed_48eeddc4-2db7-4f09-b2fd-1218cfb07f13" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_48eeddc4-2db7-4f09-b2fd-1218cfb07f13" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('48eeddc4-2db7-4f09-b2fd-1218cfb07f13',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_48eeddc4-2db7-4f09-b2fd-1218cfb07f13" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.cky.domain;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Timestamp;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.HashSet;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Set;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> User {
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Integer uId;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uEmail;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uName;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uUsername;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uPassword;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uAge;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uDetail;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String uAvatar;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String isAdmin;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Timestamp createtime;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Timestamp updatetime;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">hibernate的集合必须初始化</span>
+    <span style="color: #0000ff;">private</span> Set&lt;Blog&gt; blogs=<span style="color: #0000ff;">new</span> HashSet&lt;Blog&gt;<span style="color: #000000;">();
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">...getter setter 方法省略</span>
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer getuId() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uId;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuId(Integer uId) {
+        </span><span style="color: #0000ff;">this</span>.uId =<span style="color: #000000;"> uId;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuEmail() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uEmail;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuEmail(String uEmail) {
+        </span><span style="color: #0000ff;">this</span>.uEmail =<span style="color: #000000;"> uEmail;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuName() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uName;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuName(String uName) {
+        </span><span style="color: #0000ff;">this</span>.uName =<span style="color: #000000;"> uName;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuUsername() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uUsername;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuUsername(String uUsername) {
+        </span><span style="color: #0000ff;">this</span>.uUsername =<span style="color: #000000;"> uUsername;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuPassword() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uPassword;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuPassword(String uPassword) {
+        </span><span style="color: #0000ff;">this</span>.uPassword =<span style="color: #000000;"> uPassword;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuAge() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uAge;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuAge(String uAge) {
+        </span><span style="color: #0000ff;">this</span>.uAge =<span style="color: #000000;"> uAge;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuDetail() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uDetail;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuDetail(String uDetail) {
+        </span><span style="color: #0000ff;">this</span>.uDetail =<span style="color: #000000;"> uDetail;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getuAvatar() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> uAvatar;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setuAvatar(String uAvatar) {
+        </span><span style="color: #0000ff;">this</span>.uAvatar =<span style="color: #000000;"> uAvatar;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getIsAdmin() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> isAdmin;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setIsAdmin(String isAdmin) {
+        </span><span style="color: #0000ff;">this</span>.isAdmin =<span style="color: #000000;"> isAdmin;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Timestamp getCreatetime() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> createtime;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setCreatetime(Timestamp createtime) {
+        </span><span style="color: #0000ff;">this</span>.createtime =<span style="color: #000000;"> createtime;
+    }
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Timestamp getUpdatetime() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> updatetime;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setUpdatetime(Timestamp updatetime) {
+        </span><span style="color: #0000ff;">this</span>.updatetime =<span style="color: #000000;"> updatetime;
+    }
+    </span><span style="color: #0000ff;">public</span> Set&lt;Blog&gt;<span style="color: #000000;"> getBlogs() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> blogs;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setBlogs(Set&lt;Blog&gt;<span style="color: #000000;"> blogs) {
+        </span><span style="color: #0000ff;">this</span>.blogs =<span style="color: #000000;"> blogs;
+    }
+
+    
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h2 class="p"><strong>编写基础映射文件</strong></h2>
+<h3>　　多对一情况映射文件的编写</h3>
+<p>　　多对一时，使用&lt;many-to-one&gt;标签，只需要指定三个属性：</p>
+<p>　　name：指定此标签所映射的属性名</p>
+<p>　　class：关联的表所对应的实体类的全限定类名</p>
+<p>　　column：关联表的外键名</p>
+<p>　　Blog.hbm.xml文件具体内容</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hibernate-mapping</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">class </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="com.cky.domain.Blog"</span><span style="color: #ff0000;">  table</span><span style="color: #0000ff;">="blog"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="bId"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="b_id"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">generator </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="native"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">generator</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">id</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 普通属性 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="bSubject"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="b_subject"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="bContent"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="b_content"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="createtime"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="createtime"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="updatetime"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="updatetime"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 
+        private User user; 
+        多对一 配置</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">many-to-one </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="user"</span><span style="color: #ff0000;"> class</span><span style="color: #0000ff;">="com.cky.domain.User" </span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="u_id"</span> <span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">many-to-one</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">class</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">hibernate-mapping</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<h3>　　一对多情况映射文件的编写</h3>
+<p>　　与多对一情况不同的是，一对多时关联对象是一个set集合。</p>
+<p>　　配置文件需要使用&lt;set&gt;标签来和集合对象建立联系，其中的name指定对应的属性名</p>
+<p>　　在&lt;set&gt;中，需要指定查询关联对象所需要的表（实体类）和比较字段（外键）</p>
+<p>　　User.hbm.xml具体如下：</p>
+<p>　　</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"</span><span style="color: #0000ff;">&gt;</span>
+    
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">hibernate-mapping</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">class </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="com.cky.domain.User"</span><span style="color: #ff0000;"> table</span><span style="color: #0000ff;">="user"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置id
+    name实体类属性，column表字段，如果一样，column可以省略。</span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uId"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_id"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 主键生成策略 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">generator </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="native"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">generator</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">id</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 普通属性</span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uEmail"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_email"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uName"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_name"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uUsername"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_username"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uPassword"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_password"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uAge"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_age"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uDetail"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_detail"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="uAvatar"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="u_avatar"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="isAdmin"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="is_admin"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="createtime"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="createtime"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="updatetime"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="updatetime"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">property</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> private Set&lt;Blog&gt; blogs=new HashSet&lt;Blog&gt;();
+        集合的配置
+        name:这个类中对应的属性名
+     </span><span style="color: #008000;">--&gt;</span>
+     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">set </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="blogs"</span><span style="color: #0000ff;">&gt;</span>
+         <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">column： 外键，hibernate会根据这个字段来查询与这个对象对应的多端的所有对象 </span><span style="color: #008000;">--&gt;</span>
+         <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">key </span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="u_id"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">key</span><span style="color: #0000ff;">&gt;</span>
+         <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">class：集合代表的实体类，同时也代表要查询的表。
+                 与上面的条件结合，就可以查询出表中所有外键字段为指定值的所有结果的集合。
+             </span><span style="color: #008000;">--&gt;</span>
+         <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">one-to-many </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="com.cky.domain.Blog"</span><span style="color: #0000ff;">/&gt;</span>
+     <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">class</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">hibernate-mapping</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;为了方便使用，还需要一个工具类HibernateUtils.java，很简单就不介绍了，下面是代码：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('685eed6a-122b-4633-bcdd-9b502fbde7f3')"><img id="code_img_closed_685eed6a-122b-4633-bcdd-9b502fbde7f3" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_685eed6a-122b-4633-bcdd-9b502fbde7f3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('685eed6a-122b-4633-bcdd-9b502fbde7f3',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_685eed6a-122b-4633-bcdd-9b502fbde7f3" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.cky.utils;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.hibernate.Session;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.hibernate.SessionFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.hibernate.cfg.Configuration;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> HibernateUtils {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">ctrl+shift+x</span>
+    <span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span><span style="color: #000000;"> Configuration CONFIG;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span><span style="color: #000000;"> SessionFactory FACTORY;
+    
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">编写静态代码块</span>
+    <span style="color: #0000ff;">static</span><span style="color: #000000;"> {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">加载XML的配置文件</span>
+        CONFIG =<span style="color: #0000ff;">new</span><span style="color: #000000;"> Configuration().configure();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">构造工作</span>
+        FACTORY=<span style="color: #000000;">CONFIG.buildSessionFactory();
+    }
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * 从工厂获取session对象
+     </span><span style="color: #008000;">*/</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Session getSession() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> FACTORY.openSession();
+    }
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h2>测试基础配置（不使用级联）</h2>
+<p>到这里，基本的配置都设置完了，接下来测试配置的怎么样</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.cky.Demo;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.hibernate.Session;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.hibernate.Transaction;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.Test;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.cky.domain.Blog;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.cky.domain.User;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.cky.utils.HibernateUtils;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> CascadeTest {
+    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO2() {
+        Session session </span>=<span style="color: #000000;"> HibernateUtils.getSession();
+        Transaction tr </span>=<span style="color: #000000;"> session.beginTransaction();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">保存用户和博客</span>
+        User user=<span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+        user.setuName(</span>"王五"<span style="color: #000000;">);
+        
+        Blog blog1</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog1.setbSubject(</span>"王五日常一"<span style="color: #000000;">);
+        blog1.setbContent(</span>"看电视"<span style="color: #000000;">);
+        
+        Blog blog2</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog2.setbSubject(</span>"王五日常二"<span style="color: #000000;">);
+        blog2.setbContent(</span>"玩游戏"<span style="color: #000000;">);
+       　</span><span style="color: #008000;">//</span><span style="color: #008000;">为用户添加博客</span>
+<span style="color: #000000;">        user.getBlogs().add(blog1);
+        user.getBlogs().add(blog2);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">保存用户</span>
+<span style="color: #000000;">        session.save(user);
+        
+        tr.commit();
+        session.close();
+    }       
+}<br /></span></pre>
+</div>
+<p>什么，居然报错了：<strong><span style="color: #ff0000;">TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing</span></strong></p>
+<p><span style="color: #000000;">翻译一下，大致意思就是user对象引用了一个瞬时对象，因为当save(user)时，user已经被保存到缓存成为持久态对象，而给他添加的blog1和blog2，因为没有设置级联，所以不会被自动添加到缓存中，依然是瞬时态对象。</span></p>
+<p>解决方法就是把两个blog1和blog2也进行save(),保存到session中：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO2() {
+       </span><span style="color: #008000;">//</span><span style="color: #008000;">.....上面省略
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">保存用户</span>
+<span style="color: #000000;">        session.save(user);
+       <span style="color: #ff0000;"> session.save(blog1);
+        session.save(blog2);</span>
+        tr.commit();
+        session.close();
+    }       </span></pre>
+</div>
+<h2>&nbsp;关于级联</h2>
+<p>　　hibernate中用cascade属性设置级联。</p>
+<p>　　在基础的配置中，因为没有设置级联，默认是none，也就是不进行级联操作。</p>
+<p>　　就如上面的代码一样，我们需要手动的保证对象和他级联的对象都在同一状态，才能正确运行，这显然是很麻烦的，下面就看看如何通过设置级联属性来让代码更简单。</p>
+<p>　　cascade取值共有5个：</p>
+<p>　　　　none 　　　　默认值，不级联</p>
+<p>　　　　save-update 　在保存、更新操作时自动级联保存更新关联对象</p>
+<p>　　　　delete　　　　在删除时自动级联删除关联对象</p>
+<p>　　　　all　　　　　　类似save-update-delete，即所以的操作都会级联</p>
+<p>　　　　all-delete-orphan 解除某一节点的关系时删除该节点（默认只是清除外键关系）</p>
+<p>　　接下来就在上面的基础配置上添加上面的属性看看有什么区别：</p>
+<p>　　save-update：</p>
+<h3>　　为user配置文件的添加cascade属性</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">set </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="blogs"</span><span style="font-family: 黑体; font-size: 16px; color: #ff0000;"><strong> cascade="save-update"</strong></span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">key </span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="u_id"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">key</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">one-to-many </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="com.cky.domain.Blog"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>此时我们运行上次报错的那段代码：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('75b9aeed-a197-49e4-be98-b7d0af2617bb')"><img id="code_img_closed_75b9aeed-a197-49e4-be98-b7d0af2617bb" class="code_img_closed" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_75b9aeed-a197-49e4-be98-b7d0af2617bb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('75b9aeed-a197-49e4-be98-b7d0af2617bb',event)" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_75b9aeed-a197-49e4-be98-b7d0af2617bb" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">@Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO() {
+        Session session </span>=<span style="color: #000000;"> HibernateUtils.getSession();
+        Transaction tr </span>=<span style="color: #000000;"> session.beginTransaction();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">保存用户和博客</span>
+        User user=<span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+        user.setuName(</span>"王五"<span style="color: #000000;">);
+        
+        Blog blog1</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog1.setbSubject(</span>"王五日常一"<span style="color: #000000;">);
+        blog1.setbContent(</span>"看电视"<span style="color: #000000;">);
+        
+        Blog blog2</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog2.setbSubject(</span>"王五日常二"<span style="color: #000000;">);
+        blog2.setbContent(</span>"玩游戏"<span style="color: #000000;">);
+        
+        user.getBlogs().add(blog1);
+        user.getBlogs().add(blog2);
+        
+        blog1.setUser(user);
+        blog2.setUser(user);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">自动关联</span>
+<span style="color: #000000;">        session.save(user);
+                </span><span style="color: #008000;">//</span><span style="color: #008000;">删除掉保存blog的代码</span>
+<span style="color: #000000;">        
+        tr.commit();
+        session.close();
+    }</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>发现可以正确执行，因为保存user时，会自动级联保存两个blog，所以他们就全是持久态。</p>
+<h3>　　我们同时为blog配置文件添加cascade属性</h3>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">many-to-one </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="user"</span><span style="color: #ff0000;"> <br />　　class</span><span style="color: #0000ff;">="com.cky.domain.User"</span><span style="color: #ff0000;">   <br />　　column</span><span style="color: #0000ff;">="u_id"</span><span style="color: #ff0000;">  <br />　　</span><span style="color: #ff0000;"><span style="font-size: 15px;"><strong>cascade</strong></span><span style="font-size: 15px;"><strong>="save-update"</strong></span></span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">many-to-one</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>然后保存一个blog看看会发生什么</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO() {
+        Session session </span>=<span style="color: #000000;"> HibernateUtils.getSession();
+        Transaction tr </span>=<span style="color: #000000;"> session.beginTransaction();
+
+        User user</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> User();
+        user.setuName(</span>"王五"<span style="color: #000000;">);
+        
+        Blog blog1</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog1.setbSubject(</span>"王五日常一"<span style="color: #000000;">);
+        blog1.setbContent(</span>"看电视"<span style="color: #000000;">);
+        
+        Blog blog2</span>=<span style="color: #0000ff;">new</span><span style="color: #000000;"> Blog();
+        blog2.setbSubject(</span>"王五日常二"<span style="color: #000000;">);
+        blog2.setbContent(</span>"玩游戏"<span style="color: #000000;">);
+
+        user.getBlogs().add(blog1);
+        user.getBlogs().add(blog2);
+        
+        blog1.setUser(user);
+        blog2.setUser(user);
+        
+        </span><span style="color: #008000;">/*</span><span style="color: #008000;">session.save(user);
+        session.save(blog1);</span><span style="color: #008000;">*/</span>
+        <span style="color: #008000;">//</span><span style="color: #008000;">只保存blog2</span>
+<span style="color: #000000;">        session.save(blog2);
+        
+        tr.commit();
+        session.close();
+    }</span></pre>
+</div>
+<p>运行成功，不过更有意思的是他保存了三条信息，而不是两条。</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123094317258-702935551.png" alt="" /></p>
+<p><strong><span style="color: #ff0000;">因为当保存 blog2 时，会级联保存 user ，而user又会级联把 blog1 保存</span></strong></p>
+<p>删除也是同样的道理，就不演示了，下面再研究一个all-delete-orphan，传说的孤儿删除</p>
+<h3>　　关于all-delete-orphan</h3>
+<p>all-delete-orphan上面已经简单介绍过，就是解除关系时会把节点删除而不只是删除外键。</p>
+<p>我们把使用和不使用孤儿删除分别用代码实现，并做一次比较：</p>
+<h3><span style="color: #ff0000;">正常情况下的解除关系：</span></h3>
+<p>　　原来的blog表中两条数据都和user id=1产生关系</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123095008758-1120833401.png" alt="" /></p>
+<p>现在我们把user和其中一个blog id=1解除关系</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">普通解除关系</span>
+<span style="color: #000000;">    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO4() {
+        Session session </span>=<span style="color: #000000;"> HibernateUtils.getSession();
+        Transaction tr </span>=<span style="color: #000000;"> session.beginTransaction();
+        
+        User user</span>=(User) session.get(User.<span style="color: #0000ff;">class</span>, 1<span style="color: #000000;">);
+        Blog blog</span>=(Blog) session.get(Blog.<span style="color: #0000ff;">class</span>, 1<span style="color: #000000;">);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">解除关系只需要把user集合中的blog移除即可</span>
+<span style="color: #000000;">        user.getBlogs().remove(blog);
+        
+        tr.commit();
+        session.close();
+    }</span></pre>
+</div>
+<p>运行sql:</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123095426321-1944715638.png" alt="" /></p>
+<p>再看看表情况：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123095521399-165254300.png" alt="" /></p>
+<p>正常情况，解除关系只是删除外键。</p>
+<h3><span style="color: #ff0000;">使用all-delete-orphan时解除关系：</span></h3>
+<p><span style="color: #000000;">为user配置文件添加all-delete-orphan</span></p>
+<div class="cnblogs_code">
+<pre> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">set </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="blogs"</span><strong><span style="color: #ff0000;"> cascade</span><span style="color: #0000ff;">="all-delete-orphan"</span></strong><span style="color: #0000ff;">&gt;</span>
+     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">key </span><span style="color: #ff0000;">column</span><span style="color: #0000ff;">="u_id"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">key</span><span style="color: #0000ff;">&gt;</span>
+     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">one-to-many </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="com.cky.domain.Blog"</span> <span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">set</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>执行同样的代码解除关系：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">孤儿删除</span>
+<span style="color: #000000;">    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> testMTO4() {
+        Session session </span>=<span style="color: #000000;"> HibernateUtils.getSession();
+        Transaction tr </span>=<span style="color: #000000;"> session.beginTransaction();
+        
+        User user</span>=(User) session.get(User.<span style="color: #0000ff;">class</span>, 1<span style="color: #000000;">);
+        Blog blog</span>=(Blog) session.get(Blog.<span style="color: #0000ff;">class</span>, 1<span style="color: #000000;">);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">解除关系只需要把user集合中的blog移除即可</span>
+<span style="color: #000000;">        user.getBlogs().remove(blog);
+        
+        tr.commit();
+        session.close();
+    }</span></pre>
+</div>
+<p>sql的执行情况</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123100152961-1419660958.png" alt="" /></p>
+<p>数据表变化：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123100250508-1079879995.png" alt="" /></p>
+<h2>关于inverse(外键维护)</h2>
+<p>&nbsp;什么是外键维护呢？</p>
+<p>　　就是在两个关联对象中，如果<span style="color: #ff0000;">关系</span>发生改变需要修改<span style="color: #ff0000;">外键</span>。这么一说感觉这个功能肯定是必备的，要不然这么保证对象之间的关系呢？</p>
+<p>　　<span style="font-size: 16px;">在hibernate是<span style="color: #ff0000;">根据对象关系来判断是否要维护外键</span>。</span></p>
+<p>　　<span style="font-size: 16px;">这里有两个关键字，<span style="color: #ff0000;"><strong>对象关系</strong></span>和<span style="color: #ff0000;"><strong>外键</strong></span>。</span></p>
+<p>　　什么是对象关系？在hibernate中就是你这个<strong><span style="color: #ff0000;">对象A</span></strong>存的有<span style="color: #ff0000;"><strong>对象B</strong></span>的引用，那么对象A就有对象B的的对象关系。有趣的是，对象关系可以是单向的，即A有B的对象关系，B不一定有A的对象关系。Hibernate是根据对象的对象关系来进行外键处理的。如果两边的对象关系都改变，那么默认hibernate都会进行外键处理（处理两次）。</p>
+<p>　　举个例子</p>
+<p>　　<strong><span style="color: #ff0000;">user1</span></strong>有blog<span style="color: #ff0000;"><strong>1</strong></span>和blog<span style="color: #ff0000;"><strong>2</strong></span>俩对象关系&nbsp; 、<span style="color: #ff0000;"><strong>user2</strong></span>有blog<span style="color: #ff0000;"><strong>3</strong></span>和blog<span style="color: #ff0000;"><strong>4</strong></span>俩对象关系</p>
+<p>　　1.现在我们把blog3添加到user1中（对象关系改变）</p>
+<p>　　2.因为这时blog3中的user还是user2，还要把blog3的user换成user1（对象关系改变）</p>
+<p>　　上面两个操作都改变了对象关系，如之前说的，session的缓存和快照不一致了，对于User对象，需要更新外键，对于Blog对象，也需要更新外键。</p>
+<p>　　<span style="color: #ff0000;"><strong>但是，他们更新的是同一外键</strong></span>，也就是说对<span style="color: #ff0000;"><strong>同一外键更新了两次</strong></span>，多了一个无意义的操作无疑增加了数据库的压力。</p>
+<p>　　<img src="https://images2017.cnblogs.com/blog/1003414/201711/1003414-20171123110731993-33007203.png" alt="" /></p>
+<p>　　也许有人可能会说，我不执行步骤2不就行了，结果还是正确的，还减少了sql。</p>
+<p>　　但是按照人的思维定式，在不知道的情况还是会按上面两个步骤走，感觉更合理。</p>
+<p>　　所以解决方法就在一方放弃外键维护。并且在多对多的情况下必须有一方需要放弃外键，否者程序无法运行。</p>
+<p>　　</p>
+<p>　　</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2017-11-28 10:17</span>&nbsp;
+<a href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7881818" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(7881818);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 347497, cb_blogApp = 'chenkeyu', cb_blogUserGuid = 'fdaae355-6e59-e611-9fc1-ac853d9f53cc';
+    var cb_entryId = 7881818, cb_entryCreatedDate = '2017-11-28 10:17', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 宇的季节
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

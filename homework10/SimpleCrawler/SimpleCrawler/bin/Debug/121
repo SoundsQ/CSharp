@@ -1,0 +1,388 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="MySQL如何创建一个好索引？创建索引的5条建议 过滤效率高的放前面 对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列...这样。查询时，如果第一列能够排除的越多，那么后面列需" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MySQL如何创建一个好索引？创建索引的5条建议【宇哥带你玩转MySQL 索引篇(三)】 - 宇的季节 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismore/bundle-lessismore.min.css?v=zbVMf2M2JAlJ02H61dM8SlvD_g-Qf1GNTSQ53ByHeUE" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/chenkeyu/custom.css?v=PWorSHehbhqUHKV6xDqPdT&#x2B;w/4Q=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismore/bundle-lessismore-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenkeyu/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenkeyu/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenkeyu/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 347497;
+        var currentBlogApp = 'chenkeyu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'LessIsMore';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <style type="text/css">
+    .Abstract
+    {
+        padding: 15px;
+        border: dotted 2px #999;
+        color: #999;
+        font-family: 'Microsoft Yahei';
+        border-radius: 4px;
+    }
+        
+    .First
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        text-align: left;
+        padding: 6px 20px;
+        color: #fff;
+        background: #55895B;
+        font-size: 20px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Second
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        padding: 6px 20px;
+        background: #93C8A2;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Third
+    {
+        margin: 10px 0;
+        padding: 6px 20px;
+        font-family: 'Microsoft Yahei';
+        margin: 15px 0;
+        font-size: 16px;
+        color: fff;
+        background: #C6EFD2;
+        color: #999;
+        border-radius: 4px;
+        clear: both;
+    }
+    .note
+    {
+        margin: 10px 0;
+        padding: 15px 20px 15px 60px;
+        background: #FCFAA9 url('http://images.cnblogs.com/cnblogs_com/libaoheng/305804/o_yellow-pin.png') no-repeat 20px 0;
+        font-size: 15px;
+        font-family: 'Microsoft Yahei';
+        box-shadow: 0 0 8px #aaa;
+        clear: both;
+    }
+        
+    .demo
+    {
+        text-align: left;
+        padding: 6px 20px;
+        overflow: auto;
+        border-radius: 4px;
+        background: orange;
+        color: #fff;
+        font-size: 16px;
+        clear: both;
+    }
+        
+    .cnblogs_Highlighter
+    {
+        border: solid 1px #ccc;
+        clear: both;
+    }
+        
+    .cnblogs_code
+    {
+        background: #EFFFF4;
+        border: solid 0px #939393;
+        font-size: 14px;
+        clear: both;
+        padding: 10px 20px;
+    }
+    .cnblogs_code pre
+    {
+        font-size: 14px;
+    }
+    .cnblogs_code span
+    {
+        font-family: Courier New;
+        font-size: 14px;
+    }
+</style>
+    </div>
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenkeyu/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%AE%87%E7%9A%84%E5%AD%A3%E8%8A%82">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/chenkeyu/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+141&nbsp;</span>
+<span id="stats_article_count">文章 - 
+1&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+40</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12799207.html">MySQL如何创建一个好索引？创建索引的5条建议【宇哥带你玩转MySQL 索引篇(三)】</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>MySQL如何创建一个好索引？创建索引的5条建议</h1>
+<h3><span style="font-family: 宋体;">过滤效率高的放前面</span></h3>
+<p class="29"><span style="font-family: Cambria;">对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列</span>...这样。查询时，如果第一列能够排除的越多，那么后面列需要判断的行数就越少，效率越高。</p>
+<p><span style="font-family: Cambria;">关于如何判断哪个列的过滤效率更高，可以通过选择性计算来决定。例如我们要在</span>books表创建一个name列和author列的索引，可以计算这两列各自的选择性：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> <span style="color: #ff00ff;">count</span>(<span style="color: #0000ff;">distinct</span> name) <span style="color: #808080;">/</span> <span style="color: #ff00ff;">count</span>(<span style="color: #808080;">*</span>) <span style="color: #0000ff;">as</span> name, <span style="color: #ff00ff;">count</span>(<span style="color: #0000ff;">distinct</span> author) <span style="color: #808080;">/</span> <span style="color: #ff00ff;">count</span>(<span style="color: #808080;">*</span>) <span style="color: #0000ff;">as</span> author <span style="color: #0000ff;">from</span> books;</pre>
+</div>
+<p class="29">最后得出结果如下：</p>
+<table class="32" border="0" cellspacing="0">
+<tbody>
+<tr>
+<td valign="bottom">
+<p class="26">Name</p>
+</td>
+<td valign="bottom">
+<p class="26">author</p>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<p class="26">0.95</p>
+</td>
+<td valign="top">
+<p class="26">0.9</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><span style="font-family: Cambria;">显然</span>name字段的选择性更高，那么如果把name放第一列，在name条件过滤时就可以排除更多的列，减少接下来 author的过滤。</p>
+<h3><span style="font-family: 宋体;">使用频率高的放前面</span></h3>
+<p class="29">其实该建议比上一个建议优先级更高</p>
+<p><span style="font-family: Cambria;">例如一个商品管理页面，一般都是基于该店家的上架或已下架的商品，再添加其他的查询条件等等。由于所有的查询都需要带有</span>shopid和status条件，此时应该优先将这两个条件作为基本前缀，这样就可以方便复用索引。</p>
+<p>例如一个(shopid, status, createdat)的索引，当查询条件只有shopid和status时，也可以使用该索引。如果完全根据字段的过滤效率来决定索引，就需要创建很多不同的索引。</p>
+<h3><span style="font-family: 宋体;">避免排序</span></h3>
+<p class="29">索引的值都是有序排列的，在创建索引时还可以显式指定每个列的排序方式，例如</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">create</span> <span style="color: #0000ff;">index</span> idx_books_author_created_at <span style="color: #0000ff;">on</span> books (author, created_at <span style="color: #0000ff;">DESC</span>);</pre>
+</div>
+<p class="29">此时，如果执行下面的的查询</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> books <span style="color: #0000ff;">where</span> author <span style="color: #808080;">=</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">author</span><span style="color: #ff0000;">'</span> <span style="color: #0000ff;">order</span> <span style="color: #0000ff;">by</span> created_at <span style="color: #0000ff;">DESC</span>;</pre>
+</div>
+<p class="29"><span style="font-family: Cambria;">由于满足</span>auhtor的索引的created_at列都是有序排列的，所以不需要再进行额外的排序操作。</p>
+<p class="24"><em>&nbsp;</em><em><img src="https://img2020.cnblogs.com/blog/1003414/202004/1003414-20200428234319117-212065691.png" alt=""></em></p>
+<p><span style="font-family: Cambria;">当结果数据集很大时，</span>应该尽可能的通过索引来避免查询的额外排序，因为当内存排序空间(<a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_sort_buffer_size">sort_buffer_size</a>)不够用时，就需要把一部分内容放到硬盘中，此时会很影响性能。</p>
+<p><span style="font-family: Cambria;">例如一个分页查询每页显示100条，按从大到小的顺序显示</span>，当浏览到第100页时，如果查询是file sort的，数据库需要使用堆排序先计算出这个表里面前100 * 100 = 10000条最大的数据，然后取9900 - 10000之间的数据返回给客户端，在计算的过程中，这个最大堆如果放不下就需要保存到磁盘中，但是又需要频繁比较和替换。</p>
+<h3><span style="font-family: 宋体;">减少随机</span>IO</h3>
+<p class="29"><span style="font-family: Cambria;">在之前对硬盘知识了解后可以知道，一次随机读会有</span>10ms的寻址延迟，如果一次查询涉及达到多次的随机读，会很大程度的限制查询性能。常见的sql查询造成随机IO的包括回表和join</p>
+<p>例如下面的查询</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> books <span style="color: #0000ff;">where</span> author <span style="color: #808080;">=</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">author1</span><span style="color: #ff0000;">'</span>;</pre>
+</div>
+<p class="29"><span style="font-family: Cambria;">如果</span>author1有100本书，但是这100本书并不是连续录入的，也就是说这100本书在硬盘中的存储是分离的。那么在有二级索引(author, created_at)的情况下，MySQL先通过二级索引找到满足author1的所有books的id，然后再通过id在聚簇索引中找到具体数据。</p>
+<p><span style="font-family: Cambria;">在这一过程中，二级索引的存储可以认为是连续的，那么二级索引耗时就是</span>10ms + 100 * 0.01 = 11ms，包含一次寻址以及接下来的顺序读。而主键索引回表造成的随机IO最差情况是10ms * 100 = 1000ms。那么一共就需要11ms + 1000ms = 1011ms</p>
+<p><span style="font-family: Cambria;">通常减少随机</span>IO的一种方式就使用覆盖索引。例如上面的查询中，如果我们只是想要该作者的书名，可以将(author, created<em>at)扩展为(author, created</em>at,name)，然后将sql修改如下</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> name <span style="color: #0000ff;">from</span> books <span style="color: #0000ff;">where</span> author <span style="color: #808080;">=</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">author1</span><span style="color: #ff0000;">'</span>;</pre>
+</div>
+<p class="29"><span style="font-family: Cambria;">由于索引中已经有</span>name的信息，此时就不会再次回表，查询耗时就变成了10ms + 100 * 0.01 = 11ms</p>
+<p class="29">&nbsp;</p>
+<p><strong><span style="font-family: Cambria;">值得一提的是</span>mysql5.6新增一个叫做<span style="color: #ff0000;"><a href="https://dev.mysql.com/doc/refman/5.6/en/index-condition-pushdown-optimization.html"><span style="font-family: Cambria; color: #ff0000;">索引条件下推</span></a></span></strong><span style="font-family: Cambria;"><strong>的优化</strong>，例如在有索引</span>(author, created_at,name)的情况下，进行下面的查询：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">select</span> name <span style="color: #0000ff;">from</span> books <span style="color: #0000ff;">where</span> author <span style="color: #808080;">=</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">author1</span><span style="color: #ff0000;">'</span> <span style="color: #808080;">and</span> name <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">%name%</span><span style="color: #ff0000;">'</span> <span style="color: #808080;">and</span> created_at <span style="color: #808080;">&gt;</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">2020-01-01</span><span style="color: #ff0000;">'</span>;</pre>
+</div>
+<p><span style="font-family: Cambria;">根据最左匹配原则，这个查询只能用到索引的</span>author字段，如果没有索引条件下推优化，数据库需要在二级索引找到满足author条件的所有列id，然后回表找到剩余信息后，再过滤name和created_at条件。</p>
+<p><span style="font-family: Cambria;">有了索引条件下推，在找到满足</span>author条件的所有索引后，会再用索引的name字段进行普通过滤，尽量减少回表的次数，减少随机IO</p>
+<h3><span style="font-family: 宋体;">避免重复索引</span></h3>
+<p class="29">以<strong><span style="font-family: Cambria;">减少随机</span>IO</strong><span style="font-family: Cambria;">中的查询为例，我们最终是把</span>(author, created<em>at)扩展</em>为(author, createdat,name)，而不是创建一个新的(author, name)的索引。</p>
+<p><span style="font-family: Cambria;">在实际应用场景中也有类似的情况，例如创建一个</span>userid的外键索引，然后又创建(userid, xxx)的索引。由于索引存储的顺序性，其实可以将这两个索引进行合并，如果我们先创建(userid, xxx)的索引，然后再添加userid的外键，mysql会自动使用前面创建索引。</p>
+<p>索引是否越多越好呢？</p>
+<p>显然不是，因为索引是对原表的数据冗余，那么他就必须要保证数据的一致性。如果原表增加了一条数据，索引也需要增加。如果原表修改了一条数据，那么对应的索引可能也要修改内容以及排序的位置，这可能会造成页分裂或页合并。一个表如果索引过多，那么维护索引与表的数据一致性也是不小的压力。通常建议在满足需求前提下，索引越少越好。</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 23:49</span>&nbsp;
+<a href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12799207" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12799207);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 347497, cb_blogApp = 'chenkeyu', cb_blogUserGuid = 'fdaae355-6e59-e611-9fc1-ac853d9f53cc';
+    var cb_entryId = 12799207, cb_entryCreatedDate = '2020-04-28 23:49', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 宇的季节
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_踏歌行的专栏</title>
+  <subtitle type="text">一个爱学习爱分享的技术人员，微信公众号「OpenInfo」。
+本文原创发布于公众号 OpenInfo，转载请务必注明出处！</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=749</id>
+  <updated>2020-04-28T13:55:29Z</updated>
+  <author>
+    <name>踏歌行666</name>
+    <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12797562.html</id>
+    <title type="text">Ansible playbook Vault 加密 - 踏歌行666</title>
+    <summary type="text">Ansible playbook Vault 加密详解与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登</summary>
+    <published>2020-04-28T13:55:00Z</published>
+    <updated>2020-04-28T13:55:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12797562.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12797562.html" />
+    <content type="html">【摘要】Ansible playbook Vault 加密详解与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12797562.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12782655.html</id>
+    <title type="text">Ansible playbook 编程 - 踏歌行666</title>
+    <summary type="text">Ansible playbook 编程详解与各种小案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此</summary>
+    <published>2020-04-26T14:03:00Z</published>
+    <updated>2020-04-26T14:03:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12782655.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12782655.html" />
+    <content type="html">【摘要】Ansible playbook 编程详解与各种小案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12782655.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12776236.html</id>
+    <title type="text">Ansible Facts 变量详解 - 踏歌行666</title>
+    <summary type="text">Ansible Facts 变量详解与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此该 yu</summary>
+    <published>2020-04-25T15:31:00Z</published>
+    <updated>2020-04-25T15:31:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12776236.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12776236.html" />
+    <content type="html">【摘要】Ansible Facts 变量详解与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此该 yu &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12776236.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12686706.html</id>
+    <title type="text">Ansible Playbook 变量与 register 详解 - 踏歌行666</title>
+    <summary type="text">ansible 定义变量方式与[多层]变量引用，以及 register 详解</summary>
+    <published>2020-04-12T10:11:00Z</published>
+    <updated>2020-04-12T10:11:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12686706.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12686706.html" />
+    <content type="html">【摘要】ansible 定义变量方式与[多层]变量引用，以及 register 详解 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12686706.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12596034.html</id>
+    <title type="text">Ansible Playbook 初识 - 踏歌行666</title>
+    <summary type="text">Ansible Playbook 基本概述与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此该</summary>
+    <published>2020-03-29T15:54:00Z</published>
+    <updated>2020-03-29T15:54:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12596034.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12596034.html" />
+    <content type="html">【摘要】Ansible Playbook 基本概述与使用案例 主机规划 添加用户账号 说明： 1、 运维人员使用的登录账号； 2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放； 3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此该 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12596034.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12525566.html</id>
+    <title type="text">Ansible Ad-Hoc与常用模块 - 踏歌行666</title>
+    <summary type="text">ansible 执行结果信息–各颜色说明；ansible Ad-Hoc 说明；ansible 如何查看帮助文档与常用模块详解</summary>
+    <published>2020-03-19T09:12:00Z</published>
+    <updated>2020-03-19T09:12:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12525566.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12525566.html" />
+    <content type="html">【摘要】ansible 执行结果信息–各颜色说明；ansible Ad-Hoc 说明；ansible 如何查看帮助文档与常用模块详解 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12525566.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12501193.html</id>
+    <title type="text">Ansible-免密登录与主机清单Inventory - 踏歌行666</title>
+    <summary type="text">Ansible的指定用户与密码登录、免密登录、指定ssh端口以及主机清单Inventory配置</summary>
+    <published>2020-03-15T15:44:00Z</published>
+    <updated>2020-03-15T15:44:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12501193.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12501193.html" />
+    <content type="html">【摘要】Ansible的指定用户与密码登录、免密登录、指定ssh端口以及主机清单Inventory配置 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12501193.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12445677.html</id>
+    <title type="text">Ansible-安装配置 - 踏歌行666</title>
+    <summary type="text">主机规划 主机名称操作系统版本内网IP外网IP(模拟)安装软件 ansi-manager CentOS7.5 172.16.1.180 10.0.0.180 ansible ansi-haproxy01 CentOS7.5 172.16.1.181 10.0.0.181 ansi-haproxy02</summary>
+    <published>2020-03-08T14:53:00Z</published>
+    <updated>2020-03-08T14:53:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12445677.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12445677.html" />
+    <content type="html">【摘要】主机规划 主机名称操作系统版本内网IP外网IP(模拟)安装软件 ansi-manager CentOS7.5 172.16.1.180 10.0.0.180 ansible ansi-haproxy01 CentOS7.5 172.16.1.181 10.0.0.181 ansi-haproxy02 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12445677.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12423683.html</id>
+    <title type="text">Ansible-基本概述 - 踏歌行666</title>
+    <summary type="text">ansible 介绍、特点、原理与架构、具体执行流程，以及自动化运维使用场景</summary>
+    <published>2020-03-05T15:09:00Z</published>
+    <updated>2020-03-05T15:09:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12423683.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12423683.html" />
+    <content type="html">【摘要】ansible 介绍、特点、原理与架构、具体执行流程，以及自动化运维使用场景 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12423683.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/zhanglianghhh/p/12339731.html</id>
+    <title type="text">Linux tcpdump 命令详解与示例 - 踏歌行666</title>
+    <summary type="text">Linux tcpdump 命令详解，常用命令选项与常见示例</summary>
+    <published>2020-02-20T15:24:00Z</published>
+    <updated>2020-02-20T15:24:00Z</updated>
+    <author>
+      <name>踏歌行666</name>
+      <uri>http://www.cnblogs.com/zhanglianghhh/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/zhanglianghhh/p/12339731.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/zhanglianghhh/p/12339731.html" />
+    <content type="html">【摘要】Linux tcpdump 命令详解，常用命令选项与常见示例 &lt;a href="http://www.cnblogs.com/zhanglianghhh/p/12339731.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

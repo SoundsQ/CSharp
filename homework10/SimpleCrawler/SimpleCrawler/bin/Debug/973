@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_王陸</title>
+  <subtitle type="text">书写是对思维的缓存</subtitle>
+  <id>uuid:ff0abc49-5467-416a-a4e0-9b43608df718;id=583</id>
+  <updated>2020-04-27T12:04:29Z</updated>
+  <author>
+    <name>王陸</name>
+    <uri>http://www.cnblogs.com/wkfvawl/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12789571.html</id>
+    <title type="text">线性代数思维导图——4.线性方程组 - 王陸</title>
+    <summary type="text">方程组解的情况判断。一般方程组解的情况有三种：无解，唯一解，无穷多解。齐次方程组有两种：唯一解（只有0解）和无穷多解（有非0 解）。 求通解问题。这方面的关键性概念是齐次方程组的基础解系，它就是解集的最大无关组。</summary>
+    <published>2020-04-27T12:04:00Z</published>
+    <updated>2020-04-27T12:04:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12789571.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12789571.html" />
+    <content type="html">【摘要】方程组解的情况判断。一般方程组解的情况有三种：无解，唯一解，无穷多解。齐次方程组有两种：唯一解（只有0解）和无穷多解（有非0 解）。 求通解问题。这方面的关键性概念是齐次方程组的基础解系，它就是解集的最大无关组。 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12789571.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12782505.html</id>
+    <title type="text">Java Sping 第四章——Sping AOP  - 王陸</title>
+    <summary type="text">一、Spring Aop的基本概念 1.Aop的概念 面向切面编程（AOP，Aspect Oriented Programming），通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种</summary>
+    <published>2020-04-26T13:43:00Z</published>
+    <updated>2020-04-26T13:43:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12782505.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12782505.html" />
+    <content type="html">【摘要】一、Spring Aop的基本概念 1.Aop的概念 面向切面编程（AOP，Aspect Oriented Programming），通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12782505.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12782266.html</id>
+    <title type="text"> Java Sping 第三章——Sping Bean - 王陸</title>
+    <summary type="text">一、Bean的配置 Spring可以看做是一个大型工厂，生产和管理Spring容器中的Bean。如何使用这个工厂生产和管理Bean，需要开发者将Bean配置在Spring配置文件中。Spring框架支持XML和Properties两种格式的配置文件，在实际开发中，常用XML格式的配置文件。 Spri</summary>
+    <published>2020-04-26T13:06:00Z</published>
+    <updated>2020-04-26T13:06:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12782266.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12782266.html" />
+    <content type="html">【摘要】一、Bean的配置 Spring可以看做是一个大型工厂，生产和管理Spring容器中的Bean。如何使用这个工厂生产和管理Bean，需要开发者将Bean配置在Spring配置文件中。Spring框架支持XML和Properties两种格式的配置文件，在实际开发中，常用XML格式的配置文件。 Spri &lt;a href="http://www.cnblogs.com/wkfvawl/p/12782266.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12775985.html</id>
+    <title type="text">C++设计模式——门面模式 Façade - 王陸</title>
+    <summary type="text">Façade是一个法语词，意思是外观、门面，因此该模式又称为外观模式！ 门面模式不仅仅是一种设计模式那么简单，更是一种设计素养，需要有边界划分的意识！ 动机(Motivation) 客户和组件中各种复杂的子系统有过多的耦合 如何简化外部客户程序和系统间的交互接口？如何解耦？ 模式定义 为子系统中的一</summary>
+    <published>2020-04-25T14:55:00Z</published>
+    <updated>2020-04-25T14:55:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12775985.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12775985.html" />
+    <content type="html">【摘要】Façade是一个法语词，意思是外观、门面，因此该模式又称为外观模式！ 门面模式不仅仅是一种设计模式那么简单，更是一种设计素养，需要有边界划分的意识！ 动机(Motivation) 客户和组件中各种复杂的子系统有过多的耦合 如何简化外部客户程序和系统间的交互接口？如何解耦？ 模式定义 为子系统中的一 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12775985.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12775339.html</id>
+    <title type="text">几种常见曲线与定积分 - 王陸</title>
+    <summary type="text">这里整理一下定积分应用中几种常见的曲线和一些规律，没有涉及到一些曲线的表达式推导和由来，表达式推导内容建议参照《张宇高数18讲》第一讲中就有详尽的介绍，不得不说很多考研书籍在这一方面的讲解都是欠缺的，18讲很好弥补了这部分内容。 一、星形线 星形线弧长 星形线面积 星形线体积 二、心形线 心形线全长</summary>
+    <published>2020-04-25T13:21:00Z</published>
+    <updated>2020-04-25T13:21:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12775339.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12775339.html" />
+    <content type="html">【摘要】这里整理一下定积分应用中几种常见的曲线和一些规律，没有涉及到一些曲线的表达式推导和由来，表达式推导内容建议参照《张宇高数18讲》第一讲中就有详尽的介绍，不得不说很多考研书籍在这一方面的讲解都是欠缺的，18讲很好弥补了这部分内容。 一、星形线 星形线弧长 星形线面积 星形线体积 二、心形线 心形线全长 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12775339.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12757800.html</id>
+    <title type="text"> Java Sping 第二章——Spring IoC - 王陸</title>
+    <summary type="text">一、Spring IoC的基本概念 控制反转（Inversion of Control，IoC）是一个比较抽象的概念，是Spring框架的核心，用来消减计算机程序的耦合问题。依赖注入（Dependency Injection，DI）是IoC的另外一种说法，只是从不同的角度，描述相同的概念。IOC（I</summary>
+    <published>2020-04-22T15:41:00Z</published>
+    <updated>2020-04-22T15:41:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12757800.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12757800.html" />
+    <content type="html">【摘要】一、Spring IoC的基本概念 控制反转（Inversion of Control，IoC）是一个比较抽象的概念，是Spring框架的核心，用来消减计算机程序的耦合问题。依赖注入（Dependency Injection，DI）是IoC的另外一种说法，只是从不同的角度，描述相同的概念。IOC（I &lt;a href="http://www.cnblogs.com/wkfvawl/p/12757800.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12749213.html</id>
+    <title type="text"> Java Sping 第一章——初识 Spring - 王陸</title>
+    <summary type="text">一、Spring 简介 Spring是一个轻量级Java开发框架，最早由Rod Johnson创建，目的是为了解决企业级应用开发的业务逻辑层和其他各层的耦合问题。它是一个分层的JavaSE/EE full-stack(一站式) 轻量级开源框架，为开发Java应用程序提供全面的基础架构支持。Sprin</summary>
+    <published>2020-04-21T16:37:00Z</published>
+    <updated>2020-04-21T16:37:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12749213.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12749213.html" />
+    <content type="html">【摘要】一、Spring 简介 Spring是一个轻量级Java开发框架，最早由Rod Johnson创建，目的是为了解决企业级应用开发的业务逻辑层和其他各层的耦合问题。它是一个分层的JavaSE/EE full-stack(一站式) 轻量级开源框架，为开发Java应用程序提供全面的基础架构支持。Sprin &lt;a href="http://www.cnblogs.com/wkfvawl/p/12749213.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12742174.html</id>
+    <title type="text">C++设计模式——状态模式 State - 王陸</title>
+    <summary type="text">动机(Motivation) 对象状态如果改变，其行为也会随之而发生变化，比如文档处于只读状态，其支持的行为和读写状态支持的行为就可能完全不同。 如何在运行时根据对象的状态来透明地改变对象的行为？ 模式定义 允许一个对象在其内部状态改变时改变它的行为。从而使对象看起来似乎修改了其行为。 ——《设计模</summary>
+    <published>2020-04-21T00:35:00Z</published>
+    <updated>2020-04-21T00:35:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12742174.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12742174.html" />
+    <content type="html">【摘要】动机(Motivation) 对象状态如果改变，其行为也会随之而发生变化，比如文档处于只读状态，其支持的行为和读写状态支持的行为就可能完全不同。 如何在运行时根据对象的状态来透明地改变对象的行为？ 模式定义 允许一个对象在其内部状态改变时改变它的行为。从而使对象看起来似乎修改了其行为。 ——《设计模 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12742174.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12741837.html</id>
+    <title type="text">线性代数思维导图——3.向量组 - 王陸</title>
+    <summary type="text">向量组的线性关系有三个层次：线性表示，线性相关性，秩和最大无关组。线性表示是描述向量组和其他向量间的关系的，后两个 是刻画向量组的内在关系的。它们环环相扣，逐步深入，但是每个环节都有各自的应用。</summary>
+    <published>2020-04-20T16:52:00Z</published>
+    <updated>2020-04-20T16:52:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12741837.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12741837.html" />
+    <content type="html">【摘要】向量组的线性关系有三个层次：线性表示，线性相关性，秩和最大无关组。线性表示是描述向量组和其他向量间的关系的，后两个 是刻画向量组的内在关系的。它们环环相扣，逐步深入，但是每个环节都有各自的应用。 &lt;a href="http://www.cnblogs.com/wkfvawl/p/12741837.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/wkfvawl/p/12710219.html</id>
+    <title type="text">基于Servlet实现简单系统登录 - 王陸</title>
+    <summary type="text">一、需求 1.实现分层架构：bean dao service controller层2.基于Servlet实现controller：登录成功进入欢迎页面；登录失败重新登录，并显示上次的登录用户名3.前端：登录页面login.jsp 欢迎页面success.jsp 二、项目结构 bean层 User.</summary>
+    <published>2020-04-16T00:09:00Z</published>
+    <updated>2020-04-16T00:09:00Z</updated>
+    <author>
+      <name>王陸</name>
+      <uri>http://www.cnblogs.com/wkfvawl/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/wkfvawl/p/12710219.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/wkfvawl/p/12710219.html" />
+    <content type="html">【摘要】一、需求 1.实现分层架构：bean dao service controller层2.基于Servlet实现controller：登录成功进入欢迎页面；登录失败重新登录，并显示上次的登录用户名3.前端：登录页面login.jsp 欢迎页面success.jsp 二、项目结构 bean层 User. &lt;a href="http://www.cnblogs.com/wkfvawl/p/12710219.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

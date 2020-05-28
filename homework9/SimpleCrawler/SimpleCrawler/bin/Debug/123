@@ -1,0 +1,890 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="单例模式是常用的创建型设计模式之一，单例模式的含义比较简单，重点在于实现保证。本文介绍了单例模式的意图，结构，以及java实现，介绍了内部类的单例模式与枚举单例模式，以及使用中常见的问题。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>单例模式 创建型 设计模式（六） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9982869.html">单例模式 创建型 设计模式（六）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        单例模式是常用的创建型设计模式之一，单例模式的含义比较简单，重点在于实现保证。本文介绍了单例模式的意图，结构，以及java实现，介绍了内部类的单例模式与枚举单例模式，以及使用中常见的问题。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">&nbsp;<span style="font-family: 微软雅黑;"><span style="color: #000000; font-size: 13.5pt;"><strong>单例模式 Singleton</strong></span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>单例就是单一实例， only you&nbsp; 只有一个</strong></span></span></div>
+<h3><span style="font-size: 18px;">意图 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>保证一个类仅有一个实例，并且提供一个访问他的全局访问点</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #000000; font-size: 13.5pt;"><strong>单例模式的含义简单至极，复杂的是如何能够保障你真的只是创建了一个实例</strong></span> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>怎样才能保证一个类只有一个实例，并且这个实例对象还易于被访问？</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">可以借助于全局变量，但是类就在那里，你不能防止实例化多个对象，可能一不小心谁就创建了一个对象 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以通常的做法是让类自身负责保存他的唯一实例，通过构造方法私有阻止外部实例对象，并且提供静态公共方法&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以常说的单例模式有下面三个特点 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<ul style="line-height: 200%;">
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式的类，只能有一个实例对象 </span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式的类，自身创建自己唯一的实例对象 </span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式的类，必须提供获取这一唯一实例的方式 </span></li>
+</ul>
+</div>
+</div>
+<h3><span style="font-size: 18px;">结构 </span></h3>
+<div style="line-height: 200%;"><img src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181119141250952-293279001.png" alt="" /></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">Singleton模式的结构简单，实现的步骤一般是： </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">自身创建并且保存维护这个唯一实例，并且这个唯一实例singleton&nbsp; 是私有的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">将构造方法设置为私有，防止创建实例 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">设置公共的getInstance（）方法获取实例，而且，这个方法<span style="color: #000000; font-size: 13.5pt;"><strong>必然是静态的</strong></span> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例类自身负责创建维护唯一实例，按照实例对象创建的时机，分为两类&nbsp; </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 微软雅黑;">饿汉式：实例在类加载时创建 </span></li>
+<li><span style="font-family: 微软雅黑;">懒汉式：实例在第一次使用时创建 </span></li>
+</ul>
+</div>
+<h3><span style="font-size: 18px;">饿汉式</span></h3>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> singleton;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/11.
+* Description:
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> EagerSingleton {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> EagerSingleton() {
+}
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> EagerSingleton singleton = <span style="color: #0000ff;">new</span><span style="color: #000000;"> EagerSingleton();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> EagerSingleton getInstance() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+}
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">当类加载时，静态成员singleton 会被初始化，对象在此时被创建 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">饿汉式的缺点很明显： </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果初始化的太早，可能就会造成资源浪费。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">在虚拟机相关的文章中，有介绍过，<span style="color: #000000; font-size: 13.5pt;"><strong>虚拟机的实现会保证：类加载会确保类和对象的初始化方法在多线程场景下能够正确的同步加锁</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以，<span style="color: #ff0000; font-size: 13.5pt;"><strong>饿汉式不必担心同步问题</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果对于该对象的使用也是&ldquo;饿汉式&rdquo;的，也就是应用程序总是会高频使用，应该优先考虑这种模式&nbsp;</span></div>
+<h3><span style="font-size: 18px;">懒汉式 </span></h3>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> singleton;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/11.
+* Description:
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LazySingleton {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> LazySingleton() {
+}
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> LazySingleton singleton = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> LazySingleton getInstance() {
+</span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+singleton </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LazySingleton();
+}
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+}
+}</span></pre>
+</div>
+</div>
+<div><span style="font-family: 微软雅黑;">一个简单的懒汉式实现方式如上 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">静态singleton 初始为null&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">每次通过getInstance（）获取时，如果为null，那么创建一个实例，否则就直接返回已存在的实例singleton </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><strong><span style="color: #ff0000; font-size: 13.5pt;">同步问题</span></strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">上述代码在单线程下是没有问题的，但是在多线程场景下，需要同步 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">假如两个线程都执行到if (singleton == null) ，都判断为空 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">那么接下来两个线程都会创建对象，就无法保证唯一实例 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以可以给方法加上<span style="color: #0000ff; font-size: 13.5pt;"><strong>synchronized</strong></span>关键字，变为同步方法 </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">synchronized</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> LazySingleton getInstance() {
+</span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+singleton </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LazySingleton();
+}
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果内部逻辑不像上面这般简单，可以根据实际情况使用<span style="color: #0000ff; font-size: 13.5pt;"><strong>同步代码块</strong></span>的形式，比如 </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> LazySingleton getInstance() {
+</span><span style="color: #0000ff;">synchronized</span> (LazySingleton.<span style="color: #0000ff;">class</span><span style="color: #000000;">) {
+</span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+singleton </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LazySingleton();
+  }
+}
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><strong><span style="color: #ff0000; font-size: 13.5pt;">同步的效率问题</span></strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">多线程并发场景，并不是必然出现的，只是在第一次创建实例对象时才会出现，概率非常小&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">但是使用同步方法或者同步代码块，则会百分百的进行同步 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">同步就意味着也就是如果多个线程执行到同一地方，其余线程将会等待&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">这样虽然可以防止创建多个实例，但是有明显的效率问题&nbsp; </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">既然同步问题是小概率的，那么就可以尝试降低同步的概率 </span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> singleton;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/11.
+* Description:
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LazySingleton {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> LazySingleton() {
+}
+</span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> LazySingleton singleton = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> LazySingleton getInstance() {
+</span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+</span><span style="color: #0000ff;">synchronized</span> (LazySingleton.<span style="color: #0000ff;">class</span><span style="color: #000000;">) {
+</span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+singleton </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LazySingleton();
+}
+}
+}
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+}
+}</span></pre>
+</div>
+</div>
+<div><span style="font-family: 微软雅黑;">上面的方式被称为<span style="color: #0000ff; font-size: 13.5pt;"><strong> 双重检查</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>如果singleton不为空，那么直接返回唯一实例，不会进行同步</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>如果singleton为空，那么涉及到对象的创建，此时，才会需要同步</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">只会有一个线程进入同步代码块 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">他会校验是否的确为null，然后进行实例对象的创建 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">既解决了同步问题，又没有严重的效率问题</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><strong><span style="color: #ff0000; font-size: 13.5pt;">原子操作问题</span></strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">计算机中不会因为线程调度被打断的操作，也就是不可分割的操作，被称作原子操作&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">可以理解为计算机对指令的执行的最小单位 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">比如 i=1；这就是一个原子操作，要么1被赋值给变量i，要么没有 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">但是如果是int i = 1；这就不是一个原子操作 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">他至少需要先创建变量i 然后在进行赋值运算 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">我们实例创建语句，就不是一个原子操作 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">singleton = new LazySingleton(); </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">他可能需要下面三个步骤 </span></div>
+</div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 微软雅黑;">分配对象需要的内存空间 </span></li>
+<li><span style="font-family: 微软雅黑;">将singleton指向分配的内存空间 </span></li>
+<li><span style="font-family: 微软雅黑;">调用构造函数来初始化对象 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">计算机为了提高执行效率，会做的一些优化，在不影响最终结果的情况下，可能会对一些语句的执行顺序进行调整&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">也就是上面三个步骤的顺序是不能够保证唯一的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果先分配对象需要的内存，然后将singleton指向分配的内存空间，最后调用构造方法初始化的话&nbsp; </span></div>
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑;">假如当singleton指向分配的内存空间后，此时被另外线程抢占（<span style="line-height: 32px;">由于不是原子操作所以可能被中间抢占）</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">线程二此时执行到第一个if (singleton == null) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">此时不为空，那么不需要等待线程1结束，直接返回singleton了 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">显然，此时的singleton都还没有完全初始化，就被拿出去使用了 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">根本问题就在于写操作未结束，就进行了读操作 </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>可以给 singleton 的声明加上volatile关键字，来解决这些问题</strong></span> </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>可以保障在完成写操作之前，不会调用读操作</strong></span> </span></div>
+</div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑;">完整代码如下 </span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> singleton;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/11.
+* Description:
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> LazySingleton {
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> LazySingleton() {
+    }
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">volatile</span> LazySingleton singleton = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> LazySingleton getInstance() {
+        </span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+            </span><span style="color: #0000ff;">synchronized</span> (LazySingleton.<span style="color: #0000ff;">class</span><span style="color: #000000;">) {
+                </span><span style="color: #0000ff;">if</span> (singleton == <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+                singleton </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> LazySingleton();
+                }
+            }
+        }
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> singleton;
+    }
+}</span></pre>
+</div>
+</div>
+<h3><span style="font-size: 18px;">内部类的懒汉式</span></h3>
+<div><span style="font-family: 微软雅黑;">上面的这段代码，可以在实际项目中直接使用 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">但是，双重检查不免看起来有些啰嗦 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">还有其他的实现方式 </span></div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>内部类是延时加载的，也就是说只会在第一次使用时加载</strong></span> </span></div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #000000; font-size: 13.5pt;"><strong>内部类不使用就不加载的特性，非常适合做单例模式</strong></span> </span></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> singleton;
+ 
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/10/11.
+* Description:
+* </span><span style="color: #808080;">@author</span>
+<span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Singleton {
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Singleton() {
+    }
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> SingletonHolder {
+        </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">final</span> Singleton INSTANCE = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Singleton();
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> Singleton getInstance() {
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> SingletonHolder.INSTANCE;
+    }
+}</span></pre>
+</div>
+</div>
+<div><span style="font-family: 微软雅黑;">SingletonHolder作为静态内部类，内部持有一个Singleton实例，采用&ldquo;饿汉式&rdquo;创建加载 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">不过内部类在使用时才会被加载 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">私有的静态内部类，只有在getInstance被调用的时候，才会加载 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">此时才会创建实例，所以，从整体效果看是懒汉式 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">不使用不会加载，节省资源开销，也不需要复杂的代码逻辑&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>依靠类的初始化保障线程安全问题，依靠内部类特性实现懒加载</strong></span></span></div>
+<h3><span style="font-size: 18px;">枚举单例 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">《Effective Java》中提到过枚举针对于单例的应用 </span></div>
+<div style="line-height: 200%;"><img src="https://img2018.cnblogs.com/blog/897393/201811/897393-20181119141322973-343628837.png" alt="" /></div>
+<h3><span style="font-size: 18px;">使用场景 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">是否只是需要一个实例，是由业务逻辑决定的 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">有一些对象本质业务逻辑上就只是需要一个&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">比如线程池，windows的任务管理器，计算机的注册表管理器等等 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">计算机中只需要一个任务管理器，不需要也没必要分开成多个，一个任务管理器管理所有任务简单方便高效 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">如果qq一个任务管理器idea一个任务管理器，你受得了么 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">所以说，是否需要单例模式，完全根据你的业务场景决定 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">比如，如果当你需要一个全局的实例变量时，单例模式或许就是一种很好的解决方案</span></div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">由于单例模式在内存中只有一个实例，减少了内存开支和系统的性能开销 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>单例模式与单一职责模式有冲突</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>承担了实例的创建和逻辑功能提供两种职责</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式中没有抽象层，所以<span style="color: #0000ff; font-size: 13.5pt;"><strong>单例类的扩展比较困难</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式的选用跟业务逻辑息息相关，比如系统只需要一个实例对象时，就可以考虑使用单例模式&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">单例模式的重点在于单例的唯一性的保障实现 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;">可以直接复制上面的代码使用 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: 13.5pt;"><strong>单例模式向多个实例的扩展</strong></span> </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 24px;">
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">单例模式的意图是&ldquo;保证一个类仅有一个实例，并且提供一个访问他的全局访问点&rdquo;&nbsp; </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">单例模式的根本逻辑就是限制实例个数，并且个数限制为1 </span></div>
+</div>
+<div style="line-height: 32px;">&nbsp;</div>
+</div>
+<div style="line-height: 24px;">
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">所以，可以仍旧限制实例个数，并且将限制个数设置为大于等于1 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">这种单例模式的扩展，又被称之为多例模式 </span></div>
+</div>
+<ul>
+<li><span style="font-family: 微软雅黑;">多例模式下可以创建多个实例 </span></li>
+<li><span style="font-family: 微软雅黑;"><span style="border-collapse: separate; -webkit-border-horizontal-spacing: 0px; -webkit-border-vertical-spacing: 0px;">多例模式自己创建、管理自己的实例，并向外界提供访问方式获取实例</span> </span></li>
+</ul>
+<div style="line-height: 24px;">
+<div style="line-height: 24px;"><span style="font-family: 微软雅黑;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>多例模式其实就是单例模式的自然扩展，同单例模式一样，也肯定需要构造方法私有，多例类自己维护等，唯一不同就是实例个数扩展为多</strong></span> </span></div>
+<div style="line-height: 24px;">&nbsp;</div>
+</div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;"><span style="font-size: 13.5pt;"><strong>自定义类加载器时的问题</strong></span> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">在虚拟机相关的介绍中有详细介绍了类加载机制与命名空间以及类加载机制的安全性问题 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">不同的类加载器维护了各自的命名空间，他们是相互隔离的 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">不同的类加载器可能会加载同一个类 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">如果这种事情发生在单例模式上，系统中就可能存在不止一个实例对象 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">尽管在不同的命名空间中是隔离的 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">但是在整个应用中就是不止一个，所以如果你自定义了类加载器 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">你就需要小心，你可以指定同样的类加载器以避免这个问题 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">如果没有自定义类加载器则不需要关心这个问题 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑;">自定义的类都会使用内置的&nbsp; 应用程序&nbsp;&nbsp; 类加载器进行加载 </span></div>
+<div style="line-height: 24px;">&nbsp;</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-11-19 14:29</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9982869" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9982869);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9982869, cb_entryCreatedDate = '2018-11-19 14:29', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

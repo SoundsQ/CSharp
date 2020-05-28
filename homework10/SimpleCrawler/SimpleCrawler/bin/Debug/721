@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="经过半年的准备OpenGL ES for Android系列文章终于要和大家见面了，在这里定一个小目标-先吸引1000个粉丝，万一实现了呢。写关于OpenGL ES的文章开始是有一些犹豫的，因为Ope" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>OpenGL ES for Android - 老孟Flutter - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/book/bundle-book.min.css?v=Yr9TGmN8ri6FBY9Rkzqw6l-UX-n2toh8YHB85y4FqJ0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/book/bundle-book-mobile.min.css?v=9mAu4TwtRDzYz0p44sAVkFWE9nZCxO_rGCjvQ8nF6I0" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/mengqd/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/mengqd/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/mengqd/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 141280;
+        var currentBlogApp = 'mengqd';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BOOK';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <script type="text/javascript">
+	try {
+		if (screen.availWidth > 1200) {
+			document.getElementById("MainCss").href = '/skins/book/bundle-book-2.min.css';
+		}
+	} catch (e) { }
+</script>
+
+<div id="header">
+<div id="HeaderTitle">
+<div id="Title">
+<a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/mengqd/">meng5619</a>
+
+</div>
+<div id="subTitle">
+
+</div>
+</div>
+</div>
+
+
+<div id="main">
+	<div id="post_detail">
+    <div class="post">
+        <h2>
+            
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/mengqd/p/12209814.html">OpenGL ES for Android</a>
+
+        </h2>
+        
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/blog/467322/202001/467322-20200118180638339-1151838691.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>经过半年的准备OpenGL ES for Android系列文章终于要和大家见面了，在这里定一个小目标-先吸引1000个粉丝，万一实现了呢。写关于OpenGL ES的文章开始是有一些犹豫的，因为OpenGL ES的一些概念非常晦涩难懂，很多需要懂得计算机图形算法学相关的知识，您可能学了很久都找不到门道，知其然不知其所以然是常有的事。<br />本系列的文章并不会深入的研究计算机图形算法相关的知识，而是从工程的角度出发，解决实际项目中遇到的问题。此系列文章都是在Android的环境下实现的，如果有需要OpenGL ES for IOS的大家可以在评论或者公众号里面留言，文章的末尾有我的微信及公众号，我会根据大家的需求整理OpenGL ES for IOS，不管是Android还是IOS，OpenGL ES 相关的概念是相通的，API也都是大同小异。<br />下面是OpenGL ES for Android系列文章的目录，此目录不是固定的，大家有想了解的技术点或者想实现的功能可以在评论里回复，我会优先更新大家关注的文章。</p>
+<h2 class="ContentItem-title"><a href="https://www.cnblogs.com/mengqd/p/12215620.html" target="_blank" data-za-detail-view-element_name="Title">OpenGL ES for Android 环境搭建</a></h2>
+<p><strong>Shader Language</strong><br />1. 变量<br />2. 结构体、数组<br />3. 基本语句<br />4. 函数<br />5. attribute<br />6. uniform<br />7. varing<br />8. 精度限定<br />9. 预处理<br />10. 内置变量、常量<br />11. 内置函数</p>
+<p><strong>概念及API说明</strong><br />1. MVP矩阵<br />2. 纹理映射-glTexParameteri说明<br />3. 光照<br />4. 法线矩阵<br />5. TBN矩阵</p>
+<p><strong>实战</strong><br />1. 绘制点<br />2. 绘制线<br />3. 绘制面<br />4. 绘制三角形<br />5. 绘制立方体<br />6. 读取并绘制obj模型<br />7. 绘制纹理（图片）<br />8. 预览相机<br />9. 播放视频<br />10. 视频裁剪<br />11. 通过手势移动旋转缩放模型<br />12. 天空盒<br />13. 绘制地球<br />14. 截屏<br />15. 录制视频<br />16. 直播<br />17. 动画特效<br />18. 多重纹理<br />19. 环境光效果<br />20. 漫反射效果<br />21. 镜面反射效果<br />22. 光源-方向光<br />23. 光源-点光源<br />24. 聚光灯效果<br />25. 纹理的膨胀、腐蚀<br />26. 模糊-Blur<br />27. 雾效果<br />28. 投射阴影<br />29. 全景视频-眼镜效果<br />30. 全景视频-全景效果<br />31. 全景视频-鱼眼效果<br />32. 全景视频-高空效果<br />33. 人脸识别<br />34. 换脸<br />35. 带眼镜<br />36. 滤镜</p>
+<p>带超链接的文章表示已经整理完成，其余的将会尽快发布。这些文章将会在我的公众号同步发布。<br />由于排版的原因无法将所有的代码就放在文章中，请关注我的公众号或者添加我的微信获取全部的源代码，如果文章对您有帮助请点个赞，您的支持是我最大的动力。</p>
+<p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/blog/467322/202001/467322-20200118180745775-906179344.png" alt=""></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        <p class="postfoot">
+            posted on 
+<span id="post-date">2020-01-18 18:13</span>&nbsp;
+<a href="https://www.cnblogs.com/mengqd/">老孟Flutter</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12209814" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12209814);return false;">收藏</a>
+        </p>
+    </div>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 141280, cb_blogApp = 'mengqd', cb_blogUserGuid = 'c138f17a-a42c-e211-aa8f-842b2b196315';
+    var cb_entryId = 12209814, cb_entryCreatedDate = '2020-01-18 18:13', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 老孟Flutter
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+<div id="rightmenu">
+	
+		<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<h3>导航</h3>
+<ul>
+			<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+			<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/mengqd/">
+首页</a>
+</li>
+			<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+			<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%80%81%E5%AD%9FFlutter">
+联系</a></li>
+			<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/mengqd/rss/">
+订阅</a>
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/mengqd/rss/">
+    <img src="/skins/book/images/xml.gif" alt="订阅" />
+</a></li>
+			<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		
+<h3>统计</h3>
+<ul>
+    <li>随笔 - 
+43</li>
+    <li>文章 - 
+2</li>
+    <li>评论 - 
+21</li>
+    <li>
+        引用 - 
+0
+    </li>
+</ul>
+
+
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+			
+			
+			
+			
+			 
+
+	
+
+
+    <div id="page_end_html">
+        
+
+    </div>
+</body>
+</html>

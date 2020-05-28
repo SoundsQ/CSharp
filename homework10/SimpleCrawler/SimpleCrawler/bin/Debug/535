@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_其实还好啦</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=628</id>
+  <updated>2020-04-28T13:27:04Z</updated>
+  <author>
+    <name>其实还好啦</name>
+    <uri>http://www.cnblogs.com/python0921/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12797374.html</id>
+    <title type="text">Python爬取全球疫情数据，实现可视化显示地图数据（附代码） - 其实还好啦</title>
+    <summary type="text">前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 武汉地区，目前已经实现住院患者清零了，国内疫情已经稳定，然而中国以外新冠确诊病例达到2720458例。为了体现大国风范，今天带领大家用python实现绘制疫情地图 知识点 1</summary>
+    <published>2020-04-28T13:27:00Z</published>
+    <updated>2020-04-28T13:27:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12797374.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12797374.html" />
+    <content type="html">【摘要】前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 武汉地区，目前已经实现住院患者清零了，国内疫情已经稳定，然而中国以外新冠确诊病例达到2720458例。为了体现大国风范，今天带领大家用python实现绘制疫情地图 知识点 1 &lt;a href="http://www.cnblogs.com/python0921/p/12797374.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12794833.html</id>
+    <title type="text">python数据处理的小技巧 超详细 附代码 - 其实还好啦</title>
+    <summary type="text">首先祝大家劳动节快乐！ 五一劳动节快乐 面对目前的就业情况，自己没有点真本事还真的走不通道，数据分析越来越吃香，工作忙碌我用python，如何成为精通python尼？让我们一步一步的累计。 今日讲解 &gt;&gt;使用python插件xlrd让excel旋转起来 一:xlrd具体能实现什么？ xlrd能实现e</summary>
+    <published>2020-04-28T07:57:00Z</published>
+    <updated>2020-04-28T07:57:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12794833.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12794833.html" />
+    <content type="html">【摘要】首先祝大家劳动节快乐！ 五一劳动节快乐 面对目前的就业情况，自己没有点真本事还真的走不通道，数据分析越来越吃香，工作忙碌我用python，如何成为精通python尼？让我们一步一步的累计。 今日讲解 &gt;&gt;使用python插件xlrd让excel旋转起来 一:xlrd具体能实现什么？ xlrd能实现e &lt;a href="http://www.cnblogs.com/python0921/p/12794833.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12794617.html</id>
+    <title type="text">Python爬虫解析网页的4种方式 值得收藏 - 其实还好啦</title>
+    <summary type="text">用Python写爬虫工具在现在是一种司空见惯的事情，每个人都希望能够写一段程序去互联网上扒一点资料下来，用于数据分析或者干点别的事情。 我们知道，爬虫的原理无非是把目标网址的内容下载下来存储到内存中，这个时候它的内容其实是一堆HTML，然后再对这些HTML内容进行解析，按照自己的想法提取出想要的数据</summary>
+    <published>2020-04-28T07:31:00Z</published>
+    <updated>2020-04-28T07:31:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12794617.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12794617.html" />
+    <content type="html">【摘要】用Python写爬虫工具在现在是一种司空见惯的事情，每个人都希望能够写一段程序去互联网上扒一点资料下来，用于数据分析或者干点别的事情。 我们知道，爬虫的原理无非是把目标网址的内容下载下来存储到内存中，这个时候它的内容其实是一堆HTML，然后再对这些HTML内容进行解析，按照自己的想法提取出想要的数据 &lt;a href="http://www.cnblogs.com/python0921/p/12794617.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12793620.html</id>
+    <title type="text">用Python的Plotly画出炫酷的数据可视化(含各类图介绍，附代码) - 其实还好啦</title>
+    <summary type="text">前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 作者： 我被狗咬了 在谈及数据可视化的时候，我们通常都会使用到matplotlylib，pyecharts这些可视化的手段。但是，今天我主要来介绍Plotly这款可视化的库。</summary>
+    <published>2020-04-28T05:42:00Z</published>
+    <updated>2020-04-28T05:42:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12793620.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12793620.html" />
+    <content type="html">【摘要】前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 作者： 我被狗咬了 在谈及数据可视化的时候，我们通常都会使用到matplotlylib，pyecharts这些可视化的手段。但是，今天我主要来介绍Plotly这款可视化的库。 &lt;a href="http://www.cnblogs.com/python0921/p/12793620.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12789215.html</id>
+    <title type="text">一篇文章掌握网页解析神器——xpath - 其实还好啦</title>
+    <summary type="text">学爬虫不会xpath解析数据？ 今天老师带你一堂课带你从零开始精通xpath，从此轻松提取网页信息。 我们在爬虫的过程中，经常会遇到html字符串数据，很多我们需要的数据不是作为标签的文本就是作标签的属性值那么这些隐藏在标签中我们需要的数据可以通过xpath语法给解析出来 PS：如果你处于想学Pyt</summary>
+    <published>2020-04-27T11:26:00Z</published>
+    <updated>2020-04-27T11:26:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12789215.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12789215.html" />
+    <content type="html">【摘要】学爬虫不会xpath解析数据？ 今天老师带你一堂课带你从零开始精通xpath，从此轻松提取网页信息。 我们在爬虫的过程中，经常会遇到html字符串数据，很多我们需要的数据不是作为标签的文本就是作标签的属性值那么这些隐藏在标签中我们需要的数据可以通过xpath语法给解析出来 PS：如果你处于想学Pyt &lt;a href="http://www.cnblogs.com/python0921/p/12789215.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12786793.html</id>
+    <title type="text">python实现秒杀商品的微信自动提醒功能（附代码） - 其实还好啦</title>
+    <summary type="text">技术实现原理：获取京东的具体的商品信息，然后再使用微信发送提醒 工具：需要两个微信号，这两个微信号互为好友 如果你处于想学Python或者正在学习Python，Python的教程不少了吧，但是是最新的吗？说不定你学了可能是两年前人家就学过的内容，在这小编分享一波2020最新的Python教程。获取方</summary>
+    <published>2020-04-27T06:59:00Z</published>
+    <updated>2020-04-27T06:59:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12786793.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12786793.html" />
+    <content type="html">【摘要】技术实现原理：获取京东的具体的商品信息，然后再使用微信发送提醒 工具：需要两个微信号，这两个微信号互为好友 如果你处于想学Python或者正在学习Python，Python的教程不少了吧，但是是最新的吗？说不定你学了可能是两年前人家就学过的内容，在这小编分享一波2020最新的Python教程。获取方 &lt;a href="http://www.cnblogs.com/python0921/p/12786793.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12786439.html</id>
+    <title type="text">爬取海量表情包，让你表情包仓库持续更新，成为群里的图王（附代码） - 其实还好啦</title>
+    <summary type="text">前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 看到小伙伴一张又一张不知道从何而来的表情包是不是有点羡慕？ 今天小编就带大家，使用python爬取网站表情包，打造一个自己的表情包图库，让大家斗图从此永无败绩 知识点： re</summary>
+    <published>2020-04-27T06:18:00Z</published>
+    <updated>2020-04-27T06:18:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12786439.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12786439.html" />
+    <content type="html">【摘要】前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 看到小伙伴一张又一张不知道从何而来的表情包是不是有点羡慕？ 今天小编就带大家，使用python爬取网站表情包，打造一个自己的表情包图库，让大家斗图从此永无败绩 知识点： re &lt;a href="http://www.cnblogs.com/python0921/p/12786439.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12775446.html</id>
+    <title type="text">Python爬虫实战：手把手教你爬取农产品数据（附代码） - 其实还好啦</title>
+    <summary type="text">前言 文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 爬虫的网站：万邦国际集团。其成立于2010年，总部位于河南省郑州市，以“立足三农、保障民生、服务全国”为宗旨，业务涵盖综合性农产品冷链物流、高效生态农业开发、生鲜连锁超市、跨境</summary>
+    <published>2020-04-25T13:40:00Z</published>
+    <updated>2020-04-25T13:40:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12775446.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12775446.html" />
+    <content type="html">【摘要】前言 文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 爬虫的网站：万邦国际集团。其成立于2010年，总部位于河南省郑州市，以“立足三农、保障民生、服务全国”为宗旨，业务涵盖综合性农产品冷链物流、高效生态农业开发、生鲜连锁超市、跨境 &lt;a href="http://www.cnblogs.com/python0921/p/12775446.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12773883.html</id>
+    <title type="text">拿下60亿流量的《惊雷》都是哪些人在听？python帮你统计出来 - 其实还好啦</title>
+    <summary type="text">前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 作者： 听不来喊麦的C君 PS：如果你处于想学Python或者正在学习Python，Python的教程不少了吧，但是是最新的吗？说不定你学了可能是两年前人家就学过的内容，在这</summary>
+    <published>2020-04-25T08:54:00Z</published>
+    <updated>2020-04-25T08:54:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12773883.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12773883.html" />
+    <content type="html">【摘要】前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 作者： 听不来喊麦的C君 PS：如果你处于想学Python或者正在学习Python，Python的教程不少了吧，但是是最新的吗？说不定你学了可能是两年前人家就学过的内容，在这 &lt;a href="http://www.cnblogs.com/python0921/p/12773883.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/python0921/p/12773448.html</id>
+    <title type="text">感受python之美，python简单易懂的小例子 - 其实还好啦</title>
+    <summary type="text">前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 1 简洁之美 通过一行代码，体会Python语言简洁之美 2 Python绘图 Python绘图方便、漂亮，画图神器pyecharts几行代码就能绘制出热力图： 炫酷的水球图</summary>
+    <published>2020-04-25T08:02:00Z</published>
+    <updated>2020-04-25T08:02:00Z</updated>
+    <author>
+      <name>其实还好啦</name>
+      <uri>http://www.cnblogs.com/python0921/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/python0921/p/12773448.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/python0921/p/12773448.html" />
+    <content type="html">【摘要】前言 本文的文字及图片来源于网络,仅供学习、交流使用,不具有任何商业用途,版权归原作者所有,如有问题请及时联系我们以作处理。 1 简洁之美 通过一行代码，体会Python语言简洁之美 2 Python绘图 Python绘图方便、漂亮，画图神器pyecharts几行代码就能绘制出热力图： 炫酷的水球图 &lt;a href="http://www.cnblogs.com/python0921/p/12773448.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

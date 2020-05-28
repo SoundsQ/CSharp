@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="RBAC 认为权限授权实际上是 Who、What、How 的问题，即可简单表述为：判断“Who 对 What(Which) 进行 How 的操作”的逻辑表达式是否为真。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题：RBAC权限控制 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html">电商课题：RBAC权限控制</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        RBAC 认为权限授权实际上是 Who、What、How 的问题，即可简单表述为：判断“Who 对 What(Which) 进行 How 的操作”的逻辑表达式是否为真。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://weibo.com/yunzheng/" target="_blank">@郑昀汇总</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>名词解释：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="background-color: #ffffff;">RBAC：Role-Based Access Control，基于角色的访问控制</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="background-color: #ffffff;">&nbsp;</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>关键词：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">RBAC，Java Shiro，Spring Security，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #800000; font-size: medium;">一. RBAC 要解决的<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html" target="_blank">常见问题</a></span></strong></div>
+<div>问题一：<strong>对某一个用户只授予一些特殊的权限</strong></div>
+<div>描述：既不希望扩大某一个角色的权限，也不希望因此创建出很多零碎的、只为一个用户而存在的角色。</div>
+<div>&nbsp;</div>
+<div>问题二：<strong>性能问题</strong></div>
+<div>描述：B/S 下，菜单、页面、页面元素、dataset的列，这些层层权限判断过于复杂，容易造成系统访问非常缓慢。</div>
+<div>&nbsp;</div>
+<div>问题三：<strong>如何减少 HardCode（硬编码）</strong></div>
+<div>描述：</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>问题四：系统上线后，某个页面增加一个新HTML控件或数据集，这种细粒度权限控制如何以最快速度添加？</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">描述：对一个 Resource 的&nbsp;Privilege ，如何快速增加定义？如何快速分配权限？页面如何控制？</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong>问题五：系统上线后，增加一个新细粒度权限控制，运营部门如何最快速度将其应用到已存在角色和帐号上？</strong></div>
+<div>描述：对于系统中已存在的成百上千角色、成千上万帐号甚至于无数用户组，一个运营部门的管理人员，如何能以最小代价，通过界面，将此权限分配出去。</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div><strong><span style="color: #800000; font-size: medium;">二. 一个在权限逻辑和业务逻辑之间做切割的设计原则</span></strong></div>
+<div><strong>2.1.细粒度是否算权限系统的范畴</strong></div>
+<div>先解释两个概念：</div>
+<div>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';"><strong>粗粒度</strong>：表示类别级。即仅考虑对象的类别，不考虑对象的某个特定实例。譬如，用户管理中，增删改查，对所有的用户都一视同仁，并不区分操作的具体对象实例。</span></li>
+<li><span style="font-family: 'Microsoft Yahei';"><strong>细粒度</strong>：表示实例级。即需要考虑具体对象的实例，当然，细粒度是在考虑粗粒度的对象类别之后才再考虑特定实例。譬如，合同管理中，列表、删除，需要区分该合同实例是否为当前用户所创建。</span></li>
+</ul>
+</div>
+</div>
+<div>权限逻辑配合业务逻辑。</div>
+<div>譬如，需求方给出了一个场景：&ldquo;合同资源只能被它的创建者删除，与创建者同组的用户可以修改，所有的用户能够浏览&rdquo;，那么这<strong>既可以认为是一个细粒度的权限问题，也可以认为是一个业务逻辑问题</strong>。</div>
+<div>如果认为这是一个业务逻辑问题，那么设计权限系统时就不需要过多考虑这种场景。</div>
+<div>当然，权限系统也必须能支持这样的控制判断，或者说，权限系统提供足够多但不是完全的控制能力。</div>
+<div>此时，设计原则归结为：&ldquo;<strong>系统只提供粗粒度的权限，细粒度的权限被认为是业务逻辑的职责</strong>&rdquo;。</div>
+<div>这也是复杂问题简单化的一种思路。</div>
+<div>&nbsp;</div>
+<div>
+<div>这些对具体 Resource Instance 的细粒度权限问题，被留给业务逻辑来解决，这样的考虑基于以下两点：</div>
+<div><ol>
+<li>细粒度的权限判断必须要在资源上建模权限分配的支持信息才可能得以实现。这样，又引入了 Owner 概念。</li>
+<ul>
+<li>譬如，如果要求创建者和普通用户看到不同的信息内容，那么资源本身应该有其创建者的信息。如同 Unix 的每一个文件（资源），都定义了对 Owner， Group， All 的不同操作属性。</li>
+</ul>
+<li>细粒度的权限常常具有相当大的业务逻辑相关性。</li>
+<ul>
+<li>对不同的业务逻辑，常常意味着完全不同的权限判定原则和策略。<strong>相比之下，粗粒度的权限更具通用性，将其实现为一个架构，更有重用价值</strong>；而将细粒度的权限判断实现为一个架构级别的东西就显得繁琐，而且不是那么的有必要，用定制的代码来实现就更简洁，更灵活。</li>
+</ul>
+</ol></div>
+</div>
+<div>当然，<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html" target="_blank">郑昀说</a>，权限系统不可能做成通用，必须就事论事，所以往往在设计时，还是既照顾粗粒度也照顾细粒度。这里只是提一下有这种一刀切的思路。</div>
+<div>&nbsp;</div>
+<div><strong>2.1.数据集的列权限是否算权限系统的范畴</strong></div>
+页面需要展示一个数据集（dataset），那么对某些列的展示、可读、可写的控制，是否要放在权限系统中解决？</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">答案是，为了简化，为了避免过度侵入业务逻辑，列权限不在权限系统范畴内。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">三. RBAC <a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html" target="_blank">是什么</a></span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><span lang="EN-US">RBAC&nbsp;</span>认为权限授权实际上是&nbsp;<span lang="EN-US">Who</span>、<span lang="EN-US">What</span>、<span lang="EN-US">How&nbsp;</span>的问题，即可简单表述为：<span style="color: #ff0000;"><strong>判断&ldquo;Who 对 What(Which) 进行 How 的操作&rdquo;的逻辑表达式是否为真</strong></span>。</div>
+<div>&nbsp;</div>
+<div>RBAC 涉及的概念有：</div>
+<div>
+<ul>
+<li><span lang="EN-US">Who</span>：权限的拥用者或主体（如&nbsp;<span lang="EN-US">User</span>、<span lang="EN-US">Group</span>、<span lang="EN-US">Role&nbsp;</span>等）；</li>
+<li><span lang="EN-US">What</span>：权限针对的对象或资源（<span lang="EN-US">Resource</span>、<span lang="EN-US">Class</span>）；</li>
+<li><span lang="EN-US">How</span>：具体的权限（<span lang="EN-US">Privilege</span>）。</li>
+<ul>
+<li>正向授权在开始时假定主体没有任何权限，然后根据需要授予权限，适合于权限要求严格的系统。</li>
+<li>负向授权在开始时假定主体有所有权限，然后将某些特殊权限收回。</li>
+</ul>
+<li><span lang="EN-US">Operator</span>：操作。表明对&nbsp;<span lang="EN-US">What&nbsp;</span>的&nbsp;<span lang="EN-US">How&nbsp;</span>操作。</li>
+<ul>
+<li>也就是&nbsp;<span lang="EN-US">Privilege+Resource ；</span></li>
+<li><span lang="EN-US">注意，这里的 Resource 仅包括 Resource Type 不表示 Resource Instance；</span></li>
+<li><span lang="EN-US">之所以将 What 和 How 绑在一起作为一个 Operator 概念，而不是分开建模再建立关联，这是因为很多的 How 对于某个具体 What 才有意义。譬如，发布操作对新闻对象才有意义，对用户对象则没有意义。</span></li>
+</ul>
+<li><span lang="EN-US">Role</span>：角色，一定数量的权限的集合。权限分配的单位与载体，目的是隔离&nbsp;<span lang="EN-US">User&nbsp;</span>与&nbsp;<span lang="EN-US">Privilege&nbsp;</span>的逻辑关系；</li>
+<li><span lang="EN-US">Group</span>：用户组，权限分配的单位与载体。权限不考虑分配给特定的用户而给组。组可以包括组<span lang="EN-US">(</span>以实现权限的继承<span lang="EN-US">)</span>，也可以包含用户，组内用户继承组的权限。<span lang="EN-US">User&nbsp;</span>与&nbsp;<span lang="EN-US">Group&nbsp;</span>是多对多的关系。<span lang="EN-US">Group&nbsp;</span>可以层次化，以满足不同层级权限控制的要求。</li>
+<li>Session：<span class="Apple-converted-space">&nbsp;</span><span style="font-family: 微软雅黑;">会话是用户与激活的角色集合之间的映射。每个 Session 和单个的 User 关联，每个 User 可以关联到一或多个 Session 。</span></li>
+</ul>
+</div>
+<div>&nbsp;</div>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';"><span lang="EN-US">RBAC&nbsp;</span>支持三个安全原则：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><ol>
+<li><span style="font-family: 'Microsoft Yahei';">最小权限原则（即细粒度控制原则）：</span></li>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';"><span lang="EN-US">RBAC&nbsp;</span>可将其角色配置成其完成任务所需要的最小权限集；</span></li>
+</ul>
+<li><span style="font-family: 'Microsoft Yahei';">责任分离原则</span></li>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';">通过调用相互独立互斥的角色来共同完成敏感的任务而体现，如要求一个计帐员和财务管理员一起参与同一个过帐；</span></li>
+</ul>
+<li><span style="font-family: 'Microsoft Yahei';">数据抽象原则</span></li>
+<ul>
+<li><span style="font-family: 'Microsoft Yahei';">通过权限的抽象来体现，如财务操作用借款、存款等抽象权限。</span></li>
+</ul>
+</ol></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">四. 标准 RBAC 模型</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span id="articlecontent"><span style="font-family: 'Microsoft Yahei';"><span style="line-height: 21px;" lang="EN-US">NIST</span><span class="Apple-converted-space">&nbsp;</span><span style="line-height: 21px;">（美国国家标准与技术研究院）标准&nbsp;<span lang="EN-US">RBAC&nbsp;</span>模型由<span lang="EN-US">4</span>个部件模型组成，分别是基本模型<span lang="EN-US">RBAC0</span>（<span lang="EN-US">Core RBAC</span>）、角色分级模型<span lang="EN-US">RBAC1</span>（<span lang="EN-US">Hierarchal RBAC</span>）、角色限制模型<span lang="EN-US">RBAC2</span>（<span lang="EN-US">Constraint RBAC</span>）和统一模型<span lang="EN-US">RBAC3</span>（<span lang="EN-US">Combines RBAC</span>）。</span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span><span style="font-family: 'Microsoft Yahei';"><span style="line-height: 21px;"><span lang="EN-US">RBAC0&nbsp;</span>模型如图<span lang="EN-US">1</span>所示：</span></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 14px; font-family: 'Microsoft Yahei';"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard39.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard39.png" /></span></div>
+</td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 14px; font-family: 'Microsoft Yahei';">图1&nbsp;RBAC 0 模型</span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">RBAC0 定义了能构成一个 RBAC 控制系统的最小的元素集合：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>RBAC 定义了 五个基本数据元素：</li>
+<ol>
+<li><strong>用户 users(USERS)</strong></li>
+<li><strong>角色 roles(ROLES)</strong></li>
+<li><strong>目标 objects(OBS)</strong></li>
+<li><strong>操作 operations(OPS)</strong></li>
+<li><strong>许可权 permissions(PRMS)</strong></li>
+</ol>
+<li>RBAC0 业务规则有：</li>
+<ul>
+<li>一个用户可以对应多个角色，一个角色也可以分配给多个用户；</li>
+<li>一个角色可以有多个许可权，一种许可权则只与一个角色对应；</li>
+<li>用户可以发起会话，会话中可以激活多个角色来获取许可权；</li>
+<li>用户、角色、许可权全部由超级管理员创建与指派；</li>
+<li>一个用户拥有多个角色时，高优先级的角色权限覆盖低优先级的角色权限。</li>
+</ul>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">RBAC1（引入角色继承关系）、RBAC2（引入责任分离关系）、RBAC3 （角色继承+责任分离）都是先后在 RBAC0 上的扩展。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: medium;">五. RBAC 核心对象模型</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">授权模型：用户-角色-权限</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">核心动作：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>创造权限</li>
+<li>分配权限</li>
+<li>使用权限</li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">核心动作的主要参与者：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li><strong>Creator 创造权限</strong>：这里完成的是 Privilege 与 Resource 的对象声明；</li>
+<li><strong>Administrator 分配权限</strong>：把 Privilege 与 Resource Instance 真正关联到一起，产生了 Operator （Privilege Instance）。Administrator 利用 Operator 这个基本元素，来创造他理想中的权限模型，如创建角色，创建用户组，给用户组分配用户，将用户组与角色关联等；</li>
+<li><strong>User 使用权限</strong></li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<p><strong style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">参考资料：</strong></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）iteye编辑总结，<a style="cursor: pointer;" href="http://www.iteye.com/magazines/82">权限控制讨论</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）<a style="cursor: pointer;" href="http://www.uml.org.cn/yyal/200703145.asp">基于RBAC模型的权限管理系统的设计和实现</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）&nbsp;jackyz@jdon，2002，<a style="cursor: pointer;" href="http://www.jdon.com/4110">关于权限系统的设计</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-17 22:47</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2775427" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2775427);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2775427, cb_entryCreatedDate = '2012-11-17 22:47', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

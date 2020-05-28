@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="在开始博客之前，还是同样的给一个大概的目录结构，实则即为一般MySQL的优化步骤 1、查看SQL的执行频率 使用show status命令 2、定位哪些需要优化的SQL 通过慢查询记录&#x2B;show pr" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MySQL优化（1）--------常用的优化步骤 - JJian - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=4KE41eS1YQSSwl64fGzzTUj6ijs-YQFat4AaN-g_jxc" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=0pGk3D9Ik_jI4q1TALBT2ybOjIePHS_80_0J4DDOQiY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jian0110/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jian0110/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jian0110/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 445573;
+        var currentBlogApp = 'jian0110';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'darkgreentrip';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jian0110/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jian0110/">Jian</a>
+</h1>
+<h2>
+我是一个木得感情，木得钱，木得...头发的杀手！
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jian0110/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/JJian">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+36&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+82</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/jian0110/p/9356347.html">MySQL优化（1）--------常用的优化步骤</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 16px;">在开始博客之前，还是同样的给一个大概的目录结构，实则即为一般MySQL的优化步骤</span></p>
+<p><span style="font-size: 16px;">1、查看SQL的执行频率---------------使用show status命令</span></p>
+<p><span style="font-size: 16px;">2、定位哪些需要优化的SQL------------通过慢查询记录+show processlist命令查看当前线程</span></p>
+<p><span style="font-size: 16px;">3、分析为什么SQL执行效率低------------使用explain/desc命令分析</span></p>
+<ul>
+<li><span style="font-size: 16px;">相关列简单解释：type、table、select_type...</span></li>
+</ul>
+<p><span style="font-size: 16px;">4、对症下药采取优化措施-----------举例采取index进行优化</span></p>
+<ul>
+<li><span style="font-size: 16px;">如何使用索引？</span></li>
+<li><span style="font-size: 16px;">使用索引应该注意的事项</span></li>
+<li><span style="font-size: 16px;">查看索引使用情况</span></li>
+</ul>
+<p><span style="font-size: 16px;">主要参考资料：《深入浅出MySQL》，<a href="https://dev.mysql.com/doc/refman/8.0/en/statement-optimization.html" target="_blank">https://dev.mysql.com/doc/refman/8.0/en/statement-optimization.html</a></span></p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h1>一、查看SQL执行频率</h1>
+<p><span style="font-size: 16px; font-family: 宋体;">　　</span><span style="font-size: 16px;">使用show [session|gobal] status命令了解SQL执行频率、线程缓存内的线程的数量、当前打开的连接的数量、获得的表的锁的次数等。</span></p>
+<p><span style="font-size: 16px;">比如执行show status like 'Com_%'查看每个语句执行的次数即频率，其中Com_xxx中xxx表示就是语句，比如Com_select：执行select操作的次数。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">use</span><span style="color: #000000;"> test;
+</span><span style="color: #008080;"> 2</span> <span style="color: #0000ff;">Database</span><span style="color: #000000;"> changed
+</span><span style="color: #008080;"> 3</span> mysql<span style="color: #808080;">&gt;</span> show status <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">Com_%</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #008080;"> 4</span> <span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------------------------+-------+</span>
+<span style="color: #008080;"> 5</span> <span style="color: #808080;">|</span> Variable_name               <span style="color: #808080;">|</span> Value <span style="color: #808080;">|</span>
+<span style="color: #008080;"> 6</span> <span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------------------------+-------+</span>
+<span style="color: #008080;"> 7</span> <span style="color: #808080;">|</span> Com_admin_commands          <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;"> 8</span> <span style="color: #808080;">|</span> Com_assign_to_keycache      <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;"> 9</span> <span style="color: #808080;">|</span> Com_alter_db                <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">10</span> <span style="color: #808080;">|</span> Com_alter_db_upgrade        <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">11</span> <span style="color: #808080;">|</span> Com_alter_event             <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">12</span> <span style="color: #808080;">|</span> Com_alter_function          <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">13</span> <span style="color: #808080;">|</span> Com_alter_instance          <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">14</span> <span style="color: #808080;">|</span> Com_alter_procedure         <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">15</span> <span style="color: #808080;">|</span> Com_alter_server            <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">16</span> <span style="color: #808080;">|</span> Com_alter_table             <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">17</span> <span style="color: #808080;">|</span> Com_alter_tablespace        <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">18</span> <span style="color: #808080;">|</span> Com_alter_user              <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">19</span> <span style="color: #808080;">|</span> Com_analyze                 <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">20</span> <span style="color: #808080;">|</span> Com_begin                   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">21</span> <span style="color: #808080;">|</span> Com_binlog                  <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">22</span> <span style="color: #808080;">|</span> Com_call_procedure          <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">23</span> <span style="color: #808080;">|</span> Com_change_db               <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">2</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">24</span> <span style="color: #808080;">|</span> Com_change_master           <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">25</span> <span style="color: #808080;">|</span> Com_change_repl_filter      <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">26</span> <span style="color: #808080;">|</span> Com_check                   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">27</span> <span style="color: #808080;">|</span> Com_checksum                <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">28</span> <span style="color: #808080;">|</span> Com_commit                  <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">29</span> <span style="color: #808080;">|</span> Com_create_db               <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">30</span> <span style="color: #808080;">|</span> Com_create_event            <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">31</span> <span style="color: #808080;">|</span> Com_create_function         <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #008080;">32</span> <span style="color: #808080;">|</span> Com_create_index            <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|<br />　　..............................</span></pre>
+</div>
+<p><span style="font-size: 16px;">比如执行show status like 'slow_queries'查看慢查询次数（黑人问号？？<span style="font-size: 16px;">什么是慢查询呢？</span>就是通过设置查询时间阈值<code>long_query_time（0-10s）并打开开关<code></code>show_query_log（1=OFF/0=ON），</code>当超过这个阈值的查询都称之为慢查询,通常用来划分执行SQL效率）</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show status <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">slow_queries</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Variable_name <span style="color: #808080;">|</span> Value <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Slow_queries  <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">比如执行</span>show status like 'uptime'<span style="font-family: 宋体;">查看服务工作时间（即运行时间）</span>：</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show status <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">uptime</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Variable_name <span style="color: #808080;">|</span> Value <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Uptime        <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">21645</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">比如执行</span>show status like 'connections'<span style="font-family: 宋体;">查看</span>MySQL<span style="font-family: 宋体;">连接数：</span></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show status <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">connections</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Variable_name <span style="color: #808080;">|</span> Value <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #808080;">|</span> Connections   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">6</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-------------+-------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>　　<span style="font-size: 16px;">通过show [session|gobal] status命令很清楚地看到哪些SQL执行效率不如人意，但是具体是怎么个不如意法，还得继续往下看，使用EXPLAIN命令分析具体的SQL语句</span></p>
+<h1>&nbsp;二、定位效率低的SQL</h1>
+<p>　　<span style="font-size: 16px;">上面也提到过慢查询这个概念主要是用来划分效率低的SQL，但是慢查询是在整个查询结束后才记录的，所以光是靠慢查询日志是跟踪不了效率低的SQL。一般有两种方式定位效率低的SQL：</span></p>
+<p><span style="font-size: 16px;">　　1、<strong>通过慢查询日志查看效率低的SQL语句</strong>，慢查询日志是通过show_query_log_file指定存储路径的，里面记录所有超过<code>long_query_time</code>的SQL语句（关于日志的查看，日后再一步研究学习），但是需要慢查询日志的产生是在查询结束后才有的。</span></p>
+<p><span style="font-size: 16px;">　　2、<strong>通过show processlist命令查看当前MySQL进行的线程，可以看到线程的状态信息</strong></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span><span style="color: #000000;"> show processlist;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+------+-----------------+------+---------+------+----------+------------------+</span>
+<span style="color: #808080;">|</span> Id <span style="color: #808080;">|</span> <span style="color: #ff00ff;">User</span> <span style="color: #808080;">|</span> Host            <span style="color: #808080;">|</span> db   <span style="color: #808080;">|</span> Command <span style="color: #808080;">|</span> Time <span style="color: #808080;">|</span> State    <span style="color: #808080;">|</span> Info             <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+------+-----------------+------+---------+------+----------+------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> root <span style="color: #808080;">|</span> localhost:<span style="color: #800000; font-weight: bold;">58377</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> Sleep   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">2091</span> <span style="color: #808080;">|</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>             <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> root <span style="color: #808080;">|</span> localhost:<span style="color: #800000; font-weight: bold;">58382</span> <span style="color: #808080;">|</span> test <span style="color: #808080;">|</span> Sleep   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">2083</span> <span style="color: #808080;">|</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>             <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #808080;">|</span> root <span style="color: #808080;">|</span> localhost:<span style="color: #800000; font-weight: bold;">58386</span> <span style="color: #808080;">|</span> test <span style="color: #808080;">|</span> Sleep   <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">2082</span> <span style="color: #808080;">|</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>             <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">5</span> <span style="color: #808080;">|</span> root <span style="color: #808080;">|</span> localhost:<span style="color: #800000; font-weight: bold;">59092</span> <span style="color: #808080;">|</span> test <span style="color: #808080;">|</span> Query   <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">0</span> <span style="color: #808080;">|</span> starting <span style="color: #808080;">|</span> show processlist <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+------+-----------------+------+---------+------+----------+------------------+</span>
+<span style="color: #800000; font-weight: bold;">4</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">　　其中主要的是state字段，表示当前SQL语句线程的状态，如Sleeping 表示正在等待客户端发送新请求，Sending&nbsp;data把查询到的data结果发送给客户端等等，具体请看<a href="https://dev.mysql.com/doc/refman/8.0/en/general-thread-states.html" target="_blank">https://dev.mysql.com/doc/refman/8.0/en/general-thread-states.html</a></span></p>
+<h1>三、 查看分析效率低的SQL</h1>
+<p><span style="font-size: 16px;">　　MYSQL 5.6.3以前只能EXPLAIN SELECT; MYSQL5.6.3以后就可以EXPLAIN SELECT,UPDATE,DELETE，现在我们先创建一个user_table的表，之后分析select* from user where name=''语句</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">create</span> <span style="color: #0000ff;">table</span> <span style="color: #ff00ff;">user</span>(id <span style="color: #0000ff;">int</span>, name <span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">10</span>),password <span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">32</span>),<span style="color: #0000ff;">primary</span> <span style="color: #0000ff;">key</span>(id))engine<span style="color: #808080;">=</span><span style="color: #000000;">InnoDB;
+Query OK, </span><span style="color: #800000; font-weight: bold;">0</span> rows affected</pre>
+</div>
+<p><span style="font-size: 16px;">之后插入三条数据：</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">Zhangsan</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(UUID(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span>)),(<span style="color: #800000; font-weight: bold;">2</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">Lisi</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(UUID(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span>)),(<span style="color: #800000; font-weight: bold;">3</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">Wangwu</span><span style="color: #ff0000;">'</span>,<span style="color: #ff00ff;">replace</span>(UUID(),<span style="color: #ff0000;">'</span><span style="color: #ff0000;">-</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">''</span><span style="color: #000000;">));
+Query OK, </span><span style="color: #800000; font-weight: bold;">3</span><span style="color: #000000;"> rows affected
+Records: </span><span style="color: #800000; font-weight: bold;">3</span>  Duplicates: <span style="color: #800000; font-weight: bold;">0</span>  Warnings: <span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">
+mysql</span><span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+----------------------------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> name     <span style="color: #808080;">|</span> password                         <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+----------------------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> Zhangsan <span style="color: #808080;">|</span> 2d7284808e5111e8af74201a060059ce <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> Lisi     <span style="color: #808080;">|</span> 2d73641c8e5111e8af74201a060059ce <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> Wangwu   <span style="color: #808080;">|</span> 2d73670c8e5111e8af74201a060059ce <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+----------------------------------+</span>
+<span style="color: #800000; font-weight: bold;">3</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">下面以分析select*from user where name='Lisi'语句为例：</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> name<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">Lisi</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">33.33</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">下面讲解select_type等常见列的含义的：</span></p>
+<p><span style="font-size: 16px;">（1）select_type：表示SELECT的类型，主要有：</span></p>
+<ul>
+<li>SIMPLE：简单表，没有表连接或者子查询</li>
+<li>PRIMARY：主查询，即最外城的查询</li>
+<li>UNION：UNION中的第二个或者后面的语句</li>
+<li>SUBQUERY：子查询中的第一个SELECT</li>
+</ul>
+<p><span style="font-size: 16px;">（2）table：结果输出的表</span></p>
+<p><span style="font-size: 16px;">（3）type：表示表的连接类型，性能由好到差为：</span></p>
+<ul>
+<li>system：常量表</li>
+<li>const：单表中最多有一行匹配，比如primary key，unique index</li>
+<li>eq_ref：多表连接中使用primary key，unique index</li>
+<li>ref：使用普通索引</li>
+<li>ref_or_null：与ref类似，但是包含了NULL查询</li>
+<li>index_merge：索引合并优化</li>
+<li>unique_subquery：in后面是一个查询主键字段的子查询</li>
+<li>index_subquery：in后面是非唯一索引字段的子查询</li>
+<li>range：单表中范围查看，使用like模糊查询</li>
+<li>index：对于后面每一行都通过查询索引得到数据</li>
+<li>all：表示全表查询</li>
+</ul>
+<p><span style="font-size: 16px;">（3）possible_key：查询时可能使用的索引</span></p>
+<p><span style="font-size: 16px;">（4）key：表示实际使用的索引</span></p>
+<p><span style="font-size: 16px;">（5）key_len：索引字段的长度</span></p>
+<p><span style="font-size: 16px;">（6）rows：查询时实际扫描的行数</span></p>
+<p><span style="font-size: 16px;">（7）Extra：执行情况的说明和描述</span></p>
+<p><span style="font-size: 16px;">（8）partitions：分区数目</span></p>
+<p><span style="font-size: 16px;">（9）filtered：查询过滤的表占的百分比，比如这里查询的记录是name=Lisi的记录，占三条记录的33.3%</span></p>
+<h1>四、 关于索引的优化</h1>
+<h2>1、使用索引优化的举例</h2>
+<p>　　<span style="font-size: 16px;">上个例子我们看到到执行explain select*from user where name='Lisi'，扫描了3行（全部行数）使用了全表搜索all。如果实际业务中name是经常用到查询的字段（是指经常跟在where后的字段，不是select后的字段）并且数据量很大的情况呢？这时候就需要索引了（索引经常用到where后面的字段比select后面的字段效果更好，或者说就是要使用在where后面的字段上）</span></p>
+<p><span style="font-size: 16px;">增加name前缀索引（这里只是举例，并没有选择最合适的前缀）：<br /></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">create</span> <span style="color: #0000ff;">index</span> index_name <span style="color: #0000ff;">on</span> <span style="color: #ff00ff;">user</span>(name(<span style="color: #800000; font-weight: bold;">2</span><span style="color: #000000;">));
+Query OK, </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;"> rows affected
+Records: </span><span style="color: #800000; font-weight: bold;">0</span>  Duplicates: <span style="color: #800000; font-weight: bold;">0</span>  Warnings: <span style="color: #800000; font-weight: bold;">0</span></pre>
+</div>
+<p><span style="font-size: 16px;">执行explain分析</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> name <span style="color: #808080;">=</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">Lisi</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>        <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref   <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> index_name    <span style="color: #808080;">|</span> index_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">9</span>       <span style="color: #808080;">|</span> const <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">　　可以看到type变为ref、rows降为1（实际上只要使用了索引都是1），filtered过滤百分比为100%，实际用到的索引为index_name。如果数据量很大的话使用索引就是很好的优化措施，对于如何选择索引，什么时候用索引，我做出了如下总结：</span></p>
+<h2>2、如何高效使用索引？</h2>
+<p>　　<span style="font-size: 16px;">(1)&nbsp;<strong><span style="font-family: 宋体;">创建多列索引时，</span></strong><span style="font-family: 宋体;"><strong>只要查询条件中用到最左边的列，索引一般都会被用到</strong></span></span></p>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">　　</span>我们创建一张没有索引的表user_1:</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show <span style="color: #0000ff;">create</span> <span style="color: #0000ff;">table</span><span style="color: #000000;"> 
+user_1;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+--------------------------------------------------------------------------------------------------------------------------+</span>
+<span style="color: #808080;">|</span> <span style="color: #0000ff;">Table</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">Create</span> <span style="color: #0000ff;">Table</span>                                                                                                             <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+--------------------------------------------------------------------------------------------------------------------------+</span>
+<span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span> <span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `user_1` (
+  `id` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  `name` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">10</span>) <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">
+) ENGINE</span><span style="color: #808080;">=</span>InnoDB <span style="color: #0000ff;">DEFAULT</span> CHARSET<span style="color: #808080;">=</span>utf8 <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+--------------------------------------------------------------------------------------------------------------------------+</span>
+　<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">　之后同样插入数据：</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span><span style="color: #0000ff;">from</span><span style="color: #000000;"> user_1;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> name     <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> Zhangsan <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> Lisi     <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+----------+</span>
+<span style="color: #800000; font-weight: bold;">2</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">&nbsp;</span>创建多列索引index_id_name</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> <span style="color: #0000ff;">create</span> <span style="color: #0000ff;">index</span> index_id_name <span style="color: #0000ff;">on</span><span style="color: #000000;"> user_1(id,name);
+Query OK, </span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;"> rows affected
+Records: </span><span style="color: #800000; font-weight: bold;">0</span>  Duplicates: <span style="color: #800000; font-weight: bold;">0</span>  Warnings: <span style="color: #800000; font-weight: bold;">0</span></pre>
+</div>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">　</span>实验查询explain分析name与id<span style="font-family: 宋体;"><br /></span></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_1 <span style="color: #0000ff;">where</span> id<span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+---------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>  <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>           <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref   <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+---------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">5</span>       <span style="color: #808080;">|</span> const <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">index</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+---------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> user_1 <span style="color: #0000ff;">where</span> name<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">Lisi</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>  <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type  <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>           <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra                    <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #0000ff;">index</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>          <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">38</span>      <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span>       <span style="color: #800000; font-weight: bold;">50</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span>; Using <span style="color: #0000ff;">index</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">　　</span><span style="font-size: 16px;"><span style="font-family: Calibri;"><span style="font-family: Calibri;"><span style="font-family: Calibri;"><span style="font-family: Calibri;">可以看到使用最左列id的时候，rows为1，并且Extra明确使用了index，<span style="font-family: Calibri;">key的值为<span style="font-family: Calibri;">id_name_index，<span style="font-family: Calibri;">type的值为ref<span style="font-family: Calibri;">，而<span style="font-family: Calibri;">where不用到<span style="font-family: Calibri;">id，而是<span style="font-family: Calibri;">name的话，<span style="font-family: Calibri;">rows的值为2<span style="font-family: Calibri;">。filtered为50%，虽然key是index_id_name，但是表明是索引（个人理解，应该不太准确）</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: 16px;">　　(2)&nbsp;<strong>使用like的查询，只有%不是第一个字符并且<span style="font-family: Calibri;">%</span>后面是常量的情况下，索引才可能会被使用。</strong></span></p>
+<p><span style="font-size: 16px;">&nbsp;　　执行explain select *from user where name like &lsquo;%Li&rsquo;后type为<span style="font-family: Calibri;">ALL</span>且<span style="font-family: Calibri;">key</span>的值为<span style="font-family: Calibri;">NULL</span>，执行<span style="font-family: Calibri;">explain select *from user where name like </span>&lsquo;Li%&rsquo;后key值不为空为index_name。</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> name <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">%Li</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">33.33</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> name <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">Li%</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+-------+---------------+------------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type  <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>        <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+-------+---------------+------------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> range <span style="color: #808080;">|</span> index_name    <span style="color: #808080;">|</span> index_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">9</span>       <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+-------+---------------+------------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">　　(3)&nbsp;<strong><span style="font-family: 宋体;">如果对打的文本进行搜索，使用全文索引而不是用</span></strong>like &lsquo;%...%&rsquo;<span style="font-family: 宋体;">（只有</span>MyISAM<span style="font-family: 宋体;">支持全文索引）</span><span style="font-family: 宋体;">。</span></span></p>
+<p><span style="font-size: 16px;">　　(4)&nbsp;<strong><span style="font-family: 宋体;">如果列名是索引，使用</span>column_name is null<span style="font-family: 宋体;">将使用索引</span><span style="font-family: 宋体;">。</span></strong></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> name <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>        <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref   <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> index_name    <span style="color: #808080;">|</span> index_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">9</span>       <span style="color: #808080;">|</span> const <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span><span style="color: #000000;"> password
+ </span><span style="color: #0000ff;">is</span> <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>          <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">33.33</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<h2>3、哪些情况下即使有索引也用不到？</h2>
+<p>　<span style="font-size: 16px;">　<span>(1)&nbsp;<strong>MySQL使用MEMORY/HEAP引擎（使用的HASH索引），并且WHERE条件中不会使用&rdquo;=&rdquo;,in等进行索引列，那么不会用到索引</strong>（这是关于引擎部分特点，之后会介绍）。</span></span></p>
+<p><span style="font-size: 16px;">　　(2)<strong>&nbsp;用OR分隔开的条件，如果OR前面的条件中的列有索引，而后面的列没有索引，那么涉及到的列索引不会被使用。</strong><br /></span></p>
+<p><span><span style="font-size: 16px;"><span style="font-size: 16px;">　</span><span style="font-size: 16px;">　</span></span><span style="font-size: 16px;">执行命令show index from user可以看出password字段并没有使用任何索引，而id使用了两个索引，但是where id=1 or password='2d7284808e5111e8af74201a060059ce' 导致没有使用id列的primary索引与id_name_index索引</span><span style="font-size: 16px;"><br /></span></span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show <span style="color: #0000ff;">index</span> <span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-----+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> <span style="color: #0000ff;">Table</span> <span style="color: #808080;">|</span> Non_unique <span style="color: #808080;">|</span> Key_name      <span style="color: #808080;">|</span> Seq_in_index <span style="color: #808080;">|</span> Column_name <span style="color: #808080;">|</span> Collation <span style="color: #808080;">|</span> Cardinality <span style="color: #808080;">|</span> Sub_part <span style="color: #808080;">|</span> Packed <span style="color: #808080;">|</span> <span style="color: #0000ff;">Null</span> <span style="color: #808080;">|</span> Index_type <span style="color: #808080;">|</span> Comment <span style="color: #808080;">|</span> Index_comment <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-----+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">0</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">PRIMARY</span>       <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id          <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span>      <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> index_name    <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> name        <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>        <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id_name_index <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id          <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span>      <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id_name_index <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> name        <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">-----+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #800000; font-weight: bold;">4</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> <span style="color: #ff00ff;">user</span> <span style="color: #0000ff;">where</span> id<span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">or</span> password<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">2d7284808e5111e8af74201a060059ce</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+-----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span> <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys         <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>  <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+-----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> <span style="color: #ff00ff;">user</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #808080;">ALL</span>  <span style="color: #808080;">|</span> <span style="color: #0000ff;">PRIMARY</span>,id_name_index <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>    <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">55.56</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+-------+------------+------+-----------------------+------+---------+------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p><span style="font-size: 16px;">　<span>　(3) <strong>不是用到复合索引中的第一列即最左边的列的话，索引就不起作用（上面已经介绍）。</strong></span></span></p>
+<p><span style="font-size: 16px;">　　(4)&nbsp;<strong>如果like是以%开头的(上面已经介绍)</strong></span></p>
+<p><span style="font-size: 16px;">　　(5)&nbsp;<strong>如果列类型是字符串，那么where条件中字符常量值不用&rsquo;&rsquo;引号引起来的话，那就不会失去索引效果，这是因为MySQL会把输入的常量值进行转换再使用索引。</strong></span></p>
+<p><span style="font-size: 16px;">　　select * from user_1 where name =250，其中name的索引为name_index，并且是varchar字符串类型，但是并没有将250用引号变成&rsquo;250&rsquo;，那么explain之后的ref仍然为NULL,rows为3</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show <span style="color: #0000ff;">index</span> <span style="color: #0000ff;">from</span><span style="color: #000000;"> user_1;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> <span style="color: #0000ff;">Table</span>  <span style="color: #808080;">|</span> Non_unique <span style="color: #808080;">|</span> Key_name      <span style="color: #808080;">|</span> Seq_in_index <span style="color: #808080;">|</span> Column_name <span style="color: #808080;">|</span> Collation <span style="color: #808080;">|</span> Cardinality <span style="color: #808080;">|</span> Sub_part <span style="color: #808080;">|</span> Packed <span style="color: #808080;">|</span> <span style="color: #0000ff;">Null</span> <span style="color: #808080;">|</span> Index_type <span style="color: #808080;">|</span> Comment <span style="color: #808080;">|</span> Index_comment <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> id          <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> name        <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">2</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>     <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span>          <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> name_index    <span style="color: #808080;">|</span>            <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> name        <span style="color: #808080;">|</span> A         <span style="color: #808080;">|</span>           <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>        <span style="color: #800000; font-weight: bold;">5</span> <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>   <span style="color: #808080;">|</span> YES  <span style="color: #808080;">|</span> BTREE      <span style="color: #808080;">|</span>         <span style="color: #808080;">|</span>               <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">------+------------+---------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+</span>
+<span style="color: #800000; font-weight: bold;">3</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> user_1 <span style="color: #0000ff;">where</span> name<span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">250</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>  <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type  <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>           <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra                    <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> <span style="color: #0000ff;">index</span> <span style="color: #808080;">|</span> name_index    <span style="color: #808080;">|</span> index_id_name <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">38</span>      <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">3</span> <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">33.33</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span>; Using <span style="color: #0000ff;">index</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+-------+---------------+---------------+---------+------+------+----------+--------------------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span><span style="color: #000000;">
+
+mysql</span><span style="color: #808080;">&gt;</span> explain <span style="color: #0000ff;">select</span><span style="color: #808080;">*</span><span style="color: #0000ff;">from</span> user_1 <span style="color: #0000ff;">where</span> name<span style="color: #808080;">=</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">250</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span> id <span style="color: #808080;">|</span> select_type <span style="color: #808080;">|</span> <span style="color: #0000ff;">table</span>  <span style="color: #808080;">|</span> partitions <span style="color: #808080;">|</span> type <span style="color: #808080;">|</span> possible_keys <span style="color: #808080;">|</span> <span style="color: #0000ff;">key</span>        <span style="color: #808080;">|</span> key_len <span style="color: #808080;">|</span> ref   <span style="color: #808080;">|</span> rows <span style="color: #808080;">|</span> filtered <span style="color: #808080;">|</span> Extra       <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #808080;">|</span>  <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span> SIMPLE      <span style="color: #808080;">|</span> user_1 <span style="color: #808080;">|</span> <span style="color: #0000ff;">NULL</span>       <span style="color: #808080;">|</span> ref  <span style="color: #808080;">|</span> name_index    <span style="color: #808080;">|</span> name_index <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">18</span>      <span style="color: #808080;">|</span> const <span style="color: #808080;">|</span>    <span style="color: #800000; font-weight: bold;">1</span> <span style="color: #808080;">|</span>      <span style="color: #800000; font-weight: bold;">100</span> <span style="color: #808080;">|</span> Using <span style="color: #0000ff;">where</span> <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">--+-------------+--------+------------+------+---------------+------------+---------+-------+------+----------+-------------+</span>
+<span style="color: #800000; font-weight: bold;">1</span> row <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p>&nbsp;</p>
+<h2>4、查看索引的使用情况</h2>
+<p><span style="font-size: 16px;"><span style="font-family: 宋体;">执行</span>show status like <span style="font-family: Calibri;">&lsquo;</span>Handler_read%<span style="font-family: Calibri;">&rsquo;可以看到一个值</span></span><span style="font-size: 16px;">Handler_read_key，它代表一行被索引值读的次数，如果值很低说明增加索引得到的性能改善不高，因为索引并不经常使用。</span></p>
+<div class="cnblogs_code">
+<pre>mysql<span style="color: #808080;">&gt;</span> show status <span style="color: #808080;">like</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">Handler_read%</span><span style="color: #ff0000;">'</span><span style="color: #000000;"> ;
+</span><span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------------------+-------+</span>
+<span style="color: #808080;">|</span> Variable_name         <span style="color: #808080;">|</span> Value <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------------------+-------+</span>
+<span style="color: #808080;">|</span> Handler_read_first    <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">3</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_key      <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">5</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_last     <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_next     <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_prev     <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_rnd      <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">0</span>     <span style="color: #808080;">|</span>
+<span style="color: #808080;">|</span> Handler_read_rnd_next <span style="color: #808080;">|</span> <span style="color: #800000; font-weight: bold;">20</span>    <span style="color: #808080;">|</span>
+<span style="color: #808080;">+</span><span style="color: #008080;">--</span><span style="color: #008080;">---------------------+-------+</span>
+<span style="color: #800000; font-weight: bold;">7</span> rows <span style="color: #808080;">in</span> <span style="color: #0000ff;">set</span></pre>
+</div>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（1）Handler_read_first：索引中第一条被读的次数。如果较高，它表示服务器正执行大量全索引扫描；</span></p>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（2）Handler_read_key<strong>：如果索引正在工作，这个值代表一个行被索引值读的次数，如果值越低，表示索引得到的性能改善不高，因为索引不经常使用。</strong></span></p>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（3）Handler_read_next ：按照键顺序读下一行的请求数。如果你用范围约束或如果执行索引扫描来查询索引列，该值增加。</span></p>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（4）Handler_read_prev：按照键顺序读前一行的请求数。该读方法主要用于优化ORDER BY ... DESC。</span></p>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（5）Handler_read_rnd ：根据固定位置读一行的请求数。如果你正执行大量查询并需要对结果进行排序该值较高。你可能使用了大量需要MySQL扫描整个表的查询或你的连接没有正确使用键。这个值较高，意味着运行效率低，应该建立索引来补救。</span></p>
+<p class="MsoNormal" style="text-indent: 21pt; text-align: left;"><span style="font-size: 15px;">（6）Handler_read_rnd_next：<strong>在数据文件中读下一行的请求数。如果你正进行大量的表扫描，该值较高。通常说明你的表索引不正确或写入的查询没有利用索引。</strong></span></p>
+<!--[if gte mso 9]><xml><o:DocumentProperties><o:Revision>1</o:Revision><o:Pages>1</o:Pages><o:Lines>1</o:Lines><o:Paragraphs>1</o:Paragraphs></o:DocumentProperties></xml><![endif]--><!--[if gte mso 9]><xml><o:OfficeDocumentSettings></o:OfficeDocumentSettings></xml><![endif]--><!--[if gte mso 9]><xml><w:WordDocument><w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel><w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery><w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery><w:DocumentKind>DocumentNotSpecified</w:DocumentKind><w:DrawingGridVerticalSpacing>7.8 磅</w:DrawingGridVerticalSpacing><w:PunctuationKerning></w:PunctuationKerning><w:View>Normal</w:View><w:Compatibility><w:DontGrowAutofit/><w:BalanceSingleByteDoubleByteWidth/><w:DoNotExpandShiftReturn/><w:UseFELayout/></w:Compatibility><w:Zoom>0</w:Zoom></w:WordDocument></xml><![endif]--><!--[if gte mso 9]><xml><w:LatentStyles DefLockedState="false"  DefUnhideWhenUsed="true"  DefSemiHidden="true"  DefQFormat="false"  DefPriority="99"  LatentStyleCount="260" >
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Normal" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="heading 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toc 9" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Normal Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="footnote text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="annotation text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="header" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="footer" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="index heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="caption" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="table of figures" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="envelope address" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="envelope return" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="footnote reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="annotation reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="line number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="page number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="endnote reference" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="endnote text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="table of authorities" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="macro" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="toa heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Bullet" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Number" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Bullet 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Bullet 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Bullet 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Bullet 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Number 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Number 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Number 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Number 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Title" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Closing" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Signature" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Default Paragraph Font" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Continue" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Continue 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Continue 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Continue 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Continue 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Message Header" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Subtitle" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Salutation" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Date" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text First Indent" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text First Indent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Note Heading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text Indent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Body Text Indent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Block Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Hyperlink" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="FollowedHyperlink" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Strong" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Emphasis" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Document Map" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Plain Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="E-mail Signature" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Normal (Web)" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Acronym" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Address" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Cite" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Code" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Definition" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Keyboard" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Preformatted" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Sample" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Typewriter" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="HTML Variable" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Normal Table" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="annotation subject" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="No List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="1 / a / i" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="1 / 1.1 / 1.1.1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Article / Section" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Simple 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Simple 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Simple 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Classic 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Classic 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Classic 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Classic 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Colorful 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Colorful 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Colorful 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Columns 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Columns 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Columns 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Columns 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Columns 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 7" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table List 8" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table 3D effects 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table 3D effects 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table 3D effects 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Contemporary" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Elegant" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Professional" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Subtle 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Subtle 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Web 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Web 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Web 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Balloon Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Table Theme" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Placeholder Text" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="No Spacing" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="List Paragraph" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Quote" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Intense Quote" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 1" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 2" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 3" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 4" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 5" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Shading Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Light Grid Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Shading 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium List 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 1 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 2 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Medium Grid 3 Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Dark List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Shading Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful List Accent 6" ></w:LsdException>
+<w:LsdException Locked="false"  Priority="99"  SemiHidden="false"  Name="Colorful Grid Accent 6" ></w:LsdException>
+</w:LatentStyles></xml><![endif]-->
+<p style="text-align: left;">　<strong>　　注：以上6点来自于网络总结，其中比较重要的两个参数是<span style="font-size: 15px;">Handler_read_key与</span><span style="font-size: 15px;">Handler_read_rnd_next。</span></strong></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-07-23 19:08</span>&nbsp;
+<a href="https://www.cnblogs.com/jian0110/">JJian</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9356347" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9356347);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 445573, cb_blogApp = 'jian0110', cb_blogUserGuid = '5e6d02e5-8d13-4ad6-9b8d-08d5866282ce';
+    var cb_entryId = 9356347, cb_entryCreatedDate = '2018-07-23 19:08', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 JJian
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,736 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="JDBC事务与保存点的使用代码示例" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JDBC事务与保存点  JDBC简介（七） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10312824.html">JDBC事务与保存点  JDBC简介（七）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        JDBC事务与保存点的使用代码示例
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3><span style="font-size: 18px;">事务简介</span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px;">数据库事务(Database Transaction) ，是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">事务是必须满足4个条件（ACID） </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<ul>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>事务的原子性（ Atomicity）</strong></span>：<span style="font-size: 16px;">一组事务，要么全部成功；要么全部失败。 </span></li>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>一致性 （Consistency）</strong></span><span style="font-size: 16px;">：事务在完成时，必须使所有的数据都保持一致状态。在相关数据库中，所有规则都必须应用于事务的修改，以保持所有数据的完整性。比如一个学生表中新插入了一条记录，这个学生的class_id必须是一个已经存在的正确的，A账户向B账户转账，不能出现负数，如果不做任何保障，出现了负数，这就是破坏了一致性可以认为是一致性表示数据本来是正确的，经过了事务，转换为了另外的一个状态，仍旧是正确的。 </span></li>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>隔离性（Isolation）</strong></span><span style="font-size: 16px;">：由并发事务所作的修改必须与任何其它并发事务所作的修改隔离。也就是说另一并发事务要么读取的是事务前的状态，要么是事务后的状态，不会是这个事务的中间状态。 </span></li>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>持久性（Durability）</strong></span><span style="font-size: 16px;">：事务完成之后，它对于系统的影响是永久性的。该修改即使出现致命的系统故障也将一直保持。 </span></li>
+</ul>
+</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>在默认情况下，MySQL每执行一条SQL语句，都是一个单独的事务</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>如果需要将多条SQL语句设在在同一个事务中，那么需要开启事务和结束事务</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">JDBC中与事务有关的方法 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">Connection与事务有关的主要方法： </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px;">setAutoCommit（boolean）：设置是否为自动提交事务，</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>如果true（默认值为true）表示自动提交</strong></span><span style="font-size: 16px;">，也就是每条执行的SQL语句都是一个单独的事务；</span><span style="color: #0000ff; font-size: 13.5pt;"><strong>如果设置为false，那么相当于开启了事务，con.setAutoCommit(false) 表示开启事务。</strong></span></li>
+<li><span style="font-size: 16px;">commit（）：提交结束事务。 </span></li>
+<li><span style="font-size: 16px;">rollback（）：回滚结束事务。 </span></li>
+<li><span style="font-size: 16px;">setSavepoint（）：设置保存点。 </span></li>
+</ul>
+</div>
+</div>
+<h3><span style="font-size: 18px;">事务使用示例</span></h3>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> jdbc;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Connection;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.DriverManager;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.ResultSet;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Statement;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyTransactional {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception{
+    String user </span>= "root"<span style="color: #000000;">;
+    String password </span>= "123456"<span style="color: #000000;">;
+    String url </span>= "jdbc:mysql://localhost:3306/sampledb?useUnicode=true&amp;characterEncoding=utf-8"<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">2、获取连接对象</span>
+    Connection conn =<span style="color: #000000;"> DriverManager.getConnection(url, user, password);
+    String sql </span>= "delete from student where id='59'"<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">2、获得sql语句执行对象</span>
+    Statement stmt =<span style="color: #000000;"> conn.createStatement();
+    conn.setAutoCommit(</span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">3、执行并保存结果集</span>
+    <span style="color: #0000ff;">int</span> rows =<span style="color: #000000;"> stmt.executeUpdate(sql);
+    System.out.println(</span>"受影响的行： "+<span style="color: #000000;">rows);
+    conn.commit();
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> conn.rollback();</span>
+<span style="color: #000000;">    conn.close();
+    stmt.close();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>在执行前开启事务，conn.setAutoCommit(false);</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>注意：一定是执行前</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">只有开启事务和结束事务之间的执行才属于这个事务，如果像下面这样，可以认为是两个事务，前面一个自动提交了，然后开启了新的事务，然后回滚了新的事务 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="font-size: 16px;"><span style="color: #000000;">    stmt.executeUpdate(sql);
+    conn.setAutoCommit(</span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+    conn.rollback();</span></span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">最终通过commit或者rollback 结束事务。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">通常的一个使用形式为： </span></div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+con </span>=<span style="color: #000000;"> DBConnection.getConnection();
+</span><span style="color: #008000;">//</span><span style="color: #008000;">开启事务</span><span style="color: #000000;">
+con.setAutoCommit(</span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">处理业务逻辑
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">提交事务</span><span style="color: #000000;">
+con.commit();
+}
+</span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (SQLException e) {
+e.printStackTrace();
+</span><span style="color: #008000;">//</span><span style="color: #008000;">出现异常，回滚事务</span>
+<span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+con.rollback();
+System.out.println(</span>"JDBC Transaction rolled back successfully"<span style="color: #000000;">);
+}
+</span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (SQLException e1) {
+System.out.println(</span>"SQLException in rollback" +<span style="color: #000000;"> e.getMessage());
+}
+}</span></pre>
+</div>
+</div>
+<h3><span style="font-size: 18px;">保存点</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>有的时候可能并不需要将一整个事务进行回滚，一个复杂的事务可能由几个一致性的阶段组成</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>保存点就是在一个事务中，插入几个还原点，再出现问题时，可以及时的撤回到这个地方来</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>当撤回到一个还原点时，事务还在，仍在进行中，所以还需要再次的COMMIT，这次的COMMIT，保存点以下的执行相当于不存在。</strong></span></div>
+<div style="line-height: 200%;">
+<p style="margin: 0px; -qt-paragraph-type: empty;">&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> jdbc;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Connection;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.DriverManager;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.ResultSet;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Savepoint;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.sql.Statement;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyTransactional {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception{
+    String user </span>= "root"<span style="color: #000000;">;
+    String password </span>= "123456"<span style="color: #000000;">;
+    String url </span>= "jdbc:mysql://localhost:3306/sampledb?useUnicode=true&amp;characterEncoding=utf-8"<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">2、获取连接对象</span>
+    Connection conn =<span style="color: #000000;"> DriverManager.getConnection(url, user, password);
+    conn.setAutoCommit(</span><span style="color: #0000ff;">false</span><span style="color: #000000;">);
+    String sql1 </span>= "delete from student where id='158'"<span style="color: #000000;">;
+    String sql2 </span>= "delete from student where id='159'"<span style="color: #000000;">;
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">2、获得sql语句执行对象</span>
+    Statement stmt =<span style="color: #000000;"> conn.createStatement();
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">3、执行并保存结果集</span>
+<span style="color: #000000;">    stmt.executeUpdate(sql1);
+    Savepoint savepoint1 </span>= conn.setSavepoint("savepoint1"<span style="color: #000000;">);
+    stmt.executeUpdate(sql2);
+    Savepoint savepoint2 </span>= conn.setSavepoint("savepoint2"<span style="color: #000000;">);
+    conn.rollback(savepoint1);
+    conn.commit();
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> conn.rollback();</span>
+<span style="color: #000000;">    conn.close();
+    stmt.close();
+}
+}</span></pre>
+</div>
+</div>
+<div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">上面的示例中，执行了两次删除，删除id=158时，创建保存点savepoint1；删除id=159时，创建保存点savepoint2</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">将事务回滚到保存点1 <span style="line-height: 32px;">conn<span style="color: #4682b4; font-weight: 600;">.</span>rollback(savepoint1);，然后进行提及，保存点savepoint1以上的部分成功提交，后面的部分没有提交</span></span></div>
+<div style="line-height: 200%;"><span style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>也就是回滚到哪个保存点，那个保存点以下就相当于不存在</strong></span></span></div>
+<div style="line-height: 200%;"><span style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190124095615053-1176714813.png"><img style="display: inline; background-image: none;" title="image_5c491b65_599e" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190124095615242-1313808907.png" alt="image_5c491b65_599e" width="386" height="174" border="0" /></a></span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">保存点就是这样将一整个完整的过程进行了拆分，rollback到哪个保存点，哪个保存点以下就会回滚，之前的就会提交</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">一定要注意： conn.rollback(savepoint1); 并不会结束事务，<span style="line-height: 24px;">只有 conn.commit();或者</span><span style="line-height: 24px;"> conn.rollback();方法才会结束事务。</span></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201901/897393-20190124095615445-1576305783.png"><img style="display: inline; background-image: none;" title="image_5c491b65_3436" src="https://img2018.cnblogs.com/blog/897393/201901/897393-20190124095615647-1238412990.png" alt="image_5c491b65_3436" width="405" height="531" border="0" /></a></div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10312824.html" target="_blank">JDBC事务与保存点 JDBC简介（七）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-01-25 10:07</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10312824" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10312824);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10312824, cb_entryCreatedDate = '2019-01-25 10:07', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="前情回顾： 我通过open这个系统调用虫洞来到了内核空间，又在老爷爷的指点下来到了sys_open的地盘，即将开始打开文件的工作。 详情参见：内核地址空间大冒险：系统调用 open系统调用链 我是一个" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>一个故事看懂Linux文件权限管理 - 轩辕之风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanyuan/custom.css?v=1KFqgc8N4u9cFrFdaEZzuOblzkw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanyuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanyuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanyuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 193695;
+        var currentBlogApp = 'xuanyuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanyuan/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanyuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BE%95%E4%B9%8B%E9%A3%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanyuan/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+42&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+220</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12361461.html">一个故事看懂Linux文件权限管理</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <blockquote>
+<p><strong>前情回顾</strong>：</p>
+<p>我通过open这个系统调用虫洞来到了内核空间，又在老爷爷的指点下来到了sys_open的地盘，即将开始打开文件的工作。</p>
+<p>详情参见：<a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483893&amp;idx=1&amp;sn=8d3edb80d31e6b631f72b2b20265eb46&amp;chksm=9ac4052fadb38c39f98632aaf7ab8e4d00296a295169cc7b2641327d24abee6d4594ced3eb63&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险：系统调用</a></p>
+</blockquote>
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;"><strong>open系统调用链</strong></span></h2>
+<p> 我是一个线程，出生在这个Linux帝国。<br />在老爷爷的指点下，通过系统调用表来到了这个叫<span style="color: #ff6600;"><strong>sys_open</strong></span>的地方。这里很简陋，简单比划了几下就直接来到了<span style="color: #ff6600;"><strong>do_sys_open</strong></span>的地盘。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140034567-2019127088.png" alt="" width="222" height="221"></p>
+<p>
+一个负责接待的美女给我简单办理了手续，就让我去里面一个<span style="color: #ff6600;"><strong>do_filp_open</strong></span>的房间。进去之后，这个房间里的工作人员又让我去后面的<span style="color: #ff6600;"><strong>path_openat</strong></span>房间。<br />&ldquo;打开个文件怎么这么麻烦，搞这么层级处理~&rdquo;，我开始有点不爽了，便随口抱怨了一句。</p>
+<p><img class="rich_pages  __bg_gif" src="https://mmbiz.qpic.cn/mmbiz_gif/WGRZGqlEGL6d0RpUocibBtsnnJHmIZatNY5m5yVt8EzDeOX2EV0LSjSdNib6v6YkznlzPasa8qGicMia9fU9rxZTQQ/640?wx_fmt=gif&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="" width="166" height="166" data-ratio="1" data-src="https://mmbiz.qpic.cn/mmbiz_gif/WGRZGqlEGL6d0RpUocibBtsnnJHmIZatNY5m5yVt8EzDeOX2EV0LSjSdNib6v6YkznlzPasa8qGicMia9fU9rxZTQQ/640?wx_fmt=gif" data-type="gif" data-w="300" data-order="1" data-fail="0"></p>
+<p>
+&ldquo;这才哪到哪，后面要办的手续还多着呢，年轻人一点耐心都没有&rdquo;，原来我的抱怨不小心被<span style="color: #ff6600;"><strong>path_openat</strong></span>里的工作人员听到了。<br />我有点不好意思，硬着头皮走了过去。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140053726-244870372.png" alt="" width="245" height="163"></p>
+<p>
+&ldquo;把你要打开的文件名和需要的权限准备好，先去左手边的<span style="color: #ff6600;"><strong>path_init</strong></span>窗口先做些准备工作&rdquo;，工作人员低着头说到。我</p>
+<p>瞅了瞅旁边的窗口，按他说的照办。</p>
+<p><br />&ldquo;再去右手边的<span style="color: #ff6600;"><strong>link_path_walk</strong></span>窗口，找到你要访问的文件&rdquo;，工作人员再次说到。我继续照办。</p>
+<p><br /><img class=" __bg_gif" src="https://mmbiz.qpic.cn/mmbiz_gif/cicEDAicicJklpj52G5CGeFftSd2BFduZnGBWOcj5km2PlMFybJ0dx2CibLiaiczos3DenTm5KLY2JAT8DEJjicOl936Q/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="" data-src="https://mmbiz.qpic.cn/mmbiz_gif/cicEDAicicJklpj52G5CGeFftSd2BFduZnGBWOcj5km2PlMFybJ0dx2CibLiaiczos3DenTm5KLY2JAT8DEJjicOl936Q/640?" data-ratio="0.03333333333333333" data-w="600" data-order="2" data-fail="0"></p>
+<p><br />&ldquo;好了，我办好了，这下该给我打开文件了吧？&rdquo;，我累得上气不接下气。</p>
+<p>&ldquo;你穿过这个门，去<span style="color: #ff6600;"><strong>do_last</strong></span>房间吧，里面有位大爷，他会接受你的请求的。</p>
+<p>对了，把这个带上，一会儿他们要用&rdquo;，工作人员说完给了我一张纸条。</p>
+<p>没想到还没办完手续，不过这名字既然叫<span style="color: #ff6600;"><strong>do_last</strong></span>，应该就是最后一道手续了吧。我揣起纸条，又继续前行。</p>
+<p><br />来到<span style="color: #ff6600;"><strong>do_last</strong></span>房间，我傻眼了，这里看起来要做的事情很多啊，没办法，都走到这一步了咬着牙也得坚持下去。</p>
+<p>一顿操作猛如虎，总算来到了一个叫<span style="color: #ff6600;"><strong>finish_open</strong></span>函数的面前，看样子马上就要真正打开文件了。</p>
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;"><strong>权限检查</strong></span></h2>
+<p>
+&ldquo;唉，等一下！&rdquo;，突然一个声音叫住了我，我不由得心头一紧，难不成到嘴的肉要飞了？我转过头来，之前工作人员口中的大爷出现在我背后。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140205675-1786450662.png" alt="" width="254" height="254"></p>
+<p><img class="rich_pages img_loading" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="" data-ratio="1" data-s="300,640" data-src="https://mmbiz.qpic.cn/mmbiz_jpg/WGRZGqlEGL6d0RpUocibBtsnnJHmIZatNn8Udwxumt4W9FzXDn82emkBdw7Yh8icS7XFHEKoFU0nqx6UuJYrbjeQ/640?wx_fmt=jpeg" data-type="jpeg" data-w="610"></p>
+<p>
+&ldquo;大爷，您叫我干什么？&rdquo;&ldquo;小伙子，我是这里的保安，你现在还不能去那儿，先过来做个安检&rdquo;</p>
+<p>真是怕啥来啥，打开个文件怎么就这么难！</p>
+<p>&ldquo;安检？&rdquo;</p>
+<p>&ldquo;对，这里有个<span style="color: #ff6600;"><strong>may_open</strong></span>的大门，你先进去，检查合格了我才能让你打开文件。&rdquo;，大爷一边说一边把我往<span style="color: #ff6600;"><strong>may_open</strong></span>的大门里拽。</p>
+<p>&nbsp;</p>
+<p>半推半就，我进入了他口中的<span style="color: #ff6600;"><strong>may_open</strong></span>房间，环顾四周，这里也比较简陋，没两步就到了一个叫<span style="color: #ff6600;"><strong>inode_permission</strong></span>的房间。</p>
+<p>这里面的气氛一下子紧张了起来，几个彪形大汉在此值守。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140233062-427035223.png" alt="" width="457" height="255"></p>
+<p>
+&ldquo;把你要打开的文件的inode拿来，还有你要的访问权限&rdquo;，门口的一个大汉大声说到。</p>
+<p>&ldquo;访问权限我知道，我是要读取权限READ，你说的文件inode是什么，我...我这里只有文件的名字&rdquo;，我感觉到自己有点紧张。</p>
+<p><br />&ldquo;我要你名字干什么，我们需要inode信息，不然怎么检查你有没有权限，你一路走到这里怎么会没有inode信息呢？&rdquo;</p>
+<p>他的这句话倒是提醒了我，想起刚刚在path_openat房间，那边的工作人员给了我一个纸条。我掏了出来，上面果然记录了inode信息，我赶紧交给了大汉。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140258020-2125958450.png" alt="" width="432" height="331"></p>
+<p>
+&ldquo;你跟我来，先去做常规DAC检查&rdquo;，其中一个稍微面善的老伯带着我又来到隔壁一个叫<span style="color: #ff6600;"><strong>generic_permission</strong></span>的房间。</p>
+<p>这里面有一台很大的机器在轰隆隆运转着，旁边还有三个大门，老伯走到机器前一顿操作。&ldquo;我已经把你要访问的文件inode信息输入进去了，你从面前那个门走过去一下&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140321972-1753859049.png" alt="" width="131" height="229"></p>
+<p>
+按照老伯的指示，我穿过了第一台安检门，机器自动发出了提示音：&ldquo;<span style="color: #ff0000;">ERROR，当前进程fsuid != 目标文件uid</span>&rdquo;听到提示音的我吓了一跳。</p>
+<p>&ldquo;看来这文件不是你所属的用户的啊，没关系，再走过第二扇安检门试试&rdquo;</p>
+<p>&nbsp;</p>
+<p>&ldquo;老伯，这机器是怎么知道文件是不是我所属的用户的呢？&rdquo;我有点好奇</p>
+<p>&ldquo;文件的归属用户id是保存在文件索引inode里面的，而你所在的进程的用户id也是保存在进程的<span style="color: #ff6600;"><strong>task_struct</strong></span>里面的，这台机器自动提取这两个信息比较就知道了&rdquo;，老伯微笑着说到。</p>
+<p><br />&ldquo;原来是这样，我的<span style="color: #ff6600;"><strong>task_struct</strong></span>里面确实有一个uid&rdquo;</p>
+<p>老伯摇了摇头，&ldquo;不对不对，不是那个，是fsuid。也不在那里，是在<span style="color: #ff6600;"><strong>task_struct-&gt;cred</strong></span>里面的，这个cred就是你的<span style="color: #ff6600;"><strong>凭证</strong></span>，来咱们内核空间办事儿，到处都要检查，你可要收好了，弄丢了就麻烦了&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140359628-1509494016.png" alt=""></p>
+<p>&ldquo;那现在怎么办？这文件不是我所属用户的，我是不是没有权限打开呢？&rdquo;</p>
+<p>&ldquo;别着急，你再走过第二扇门试试&rdquo;</p>
+<p><br />听从老伯的指示，我又穿过了第二道门，机器又一次发出了提示音：<span style="color: #ff0000;">&ldquo;ERROR，当前进程fsgid != 目标文件gid</span>&rdquo;</p>
+<p>又报错了！我越发的担心起来。</p>
+<p><br />&ldquo;看来你也不在这个文件的归属组里啊&rdquo;，老伯叹了口气。我正想问，老伯又开口了，&ldquo;不过别着急，还有一次机会，快走进第三扇门&rdquo;</p>
+<p>抱着一丝希望，走进了第三扇门，没有意外的机器又报警了：&ldquo;<span style="color: #ff0000;">ERROR，目标文件权限640，其他用户无访问权限！</span>&rdquo;</p>
+<p>我的心情跌落到了谷底，没想到忙活了这么久，居然没有权限打开。</p>
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;"><strong>UGO &amp; ACL</strong></span></h2>
+<p>
+&ldquo;先别气馁，还有机会！&rdquo;，老伯突然拍了下我的肩膀。</p>
+<p>&ldquo;不是三道门都报错了吗，怎么还有机会呢？&rdquo;，我小声的问道。</p>
+<p>&ldquo;UGO权限检查没通过，不过我注意到你要访问的文件有ACL，兴许还有机会也未可知。&rdquo;</p>
+<p>&ldquo;UGO是什么？ACL又是什么&rdquo;，面对这两个新词，我一下有点懵。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140448022-1099001576.png" alt="" width="343" height="184"></p>
+<p>
+&ldquo;UGO就是(User, Group, Other)的缩写，Linux帝国为所有文件针对所属用户、同组用户和其他用户分别设置了访问权限，Read、Write、Execute三种权限的组合，并把这些权限信息和文件的归属信息记录在了索引信息inode里面，就是你之前拿到的那个纸条，帝国把这种权限管理方式叫UGO&rdquo;</p>
+<p>我听得似懂非懂，&ldquo;那ACL又是什么呢？&rdquo;</p>
+<p>&ldquo;UGO的管理方式有些简单粗暴，为了更精细化的管理，帝国高层经过商议后，颁布了新的政策就是ACL(Access Control List)，访问控制列表的意思，在UGO的基础上，可以单独记录一些细粒度的权限信息，比如指定组外某一个特殊用户允许对文件的访问，这些信息就构成了一个访问控制列表，把这个表的地址放到了inode里面，你看到那个红色的＋号没，表示这个文件是有ACL的，所以你还有机会再试一试&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140512377-1453300505.png" alt="" width="557" height="51"></p>
+<p>听完老伯的讲解，我又重新燃起了希望，辛苦大半天，我可不想空手而归。</p>
+<p>老伯再次对着机器一顿操作，出现了第四扇门，我给自己鼓了鼓劲，走了过去。</p>
+<p>这一次机器没有发出刺耳的声音，而是一声清脆的&ldquo;SUCCESS&rdquo;！</p>
+<p>老伯走了过来，&ldquo;恭喜，检查通过了，咱们回去吧&rdquo;</p>
+<p><img class="__bg_gif " src="https://mmbiz.qpic.cn/mmbiz_gif/c6gqmhWiafyrJGnA6iaJEhFBGJeW0pYICYMLH4dwbBsAD08htsZT86SEE2eLnslqfV2hOWTjw7Dvqa1g4QgTZwXg/640?tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="" width="119" height="119" data-copyright="0" data-ratio="1" data-src="https://mmbiz.qpic.cn/mmbiz_gif/c6gqmhWiafyrJGnA6iaJEhFBGJeW0pYICYMLH4dwbBsAD08htsZT86SEE2eLnslqfV2hOWTjw7Dvqa1g4QgTZwXg/640" data-type="gif" data-w="300" data-order="3" data-fail="0"></p>
+<p>
+检查通过的我仿佛经历了一场大考，心里如释重负，回去的步伐轻快了许多。</p>
+<p>&nbsp;</p>
+<h2><span style="color: #ff6600;"><strong>Cgroup &amp;&nbsp;SELinux</strong></span></h2>
+<p>
+回到<span style="color: #ff6600;"><strong>inode_permission</strong></span>房间，老伯向另一个彪形大汉提交了检查结果。</p>
+<p>&ldquo;阿虎，DAC检查已经通过了，下面交给你了。&rdquo;原来这一位叫阿虎，正想着，他走了过来。</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140544720-56719752.png" alt=""></p>
+<p>
+&ldquo;小子，跟我来吧，继续做<span style="color: #ff6600;"><strong>Cgroup</strong></span>检查&rdquo;</p>
+<p>我的心咯噔一下，居然还有检查。&ldquo;<span style="color: #ff6600;"><strong>Cgroup</strong></span>检查又是干嘛的？&rdquo;，我忍不住问到。</p>
+<p>&ldquo;我们是Linux帝国进程分组控制管理部下辖的<span style="color: #ff6600;"><strong>devices</strong></span>部门，在此奉命检查你是否有权限访问对应的设备，请配合我们的工作&rdquo;，阿虎严肃正经的回答。</p>
+<p>&ldquo;这应该是最后一次检查了吧，完事儿总该放我走了吧？&rdquo;</p>
+<p>&nbsp;</p>
+<p>命运总是会跟我开玩笑，听到我的问题，旁边又一位大哥走了过来，&ldquo;等会检查通过的话，我们<span style="color: #ff6600;"><strong>SELinux</strong></span>部门还有最后一道检查，麻烦您再坚持一下~&rdquo;</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140613148-1257223974.png" alt=""></p>
+<p>&nbsp;</p>
+<p>
+我一下没了力气，瘫坐了一旁，&ldquo;容我休息休息&rdquo;。</p>
+<p><br /><span style="color: #3366ff;">未完待续&middot;&middot;&middot;&middot;&middot;&middot;&middot;</span></p>
+<p>&nbsp;</p>
+<blockquote>
+<p><strong>彩蛋</strong></p>
+<p>在我休息的间隙，隔壁<span style="color: #ff6600;"><strong>generic_permission</strong></span>房间又传来了几下错误的提示音，不知道哪个倒霉蛋要空手而归了。</p>
+<p>一会儿老伯就出来了，&ldquo;阿虎，DAC检查已经通过了，下面交给你了。&rdquo;</p>
+<p>&nbsp;</p>
+<p>&ldquo;老伯，我刚刚明明听到了机器报警，检查不通过才对啊&rdquo;，我走上去问老伯。</p>
+<p>&ldquo;哦，你说他啊，他是一个特权进程的线程，有<span style="color: #ff6600;"><strong>CAP_DAC_OVERRIDE</strong></span>能力标记，可以无视那台机器，哈哈&rdquo;</p>
+<p>&nbsp;</p>
+<p>欲知后事如何，请关注后续精彩......</p>
+
+</blockquote>
+<p>&nbsp;</p>
+<p><img src="https://img2018.cnblogs.com/i-beta/659280/202002/659280-20200225140659976-1137666408.png" alt="" width="490" height="165"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>往期热门文章</strong>：</p>
+<p>
+<a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484083&amp;idx=1&amp;sn=f4a15e32006eeeffc3fdd228317f9d24&amp;chksm=9ac40669adb38f7fb5688b804208c88db8032ebfba68e063fac940d71cd13b00b17616566773&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">谁动了你的HTTPS流量？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484064&amp;idx=1&amp;sn=fd73704a71da718ef55efc74e02bb7dc&amp;chksm=9ac4067aadb38f6c1691502051e121569b54fc28f11f152587ac20b4469820dc9fac8a94cc34&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">堆栈里的秘密行动：劫持执行流</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484048&amp;idx=1&amp;sn=b2b1f46a48a56f144cc54853c88c0519&amp;chksm=9ac4064aadb38f5cd16e26f0a6950ddd6baf332b9a6e67acd84d4b26554abd3fe89a3163fbec&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">堆栈里的悄悄话&mdash;&mdash;智能指针</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484047&amp;idx=1&amp;sn=4e5b0316f3b5debe746cdc1d11f3b88f&amp;chksm=9ac40655adb38f438331a9f8ed67ffee4b969ac4e18b47daffd40c9d4f4c4c930a3be5469016&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">路由器里的广告秘密</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247484010&amp;idx=1&amp;sn=d35f799113977034c193a16196ee67bf&amp;chksm=9ac406b0adb38fa69d1962063d1f346fe090c12f90b68a9f2c88e05cd3e00537fa0782b202e0&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险2：中断与异常</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483973&amp;idx=1&amp;sn=e0d9a1dc41feaf0f42b582bc6c8418e3&amp;chksm=9ac4069fadb38f89b03f3f93058673c292c5ec998b768b8150010ea3fdb8b97ead5ce0700525&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一个DNS数据包的惊险之旅</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483942&amp;idx=1&amp;sn=6c67b2d735367d6b0876756cc5e81c12&amp;chksm=9ac406fcadb38fead95887a0f0288cf83f6a5cd683d77493724f23f84cc99efba70a92972870&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">DDoS攻击：无限战争</a><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483900&amp;idx=1&amp;sn=244d7d2a5b2e3b6e5bae63797e66b224&amp;chksm=9ac40526adb38c3093d99e1670623a30acb251a165a6bb71b10c4cef7dfde06e9d75cfa90973&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一条</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483900&amp;idx=1&amp;sn=244d7d2a5b2e3b6e5bae63797e66b224&amp;chksm=9ac40526adb38c3093d99e1670623a30acb251a165a6bb71b10c4cef7dfde06e9d75cfa90973&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">SQL注入引出的惊天大案</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483893&amp;idx=1&amp;sn=8d3edb80d31e6b631f72b2b20265eb46&amp;chksm=9ac4052fadb38c39f98632aaf7ab8e4d00296a295169cc7b2641327d24abee6d4594ced3eb63&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">内核地址空间大冒险：系统调用</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483861&amp;idx=1&amp;sn=9404c7ab703f4c73f70e4d913a00c0e6&amp;chksm=9ac4050fadb38c19e3f1406290f44cba36092ce1f53fdfa70bdc348c7490ca005c47b083a8b8&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">一个HTTP数据包的奇幻之旅</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483839&amp;idx=1&amp;sn=d2665d7e5c1f5ed4e082eb811d6ecddf&amp;chksm=9ac40565adb38c734381fa83a89ffc7545321f76f252589a6331d368d8d2b2eddece40b8a41b&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">远去的传说：安全软件群雄混战史</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483819&amp;idx=1&amp;sn=fddc41ce3fbbcee3736bc0d31b6622f2&amp;chksm=9ac40571adb38c675242dbe9b94055cac1e2609ee9e2f45df7deee3979850bad950fae37ce8c&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">默认浏览器争霸传奇</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483806&amp;idx=1&amp;sn=32adfe25c549c0c7b023429c5f2aab50&amp;chksm=9ac40544adb38c52349cc6927a28ac7b26c8434d96ee4e1117d5116deafa487c17312e8a1556&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">我是一个流氓软件线程</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzAwMjc3NDQ1Mw==&amp;mid=2247483734&amp;idx=1&amp;sn=1b2bd2a4338135c1a69986dcbb0afce8&amp;chksm=9ac4058cadb38c9ac785e47a1b46d70739fa9007b418091a32506ed452f82e82ed9b82225eda&amp;scene=21#wechat_redirect" target="_blank" data-itemshowtype="0" data-linktype="2">我是一个杀毒软件线程</a></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-02-25 14:10</span>&nbsp;
+<a href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12361461" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12361461);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 193695, cb_blogApp = 'xuanyuan', cb_blogUserGuid = '8508cac9-f21a-e411-8d02-90b11c0b17d6';
+    var cb_entryId = 12361461, cb_entryCreatedDate = '2020-02-25 14:10', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 轩辕之风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

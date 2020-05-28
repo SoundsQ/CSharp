@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_bluedarkni</title>
+  <subtitle type="text">笨鸟也要飞，蜗牛也要爬呀...</subtitle>
+  <id>uuid:b68dcb29-00c4-4668-b08f-b3d93523d9bc;id=4</id>
+  <updated>2020-04-28T15:36:09Z</updated>
+  <author>
+    <name>白露非霜</name>
+    <uri>http://www.cnblogs.com/nijunyang/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12798951.html</id>
+    <title type="text">高级数据结构---赫(哈)夫曼树及java代码实现 - 白露非霜</title>
+    <summary type="text">我们经常会用到文件压缩，压缩之后文件会变小，便于传输，使用的时候又将其解压出来。为什么压缩之后会变小，而且压缩和解压也不会出错。赫夫曼编码和赫夫曼树了解一下。 赫夫曼树： 它是一种的叶子结点带有权重的特殊二叉树，也叫最优二叉树。既然出现最优两个字肯定就不是随便一个叶子结点带有权重的二叉树都叫做赫夫曼</summary>
+    <published>2020-04-28T15:33:00Z</published>
+    <updated>2020-04-28T15:33:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12798951.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12798951.html" />
+    <content type="html">【摘要】我们经常会用到文件压缩，压缩之后文件会变小，便于传输，使用的时候又将其解压出来。为什么压缩之后会变小，而且压缩和解压也不会出错。赫夫曼编码和赫夫曼树了解一下。 赫夫曼树： 它是一种的叶子结点带有权重的特殊二叉树，也叫最优二叉树。既然出现最优两个字肯定就不是随便一个叶子结点带有权重的二叉树都叫做赫夫曼 &lt;a href="http://www.cnblogs.com/nijunyang/p/12798951.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12783768.html</id>
+    <title type="text">域名和服务器绑定及https协议更换 - 白露非霜</title>
+    <summary type="text">服务器是之前已经购买了的 1.腾讯云产品中搜索域名注册（产品太多了懒得找，直接搜索来得快些） 2.进去之后可以选择各种后缀的域名，输入自己喜欢的，看看哪些后缀是没有被注册的。自己挑选一个就可以，按照指导给付钱就行了。看见有个xyz后缀的，刚好是三维坐标系，就随手搜了下三维时代，然后就注册了这个。 3</summary>
+    <published>2020-04-26T16:38:00Z</published>
+    <updated>2020-04-26T16:38:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12783768.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12783768.html" />
+    <content type="html">【摘要】服务器是之前已经购买了的 1.腾讯云产品中搜索域名注册（产品太多了懒得找，直接搜索来得快些） 2.进去之后可以选择各种后缀的域名，输入自己喜欢的，看看哪些后缀是没有被注册的。自己挑选一个就可以，按照指导给付钱就行了。看见有个xyz后缀的，刚好是三维坐标系，就随手搜了下三维时代，然后就注册了这个。 3 &lt;a href="http://www.cnblogs.com/nijunyang/p/12783768.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12771835.html</id>
+    <title type="text">高级数据结构---B树和B+树及mysql索引分析 - 白露非霜</title>
+    <summary type="text">mysql索引数据结构：https://www.cnblogs.com/nijunyang/p/11406688.html 几种树结构的对比： 二叉查找树：二叉搜索树，二叉排序树，优点查找快，但是在某些情况下会退化成链表，它是所有高效查找树的基础 红黑树：内存查找高效树，不适合大数据量 也不适合磁盘</summary>
+    <published>2020-04-25T02:34:00Z</published>
+    <updated>2020-04-25T02:34:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12771835.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12771835.html" />
+    <content type="html">【摘要】mysql索引数据结构：https://www.cnblogs.com/nijunyang/p/11406688.html 几种树结构的对比： 二叉查找树：二叉搜索树，二叉排序树，优点查找快，但是在某些情况下会退化成链表，它是所有高效查找树的基础 红黑树：内存查找高效树，不适合大数据量 也不适合磁盘 &lt;a href="http://www.cnblogs.com/nijunyang/p/12771835.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12764632.html</id>
+    <title type="text">高级数据结构---红黑树及其插入左旋右旋代码java实现 - 白露非霜</title>
+    <summary type="text">前面我们说到的二叉查找树，可以看到根结点是初始化之后就是固定了的，后续插入的数如果都比它大，或者都比它小，那么这个时候它就退化成了链表了，查询的时间复杂度就变成了O(n),而不是理想中O(logn),就像这个样子 如果我们有一个平衡机制，让这棵树可以动起来，比如将4变成根结点，是不是查询效率又可以提</summary>
+    <published>2020-04-23T15:24:00Z</published>
+    <updated>2020-04-23T15:24:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12764632.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12764632.html" />
+    <content type="html">【摘要】前面我们说到的二叉查找树，可以看到根结点是初始化之后就是固定了的，后续插入的数如果都比它大，或者都比它小，那么这个时候它就退化成了链表了，查询的时间复杂度就变成了O(n),而不是理想中O(logn),就像这个样子 如果我们有一个平衡机制，让这棵树可以动起来，比如将4变成根结点，是不是查询效率又可以提 &lt;a href="http://www.cnblogs.com/nijunyang/p/12764632.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12740751.html</id>
+    <title type="text">高级数据结构---二叉查找树及其增删改查实现 - 白露非霜</title>
+    <summary type="text">二叉树查找树： 二叉查找树也叫二叉搜索树，二叉排序树。它也是一种特殊的二叉树， 它具有以下特点 1.如果它的左子树不为空，则左子树上结点的值都小于根结点。 2.如果它的右子树不为空，则右子树上结点的值都大于根结点。 3.子树的子树同样也要遵循以上两点 为什么又叫做二叉排序树，因为具有这种特殊特点的二</summary>
+    <published>2020-04-20T13:39:00Z</published>
+    <updated>2020-04-20T13:39:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12740751.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12740751.html" />
+    <content type="html">【摘要】二叉树查找树： 二叉查找树也叫二叉搜索树，二叉排序树。它也是一种特殊的二叉树， 它具有以下特点 1.如果它的左子树不为空，则左子树上结点的值都小于根结点。 2.如果它的右子树不为空，则右子树上结点的值都大于根结点。 3.子树的子树同样也要遵循以上两点 为什么又叫做二叉排序树，因为具有这种特殊特点的二 &lt;a href="http://www.cnblogs.com/nijunyang/p/12740751.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12731223.html</id>
+    <title type="text">高级数据结构---二叉树 - 白露非霜</title>
+    <summary type="text">树是一种一对多的数据结构，之前的数组，栈这些都是一对一的数据结构。 树是n个结点的有限集。n=0称空树。在任意一棵非空树中：有且仅有一个根（root）结点；n&gt;1时，其余结点可分为m个互不相交的的有限集，其中每个集合又是一棵树，称为根的子树。 前面三个都是树，最后一个不是树，因为最后一个的数据相交了</summary>
+    <published>2020-04-19T05:33:00Z</published>
+    <updated>2020-04-19T05:33:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12731223.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12731223.html" />
+    <content type="html">【摘要】树是一种一对多的数据结构，之前的数组，栈这些都是一对一的数据结构。 树是n个结点的有限集。n=0称空树。在任意一棵非空树中：有且仅有一个根（root）结点；n&gt;1时，其余结点可分为m个互不相交的的有限集，其中每个集合又是一棵树，称为根的子树。 前面三个都是树，最后一个不是树，因为最后一个的数据相交了 &lt;a href="http://www.cnblogs.com/nijunyang/p/12731223.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12725011.html</id>
+    <title type="text">算法---贪心算法和动态规划 - 白露非霜</title>
+    <summary type="text">贪心算法顾名思义在一个贪字上面，它在解决某个问题的时候，总是先从眼前利益出发。也就是说只顾眼前，不顾大局，所以它是局部最优解。它的核心的就是局部最优推出全局最优。 比如公司只有一个会议室，明天有几场同样的重要的会议要开，怎么安排会议才能尽可能的多开会。 如果我们将所有会议的结束时间从小到大排序。然后</summary>
+    <published>2020-04-18T04:08:00Z</published>
+    <updated>2020-04-18T04:08:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12725011.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12725011.html" />
+    <content type="html">【摘要】贪心算法顾名思义在一个贪字上面，它在解决某个问题的时候，总是先从眼前利益出发。也就是说只顾眼前，不顾大局，所以它是局部最优解。它的核心的就是局部最优推出全局最优。 比如公司只有一个会议室，明天有几场同样的重要的会议要开，怎么安排会议才能尽可能的多开会。 如果我们将所有会议的结束时间从小到大排序。然后 &lt;a href="http://www.cnblogs.com/nijunyang/p/12725011.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12709548.html</id>
+    <title type="text">算法---排序 - 白露非霜</title>
+    <summary type="text">排序过程详细的动态图可参考https://www.cnblogs.com/onepixel/articles/7674659.html 1.插入排序 稳定O(n^2) 稳定的意思是a=b，原本a在b前面，排序完成后a也在b前面。 插入排序的思路就是将数组逻辑上分成两段，一段是排好序的，一段是未排序的</summary>
+    <published>2020-04-15T15:32:00Z</published>
+    <updated>2020-04-15T15:32:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12709548.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12709548.html" />
+    <content type="html">【摘要】排序过程详细的动态图可参考https://www.cnblogs.com/onepixel/articles/7674659.html 1.插入排序 稳定O(n^2) 稳定的意思是a=b，原本a在b前面，排序完成后a也在b前面。 插入排序的思路就是将数组逻辑上分成两段，一段是排好序的，一段是未排序的 &lt;a href="http://www.cnblogs.com/nijunyang/p/12709548.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12669989.html</id>
+    <title type="text">算法---递归及尾递归 - 白露非霜</title>
+    <summary type="text">什么叫递归？举个例子，我们排队，想知道自己排在第几个，那么我们可以问前面的那个人，前面的人继续问前面，直到问到第一个人，这就是传递的过程。然后再从第一个人回来，这就是归（回溯）的过程。传递过去再回归回来，这就是递归。第一个人就是我们所说的递归出口，也就是说到哪个点应该回归了，如果没有出口，那么就会死</summary>
+    <published>2020-04-09T14:09:00Z</published>
+    <updated>2020-04-09T14:09:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12669989.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12669989.html" />
+    <content type="html">【摘要】什么叫递归？举个例子，我们排队，想知道自己排在第几个，那么我们可以问前面的那个人，前面的人继续问前面，直到问到第一个人，这就是传递的过程。然后再从第一个人回来，这就是归（回溯）的过程。传递过去再回归回来，这就是递归。第一个人就是我们所说的递归出口，也就是说到哪个点应该回归了，如果没有出口，那么就会死 &lt;a href="http://www.cnblogs.com/nijunyang/p/12669989.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/nijunyang/p/12657039.html</id>
+    <title type="text">ScheduledThreadPoolExecutor之remove方法 - 白露非霜</title>
+    <summary type="text">之前用定时任务的线程池，设置了个任务，但是突然今天产品说，某些个操作需要中断某些任务（如果任务还没有执行），使其不能再到点执行了。于是查了API果然有这样一个方法。 一看API，需要移除的是一个Runnable对象，想当然的就把任务调度的传入的Runable对象保留下来，然后进行删除。简要代码如下 </summary>
+    <published>2020-04-07T15:21:00Z</published>
+    <updated>2020-04-07T15:21:00Z</updated>
+    <author>
+      <name>白露非霜</name>
+      <uri>http://www.cnblogs.com/nijunyang/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/nijunyang/p/12657039.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/nijunyang/p/12657039.html" />
+    <content type="html">【摘要】之前用定时任务的线程池，设置了个任务，但是突然今天产品说，某些个操作需要中断某些任务（如果任务还没有执行），使其不能再到点执行了。于是查了API果然有这样一个方法。 一看API，需要移除的是一个Runnable对象，想当然的就把任务调度的传入的Runable对象保留下来，然后进行删除。简要代码如下  &lt;a href="http://www.cnblogs.com/nijunyang/p/12657039.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

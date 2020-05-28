@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="过山车 Time Limit: 1000/1000 MS (Java/Others) Memory Limit: 32768/32768 K (Java/Others) Total Submissio" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>#2063 过山车（二分图入门题） - RioTian - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/RioTian/custom.css?v=rge7oc1YCxBHot8kEccGvw1cY5E=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/RioTian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/RioTian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/RioTian/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 568589;
+        var currentBlogApp = 'RioTian';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/RioTian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/RioTian/">RioTian</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/RioTian/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/RioTian">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+101&nbsp; </span>
+<span id="stats_article_count">文章 - 
+8&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+8</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/RioTian/p/12775236.html">#2063 过山车（二分图入门题）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-211130ba7a.css">
+                            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-211130ba7a.css">
+                <div class="htmledit_views" id="content_views">
+<h1 style="color:rgb(26,92,200);text-align:center;font-family:'Times New Roman';"><a name="t0"></a><a name="t0"></a>
+过山车</h1>
+<p><span style="font-family:'Times New Roman';font-size:14px;"><strong><span style="font-family:Arial;font-size:12px;color:#008000;">Time Limit: 1000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)<br><br>
+Total Submission(s): 19256    Accepted Submission(s): 8415<br></span></strong></span><br style="font-family:'Times New Roman';font-size:14px;"><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Problem Description</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+RPG girls今天和大家一起去游乐场玩，终于可以坐上梦寐以求的过山车了。可是，过山车的每一排只有两个座位，而且还有条不成文的规矩，就是每个女生必须找个个男生做partner和她同坐。但是，每个女孩都有各自的想法，举个例子把，Rabbit只愿意和XHD或PQK做partner，Grass只愿意和linle或LL做partner，PrincessSnow愿意和水域浪子或伪酷儿做partner。考虑到经费问题，boss刘决定只让找到partner的人去坐过山车，其他的人，嘿嘿，就站在下面看着吧。聪明的Acmer，你可以帮忙算算最多有多少对组合可以坐上过山车吗？</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Input</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+输入数据的第一行是三个整数K , M , N，分别表示可能的组合数目，女生的人数，男生的人数。0&lt;K&lt;=1000<br>
+1&lt;=N 和M&lt;=500.接下来的K行，每行有两个数，分别表示女生Ai愿意和男生Bj做partner。最后一个0结束输入。</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Output</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+对于每组数据，输出一个整数，表示可以坐上过山车的最多组合数。</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Sample Input</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+<pre></pre><div style="font-family:'Courier New', Courier, monospace;">6 3 3
+1 1
+1 2
+1 3
+2 1
+2 3
+3 1
+0</div>
+</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Sample Output</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+<pre></pre><div style="font-family:'Courier New', Courier, monospace;">3</div>
+</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Author</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+PrincessSnow</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"></p>
+<p>二分图入门题型：<a href="https://www.cnblogs.com/RioTian/articles/12775335.html">二分图讲解</a></p>
+<p><strong>AC代码：</strong></p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 505;
+int line[N][N];//对上眼的组合
+int gril[N];
+bool book[N];//标记已经匹配的女生
+int k, m, n;
+//为男生匹配女生，递归法实现
+//匈牙利算法核心
+bool found(int x) {
+    for (int i = 1; i &lt;= n; ++i) {
+        if (line[x][i] &amp;&amp; !book[i]) {
+            book[i] = true;
+            if (!gril[i] || found(gril[i])) {
+                book[i] = true;
+                gril[i] = x;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+int main() {
+    int x, y;
+    while (cin &gt;&gt; k &amp;&amp; k) {
+        cin &gt;&gt; m &gt;&gt; n;
+        memset(line, 0, sizeof(line));
+        memset(gril, 0, sizeof(gril));
+        for (int i = 0; i &lt; k; ++i) {
+            cin &gt;&gt; x &gt;&gt; y;
+            line[x][y] = 1;//男生女生对上电波了
+        }
+        int sum = 0;//计算最大撮合数
+        for (int i = 1; i &lt;= m; ++i) {
+            memset(book, false, sizeof(book));
+            if (found(i))++sum;
+        }
+        cout &lt;&lt; sum &lt;&lt; endl;
+    }
+
+    return 0;
+}
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-25 20:59</span>&nbsp;
+<a href="https://www.cnblogs.com/RioTian/">RioTian</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12775236" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12775236);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 568589, cb_blogApp = 'RioTian', cb_blogUserGuid = '1879b1d0-0b82-43fc-9a4e-08d753a9a8fd';
+    var cb_entryId = 12775236, cb_entryCreatedDate = '2020-04-25 20:59', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 RioTian
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+        /* 鼠标点击文字特效 */
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+            $("body").click(function (e) {
+                var a = [
+                    "天天天","技术宅","伊卡洛斯","ACMer","萝莉","人工智能","小白","四糸乃","Terminal","图论","数论","为了女儿说不定连魔王都能干掉","一生只为机器人",
+                ];
+                var b = [
+                    "#FFF68F", "#FFBBFF", "#FF0000", "#FF00FF", "#F08080",
+                    "#008000", "#7FFFAA", "#0000CD", "#0000FF", "#080808"
+                ];
+                var a_index = Math.floor((Math.random() * a.length));
+                var b_index = Math.floor((Math.random() * b.length));
+ 
+                var color = b[b_index];
+                var $i = $("<span/>").text(a[a_index]);
+                /* a_idx = (a_idx + 1) % a.length; */
+                var x = e.pageX,
+                    y = e.pageY;
+ 
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": color,
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 1500, function () {
+                    $i.remove();
+                });
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一个人的旅行 Time Limit: 1000/1000 MS (Java/Others) Memory Limit: 32768/32768 K (Java/Others) Total Submis" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>#2066：一个人的旅行（Dijkstra算法入门题） - RioTian - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/RioTian/custom.css?v=rge7oc1YCxBHot8kEccGvw1cY5E=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/RioTian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/RioTian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/RioTian/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 568589;
+        var currentBlogApp = 'RioTian';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/RioTian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/RioTian/">RioTian</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/RioTian/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/RioTian">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+101&nbsp; </span>
+<span id="stats_article_count">文章 - 
+8&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+8</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/RioTian/p/12777514.html">#2066：一个人的旅行（Dijkstra算法入门题）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-211130ba7a.css">
+                            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-211130ba7a.css">
+                <div class="htmledit_views" id="content_views">
+<h1 style="color:rgb(26,92,200);text-align:center;font-family:'Times New Roman';"><a name="t0"></a><a name="t0"></a>
+一个人的旅行</h1>
+<p><span style="font-family:'Times New Roman';font-size:14px;"><strong><span style="font-family:Arial;font-size:12px;color:#008000;">Time Limit: 1000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)<br><br>
+Total Submission(s): 31420    Accepted Submission(s): 10804<br></span></strong></span><br style="font-family:'Times New Roman';font-size:14px;"><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Problem Description</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Input</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+输入数据有多组，每组的第一行是三个整数T，S和D，表示有T条路，和草儿家相邻的城市的有S个，草儿想去的地方有D个；<br>
+接着有T行，每行有三个整数a，b，time,表示a,b城市之间的车程是time小时；(1=&lt;(a,b)&lt;=1000;a,b 之间可能有多条路)<br>
+接着的第T+1行有S个数，表示和草儿家相连的城市；<br>
+接着的第T+2行有D个数，表示草儿想去地方。</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Output</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+输出草儿能去某个喜欢的城市的最短时间。</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Sample Input</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+<pre></pre><div style="font-family:'Courier New', Courier, monospace;">6 2 3
+1 3 5
+1 4 7
+2 8 12
+3 8 4
+4 9 12
+9 10 2
+1 2
+8 9 10</div>
+</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><br style="font-family:'Times New Roman';font-size:14px;"><div class="panel_title" align="left" style="color:rgb(124,169,237);font-size:18px;font-family:Arial;font-weight:bold;"><br>
+Sample Output</div></p>
+<div class="panel_content" style="font-size:14px;font-family:'Times New Roman';">
+<pre></pre><div style="font-family:'Courier New', Courier, monospace;">9</div>
+</div>
+<div class="panel_bottom" style="font-family:'Times New Roman';font-size:14px;">
+&nbsp;</div>
+<p><font color = #0BBFFF>思路1：<a href="https://www.cnblogs.com/RioTian/p/12597634.html">Dijkstra算法（链接附讲解）</a></font></p>
+<p>AC代码：</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define N 1005
+#define inf 9999999
+using namespace std;
+
+int e[N][N], dis[N],book[N];
+
+void dijkstra(int n) {
+    int i, j, k, Min;
+    memset(book, 0, sizeof(book));
+    //初始化某点的最短路径
+    for (i = 0; i &lt;= n; ++i)dis[i] = e[0][i];
+    book[0] = 1;
+    for (k = 1; k &lt;= n; ++k) {
+        Min = inf;
+        for (i = 1; i &lt;= n; ++i)
+            if (!book[i] &amp;&amp; dis[i] &lt; Min)Min = dis[i], j = i;
+        book[j] = 1;
+        for (i = 1; i &lt;= n; ++i)
+            if (!book[i] &amp;&amp; dis[i] &gt; e[j][i] + dis[j])
+                dis[i] = e[j][i] + dis[j];
+    }
+}
+int main() {
+    int t, s, d, Min, u, v, w, n;
+
+    while (cin &gt;&gt; t &gt;&gt; s &gt;&gt; d) {
+        memset(e, inf, sizeof(e));
+        for (int i = 0; i &lt; N; ++i)e[i][i] = 0;
+        n = 0;
+        //输入城市间路径与时间
+        while (t--) {
+            cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+            //因为有些路径是给了多次，取最小的
+            if (e[u][v] &gt; w)e[u][v] = e[v][u] = w;
+            n = max(n, max(u, v));
+        }
+        //相邻城市距离为0
+        while (s--) {
+            cin &gt;&gt; v;
+            e[0][v]= e[v][0] = 0;
+        }
+        dijkstra(n);
+        Min = inf;
+        while (d--) {
+            cin &gt;&gt; v;
+            Min = min(Min, dis[v]);
+        }
+        cout &lt;&lt; Min &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-26 10:18</span>&nbsp;
+<a href="https://www.cnblogs.com/RioTian/">RioTian</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12777514" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12777514);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 568589, cb_blogApp = 'RioTian', cb_blogUserGuid = '1879b1d0-0b82-43fc-9a4e-08d753a9a8fd';
+    var cb_entryId = 12777514, cb_entryCreatedDate = '2020-04-26 10:18', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 RioTian
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+        /* 鼠标点击文字特效 */
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+            $("body").click(function (e) {
+                var a = [
+                    "天天天","技术宅","伊卡洛斯","ACMer","萝莉","人工智能","小白","四糸乃","Terminal","图论","数论","为了女儿说不定连魔王都能干掉","一生只为机器人",
+                ];
+                var b = [
+                    "#FFF68F", "#FFBBFF", "#FF0000", "#FF00FF", "#F08080",
+                    "#008000", "#7FFFAA", "#0000CD", "#0000FF", "#080808"
+                ];
+                var a_index = Math.floor((Math.random() * a.length));
+                var b_index = Math.floor((Math.random() * b.length));
+ 
+                var color = b[b_index];
+                var $i = $("<span/>").text(a[a_index]);
+                /* a_idx = (a_idx + 1) % a.length; */
+                var x = e.pageX,
+                    y = e.pageY;
+ 
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": color,
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                }, 1500, function () {
+                    $i.remove();
+                });
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>

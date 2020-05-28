@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; Java中提供了很多原子操作类来" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>并发编程的基石——CAS机制 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/12160085.html">并发编程的基石——CAS机制</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<p>Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇博客就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。</p>
+<p>其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写博客介绍。</p>
+<h2 id="什么是cas机制">什么是CAS机制</h2>
+<p>CAS机制是一种数据更新的方式。在具体讲什么是CAS机制之前，我们先来聊下在多线程环境下，对共享变量进行数据更新的两种模式：悲观锁模式和乐观锁模式。</p>
+<p>悲观锁更新的方式认为：在更新数据的时候大概率会有其他线程去争夺共享资源，所以悲观锁的做法是：第一个获取资源的线程会将资源锁定起来，其他没争夺到资源的线程只能进入阻塞队列，等第一个获取资源的线程释放锁之后，这些线程才能有机会重新争夺资源。synchronized就是java中悲观锁的典型实现，synchronized使用起来非常简单方便，但是会使没争抢到资源的线程进入阻塞状态，线程在阻塞状态和Runnable状态之间切换效率较低（比较慢）。比如你的更新操作其实是非常快的，这种情况下你还用synchronized将其他线程都锁住了，线程从Blocked状态切换回Runnable华的时间可能比你的更新操作的时间还要长。</p>
+<p>乐观锁更新方式认为:在更新数据的时候其他线程争抢这个共享变量的概率非常小，所以更新数据的时候不会对共享数据加锁。但是在正式更新数据之前会检查数据是否被其他线程改变过，如果未被其他线程改变过就将共享变量更新成最新值，如果发现共享变量已经被其他线程更新过了，就重试，直到成功为止。CAS机制就是乐观锁的典型实现。</p>
+<p>CAS，是Compare and Swap的简称，在这个机制中有三个核心的参数：</p>
+<ul>
+<li>主内存中存放的共享变量的值：V（一般情况下这个V是内存的地址值，通过这个地址可以获得内存中的值）</li>
+<li>工作内存中共享变量的副本值，也叫预期值：A</li>
+<li>需要将共享变量更新到的最新值：B</li>
+</ul>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/202001/1775037-20200106164315461-658325570.jpg" alt=""></p>
+<p>如上图中，主存中保存V值，线程中要使用V值要先从主存中读取V值到线程的工作内存A中，然后计算后变成B值，最后再把B值写回到内存V值中。多个线程共用V值都是如此操作。CAS的核心是在将B值写入到V之前要比较A值和V值是否相同，如果不相同证明此时V值已经被其他线程改变，重新将V值赋给A，并重新计算得到B，如果相同，则将B值赋给V。</p>
+<p>值得注意的是CAS机制中的这步步骤是原子性的（从指令层面提供的原子操作），所以CAS机制可以解决多线程并发编程对共享变量读写的原子性问题。</p>
+<h2 id="cas机制优缺点">CAS机制优缺点</h2>
+<h3 id="缺点">缺点</h3>
+<p><strong>1. ABA问题</strong><br>
+ABA问题：CAS在操作的时候会检查变量的值是否被更改过，如果没有则更新值，但是带来一个问题，最开始的值是A，接着变成B，最后又变成了A。经过检查这个值确实没有修改过，因为最后的值还是A，但是实际上这个值确实已经被修改过了。为了解决这个问题，在每次进行操作的时候加上一个版本号，每次操作的就是两个值，一个版本号和某个值，A——&gt;B——&gt;A问题就变成了1A——&gt;2B——&gt;3A。在jdk中提供了AtomicStampedReference类解决ABA问题，用Pair这个内部类实现，包含两个属性，分别代表版本号和引用，在compareAndSet中先对当前引用进行检查，再对版本号标志进行检查，只有全部相等才更新值。</p>
+<p><strong>2. 可能会消耗较高的CPU</strong><br>
+看起来CAS比锁的效率高，从阻塞机制变成了非阻塞机制，减少了线程之间等待的时间。每个方法不能绝对的比另一个好，在线程之间竞争程度大的时候，如果使用CAS，每次都有很多的线程在竞争，也就是说CAS机制不能更新成功。这种情况下CAS机制会一直重试，这样就会比较耗费CPU。因此可以看出，如果线程之间竞争程度小，使用CAS是一个很好的选择；但是如果竞争很大，使用锁可能是个更好的选择。在并发量非常高的环境中，如果仍然想通过原子类来更新的话，可以使用AtomicLong的替代类：LongAdder。</p>
+<p><strong>3. 不能保证代码块的原子性</strong><br>
+Java中的CAS机制只能保证共享变量操作的原子性，而不能保证代码块的原子性。</p>
+<h3 id="优点">优点</h3>
+<ul>
+<li>可以保证变量操作的原子性；</li>
+<li>并发量不是很高的情况下，使用CAS机制比使用锁机制效率更高；</li>
+<li>在线程对共享资源占用时间较短的情况下，使用CAS机制效率也会较高。</li>
+</ul>
+<h2 id="java提供的cas操作类--unsafe类">Java提供的CAS操作类--Unsafe类</h2>
+<p>从Java5开始引入了对CAS机制的底层的支持，在这之前需要开发人员编写相关的代码才可以实现CAS。在原子变量类Atomic<em><strong>中（例如AtomicInteger、AtomicLong）可以看到CAS操作的代码，在这里的代码都是调用了底层（核心代码调用native修饰的方法）的实现方法。在AtomicInteger源码中可以看getAndSet方法和compareAndSet方法之间的关系，compareAndSet方法调用了底层的实现，该方法可以实现与一个volatile变量的读取和写入相同的效果。在前面说到了volatile不支持例如i++这样的复合操作，在Atomic</strong></em>中提供了实现该操作的方法。JVM对CAS的支持通过这些原子类（Atomic***）暴露出来，供我们使用。</p>
+<p>而Atomic系类的类底层调用的是Unsafe类的API，Unsafe类提供了一系列的compareAndSwap*方法，下面就简单介绍下Unsafe类的API：</p>
+<ul>
+<li>
+<p>long objectFieldOffset（Field field）方法：返回指定的变量在所属类中的内存偏移地址，该偏移地址仅仅在该Unsafe函数中访问指定字段时使用。如下代码使用Unsafe类获取变量value在AtomicLong对象中的内存偏移。</p>
+<pre><code class="language-java">static {
+   try {
+       valueOffset = unsafe.objectFieldOffset
+           (AtomicInteger.class.getDeclaredField(&quot;value&quot;));
+   } catch (Exception ex) { throw new Error(ex); }
+}
+</code></pre>
+</li>
+<li>
+<p>int arrayBaseOffset（Class arrayClass）方法：获取数组中第一个元素的地址。</p>
+</li>
+<li>
+<p>int arrayIndexScale（Class arrayClass）方法：获取数组中一个元素占用的字节。</p>
+</li>
+<li>
+<p>boolean compareAndSwapLong（Object obj, long offset, long expect, long update）方法：比较对象obj中偏移量为offset的变量的值是否与expect相等，相等则使用update值更新，然后返回true，否则返回false，这次处理器提供的一个原子性指令。</p>
+</li>
+<li>
+<p>public native long getLongvolatile（Object obj, long offset）方法：获取对象obj中偏移量为offset的变量对应volatile语义的值。</p>
+</li>
+<li>
+<p>void putLongvolatile（Object obj, long offset, long value）方法：设置obj对象中offset偏移的类型为long的field的值为value，支持volatile语义。</p>
+</li>
+<li>
+<p>void putOrderedLong（Object obj, long offset, long value）方法：设置obj对象中offset偏移地址对应的long型field的值为value。这是一个有延迟的putLongvolatile方法，并且不保证值修改对其他线程立刻可见。只有在变量使用volatile修饰并且预计会被意外修改时才使用该方法。</p>
+</li>
+<li>
+<p>void park（boolean isAbsolute, long time）方法：阻塞当前线程，其中参数isAbsolute等于false且time等于0表示一直阻塞。time大于0表示等待指定的time后阻塞线程会被唤醒，这个time是个相对值，是个增量值，也就是相对当前时间累加time后当前线程就会被唤醒。如果isAbsolute等于true，并且time大于0，则表示阻塞的线程到指定的时间点后会被唤醒，这里time是个绝对时间，是将某个时间点换算为ms后的值。另外，当其他线程调用了当前阻塞线程的interrupt方法而中断了当前线程时，当前线程也会返回，而当其他线程调用了unPark方法并且把当前线程作为参数时当前线程也会返回。</p>
+</li>
+<li>
+<p>void unpark（Object thread）方法：唤醒调用park后阻塞的线程。</p>
+</li>
+</ul>
+<p>下面是JDK8新增的函数，这里只列出Long类型操作。</p>
+<ul>
+<li>
+<p>long getAndSetLong（Object obj, long offset, long update）方法：获取对象obj中偏移量为offset的变量volatile语义的当前值，并设置变量volatile语义的值为update。</p>
+<pre><code class="language-java">//这个方法只是封装了compareAndSwapLong的使用，不需要自己写重试机制
+public final long getAndSetLong(Object var1, long var2, long var4) {
+    long var6;
+    do {
+        var6 = this.getLongVolatile(var1, var2);
+    } while(!this.compareAndSwapLong(var1, var2, var6, var4));
+
+    return var6;
+}
+</code></pre>
+</li>
+<li>
+<p>long getAndAddLong（Object obj, long offset, long addValue）方法：获取对象obj中偏移量为offset的变量volatile语义的当前值，并设置变量值为原始值+addValue，原理和上面的方法类似。</p>
+</li>
+</ul>
+<h2 id="unsafe类的使用">Unsafe类的使用</h2>
+<pre><code class="language-java">
+public class UnsafeDemo {
+
+    static final Unsafe unsafe;
+    static final long offSet;
+    static long count;
+
+    static {
+        try {
+
+            Field theUnsafe = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
+            theUnsafe.setAccessible(true);
+            unsafe= (Unsafe)theUnsafe.get(null);
+            offSet = unsafe.objectFieldOffset(UnsafeDemo.class.getDeclaredField(&quot;offSet&quot;));
+
+        }catch (Exception e){
+
+        }
+    }
+
+    public static void main(String[] args) {
+        UnsafeDemo unsafeDemo = new UnsafeDemo();
+        boolean b = unsafe.compareAndSwapInt(unsafeDemo, offSet, 0, 1);
+        System.out.println(b);
+    }
+
+}
+
+</code></pre>
+<h2 id="cas使用场景">CAS使用场景</h2>
+<ul>
+<li>使用一个变量统计网站的访问量；</li>
+<li>Atomic类操作；</li>
+<li>数据库乐观锁更新。</li>
+</ul>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/myopensource/p/8177074.html">https://www.cnblogs.com/myopensource/p/8177074.html</a></li>
+<li><a href="https://baijiahao.baidu.com/s?id=1647620168550407271&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1647620168550407271&amp;wfr=spider&amp;for=pc</a></li>
+<li><a href="https://www.jianshu.com/p/f714c440d0cb">https://www.jianshu.com/p/f714c440d0cb</a></li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-07 10:26</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12160085" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12160085);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 12160085, cb_entryCreatedDate = '2020-01-07 10:26', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="Ansible Facts 变量详解与使用案例" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ansible Facts 变量详解 - 踏歌行666 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=vmUk-3Bh8LDsKXwjNHs2GDiFna-ZMTUgOJzjUaXTlPA" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=cJiDsI1JAuHHd-OAUWJeyE5JMXXsG4mmuUi2rVmEK1c" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhanglianghhh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhanglianghhh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhanglianghhh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 430741;
+        var currentBlogApp = 'zhanglianghhh';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'AnotherEon001';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhanglianghhh/">踏歌行的专栏</a>
+</h1>
+<div id="subtitle">
+一个爱学习爱分享的技术人员，微信公众号「OpenInfo」。
+本文原创发布于公众号 OpenInfo，转载请务必注明出处！
+</div>
+</div>
+<div id="sub"><div class="BlogStats">随笔 - 
+113, 文章 - 
+0, 评论 - 
+7, 引用 - 
+0</div>
+
+</div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	<div id="post_detail">
+    <div class="post">
+        <h2>
+            
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhanglianghhh/p/12776236.html">Ansible Facts 变量详解</a>
+
+        </h2>
+        <div class="postbody">
+            
+    <div id="cnblogs_post_description" style="display: none">
+        Ansible Facts 变量详解与使用案例
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<blockquote>
+<p>Ansible Facts 变量详解与使用案例</p>
+</blockquote>
+<p>&nbsp;</p>
+<h1>主机规划</h1>
+<p><img src="https://img2020.cnblogs.com/blog/1395193/202004/1395193-20200425232611525-2079192646.png" alt=""></p>
+<p>&nbsp;</p>
+<h2 id="添加用户账号">添加用户账号</h2>
+<p><strong>说明：</strong></p>
+<p>1、 运维人员使用的登录账号；</p>
+<p>2、 所有的业务都放在 /app/ 下「yun用户的家目录」，避免业务数据乱放；</p>
+<p>3、 该用户也被 ansible 使用，因为几乎所有的生产环境都是禁止 root 远程登录的（因此该 yun 用户也进行了 sudo 提权）。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> <span style="color: #000000;"># 使用一个专门的用户，避免直接使用root用户
+</span><span style="color: #008080;">2</span> <span style="color: #000000;"># 添加用户、指定家目录并指定用户密码
+</span><span style="color: #008080;">3</span> <span style="color: #000000;"># sudo提权
+</span><span style="color: #008080;">4</span> <span style="color: #000000;"># 让其它普通用户可以进入该目录查看信息
+</span><span style="color: #008080;">5</span> useradd -u <span style="color: #800080;">1050</span> -d /app yun &amp;&amp; <span style="color: #0000ff;">echo</span> <span style="color: #800000;">'</span><span style="color: #800000;">123456</span><span style="color: #800000;">'</span> | /usr/bin/<span style="color: #0000ff;">passwd</span> --<span style="color: #000000;">stdin yun
+</span><span style="color: #008080;">6</span> <span style="color: #0000ff;">echo</span> <span style="color: #800000;">"</span><span style="color: #800000;">yun  ALL=(ALL)       NOPASSWD: ALL</span><span style="color: #800000;">"</span> &gt;&gt;  /etc/<span style="color: #000000;">sudoers
+</span><span style="color: #008080;">7</span> <span style="color: #0000ff;">chmod</span> <span style="color: #800080;">755</span> /app/</pre>
+</div>
+<p>&nbsp;</p>
+<h2 id="Ansible-配置清单Inventory">Ansible 配置清单Inventory</h2>
+<p>之后文章都是如下主机配置清单</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> [yun@ansi-manager ansible_info]$ <span style="color: #0000ff;">pwd</span>
+<span style="color: #008080;"> 2</span> /app/<span style="color: #000000;">ansible_info
+</span><span style="color: #008080;"> 3</span> [yun@ansi-manager ansible_info]$ <span style="color: #0000ff;">cat</span><span style="color: #000000;"> hosts_key 
+</span><span style="color: #008080;"> 4</span> # 方式1、主机 + 端口 +<span style="color: #000000;"> 密钥
+</span><span style="color: #008080;"> 5</span> <span style="color: #000000;">[manageservers]
+</span><span style="color: #008080;"> 6</span> <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>:<span style="color: #800080;">22</span>
+<span style="color: #008080;"> 7</span> 
+<span style="color: #008080;"> 8</span> <span style="color: #000000;">[proxyservers]
+</span><span style="color: #008080;"> 9</span> <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.18</span>[<span style="color: #800080;">1</span>:<span style="color: #800080;">2</span>]:<span style="color: #800080;">22</span>
+<span style="color: #008080;">10</span> 
+<span style="color: #008080;">11</span> # 方式2：别名 + 主机 + 端口 +<span style="color: #000000;"> 密码
+</span><span style="color: #008080;">12</span> <span style="color: #000000;">[webservers]
+</span><span style="color: #008080;">13</span> web01 ansible_ssh_host=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.183</span> ansible_ssh_port=<span style="color: #800080;">22</span>
+<span style="color: #008080;">14</span> web02 ansible_ssh_host=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.184</span> ansible_ssh_port=<span style="color: #800080;">22</span>
+<span style="color: #008080;">15</span> web03 ansible_ssh_host=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.185</span> ansible_ssh_port=<span style="color: #800080;">22</span></pre>
+</div>
+<p>&nbsp;</p>
+<h1 id="Facts-概述">Facts 概述</h1>
+<p><strong>Ansible Facts 是 Ansible 在被托管主机上自动收集的变量。</strong>它是通过在执行 Ad-Hoc 以及 Playbook 时使用 setup 模块进行收集的，并且这个操作是默认的。</p>
+<p>因为这个收集托管主机上的 Facts 比较耗费时间，所以可以在不需要的时候关闭&nbsp;<span style="color: red;">setup</span>&nbsp;模块。收集的 Facts 中包含了托管主机特有的信息，这些信息可以像变量一样在 Playbook 中使用。</p>
+<p><strong>收集的 Facts 中包含了以下常用的信息：</strong></p>
+<p>主机名、内核版本、网卡接口、IP 地址、操作系统版本、环境变量、CPU 核数、可用内存、可用磁盘 等等&hellip;&hellip;。</p>
+<p><strong>使用场景：</strong></p>
+<ol>
+<li>通过 facts 检查 CPU，生成对应的 Nginx 配置文件</li>
+<li>通过 facts 检查内存情况，定义不同的 MySQL 配置文件或 Redis 配置文件</li>
+<li>通过 facts 检查主机 hostname，生成不同的 zabbix 配置文件</li>
+</ol>
+<p><strong>获取指定受控端的 facts 信息</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> [yun@ansi-manager ansible_info]$ <span style="color: #0000ff;">pwd</span>
+<span style="color: #008080;"> 2</span> /app/<span style="color: #000000;">ansible_info
+</span><span style="color: #008080;"> 3</span> [yun@ansi-manager ansible_info]$ ansible <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.181</span> -m setup -i ./<span style="color: #000000;">hosts_key 
+</span><span style="color: #008080;"> 4</span> <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.181</span> | SUCCESS =&gt;<span style="color: #000000;"> {
+</span><span style="color: #008080;"> 5</span>     <span style="color: #800000;">"</span><span style="color: #800000;">ansible_facts</span><span style="color: #800000;">"</span><span style="color: #000000;">: {
+</span><span style="color: #008080;"> 6</span>         <span style="color: #800000;">"</span><span style="color: #800000;">ansible_all_ipv4_addresses</span><span style="color: #800000;">"</span><span style="color: #000000;">: [
+</span><span style="color: #008080;"> 7</span>             <span style="color: #800000;">"</span><span style="color: #800000;">10.0.0.181</span><span style="color: #800000;">"</span><span style="color: #000000;">, 
+</span><span style="color: #008080;"> 8</span>             <span style="color: #800000;">"</span><span style="color: #800000;">172.16.1.181</span><span style="color: #800000;">"</span>
+<span style="color: #008080;"> 9</span> <span style="color: #000000;">        ],
+</span><span style="color: #008080;">10</span> &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;</pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>如何在 playbook 中关闭 facts</strong></p>
+<p><strong>&nbsp;</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">pwd</span>
+<span style="color: #008080;"> 2</span> /app/ansible_info/<span style="color: #000000;">object03
+</span><span style="color: #008080;"> 3</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">cat</span><span style="color: #000000;"> test_facts.yml 
+</span><span style="color: #008080;"> 4</span> ---
+<span style="color: #008080;"> 5</span> <span style="color: #000000;"># facts 使用
+</span><span style="color: #008080;"> 6</span> -<span style="color: #000000;"> hosts: proxyservers
+</span><span style="color: #008080;"> 7</span> <span style="color: #000000;">  # 关闭 facts 变量
+</span><span style="color: #008080;"> 8</span> <span style="color: #000000;">  gather_facts: no
+</span><span style="color: #008080;"> 9</span> 
+<span style="color: #008080;">10</span>   # 这时就不能取到 ansible_hostname、ansible_eth0.ipv4.address、ansible_eth1 [<span style="color: #800000;">'</span><span style="color: #800000;">ipv4</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">address</span><span style="color: #800000;">'</span><span style="color: #000000;">] 变量信息
+</span><span style="color: #008080;">11</span> <span style="color: #000000;">  tasks:
+</span><span style="color: #008080;">12</span>     - name: <span style="color: #800000;">"</span><span style="color: #800000;">get ansible facts var</span><span style="color: #800000;">"</span>
+<span style="color: #008080;">13</span> <span style="color: #000000;">      debug:
+</span><span style="color: #008080;">14</span>         msg: <span style="color: #800000;">"</span><span style="color: #800000;">This host name is {{ ansible_hostname }} ,eth0: {{ ansible_eth0.ipv4.address }}, eth1: {{ ansible_eth1['ipv4']['address'] }}</span><span style="color: #800000;">"</span></pre>
+</div>
+<p>&nbsp;</p>
+<h1 id="Facts-案例-获取主机名和网卡信息">Facts 案例-获取主机名和网卡信息</h1>
+<p>获取受控端的主机名，内网地址和外网地址</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">pwd</span>
+<span style="color: #008080;"> 2</span> /app/ansible_info/<span style="color: #000000;">object03
+</span><span style="color: #008080;"> 3</span> [yun@ansi-<span style="color: #000000;">manager object03]$ ll
+</span><span style="color: #008080;"> 4</span> total <span style="color: #800080;">4</span>
+<span style="color: #008080;"> 5</span> -rw-rw-r-- <span style="color: #800080;">1</span> yun yun  <span style="color: #800080;">241</span> Aug <span style="color: #800080;">22</span> <span style="color: #800080;">10</span>:<span style="color: #800080;">41</span><span style="color: #000000;"> test_facts.yml
+</span><span style="color: #008080;"> 6</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">cat</span><span style="color: #000000;"> test_facts.yml 
+</span><span style="color: #008080;"> 7</span> ---
+<span style="color: #008080;"> 8</span> <span style="color: #000000;"># facts 使用
+</span><span style="color: #008080;"> 9</span> -<span style="color: #000000;"> hosts: proxyservers
+</span><span style="color: #008080;">10</span> 
+<span style="color: #008080;">11</span> <span style="color: #000000;">  tasks:
+</span><span style="color: #008080;">12</span>     - name: <span style="color: #800000;">"</span><span style="color: #800000;">get ansible facts var</span><span style="color: #800000;">"</span>
+<span style="color: #008080;">13</span> <span style="color: #000000;">      debug:
+</span><span style="color: #008080;">14</span>         msg: <span style="color: #800000;">"</span><span style="color: #800000;">This host name is {{ ansible_hostname }} ,eth0: {{ ansible_eth0.ipv4.address }}, eth1: {{ ansible_eth1['ipv4']['address'] }}</span><span style="color: #800000;">"</span>
+<span style="color: #008080;">15</span> <span style="color: #000000;">        #### 上面写了两种方式引用变量，推荐使用后一种引用方式
+</span><span style="color: #008080;">16</span> 
+<span style="color: #008080;">17</span> [yun@ansi-manager object03]$ ansible-playbook -b -i ../<span style="color: #000000;">hosts_key test_facts.yml 
+</span><span style="color: #008080;">18</span> 
+<span style="color: #008080;">19</span> PLAY [proxyservers] ***********************************************************************************************
+<span style="color: #008080;">20</span> 
+<span style="color: #008080;">21</span> TASK [Gathering Facts] ********************************************************************************************
+<span style="color: #008080;">22</span> ok: [<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.181</span><span style="color: #000000;">]
+</span><span style="color: #008080;">23</span> ok: [<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.182</span><span style="color: #000000;">]
+</span><span style="color: #008080;">24</span> 
+<span style="color: #008080;">25</span> TASK [get ansible facts var] **************************************************************************************
+<span style="color: #008080;">26</span> ok: [<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.181</span>] =&gt;<span style="color: #000000;"> {
+</span><span style="color: #008080;">27</span>     <span style="color: #800000;">"</span><span style="color: #800000;">msg</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">This host name is ansi-haproxy01 ,eth0: 172.16.1.181, eth1: 10.0.0.181</span><span style="color: #800000;">"</span>
+<span style="color: #008080;">28</span> <span style="color: #000000;">}
+</span><span style="color: #008080;">29</span> ok: [<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.182</span>] =&gt;<span style="color: #000000;"> {
+</span><span style="color: #008080;">30</span>     <span style="color: #800000;">"</span><span style="color: #800000;">msg</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">This host name is ansi-haproxy02 ,eth0: 172.16.1.182, eth1: 10.0.0.182</span><span style="color: #800000;">"</span>
+<span style="color: #008080;">31</span> <span style="color: #000000;">}
+</span><span style="color: #008080;">32</span> 
+<span style="color: #008080;">33</span> PLAY RECAP ********************************************************************************************************
+<span style="color: #008080;">34</span> <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.181</span>               : ok=<span style="color: #800080;">2</span>    changed=<span style="color: #800080;">0</span>    unreachable=<span style="color: #800080;">0</span>    failed=<span style="color: #800080;">0</span>    skipped=<span style="color: #800080;">0</span>    rescued=<span style="color: #800080;">0</span>    ignored=<span style="color: #800080;">0</span> 
+<span style="color: #008080;">35</span> <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.182</span>               : ok=<span style="color: #800080;">2</span>    changed=<span style="color: #800080;">0</span>    unreachable=<span style="color: #800080;">0</span>    failed=<span style="color: #800080;">0</span>    skipped=<span style="color: #800080;">0</span>    rescued=<span style="color: #800080;">0</span>    ignored=<span style="color: #800080;">0</span></pre>
+</div>
+<p>&nbsp;</p>
+<h1 id="Facts-案例-模拟zabbix客户端配置">Facts 案例-模拟zabbix客户端配置</h1>
+<p>根据受控端主机名的不同，在受控端生成不同的配置文件</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">pwd</span>
+<span style="color: #008080;"> 2</span> /app/ansible_info/<span style="color: #000000;">object03
+</span><span style="color: #008080;"> 3</span> [yun@ansi-<span style="color: #000000;">manager object03]$ ll
+</span><span style="color: #008080;"> 4</span> total <span style="color: #800080;">32</span>
+<span style="color: #008080;"> 5</span> drwxrwxr-x <span style="color: #800080;">2</span> yun yun   <span style="color: #800080;">58</span> Aug <span style="color: #800080;">22</span> <span style="color: #800080;">12</span>:<span style="color: #800080;">31</span> <span style="color: #0000ff;">file</span>
+<span style="color: #008080;"> 6</span> -rw-rw-r-- <span style="color: #800080;">1</span> yun yun  <span style="color: #800080;">224</span> Aug <span style="color: #800080;">22</span> <span style="color: #800080;">12</span>:<span style="color: #800080;">33</span><span style="color: #000000;"> test_zabbix_agentd.yml
+</span><span style="color: #008080;"> 7</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">cat</span> <span style="color: #0000ff;">file</span>/<span style="color: #000000;">vars_file.yml  # playbook 变量
+</span><span style="color: #008080;"> 8</span> zabbix_server: <span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>
+<span style="color: #008080;"> 9</span> 
+<span style="color: #008080;">10</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">cat</span> <span style="color: #0000ff;">file</span>/<span style="color: #000000;">zabbix_agentd_temp.conf.j2  # 模拟 zabbix_agentd 配置文件
+</span><span style="color: #008080;">11</span> <span style="color: #000000;"># 模拟 zabbix_agentd 配置文件
+</span><span style="color: #008080;">12</span> 
+<span style="color: #008080;">13</span> <span style="color: #000000;"># zabbix 服务端配置
+</span><span style="color: #008080;">14</span> Server=<span style="color: #000000;">{{ zabbix_server }}
+</span><span style="color: #008080;">15</span> ServerActive=<span style="color: #000000;">{{ zabbix_server }}
+</span><span style="color: #008080;">16</span> 
+<span style="color: #008080;">17</span> <span style="color: #000000;"># zabbix 客户端配置
+</span><span style="color: #008080;">18</span> Hostname=<span style="color: #000000;">{{ ansible_hostname }}
+</span><span style="color: #008080;">19</span> 
+<span style="color: #008080;">20</span> [yun@ansi-manager object03]$ <span style="color: #0000ff;">cat</span><span style="color: #000000;"> test_zabbix_agentd.yml  # 具体的 yml 文件
+</span><span style="color: #008080;">21</span> ---
+<span style="color: #008080;">22</span> <span style="color: #000000;"># zabbix 配置
+</span><span style="color: #008080;">23</span> -<span style="color: #000000;"> hosts: proxyservers
+</span><span style="color: #008080;">24</span>   vars_files: ./<span style="color: #0000ff;">file</span>/<span style="color: #000000;">vars_file.yml
+</span><span style="color: #008080;">25</span> 
+<span style="color: #008080;">26</span> <span style="color: #000000;">  tasks:
+</span><span style="color: #008080;">27</span>     -<span style="color: #000000;"> name: config zabbix_agentd
+</span><span style="color: #008080;">28</span> <span style="color: #000000;">      template:
+</span><span style="color: #008080;">29</span>         src: ./<span style="color: #0000ff;">file</span>/<span style="color: #000000;">zabbix_agentd_temp.conf.j2
+</span><span style="color: #008080;">30</span>         dest: /tmp/<span style="color: #000000;">zabbix_agentd_temp.conf
+</span><span style="color: #008080;">31</span> 
+<span style="color: #008080;">32</span> [yun@ansi-manager object03]$ ansible-playbook -b -i ../hosts_key --syntax-<span style="color: #000000;">check test_zabbix_agentd.yml  # 语法检测
+</span><span style="color: #008080;">33</span> [yun@ansi-manager object03]$ ansible-playbook -b -i ../hosts_key -<span style="color: #000000;">C test_zabbix_agentd.yml  # 预执行，测试执行
+</span><span style="color: #008080;">34</span> [yun@ansi-manager object03]$ ansible-playbook -b -i ../hosts_key test_zabbix_agentd.yml  # 执行</pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>受控端1配置文件查看</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> [yun@ansi-haproxy01 ~]$ <span style="color: #0000ff;">cat</span> /tmp/<span style="color: #000000;">zabbix_agentd_temp.conf 
+</span><span style="color: #008080;">2</span> <span style="color: #000000;"># 模拟 zabbix_agentd 配置文件
+</span><span style="color: #008080;">3</span> 
+<span style="color: #008080;">4</span> <span style="color: #000000;"># zabbix 服务端配置
+</span><span style="color: #008080;">5</span> Server=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>
+<span style="color: #008080;">6</span> ServerActive=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>
+<span style="color: #008080;">7</span> 
+<span style="color: #008080;">8</span> <span style="color: #000000;"># zabbix 客户端配置
+</span><span style="color: #008080;">9</span> Hostname=ansi-haproxy01</pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>受控端2配置文件查看</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;">1</span> [yun@ansi-haproxy02 ~]$ <span style="color: #0000ff;">cat</span> /tmp/<span style="color: #000000;">zabbix_agentd_temp.conf 
+</span><span style="color: #008080;">2</span> <span style="color: #000000;"># 模拟 zabbix_agentd 配置文件
+</span><span style="color: #008080;">3</span> 
+<span style="color: #008080;">4</span> <span style="color: #000000;"># zabbix 服务端配置
+</span><span style="color: #008080;">5</span> Server=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>
+<span style="color: #008080;">6</span> ServerActive=<span style="color: #800080;">172.16</span>.<span style="color: #800080;">1.180</span>
+<span style="color: #008080;">7</span> 
+<span style="color: #008080;">8</span> <span style="color: #000000;"># zabbix 客户端配置
+</span><span style="color: #008080;">9</span> Hostname=ansi-haproxy02</pre>
+</div>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;&nbsp;</p>
+<p style="text-align: center;">&mdash;&mdash;&mdash;END&mdash;&mdash;&mdash;<br />如果觉得不错就关注下呗 (-^O^-) ！</p>
+<p style="text-align: center;"><img src="https://img2020.cnblogs.com/blog/1395193/202004/1395193-20200425232923407-1648610365.png" alt=""></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        </div>
+        <p class="postfoot">
+            posted on 
+<span id="post-date">2020-04-25 23:31</span>&nbsp;
+<a href="https://www.cnblogs.com/zhanglianghhh/">踏歌行666</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12776236" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12776236);return false;">收藏</a>
+        </p>
+    </div>
+</div>
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 430741, cb_blogApp = 'zhanglianghhh', cb_blogUserGuid = '1e1d97dd-c689-408a-4524-08d5b2fd8341';
+    var cb_entryId = 12776236, cb_entryCreatedDate = '2020-04-25 23:31', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhanglianghhh/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%B8%8F%E6%AD%8C%E8%A1%8C666">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhanglianghhh/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/zhanglianghhh/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 踏歌行666
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+</body>
+</html>

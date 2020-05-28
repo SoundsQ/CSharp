@@ -1,0 +1,1013 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>宇的季节 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismore/bundle-lessismore.min.css?v=zbVMf2M2JAlJ02H61dM8SlvD_g-Qf1GNTSQ53ByHeUE" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/chenkeyu/custom.css?v=PWorSHehbhqUHKV6xDqPdT&#x2B;w/4Q=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismore/bundle-lessismore-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/chenkeyu/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/chenkeyu/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/chenkeyu/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 347497;
+        var currentBlogApp = 'chenkeyu';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'LessIsMore';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <style type="text/css">
+    .Abstract
+    {
+        padding: 15px;
+        border: dotted 2px #999;
+        color: #999;
+        font-family: 'Microsoft Yahei';
+        border-radius: 4px;
+    }
+        
+    .First
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        text-align: left;
+        padding: 6px 20px;
+        color: #fff;
+        background: #55895B;
+        font-size: 20px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Second
+    {
+        margin: 10px 0;
+        font-family: 'Microsoft Yahei';
+        padding: 6px 20px;
+        background: #93C8A2;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 4px;
+        clear: both;
+    }
+        
+        
+    .Third
+    {
+        margin: 10px 0;
+        padding: 6px 20px;
+        font-family: 'Microsoft Yahei';
+        margin: 15px 0;
+        font-size: 16px;
+        color: fff;
+        background: #C6EFD2;
+        color: #999;
+        border-radius: 4px;
+        clear: both;
+    }
+    .note
+    {
+        margin: 10px 0;
+        padding: 15px 20px 15px 60px;
+        background: #FCFAA9 url('http://images.cnblogs.com/cnblogs_com/libaoheng/305804/o_yellow-pin.png') no-repeat 20px 0;
+        font-size: 15px;
+        font-family: 'Microsoft Yahei';
+        box-shadow: 0 0 8px #aaa;
+        clear: both;
+    }
+        
+    .demo
+    {
+        text-align: left;
+        padding: 6px 20px;
+        overflow: auto;
+        border-radius: 4px;
+        background: orange;
+        color: #fff;
+        font-size: 16px;
+        clear: both;
+    }
+        
+    .cnblogs_Highlighter
+    {
+        border: solid 1px #ccc;
+        clear: both;
+    }
+        
+    .cnblogs_code
+    {
+        background: #EFFFF4;
+        border: solid 0px #939393;
+        font-size: 14px;
+        clear: both;
+        padding: 10px 20px;
+    }
+    .cnblogs_code pre
+    {
+        font-size: 14px;
+    }
+    .cnblogs_code span
+    {
+        font-family: Courier New;
+        font-size: 14px;
+    }
+</style>
+    </div>
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/chenkeyu/">宇的季节</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/chenkeyu/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%AE%87%E7%9A%84%E5%AD%A3%E8%8A%82">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/chenkeyu/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+141&nbsp;</span>
+<span id="stats_article_count">文章 - 
+1&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+40</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12799207.html">
+[置顶]    MySQL如何创建一个好索引？创建索引的5条建议【宇哥带你玩转MySQL 索引篇(三)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：MySQL如何创建一个好索引？创建索引的5条建议 过滤效率高的放前面 对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列...这样。查询时，如果第一列能够排除的越多，那么后面列需要判断的行数就越少，效率越高。 关于如何判断哪个列的过滤效率更高，可以通过选择性计算来决定。例如我们            <a href="https://www.cnblogs.com/chenkeyu/p/12799207.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-28 23:49 宇的季节 阅读 (37) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12799207" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/12.html">2020年4月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12686940.html">
+[置顶]    为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生【宇哥带你玩转MySQL 索引篇(二)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生 在上一节，我们聊到数据库为了让我们的查询加速，通过索引方式对数据进行冗余并排序，这样我们在使用时就可以在排好序的数据里进行快速的二分查找，使得查询效率指数提升。但是我在结尾同样提到一个问题，就是内存大小一般是很有限的，不可能把一个表所有的数据都            <a href="https://www.cnblogs.com/chenkeyu/p/12686940.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-12 19:13 宇的季节 阅读 (222) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12686940" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/05.html">2020年4月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12639023.html">
+[置顶]    索引揭秘，看他是如何让你的查询性能指数提升的【宇哥带你玩转MySQL 索引篇(一)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：场景复现，一个索引提高600倍查询速度？ 首先准备一张books表 create table books( id int not null primary key auto_increment, name varchar(255) not null, author varchar(255) not             <a href="https://www.cnblogs.com/chenkeyu/p/12639023.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-05 21:09 宇的季节 阅读 (203) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12639023" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/05/26.html">2018年5月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/9092767.html">
+[置顶]    不使用SpringBoot如何将原生Feign集成到Spring中来简化http调用
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Github 使用示例(https://github.com/cky-thinker/spring-feign-client/blob/master/README.md) 在微服务架构中，如果使用得是SpringCloud，那么只需要集成SpringFeign就可以了，SpringFeign可以很友            <a href="https://www.cnblogs.com/chenkeyu/p/9092767.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-05-26 14:05 宇的季节 阅读 (2980) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9092767" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/05/07.html">2018年5月7日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/9005507.html">
+[置顶]    干货！从Tomcat执行流程了解jsp是如何被解析的，错误提示是哪里生成的。
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：一.关于Tomcat组成 先上张图： Tomcat组成： 1. Server：代表整个 servlet 容器，如Tomcat，JBoss之类的。 2. Service：它由一个或者多个Connector组成，以及一个Engine，负责处理所有Connector所获得的客户请求。 3. Connect            <a href="https://www.cnblogs.com/chenkeyu/p/9005507.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-05-07 22:53 宇的季节 阅读 (1495) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9005507" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2018/02/28.html">2018年2月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/8485412.html">
+[置顶]    对TCP三次握手四次分手还不清楚的速度进，超简单解析，明白了就很好记！
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：关于TCP三次握手四次分手，之前看资料解释的都很笼统，很多地方都不是很明白，所以很难记，前几天看的一个博客豁然开朗，可惜现在找不到了。现在把之前的疑惑总结起来，方便一下大家。 先上个TCP三次握手和四次分手的图 网上好多都是错的，只能自己画了，一个正确的图的确可以方便理解。 疑问一，上图传递过程中出            <a href="https://www.cnblogs.com/chenkeyu/p/8485412.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2018-02-28 20:20 宇的季节 阅读 (1684) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8485412" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/12/12.html">2017年12月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/8028781.html">
+[置顶]    SpringCache与redis集成，优雅的缓存解决方案
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：缓存可以说是加速服务响应速度的一种非常有效并且简单的方式。在缓存领域，有很多知名的框架，如EhCache&#160;、Guava、HazelCast等。Redis作为key-value型数据库，由于他的这一特性，Redis也成为一种流行的数据缓存工具。 在传统方式下对于缓存的处理代码是非常臃肿的。 例如：我们            <a href="https://www.cnblogs.com/chenkeyu/p/8028781.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-12-12 17:19 宇的季节 阅读 (37758) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8028781" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/12/07.html">2017年12月7日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/8001624.html">
+[置顶]    高可用的Spring FTP上传下载工具类（已解决上传过程常见问题）
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 最近在项目中需要和ftp服务器进行交互，在网上找了一下关于ftp上传下载的工具类，大致有两种。 第一种是单例模式的类。 第二种是另外定义一个Service，直接通过Service来实现ftp的上传下载删除。 这两种感觉都有利弊。 第一种实现了代码复用，但是配置信息全需要写在类中，维护比较复杂。            <a href="https://www.cnblogs.com/chenkeyu/p/8001624.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-12-07 23:44 宇的季节 阅读 (3514) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8001624" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/11/28.html">2017年11月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/7881818.html">
+[置顶]    Hibernate级联之一对多和inverse解析
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：hibernate的级联可以说是hibernate最重要的部分，只有深入了解了级联的特性与用法，才能运用自如。 这次讨论一对多的情况，所以就使用博客项目的用户表和博客表作为示例，来一起学习hibernate的级联 基本准备 文件结构： hibernate核心配置文件hibernate.cfg.xml            <a href="https://www.cnblogs.com/chenkeyu/p/7881818.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-11-28 10:17 宇的季节 阅读 (683) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7881818" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/10/22.html">2017年10月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/7711600.html">
+[置顶]    Spring的面向切面
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Spring的面向切面 在应用开发中，有很多类似日志、安全和事务管理的功能。这些功能都有一个共同点，那就是很多个对象都需要这些功能。复用这些通用的功能的最简单的方法就是继承或者委托。但是当应用规模达到一定程度时，使用继承或委托将会使应用的结构非常复杂。 面向切面便是解决上面问题的最佳办法。我们把这些            <a href="https://www.cnblogs.com/chenkeyu/p/7711600.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-10-22 20:52 宇的季节 阅读 (453) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7711600" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/09/10.html">2017年9月10日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/7501169.html">
+[置顶]    归并排序：步骤讲解与代码实现
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：归并排序 在一些常用的排序中，归并排序在时间开销上来说可以是排序中的最佳实践之一（时间复杂度=n*log n），今天我们就来看看归并是如何实现的。 归并排序大致可以分为两步： 1、将数组从中间分开，对两边分别排序。 2、将两个有序的数组进行合并。 所以实现归并排序主要也就是解决这两个问题。 下图是归            <a href="https://www.cnblogs.com/chenkeyu/p/7501169.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-09-10 15:22 宇的季节 阅读 (4373) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7501169" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2017/06/26.html">2017年6月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/7081228.html">
+[置顶]    关于操作系统中多个fork()会创建几个进程的理解
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：最近在看操作系统的书，在讲到用fork()创建子进程时，有些地方一时迷惑，最终理解，特记录下来。如下： //创建一个子进程；#include &quot;csapp.h&quot; int main() { fork(); printf(&quot;hello/n&quot;); exit(0);} //打印出两个hello;不难理解，主            <a href="https://www.cnblogs.com/chenkeyu/p/7081228.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2017-06-26 16:40 宇的季节 阅读 (4856) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=7081228" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12799207.html">
+    MySQL如何创建一个好索引？创建索引的5条建议【宇哥带你玩转MySQL 索引篇(三)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：MySQL如何创建一个好索引？创建索引的5条建议 过滤效率高的放前面 对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列...这样。查询时，如果第一列能够排除的越多，那么后面列需要判断的行数就越少，效率越高。 关于如何判断哪个列的过滤效率更高，可以通过选择性计算来决定。例如我们            <a href="https://www.cnblogs.com/chenkeyu/p/12799207.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-28 23:49 宇的季节 阅读 (37) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12799207" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/12.html">2020年4月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12686940.html">
+    为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生【宇哥带你玩转MySQL 索引篇(二)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生 在上一节，我们聊到数据库为了让我们的查询加速，通过索引方式对数据进行冗余并排序，这样我们在使用时就可以在排好序的数据里进行快速的二分查找，使得查询效率指数提升。但是我在结尾同样提到一个问题，就是内存大小一般是很有限的，不可能把一个表所有的数据都            <a href="https://www.cnblogs.com/chenkeyu/p/12686940.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-12 19:13 宇的季节 阅读 (222) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12686940" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/04/05.html">2020年4月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12639023.html">
+    索引揭秘，看他是如何让你的查询性能指数提升的【宇哥带你玩转MySQL 索引篇(一)】
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：场景复现，一个索引提高600倍查询速度？ 首先准备一张books表 create table books( id int not null primary key auto_increment, name varchar(255) not null, author varchar(255) not             <a href="https://www.cnblogs.com/chenkeyu/p/12639023.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-04-05 21:09 宇的季节 阅读 (203) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12639023" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/02/26.html">2020年2月26日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12368598.html">
+    mysql连接报错 Lost connection to MySQL server at &#39;sending authentication information&#39;, system error: 32
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：如果mysql连接报错Lost connection to MySQL server at &#39;sending authentication information&#39;, system error: 32 一种可能的原因是系统打开文件数过多 mac系统默认是256个，如果数据库打开文件过多，会因为系统限            <a href="https://www.cnblogs.com/chenkeyu/p/12368598.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-26 19:29 宇的季节 阅读 (46) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12368598" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/02/06.html">2020年2月6日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12268165.html">
+    mac item2自定义光标移动快捷键，移动行首行尾，按单词跳转
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：To jump between words and start/end of lines in iTerm2 follow these steps: iTerm2 -&gt; Preferences (⌘&#160;+&#160;,) Open the “Keys” tab Add the following Global             <a href="https://www.cnblogs.com/chenkeyu/p/12268165.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-06 12:06 宇的季节 阅读 (178) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12268165" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2020/01/02.html">2020年1月2日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/12141811.html">
+    Deepin系统安装之后找不到windows启动项
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：deepin terminal 输入如下命令            <a href="https://www.cnblogs.com/chenkeyu/p/12141811.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-02 20:14 宇的季节 阅读 (47) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12141811" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/11/08.html">2019年11月8日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/11820270.html">
+    deepin 删除文件后目录不刷新解决方案
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：调整最大文件监控数量 添加参数 运行使配置生效 https://unix.stackexchange.com/questions/444998/how-to-set-and-understand-fs-notify-max-user-watches            <a href="https://www.cnblogs.com/chenkeyu/p/11820270.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-11-08 14:54 宇的季节 阅读 (186) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11820270" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/09/23.html">2019年9月23日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/11571811.html">
+    google访问助手
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：google访问助手下载链接 1.插件安装失败？ 在安装chrome离线扩展程序时，报错信息如下： 2.解决方案 第一步：新建一个标签页，在地址栏输入：chrome://flags/#extensions-on-chrome-urls并按回车键 将值改为enabled 将值改为enabled 重启c            <a href="https://www.cnblogs.com/chenkeyu/p/11571811.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-09-23 13:24 宇的季节 阅读 (30) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11571811" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/08/25.html">2019年8月25日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/11408095.html">
+    Main property in package.json defines package entry point
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：I know my project&#39;s dependencies are installed under&#160;node_modules&#160;directory. But when I do&#160;require(&#39;lodash&#39;), how does Node know which file to load? &quot;            <a href="https://www.cnblogs.com/chenkeyu/p/11408095.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-08-25 15:35 宇的季节 阅读 (48) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11408095" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/chenkeyu/archive/2019/05/20.html">2019年5月20日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/chenkeyu/p/10897208.html">
+    mysql使用慢查询日志分析数据执行情况
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：#查询慢查询日志文件路径show variables like &#39;%slow_query%&#39;;#开启慢查询日志 set global slow_query_log=1; #设置慢查询阀值为0,将所有的语句都记入慢查询日志 set global long_query_time=0;#未使用索引的查询也被记录到慢查询日志中set global log-queries-not-using-indexe...            <a href="https://www.cnblogs.com/chenkeyu/p/10897208.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2019-05-20 23:12 宇的季节 阅读 (128) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10897208" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/chenkeyu/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 宇的季节
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

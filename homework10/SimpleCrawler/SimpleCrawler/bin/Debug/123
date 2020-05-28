@@ -1,0 +1,618 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="pyecharts是一个开源的可视化模块，其内置的功能非常丰富，生成图表展示出的视觉效果及佳，可以极大的方便我们对数据的分析和处理  本次我们使用pyecharts模块来获取全球疫情的信息，并制作成可" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Python模块---制作新冠疫情世界地图 - merlin& - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/cherish-hao/custom.css?v=4hqAigoQxKQLWBBM94IuOEs8LkI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/cherish-hao/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/cherish-hao/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/cherish-hao/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 586242;
+        var currentBlogApp = 'cherish-hao';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/cherish-hao/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/cherish-hao/">merlin&</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/cherish-hao/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/merlin%26">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/cherish-hao/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+14&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+1</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/cherish-hao/p/12793525.html">Python模块---制作新冠疫情世界地图</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        pyecharts是一个开源的可视化模块，其内置的功能非常丰富，生成图表展示出的视觉效果及佳，可以极大的方便我们对数据的分析和处理  本次我们使用pyecharts模块来获取全球疫情的信息，并制作成可视化地图展现出来
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="#pyecharts模块">pyecharts模块</a><ul><li><a href="#简介">简介</a></li><li><a href="#安装pyecharts">安装pyecharts</a></li><li><a href="#测试pyecharts模块">测试pyecharts模块</a></li></ul></li><li><a href="#pyecharts实战：绘制新冠肺炎疫情地图">pyecharts实战：绘制新冠肺炎疫情地图</a><ul><li><a href="#需求分析">需求分析</a></li><li><a href="#请求数据">请求数据</a></li><li><a href="#提取数据">提取数据</a></li><li><a href="#处理数据">处理数据</a></li><li><a href="#制作可视化地图">制作可视化地图</a></li><li><a href="#设置可视化地图">设置可视化地图</a></li></ul></li><li><a href="#完整代码">完整代码</a></li><li><a href="#实现结果">实现结果</a></li></ul></div></p>
+<h2 id="pyecharts模块">pyecharts模块</h2>
+<h3 id="简介">简介</h3>
+<p>Echarts 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，pyecharts 诞生了。<br>
+如果想要掌握pyecharts，可以阅读<a href="https://pyecharts.org/#/zh-cn/intro">pyecharts中文文档</a>，里面的图表类型和配置项写的非常详细，我就不过多的赘述了</p>
+<h3 id="安装pyecharts">安装pyecharts</h3>
+<p>安装的命令也非常简单：</p>
+<pre><code>pip install pyecharts
+</code></pre>
+<p>安装成功：<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428193045671-1853913251.png" alt=""></p>
+<h3 id="测试pyecharts模块">测试pyecharts模块</h3>
+<p>我们可以尝试运行官方文档所给出的几个小例子来测试一下pyecharts模块是否成功安装<br>
+打开编辑器，输入并运行以下代码：</p>
+<pre><code>from pyecharts.charts import Bar
+from pyecharts import options as opts
+# 内置主题类型可查看 pyecharts.globals.ThemeType
+from pyecharts.globals import ThemeType
+
+bar = (
+    Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+    .add_xaxis([&quot;衬衫&quot;, &quot;羊毛衫&quot;, &quot;雪纺衫&quot;, &quot;裤子&quot;, &quot;高跟鞋&quot;, &quot;袜子&quot;])
+    .add_yaxis(&quot;商家A&quot;, [5, 20, 36, 10, 75, 90])
+    .add_yaxis(&quot;商家B&quot;, [15, 6, 45, 20, 35, 66])
+    .set_global_opts(title_opts=opts.TitleOpts(title=&quot;主标题&quot;, subtitle=&quot;副标题&quot;))
+)
+bar.render()   #保存为html文件
+</code></pre>
+<p>若此时在当前目录下生成了一个名为<font color=red>render.html</font>的文件<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428201222710-224724027.png" alt=""></p>
+<p>打开此文件，看到如下的图片则证明安装模块成功<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428201234947-1189003310.png" alt=""></p>
+<h2 id="pyecharts实战：绘制新冠肺炎疫情地图">pyecharts实战：绘制新冠肺炎疫情地图</h2>
+<h3 id="需求分析">需求分析</h3>
+<p>想要制作全球疫情的地图（空气质量图，人口分布图也是同理），首先需要的就是每个国家的疫情数据，比如人数，治愈数，增长数......  那么我们该如何获取到这些信息呢？</p>
+<h3 id="请求数据">请求数据</h3>
+<p>我们发现很多app和网页上都会有最新的疫情信息公布，我选取的数据来源是腾讯地图。<br>
+首先打开<a href="https://news.qq.com/zt2020/page/feiyan.htm#/global">腾讯地图的疫情信息页</a>，可以发现疫情的信息展现在这一页中<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428122538840-2036862265.png" alt=""></p>
+<p>获取这些信息的方法有很多种，可以是用表达式提取，也可以抓包分析，我更喜欢的一种方法是抓包分析。</p>
+<p>右击《检查》，点击《network》选项卡并刷新界面，看到加载出来很多数据包，找到里面最像列表的一个list数据包<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428123841422-258150398.png" alt=""></p>
+<p>此时发现，这个list数据包正式我们要提取的数据列表，里面的每个键值对都代表着相应的数据，提取到这些键值对就可以获取到所有的数据信息了，再次回到headers，选项卡下面对应的网址就是我们即将请求的网址，这里我们需要注意的是，这个网址对应的请求是post而不是我们经常使用的get<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428124442815-384401241.png" alt=""></p>
+<p>向网页请求数据：</p>
+<pre><code>import requests
+
+url = 'https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist'
+response = requests.post(url).text
+print(response)
+</code></pre>
+<p>可以看到这个网页并没有设置反爬虫，可以轻松的获取到数据<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428124703908-1859571469.png" alt=""></p>
+<h3 id="提取数据">提取数据</h3>
+<p>我们刚刚请求到的数据格式是字符格式，并不能被我们直接提取到，必须想将字符格式的数据转换为字典格式才可以开始下一步的提取</p>
+<pre><code>resp = json.loads(response)   #使用变量resp来接收字典格式的数据
+
+</code></pre>
+<p>将变量转化为字典格式后，就要开始提取数据了  提取json类型的数据可以使用取出列表元素的方法来提取，即先遍历列表将每个国家的信息提取出来，再分别从这些条信息中提取到我们想要的数据</p>
+<p>提取数据：</p>
+<pre><code>import json
+
+resp = json.loads(response)   #使用变量resp来接收字典格式的数据
+for data in resp['data']:  #遍历提取每个国家的疫情数据
+    name = data['name']   #国家名
+    confirm = data['confirm']   #该国家疫情人数
+    print(name,confirm)
+</code></pre>
+<p>打印数据：<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428132158871-965155416.png" alt=""></p>
+<h3 id="处理数据">处理数据</h3>
+<p>在得到了国家和人数信息之后，还需要将数据存储到字典中才能传入图表中，这就需要我们手动的转换数据，并储存到字典中</p>
+<pre><code>map_version = {}  #定义空字典
+for data in resp['data']:  #遍历提取每个国家的疫情数据
+    name = data['name']   #国家名
+    confirm = data['confirm']   #该国家疫情人数
+    map_version[name] = int(confirm)  #将国家和人数以键值对的形式传入字典
+</code></pre>
+<p>输出字典：<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428140324895-1654645914.png" alt=""></p>
+<p>此时打印出来的字典是标准的字典格式，但是这种格式并不是pyecharts所要求的格式，所以还需要一行代码来进行转换</p>
+<pre><code>element = list(map_version.items())
+</code></pre>
+<p>然后就可以输出传入数据的标准格式：<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428170401241-595200422.png" alt=""></p>
+<h3 id="制作可视化地图">制作可视化地图</h3>
+<p>在将数据爬取、变换、整理后，所有准备工作都已经做完，下面我们来调用数据实现数据可视化</p>
+<p>先写出一个初步的框架来接收内容</p>
+<pre><code>from pyecharts.charts import Map,Geo
+
+map = Map().add(series_name=&quot;世界疫情分布图&quot;,  #名称
+                data_pair=element,   #传入数据
+                maptype='world',   #地图类型
+                )
+map.render('map.html')  #命名并保存
+</code></pre>
+<p>运行代码，发现当前文件夹下出现了一个<font color=pink>map.html</font>文件，双击运行<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428173457314-1138208178.png" alt=""></p>
+<p>看到这个图表之后，发现代码的运行并没有问题，但是数据却没有传到地图中，这是由于pyecharts默认的世界地图中的国家名是英文，所以我们就要传入一个字典来替代掉这些英文</p>
+<h3 id="设置可视化地图">设置可视化地图</h3>
+<p>生成了地图之后，接下来就是要保证地图的正确性和美观，所以我们要来设置世界地图</p>
+<p>地图上显示国家名太多，影响可读性，所以设置为不显示国家名</p>
+<pre><code>from pyecharts import options
+
+map.set_series_opts(label_opts=options.LabelOpts(is_show=False))  #不显示国家名
+</code></pre>
+<p>按照感染人数的不同，给地图添加不同的颜色</p>
+<pre><code>#设置全局配置项
+map.set_global_opts(visualmap_opts=options.VisualMapOpts(max_=1100000,is_piecewise=True,pieces=[
+                 {&quot;min&quot;: 500000},
+                 {&quot;min&quot;: 200000, &quot;max&quot;: 499999},
+                 {&quot;min&quot;: 100000, &quot;max&quot;: 199999},
+                 {&quot;min&quot;: 50000, &quot;max&quot;: 99999},
+                 {&quot;min&quot;: 10000, &quot;max&quot;: 49999},
+                 {&quot;max&quot;: 9999},]))
+</code></pre>
+<p>代表国家首都的圆点不美观，去掉红点：</p>
+<pre><code>map = Map().add(
+                                    is_map_symbol_show=False,  #不显示标记
+                                    ）
+</code></pre>
+<p>设置背景颜色并为网页取名：</p>
+<pre><code>map = Map(options.InitOpts(bg_color=&quot;#87CEFA&quot;,page_title='世界疫情分布')).add()
+</code></pre>
+<p>到了现在所有的配置已经完成，但是图表要想显示数据还需要传入一个字典来替换掉默认的英文名，具体实现请看下面的完整代码。</p>
+<h2 id="完整代码">完整代码</h2>
+<pre><code>import requests
+import json
+from pyecharts.charts import Map
+from pyecharts import options
+
+url = 'https://api.inews.qq.com/newsqa/v1/automation/foreign/country/ranklist'
+response = requests.post(url).text
+resp = json.loads(response)   #使用变量resp来接收字典格式的数据
+map_version = {}  #定义空字典
+for data in resp['data']:  #遍历提取每个国家的疫情数据
+    name = data['name']   #国家名
+    confirm = data['confirm']   #该国家疫情人数
+    map_version[name] = int(confirm)  #将国家和人数以键值对的形式传入字典
+element = list(map_version.items())   #将字典值调整为可以传入地图的格式
+name_map = {
+    'Singapore Rep.': '新加坡',
+    'Dominican Rep.': '多米尼加',
+    'Palestine': '巴勒斯坦',
+    'Bahamas': '巴哈马',
+    'Timor-Leste': '东帝汶',
+    'Afghanistan': '阿富汗',
+    'Guinea-Bissau': '几内亚比绍',
+    &quot;Côte d'Ivoire&quot;: '科特迪瓦',
+    'Siachen Glacier': '锡亚琴冰川',
+    &quot;Br. Indian Ocean Ter.&quot;: '英属印度洋领土',
+    'Angola': '安哥拉',
+    'Albania': '阿尔巴尼亚',
+    'United Arab Emirates': '阿联酋',
+    'Argentina': '阿根廷',
+    'Armenia': '亚美尼亚',
+    'French Southern and Antarctic Lands': '法属南半球和南极领地',
+    'Australia': '澳大利亚',
+    'Austria': '奥地利',
+    'Azerbaijan': '阿塞拜疆',
+    'Burundi': '布隆迪',
+    'Belgium': '比利时',
+    'Benin': '贝宁',
+    'Burkina Faso': '布基纳法索',
+    'Bangladesh': '孟加拉国',
+    'Bulgaria': '保加利亚',
+    'The Bahamas': '巴哈马',
+    'Bosnia and Herz.': '波斯尼亚和黑塞哥维那',
+    'Belarus': '白俄罗斯',
+    'Belize': '伯利兹',
+    'Bermuda': '百慕大',
+    'Bolivia': '玻利维亚',
+    'Brazil': '巴西',
+    'Brunei': '文莱',
+    'Bhutan': '不丹',
+    'Botswana': '博茨瓦纳',
+    'Central African Rep.': '中非',
+    'Canada': '加拿大',
+    'Switzerland': '瑞士',
+    'Chile': '智利',
+    'China': '中国',
+    'Ivory Coast': '象牙海岸',
+    'Cameroon': '喀麦隆',
+    'Dem. Rep. Congo': '刚果民主共和国',
+    'Congo': '刚果',
+    'Colombia': '哥伦比亚',
+    'Costa Rica': '哥斯达黎加',
+    'Cuba': '古巴',
+    'N. Cyprus': '北塞浦路斯',
+    'Cyprus': '塞浦路斯',
+    'Czech Rep.': '捷克',
+    'Germany': '德国',
+    'Djibouti': '吉布提',
+    'Denmark': '丹麦',
+    'Algeria': '阿尔及利亚',
+    'Ecuador': '厄瓜多尔',
+    'Egypt': '埃及',
+    'Eritrea': '厄立特里亚',
+    'Spain': '西班牙',
+    'Estonia': '爱沙尼亚',
+    'Ethiopia': '埃塞俄比亚',
+    'Finland': '芬兰',
+    'Fiji': '斐',
+    'Falkland Islands': '福克兰群岛',
+    'France': '法国',
+    'Gabon': '加蓬',
+    'United Kingdom': '英国',
+    'Georgia': '格鲁吉亚',
+    'Ghana': '加纳',
+    'Guinea': '几内亚',
+    'Gambia': '冈比亚',
+    'Guinea Bissau': '几内亚比绍',
+    'Eq. Guinea': '赤道几内亚',
+    'Greece': '希腊',
+    'Greenland': '格陵兰',
+    'Guatemala': '危地马拉',
+    'French Guiana': '法属圭亚那',
+    'Guyana': '圭亚那',
+    'Honduras': '洪都拉斯',
+    'Croatia': '克罗地亚',
+    'Haiti': '海地',
+    'Hungary': '匈牙利',
+    'Indonesia': '印度尼西亚',
+    'India': '印度',
+    'Ireland': '爱尔兰',
+    'Iran': '伊朗',
+    'Iraq': '伊拉克',
+    'Iceland': '冰岛',
+    'Israel': '以色列',
+    'Italy': '意大利',
+    'Jamaica': '牙买加',
+    'Jordan': '约旦',
+    'Japan': '日本',
+    'Kazakhstan': '哈萨克斯坦',
+    'Kenya': '肯尼亚',
+    'Kyrgyzstan': '吉尔吉斯斯坦',
+    'Cambodia': '柬埔寨',
+    'Korea': '韩国',
+    'Kosovo': '科索沃',
+    'Kuwait': '科威特',
+    'Lao PDR': '老挝',
+    'Lebanon': '黎巴嫩',
+    'Liberia': '利比里亚',
+    'Libya': '利比亚',
+    'Sri Lanka': '斯里兰卡',
+    'Lesotho': '莱索托',
+    'Lithuania': '立陶宛',
+    'Luxembourg': '卢森堡',
+    'Latvia': '拉脱维亚',
+    'Morocco': '摩洛哥',
+    'Moldova': '摩尔多瓦',
+    'Madagascar': '马达加斯加',
+    'Mexico': '墨西哥',
+    'Macedonia': '马其顿',
+    'Mali': '马里',
+    'Myanmar': '缅甸',
+    'Montenegro': '黑山',
+    'Mongolia': '蒙古',
+    'Mozambique': '莫桑比克',
+    'Mauritania': '毛里塔尼亚',
+    'Malawi': '马拉维',
+    'Malaysia': '马来西亚',
+    'Namibia': '纳米比亚',
+    'New Caledonia': '新喀里多尼亚',
+    'Niger': '尼日尔',
+    'Nigeria': '尼日利亚',
+    'Nicaragua': '尼加拉瓜',
+    'Netherlands': '荷兰',
+    'Norway': '挪威',
+    'Nepal': '尼泊尔',
+    'New Zealand': '新西兰',
+    'Oman': '阿曼',
+    'Pakistan': '巴基斯坦',
+    'Panama': '巴拿马',
+    'Peru': '秘鲁',
+    'Philippines': '菲律宾',
+    'Papua New Guinea': '巴布亚新几内亚',
+    'Poland': '波兰',
+    'Puerto Rico': '波多黎各',
+    'Dem. Rep. Korea': '朝鲜',
+    'Portugal': '葡萄牙',
+    'Paraguay': '巴拉圭',
+    'Qatar': '卡塔尔',
+    'Romania': '罗马尼亚',
+    'Russia': '俄罗斯',
+    'Rwanda': '卢旺达',
+    'W. Sahara': '西撒哈拉',
+    'Saudi Arabia': '沙特阿拉伯',
+    'Sudan': '苏丹',
+    'S. Sudan': '南苏丹',
+    'Senegal': '塞内加尔',
+    'Solomon Is.': '所罗门群岛',
+    'Sierra Leone': '塞拉利昂',
+    'El Salvador': '萨尔瓦多',
+    'Somaliland': '索马里兰',
+    'Somalia': '索马里',
+    'Serbia': '塞尔维亚',
+    'Suriname': '苏里南',
+    'Slovakia': '斯洛伐克',
+    'Slovenia': '斯洛文尼亚',
+    'Sweden': '瑞典',
+    'Swaziland': '斯威士兰',
+    'Syria': '叙利亚',
+    'Chad': '乍得',
+    'Togo': '多哥',
+    'Thailand': '泰国',
+    'Tajikistan': '塔吉克斯坦',
+    'Turkmenistan': '土库曼斯坦',
+    'East Timor': '东帝汶',
+    'Trinidad and Tobago': '特里尼达和多巴哥',
+    'Tunisia': '突尼斯',
+    'Turkey': '土耳其',
+    'Tanzania': '坦桑尼亚',
+    'Uganda': '乌干达',
+    'Ukraine': '乌克兰',
+    'Uruguay': '乌拉圭',
+    'United States': '美国',
+    'Uzbekistan': '乌兹别克斯坦',
+    'Venezuela': '委内瑞拉',
+    'Vietnam': '越南',
+    'Vanuatu': '瓦努阿图',
+    'West Bank': '西岸',
+    'Yemen': '也门',
+    'South Africa': '南非',
+    'Zambia': '赞比亚',
+    'Zimbabwe': '津巴布韦',
+    'Comoros': '科摩罗'
+}
+
+map = Map(options.InitOpts(bg_color=&quot;#87CEFA&quot;,page_title='世界疫情分布')).\
+    add(series_name=&quot;世界疫情分布图&quot;,  #名称
+        data_pair=element,   #传入数据
+        is_map_symbol_show=False,  #不显示标记
+        maptype='world',   #地图类型
+        name_map=name_map,
+        )
+#设置全局配置项
+map.set_global_opts(visualmap_opts=options.VisualMapOpts(max_=1100000,is_piecewise=True,pieces=[
+                 {&quot;min&quot;: 500000},
+                 {&quot;min&quot;: 200000, &quot;max&quot;: 499999},
+                 {&quot;min&quot;: 100000, &quot;max&quot;: 199999},
+                 {&quot;min&quot;: 50000, &quot;max&quot;: 99999},
+                 {&quot;min&quot;: 10000, &quot;max&quot;: 49999},
+                 {&quot;max&quot;: 9999},]))
+#设置系列配置项
+map.set_series_opts(label_opts=options.LabelOpts(is_show=False))  #不显示国家名
+map.render('map.html')  #命名并保存
+</code></pre>
+<h2 id="实现结果">实现结果</h2>
+<p>这个结果可以动态的显示在网页中，可以根据人数来筛选地图的板块，而且方便缩放<br>
+<img src="https://img2020.cnblogs.com/blog/1971945/202004/1971945-20200428200028487-174626370.png" alt=""></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-28 20:19</span>&nbsp;
+<a href="https://www.cnblogs.com/cherish-hao/">merlin&</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12793525" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12793525);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 586242, cb_blogApp = 'cherish-hao', cb_blogUserGuid = '32837683-d4e5-4daf-ffe3-08d7c7fac060';
+    var cb_entryId = 12793525, cb_entryCreatedDate = '2020-04-28 20:19', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 merlin&amp;
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<script>
+    L2Dwidget.init({
+        "model": {
+            //jsonpath控制显示那个小萝莉模型，下面这个就是我觉得最可爱的小萝莉模型，替换时后面名字也要替换掉
+            jsonPath: "https://unpkg.com/live2d-widget-model-hibiki@1.0.5/assets/hibiki.model.json",
+            "scale": 1
+        },
+        "display": {
+            "position": "left", //看板娘的表现位置
+            "width": 70,  //小萝莉的宽度
+            "height": 150, //小萝莉的高度
+            "hOffset": 0,
+            "vOffset": -20
+        },
+        "mobile": {
+            "show": true,
+            "scale": 0.5
+        },
+        "react": {
+            "opacityDefault": 0.7,
+            "opacityOnHover": 0.2
+        }
+    });
+</script>
+
+    </div>
+</body>
+</html>

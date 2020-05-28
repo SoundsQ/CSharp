@@ -1,0 +1,581 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="上篇实现利用mybatis实现单表增删改查，今天利用mybatis实现多表联合查询。 1.创建数据库mybatis2，建立student、class、student_class三张表 DROP TAB" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Mybatis实现多表联合查询 - 曾聪聪 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey.min.css?v=_wtKGIz9sYqjm3oTTk7YRXg9g-RHiRw9EHTGXG3FSu8" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/zengcongcong/custom.css?v=it2TbG1odzlynosE3qmq35D7SZ8=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey-mobile.min.css?v=cYvlxMu_nd6MVfg-vi7YqOC6FaZ7VHFsDM166vO_ekA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zengcongcong/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zengcongcong/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zengcongcong/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 491385;
+        var currentBlogApp = 'zengcongcong';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BlackLowKey';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/zengcongcong/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zengcongcong/">生命不息，折腾不止</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zengcongcong/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%9B%BE%E8%81%AA%E8%81%AA">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zengcongcong/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+99&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+5</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zengcongcong/p/12198329.html">Mybatis实现多表联合查询</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-family: 'Microsoft YaHei';">上篇实现利用mybatis实现单表增删改查，今天利用mybatis实现多表联合查询。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">1.创建数据库mybatis2，建立student、class、student_class三张表</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">TABLE</span> <span style="color: #0000ff;">IF</span> <span style="color: #808080;">EXISTS</span><span style="color: #000000;"> `class`;
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `class`  (
+  `class_id` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;"> AUTO_INCREMENT,
+  `class_name` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> utf8 COLLATE utf8_general_ci <span style="color: #0000ff;">NULL</span> <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  </span><span style="color: #0000ff;">PRIMARY</span> <span style="color: #0000ff;">KEY</span><span style="color: #000000;"> (`class_id`) USING BTREE
+) ENGINE </span><span style="color: #808080;">=</span> InnoDB AUTO_INCREMENT <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">4</span> <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> <span style="color: #808080;">=</span> utf8 COLLATE <span style="color: #808080;">=</span> utf8_general_ci ROW_FORMAT <span style="color: #808080;">=</span><span style="color: #000000;"> Compact;
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> ----------------------------</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> Records of class</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> ----------------------------</span>
+<span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">1</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">一班</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">2</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">二班</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">3</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">三班</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> ----------------------------</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> Table structure for student</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> ----------------------------</span>
+<span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">TABLE</span> <span style="color: #0000ff;">IF</span> <span style="color: #808080;">EXISTS</span><span style="color: #000000;"> `student`;
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `student`  (
+  `id` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">5</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;"> AUTO_INCREMENT,
+  `name` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> utf8 COLLATE utf8_general_ci <span style="color: #0000ff;">NULL</span> <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  `sex` </span><span style="color: #0000ff;">varchar</span>(<span style="color: #800000; font-weight: bold;">255</span>) <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> utf8 COLLATE utf8_general_ci <span style="color: #0000ff;">NULL</span> <span style="color: #0000ff;">DEFAULT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  </span><span style="color: #0000ff;">PRIMARY</span> <span style="color: #0000ff;">KEY</span><span style="color: #000000;"> (`id`) USING BTREE
+) ENGINE </span><span style="color: #808080;">=</span> InnoDB AUTO_INCREMENT <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">6</span> <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> <span style="color: #808080;">=</span> utf8 COLLATE <span style="color: #808080;">=</span> utf8_general_ci ROW_FORMAT <span style="color: #808080;">=</span><span style="color: #000000;"> Compact;
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> ----------------------------</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> Records of student</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> ----------------------------</span>
+<span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">1</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">张三</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">男</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">2</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">李四</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">女</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">3</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">王五</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">男</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">4</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">王麻子</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">女</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">5</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;"> 赵六</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">男</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> ----------------------------</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> Table structure for student_class</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> ----------------------------</span>
+<span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">TABLE</span> <span style="color: #0000ff;">IF</span> <span style="color: #808080;">EXISTS</span><span style="color: #000000;"> `student_class`;
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> `student_class`  (
+  `sid` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">,
+  `cid` </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">11</span>) <span style="color: #808080;">NOT</span> <span style="color: #0000ff;">NULL</span><span style="color: #000000;">
+) ENGINE </span><span style="color: #808080;">=</span> InnoDB <span style="color: #0000ff;">CHARACTER</span> <span style="color: #0000ff;">SET</span> <span style="color: #808080;">=</span> utf8 COLLATE <span style="color: #808080;">=</span> utf8_general_ci ROW_FORMAT <span style="color: #808080;">=</span><span style="color: #000000;"> Compact;
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> ----------------------------</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> Records of student_class</span><span style="color: #008080;">
+--</span><span style="color: #008080;"> ----------------------------</span>
+<span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student_class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">1</span>, <span style="color: #800000; font-weight: bold;">2</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student_class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">2</span>, <span style="color: #800000; font-weight: bold;">2</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student_class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">4</span>, <span style="color: #800000; font-weight: bold;">4</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student_class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">3</span>, <span style="color: #800000; font-weight: bold;">3</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> `student_class` <span style="color: #0000ff;">VALUES</span> (<span style="color: #800000; font-weight: bold;">5</span>, <span style="color: #800000; font-weight: bold;">3</span><span style="color: #000000;">);
+
+</span><span style="color: #0000ff;">SET</span> FOREIGN_KEY_CHECKS <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">1</span>;</pre>
+</div>
+<p>2.在com.domain包下创建实体类</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.domain;
+</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Student {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> id;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String sex;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">学生所在的班级</span>
+    <span style="color: #0000ff;">private</span><span style="color: #000000;"> Class sClass;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">getter/setter/toString【已省略】</span>
+<span style="color: #000000;">
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.domain;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Class {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> class_id;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String class_name;
+
+    </span><span style="color: #0000ff;">private</span> List&lt;Student&gt;<span style="color: #000000;"> students;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">getter/setter/toString</span>
+<span style="color: #000000;"> 
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.domain;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> admin
+ * </span><span style="color: #808080;">@version</span><span style="color: #008000;"> 1.0.0
+ * @ClassName Student_Class.java
+ * @Description TODO
+ * @createTime 2020年01月15日 16:13:00
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Student_Class {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> sid;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> cid;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">getter/setter/toString</span>
+<span style="color: #000000;">
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.domain;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> admin
+ * </span><span style="color: #808080;">@version</span><span style="color: #008000;"> 1.0.0
+ * @ClassName StudentClass.java
+ * @Description TODO
+ * @createTime 2020年01月15日 18:10:00
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> StudentClass {
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> id;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String sex;
+    </span><span style="color: #0000ff;">private</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> class_id;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String class_name;
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">getter/setter/toString</span>
+<span style="color: #000000;">
+}</span></pre>
+</div>
+<p>3.在com.dao下创建接口StudentDao</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.dao;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.Class;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.Student;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.StudentClass;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> admin
+ * </span><span style="color: #808080;">@version</span><span style="color: #008000;"> 1.0.0
+ * @ClassName StudentDao.java
+ * @Description TODO
+ * @createTime 2020年01月15日 16:20:00
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> StudentDao {
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">获取某学生的学号、姓名以及某学生所在的班级名  一对一关联查询  一个学生对应一个班级</span>
+    List&lt;Student&gt;<span style="color: #000000;"> findByName(String studentName);
+
+    List</span>&lt;StudentClass&gt;<span style="color: #000000;"> findByName2(String studentName);
+
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">获取指定班级下的所有学生 【班级编号、班级名、学生姓名、性别】 一对多关联查询 一个班级对应多个学生</span>
+    List&lt;Class&gt; findAllStudent(<span style="color: #0000ff;">int</span><span style="color: #000000;"> cid);
+}</span></pre>
+</div>
+<p>4.创建主约束文件SqlMapConfig.xml</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> mybatis的主配置文件 </span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置环境 </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">environments </span><span style="color: #ff0000;">default</span><span style="color: #0000ff;">="mysql"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置mysql的环境</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">environment </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="mysql"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置事务的类型</span><span style="color: #008000;">--&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">transactionManager </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="JDBC"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">transactionManager</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置数据源（连接池） </span><span style="color: #008000;">--&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dataSource </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="POOLED"</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置连接数据库的4个基本信息 </span><span style="color: #008000;">--&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="driver"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="com.mysql.jdbc.Driver"</span><span style="color: #0000ff;">/&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="url"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="jdbc:mysql://localhost:3306/mybatis2?useUnicode=true&amp;amp;characterEncoding=utf8"</span><span style="color: #0000ff;">/&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="username"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="root"</span><span style="color: #0000ff;">/&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">property </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="password"</span><span style="color: #ff0000;"> value</span><span style="color: #0000ff;">="root"</span><span style="color: #0000ff;">/&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dataSource</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">environment</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">environments</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 配置映射文件的位置 </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">package </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="com.dao"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">package</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mappers</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>5.在com.dao下创建子约束文件studentDao.xml</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #008000;">&lt;!--</span><span style="color: #008000;">mybaits头约束 </span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008000;">&lt;!--</span><span style="color: #008000;">配置约束</span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="com.dao.StudentDao"</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">1.获取学生编号、姓名、对应的班级名称</span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 可以显示指出列名，如果用"*"代替，则mybatis会自动匹配resultMap中提供的列名 </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="findByName"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="String"</span><span style="color: #ff0000;"> resultMap</span><span style="color: #0000ff;">="studentClassMap"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        select a.id,a.name,b.class_name from student a,class b,
+        student_class c where a.id=c.sid and b.class_id = c.cid and a.name=#{name}
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">resultMap中的type表示返回什么类型的对象</span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="studentClassMap"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="com.domain.Student"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">主键字段</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">property表示com.domain.Student的字段,coloum为表中的字段，进行配置映射</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="id"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">非主键字段</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="name"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="name"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">association字面意思关联，这里只专门做一对一关联； property表示是com.domain.Student的属性名称
+        javaType表示该属性是什么类型对象</span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">association </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="sClass"</span><span style="color: #ff0000;"> javaType</span><span style="color: #0000ff;">="com.domain.Class"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> property 表示com.domain.Class中的属性； column 表示表中的列名 </span><span style="color: #008000;">--&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="class_name"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="class_name"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">association</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;">第二种方式，新建一个类，类似于视图</span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="findByName2"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="String"</span><span style="color: #ff0000;"> resultType</span><span style="color: #0000ff;">="com.domain.StudentClass"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+         select * from student a,class b,
+        student_class c where a.id=c.sid and b.class_id = c.cid and a.name=#{name}
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="findAllStudent"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="int"</span><span style="color: #ff0000;"> resultMap</span><span style="color: #0000ff;">="getClassStudent"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+      select * from class a left join student_class b on a.class_id=b.cid
+      left join student c on b.sid = c.id where a.class_id = #{class_id}
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">resultMap </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="getClassStudent"</span><span style="color: #ff0000;"> type</span><span style="color: #0000ff;">="com.domain.Class"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="class_id"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="class_id"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="class_name"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="class_name"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> property表示集合类型属性名称，ofType表示集合中的对象是什么类型 </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">collection </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="students"</span><span style="color: #ff0000;"> ofType</span><span style="color: #0000ff;">="com.domain.Student"</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">id </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="id"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="id"</span><span style="color: #0000ff;">/&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="name"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="name"</span><span style="color: #0000ff;">/&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">result </span><span style="color: #ff0000;">property</span><span style="color: #0000ff;">="sex"</span><span style="color: #ff0000;"> column</span><span style="color: #0000ff;">="sex"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">collection</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">resultMap</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>6.编写测试类test</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> com.dao;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.Class;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.Student;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> com.domain.StudentClass;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.io.Resources;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSession;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactory;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.ibatis.session.SqlSessionFactoryBuilder;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.After;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.Before;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> org.junit.Test;
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.InputStream;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.List;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+ * </span><span style="color: #808080;">@author</span><span style="color: #008000;"> admin
+ * </span><span style="color: #808080;">@version</span><span style="color: #008000;"> 1.0.0
+ * @ClassName test2.java
+ * @Description TODO
+ * @createTime 2020年01月11日 23:22:00
+ </span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> test2 {
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> InputStream in;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> SqlSession sqlSession;
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> StudentDao studentDao;
+
+    @Before</span><span style="color: #008000;">//</span><span style="color: #008000;">用于在测试方法执行之前执行</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> init() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">1.读取配置文件，生成字节输入流</span>
+        in = Resources.getResourceAsStream("SqlMapConfig.xml"<span style="color: #000000;">);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">2.获取SqlSessionFactory工厂对象</span>
+        SqlSessionFactory factory = <span style="color: #0000ff;">new</span><span style="color: #000000;"> SqlSessionFactoryBuilder().build(in);
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">3.获取SqlSession对象</span>
+        sqlSession =<span style="color: #000000;"> factory.openSession();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">4.获取dao的代理对象</span>
+        studentDao = sqlSession.getMapper(StudentDao.<span style="color: #0000ff;">class</span><span style="color: #000000;">);
+    }
+
+    @After</span><span style="color: #008000;">//</span><span style="color: #008000;">用于在测试方法执行之后执行</span>
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> destroy() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">提交事务</span>
+<span style="color: #000000;">        sqlSession.commit();
+        </span><span style="color: #008000;">//</span><span style="color: #008000;">6.释放资源</span>
+<span style="color: #000000;">        sqlSession.close();
+        in.close();
+    }
+
+    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> findByName(){
+        List</span>&lt;Student&gt; lists = studentDao.findByName("张三"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">for</span><span style="color: #000000;">(Student s:lists){
+            System.out.println(s.getId()</span>+" "+s.getName()+"  "+<span style="color: #000000;">s.getsClass().getClass_name());
+        }
+    }
+
+    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> findByName2(){
+        List</span>&lt;StudentClass&gt; lists = studentDao.findByName2("张三"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">for</span><span style="color: #000000;">(StudentClass s:lists){
+            System.out.println(s.toString());
+        }
+    }
+
+    @Test
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> findAllStudent(){
+        List</span>&lt;Class&gt; lists = studentDao.findAllStudent(2<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">for</span><span style="color: #000000;">(Class c:lists){
+            System.out.println(c.toString());
+        }
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>7.小结</p>
+<p>&nbsp;以上实现了一对一查询与一对多查询,有配置resultMap的方式也可以通过新建一个实体类的方式</p>
+<p>mybatis讲究一一对应映射进去，得按照人家规则来，熟练程度不如自己封装一个操作JDBC工具类来的快。</p>
+<p>参考自：<a href="https://www.cnblogs.com/wucj/p/5148813.html">https://www.cnblogs.com/wucj/p/5148813.html</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-01-15 19:27</span>&nbsp;
+<a href="https://www.cnblogs.com/zengcongcong/">曾聪聪</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12198329" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12198329);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 491385, cb_blogApp = 'zengcongcong', cb_blogUserGuid = '1131037e-13ee-4d45-cdfe-08d619917642';
+    var cb_entryId = 12198329, cb_entryCreatedDate = '2020-01-15 19:27', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 曾聪聪
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        
+<!--代码块复制-->
+<script src="https://blog-static.cnblogs.com/files/zengcongcong/clipboard.min.js"></script>
+<script src="https://blog-static.cnblogs.com/files/zengcongcong/cp.js"></script>
+
+<!--目录导航js-->
+<script src="https://blog-static.cnblogs.com/files/zengcongcong/daohang.js"></script>
+<!--鼠标点击特效-->
+<!--<script src="https://blog-static.cnblogs.com/files/zengcongcong/click2.js"></script>-->
+<script src="https://blog-static.cnblogs.com/files/zengcongcong/click.js"></script> 
+
+<!--图片放大查看-->
+<script type="text/javascript" src="https://blog-static.cnblogs.com/files/zengcongcong/img.enlarge.js"></script>
+<div id="outerdiv" style="text-align: center;position: fixed;z-index: 1000;top: 0;left: 0;
+    width: 100%;height: 100%;background-color: rgba(255,255,255,.9);">
+    <img id="bigimg" style="height: auto;width: 65%;border: 5px solid #7e8c8d; 
+        margin: auto;position: absolute;top: 0;bottom: 0;left: 0;right: 0;" src="" />
+</div>
+
+    </div>
+</body>
+</html>

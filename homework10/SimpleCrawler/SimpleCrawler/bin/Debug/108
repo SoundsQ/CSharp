@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>黄钰朝 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/misterchaos/custom.css?v=GQh2mQzT3d2FEnisfgYtaVe&#x2B;EAE=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/misterchaos/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/misterchaos/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/misterchaos/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 584199;
+        var currentBlogApp = 'misterchaos';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/misterchaos/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/misterchaos/">YC的博客</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/misterchaos/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+</li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+7&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+73</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12799168.html">
+    使用docker安装codimd，搭建你自己的在线协作markdown编辑器
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 一、前言 最近笔者需要频繁更新和发布文档，因此有了寻找一个在线 &quot;markdown&quot; 文档平台的想法。我最终在作业部落，gitbook，codimd之中选择了codimd，并且将其部署到了自己的服务器以便提高访问速度，因此写下这篇博客记录自己 部署和使用的心得 ，供大家参考借鉴。 二、c            <a href="https://www.cnblogs.com/misterchaos/p/12799168.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 23:55 黄钰朝 阅读 (36) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12799168" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/04/26.html">2020年4月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12782986.html">
+    Java中的字符串操作（比较String，StringBuiler和StringBuffer）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、前言 刚开始学习Java时，作为只会C语言的小白，就为其中的字符串操作而感到震撼。相比之下，C语言在字节数组中保存一个结尾的\0去表示字符串，想实现字符串拼接，还需要调用strcpy库函数或者自己手动去复制数组，非常麻烦，更别提其他复杂操作，而Java通过String类让字符串操作变得十分简单和            <a href="https://www.cnblogs.com/misterchaos/p/12782986.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-26 22:46 黄钰朝 阅读 (52) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12782986" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/04/24.html">2020年4月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12766888.html">
+    团队作业1：团队展示&amp;选题（歪瑞古德小队）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 一、团队展示 1.1 队名: &quot;歪瑞古德小队&quot; 歪瑞古德是 英文very good的谐音 ，象征着这是一只很棒的队伍！ 1.2 队员信息 &quot;黄钰朝&quot; ：3118005005（队长） &quot;黄煜淇&quot; ：3118004962 &quot;陈宇&quot; ：3118004999 &quot;丘丽珊&quot; ：3218007877             <a href="https://www.cnblogs.com/misterchaos/p/12766888.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-24 13:44 黄钰朝 阅读 (188) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12766888" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/04/12.html">2020年4月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12687033.html">
+    结对项目：四则运算题目生成器（Java）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 项目Github地址 ： &quot;ExercisesGenerator&quot; 结对项目成员 ： &quot;丘丽珊&quot; 3218007877 &quot;黄钰朝&quot; 3118005005 一、需求分析 | 需求描述 | 是否实现 | | | | | 控制生成题目的个数 | 是 | | 控制题目中数值范围 | 是 | |             <a href="https://www.cnblogs.com/misterchaos/p/12687033.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-12 19:20 黄钰朝 阅读 (153) 评论 (12)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12687033" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/04/06.html">2020年4月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12650643.html">
+    Java是未来的第一编程语言吗？
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[TOC] 一、前言 Java语言长期以来一直霸占多数热门编程语言榜单的榜首，可见这是一个备受程序员热捧的编程语言。Java语言具有什么魅力？想必这都是已经为大多数人们所熟知的了，不值得过多赘述。而Java语言发展至今，面对发展势头迅猛又十分简单易学的python，以及各种层出不穷的高级语言，Jav            <a href="https://www.cnblogs.com/misterchaos/p/12650643.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-06 23:57 黄钰朝 阅读 (4207) 评论 (55)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12650643" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/03/23.html">2020年3月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12555991.html">
+    个人项目：WordCount (Java)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、Github项目地址 https://github.com/misterchaos/WordCount 二、解题思路 2.1 基本需求分析 经过仔细阅读题目，分析得出项目的基本需求如下: wc.exe -c //返回文件 file.c 的字符数 wc.exe -c //返回文件 file.c 的            <a href="https://www.cnblogs.com/misterchaos/p/12555991.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-23 23:00 黄钰朝 阅读 (143) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12555991" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/misterchaos/archive/2020/03/08.html">2020年3月8日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12443646.html">
+    自我介绍+软工5问
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：自我介绍 Name：黄钰朝 Github: https://github.com/misterchaos Mail：kobe524348@gmail.com Introduction：喜欢篮球（湖人队球迷），指弹吉他，热爱开源，目前主要从事后端开发。 软工五问 我们从软件工程这门课应该学到的最核心的            <a href="https://www.cnblogs.com/misterchaos/p/12443646.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-08 17:25 黄钰朝 阅读 (118) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12443646" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 黄钰朝
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

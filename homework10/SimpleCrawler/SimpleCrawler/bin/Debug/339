@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="Magicodes.IE Excel图片导入导出 为了更好的根据实际功能来迭代，从2.2的里程碑规划开始，我们将结合社区的建议和意见来进行迭代，您可以点此链接来提交您的意见和建议： https://g" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ASP.NET 开源导入导出库Magicodes.IE 完成Excel图片导入导出 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12515229.html">ASP.NET 开源导入导出库Magicodes.IE 完成Excel图片导入导出</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="magicodesie-excel图片导入导出">Magicodes.IE Excel图片导入导出</h1>
+<p>为了更好的根据实际功能来迭代，从2.2的里程碑规划开始，我们将结合社区的建议和意见来进行迭代，您可以点此链接来提交您的意见和建议：<br>
+<a href="https://github.com/dotnetcore/Magicodes.IE/issues/46">https://github.com/dotnetcore/Magicodes.IE/issues/46</a></p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/17d06429-eed0-416e-948f-db3a714627da.jpg" alt=""></p>
+<h2 id="说明">说明</h2>
+<p>本章教程主要说明如何使用Magicodes.IE.Excel进行图片的导入导出。</p>
+<h2 id="要点">要点</h2>
+<ul>
+<li>配置DTO进行Excel图片导出</li>
+<li>配置DTO进行Excel图片导入</li>
+</ul>
+<h2 id="图片导入导出特性说明">图片导入导出特性说明</h2>
+<h3 id="exportimagefieldattribute">ExportImageFieldAttribute</h3>
+<ul>
+<li><strong>Height</strong>： 高度(默认15)</li>
+<li><strong>Width</strong>：宽度(默认50)</li>
+<li><strong>Alt</strong>：图片不存在时替换文本</li>
+</ul>
+<h3 id="importimagefieldattribute">ImportImageFieldAttribute</h3>
+<ul>
+<li><strong>ImageDirectory</strong>：  图片存储路径（默认存储到临时目录）</li>
+<li><strong>ImportImageTo</strong>：图片导出方式（默认Base64），支持的方式如下所示：</li>
+</ul>
+<pre><code class="language-csharp">    /// &lt;summary&gt;
+    ///     图片导入类型
+    /// &lt;/summary&gt;
+    public enum ImportImageTo
+    {
+        /// &lt;summary&gt;
+        ///     导入到临时目录
+        /// &lt;/summary&gt;
+        TempFolder,
+
+        /// &lt;summary&gt;
+        ///     导入为base64格式
+        /// &lt;/summary&gt;
+        Base64
+    }
+</code></pre>
+<h2 id="主要步骤">主要步骤</h2>
+<h3 id="1安装包magicodesieexcel">1.安装包Magicodes.IE.Excel</h3>
+<pre><code class="language-powershell">Install-Package Magicodes.IE.Excel
+</code></pre>
+<h3 id="2使用magicodesieexcel导出图片到excel">2.使用Magicodes.IE.Excel导出图片到Excel</h3>
+<p>如下述示例代码所示，我们需要在图片属性上添加<strong>ExportImageFieldAttribute</strong>特性，使用特性的“Width”属性指定图片宽度，“Height”属性指定图片高度，“Alt”属性指定替换文本，也就是当图片不存在时则会显示此文本：</p>
+<pre><code class="language-csharp">   [ExcelExporter(Name = &quot;测试&quot;)]
+    public class ExportTestDataWithPicture
+    {
+        [ExporterHeader(DisplayName = &quot;加粗文本&quot;, IsBold = true)]
+        public string Text { get; set; }
+
+        [ExporterHeader(DisplayName = &quot;普通文本&quot;)] public string Text2 { get; set; }
+        [ExporterHeader(DisplayName = &quot;忽略&quot;, IsIgnore = true)]
+        public string Text3 { get; set; }
+
+        [ExportImageField(Width = 20, Height = 120)]
+        [ExporterHeader(DisplayName = &quot;图1&quot;)]
+        public string Img1 { get; set; }
+        [ExporterHeader(DisplayName = &quot;数值&quot;, Format = &quot;#,##0&quot;)]
+        public decimal Number { get; set; }
+        [ExporterHeader(DisplayName = &quot;名称&quot;, IsAutoFit = true)]
+        public string Name { get; set; }
+        /// &lt;summary&gt;
+        /// 时间测试
+        /// &lt;/summary&gt;
+        [ExporterHeader(DisplayName = &quot;日期1&quot;, Format = &quot;yyyy-MM-dd&quot;)]
+        public DateTime Time1 { get; set; }
+
+        [ExportImageField(Width = 50, Height = 120, Alt = &quot;404&quot;)]
+        [ExporterHeader(DisplayName = &quot;图&quot;, IsAutoFit = false)]
+        public string Img { get; set; }
+    }
+</code></pre>
+<p>值得注意的是：</p>
+<ul>
+<li>ExportImageFieldAttribute特性是必须的</li>
+<li>图片属性类型必须为string类型，支持本地图片和远程图片地址</li>
+</ul>
+<p>接下来，我们就可以使用API来执行导出了。其实除了Dto的不同，导出API还是一个，如下述代码所示：</p>
+<pre><code class="language-csharp">        public async Task ExportPicture_Test()
+        {
+            IExporter exporter = new ExcelExporter();
+            var url = Path.Combine(&quot;TestFiles&quot;, &quot;ExporterTest.png&quot;);
+            for (var i = 0; i &lt; data.Count; i++)
+            {
+                var item = data[i];
+                item.Img1 = url;
+                if (i == 4)
+                    item.Img = null;
+                else
+                    item.Img = &quot;https://docs.microsoft.com/en-us/media/microsoft-logo-dark.png&quot;;
+            }
+            var result = await exporter.Export(filePath, data);
+        }
+</code></pre>
+<p>如上述代码所示，目前图片导出可以设置为远程图片地址，以及本地图片地址，并且也可以设置为null（null将会被替代文本所代替）。效果如下图：</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/ea124562-cf98-4d5e-8f53-35855439198b.png" alt=""></p>
+<h3 id="3使用magicodesieexcel导入图片">3.使用Magicodes.IE.Excel导入图片</h3>
+<p>Magicodes.IE.Excel支持从Excel导入图片，仅需使用特性“ImportImageField”。其支持两种导入方式：</p>
+<ul>
+<li>导入到临时目录</li>
+<li>导入为Base64</li>
+</ul>
+<p>仅需设置ImportImageTo属性。</p>
+<p><strong>ImportImageTo枚举</strong></p>
+<ul>
+<li>
+<p><strong>Base64</strong>  导入为base64格式</p>
+</li>
+<li>
+<p><strong>TempFolder</strong> 导入到临时目录</p>
+</li>
+</ul>
+<p>值得注意的是，同上文一样，图片属性字段类型也仅支持string类型。</p>
+<h4 id="准备待导入的包含图片的excel">准备待导入的包含图片的Excel</h4>
+<p>在开始之前，我们需准备好导入的Excel，本示例中的模板如下图所示：</p>
+<h4 id="导入到临时目录">导入到临时目录</h4>
+<p>Dto模型如下所示：</p>
+<pre><code class="language-csharp">
+    public class ImportPictureDto
+    {
+        [ImporterHeader(Name = &quot;加粗文本&quot;)]
+        public string Text { get; set; }
+        [ImporterHeader(Name = &quot;普通文本&quot;)]
+        public string Text2 { get; set; }
+
+        /// &lt;summary&gt;
+        /// 将图片写入到临时目录
+        /// &lt;/summary&gt;
+        [ImportImageField(ImportImageTo = ImportImageTo.TempFolder)]
+        [ImporterHeader(Name = &quot;图1&quot;)]
+        public string Img1 { get; set; }
+        [ImporterHeader(Name = &quot;数值&quot;)]
+        public string Number { get; set; }
+        [ImporterHeader(Name = &quot;名称&quot;)]
+        public string Name { get; set; }
+        [ImporterHeader(Name = &quot;日期&quot;)]
+        public DateTime Time { get; set; }
+
+        /// &lt;summary&gt;
+        /// 将图片写入到临时目录
+        /// &lt;/summary&gt;
+        [ImportImageField(ImportImageTo = ImportImageTo.TempFolder)]
+        [ImporterHeader(Name = &quot;图&quot;)]
+        public string Img { get; set; }
+    }
+
+</code></pre>
+<p>导入还是那个导入，只是Dto设置变了：</p>
+<pre><code class="language-csharp">        public async Task ImportPicture_Test()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), &quot;TestFiles&quot;, &quot;Import&quot;, &quot;图片导入模板.xlsx&quot;);
+            var import = await Importer.Import&lt;ImportPictureDto&gt;(filePath);
+            if (import.Exception != null) _testOutputHelper.WriteLine(import.Exception.ToString());
+
+            if (import.RowErrors.Count &gt; 0) _testOutputHelper.WriteLine(JsonConvert.SerializeObject(import.RowErrors));
+        }
+
+</code></pre>
+<p>如下图所示，Excel中的图片就会导入到临时目录。值得注意的是：</p>
+<ul>
+<li><strong>图片导入到临时目录之后，如果导入结果符合业务需要，请立即将图片移动到正式存储位置，比如网站目录、云存储等；</strong></li>
+<li>图片导入也支持指定位置，不过不推荐。</li>
+</ul>
+<p><img src="https://imgkr.cn-bj.ufileos.com/6a4022a1-bc1b-40b6-919b-556dd411d2f8.png" alt=""></p>
+<h4 id="将图片导入为base64">将图片导入为base64</h4>
+<p>将图片导入为base64仅需设置“ImportImageTo”属性值为“ImportImageTo.Base64”即可：</p>
+<pre><code class="language-csharp">
+    public class ImportPictureBase64Dto
+    {
+        [ImporterHeader(Name = &quot;加粗文本&quot;)]
+        public string Text { get; set; }
+        [ImporterHeader(Name = &quot;普通文本&quot;)]
+        public string Text2 { get; set; }
+
+        /// &lt;summary&gt;
+        /// 将图片导入为base64（默认为base64）
+        /// &lt;/summary&gt;
+        [ImportImageField(ImportImageTo = ImportImageTo.Base64)]
+        [ImporterHeader(Name = &quot;图1&quot;)]
+        public string Img1 { get; set; }
+
+        [ImporterHeader(Name = &quot;数值&quot;)]
+        public string Number { get; set; }
+        [ImporterHeader(Name = &quot;名称&quot;)]
+        public string Name { get; set; }
+        [ImporterHeader(Name = &quot;日期&quot;)]
+        public DateTime Time { get; set; }
+
+        /// &lt;summary&gt;
+        /// 将图片导入到临时目录
+        /// &lt;/summary&gt;
+        [ImportImageField(ImportImageTo = ImportImageTo.TempFolder)]
+        [ImporterHeader(Name = &quot;图&quot;)]
+        public string Img { get; set; }
+    }
+
+</code></pre>
+<p>导入代码同上：</p>
+<pre><code class="language-csharp">
+public async Task ImportPictureBase64_Test()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), &quot;TestFiles&quot;, &quot;Import&quot;, &quot;图片导入模板.xlsx&quot;);
+            var import = await Importer.Import&lt;ImportPictureBase64Dto&gt;(filePath);
+        }
+
+</code></pre>
+<p>如下图所示，我们就很方便的得到了图片的base64编码的结果：</p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/dffc122b-8996-4844-b647-83c53016a19a.png" alt=""></p>
+<h2 id="reference">Reference</h2>
+<p><a href="https://github.com/dotnetcore/Magicodes.IE">https://github.com/dotnetcore/Magicodes.IE</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-18 08:14</span>&nbsp;
+<a href="https://www.cnblogs.com/yyfh/">HueiFeng</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12515229" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12515229);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 329108, cb_blogApp = 'yyfh', cb_blogUserGuid = 'f2702a43-bbde-e611-845c-ac853d9f53ac';
+    var cb_entryId = 12515229, cb_entryCreatedDate = '2020-03-18 08:14', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,576 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="1. 什么是LTPA?Lightweight Third-Party Authentication (LTPA)是IBM Websphere和Domino产品中使用单点登录技术。当服务器配置好LTPA" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>LTPA Cookie原理 - hannover - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/chinaheart/bundle-chinaheart.min.css?v=qPrjkYIYsNX6j7FZPrDaIcAMY7bkfcZScvmclQgtA8k" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/chinaheart/bundle-chinaheart-mobile.min.css?v=y5BiuX9yK-NTbRmXfimHIKbPvbZqjclnZd1KIr3200o" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/hannover/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/hannover/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/hannover/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 47907;
+        var currentBlogApp = 'hannover';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'ChinaHeart';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/hannover/"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/hannover/">dirl 站 lotus世界</a>
+</h1>
+<h2>
+发展是硬道理，学习是必由之路
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a href="https://home.cnblogs.com/u/hannover/">园子</a></li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/hannover/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/hannover">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/hannover/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/hannover/rss/">
+    <img src="/skins/chinaheart/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+		<div class="clear"></div>
+		<div class="blogStats">
+			
+			<!--done-->
+随笔- 
+866&nbsp;
+文章- 
+3&nbsp;
+评论- 
+116&nbsp;
+
+
+			
+						
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="topicList">
+	<div class="forFlow">
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/hannover/archive/2011/05/29/2061798.html">LTPA Cookie原理</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-weight: bold; font-size: 18px">1. 什么是LTPA?</span></p>
+<p>Lightweight Third-Party Authentication (LTPA)是IBM Websphere和Domino产品中使用单点登录技术。当服务器配置好LTPA认证方式，用户通过浏览器成功登录后，服务器会自动发送一个session cookie给浏览器；此cookie中包含一个LTPA Token。</p>
+<p><img style="width: 400px; height: 278px" alt="" src="http://lh3.googleusercontent.com/8nHIEUtDLn4EX64kBh6wFBfeNA5nY0NnnZRXTMPT3bYhml_IMi29rcA66_9zDwYCxsa7CZvvgd8a7Mcl4rS-aYq4zQ" /></p>
+<hr />
+
+<p><span class="Apple-style-span" style="font-weight: bold; font-size: 18px">2. WebSphere部分</span></p>
+<p>本部分描述适用于已实施WebSphere系列产品应用和Domino平台应用，或WebSphere与Domino之间已完成单点登录。在这样的环境中与构异系统实现单点登录。</p>
+<div>一个通过有效的LTPA Cookie能够在同一个认证域中所有服务器被自动认证。此Cookie中包含认证信息和时间戳。这些信息通过共享的3DES Key进行了bis 加密。使用公共密钥/私有密钥进行签名。</div>
+<div>LTPA Cookie通过3DES密钥使用DESede/ECB/PKCS5P进行加密。此密钥也是采用DESede/ECB/PKCS5P进行加密，加密后再使用提供的密码再进行SHA Hash，生成24个字节的密钥，再进行Base64编码。</div>
+<div>&nbsp;</div>
+<div>如果你要解析LTPA Token，先得使用Key的密码，生成3DES密钥；再使用3DES密钥解密Token Cookie。也可以使用公共/私有密钥来签名或验证LTPA Cookie。</div>
+<hr />
+
+<h3>2.1 WebSphere LTPA 生成原理</h3>
+<div>首先，这个 cookie 由以下部分组成，以%进行分隔：</div>
+<ul><li><strong>用户信息</strong>，格式为u:user\:&lt;RealmName&gt;/&lt;UserDN&gt;，如：u:user\:VGOLiveRealm/CN=squallzhong,O=VGOLive Technology</li><li><strong>过期时间</strong></li><li><strong>签名信息，</strong>如：<br />
+<blockquote>u:user\:VGOLiveRealm/CN=squallzhong,O=VGOLive Technology%1301558320666%Cy2CAeru5kEElGj0hrvYsKW2ZVsvvcu6Un573aeX55OO4G3EMYWc0e/ZbqDp1z7MS+dLzniuUH4sYWCMpnKdm7ZGabwmV+WcraBl+y+yzwcl722gHVMOnDZAW7U3jEay9Tk2yG4yXkMWU+617xndpVxke2jtS5wIyVVM3q7UDPw=</blockquote></li></ul>
+<hr />
+
+<h3>2.2 异构系统所需信息</h3>
+<p>从WebSphere系统中导出ltpa的key文件，使用文本文件打开，如：</p>
+<blockquote>com.ibm.websphere.CreationDate=Thu Mar 31 11\:08\:09 GMT+08\:00 2011 com.ibm.websphere.ltpa.version=1.0 com.ibm.websphere.ltpa.3DESKey=7dH4i81YepbVe+gF9XVUzE4C1Ca5g6A4Q69OFobJV9g\= com.ibm.websphere.CreationHost=wasserver com.ibm.websphere.ltpa.PrivateKey=N3bnOE1IbiXNsHXxxemC98iiCnmtw3JUuQvdFjEyh9r2gu+FlQRmG8xp5RBltqc6raI4EgYFhTr+t5/tmRQrFqfNKgvujeJZODeCspohi1V4C0qit7DOoqD9xOOn9Rzdb4PIuJM3ekwuBiZZYTYu7q0TANDygc7VbmwoD3xMPCk5svyvFJ/VshPyg5f7Q+VNM8dlIitU4gK9Qp8VZEqjGoXsYYzYYTQgnwAVtR2GfZtXKlf24EPXSkgUz9j8FwTvcylcKwjS22d6eVjciyAzInnxPqxE2iMRPEFDatHZFox3flsqBswmeDQrAGv8zIiffgP1DLKdjozUyAG+50v97xx7u1RtIrB4B01ik8DuLhw\= com.ibm.websphere.ltpa.Realm=VGOLiveRealm com.ibm.websphere.ltpa.PublicKey=AM04If2+ElGSyVRF0ZEesgvC59vGw8gSIfptjfoXj8iz4C7Ip/KVAu2PDkpQi3LUN/FgVF696tmsegBThks9rmMMHzOix/vGP2721dQZKbD7plOLdWtiY2AYZChsBVkOF26DfiWJ6euxD+a+KNcrfDnu2AXRC/tKncIUJV4LbeJdAQAB</blockquote>
+<ul><li>所使用的DNS域，如：vgolive.com</li><li>过期时间(分钟)，如：30</li><li>LTPA 3DESKey 密钥及密钥的保护密码</li><li>Base DN，如：O=VGOLive Technology或DC=vgolive,DC=com </li></ul>
+<div>注：</div>
+<div>
+<ul><li><span style="color: #ff0000">在3DESKey中的反斜杠只是为了在JAVA中可解释等于号，所以正确的3DESKey为<strong>7dH4i81YepbVe+gF9XVUzE4C1Ca5g6A4Q69OFobJV9g=</strong></span></li><li><span style="color: #ff0000">用户名可以通过Base Dn验证字进行拼接，如异构系统中用户名为SquallZhong，相应在Domino中的DN就是CN=SquallZhong,O=DigiWin。此类情况仅限于LDAP中的CN与异构系统中的用户名一致。如果不一致，需要异构系统做用户对应</span> </li></ul></div>
+<hr />
+
+<h3>2.3 实现</h3>
+<div>Base64解码/编码所需Jar包：<strong>apache-commons-codec-1.3.jar</strong>以上</div>
+<div>SHA-1的校验使用<strong>java.security.MessageDigest</strong>类</div>
+<h4>2.3.1 解析</h4>
+<p>以下代码为解析从WebSphere或Domino发送过来的LTPAToken Cookie以Java为例：</p>
+<div class="syntaxhighlighter ieHover" id="highlighter_429806">
+<div class="lines">
+<div class="bar">
+<div class="toolbar"><a class=" item expandSource" title="show source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;">show source</a><a class="icon item collapseSource" title="hide" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item viewSource" title="view plain text source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item toggleLineNumbers" title="toggle line numbers" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item printSource" title="print" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item about" title="About SyntaxHighlighter" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a></div></div>
+<div class="line alt1"><code class="number bg" style="top: 1px; height: 780px">01</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">02</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// LTPA 3DES 密钥 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">03</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpa3DESKey = </code><code class="string">"7dH4i81YepbVe+gF9XVUzE4C1Ca5g6A4Q69OFobJV9g="</code><code class="plain">; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">04</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// LTPA 密钥密码 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">05</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpaPassword = </code><code class="string">"Passw0rd"</code><code class="plain">; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">06</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">try</code> <code class="plain">{ </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">07</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 获得加密key </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">08</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] secretKey = getSecretKey(ltpa3DESKey, ltpaPassword); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">09</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用加密key解密ltpa Cookie </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">10</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpaPlaintext = </code><code class="keyword">new</code> <code class="plain">String(decryptLtpaToken(tokenCipher, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">11</code><span class="content"><span class="block" style="background-position: 140px 1.2em; padding-left: 161px! important; text-indent: -161px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">secretKey)); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">12</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">displayTokenData(ltpaPlaintext); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">13</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="keyword">catch</code> <code class="plain">(Exception e) { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">14</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.out.println(</code><code class="string">"Caught inner: "</code> <code class="plain">+ e); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">15</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">16</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">17</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">//获得安全Key </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">18</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">private</code> <code class="keyword">static</code> <code class="keyword">byte</code><code class="plain">[] getSecretKey(String ltpa3DESKey, String password) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">19</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code> <code class="plain">Exception { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">20</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用SHA获得key密码的hash值 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">21</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">MessageDigest md = MessageDigest.getInstance(</code><code class="string">"SHA"</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">22</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">md.update(password.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">23</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] hash3DES = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[</code><code class="value">24</code><code class="plain">]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">24</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(md.digest(), </code><code class="value">0</code><code class="plain">, hash3DES, </code><code class="value">0</code><code class="plain">, </code><code class="value">20</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">25</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用0替换后4个字节 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">26</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">Arrays.fill(hash3DES, </code><code class="value">20</code><code class="plain">, </code><code class="value">24</code><code class="plain">, (</code><code class="keyword">byte</code><code class="plain">) </code><code class="value">0</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">27</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// BASE64解码 ltpa3DESKey </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">28</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] decode3DES = Base64.decodeBase64(ltpa3DESKey.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">29</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用key密码hash值解密已Base64解码的ltpa3DESKey </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">30</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code> <code class="plain">decrypt(decode3DES, hash3DES); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">31</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">32</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">//解密LtpaToken </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">33</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">public</code> <code class="keyword">static</code> <code class="keyword">byte</code><code class="plain">[] decryptLtpaToken(String encryptedLtpaToken, </code><code class="keyword">byte</code><code class="plain">[] key) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">34</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code> <code class="plain">Exception { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">35</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// Base64解码LTPAToken </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">36</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code> <code class="keyword">byte</code><code class="plain">[] ltpaByteArray = Base64.decodeBase64(encryptedLtpaToken </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">37</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">38</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 使用key解密已Base64解码的LTPAToken </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">39</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code> <code class="plain">decrypt(ltpaByteArray, key); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">40</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">41</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// DESede/ECB/PKC5Padding解方法 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">42</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">public</code> <code class="keyword">static</code> <code class="keyword">byte</code><code class="plain">[] decrypt(</code><code class="keyword">byte</code><code class="plain">[] ciphertext, </code><code class="keyword">byte</code><code class="plain">[] key) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">43</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throws</code> <code class="plain">Exception { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">44</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code> <code class="plain">Cipher cipher = Cipher.getInstance(</code><code class="string">"DESede/ECB/PKCS5Padding"</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">45</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code> <code class="plain">KeySpec keySpec = </code><code class="keyword">new</code> <code class="plain">DESedeKeySpec(key); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">46</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">final</code> <code class="plain">Key secretKey = SecretKeyFactory.getInstance(</code><code class="string">"TripleDES"</code><code class="plain">) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">47</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.generateSecret(keySpec); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">48</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">cipher.init(Cipher.DECRYPT_MODE, secretKey); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">49</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code> <code class="plain">cipher.doFinal(ciphertext); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">50</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">51</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230;</code><code class="lineTerm"></code></span></span></div></div></div>
+<p>解析出来的LTPAToken信息以%分隔</p>
+<hr />
+
+<h4>2.3.2 生成</h4>
+<p>Websphere LTPA生成时的签名信息是由用户DN和一些用户其他信息组成字符串，使用私有密钥进行签名，由于不清楚这些信息的组成，故无法产生正确的LTPA。</p>
+<hr />
+
+<h2>3. Domino部分</h2>
+<p>本部分的描述仅适用于单一的Domino平台应用与构异系统实现单点登录。</p>
+<hr />
+
+<h3>3.1 Domino LTPA Cookie 生成原理</h3>
+<div>在与 Domino 做 SSO 的时候，会使用 LTPA Token的认证方式，本文描述它的生成原理，通过它我们可以自己编码生成身份认证的 cookie，实现 SSO。</div>
+<div>首先，这个 cookie 由以下部分组成：</div>
+<ul><li>LTPA token 版本（4字节）</li><li>创建时间（8字节）</li><li>过期时间（8字节）</li><li>用户名（可变长度）</li><li>Domino LTPA 密钥（20字节） </li></ul>
+<div>接下来分别说明各部分的具体内容：</div>
+<ul><li>LTPA token 版本目前 Domino 只有一种值：0x0001</li><li>创建时间为以十六进制方式表示的Unix time，例如:2009-04-09 13:52:42 (GMT +8) = 1239256362 = 49DD8D2A。</li><li>过期时间=创建时间 + SSO 配置文档的过期时间（LTPA_TokenExpiration域）</li><li>用户名为 Names 中用户文档的FullName域值；如：Squall Zhong/Digiwin</li><li>Domino LTPA 密钥通过 Base64编码后，保存在 SSO 配置文档的LTPA_DominoSecret域中 </li></ul>
+<p><img style="width: 471px; height: 230px" alt="" src="http://lh6.googleusercontent.com/9aNb90qGxfI2xo079GBnZU70rVkt0VA0PptmOwkXa3lMWTC4NsYGlyN9SSs2KXnf-umJAFKFSBHwUYyHD89laYLElg" /></p>
+<div>当然不能将密钥直接发送给浏览器，所以将上述部分合并起来（如上图），计算 SHA-1 校验和。</div>
+<div><img alt="" src="http://lh5.googleusercontent.com/XLW2lNbFKVzFhL7hGYHbYxQFFy9VqrMdND0CRWaPYL8UyKzjOl7cPTiIjY_sJ5mP8QSNeAFZLT-8slUCXqXHKpvGSQ" /></div>
+<div>然后用 SHA-1 校验和替换掉 Domino LTPA 密钥，最后再将内容通过 Base64 编码，形成最终的 cookie 发送给浏览器（如上图）。这样如果 cookie 中的任何内容被修改，校验和就不对了，达到了防篡改的效果。所以最终LTPA Cookie所得到的值为以下公式组成：</div>
+<div><strong>SHA-1=LTPA版本号+创建时间+过期时间+用户名+Domino LTPA 密钥</strong></div>
+<div><strong>LTPA Cookie= Base64(LTPA版本号+创建时间+过期时间+用户名+SHA-1)</strong></div>
+<hr />
+
+<h3>3.2 异构系统所需信息</h3>
+<ul><li>Domino 所使用的DNS域，如：vgolive.com</li><li>过期时间(分钟)，如：30</li><li>Domino LTPA 密钥</li><li>Domino验证字名称，如：/O=VGOLive Technology </li></ul>
+<div><span style="color: #ff0000">注：用户名可以通过Domino验证字进行拼接，如异构系统中用户名为SquallZhong，相应在Domino中的DN就是CN=SquallZhong/O=VGOLive Technology。此类情况仅限于Domino中的CN与异构系统中的用户名一致。如果不一致，需要异构系统做用户对应</span></div>
+<hr />
+
+<h3>3.3 实现</h3>
+<p>Base64解码/编码所需Jar包：<strong>apache-commons-codec-1.3.jar以上</strong></p>
+<div>SHA-1的校验使用<strong>java.security.MessageDigest</strong>类</div>
+<div>转换字符集使用：<strong>Cp850</strong></div>
+<hr />
+
+<h4>3.3.1 解析</h4>
+<div>
+<div class="syntaxhighlighter ieHover" id="highlighter_105457">
+<div class="lines">
+<div class="bar">
+<div class="toolbar"><a class=" item expandSource" title="show source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;">show source</a><a class="icon item collapseSource" title="hide" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item viewSource" title="view plain text source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item toggleLineNumbers" title="toggle line numbers" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item printSource" title="print" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item about" title="About SyntaxHighlighter" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a></div></div>
+<div class="line alt1"><code class="number bg" style="top: 1px; height: 1050px">01</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">import</code> <code class="plain">org.apache.commons.codec.binary.Base64; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">02</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230;... </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">03</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">final</code> <code class="plain">String CHARSET = </code><code class="string">"Cp850"</code><code class="plain">; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">04</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code><code class="plain">[] dominoSecret = Base64.decodeBase64(ltpaDominoSecret.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">05</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code><code class="plain">[] ltpa = Base64.decodeBase64(ltpaToken.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">06</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">ByteArrayInputStream stream = </code><code class="keyword">new</code> <code class="plain">ByteArrayInputStream(ltpa); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">07</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">int</code> <code class="plain">usernameLength = ltpa.length &#8211; </code><code class="value">40</code><code class="plain">; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">08</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code> <code class="plain">header[] = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[</code><code class="value">4</code><code class="plain">]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">09</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code> <code class="plain">creation[] = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[</code><code class="value">8</code><code class="plain">]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">10</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code> <code class="plain">expires[] = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[</code><code class="value">8</code><code class="plain">]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">11</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code> <code class="plain">username[] = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[usernameLength]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">12</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">byte</code><code class="plain">[] sha = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[</code><code class="value">20</code><code class="plain">]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">13</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="comments">// 读取LTPAToken版本号 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">14</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">stream.read(header, </code><code class="value">0</code><code class="plain">, </code><code class="value">4</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">15</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="keyword">if</code> <code class="plain">(header[</code><code class="value">0</code><code class="plain">] != </code><code class="value">0</code> <code class="plain">|| header[</code><code class="value">1</code><code class="plain">] != </code><code class="value">1</code> <code class="plain">|| header[</code><code class="value">2</code><code class="plain">] != </code><code class="value">2</code><code class="plain">|| header[</code><code class="value">3</code><code class="plain">] != </code><code class="value">3</code><code class="plain">) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">16</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throw</code> <code class="keyword">new</code> <code class="plain">IllegalArgumentException(</code><code class="string">"Invalid ltpaToken format"</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">17</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 读取开始时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">18</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">stream.read(creation, </code><code class="value">0</code><code class="plain">, </code><code class="value">8</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">19</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="comments">// 读取到期时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">20</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">stream.read(expires, </code><code class="value">0</code><code class="plain">, </code><code class="value">8</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">21</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="comments">// 读取Domino用户DN </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">22</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">stream.read(username, </code><code class="value">0</code><code class="plain">, usernameLength); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">23</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="comments">// 读取SHA校验和 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">24</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">stream.read(sha, </code><code class="value">0</code><code class="plain">, </code><code class="value">20</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">25</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 转换用户名 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">26</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="keyword">char</code> <code class="plain">characters[] = </code><code class="keyword">new</code> <code class="keyword">char</code><code class="plain">[usernameLength]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">27</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="keyword">try</code> <code class="plain">{ </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">28</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">InputStreamReader isr = </code><code class="keyword">new</code> <code class="plain">InputStreamReader( </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">29</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">new</code> <code class="plain">ByteArrayInputStream(username), </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">30</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">CHARSET); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">31</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">isr.read(characters); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">32</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="keyword">catch</code> <code class="plain">(Exception e) { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">33</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">34</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 获得Domino用户DN </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">35</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String dn = </code><code class="keyword">new</code> <code class="plain">String(characters); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">36</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 获得创建时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">37</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">Date creationDate = </code><code class="keyword">new</code> <code class="plain">Date( </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">38</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">Long.parseLong(</code><code class="keyword">new</code> <code class="plain">String(creation), </code><code class="value">16</code><code class="plain">) * </code><code class="value">1000</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">39</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 获得到期时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">40</code><span class="content"><span class="block" style="background-position: 21px 1.2em; padding-left: 42px! important; text-indent: -42px! important">&nbsp;&nbsp; <code class="plain">Date expiresDate = </code><code class="keyword">new</code> <code class="plain">Date( </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">41</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">Long.parseLong(</code><code class="keyword">new</code> <code class="plain">String(expires), </code><code class="value">16</code><code class="plain">) * </code><code class="value">1000</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">42</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230;... </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">43</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="comments">// 创建LTPA Token </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">44</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ByteArrayOutputStream ostream = </code><code class="keyword">new</code> <code class="plain">ByteArrayOutputStream(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">45</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">try</code> <code class="plain">{ </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">46</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// LTPA Token版本号 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">47</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.write(header); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">48</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 创建时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">49</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.write(creation); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">50</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 过期时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">51</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.write(expires); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">52</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// Domino用户DN，如CN=SquallZhong/O=DigiWin </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">53</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.write(username); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">54</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// Domino LTPA 密钥 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">55</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.write(dominoSecret); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">56</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ostream.close(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">57</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="keyword">catch</code> <code class="plain">(IOException e) { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">58</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throw</code> <code class="keyword">new</code> <code class="plain">RuntimeException(e); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">59</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">60</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 进行 SHA-1 校验和 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">61</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">MessageDigest md; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">62</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">try</code> <code class="plain">{ </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">63</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">md = MessageDigest.getInstance(</code><code class="string">"SHA-1"</code><code class="plain">); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">64</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">md.reset(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">65</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="keyword">catch</code> <code class="plain">(NoSuchAlgorithmException e) { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">66</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">throw</code> <code class="keyword">new</code> <code class="plain">RuntimeException(e); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">67</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">68</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] digest = md.digest(ostream.toByteArray()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">69</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 完成 SHA-1 校验和，digest长度为20 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">70</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">boolean</code> <code class="plain">valid = MessageDigest.isEqual(digest, sha);</code><code class="lineTerm"> </code></span></span></div></div></div></div>
+<hr />
+
+<h4>3.3.2 生成</h4>
+<div>
+<div class="syntaxhighlighter ieHover" id="highlighter_751530">
+<div class="lines">
+<div class="bar">
+<div class="toolbar"><a class=" item expandSource" title="show source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;">show source</a><a class="icon item collapseSource" title="hide" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item viewSource" title="view plain text source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item toggleLineNumbers" title="toggle line numbers" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item printSource" title="print" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item about" title="About SyntaxHighlighter" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a></div></div>
+<div class="line alt1"><code class="number bg" style="top: 1px; height: 1155px">01</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="preprocessor">/** </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">02</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* 为指定用户创建有效的LTPA Token.创建时间为&lt;tt&gt;now&lt;/tt&gt;. </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">03</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">04</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @param username </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">05</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 用户名，注：使用用户全称，如：CN=SquallZhong/O=VGOLive Technology </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">06</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @param creationTime </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">07</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 创建时间 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">08</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @param durationMinutes </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">09</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 到期时间，单位：分钟 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">10</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="preprocessor">@param ltpaSecretStr </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">11</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Domino Ltpa 加密字符串 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">12</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @return - 返回已Base64编码的Ltpa Cookie. </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">13</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @throws NoSuchAlgorithmException </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">14</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">* @throws Base64DecodeException </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">15</code><span class="content"><span class="block" style="background-position: 35px 1.2em; padding-left: 56px! important; text-indent: -56px! important">&nbsp;&nbsp;&nbsp;&nbsp; <code class="preprocessor">*/</code> <code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">16</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">public</code> <code class="keyword">static</code> <code class="plain">String createLtpaToken(String username, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">17</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">GregorianCalendar creationTime, </code><code class="keyword">int</code> <code class="plain">durationMinutes, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">18</code><span class="content"><span class="block" style="background-position: 84px 1.2em; padding-left: 105px! important; text-indent: -105px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String ltpaSecretStr) </code><code class="keyword">throws</code> <code class="plain">NoSuchAlgorithmException { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">19</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// Base64解码ltpaSecretStr </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">20</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] ltpaSecret = Base64.decodeBase64(ltpaSecretStr.getBytes()); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">21</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 用户名字节数组 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">22</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] usernameArray = username.getBytes(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">23</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] workingBuffer = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[preUserDataLength </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">24</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ usernameArray.length + ltpaSecret.length]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">25</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">26</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 设置ltpaToken版本至workingBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">27</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(ltpaTokenVersion, </code><code class="value">0</code><code class="plain">, workingBuffer, </code><code class="value">0</code><code class="plain">, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">28</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">ltpaTokenVersion.length); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">29</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 获得过期时间，过期时间=当前时间+到期时间(分钟) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">30</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">GregorianCalendar expirationDate = (GregorianCalendar) creationTime </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">31</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.clone(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">32</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">expirationDate.add(Calendar.MINUTE, durationMinutes); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">33</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">34</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 转换创建时间至16进制字符串 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">35</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">String hex = dateStringFiller </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">36</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ Integer.toHexString( </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">37</code><span class="content"><span class="block" style="background-position: 168px 1.2em; padding-left: 189px! important; text-indent: -189px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">(</code><code class="keyword">int</code><code class="plain">) (creationTime.getTimeInMillis() / </code><code class="value">1000</code><code class="plain">)) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">38</code><span class="content"><span class="block" style="background-position: 168px 1.2em; padding-left: 189px! important; text-indent: -189px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.toUpperCase(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">39</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 设置创建时间至workingBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">40</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(hex.getBytes(), hex.getBytes().length </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">41</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">- dateStringLength, workingBuffer, creationDatePosition, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">42</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">dateStringLength); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">43</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">44</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 转换过期时间至16进制字符串 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">45</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">hex = dateStringFiller </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">46</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ Integer.toHexString( </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">47</code><span class="content"><span class="block" style="background-position: 168px 1.2em; padding-left: 189px! important; text-indent: -189px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">(</code><code class="keyword">int</code><code class="plain">) (expirationDate.getTimeInMillis() / </code><code class="value">1000</code><code class="plain">)) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">48</code><span class="content"><span class="block" style="background-position: 168px 1.2em; padding-left: 189px! important; text-indent: -189px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">.toUpperCase(); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">49</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 设置过期时间至workingBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">50</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(hex.getBytes(), hex.getBytes().length </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">51</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">- dateStringLength, workingBuffer, expirationDatePosition, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">52</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">dateStringLength); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">53</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">54</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 设置用户全称至workingBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">55</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(usernameArray, </code><code class="value">0</code><code class="plain">, workingBuffer, preUserDataLength, </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">56</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">usernameArray.length); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">57</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">58</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 设置已Base64解码ltpaSecret至workingBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">59</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(ltpaSecret, </code><code class="value">0</code><code class="plain">, workingBuffer, preUserDataLength </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">60</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ usernameArray.length, ltpaSecret.length); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">61</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 创建Hash字符串 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">62</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] hash = createHash(workingBuffer); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">63</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">64</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// ltpaToken版本+开始时间(16进制)+到期时间(16进制)+用户全名+SHA-1(ltpaToken版本+开始时间(16进制)+到期时间(16进制)+用户全名) </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">65</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">byte</code><code class="plain">[] outputBuffer = </code><code class="keyword">new</code> <code class="keyword">byte</code><code class="plain">[preUserDataLength + usernameArray.length </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">66</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ hashLength]; </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">67</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(workingBuffer, </code><code class="value">0</code><code class="plain">, outputBuffer, </code><code class="value">0</code><code class="plain">, preUserDataLength </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">68</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ usernameArray.length); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">69</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">System.arraycopy(hash, </code><code class="value">0</code><code class="plain">, outputBuffer, preUserDataLength </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">70</code><span class="content"><span class="block" style="background-position: 112px 1.2em; padding-left: 133px! important; text-indent: -133px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">+ usernameArray.length, hashLength); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">71</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="comments">// 返回已Base64编码的outputBuffer </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">72</code><span class="content"><span class="block" style="background-position: 56px 1.2em; padding-left: 77px! important; text-indent: -77px! important">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code> <code class="keyword">new</code> <code class="plain">String(Base64.encodeBase64(outputBuffer)); </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">73</code><span class="content"><span class="block" style="background-position: 28px 1.2em; padding-left: 49px! important; text-indent: -49px! important">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">74</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">&#8230;...</code><code class="lineTerm"> </code></span></span></div></div></div></div>
+<hr />
+
+<h2>4.&nbsp;通过F5 BIG-IP创建Domino LTPAToken</h2>
+<p>F5 iRule代码如下：</p>
+<p><span class="Apple-style-span" style="font-family: monospace; white-space: pre">when RULE_INIT {</span></p>
+<div class="syntaxhighlighter ieHover" id="highlighter_320327">
+<div class="lines">
+<div class="bar">
+<div class="toolbar"><a class=" item expandSource" title="show source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;">show source</a><a class="icon item collapseSource" title="hide" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item viewSource" title="view plain text source" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item toggleLineNumbers" title="toggle line numbers" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item printSource" title="print" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a><a class="icon item about" title="About SyntaxHighlighter" href="http://www.cnblogs.com/hannover/admin/javascript:%20return%20false;"></a></div></div>
+<div class="line alt1"><code class="number bg" style="top: 1px; height: 645px">01</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="functions">set</code> <code class="plain">cookie_name </code><code class="string">"LtpaToken"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="comments"># 不更改 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">02</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_version </code><code class="string">"\x00\x01\x02\x03"</code>&nbsp;&nbsp; <code class="comments"># 不更改 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">03</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_secret </code><code class="string">"b64encodedsecretkey"</code> <code class="comments"># 从Domino SSO文档获得ltpa密钥 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">04</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_timeout </code><code class="string">"1800"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="comments"># 从Domino SSO文档中获得过期时间，单位：秒 </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">05</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">06</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"><code class="blankLine">&nbsp;</code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">07</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">when HTTP_REQUEST { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">08</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">09</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Do your usual F5 HTTP authentication here </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">10</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">11</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Initial values </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">12</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">creation_time_temp [clock seconds] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">13</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">creation_time [</code><code class="functions">format</code> <code class="keyword">%</code><code class="plain">X $creation_time_temp] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">14</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">expr_time_temp [expr { $creation_time_temp </code><code class="keyword">+</code> <code class="plain">$::ltpa_timeout}] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">15</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">expr_time [</code><code class="functions">format</code> <code class="keyword">%</code><code class="plain">X $expr_time_temp] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">16</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">username [HTTP::username] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">17</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_secret_decode [b64decode $::ltpa_secret] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">18</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># First part of token </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">19</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">cookie_data_raw {} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">20</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append cookie_data_raw $::ltpa_version </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">21</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append cookie_data_raw $creation_time </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">22</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append cookie_data_raw $expr_time </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">23</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append cookie_data_raw $username </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">24</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append cookie_data_raw $ltpa_secret_decode </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">25</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># SHA1 of first part of token </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">26</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">sha_cookie_raw [sha1 $cookie_data_raw] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">27</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Final not yet encoded token </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">28</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_token_raw {} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">29</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append ltpa_token_raw $::ltpa_version </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">30</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append ltpa_token_raw $creation_time </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">31</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append ltpa_token_raw $expr_time </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">32</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append ltpa_token_raw $username </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">33</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">append ltpa_token_raw $sha_cookie_raw </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">34</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Final Base64 encoded token </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">35</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="functions">set</code> <code class="plain">ltpa_token_final [b64encode $ltpa_token_raw] </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">36</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Insert the cookie </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">37</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">HTTP::cookie insert name $::cookie_name value $ltpa_token_final </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">38</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">39</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="comments"># Remove Authorization HTTP header to avoid using basic authentication </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">40</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="keyword">if</code> <code class="plain">{ [HTTP::header exists </code><code class="string">"Authorization"</code><code class="plain">] } { </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">41</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">HTTP::header remove </code><code class="string">"Authorization"</code> <code class="lineTerm"></code></span></span></div>
+<div class="line alt2"><code class="number">42</code><span class="content"><span class="block" style="background-position: 7px 1.2em; padding-left: 28px! important; text-indent: -28px! important"> <code class="plain">} </code><code class="lineTerm"></code></span></span></div>
+<div class="line alt1"><code class="number">43</code><span class="content"><span class="block" style="background-position: 0px 1.2em; padding-left: 21px! important; text-indent: -21px! important"><code class="plain">}</code><code class="lineTerm"></code></span></span></div></div></div>
+<div>相关链接：</div>
+<div><a href="http://per.lausten.dk/blog/2009/06/how-to-create-a-ltpa-session-cookie-for-lotus-domino-using-f5.html" vglnk_1306629160812="1">http://per.lausten.dk/blog/2009/06/how-to-create-a-ltpa-session-cookie-for-lotus-domino-using-f5.html</a></div>
+<div><a href="http://www-10.lotus.com/ldd/dominowiki.nsf/dx/06162009022019PMWEBPHR.htm" vglnk_1306629160812="2">http://www-10.lotus.com/ldd/dominowiki.nsf/dx/06162009022019PMWEBPHR.htm</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2011-05-29 08:33</span>&nbsp;
+<a href="https://www.cnblogs.com/hannover/">hannover</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2061798" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2061798);return false;">收藏</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 47907, cb_blogApp = 'hannover', cb_blogUserGuid = 'da01470b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2061798, cb_entryCreatedDate = '2011-05-29 08:33', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: topicList 文章列表容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

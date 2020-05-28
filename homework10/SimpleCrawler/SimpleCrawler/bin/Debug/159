@@ -1,0 +1,661 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="简单记录一次安装dokuwiki的过程 dokuwiki下载 dokuwiki下载地址 https://download.dokuwiki.org/ 下载前有一些可选项目，版本、语言、插件，可以按照需" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>windows系统dokuwiki安装部署设置  xampp环境配置 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10408168.html">windows系统dokuwiki安装部署设置  xampp环境配置</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 18px;">简单记录一次安装dokuwiki的过程</span></p>
+<h3><span style="font-size: 18px;">dokuwiki下载</span></h3>
+<div style="line-height: 200%;">dokuwiki下载地址</div>
+<div style="line-height: 200%;">https://download.dokuwiki.org/</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175536084-1546140948.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_43fd" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175536638-1416660090.png" alt="image_5c6d2400_43fd" width="1082" height="544" border="0" /></a></div>
+<div style="line-height: 200%;">下载前有一些可选项目，版本、语言、插件，可以按照需要勾选，然后点击底部的下载</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175536908-1963102790.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_2743" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175537188-1328104054.png" alt="image_5c6d2400_2743" width="1095" height="133" border="0" /></a></div>
+<div style="line-height: 200%;">下载后文件如下</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175537416-1848198297.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_6e0f" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175537681-892063221.png" alt="image_5c6d2400_6e0f" width="1062" height="34" border="0" /></a></div>
+<h3><span style="font-size: 18px;">XAMPP下载</span></h3>
+<div style="line-height: 200%;"><a title="" href="https://www.apachefriends.org/zh_cn/index.html">https://www.apachefriends.org/zh_cn/index.html</a></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175538182-964414717.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_3800" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175538586-2041020251.png" alt="image_5c6d2400_3800" width="1120" height="697" border="0" /></a></div>
+<div style="line-height: 200%;">下载后的文件</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175539111-140433171.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_6e9d" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175539316-1922794556.png" alt="image_5c6d2400_6e9d" width="1060" height="30" border="0" /></a></div>
+<h3><span style="font-size: 18px;">XAMPP安装</span></h3>
+<div style="line-height: 200%;">双击进行安装</div>
+<div style="line-height: 200%;">注意：</div>
+<div style="line-height: 200%;">开始如果有提示信息提醒杀毒软件或者用户账户控制的告警信息的话，继续安装就好了</div>
+<div style="line-height: 200%;">安装文件的位置，如果需要变动，可以设置</div>
+<div style="line-height: 200%;">Learn more about Bitnami for XAMPP前面的选项复选框可以取消掉</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175539554-536606979.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_7f24" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175540040-55736009.png" alt="image_5c6d2400_7f24" width="507" height="423" border="0" /></a></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175540660-72067473.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_1b66" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175540958-2000461412.png" alt="image_5c6d2400_1b66" width="511" height="425" border="0" /></a></div>
+<h3><span style="font-size: 18px;">dokuwiki解压后发布</span></h3>
+<div style="line-height: 200%;">安装后将dokuwiki安装包解压缩，放置到xampp安装目录的发布路径中</div>
+<div style="line-height: 200%;">比如我的：E:\xampp\htdocs</div>
+<h3><span style="font-size: 18px;">设置xampp</span></h3>
+<div style="line-height: 200%;">xampp-control.exe为控制面板，在此界面可以进行相关环境的配置</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175541275-983953673.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_1b00" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175541496-1981874610.png" alt="image_5c6d2400_1b00" width="762" height="69" border="0" /></a></div>
+<div style="line-height: 200%;">如果有需要可以点击修改配置文件，比如端口号，可以点击下面的config</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175541894-505177704.png"><img style="display: inline; background-image: none;" title="image_5c6d2400_5363" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175542603-1819342088.png" alt="image_5c6d2400_5363" width="683" height="429" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175542973-629071099.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_22b3" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175543299-758776733.png" alt="image_5c6d2401_22b3" width="685" height="437" border="0" /></a></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175543516-431906334.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_987" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175543719-874624375.png" alt="image_5c6d2401_987" width="643" height="520" border="0" /></a></div>
+<h3><span style="font-size: 18px;">启动Apache </span></h3>
+<div style="line-height: 200%;">点击第一行apache的start按钮</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175544013-1397817284.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_5c34" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175544336-1207372930.png" alt="image_5c6d2401_5c34" width="679" height="432" border="0" /></a></div>
+<h3><span style="font-size: 18px;">安装dokuwiki </span></h3>
+<div style="line-height: 200%;">启动后就可以访问项目了，然后就可以安装dokuwiki了</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>http://192.168.0.xxx:9876/dokuwiki</strong></span>/install.php</div>
+<div style="line-height: 200%;">安装好之后会提醒你删除install.php文件</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175544684-1818308186.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_7e62" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175544916-358101937.png" alt="image_5c6d2401_7e62" width="898" height="189" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;">将文件重命名即可</div>
+<div style="line-height: 32px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175545226-1208029645.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_7a22" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175545423-1344837702.png" alt="image_5c6d2401_7a22" width="802" height="41" border="0" /></a></div>
+</div>
+<h3><span style="font-size: 18px;">访问dokuwiki </span></h3>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong><a href="http://192.168.0.xxx:9876/dokuwiki/doku.php">http://192.168.0.xxx:9876/dokuwiki/doku.php</a></strong></span> <span style="color: #000000; font-size: 13.5pt;"><strong><br /></strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong><span style="color: #ff0000;">可以进入欢迎页面，进行start页面的设置，正常通过安装后就有链接跳转到&nbsp; </span><span style="color: #0000ff;">welcome</span></strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>http://192.168.0.xxx:9876/dokuwiki/doku.php?id=wiki:welcome</strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #888888; font-size: 13.5pt;"><strong><span style="color: #3366ff;">看页面上红色的链接，就是没有设置页面的链接，绿色的是设置过的</span></strong></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175545706-315873594.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_d37" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175546030-1653272552.png" alt="image_5c6d2401_d37" width="1053" height="415" border="0" /></a></strong></span></div>
+<div style="line-height: 200%;">
+<span style="color: #000000; font-size: 13.5pt;"><strong><br /></strong></span></div>
+<h3><span style="font-size: 18px;">dokuwiki配置
+</span></h3>
+<div style="line-height: 200%;"><span style="color: #000000;">通过右上角的管理可以进入管理界面</span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175546300-365335160.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_796d" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175546528-1661760783.png" alt="image_5c6d2401_796d" width="536" height="125" border="0" /></a></strong></span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;">点击后如下图所示</span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;">用户管理、插件管理等都可以在这边</span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175546884-2056653300.png"><img style="display: inline; background-image: none;" title="image_5c6d2401_5b18" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190220175547263-1838853832.png" alt="image_5c6d2401_5b18" width="1066" height="527" border="0" /></a></strong></span>
+</div>
+<h3><span style="font-size: 18px;">小结
+</span></h3>
+<div style="line-height: 200%;"><span style="color: #000000;">安装dokuwiki其实很简单，因为有了集成的环境，只需要将文件解压到发布目录并且启动Apache即可</span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000;">其余的设置可以自己在页面上试着随便点点，慢慢就学会了，百度上有一大把</span>
+</div>
+<div style="line-height: 200%;"><span style="color: #000000;">以上为本人此次安装wiki的一个简要步骤记录</span>&nbsp;</div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10408168.html" target="_blank">windows系统dokuwiki安装部署设置 xampp环境配置</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-20 17:59</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10408168" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10408168);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10408168, cb_entryCreatedDate = '2019-02-20 17:59', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

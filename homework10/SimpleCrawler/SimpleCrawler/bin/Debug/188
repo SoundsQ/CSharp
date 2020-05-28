@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="你的业务已经完成了从0到1，正在从1走向10，或者从10走向100，请记住下面这些忠言。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>当我们谈重构的时候我们想谈什么？ - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/refactoring.html">当我们谈重构的时候我们想谈什么？</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="font-size: 16px;">郑昀 20180411</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">如果你在繁忙的业务迭代中开始系统重构，恭喜你，说明你的业务已经完成了从0到1，正在从1走向10，或者从10走向100。</span></p>
+<p><span style="font-size: 16px;">至于重构后的技术栈是 Spring MVC+Dubbo，还是 Spring Boot+Spring Cloud？</span></p>
+<p><span style="font-size: 16px;">是 Vue+ElementUI，是 React，还是 Ant.design，抑或就是上古时代的 JQuery+Bootstrap？</span></p>
+<p><span style="font-size: 16px;">是 k8s，还是 mesos+marathon？是 Thrift，还是 Hessian，抑或 Protobuf？我并不在意。</span></p>
+<p><span style="font-size: 16px;">我并不 care 这些东西，每个技术团队都可以有自己的技术选型思路。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">我在意的是<strong>两个&ldquo;是否有利于&rdquo;：</strong></span></p>
+<p><strong><span style="font-size: 16px;">一，是否有利于发布部署。</span></strong></p>
+<p><strong><span style="font-size: 16px;">二，是否有利于排除故障（是否有利于快速定位线上问题和解决问题）。</span></strong></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">为什么要强调它俩？</span></p>
+<p><span style="font-size: 16px;">因为我们在过去六七年间，经历了太多的生死折磨。如履薄冰如临深渊。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">我们曾是做本地生活服务电商的，餐饮/电影/酒店/景点门票/美容美发&hellip;&hellip;</span></p>
+<p><span style="font-size: 16px;">节假日往往也是本地生活服务的峰值日，饭点儿就相当于秒杀。</span></p>
+<p><span style="font-size: 16px;">太多次在假期被召回。</span></p>
+<p><span style="font-size: 16px;">太多次打电话给各个 TeamLeader，有时电脑不在身边，有时深山老林无法上网，有时无人接听，有时 VPN 连不进去～</span></p>
+<p><span style="font-size: 16px;">多少次翘首期盼 DBA、SA、QA、DevManager 们给我回报到底出啥事儿了。</span></p>
+<p><span style="font-size: 16px;">请先阅读一下我写的《<a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.cnblogs.com/zhengyun_ustc/p/resistless.html" rel="nofollow noreferrer" target="_blank" data-za-detail-view-id="1043">经历不可抗力是一种什么体验</a>》，了解一下什么是 too young too naive。</span></p>
+<p><span style="font-size: 16px;">以至于我有两个怨念：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">怨念一，Centreon 烂到渣，Zabbix 也不咋的，基础运维的那些神兵利器，都不考虑做业务的人，尤其是业务集群规模庞大的人，到底是怎么排查问题排除故障的。</span></strong></p>
+<p><span style="font-size: 16px;">SA 是怎么工作的？</span></p>
+<p><span style="font-size: 16px;">一旦出现连接数暴涨，Web/App 服务长时间无响应，应用内存飙升，SA 拍马赶到，一定是先重启相关应用（不管是容器还是虚拟机），如果还不管用，就立即将相关应用悉数回滚到上一个稳定版本上，争取以最短时间恢复。</span></p>
+<p><span style="font-size: 16px;">等研发介入时，现场已经不复存在。</span></p>
+<p><span style="font-size: 16px;">六七年前，事发后，我们登入 Centreon 和 ELK，按机器组、按机器、按指标，用肉眼，用大脑，结合各个业务集群里的日志，结合 Nagios 报警短信，理出来一个因果证据链。</span></p>
+<p><span style="font-size: 16px;">你可能需要打开几百个监控页面，你还需要精通业务集群的分组、调用关系和IP（那时候还没有 Docker 容器，都是虚拟机）。</span></p>
+<p><span style="font-size: 16px;">这也就是为什么我定下<a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.cnblogs.com/zhengyun_ustc/p/philosophy.html" rel="nofollow noreferrer" target="_blank" data-za-detail-view-id="1043">我司研发哲学</a>第一条：Don't make me think&hellip;&hellip;</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">怨念二，开源软件的开发者是好人也往往是性情中人，不太考虑排除故障成本低、可视化、高可用、可伸缩、监控报警等商业系统必备的运维属性，拿来主义必死无葬身之地。</span></strong></p>
+<p><span style="font-size: 16px;">举个例子吧，ActiveMQ 和 RabbitMQ 有<a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//www.cnblogs.com/zhengyun_ustc/archive/2012/08/25/flowcontrol.html" rel="nofollow noreferrer" target="_blank" data-za-detail-view-id="1043">生产者流量控制</a>，如果你没有听说过，没有遇到过，恭喜你，但也表明你的业务量还是太小。</span></p>
+<p><span style="font-size: 16px;">你可能会说，遇到了生产者流量控制，说明下游消费者消费得太慢，加快速度不就完了？</span></p>
+<p><span style="font-size: 16px;">在电商服务中，异步消息队列的消费者往往是与第三方系统网络通讯，第三方系统可就不在你控制范围之内了，一个第三方系统挂了，或者突然拥塞，就会憋住你的消费者集群的所有线程，造成消息积压。因此就将上游生产者挂起？开玩笑呢吧？！咋想的这都是？让灾难从下游蔓延到上游？！</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">那么我们应该怎么思考系统重构呢？</span></p>
+<p><span style="font-size: 16px;">随着业务规模越来越大，随着应用越来越多，随着 Docker 容器集群的引入，随着前后端分离导致内部接口越来越多，随着 API 网关的引入，我们越来越难以在5分钟之内断定系统出了什么事儿。</span></p>
+<p><span style="font-size: 16px;">因此，我要求：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">戒律一：凡是中间件，不管是自主研发的，还是以开源软件为内核构建出来的，都必须自带监控报警，否则不允许上线。</span></strong></p>
+<p><strong><span style="font-size: 16px;">戒律二：本着 Don't make me think 的哲学思路，所有对排除故障有帮助的信息，都必须一站式展示在交互界面上，也就是在中间件的控制台上，或运维自动化平台上，或研发协作平台上。</span></strong></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">下面举一些具体的例子，帮助大家理解。</span></p>
+<p><span style="font-size: 16px;">我司的技术支撑体系如下图所示（或<a class=" wrap external" href="https://link.zhihu.com/?target=http%3A//images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_%25E6%258A%2580%25E6%259C%25AF%25E6%2594%25AF%25E6%2592%2591%25E4%25BD%2593%25E7%25B3%25BB.png" rel="nofollow noreferrer" target="_blank" data-za-detail-view-id="1043">点击查看原图</a>）：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114124659-823902959.png" alt="" width="816" height="334" /></span></p>
+<p><span style="font-size: 16px;">其中：</span></p>
+<p><span style="font-size: 16px;">1，定时任务管理与调度平台有运行情况展示，自带监控报警：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114205569-876046676.png" alt="" width="839" height="170" /></span></p>
+<p><span style="font-size: 16px;">2，异步消息可靠推送系统有可视化的内部详情展示，自带监控报警：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114232437-1565639624.png" alt="" width="609" height="338" /></span></p>
+<p><span style="font-size: 16px;">3，分布式并行计算调度与管理平台一站式展示工作流下每一个任务在所有节点上的运行日志，并自带监控报警：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114313672-1880964782.png" alt="" width="699" height="321" /></span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">4，大数据协作平台自带监控报警：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114338029-100507159.png" alt="" width="701" height="476" /></span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">5，我们甚至要把所有 PC 客户端，所有智能设备都监管起来：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114402656-1033894709.png" alt="" width="756" height="275" /></span></p>
+<p><span style="font-size: 16px;">6，研发协作平台一站式展示应用部署的方方面面：</span></p>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114429877-967217485.png" alt="" width="728" height="177" /></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;">可以说我们打造的每一个中间件、协作平台都体现了戒律一和戒律二。</span></p>
+<p><span style="font-size: 16px;">不需要东奔西走，四处收集蛛丝马迹。</span></p>
+<p><span style="font-size: 16px;">不需要一次性点开几百个指标页面，脑补推演。</span></p>
+<p><span style="font-size: 16px;">不需要精通集群部署结构。</span></p>
+<p><span style="font-size: 16px;">不需要熟知应用日志的路径。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">对，这就是为我这样的&ldquo;旁观者&rdquo;、&ldquo;小白&rdquo;准备的。</span></p>
+<p><span style="font-size: 16px;">有了这些系统，即使大家都出去玩了，我一个人也能看出问题所在，同时也能有效应对铁打营盘流水兵的情况。</span></p>
+<p><span style="font-size: 16px;">当你完成了从0到1的跨越，正在从1走向10，走向100，请记住下面的忠言：</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">两个&ldquo;是否有利于&rdquo;：</span></strong></p>
+<p><strong><span style="font-size: 16px;">一，是否有利于发布部署。</span></strong></p>
+<p><strong><span style="font-size: 16px;">二，是否有利于排除故障（是否有利于快速定位问题和解决问题）。</span></strong></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><strong><span style="font-size: 16px;">两个戒律：</span></strong></p>
+<p><strong><span style="font-size: 16px;">戒律一：凡是中间件，不管是自主开发的，还是以开源软件为内核构建出来的，都必须自带监控报警，否则不允许上线。</span></strong></p>
+<p><strong><span style="font-size: 16px;">戒律二：本着 Don't make me think 的哲学思路，所有对排除故障有帮助的信息，都必须一站式展示在交互界面上，也就是中间件的控制台上，或运维自动化平台上，或研发协作平台上。</span></strong></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">-EOF-</span></p>
+<p><span style="font-size: 16px;">欢迎订阅我的微信订阅号『老兵笔记』</span></p>
+<p><span style="font-size: 16px;"><img class="content_image lazy" src="https://pic1.zhimg.com/80/098dcdc734c32da18eab239d8dbb781b_hd.jpg" alt="" data-size="normal" data-actualsrc="https://pic1.zhimg.com/098dcdc734c32da18eab239d8dbb781b_b.jpg" /></span></p>
+<p><span style="font-size: 16px;">赠图一枚：</span></p>
+<p><span style="font-size: 16px;">生活和你～</span></p>
+<div class="RichText-gifPlaceholder">
+<div class="GifPlayer" data-reactroot="" data-size="normal" data-za-detail-view-path-module="GifItem"><span style="font-size: 16px;"><img class="column-gif" src="https://pic3.zhimg.com/v2-299fbd33e4c8089bbe0fd13e6cac8f50_b.jpg" alt="" data-thumbnail="https://pic3.zhimg.com/v2-299fbd33e4c8089bbe0fd13e6cac8f50_b.jpg" data-size="normal" /></span></div>
+</div>
+<p><span style="font-size: 16px;"><img src="https://images2018.cnblogs.com/blog/7438/201804/7438-20180416114509313-1488730930.gif" alt="" /></span></p>
+<p><span style="font-size: 16px;">语录两条：</span></p>
+<p><span style="font-size: 16px;">1，</span></p>
+<p><span style="font-size: 16px;">王志安：&ldquo;这叫调查？这叫武汉理工大学好吗！&rdquo;于是评论纷纷打蛇随棍上：&ldquo;对，武理取闹！&rdquo;#新词发现#</span></p>
+<p><span style="font-size: 16px;">2，</span></p>
+<p><span style="font-size: 16px;">有一种离职叫『弃船逃生』：</span></p>
+<p><span style="font-size: 16px;">『2011年在百度浏览器团队时，遇到几件让人印象深刻的事情。有一次开会，产品拿出Google某个产品的DEMO，里面有一段很酷炫的 3D 效果，要求开发加上，只给2天时间。大家目瞪口呆。后续，开发为了赶节奏，导致非常多的bug，又为了修改bug，leader将所有的bug按照人员平均分配，导致不同模块间的同学相互修改&hellip;&hellip;实在难以想象，好比让做花卷的厨子，去修改西湖醋鱼的味道。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">最初的现象是：bug下降得慢，进而bug反而增加，每个人都累得半死，代码风格极其杂乱，为了赶工引入的临时方案层出不穷。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">到了中期：人员离职越来也多，代码难以维护，新加的需求与之前的临时方案冲突。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">到了后期：想做一些修复，想调整架构，又要保证正常运行，其难度好比在一架飞行中的飞机上拆换零件。</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">然后我也急忙离职了&hellip;&hellip;实在是看不到成功的可能性。</span></p>
+<p><span style="font-size: 16px;">后来到了腾讯的团队，感觉流程就规范多了。需求和bug有Tapd跟踪，产品发布按照节奏，需求提出前会和开发反复讨论可行性，有专门的质量跟踪，有专门的用户反馈，每天知道要做什么，也知道明天要做什么。有产品需求，也有开发需求！这个非常重要。很多团队，都是只有产品需求，开发好像牛一样，耕完地就不管了？</span></p>
+<p><span style="font-size: 16px;">&nbsp;</span></p>
+<p><span style="font-size: 16px;">流程其实没那么复杂，就是各司其责+节奏。』&mdash;&mdash;<a href="https://zhuanlan.zhihu.com/p/35076829" target="_blank">https://zhuanlan.zhihu.com/p/35076829</a>&nbsp;</span></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-04-16 11:51</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8855175" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(8855175);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 8855175, cb_entryCreatedDate = '2018-04-16 11:51', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

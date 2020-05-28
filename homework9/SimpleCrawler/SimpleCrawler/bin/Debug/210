@@ -1,0 +1,1253 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="设计模式的学习,是软件开发中必不可少的一个环节,本文详细的阐述了设计模式中的适配器模式Adapter的含义,概念,以及分类,类适配器,对象适配器,接口适配器,双向适配器,以及适配器模式在JDK中的一个" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>适配器模式 adapter 结构型 设计模式(九) - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9596069.html">适配器模式 adapter 结构型 设计模式(九)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        设计模式的学习,是软件开发中必不可少的一个环节,本文详细的阐述了设计模式中的适配器模式Adapter的含义,概念,以及分类,类适配器,对象适配器,接口适配器,双向适配器,以及适配器模式在JDK中的一个小应用
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">现实世界中的适配器模型</span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: large;">先来看下来几个图片,截图自淘宝</span></div>
+<div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082732181-1082232218.png"><img style="display: inline; background-image: none;" title="image_5b907301_7af1" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082734102-1437497622.png" alt="image_5b907301_7af1" width="830" height="501" border="0" /></a></span></div>
+<div style="text-align: left; line-height: 200%;"><span style="font-size: large; font-weight: bold;">上图为港版的插头与港版的插座</span></div>
+<div style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;"><span style="font-size: x-large; font-weight: bold;"><span style="font-size: x-large; font-weight: bold;">&nbsp;</span></span></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082737102-614695484.png"><img style="display: inline; background-image: none;" title="image_5b907302_77b6" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082742749-1893411159.png" alt="image_5b907302_77b6" width="852" height="793" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">上图为插座适配器卖家的描述图</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082748932-1061774598.png"><img style="display: inline; background-image: none;" title="image_5b907302_3d4c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082749910-671332012.png" alt="image_5b907302_3d4c" width="659" height="318" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">上图为适配后的结果</span></div>
+<h4 style="line-height: 200%;">现实世界中适配器模式 角色分类</h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这就是适配器模式在电源插座上的应用 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们看下在插座适配器中的几个重要角色 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082751150-367467472.png"><img style="display: inline; background-image: none;" title="image_5b907303_2709" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082753380-1699013896.png" alt="image_5b907303_2709" width="828" height="593" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可以看得出来,大陆和港版插座面板,都是作为电源的角色,他们的功能是相似的或者说相近的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">插头要使用插座,进而接通电流</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">现实世界到代码的转换 电源插座代码示例</span></h3>
+<h4 style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">港版插座面板</span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">目标角色 Target 接口
+* 香港地区使用的插座面板,提供输出电流的功能
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> TargetHongkongPanelInterface {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> offerHongKongElectricity();
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">目标角色 Target 某个具体的港版插座面板 实现类
+* 香港地区使用的插座面板,提供输出电流的功能
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> TargetHongkongPanel <span style="color: #0000ff;">implements</span><span style="color: #000000;"> TargetHongkongPanelInterface{
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> offerHongKongElectricity() {
+System.out.println(</span>"港版面板 提供电流"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<p><span style="font-size: large; font-weight: bold;">大陆地区插座面板</span></p>
+</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">被适配角色 Adaptee 接口
+* 大陆地区使用的插座面板,提供输出电流的功能
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> AdapteeChinaMainlandPanelInterface {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> offerChinaMainlandElectricity();
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">被适配角色 Adaptee 某种具体类型的插座面板 实现类
+* 大陆地区使用的插座面板,提供输出电流的功能
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AdapteeChinaMainlandPanel <span style="color: #0000ff;">implements</span><span style="color: #000000;"> AdapteeChinaMainlandPanelInterface{
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> offerChinaMainlandElectricity() {
+System.out.println(</span>"国标面板 提供电流"<span style="color: #000000;">);
+
+}
+}</span></pre>
+</div>
+<h4><span style="font-size: large; font-weight: bold;">港版插头</span></h4>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">客户角色 Client 港版插头
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> ClientHongKongSocket {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">接受港版插座面板作为参数
+* 港版插头,插入到港版插座面板
+* </span><span style="color: #808080;">@param</span><span style="color: #008000;"> targetHongkongPanel
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> plugIn(TargetHongkongPanelInterface targetHongkongPanel) {
+targetHongkongPanel.offerHongKongElectricity();
+}
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">
+* 测试主程序,港版插头 插入到适配器上
+* 适配器插入到大陆面板上
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String ...args) {
+</span><span style="color: #008000;">//</span><span style="color: #008000;">港版插头</span><span style="color: #000000;">
+ClientHongKongSocket socket </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ClientHongKongSocket();
+</span><span style="color: #008000;">//</span><span style="color: #008000;">大陆面板</span><span style="color: #000000;">
+AdapteeChinaMainlandPanel adapteeChinaMainlandPanel </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> AdapteeChinaMainlandPanel();
+</span><span style="color: #008000;">//</span><span style="color: #008000;">适配器</span><span style="color: #000000;">
+Adapter adapter </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Adapter(adapteeChinaMainlandPanel);
+</span><span style="color: #008000;">//</span><span style="color: #008000;">港版插头 插到 适配器上</span><span style="color: #000000;">
+socket.plugIn(adapter);
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<h4 style="line-height: 200%;"><span style="font-size: large; font-weight: bold;">插头适配器</span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> adapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">适配器角色 Adapter
+* 实现目标角色 TargetHongkongPanelInterface
+* 组合使用被适配角色 AdapteeChinaMainlandPanelInterface
+* 将对目标角色的方法调用转换为被适配角色的方法调用
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Adapter <span style="color: #0000ff;">implements</span><span style="color: #000000;"> TargetHongkongPanelInterface{
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> AdapteeChinaMainlandPanelInterface adapteeChinaMainlandPanel;
+
+Adapter(AdapteeChinaMainlandPanel adapteeChinaMainlandPanel){
+</span><span style="color: #0000ff;">this</span>.adapteeChinaMainlandPanel =<span style="color: #000000;"> adapteeChinaMainlandPanel;
+}
+
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> offerHongKongElectricity() {
+adapteeChinaMainlandPanel.offerChinaMainlandElectricity();
+}
+}</span></pre>
+</div>
+<h4>执行港版插头的测试main方法</h4>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082755467-1890612919.png"><img style="display: inline; background-image: none;" title="image_5b907303_2fc7" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082755678-85262300.png" alt="image_5b907303_2fc7" width="797" height="323" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>UML图</strong></span></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">港版插头ClientHongKongSocket与港版插座面板 TargetHongKongPanelInterface接口关联 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">Adapter 实现了&nbsp; 港版插座面板 TargetHongKongPanelInterface接口 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">并且包含一个&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 大陆插座面板&nbsp; AdapteeChinaMainlandPanelInterface 接口 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器将对 港版插座面板的方法调用&nbsp; 转换为&nbsp; 大陆插座面板的方法调用 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这就是整个适配器结构( 可以不关注实现类) </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082755875-570778560.png"><img style="display: inline; background-image: none;" title="image_5b907303_2360" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082756074-1195769481.png" alt="image_5b907303_2360" width="838" height="567" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082756264-1283429693.png"><img style="display: inline; background-image: none;" title="image_5b907303_4009" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082756466-1082541156.png" alt="image_5b907303_4009" width="803" height="549" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">客户角色Client 要使用 目标角色Target </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器模式就是要</span><span style="font-size: 18pt;"><strong>冒充</strong></span><span style="font-size: 15px;">目标角色Target,看起来有目标角色的行为 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"> 在OOP中,想要做到 就是实现或者继承或者拥有一个成员 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">总之: </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器就是把被适配者转换为为目标</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: x-large; font-weight: bold;">OOP中的适配器模式详解</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">意图: </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">将一个类的接口转换成客户希望的另外一个接口。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作. </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">注意:此处说的接口,并不是单纯的指Interface,而是指一切可以提供方法调用的类型,可能是接口也可能是类 </span></div>
+</td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">客户使用适配器的过程: </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">客户通过目标接口调用适配器的方法,对适配器发出请求 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器使用被适配者接口把请求进行处理 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">客户接收到调用的结果,但是并未察觉这一切是适配器在起转换作用. </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;">适配器分类</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">适配器三种模式 </span></td>
+</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">类适配器&nbsp;&nbsp;&nbsp; </span><br /><span style="font-size: 15px;">对象适配器</span><br /><span style="font-size: 15px;">接口适配器
+				</span></td>
+
+
+
+
+			</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">想要把一个类的接口转换为客户希望的另外一个接口</span><br /><span style="font-size: 15px;">必须要有输入输出,有目标&nbsp; 有源</span><br /><span style="font-size: 15px;">所以作为一个适配器,必须要 一手拿着被适配者也就是源&nbsp; 另一手拿着的是目标 </span><br /><span style="font-size: 15px;">想要转变为目标,那么必须得同目标时一样的类型,&nbsp;&nbsp; 在oop中想要成为目标类型 要么继承 要么实现</span><br /><span style="font-size: 15px;">想要拥有被适配者,要么继承,要么实现,要么就是关联(拥有一个对象)</span><br /><span style="font-size: 15px;">三种方式可以理解为按照&nbsp; 拥有被适配者 的方式进行划分的</span><br /><span style="font-size: 15px;">如果继承Adaptee,那么就是类 适配器</span><br /><span style="font-size: 15px;">如果拥有一个Adaptee,也就是拥有一个Adaptee对象,那么就是对象 适配器</span><br /><span style="font-size: 15px;">如果实现Adaptee,那么就是 接口适配器</span><br />
+				</td>
+
+
+
+
+			</tr>
+
+
+
+
+		</tbody>
+
+
+
+
+	</table>
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">现在回想下,我们上面的例子
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">适配器 实现了目标接口,并且拥有一个Adaptee对象 作为属性,很显然就是对象适配器
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">类适配器
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">根据上面的描述,如果继承Adaptee,那么就是类 适配器, 
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在Java中不允许多继承,既然已经继承了Adaptee&nbsp; ,那么就必须要求目标是一个接口(此处接口就是Interface)
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这就有一定的局限性
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">而且,既然是继承被适配者类,那么,被适配者的子类拥有的方法和行为,他并不能拥有,也就是说不能适配被适配者的子类
+					</span></div>
+
+
+
+
+				</td>
+
+
+
+
+			</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">优点,那就是,适配器作为被适配者的子类,自然拥有更多的操作空间,比如重写方法</span><br />
+				</td>
+
+
+
+
+			</tr>
+
+
+
+
+		</tbody>
+
+
+
+
+	</table>
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">对象适配器</span><br />
+				</td>
+
+
+
+
+			</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">如同我们上面的例子一样,如果把被适配者当做一个属性对象放到适配器中,这就是对象适配器
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">显然,他不要求目标一定是接口, 继承还是实现都可以
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">同类适配器比较的话,显然,他不能对被适配者 原来的一些方法进行操作,只能进行使用,不过也无伤大雅,不算缺点
+					</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">因为他是拥有一个被适配者类型的对象,那么,被适配者和他的子类显然都可以作为具体的对象传入
+					</span></div>
+
+
+
+
+				</td>
+
+
+
+
+			</tr>
+
+
+
+
+		</tbody>
+
+
+
+
+	</table>
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">接口适配器</span><br /><span style="font-size: 15px;">按照我们的描述,如果实现了被适配者 Adaptee&nbsp; 那么就是接口适配器</span><br /><span style="font-size: 15px;">具体说来:</span><br /><span style="font-size: 15px;">当<strong>不需要全部实现接口提供的方法</strong>时</span><br /><span style="font-size: 15px;">可先设计一个<strong>抽象类实现接口</strong>，并为该接口中<strong>每个方法提供一个默认实现（空方法）</strong></span><br /><span style="font-size: 15px;">那么该<strong>抽象类的子类可有选择地覆盖父类的某些方法来实现需求</strong></span><br /><span style="font-size: 15px;">它<strong>适用于一个接口不想使用其所有的方法的情况</strong>
+				</span></td>
+
+
+
+
+			</tr>
+
+
+
+
+		</tbody>
+
+
+
+
+	</table>
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>接口适配器示例</strong></span></h3>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>接口</strong></span>
+</h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> interfaceadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Interfaces {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method1();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method2();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method3();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method4();
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method5();
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>抽象类</strong></span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> interfaceadapter;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* </span><span style="color: #808080;">@author</span><span style="color: #008000;"> noteless
+*
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span> AbstractClass <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Interfaces {
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method1() { }
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method2() { }
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method3() { }
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method4() { }
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method5() { }
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>两个实现类</strong></span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> interfaceadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ImplementClass1 <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractClass {
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method1() {
+System.out.println(</span>"method1 called "<span style="color: #000000;">);
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method3() {
+System.out.println(</span>"method3 called "<span style="color: #000000;">);
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method5() {
+System.out.println(</span>"method5 called "<span style="color: #000000;">);
+}
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> interfaceadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> ImplementClass2 <span style="color: #0000ff;">extends</span><span style="color: #000000;"> AbstractClass {
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method2() {
+System.out.println(</span>"method2 called"<span style="color: #000000;">);
+}
+
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method4() {
+System.out.println(</span>"method4 called"<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>测试类-客户角色</strong></span></h4>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> interfaceadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+Interfaces class1 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ImplementClass1();
+Interfaces class2 </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ImplementClass2();
+class1.method1();
+class1.method2();
+class1.method3();
+class1.method4();
+class1.method5();
+System.out.println(</span>"------"<span style="color: #000000;">);
+class2.method1();
+class2.method2();
+class2.method3();
+class2.method4();
+class2.method5();
+}
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082756676-1723222878.png"><img style="display: inline; background-image: none;" title="image_5b907303_60dd" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082756826-1153283698.png" alt="image_5b907303_60dd" width="375" height="187" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">接口适配器的行为相当于适配了自己</span></div>
+<div><span style="font-size: 15px;">把原来的接口 当做被适配者 </span></div>
+<div><span style="font-size: 15px;">目标则是一个实现了接口部分功能的类</span></div>
+<div><span style="font-size: 15px;">调用这个接口的部分方法场景下,上面的形式是非常方便的 </span></div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">从这个示例中或许应该更加能理解适配器的本意: </span></div>
+<div style="line-height: 200%;">
+<div>
+<div><span style="font-size: 15px;">将一个类的接口转换成客户希望的另外一个接口。 </span></div>
+<div><span style="font-size: 15px;">适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作 </span></div>
+</div>
+<div><span style="font-size: 15px;">所以说,但凡是涉及到转换这一概念,你都可以考虑这个思维模式 </span></div>
+<div><span style="font-size: 15px;">三种常用形式,只是概念的表现形式而已 </span></div>
+<div><span style="font-size: 15px;">而且,实际的问题场景将会有很多种,也不可能完全都按照某种格式 </span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">再比如双向适配器 </span></div>
+<div><span style="font-size: 15px;">即可以将被适配者转换为目标 </span></div>
+<div><span style="font-size: 15px;">也可以把目标转换为被适配者</span></div>
+<h3><span style="font-size: 15px;">双向适配器</span></h3>
+<h4>目标接口/目标实现类</h4>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> doubleadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> TargetInterface {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> targetRequest();
+}
+
+
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> doubleadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> TargetImplClass <span style="color: #0000ff;">implements</span><span style="color: #000000;"> TargetInterface{
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> targetRequest() {
+System.out.println(</span>"targetRequest ... "<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<h4>被适配者接口/被适配者实现类</h4>
+</div>
+<div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> doubleadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> AdapteeInterface {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> adapteeRequest();
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> doubleadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> AdapteeImplClass <span style="color: #0000ff;">implements</span><span style="color: #000000;"> AdapteeInterface{
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> adapteeRequest() {
+System.out.println(</span>"adapteeRequest ... "<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<h4>适配器</h4>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> doubleadapter;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Adapter <span style="color: #0000ff;">implements</span><span style="color: #000000;"> TargetInterface,AdapteeInterface {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> TargetInterface target;
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> AdapteeInterface adaptee;
+Adapter(TargetInterface target){
+</span><span style="color: #0000ff;">this</span>.target =<span style="color: #000000;"> target;
+}
+
+Adapter(AdapteeInterface adaptee){
+</span><span style="color: #0000ff;">this</span>.adaptee =<span style="color: #000000;"> adaptee;
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> adapteeRequest() {
+target.targetRequest();
+}
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> targetRequest() {
+adaptee.adapteeRequest();
+}
+}</span></pre>
+</div>
+<h4>Client 客户端角色</h4>
+</div>
+<div><span style="font-size: 15px;">Main方法就相当于Client 客户端角色</span></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757016-1664366743.png"><img style="display: inline; background-image: none;" title="image_5b907303_4265" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757229-864433333.png" alt="image_5b907303_4265" width="622" height="634" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 18px;">适配器Adapter模式的宗旨是： </span></div>
+<div><span style="font-size: 18px;">保留现有类所提供的服务，向客户提供接口，以满足客户的期望,也就是将现有接口转换为客户希望的另外的一个接口 </span></div>
+<div><span style="font-size: 18px;">本质在于转换 </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>&nbsp;</div>
+</div>
+<h3><span style="font-size: 18px;">JDK中的小应用</span></h3>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757408-1021955263.png"><img style="display: inline; background-image: none;" title="image_5b907303_1877" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757566-1343439641.png" alt="image_5b907303_1877" width="395" height="125" border="0" /></a></div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757716-63043090.png"><img style="display: inline; background-image: none;" title="image_5b907303_1230" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180906082757868-651856320.png" alt="image_5b907303_1230" width="296" height="84" border="0" /></a></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span>
+<span style="color: #008000;">//</span><span style="color: #008000;"> Source code recreated from a .class file by IntelliJ IDEA
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> (powered by Fernflower decompiler)
+</span><span style="color: #008000;">//</span>
+<span style="color: #0000ff;">package</span><span style="color: #000000;"> org.apache.commons.collections.iterators;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Collection;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Enumeration;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.util.Iterator;<br />
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> EnumerationIterator <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Iterator {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Collection collection;
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Enumeration enumeration;
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Object last;
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> EnumerationIterator() {
+</span><span style="color: #0000ff;">this</span>((Enumeration)<span style="color: #0000ff;">null</span>, (Collection)<span style="color: #0000ff;">null</span><span style="color: #000000;">);
+}
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> EnumerationIterator(Enumeration enumeration) {
+</span><span style="color: #0000ff;">this</span>(enumeration, (Collection)<span style="color: #0000ff;">null</span><span style="color: #000000;">);
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> EnumerationIterator(Enumeration enumeration, Collection collection) {
+</span><span style="color: #0000ff;">this</span>.enumeration =<span style="color: #000000;"> enumeration;
+</span><span style="color: #0000ff;">this</span>.collection =<span style="color: #000000;"> collection;
+</span><span style="color: #0000ff;">this</span>.last = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">boolean</span><span style="color: #000000;"> hasNext() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">.enumeration.hasMoreElements();
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Object next() {
+</span><span style="color: #0000ff;">this</span>.last = <span style="color: #0000ff;">this</span><span style="color: #000000;">.enumeration.nextElement();
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">.last;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> remove() {
+</span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">this</span>.collection != <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+</span><span style="color: #0000ff;">if</span> (<span style="color: #0000ff;">this</span>.last != <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+</span><span style="color: #0000ff;">this</span>.collection.remove(<span style="color: #0000ff;">this</span><span style="color: #000000;">.last);
+} </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+</span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> IllegalStateException("next() must have been called for remove() to function"<span style="color: #000000;">);
+}
+
+} </span><span style="color: #0000ff;">else</span><span style="color: #000000;"> {
+</span><span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span> UnsupportedOperationException("No Collection associated with this Iterator"<span style="color: #000000;">);
+}
+}
+
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Enumeration getEnumeration() {
+</span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">this</span><span style="color: #000000;">.enumeration;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> setEnumeration(Enumeration enumeration) {
+</span><span style="color: #0000ff;">this</span>.enumeration =<span style="color: #000000;"> enumeration;
+}
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div>
+<div><span style="font-size: 15px;">Enumeration 和 Iterator 大家应该都听过</span></div>
+</div>
+<div><span style="font-size: 15px;">Enumeration算是遗留的老代码了</span></div>
+<div><span style="font-size: 15px;">很显然,我们希望能够使用新世界的Iterator</span></div>
+<div><span style="font-size: 15px;">怎么办呢?</span></div>
+<div><span style="font-size: 15px;">答案就是适配器</span></div>
+<div><span style="font-size: 15px;">目标是 Iterator&nbsp;&nbsp; 被适配者是 Enumeration</span></div>
+<div><span style="font-size: 15px;">看代码可知:</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">public class EnumerationIterator implements Iterator {</span></div>
+<div><span style="font-size: 15px;">&nbsp;&nbsp;&nbsp; private Enumeration enumeration;</span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<div>&nbsp;</div>
+</div>
+<div><span style="font-size: 15px;">他实现了Iterator&nbsp; 并且有一个Enumeration 的成员,是&nbsp;<strong> 对象适配器 </strong></span></div>
+<div><span style="font-size: 15px;">nextElement()&nbsp; 与&nbsp; next() </span></div>
+<div><span style="font-size: 15px;">hasMoreElements&nbsp; 与&nbsp; hasNext()&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div><span style="font-size: 15px;">他们可以说是匹配的 </span></div>
+<div><span style="font-size: 15px;">但是Enumeration 是不能删除的,没办法搞remove方法 </span></div>
+<div><span style="font-size: 15px;">所以说源码中提供了可以传入集合的构造方法,把对应的集合也传入进去 </span></div>
+<div><span style="font-size: 15px;">并且设置last变量记住刚才的位置 </span></div>
+<div><span style="font-size: 15px;">如果传递了集合 并且last存在,那么可以执行remove </span></div>
+<div><span style="font-size: 15px;">否则抛异常 </span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 18px;">设计模式是作为解决问题或者设计类层级结构时的一种思维的存在,而不是公式一样的存在! </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-06 08:28</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9596069" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9596069);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9596069, cb_entryCreatedDate = '2018-09-06 08:28', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

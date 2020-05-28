@@ -1,0 +1,700 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="我们认为，数以百计人员组成的大型研发组织，或许可以划分为更小的“集团”，即子部门，这些组织的负责人可以推动自我进化自我迭代，在某种程度上属于阿米巴组织。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>研发阿米巴组织的运行逻辑 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/Amoeba.html">研发阿米巴组织的运行逻辑</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>郑昀创建于2014/3/1<br />最后更新于2014/3/3<br />本文遵循 Creative Commons 姓名标示-非商业性使用-禁止演绎 许可协议。转载时请注明&ldquo;转载自知乎&rdquo;或者给出转载文章的<a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19701633">原始链接</a>。</p>
+<p><img class="decoded" src="http://ww3.sinaimg.cn/mw1024/62a92ba0gw1ecpwo21po0j20ku0dwtcg.jpg" alt="http://ww3.sinaimg.cn/mw1024/62a92ba0gw1ecpwo21po0j20ku0dwtcg.jpg" /><br />提纲：</p>
+<ul>
+<li>工作范围，主动出击</li>
+<li>重点工作，发动群众</li>
+<li>法则常驻，三观稳定</li>
+
+
+</ul>
+<p>
+<strong>背景知识，阿米巴组织</strong><br />  所谓&ldquo;<a class=" wrap external" href="http://wiki.mbalib.com/wiki/%E9%98%BF%E7%B1%B3%E5%B7%B4%E7%BB%8F%E8%90%A5" rel="nofollow" target="_blank">阿米巴经营</a>&rdquo;
+是指，『将组织分成小的集团，通过与市场直接联系的独立核算制进行运营，培养具有管理意识的领导，让全体员工参与经营管理，从而实现&ldquo;全员参与&rdquo;的经营方
+式。是京瓷集团自主创造了这种独特的经营管理模式』。 
+我们认为，数以百计人员组成的大型研发组织，或许可以划分为更小的&ldquo;集团&rdquo;，即子部门，这些组织的负责人可以推动自我进化自我迭代，在某种程度上属于阿米巴组织。<br /><br /><strong>一，工作范围，主动出击</strong><br />  我们认为，每一个研发子部门，应该努力演化为<strong>一个自成体系的组织</strong>。这也就是子部门负责人的目标。每位负责人都有自己的工作背景和成长轨迹，可能在有些方面&ldquo;奈何力有所不逮，技术有所不及&rdquo;。这里要强调的是，打铁还要自身硬，请你主动出击，率先做到自我管理、自我激励、自我完善，然后惠及他人。<br />  所谓组织自成体系，指的是：</p>
+<ul>
+<li>自我进化</li>
+<ul>
+<li>招人、留人、培养人</li>
+<ul>
+<li>自我淘汰</li>
+<ul>
+<li>能快速识别出<strong>能力、责任心和诚信</strong>上不符合我们团队价值观的员工，当断则断，清理干净；</li>
+
+
+</ul>
+<li>自我升级</li>
+<ul>
+<li>带领团队成员在<strong>研发效率、研发能力、研发活力</strong>上共同进步，不偏科，不随波逐流；</li>
+<li>建立知识库，随时做好知识转移，应对突发的人员危机；</li>
+
+
+</ul>
+
+
+</ul>
+
+
+</ul>
+<li>对结果负责</li>
+<ul>
+<li>一个子部门通常能独立完成研发工作，包括优化措施和预研课题，所以子部门负责人应该对这些工作的结果负责；</li>
+<li>请你们知晓，职场有一个残酷法则&ldquo;没有苦劳，只有功劳&rdquo;，不要期望公司因为你和小伙伴们有苦劳而宽容你们没有产出。</li>
+
+
+</ul>
+
+
+</ul>
+<p>
+  子部门应该在以下事务上自我运转，无需上级主管事事安排：</p>
+<ul>
+<li><strong>招人</strong></li>
+<ul>
+<li><strong><span style="text-decoration: underline;">你应该</span></strong>不定期提出招聘计划，经过上级主管审批后，对接HR的招聘部门；</li>
+<li><strong><span style="text-decoration: underline;">你应该</span></strong>撰写招聘岗位的 JD（Job Description），定义岗位职责和任职资格，指定初试和复试的面试官，指定岗位入职时的直接上级；</li>
+<li>提前查探到员工离职意向，在面谈无效后，<strong><span style="text-decoration: underline;">你应该</span></strong>预先（向上级主管）提出离职补岗需求；</li>
+
+
+</ul>
+<li><strong>面试</strong></li>
+<ul>
+<li>你与面试官通过阅读我撰写的《面试、入职、离职的那些事儿(附录A.1)》，商量好面试策略，不要盲目面试，必要时提供笔试题集；</li>
+<li>你有必要通过阅读我撰写的《面试案例点评》和《面试技巧》，了解如何甄别面试者；</li>
+<li>一对一面试，与一对一绩效面谈一样，是一门学问，请尽快建立你的人才选拔观和面试问题集；</li>
+<li>如果应聘者通过初试和复试，<strong><span style="text-decoration: underline;">你应该</span></strong>形成书面资料，记录对候选人的评价，以与入职后他的表现相对照，不断修正你的人才观；</li>
+
+
+</ul>
+<li><strong>培育新人</strong></li>
+<ul>
+<li><strong><span style="text-decoration: underline;">你应该</span></strong>为新员工指定导师（mentor），你或导师做好团队、技术架构、工作制度等介绍；</li>
+<li><strong><span style="text-decoration: underline;">你应该</span></strong>思考哪些人适合做新生导师；</li>
+<li>你
+与导师一起制定新员工在考核期内的考核项。我希望你们做到的是，通过一个或多个考察题目，尽快确认新员工是否具有独立分析问题、设计和解决问题等能力，他
+必须能当众讲解直面PK而不是只说服你即可，如附录A.1所说&ldquo;不要跑过来跟我说， （他）&ldquo;凑合&rdquo;、&ldquo;能干活&rdquo;，我们不需要行尸走肉&rdquo;；</li>
+<li>将萌芽消灭在试用期，牢记两句话：</li>
+<ul>
+<li>实践证明，你在面试或试用过程中发现的他身上的缺点，在日后的工作中将无限放大，直至你无法承受后果，最终还是要辞退他。</li>
+<li>在现行法律制度下，员工在试用期的考察非常重要，因为只有在试用期终止劳动合同是痛苦指数最小的。发现不合适的员工，应该在试用期尽快解雇。</li>
+
+
+</ul>
+
+
+</ul>
+<li><strong>人员打组</strong></li>
+<ul>
+<li>每个子部门至少7人以上，你为了方便管理，要分组并指定 Team Leader；</li>
+<li><strong><span style="text-decoration: underline;">你必须</span></strong>对 Team Leader 的输出物做严格定义，确保规范执行，如（项目/小组/人员）周报发送时间、格式和表头，如是否做组内排期，排期表的表头，如对外输出项目计划、延期通告的格式；</li>
+<li>关键岗位实行&ldquo;AB角&rdquo;备份制，避免单点；</li>
+<li>对 Team Leader 要求要越来越高，&ldquo;逼迫&rdquo;他逐步成长起来；同样，★ 我们对你的要求也会越来越高★ ；</li>
+
+
+</ul>
+<li><strong>进度管控</strong></li>
+<ul>
+<li>你承接的每件事都要指定一个研发负责人，他要做任务分解、制定和核对项目计划、建立和检验里程碑、组织评审会、组织演示会、组织站立晨会等等；</li>
+<li>你要通过阅读我撰写的《最佳实践系列：常规项目管理（跨部门项目）的12个最佳实践(附录B.2)》，理解在什么场景下启用哪些最佳实践；</li>
+<li><strong><span style="text-decoration: underline;">你应该</span></strong>逐步把进度管控交给 Team Leader 来跟进，<strong><span style="text-decoration: underline;">你必须</span></strong>确保项目中暴露的问题都得到妥善解决；</li>
+
+
+</ul>
+<li><strong>绩效考核</strong></li>
+<ul>
+<li>&ldquo;天下武功，唯认真不破&rdquo;，绩效考核不能走过场，我要求<strong><span style="text-decoration: underline;">你必须</span></strong>对每一个考评都认认真真地面谈、撰写评语，员工也必须认认真真写考核期内的总结；</li>
+<li>我希望我们板块始终是公司里做绩效考核最认真的一群人，你要把员工在考核期内的优缺点明确指出来，写清楚希望他在下一个考核期内在哪些方面注意和完善，不要写套话空话；</li>
+<li>如果我通过考评察觉你部&ldquo;将不知兵，兵不知将&rdquo;，我会找更适合的人来带队；</li>
+<li>请阅读《回馈的魔力(附录C.1)》来理解为什么要认认真真地面谈、认认真真地写评语、不说空话套话、只说真话；</li>
+
+
+</ul>
+<li><strong>死磕BUG</strong></li>
+<ul>
+<li><strong><span style="text-decoration: underline;">你必须</span></strong>认真领会航天二十字口诀&ldquo;定位准确、机理清楚、可以复现、措施有效、举一反三&rdquo;，即使再忙再累，也要坚持这些原则；</li>
+<li>请你通读我撰写整理的RCA报告集和幻灯片，认真领会何谓&ldquo;Root Cause&rdquo;；</li>
+<li>世界上没有无缘无故的爱，也没有无缘无故的BUG，所以它出现一次，意味着它还会第二次光临，坐在那里祈祷是没有用的，不要等死，加监控，加报警，加日志，提高日志输出级别，再重新看一遍应用配置文件的每一行，再重新检查一遍没有显式配置的默认配置项&hellip;&hellip;不要等死；</li>
+<li>你必须要求引发严重错误的员工请本组织成员、请受牵连的其他组织成员吃零食喝饮料。我们通常处罚只到总监级，通报也仅限于提及部门名称，但建立一个温和的内部惩罚机制是必要的；</li>
+<li>你部门成员引发的问题，请你负责善后；</li>
+
+
+</ul>
+<li><strong>发现问题</strong></li>
+<ul>
+<li>你的部门内外，一定有这样那样的问题，阻碍了生产效率，折磨了人心，如果你迟迟发现不了问题（多数情况是因为麻木不仁所以视而不见），就会有人主动用脚投票；</li>
+<li>你必须从日报、周报、面谈以及各种反馈中察觉这些问题，，并把这些&ldquo;痛点&rdquo;当成一件大事，一个一个消灭；</li>
+<li>『你
+真正没有能力解决的问题绝对不会超过10%。50%是你根本没有搞清楚问题是什么，20%是你根本没有殚精竭虑去找解决问题的方法，20%是你根本没有竭
+尽全力去找能解决问题的人帮忙。』，对于老兵来说，你所能发现的那些问题，都能解决，所以&ldquo;何事惊慌(附录D.2)&rdquo;；</li>
+<li>发现问题、提出问题、解决问题，是我们的干部的基本素养，这也是我们对你的考核点之一；</li>
+
+
+</ul>
+<li><strong>谈话</strong></li>
+<ul>
+<li>（正式地、一对一地）谈话是一门学问；</li>
+<li>通常<strong><span style="text-decoration: underline;">你需要</span></strong>做如下谈话：</li>
+<ul>
+<li>新人入职后考核期内定期谈话；</li>
+<li>绩效面谈；</li>
+<li>诫勉谈话；</li>
+<li>劝退谈话；</li>
+
+
+</ul>
+<li>遵
+从我撰写的《职场（潜）规则：心法和技法(附录E.1)》文中的规则&ldquo;有话要说，但有话必须好好说：每个部门都有部门的行事准则和立场，所以有时候就是要
+&ldquo;公事公办&rdquo;，把话摆在桌面上说，一次说不清，那就约好了再聊一次。&rdquo;，很多事都介于&ldquo;不说憋屈&rdquo;和&ldquo;说了矫情&rdquo;之间，在我们这里，请你尽可能选择说出
+来，诚恳地说真话，不和稀泥；</li>
+
+
+</ul>
+
+
+</ul>
+<p>
+<strong>二，重点工作，发动群众</strong><br />  干革命就是要发动群众。下面是你的重点工作，但你要学会尽快分发出去：</p>
+<ul>
+<li>日常研发管理；</li>
+<li>确保&ldquo;三个提升&rdquo;：团队成员研发能力有提升、生产效率有提升、研发活力有提升；</li>
+<li>有计划有步骤地落实支撑未来业务发展的技术点；</li>
+<li>线上问题定位和解决；</li>
+
+
+</ul>
+<p>
+  分发给谁？  分发给你的 Team Leaders。不要让自己成为部门运转的瓶颈。<br />
+  
+但要注意，你要温习我撰写的《管理杂谈：学习东北战争好榜样(附录E.2)》中提及的思想&ldquo;第二点，认识到价值观之外还有技战术素养普遍缺乏的问题，于是
+管理者必须（向下）提供工具。&hellip;&hellip;第三点，管理者不能停留在宏观层面，总是说一些似是而非、永远正确的话上。管理者必须直面白刃战，必须随时能深入到业务
+细节。&rdquo;<br />  别（真）当甩手掌柜。<br />  培养好你要依靠的那几个Team Leaders，他们要和你一起成长。<br /><br /><strong>三，法则常驻，三观稳定</strong><br />
+  
+我在《职场（潜）规则(附录E.1)》文中说，&ldquo;我们的干部要争取做到发出的指令80%是正确的。指令总是正确的，兄弟们就会默认地信任你的指令，如臂使
+指。如果总是计划赶不上变化、朝令夕改、做面子工程、做无用功，那信任就会慢慢丧失，每次发指令时，兄弟们就会嘀咕，这次会不会又是当炮灰？&rdquo;<br />  如果你作为部门负责人，要对内对外输出价值观，你应该怎么做？<br />  首先你要了解清楚过去、现在和未来，什么时间什么人埋过什么雷，什么时间从什么业务逻辑变为了什么，当初这个业务场景为什么这么设计，等等。不了解历史，你（一定会）无法客观地输出价值观。<br />  其次，形成自己的判定规则，避免朝令夕改，避免输出给员工的结论和指令前后不一致 ，避免被不同人翻来覆去影响 。这也就是我说的&ldquo;三观稳定&rdquo;。<br /><br />  我们的内存中应该常驻哪些法则？我简单罗列几条，没有先后顺序：</p>
+<ol>
+<li>没有苦劳，只有功劳。</li>
+<li>事故处理二十字口诀：定位准确、机理清楚、可以复现、措施有效、举一反三。</li>
+<li>做事有始有终，日拱一卒，拿出结果。</li>
+<li>主动往前迈半步，必要时跑步上前对接。</li>
+<li>代入式思考，不当甩手掌柜。 </li>
+<li>对一团乱麻要分类，分类可以有很多维度，把目的想得越清楚越可能设计出正确的维度，然后按照维度分类，针对每类情况设计解决方案和解决时间。</li>
+<li>低头拉车，抬头看路。</li>
+<li>遇到分歧，沟通无果后，迅速升级。</li>
+<li>决不能&ldquo;最后来的事情优先&rdquo;。</li>
+<li>竭尽可能消灭线上Exception。</li>
+
+
+</ol>
+<p>  也可以看我的《职场（潜）规则：心法和技法(附录E.1)》。<br />附录A<br />&mdash;&mdash;附录A.1.<br /><a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19617476">面试、入职、离职的那些事儿</a><br />郑昀 创建于2013/7/7<br />最后更新于2013/7/17<br />本文遵循 Creative Commons 姓名标示-非商业性使用-禁止演绎 许可协议。转载时请注明&ldquo;转载自知乎&rdquo;或者给出转载文章的<a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19617476">原始链接</a>。<br /><strong>面试</strong><br />1）我们考察应聘者的三个点：<strong>态度、能力和诚信</strong>。<br /><br />2）
+关于态度：李开复曾总结说，所有面试问题本质上可以归结为3个：1）此人能不能做这份工作（工作技能、能力和相关经验等）；2）此人是否喜欢/真正想做这
+ 份工作（求职动机和价值观等）；3）此人能否和现有团队一起把这份工作做好（工作态度、文化匹配度和团队精神等）。<strong>我们的面试官往往限于第一点，而忽视第二点和第三点</strong>。讲完愿景、工作内容和整体技术架构后，研发工程师如果表现不出跃跃欲试、一展身手、积极学习的意愿，流露出无动于衷、唯钱是瞻、做啥都一个样的态度，我不知道聘请这样的死魂灵有何意义。<br /><br />3）关于能力：<strong>面试是一个&ldquo;自证靠谱&rdquo;模式</strong>。如果候选人自证没有说服力、缺少证据，那请放弃他。<strong>不要跑过来跟我说，应聘者&ldquo;凑合&rdquo;、&ldquo;能干活&rdquo;</strong>。作为面试官，针对候选人罗列的项目经验，让他讲里面碰到的问题，不断地提出问题，一层一层地追问细节、追问为什么这样、为什么不那样。看他面对这些个问题时，究竟做了多么深入的调查和思考，尝试过多少种解决方法，能不能做到知其所以然。<strong>我们是在挑选和我们一起工作的人，不一定要他样样出色，但确实希望他身上有闪光的亮点</strong>。没有闪光点，薪金待遇就相应会低。<br /><br />4）关于诚信：应聘者不坦诚不踏实，是大忌，尤其是不坦诚。简历撒谎，抹去部分工作经历，夸大项目经验，隐藏外包经历。面试官通过细节连续追问发现项目不是他做的、设计也不是他做的、思路也不是他的，又千般狡辩不想承认的，必须放弃他。<br /><br />5）如果应聘者手握多家公司的Offer，注意，<strong>我们不参与&ldquo;哄抬物价&rdquo;</strong>。<br /><br /><strong>入职</strong><br />1）<strong>员工入职前都会抱有一定期望，所以入职头两周，主管百忙之中一定要善待他</strong>。如期望公司可以让他很快提升技术能力，如期望这是一个亲切有爱的团队，如期望他能接触一些重要的或者有趣的技术课题。请主管<strong>安排好导师，做好团队介绍，准备好考察课题，定期检查他的工作，定期询问避免员工积极性受挫</strong>。<br /><br />2）有一个悖论，新员工在试用期内会刻意去&ldquo;装&rdquo;，未必是他的原生态。但我们可以反推，如果一个新员工连在试用期内都不能表现出工作积极性，挑三拣四、拖拖拉拉、缺乏好奇心，<strong>既然他连&ldquo;装&rdquo;都不想&ldquo;装&rdquo;，那么不让他通过试用期即可</strong>。<br /><br />3）面试过程中，不少人在面对我的压力面试时被我一顿炮轰，我希望在试用期结束时看到他们确实在设计能力、交付能力、规范和团队效率贡献上能体现他们自己的进步，而不仅仅是签了几个月的到。<br /><br /><strong>离职</strong><br />1）离职前的&ldquo;正反馈&rdquo;：员工离职前，会有数月至少有数周时间在<strong>有意无意地收集本公司的负面信息和不利证据，以此佐证他做出离职选择的正确性</strong>，从而形成&ldquo;正反馈&rdquo;。所以，<strong>一旦员工正式提出辞职，一般难以挽回</strong>。<br /><br />2）不要指望你能巧舌如簧，说服员工收回辞职申请。原因之一嘛，如上所述，除非是员工&ldquo;激情辞职&rdquo;。所以，只有未雨绸缪，提前掌握员工动向，打消他们提出辞职的意向。<br /><br />3）员工薪资某种程度上主要<strong>取决于与从市场上引入可替代人才的成本</strong>。除非离职员工薪资待遇比市场水平低，否则靠离职面谈时承诺调薪来留住员工，是引鸩止渴，救得了一时救不了一世，还可能会造成新一轮的同工不同酬。<br /><br />4）新公司支付给员工的<strong>是对他未来的期望</strong>（好比买股票），需要员工未来去兑现承诺；老公司支付给员工的<strong>是对他过去的肯定</strong>（好比发年终奖）。这两者自然有数额上的差别。一个是寄托于未来，一个是肯定过去。<br /><br />5）再次强调，<strong>我们不与其他公司一起&ldquo;哄抬物价&rdquo;</strong>，我们不会参与&ldquo;竞拍&rdquo;。<br /><br />6）员工对自己的认知，与各级主管对他的认知，是不对等的。这一点，在员工离职时将暴露无遗。<br /><br />7）但我们和HR都会做离职调查，防止团队出现系统性问题。<br /><br />-over-<br />附录B<br />&mdash;&mdash;附录B.2.<br />最佳实践系列：常规项目管理（跨部门项目）的12个最佳实践<br />郑昀 创建于2012/7/20</p>
+<ul>
+<li>常规的项目管理</li>
+<ul>
+<li><strong>需求分析</strong></li>
+<ul>
+<li>明确原始需求</li>
+<ul>
+<li><strong>忽略需求方提出的所谓解决方案</strong>&mdash;&mdash;最佳实践1</li>
+
+
+</ul>
+<li>竞品分析</li>
+<li>撰写UseStory</li>
+<li>拉FeatureList</li>
+<li>分期实现小步快跑</li>
+<li>轮询各个系统负责人，评估对所有系统的潜在影响&mdash;&mdash;最佳实践2</li>
+
+
+</ul>
+<li><strong>项目启动</strong></li>
+<ul>
+<li>以会代训：启动会&mdash;&mdash;最佳实践3</li>
+<li>约定项目占用资源</li>
+<li>列出干系人</li>
+<ul>
+<li>项目进展每周三周五与干系人分享&mdash;&mdash;最佳实践4</li>
+
+
+</ul>
+<li>Project计划</li>
+<ul>
+<li>拉里程碑</li>
+<li>拆解到以1～2人天为单位的子任务&mdash;&mdash;最佳实践5</li>
+
+
+</ul>
+<li>列出前置资源</li>
+
+
+</ul>
+<li><strong>项目跟催</strong></li>
+<ul>
+<li>延期预先通告</li>
+<li>需求变更管理</li>
+<ul>
+<li>拒绝不紧急不重要需求</li>
+<li>重要但不紧急需求放在下一次迭代做</li>
+<li>评估对所有系统潜在影响</li>
+
+
+</ul>
+<li>以会代训，会议纪要作为执行决议</li>
+<ul>
+<li>设计评审会</li>
+<li>跨部门难题推进会&mdash;&mdash;最佳实践6</li>
+
+
+</ul>
+
+
+</ul>
+
+
+</ul>
+<li>周报</li>
+<ul>
+<li>周报上先列timeline&mdash;&mdash;最佳实践7</li>
+<li>子任务列表，对应的完成百分比</li>
+
+
+</ul>
+<li>风险预警</li>
+<li>紧锣密鼓</li>
+<ul>
+<li>站立晨会&mdash;&mdash;最佳实践8</li>
+<li>任务看板</li>
+<li>定期定时项目协调会&mdash;&mdash;最佳实践9</li>
+
+
+</ul>
+<li>快马加鞭</li>
+<ul>
+<li>日报</li>
+<li>工时统计</li>
+<li>产品研发测试锁定会议室集中办公&mdash;&mdash;最佳实践10</li>
+<li>周日联调</li>
+<li>以演示会作为阶段性deadline推动&mdash;&mdash;最佳实践11</li>
+
+
+</ul>
+<li>测试用例评审会</li>
+<li>实施计划</li>
+<ul>
+<li>数据迁移</li>
+<li>项目经理收集整理本项目涉及改动的系统、需重新部署的系统和模块、数据表结构变化列表</li>
+<li>盯住验收</li>
+<li>分批实施</li>
+<li>部署计划和实施方案</li>
+<li>上线后的问题处理预案&mdash;&mdash;最佳实践12</li>
+
+
+</ul>
+<li>关键因素</li>
+<ul>
+<li>向下关注</li>
+<ul>
+<li>三岁宝宝端水的段子</li>
+<ul>
+<li>发出指令，必须深入了解执行步骤和执行细节</li>
+
+
+</ul>
+<li>代入式思考，落实到执行层面</li>
+
+
+</ul>
+<li>导演和制片主任模式</li>
+<ul>
+<li>了解背景知识</li>
+<li>给出备选方案</li>
+<li>跨部门征求要不要这么做，而不是征求怎么做</li>
+
+
+</ul>
+<li>养成拉List清单的习惯</li>
+<ul>
+<li>发现问题</li>
+<li>放大问题或认清问题</li>
+
+
+</ul>
+<li>尊重海恩法则</li>
+<ul>
+<li>每一起严重事故的背后，必然有29次轻微事故和300起未遂先兆以及1000起事故隐患</li>
+<li>脏数据和投诉背后隐藏着致命真相</li>
+
+
+</ul>
+<li>不能等死</li>
+
+
+</ul>
+
+
+</ul>
+<p>
+-over-附录C<br />&mdash;&mdash;附录C.1.<br />回馈的魔力<br />节选自《绩效！绩效！》费迪南&middot;佛尼斯</p>
+<blockquote>想像你独自在保龄球馆里准备好开始打球。一切似乎都没有什么问题，但是当你掷出第一粒球时，照射保龄球的灯就熄灭了。你听到球瓶倒下的声音，但是你无法确定倒了几个。你看了看你的周围，但是看不到任何人，所以你大喊：&ldquo;喂！保龄球瓶上面的灯熄了，我看不到倒了几个。&rdquo;<br />在球附近有一个声音回答你：&ldquo;有两个没倒。&rdquo; <br />你大声地问：&ldquo;哪两个？&rdquo; <br />那个声音回答你：&ldquo;别吵我，你继续玩。&rdquo; <br />显
+然别无选择，所以你对着那两个看不到的球又掷了一颗球，你没有听到球瓶倒的声音。过了片刻灯亮了，你看到了保龄球瓶又排好了。你告诉自己：&ldquo;嗯！这样好多
+了。&rdquo;接着你准备好玩第二局。但是在你掷球时，灯又熄灭了。你又大喊：&ldquo;喂！要不把灯点亮，要不就告诉我到底发生什么事。&rdquo; <br />你又听到那个声音说：&ldquo;请你别吵我，我在后面，这里很忙，你继续玩，两个小时后我会回来，到时候再告诉你结果。&rdquo; <br />假设你在这样的情况下继续玩球，两个小时候后，那个声音说：&ldquo;我回来了。&rdquo; <br />你问：&ldquo;我的成绩如何？&rdquo; <br />那个声音说：&ldquo;不太好。&rdquo; <br />你问：&ldquo;分数如何？&rdquo; <br />那个声音回答：&ldquo;我不知道，但是真的很糟。&rdquo; <br />即使你保龄球玩得不错，你也不会对你的成绩感到吃惊，原因是你没有得到任何回馈。 <br /><br />你看不到你每个动作的结果，因此你无法对你的表现作出有效的修正。</blockquote>
+<p>
+-over-<br />附录D<br />&mdash;&mdash;附录D.2.<br />永安里那家小馆的牌匾&ldquo;何事惊慌&rdquo;<br /><img class="origin_image zh-lightbox-thumb" src="http://p2.zhimg.com/e0/26/e026ff3a81188b346802c901bca9e0b3_m.jpg" alt="" width="472" data-rawheight="318" data-rawwidth="472" data-original="http://p2.zhimg.com/e0/26/e026ff3a81188b346802c901bca9e0b3_r.jpg" /><br />-over-<br />附录E<br />&mdash;&mdash;附录E.1.<br /><a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19639346">职场(潜)规则：心法和技法</a></p>
+<p>郑昀 创建于2013/7/22<br />最后更新于2013/10/17<br />本文遵循 Creative Commons 姓名标示-非商业性使用-禁止演绎 许可协议。转载时请注明&ldquo;转载自知乎&rdquo;或者给出转载文章的<a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19639346">原始链接</a>。</p>
+<p>整理这些职场&ldquo;潜&rdquo;规则，是为了让兄弟们一起对表，为了让大家在同一个维度下思考问题，为了统一标准话术。<br />为什么给&ldquo;潜&rdquo;字打上双引号号，因为这些其实是正大光明的规则，只不过不是显式规则。<br />熟练掌握这些潜规则，你我也许会生活得更轻松一点。</p>
+<ol>
+<li><strong>信任，但需要确认 </strong></li>
+<li><strong>有话要说，但有话要好好说 </strong></li>
+<li><strong>不要&ldquo;等死&rdquo;</strong></li>
+<li><strong>不要&ldquo;妄议&rdquo;他人</strong></li>
+<li><strong>线上问题要&ldquo;全面处理&rdquo;</strong></li>
+<li><strong>日拱一卒，不怕慢就怕站</strong></li>
+<li><strong>分歧僵持，迅速升级</strong></li>
+<li><strong>主管要向下提供&ldquo;工具&rdquo;</strong></li>
+<li><strong>负责人要&ldquo;拿出结果&rdquo;</strong></li>
+<li><strong>搞清楚为何而战再动手 </strong></li>
+<li><strong>信任易碎，积累不易</strong></li>
+<li><strong>听原始需求，不听技术解决方案</strong></li>
+<li><strong>解释成本很高</strong></li>
+<li><strong>低头拉车，抬头看路</strong></li>
+
+
+</ol>
+<p>整理这些职场潜规则，是为了让兄弟们一起对表，为了让大家在同一个维度下思考问题，为了统一标准话术。[现场]&hellip;&hellip;什么是标准话术，三个月后邮件误重发得到了我的如出一辙的回应&hellip;&hellip;<br />为什么给&ldquo;潜&rdquo;字打上括号，因为这些其实是正大光明的规则，只不过不是显式规则。<br />熟练掌握这些潜规则，你我也许会生活得更轻松一点。<br />&hellip;&hellip;具体内容详见 <a class="internal" href="http://zhuanlan.zhihu.com/zhengyun/19639346">职场&ldquo;潜&rdquo;规则：心法和技法 - 旁观者 - 知乎专栏</a> &hellip;&hellip;<br /><br />-over-</p>
+<hr />
+<p>附录E<br />&mdash;&mdash;附录E.2.</p>
+<p><a class=" wrap external" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html" rel="nofollow" target="_blank">管理杂谈：学习东北战争好榜样</a></p>
+<p>郑昀 创建于2012/4/18</p>
+<p>每一个快速发展、仓促之间聚集起来的团队都会经历1947年～1948年我党在东北所面对的局面。</p>
+<p>从最开始出关的匆忙上阵、缺少武器弹药、节节败退、老底子被打光、成群结队开小差的逃兵、迷茫沮丧，到一年后数百万装备整齐、挑着狗皮帽子沿路炫耀武力的军团入关，这中间到底发生了什么？</p>
+<p>简单地说，对于现代公司运营者来说，可以借鉴那个时候他们做的三件事：</p>
+<p>第一点，统一价值观，这也是每个期望基业长青的公司都在着手去做的。在东北，他们是通过在基层员工搞阶级教育、诉苦运动，解决为谁当兵、为谁打仗的问题，从而统一了包括大批&ldquo;解放战士&rdquo;在内的员工价值观。</p>
+<p>第二点，认识到价值观之外还有技战术素养普遍缺乏的问题，于是管理者必须提供工具。</p>
+<p><strong>什么叫&ldquo;提供工具&rdquo;？</strong></p>
+<p>经常会看到这样的场景：</p>
+<p>管理者质问员工，你怎么这么瞎搞!</p>
+<p>或者质问，就这么点儿事，你们都搞不定?!当年我分分钟搞定!</p>
+<p>或者质问，你们怎么什么都不会?!</p>
+<p>然后留下员工苦苦思索，领导甩手大踏步离开。下次员工保不齐还得被骂。</p>
+<p>为什么（管理者）要提供工具？</p>
+<p><strong>因为要形成干部的工作套路。</strong></p>
+<p>什么叫工作套路？</p>
+<p>林彪他们非常善于总结并简化套路，它们通常非常容易记忆和套用，非常适合向下传达，甚至细到以班为单位。</p>
+<p>他们下发了六个战术原则：</p>
+<ol>
+<li><strong>一点两面</strong></li>
+<li><strong>三三制</strong></li>
+<li><strong>四快一慢</strong></li>
+<li><strong>三猛战术</strong></li>
+<li><strong>四组一队</strong></li>
+<li><strong>三种情况，三种打法</strong></li>
+
+
+</ol>
+<p>这就是套路。</p>
+<p>有了套路，管你东西南北风来袭，我只管上这六板斧，管你铁打营盘流水兵，我只管培训和演练。</p>
+<p><strong>什么是一点两面？</strong></p>
+<p>1946年9月15日，毛致电林，问&ldquo;你们所说一点两面的战法是什么意思&rdquo;，四天后，林彪回复邮件：</p>
+<p>所
+谓一点，就是说要集中优势兵力于主要的攻击点上，反对在各点上平分兵力的办法。所谓两面，就是说必须采取勇敢包围办法，防止敌人突围逃走：两面是 
+指至少两面，兵力多时也可以是三面四面。一点的精神在於保证一定打垮敌人，整个的精神在于使打垮的敌人不致跑棹。大意就是如此。是针对我们干部不肯彻底集
+ 中兵力和不敢追行勇敢迂回的毛病而规定的。</p>
+<p><strong>什么是三三制？</strong></p>
+<p>一个班内由三至四人划分三或四组。正副班长为当然小组长。另在班内挑选政治较好、战斗勇敢，或有经验的战士充当组长。</p>
+<p>在战斗时各组以班长为核心，在班长指挥下，率领本小组根据敌情地形，散开距离间隔进行作战，不超过班长口令指挥范围以外，在平时使三三制编制要与日常生活管理教育公差勤务等一切活动相结合，在战斗中求得灵活运用发挥其效能。</p>
+<p><strong>一点两面和三三制如何结合？</strong></p>
+<p>在战略上要集中兵力，战役上一点两面，</p>
+<p>而在战术上，战术动作却是分散兵力，稀疏兵力。</p>
+<p>兵力集中并不是要求我们在冲锋时密集队形，而是要求在部队冲锋时，必须有充分的人力掩护与配合冲锋的部队及二梯队，所以兵多不是一下子都冲上去，而必须用三三制的队形。</p>
+<p><strong>什么是三猛战术？</strong></p>
+<p>猛打。</p>
+<p>猛冲。</p>
+<p>猛追。</p>
+<p>猛是猛然的猛，即强调出其不意的突然性。而不是凶猛的&ldquo;猛&rdquo;。</p>
+<p><strong>什么是四组一队？</strong></p>
+<p>四组即火力组，突击组，爆破组，支援组。</p>
+<p>主要是突击连队要分工，小组互相掩护，互相配合。</p>
+<p>有点像研发时架构组、前端组、DBA组、系统组分工协作互相掩护一样。</p>
+<p><strong>下发六个战术原则，就行了吗？</strong></p>
+<p>你以为定义好三步，大象就能自个儿装进冰箱吗？</p>
+<p>需要怎么做？</p>
+<p><strong>培训直到最基层</strong></p>
+<p><strong>案例点评</strong></p>
+<p><strong>&mdash;&mdash;结合正反实例反复讲</strong></p>
+<p><strong>&mdash;&mdash;有机会就讲</strong><strong>!</strong><strong>有机会就补充</strong><strong>!</strong><strong>有机会就强调</strong><strong>!</strong></p>
+<p><strong>不断检查</strong><strong>!</strong><strong>不断重复</strong><strong>!</strong></p>
+<p>郑昀问你，你们的工作套路是什么？请掰着指头数一数。</p>
+<ol>
+<li>常规战争的周报+闪电战的日报</li>
+<li>定期风险预警</li>
+<li>脑图/鱼骨图</li>
+<li>MS Project/甘特图</li>
+<li>排期会</li>
+<li>每日站立晨会</li>
+<li>项目启动会</li>
+<li>任务看板</li>
+<li>项目信息墙</li>
+<li>SWOT</li>
+<li>日常拉各种List清单的习惯</li>
+<li>内评/外评评审会</li>
+<li>Code Review</li>
+<li>自动化测试</li>
+<li>测试驱动</li>
+<li>倒逼上游</li>
+<li>&ldquo;四象限&rdquo;法</li>
+<li>罗伯特议事法则</li>
+<li>&hellip;&hellip;</li>
+
+
+</ol>
+<p>前面讲了那些年他们做了三件事，第一点统一价值观，第二点管理者提供工具，第三点是什么？</p>
+<p><strong>管理者要直面白刃战</strong></p>
+<p>第三点是管理者不能停留在宏观层面，总是说一些似是而非、永远正确的话上。</p>
+<p><strong>管理者必须直面白刃战，必须随时能深入到业务细节。</strong></p>
+<p>什么意思？</p>
+<p>郑昀从最简单的&ldquo;表头法则&rdquo;说起吧。</p>
+<p><strong>表头法则</strong></p>
+<p>&mdash;&mdash;当你交代一项需要你汇总或检查的工作时，给他（们）定义好输出的表头。</p>
+<p>最怕的就是管理者&ldquo;一句话&rdquo;作风。一句话让下面所有人跑断腿，然后一句话否定大家的揣摩上意后的努力，最后一句话让大家再做一遍。</p>
+<p>比如，你说我想知道现在大家都在忙什么，那你就统一给所有主管下发一个表头：</p>
+<p>需求登记时间</p>
+<p>需求总发起人</p>
+<p>状态</p>
+<p>紧急程度</p>
+<p>跟踪负责人</p>
+<p>预期上线时间</p>
+<p>实际上线时间</p>
+<p>占用资源数</p>
+<p>方便填写。要不每个人给你一个自定义格式，甚至只是一些项目名称罢了，你怎么合并，电话邮件沟通来沟通去，有这时间，下发一个表头，要求逐一填写不就结了？</p>
+<p>你拟定不出来表头，很有可能是你压根不知道工作细节，你不知道一个指令如何落地、如何实作、如何汇总!</p>
+<p>最后展示一下辽沈战役中军委下发的&ldquo;铁路大翻身&rdquo;电报，大家体会一下。不要觉得郑昀你是军委，所以铁路翻身是小事儿，是细枝末节，那是你对工作优先级判断力不够。而判断力不够，是诸多管理者下课的原因。</p>
+<p>所以，请管理者不要吝于定义流程步骤。</p>
+<p>下面请看：</p>
+<p>电报全文如下：</p>
+<p>　　刘邓、陈粟、陈谢韩、徐滕薄、饶黎、张邓、谭许、聂肖刘、杨杨耿、彭张、王王、贺箫、李周（注：这封群发邮件是抄送众多高级将领的）：</p>
+<p>　　东总介绍铁路大翻身的方法如日下：</p>
+<p>　　（一）以百人左右为一队，几十个人也可以，携带粗绳廿根，结实木廾根（内一部份可用铁路上起道钉之铁起子）及一二十把铁锹洋镐。（注：物料、人力这些资源罗列清楚，方便各部门的成本核算）</p>
+<p>　　（二）第一步将铁路一边之两根铁轨连结之螺丝钉取掉（或毁棹），并取下结合处的两槐小铁板，只能截断一边铁轨，不应截断两边铁轨。</p>
+<p>　　（三）第二步从两根铁轨断开处，用工具将二、三十根枕木下的垫土刨空。</p>
+<p>　　（四）第三步，用粗绳隔一枕木，将铁轨和枕木交叉处捆结实（十几根绳子按次均捆上），然後以一部人用木（铁）棒将分离开的一面铁轨撬起来，同时用力拉绳子，使整个铁轨枕木翻个筋头，接著便很容易的往前。结果全部铁路都翻了筋头。</p>
+<p>　　（五）然後将枕木取下，堆集起来用火一烧，日前敌人修路极感头痛的是没有枕木，要从美国运枕木来，因此烧掉全部枕木，是重要的一着。</p>
+<p>　　（六）此法开始时较费力气，只要开头翻过，事後利用铁轨本身重量及压力，越翻越轻。据我们的经验一连人每小时可翻六里长，所以这种方法的特点是方法简单，动作迅速，破坏规模大，所费力量小，东北敌人十分怕铁路翻身。（注：明确效果，确认各部门对任务的优先级理解到位）</p>
+<p>　　　　　　　　　　　　　　　　　　　　军委 </p>
+<p>　　　　　　　　　　　　　　　　　　　　廿敬</p>
+<p><a class=" wrap external" href="http://www.cnblogs.com/zhengyun_ustc/archive/2009/03/15/survive_thrive.html" rel="nofollow" target="_blank">饭否时代某兴曾说过</a>：&ldquo;创业几年，我对1949年之前的共產党人越来越佩服。和政治理念无关，纯粹是对他们能在那种艰苦的环境下生存并壮大起来觉得简直不可思议&rdquo;，确实是奇迹，但他们的成功并非偶然。</p>
+<p>原文链接：<a class=" wrap external" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/05/01/1947_1948.html" rel="nofollow" target="_blank">管理杂谈&middot;技战术素养养成+管理者向下提供工具</a></p>
+<p>
+-over-<br /><br /><br />-TheEnd-</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2014-03-15 14:23</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3601989" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3601989);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3601989, cb_entryCreatedDate = '2014-03-15 14:23', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

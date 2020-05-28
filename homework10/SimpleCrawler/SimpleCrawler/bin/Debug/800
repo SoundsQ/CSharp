@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言: 在写了上一篇文章之后, Blazor Server Side 开发教程 - 安装环境与运行第一个程序 还写了一个较远的东西 : 视频图文教学 - 用最快的速度把 DotNet Core Bla" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[Asp.Net Core] Blazor Server Side 开发教程 - 进度, 计划, 安排 - 轩轩之家 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cleargertrude/bundle-cleargertrude.min.css?v=qOcerEQTAHF_YZGWYnXIdOZ3zf__fQbjAsaHzX-kpoo" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cleargertrude/bundle-cleargertrude-mobile.min.css?v=3HpAq_t-Lu45yjUl-6Fzi0TYj4q-B2F0BQkiWtjIP9Y" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhgangxuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhgangxuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhgangxuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 265669;
+        var currentBlogApp = 'zhgangxuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'ClearGertrude';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="header">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhgangxuan/">轩轩之家 QQ群 : 934608703</a>
+</h1>
+<p id="tagline">
+欢迎讨论Blazor的技术问题 QQ群 : 934608703
+</p>
+
+</div>
+<div id="main">
+	<div id="post_detail">
+	<div class="post">
+		<h2>
+			
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhgangxuan/p/12765146.html">[Asp.Net Core] Blazor Server Side 开发教程 - 进度, 计划, 安排</a>
+
+		</h2>
+		<div class="postText">
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h2>前言:</h2>
+<p>在写了上一篇文章之后,&nbsp;</p>
+<h3><span style="font-family: 黑体;"><a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhgangxuan/p/aspnet_core_blazor_server_side_b001.html">Blazor Server Side 开发教程 - 安装环境与运行第一个程序</a></span></h3>
+<p><span style="font-family: 黑体;">还写了一个较远的东西 :&nbsp;</span></p>
+<p><a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhgangxuan/p/blazor_raspberrypi_gpio.html">视频图文教学 - 用最快的速度把 DotNet Core Blazor 程序安装到 树莓派中 并且用网页控制 GPIO 闪灯</a></p>
+<p>到现在, 居然已经过了一个多星期了.&nbsp;</p>
+<p>&nbsp;</p>
+<p>正如前面文中计划的,&nbsp;本人写的一系列教程主要针对&nbsp;<span style="font-size: 14pt; color: #ff0000;"><strong>中小企业开发者 , 包括新手</strong></span></p>
+<p>所以做事的方向也是如此.&nbsp;</p>
+<p>&nbsp;</p>
+<h2>组件:</h2>
+<p>这个星期我除了本职工作以外,&nbsp;主要干的是创造 Blazor 所需要各种组件.</p>
+<p>Blazor的确是一个很好的开发框架.&nbsp;但是它太新了.&nbsp;很多细节并没有提供直接的解决方案.&nbsp;</p>
+<p>开发者如果需要手动去做,&nbsp;某些事情需要花费大量的工作.&nbsp;</p>
+<p>现在我做的这个组件,&nbsp;就是要解决开发中难度与耗时问题.&nbsp;</p>
+<p>当前已实现的东西有:</p>
+<ul>
+<li>Alert / Confirm / Prompt /&nbsp;Toast</li>
+<li>模态对话框 Modal Dialog ,&nbsp;支持 ESC&nbsp;键,&nbsp;返回键, history.back() ,&nbsp;手机返回键等等.&nbsp;</li>
+<li>文件上传 .&nbsp;很容易定制自己的进度条.&nbsp;</li>
+<li>BlazorSession ,&nbsp;用于弥补 Blazor&nbsp;没有自带 Session&nbsp;的问题</li>
+<li>BlazorSession.Browser ,&nbsp;用于自动给浏览器存一个UniqueID ,&nbsp;与基于这个ID进行数据存取</li>
+<li>更友好的脚本交互模式.&nbsp;直接支持Eval ,&nbsp;而不需要提交一个函数名.&nbsp;</li>
+<li>DOM控件体系 (凌驾于Render体系) ,&nbsp;扩展界面的编写模式,&nbsp;<span style="color: #ff0000;">现在可以手动 Create/Append/Remove DOM元素</span>了</li>
+<li>BlazorTreeView , BlazorListView , PlusGridView ,&nbsp;这些还未写例子和文档.&nbsp;</li>
+<li>js文件依赖关系与推送,缓存 -&nbsp;解决js文件的动态加载问题,&nbsp;在服务器<span style="color: #ff0000;">按需</span>推送脚本,&nbsp;立刻推送立刻可用.&nbsp;</li>
+<li>对SVG,Canvas提供简易的支持.&nbsp;</li>
+</ul>
+<p>其他例子有:</p>
+<ul>
+<li>常用信息获取 -&nbsp;例如 IP,&nbsp;客户端状态,&nbsp;服务器各种情况</li>
+<li>使用PlusControl来直接生成一棵自带状态的Tree</li>
+<li>聊天室 -&nbsp;按IP分配聊天室,&nbsp;同一个IP的人可以互相聊天</li>
+<li>验证码 -&nbsp;参照&nbsp;<a class="postTitle2" href="https://www.cnblogs.com/zhgangxuan/p/asp_net_core_blazor_server_side_002_01.html">为什么选择 Blazor Server Side (一) 快速实现图片验证码</a></li>
+<li>Input未提交前立刻获取输入中的信息</li>
+</ul>
+<p>演示地址 <a href="http://demo.blazorplus.com/" target="_blank">http://demo.blazorplus.com/</a> (硅谷服务器,&nbsp;国内访问挺卡的)&nbsp;</p>
+<p>演示代码&nbsp;<a href="https://github.com/BlazorPlus/BlazorPlusDemo" target="_blank">https://github.com/BlazorPlus/BlazorPlusDemo</a>&nbsp;</p>
+<p>Nuget :&nbsp;<a href="https://www.nuget.org/packages/BlazorPlus" target="_blank">https://www.nuget.org/packages/BlazorPlus</a></p>
+<p><span style="color: #ff0000;">MIT&nbsp;License ,&nbsp;完全免费无使用担忧.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">相关项目:</span></p>
+<p><span style="color: #000000;"><a href="https://github.com/BlazorPlus/BlazorLinuxAdmin">https://github.com/BlazorPlus/BlazorLinuxAdmin</a>&nbsp;</span></p>
+<p><span style="color: #000000;">这是第一个基于这个组件开发的项目.&nbsp;用于验证组件功能.&nbsp;</span></p>
+<p>虽然它不是"中小型软件公司"所关注的类型.&nbsp;</p>
+<p>但是里面已经包含了一些常见概念 :&nbsp;&nbsp;</p>
+<ul>
+<li>全局登录&nbsp;</li>
+<li>列表 (搜索) ,&nbsp;</li>
+<li>树型目录</li>
+<li>简单的Canvas动态折线图</li>
+</ul>
+<p>需要尝鲜的网友可以试一下.&nbsp;</p>
+<p>&nbsp;</p>
+<h2>进度问题</h2>
+<p>目前这个东西还在积极的开发中,&nbsp;文档也慢慢准备.&nbsp;</p>
+<p>最终的目标,&nbsp;就是<span style="color: #ff0000; font-size: 18px;">Plus</span>, Blazor缺的功能,&nbsp;都给<span style="color: #ff0000; font-size: 18px;">加上</span>.&nbsp;</p>
+<p>注意的是,&nbsp;这套东西与现在很多 UI项目不一样,&nbsp;它不是UI,&nbsp;但<span style="color: #ff0000;">兼容所有的 UI项目的</span>.&nbsp;</p>
+<h2>其他UI项目</h2>
+<p>以下复制自张队的文章 :&nbsp;<a href="https://www.cnblogs.com/shanyou/p/12717318.html">https://www.cnblogs.com/shanyou/p/12717318.html</a>&nbsp;,&nbsp;推荐的UI项目:&nbsp;</p>
+<blockquote>
+<p>目前我们在开发一个开源项目 ant-design-blazor，目标是成为Ant Design官方认可的Blazor实现，并丰富Blazor生态。现在刚起步，需要有兴趣的同学一起参与。</p>
+<p>Github：<a href="https://github.com/ElderJames/ant-design-blazor">https://github.com/ElderJames/ant-design-blazor</a><br />Demo：<br /><a href="https://ant-design-blazor.gitee.io/">https://ant-design-blazor.gitee.io</a><br />开发文档：<br /><a href="https://github.com/ElderJames/ant-design-blazor/wiki">https://github.com/ElderJames/ant-design-blazor/wiki</a><br />Blazor文档：<a href="https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-3.1">https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?view=aspnetcore-3.1</a></p>
+<p>欢迎任何形式的issue和PR</p>
+<p>国内社区还有几个Blazor相关的库：</p>
+<p>1、Bootstrap 是 Blazor<a href="https://www.cnblogs.com/shanyou/p/%20http://blazor.sdgxgz.com" target="_blank">&nbsp;</a>基于Bootstrap ，这个UI库目前只有服务器端，客户端wasm模式等正式版出来会搞， 仓库地址：https://gitee.com/LongbowEnterprise/BootstrapBlazor ，演示地址：<a href="https://www.cnblogs.com/shanyou/p/%20http://blazor.sdgxgz.com" target="_blank">blazor.sdgxgz.com</a>&nbsp;</p>
+<p>2、Blazui&nbsp;&nbsp;是 Element UI 的 CSS 和 HTML 结构 仓库地址：<a href="https://github.com/wzxinchen/Blazui">https://github.com/wzxinchen/Blazui</a>&nbsp;，演示地址&nbsp;<a href="http://blazui.com:9000/">http://blazui.com:9000</a></p>
+
+</blockquote>
+<p>&nbsp;</p>
+<h2>计划:</h2>
+<p>因为日常工作量还是很大,&nbsp;而且还得空闲事件开发组件与文档教程</p>
+<p>所以博客园的新手系列估计还是只能坚持一周一章.&nbsp;</p>
+<p>不过没关系,&nbsp;因为Blazor也是在...&nbsp;在爆发之中,&nbsp; <span style="color: #ff0000;">需要飞一会儿</span>,&nbsp;时间上刚好搭上.&nbsp;</p>
+<p>现在不建议新手开发者立刻上马. (老手开发者可以)&nbsp;</p>
+<p><span style="color: #ff0000;">但是值得平时花多一点时间,&nbsp;慢慢学习,&nbsp;慢慢积累经验.&nbsp;</span></p>
+<p>&nbsp;</p>
+<p>教程方面,&nbsp;会有一系列的文章推荐.&nbsp;&nbsp;</p>
+<p>除了自己写的 ,&nbsp; 还会推荐其他人写的值得一看的文章.&nbsp;&nbsp;</p>
+<p>这<span style="color: #ff0000;"><span style="color: #800000;"><strong>当然是考虑到开发者的能力程度,&nbsp;为开发者省时咯.</strong></span>&nbsp;</span></p>
+<p>虽然很多文章内容都很好.&nbsp; 但是网上的文章缺少整理.&nbsp;</p>
+<p>什么程度的人需要看哪些文章,&nbsp;文章与文章之间是什么前后关系,&nbsp;</p>
+<p>有哪些文章值得看,&nbsp;哪些文章不值得看,&nbsp;</p>
+<p>都需要整理,&nbsp;排序,&nbsp;归类,&nbsp;等等.&nbsp;</p>
+<p>也是不少工作量.&nbsp;</p>
+<p>&nbsp;</p>
+<h2>样板项目:</h2>
+<p>上次提及过,&nbsp;要写一个样板工程.&nbsp;&nbsp;</p>
+<p>这次样板工程的类型也基本上定了下来.&nbsp;</p>
+<p>&nbsp;</p>
+<p>那便是&nbsp;<span style="color: #ff0000;">中小型软件公司快速开发模板</span>&nbsp;</p>
+<p>包含后台管理,&nbsp;包含微信整合,&nbsp;桌面/手机消息推送等等东西.&nbsp;</p>
+<p>里面大概做的是 :&nbsp;</p>
+<ol>
+<li>统一用户管理 ,&nbsp;微信公众号绑定</li>
+<li>OA/CRM/项目管理/工作流/.... 等比较基本的可选的功能.&nbsp;</li>
+<li>企业私有网盘 , (解决小企业'隐私地'分享文件问题,&nbsp;而不是依靠云或邮件,&nbsp;并且支持使用量审计,&nbsp;操作纪录)</li>
+<li>基于这个,&nbsp;慢慢做一些典型行业的模板.</li>
+
+</ol>
+<p>很多中小型企业,&nbsp;他们根本不愿意上云.&nbsp;也拒绝使用各种云OA....&nbsp;&nbsp;</p>
+<p>已经很多年不做OA了,&nbsp;互联网OA拼杀太残酷.&nbsp;给中小企业做定制OA,&nbsp;没什么肉吃.&nbsp;</p>
+<p>但是这次借助这么一个机会,&nbsp;把OA重新搞起来,&nbsp;还是值得的.&nbsp;毕竟不愿意使用公共OA的市场还有..</p>
+<p>&nbsp;</p>
+<h2>这次做这个项目,&nbsp;打算全程录播</h2>
+<p>从新建项目开始,&nbsp;一步一步的,&nbsp;如何慢慢增加功能,&nbsp;都录屏下来,&nbsp;然后拖时间的部分剪掉.&nbsp;</p>
+<p>让开发者可以自己感受一下Blazor的开发方式.&nbsp;建立一套第一目标为省时省力的开发方式.&nbsp;</p>
+<p>考虑使用的技术方案,&nbsp;越简单越好.&nbsp;不要有太多的依赖,&nbsp;让项目换人变得更容易.&nbsp;</p>
+<p>&nbsp;</p>
+<h2><strong>暂时这样</strong></h2>
+<p>需要加入新手问答群的,&nbsp;请进<span style="font-size: 14pt; color: #ff0000;">QQ群&nbsp;934608703</span> ,&nbsp; 现在没什么人,&nbsp;欢迎来占坑.&nbsp; 我们要做的就是等待 Blazor&nbsp;爆发.&nbsp;</p>
+<p>另外我的 B&nbsp;站 :&nbsp;<a href="https://space.bilibili.com/540073960">https://space.bilibili.com/540073960</a>&nbsp;, 用于投放视频.&nbsp; 有价值的视频都会在博客园发表文章解说.&nbsp;</p>
+<p>我自己是极为看重 Blazor&nbsp;的,&nbsp;它将会大大地提高工作效率,&nbsp; 基于统一的开发方式,&nbsp;至少能用上10年,&nbsp;或者更长...</p>
+<p>现在要做的,&nbsp;就是准备,&nbsp;早一点准备,&nbsp;早上车早享受.&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div></div>
+		<p class="postfoot">
+			posted on 
+<span id="post-date">2020-04-24 09:15</span>&nbsp;
+<a href="https://www.cnblogs.com/zhgangxuan/">轩轩之家</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12765146" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12765146);return false;">收藏</a>
+		</p>
+	</div>
+	
+	
+	
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 265669, cb_blogApp = 'zhgangxuan', cb_blogUserGuid = '366fda63-d45d-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12765146, cb_entryCreatedDate = '2020-04-24 09:15', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div id="rightmenu">
+	
+		
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhgangxuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BD%A9%E4%B9%8B%E5%AE%B6">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhgangxuan/rss/">
+订阅</a>
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/zhgangxuan/rss/">
+    <img src="/skins/cleargertrude/images/xml.gif" alt="订阅" />
+</a></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>					
+		<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		<h3>统计</h3>
+<ul>
+	<li>随笔 - 
+8</li>
+	<li>文章 - 
+0</li>
+	<li>评论 - 
+7</li>
+	<li>引用 - 
+0</li>
+ </ul>
+
+
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+		<div id="footer">
+	Powered by: 
+	<br />
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 轩轩之家
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</div>
+
+
+	
+</div>			
+			
+	
+
+
+    
+</body>
+</html>

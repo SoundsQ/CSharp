@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - Java架构师追风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=vmUk-3Bh8LDsKXwjNHs2GDiFna-ZMTUgOJzjUaXTlPA" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=cJiDsI1JAuHHd-OAUWJeyE5JMXXsG4mmuUi2rVmEK1c" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhuifeng523/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhuifeng523/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhuifeng523/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 533772;
+        var currentBlogApp = 'zhuifeng523';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'AnotherEon001';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhuifeng523/">Java架构师追风</a>
+</h1>
+<div id="subtitle">
+
+</div>
+</div>
+<div id="sub"><div class="BlogStats">随笔 - 
+125, 文章 - 
+0, 评论 - 
+2, 引用 - 
+0</div>
+
+</div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=13">13</a>
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=3">下一页</a>
+</div>
+</div>
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/02/11.html">2020年2月11日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12294904.html">
+    85道Java微服务面试题整理（助力2020面试）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：85道Java微服务面试题，哪些你还不会？            <a href="https://www.cnblogs.com/zhuifeng523/p/12294904.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-02-11 14:11 Java架构师追风 阅读 (522) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12294904" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/02/07.html">2020年2月7日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12274740.html">
+    10个很多人不知道的Redis使用技巧
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：10个redis的使用技巧解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12274740.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-02-07 21:45 Java架构师追风 阅读 (485) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12274740" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/02/06.html">2020年2月6日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12269680.html">
+    2020年大厂Java面试题（基础+框架+系统架构+分布式+实战）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：一线大厂Java面试题查漏补缺（基础+框架+系统架构+分布式+实战）            <a href="https://www.cnblogs.com/zhuifeng523/p/12269680.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-02-06 18:14 Java架构师追风 阅读 (353) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12269680" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/02/04.html">2020年2月4日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12260677.html">
+    2020年薪30W的Java程序员都要求熟悉JVM与性能调优！
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：2020年JVM与性能调优知识总结！            <a href="https://www.cnblogs.com/zhuifeng523/p/12260677.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-02-04 19:18 Java架构师追风 阅读 (81) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12260677" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/01/14.html">2020年1月14日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12191869.html">
+    2019年面试官最喜欢问的28道ZooKeeper面试题
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：28道高频ZooKeeper面试题，那些你还不会？            <a href="https://www.cnblogs.com/zhuifeng523/p/12191869.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-01-14 14:35 Java架构师追风 阅读 (106) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12191869" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/01/12.html">2020年1月12日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12183129.html">
+    2019年全网最热门的123个Java并发面试题总结
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：123道Java并发面试题，你遇到过哪些？            <a href="https://www.cnblogs.com/zhuifeng523/p/12183129.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-01-12 16:50 Java架构师追风 阅读 (51) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12183129" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/01/09.html">2020年1月9日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12171655.html">
+    有网友说：2020年还不懂Spring就放弃Java吧？
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：全网最热门的119个Spring问题总结            <a href="https://www.cnblogs.com/zhuifeng523/p/12171655.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-01-09 15:13 Java架构师追风 阅读 (141) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12171655" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2020/01/08.html">2020年1月8日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12167322.html">
+    2020面试还搞不懂MyBatis？快看看这27道面试题！（含答案和思维导图）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：27道常见MyBatis面试题答案详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12167322.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2020-01-08 16:24 Java架构师追风 阅读 (106) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12167322" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/31.html">2019年12月31日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12127642.html">
+    2020年去一线大厂面试先过SSM框架源码这一关！
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：常见SSM框架源码面试题解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12127642.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-31 21:52 Java架构师追风 阅读 (87) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12127642" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/30.html">2019年12月30日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12121787.html">
+    查漏补缺：2020年搞定SpringCloud面试（含答案和思维导图）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：13道常见SpringCloud面试题详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12121787.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-30 21:18 Java架构师追风 阅读 (226) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12121787" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=6">6</a>
+    ···
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=13">13</a>
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=3">下一页</a>
+</div>
+</div>
+
+
+
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhuifeng523/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Java%E6%9E%B6%E6%9E%84%E5%B8%88%E8%BF%BD%E9%A3%8E">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhuifeng523/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/zhuifeng523/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 Java架构师追风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+</body>
+</html>

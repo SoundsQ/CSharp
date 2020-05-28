@@ -1,0 +1,692 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="vm12 安装ubuntu15.10详细图文教程 虚拟机安装ubuntu安装 ubuntu更新软件 ubuntu一直卡在下载语言怎么办 官网下载ubuntu 下载ubuntu镜像文件 虚拟机安装ubu" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>vm12 安装ubuntu15.10详细图文教程 虚拟机安装ubuntu安装 ubuntu更新软件 ubuntu一直卡在下载语言怎么办? - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/5249652.html">vm12 安装ubuntu15.10详细图文教程 虚拟机安装ubuntu安装 ubuntu更新软件 ubuntu一直卡在下载语言怎么办?</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        vm12 安装ubuntu15.10详细图文教程 虚拟机安装ubuntu安装 ubuntu更新软件 ubuntu一直卡在下载语言怎么办 官网下载ubuntu 下载ubuntu镜像文件 虚拟机安装ubuntu如何设置处理器配置 虚拟机安装ubuntu 内存多大合适 ubuntu更新软件  ubuntu 切换软件下载源
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>1,准备工作-ubuntu下载 ubuntu官网下载</p>
+<p>如何官网下载ubuntu&nbsp;</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102812522-852785089.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="5ed2833e-2b8a-4a90-8e6a-f0f3d3710b02" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102812944-1579359064.png" alt="5ed2833e-2b8a-4a90-8e6a-f0f3d3710b02" width="664" height="374" border="0" /></a></p>
+<p><a href="http://www.ubuntu.com/download/">http://www.ubuntu.com/download/</a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102813288-679746463.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="94b54663-6acc-4a38-a957-f9842ee4127c" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102813647-1827862585.png" alt="94b54663-6acc-4a38-a957-f9842ee4127c" width="942" height="506" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102814069-1990049433.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="f729add3-e7e6-45a2-a32c-ccef691ca5a5" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102814585-175499762.png" alt="f729add3-e7e6-45a2-a32c-ccef691ca5a5" width="913" height="705" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102815116-108385552.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="7420b9bf-0506-4b7e-8f80-62d1ad45ab38" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102815554-740445136.png" alt="7420b9bf-0506-4b7e-8f80-62d1ad45ab38" width="698" height="653" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102815804-957302348.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="461306fd-19db-403e-af7f-0a01e8434515" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102816132-1521960667.png" alt="461306fd-19db-403e-af7f-0a01e8434515" width="980" height="305" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102816413-570182479.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="f96ac837-7c39-448e-a83e-88a9d2a5547b" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102816679-1787372147.png" alt="f96ac837-7c39-448e-a83e-88a9d2a5547b" width="823" height="35" border="0" /></a></p>
+<p>2,打开虚拟机</p>
+<p>虚拟机安装ubuntu15.10 虚拟机安装ubuntu 详细完整教程</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102817007-93355484.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="fd21fed4-c995-4b77-a13f-66d948757773" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102817600-627610333.png" alt="fd21fed4-c995-4b77-a13f-66d948757773" width="1015" height="696" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102818382-638221668.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="aa4c9fb3-ba00-4744-b57d-01b5e9f1e80a" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102818960-943730848.png" alt="aa4c9fb3-ba00-4744-b57d-01b5e9f1e80a" width="503" height="485" border="0" /></a></p>
+<p>选择&nbsp; 自定义&nbsp; 然后下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102819272-23135680.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="0974eb43-0803-485d-b1e9-86e799a21343" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102819710-392250510.png" alt="0974eb43-0803-485d-b1e9-86e799a21343" width="503" height="485" border="0" /></a></p>
+<p>直接下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102820007-1412176524.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="492bb074-c8c1-4e99-a4c2-0bce5cc32cef" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102820272-1732960693.png" alt="492bb074-c8c1-4e99-a4c2-0bce5cc32cef" width="503" height="485" border="0" /></a></p>
+<p>浏览到自己的下载位置,选中</p>
+<p>然后选择下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102820585-1360861284.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="1b1459cf-84c3-41ed-80d6-c87b914d3b4a" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102820835-438750102.png" alt="1b1459cf-84c3-41ed-80d6-c87b914d3b4a" width="503" height="485" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102821257-1036847777.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="fe435275-b3ec-48ef-807c-ea4a5077f6ab" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102821616-1907026633.png" alt="fe435275-b3ec-48ef-807c-ea4a5077f6ab" width="503" height="485" border="0" /></a></p>
+<p>设置好名字,选择好文件位置</p>
+<p>点击下一步</p>
+<p>虚拟机安装ubuntu,处理器配置如何设置?处理器数量设置多少?</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102821929-1510705738.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="f330f706-7f35-4aa7-8e2b-8a920e1c7f1d" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102822319-1612408168.png" alt="f330f706-7f35-4aa7-8e2b-8a920e1c7f1d" width="503" height="485" border="0" /></a></p>
+<p>这一步一般这样子就可以了,也可以默认的1&nbsp; 1&nbsp; 一般都可以跑起来具体的看自身电脑的配置</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102822663-739517366.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9a95496b-febb-44e8-be29-c8f784203b59" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102822913-709759111.png" alt="9a95496b-febb-44e8-be29-c8f784203b59" width="503" height="485" border="0" /></a></p>
+<p>我内存比较大,选择2g,你可以使用推荐的内存</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102823225-2007770018.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="ced80cff-0363-4ca7-ad2b-c7439d0d711a" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102823538-1622821948.png" alt="ced80cff-0363-4ca7-ad2b-c7439d0d711a" width="503" height="485" border="0" /></a></p>
+<p>这个类型 后续也可以修改</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102823772-1512650567.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="45e372f9-182f-4581-81fc-9fd1ab1fcbf6" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102824100-700484331.png" alt="45e372f9-182f-4581-81fc-9fd1ab1fcbf6" width="503" height="485" border="0" /></a></p>
+<p>使用默认</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102824366-1173664282.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="3acbddbb-fe38-45f4-a13e-2ff0849e6a45" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102824616-91519881.png" alt="3acbddbb-fe38-45f4-a13e-2ff0849e6a45" width="503" height="485" border="0" /></a></p>
+<p>默认</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102825054-66182995.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="d4dd970e-8670-4c71-bf5a-a5c372cb68aa" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102825475-1139886423.png" alt="d4dd970e-8670-4c71-bf5a-a5c372cb68aa" width="503" height="485" border="0" /></a></p>
+<p>默认</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102825741-1114800202.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="c21aa1eb-7870-48d8-ae68-d52a037a6d0c" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102826100-1088480337.png" alt="c21aa1eb-7870-48d8-ae68-d52a037a6d0c" width="503" height="485" border="0" /></a></p>
+<p>硬盘大的给100g也没问题,</p>
+<p>建议立即分配</p>
+<p>我习惯单个文件</p>
+<p>设置后之后</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102826491-691737380.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9af1511b-7aba-49b3-a2ab-505dde6ce825" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102826866-1520020843.png" alt="9af1511b-7aba-49b3-a2ab-505dde6ce825" width="503" height="485" border="0" /></a></p>
+<p>设置好位置</p>
+<p>下一步</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102827272-1076081347.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="ccb2f442-0c81-44c2-8af1-ccc1ab045ff4" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102827569-810841616.png" alt="ccb2f442-0c81-44c2-8af1-ccc1ab045ff4" width="503" height="485" border="0" /></a></p>
+<p>可以自定义硬件</p>
+<p>可以把不需要的去掉</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102827897-2011733260.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="52b54e4f-6446-4aab-9d95-22b2814e028d" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102828147-2017301184.png" alt="52b54e4f-6446-4aab-9d95-22b2814e028d" width="783" height="716" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102828507-1569789648.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9ad5b45e-a811-466b-868f-cfac2699c0cd" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102828804-694737064.png" alt="9ad5b45e-a811-466b-868f-cfac2699c0cd" width="503" height="485" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102829085-781414597.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="8a177d32-1972-46d7-bc43-0f99efa6aba4" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102829397-1962268282.png" alt="8a177d32-1972-46d7-bc43-0f99efa6aba4" width="503" height="485" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102829647-1568132572.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="dff26a69-8dfc-47e8-8f0f-b2fb9d1bcf9b" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102829975-1067021157.png" alt="dff26a69-8dfc-47e8-8f0f-b2fb9d1bcf9b" width="503" height="485" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102830210-85400948.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="17befc32-a93d-4825-987e-738a9e38d852" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102830475-1984748639.png" alt="17befc32-a93d-4825-987e-738a9e38d852" width="503" height="485" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102831179-105861891.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9915d2c5-450c-466f-904b-bc9c0ddc3f6e" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102831507-2022695386.png" alt="9915d2c5-450c-466f-904b-bc9c0ddc3f6e" width="734" height="525" border="0" /></a></p>
+<p>这些个提示信息可以让她不再显示,就是指你的一些硬件设备比喻摄像头,手机等,是否连接到虚拟机</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102831788-315369113.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="a5a3c467-aa4d-400a-ad29-f91e7c149591" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102832163-988520325.png" alt="a5a3c467-aa4d-400a-ad29-f91e7c149591" width="1280" height="764" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102832429-521074968.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="da143a2e-3bd9-4e23-adb7-0f6b67474fbf" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102832725-1038502723.jpg" alt="da143a2e-3bd9-4e23-adb7-0f6b67474fbf" width="1281" height="764" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102833069-341244529.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="6607c3f3-3bf5-40e1-b488-b1a1a46825da" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102833382-743213348.jpg" alt="6607c3f3-3bf5-40e1-b488-b1a1a46825da" width="1275" height="763" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102833835-812582458.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="a77aee80-05e6-4f9f-b306-513bd5001927" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102834382-2022618599.jpg" alt="a77aee80-05e6-4f9f-b306-513bd5001927" width="1274" height="764" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102834975-247872721.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="dfd99a75-6d5b-4a30-a1b9-1c210ab2804c" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102835616-2931428.jpg" alt="dfd99a75-6d5b-4a30-a1b9-1c210ab2804c" width="1281" height="770" border="0" /></a></p>
+<p>此时已经安装好了,输入密码进入桌面</p>
+<p>ps:如果说你的网络不好,上面有的过程可能需要下载很久,你可以把你的网络断掉,终止掉他的下载过程</p>
+<p>等进入系统以后再重新更新软件</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102836116-965354174.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="f9220726-bc59-4364-9989-06b1c3c11d18" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102836413-518653741.jpg" alt="f9220726-bc59-4364-9989-06b1c3c11d18" width="820" height="620" border="0" /></a></p>
+<p>如何设置虚拟机中ubuntu系统的语言?如何设置ubuntu为中文?</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102836804-709449132.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="61c5be48-0c3d-4f1b-91bc-cdfa9ae42b0c" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102837147-673768032.jpg" alt="61c5be48-0c3d-4f1b-91bc-cdfa9ae42b0c" width="803" height="602" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102837522-521328045.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="eb1e4e1c-da51-48d1-b732-e6fe90dc2907" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102838007-968398379.jpg" alt="eb1e4e1c-da51-48d1-b732-e6fe90dc2907" width="801" height="607" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102838507-1131119709.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="5482a6bf-102e-4238-8bbd-4e3c7cc766da" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102838897-1264571191.jpg" alt="5482a6bf-102e-4238-8bbd-4e3c7cc766da" width="801" height="603" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102839429-478852464.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="6f9a40bb-102d-4659-945d-bed8d6456f8b" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102840038-1459245375.jpg" alt="6f9a40bb-102d-4659-945d-bed8d6456f8b" width="801" height="602" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102840632-726132217.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="ac2cfb52-2074-418f-854b-259f1a6d2f5e" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102841007-315944196.jpg" alt="ac2cfb52-2074-418f-854b-259f1a6d2f5e" width="798" height="599" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102841413-287372324.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="9f14c674-5fd2-44a8-9d1f-c1bc48dc4e4b" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102841866-1508636734.jpg" alt="9f14c674-5fd2-44a8-9d1f-c1bc48dc4e4b" width="801" height="604" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102842304-1276951113.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="55c91aea-4b58-48f9-8767-c2368b24e3c4" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102842710-1803119051.jpg" alt="55c91aea-4b58-48f9-8767-c2368b24e3c4" width="802" height="601" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102843444-269845949.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="95ed25f8-7c6d-4a6c-ba09-5442abe1d6b8" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102843960-1113779540.jpg" alt="95ed25f8-7c6d-4a6c-ba09-5442abe1d6b8" width="801" height="601" border="0" /></a></p>
+<p>我的网络不好,刚才安装系统的时候,语言支持没能下载好</p>
+<p>重新下载下</p>
+<p>ps:如果说此时还是一直失败,可以更改软件源</p>
+<p>ubuntu如何更改软件源?ubuntu下载软件总是失败怎么办?ubuntu更新语言,下载语言一直失败怎么解决</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102844397-1136559610.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="7449e3fd-1afe-4e8c-aecd-01791f2e3d31" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102844725-210186617.jpg" alt="7449e3fd-1afe-4e8c-aecd-01791f2e3d31" width="58" height="481" border="0" /></a></p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102845116-591846272.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="7d33eb8c-c965-4d77-98fb-cd0078005dd3" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102845710-823119037.jpg" alt="7d33eb8c-c965-4d77-98fb-cd0078005dd3" width="799" height="510" border="0" /></a></p>
+<p>选择</p>
+<p>software source</p>
+<p>这个就是软件的下载源,选一个中国的,不行就在挨个的试试看,总有一个适合你!</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102846210-541761901.png"><img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border: 0px;" title="603d290d-f863-4545-bc2b-c663b32a5ba1" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102846554-2115164749.png" alt="603d290d-f863-4545-bc2b-c663b32a5ba1" width="601" height="453" border="0" /></a></p>
+<p>ubuntu如何更改显示器的分辨率?</p>
+<p>设置里面的display就是了</p>
+<p>如果选不到合适的也不用怕,肯定是某些地方的设置没弄好,可以先把所有的软件更新下</p>
+<p>然后重启下ubuntu试试看</p>
+<p>更新软件命令</p>
+<p>打开终端</p>
+<p>右键菜单就有的哦</p>
+<p>sudo apt-get update</p>
+<p>sudo apt-get dist-upgrade</p>
+<p>按照提示信息输入密码,以及Y</p>
+<p>就可以更新下载了</p>
+<p>不行就换下载源!!!</p>
+<p><a href="http://images2015.cnblogs.com/blog/897393/201603/897393-20160307102847038-207637965.jpg"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="a9d44b1f-4f2e-4012-b4bf-a00fff7bae10" src="https://images2015.cnblogs.com/blog/897393/201603/897393-20160307102847507-212427728.jpg" alt="a9d44b1f-4f2e-4012-b4bf-a00fff7bae10" width="791" height="600" border="0" /></a></p>
+<p>ubuntu如何切换输入法</p>
+<p>ctrl + space(空格)切换输入法</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2016-03-07 10:29</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=5249652" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(5249652);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 5249652, cb_entryCreatedDate = '2016-03-07 10:29', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

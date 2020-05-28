@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_经典鸡翅</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=734</id>
+  <updated>2020-04-28T13:54:16Z</updated>
+  <author>
+    <name>经典鸡翅</name>
+    <uri>http://www.cnblogs.com/jichi/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12797557.html</id>
+    <title type="text">Eureka和zookeeper的区别 - 经典鸡翅</title>
+    <summary type="text">前言 最近在面试的时候，被问到了这个问题，作答的不是很好，在此进行整理和学习，希望能够帮助大家。 CAP理论 在了解eureka和zookeeper区别之前，我们先来了解一下这个知识，cap理论。 1998年的加州大学的计算机科学家 Eric Brewer 提出，分布式有三个指标。Consisten</summary>
+    <published>2020-04-28T13:54:00Z</published>
+    <updated>2020-04-28T13:54:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12797557.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12797557.html" />
+    <content type="html">【摘要】前言 最近在面试的时候，被问到了这个问题，作答的不是很好，在此进行整理和学习，希望能够帮助大家。 CAP理论 在了解eureka和zookeeper区别之前，我们先来了解一下这个知识，cap理论。 1998年的加州大学的计算机科学家 Eric Brewer 提出，分布式有三个指标。Consisten &lt;a href="http://www.cnblogs.com/jichi/p/12797557.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12790478.html</id>
+    <title type="text">为什么redis是单线程的以及为什么这么快？ - 经典鸡翅</title>
+    <summary type="text">官网的说法 我们先来认真看一下官网的说法。翻译过来大意如下： CPU并不是您使用Redis的瓶颈，因为通常Redis要么受内存限制，要么受网络限制。例如，使用在一般Linux系统上运行的流水线Redis每秒可以发送一百万个请求，因此，如果您的应用程序主要使用O（N）或O（log（N））命令，则几乎不</summary>
+    <published>2020-04-27T14:07:00Z</published>
+    <updated>2020-04-27T14:07:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12790478.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12790478.html" />
+    <content type="html">【摘要】官网的说法 我们先来认真看一下官网的说法。翻译过来大意如下： CPU并不是您使用Redis的瓶颈，因为通常Redis要么受内存限制，要么受网络限制。例如，使用在一般Linux系统上运行的流水线Redis每秒可以发送一百万个请求，因此，如果您的应用程序主要使用O（N）或O（log（N））命令，则几乎不 &lt;a href="http://www.cnblogs.com/jichi/p/12790478.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12784349.html</id>
+    <title type="text">freemarker中js里面取字符串，换行导致报错的解决办法 - 经典鸡翅</title>
+    <summary type="text">问题原因 原因在于直接在js中取的变量并复制给var变量。 于是就变成这样。 解决办法 var data = '${content?js_string}';</summary>
+    <published>2020-04-27T00:54:00Z</published>
+    <updated>2020-04-27T00:54:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12784349.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12784349.html" />
+    <content type="html">【摘要】问题原因 原因在于直接在js中取的变量并复制给var变量。 于是就变成这样。 解决办法 var data = '${content?js_string}'; &lt;a href="http://www.cnblogs.com/jichi/p/12784349.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12779014.html</id>
+    <title type="text">PowerDesigner显示mysql数据表注释 - 经典鸡翅</title>
+    <summary type="text">通过Navicat或其他工具将表转为sql文件 例如下方这样 将sql表文件导入powerdesigner 下一步 下一步 确定后，产生如下模型 执行脚本 在对话框中执行如下脚本 最后 效果图如下</summary>
+    <published>2020-04-26T05:44:00Z</published>
+    <updated>2020-04-26T05:44:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12779014.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12779014.html" />
+    <content type="html">【摘要】通过Navicat或其他工具将表转为sql文件 例如下方这样 将sql表文件导入powerdesigner 下一步 下一步 确定后，产生如下模型 执行脚本 在对话框中执行如下脚本 最后 效果图如下 &lt;a href="http://www.cnblogs.com/jichi/p/12779014.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12694260.html</id>
+    <title type="text">java中wait和notify的虚假唤醒问题 - 经典鸡翅</title>
+    <summary type="text">前言 本篇博客来自 https://www.cnblogs.com/clover-forever/p/12616869.html 自己在此记录一下，方便日后复习。 虚假唤醒的概念 jdk官方文档解释： 所以说在wait和notify一块使用时，如果使用if作为条件时，会有虚假唤醒的情况发生，所以必须</summary>
+    <published>2020-04-13T13:58:00Z</published>
+    <updated>2020-04-13T13:58:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12694260.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12694260.html" />
+    <content type="html">【摘要】前言 本篇博客来自 https://www.cnblogs.com/clover-forever/p/12616869.html 自己在此记录一下，方便日后复习。 虚假唤醒的概念 jdk官方文档解释： 所以说在wait和notify一块使用时，如果使用if作为条件时，会有虚假唤醒的情况发生，所以必须 &lt;a href="http://www.cnblogs.com/jichi/p/12694260.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12694173.html</id>
+    <title type="text">为什么wait和notify只能在synchronized中？ - 经典鸡翅</title>
+    <summary type="text">前言 wait和notify必须在synchronized块中，否则会抛出IllegalMonitorStateException。 原因 代码示例 代码示例的问题所在 一个消费者调用take，发现buffer.isEmpty。 在消费者调用wait之前，由于cpu的调度，消费者线程被挂起，生产者调</summary>
+    <published>2020-04-13T13:46:00Z</published>
+    <updated>2020-04-13T13:46:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12694173.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12694173.html" />
+    <content type="html">【摘要】前言 wait和notify必须在synchronized块中，否则会抛出IllegalMonitorStateException。 原因 代码示例 代码示例的问题所在 一个消费者调用take，发现buffer.isEmpty。 在消费者调用wait之前，由于cpu的调度，消费者线程被挂起，生产者调 &lt;a href="http://www.cnblogs.com/jichi/p/12694173.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12686586.html</id>
+    <title type="text">一篇blog带你了解java中的锁 - 经典鸡翅</title>
+    <summary type="text">前言 最近在复习锁这一块，对java中的锁进行整理，本文介绍各种锁，希望给大家带来帮助。 Java的锁 乐观锁 乐观锁是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，采取在写时先读出</summary>
+    <published>2020-04-12T09:55:00Z</published>
+    <updated>2020-04-12T09:55:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12686586.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12686586.html" />
+    <content type="html">【摘要】前言 最近在复习锁这一块，对java中的锁进行整理，本文介绍各种锁，希望给大家带来帮助。 Java的锁 乐观锁 乐观锁是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，采取在写时先读出 &lt;a href="http://www.cnblogs.com/jichi/p/12686586.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12664395.html</id>
+    <title type="text">jvm类加载机制总结 - 经典鸡翅</title>
+    <summary type="text">类的加载机制分为如下三个阶段：加载，连接，初始化。其中连接又分为三个小阶段：验证，准备，解析。 加载阶段 将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后再堆内创建一个class对象，用来封装类在方法区内的数据结构。 加载class文件的方式： 从本地系统中直接</summary>
+    <published>2020-04-09T00:29:00Z</published>
+    <updated>2020-04-09T00:29:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12664395.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12664395.html" />
+    <content type="html">【摘要】类的加载机制分为如下三个阶段：加载，连接，初始化。其中连接又分为三个小阶段：验证，准备，解析。 加载阶段 将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后再堆内创建一个class对象，用来封装类在方法区内的数据结构。 加载class文件的方式： 从本地系统中直接 &lt;a href="http://www.cnblogs.com/jichi/p/12664395.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12642175.html</id>
+    <title type="text">Java的浅拷贝与深拷贝总结 - 经典鸡翅</title>
+    <summary type="text">Java中的对象拷贝(Object Copy)指的是将一个对象的所有属性（成员变量）拷贝到另一个有着相同类类型的对象中去。举例说明：比如，对象A和对象B都属于类S，具有属性a和b。那么对对象A进行拷贝操作赋值给对象B就是：B.a=A.a; B.b=A.b; 在程序中拷贝对象是很常见的，主要是为了在新</summary>
+    <published>2020-04-06T07:05:00Z</published>
+    <updated>2020-04-06T07:05:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12642175.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12642175.html" />
+    <content type="html">【摘要】Java中的对象拷贝(Object Copy)指的是将一个对象的所有属性（成员变量）拷贝到另一个有着相同类类型的对象中去。举例说明：比如，对象A和对象B都属于类S，具有属性a和b。那么对对象A进行拷贝操作赋值给对象B就是：B.a=A.a; B.b=A.b; 在程序中拷贝对象是很常见的，主要是为了在新 &lt;a href="http://www.cnblogs.com/jichi/p/12642175.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/jichi/p/12630405.html</id>
+    <title type="text">政府网站公祭日，如何使网站整体变灰 - 经典鸡翅</title>
+    <summary type="text">前言 政府网站会遇到公祭日的时候，网站整体颜色变灰的情况。今天正好调了一下。在此把解决方案分享给大家。方案简单实用，笔者已在生产环境使用过。通过整体的html使用filter来进行过滤。如下，只要引入即可。 解决方案 IE11 和 IE10的解决方案 经过测试发现，以上代码的方式对于谷歌，火狐，IE</summary>
+    <published>2020-04-04T01:40:00Z</published>
+    <updated>2020-04-04T01:40:00Z</updated>
+    <author>
+      <name>经典鸡翅</name>
+      <uri>http://www.cnblogs.com/jichi/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/jichi/p/12630405.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/jichi/p/12630405.html" />
+    <content type="html">【摘要】前言 政府网站会遇到公祭日的时候，网站整体颜色变灰的情况。今天正好调了一下。在此把解决方案分享给大家。方案简单实用，笔者已在生产环境使用过。通过整体的html使用filter来进行过滤。如下，只要引入即可。 解决方案 IE11 和 IE10的解决方案 经过测试发现，以上代码的方式对于谷歌，火狐，IE &lt;a href="http://www.cnblogs.com/jichi/p/12630405.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

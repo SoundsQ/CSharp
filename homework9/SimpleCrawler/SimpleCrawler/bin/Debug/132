@@ -1,0 +1,765 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="多并发的概念本身就是来自于计算机操作系统的进程的概念，本文对进程的相关概念进行讲解，对进程进行了介绍，只有了解了最根本最核心的内容才能够对后续多线程以及Java的并发有很好的掌握" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>进行概念详解 多线程上篇（二） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10350186.html">进行概念详解 多线程上篇（二）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        多并发的概念本身就是来自于计算机操作系统的进程的概念，本文对进程的相关概念进行讲解，对进程进行了介绍，只有了解了最根本最核心的内容才能够对后续多线程以及Java的并发有很好的掌握
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">操作系统是程序与硬件交互的中间层，现代操作系统将程序的一次执行抽象为进程和线程的概念。</span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程作为资源分配的基本单位，线程作为执行的基本单位。</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程和线程其实就是操作系统程序本身实现控制一个程序运行的数据项描述</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所有的程序都是面向语言进行开发的，而语言本身是面向操作系统的，线程是操作系统对程序一次运行的抽象</strong></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">所以，所有的多线程编程模型，必然遵从操作系统的大逻辑，必然是符合操作系统的对线程的抽象概念，操作系统在抽象之上提供了API供应用程序调用</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">简言之，应用程序的底层是借助于操作系统来完成多线程编程模型的，所以怎么可能逾越系统这一根本？</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">本篇对操作系统中线程进程相关概念进行简单介绍</span></div>
+<h3><span style="font-size: 18px; font-family: 'Microsoft YaHei';">进程</span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">在很久很久之前的串行执行时，程序按顺序加载到计算机中并运行，程序独占计算机的所有资源</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">程序具有顺序性，封闭性和可重现性</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">多道程序出现之后，程序需要并发的执行，计算机的资源是共享的，而不再是某一程序运行后独享</span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以不再是顺序的，而是间断的，也不再是封闭，也不再具有可重现性</strong></span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125847889-1420880069.png"><img style="display: inline; background-image: none;" title="image_5c56750f_433" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125848409-1166457291.png" alt="image_5c56750f_433" width="909" height="606" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">还是以做饭为例，当只有你一个人使用厨房时，你可以随便；</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">但是当多个人共享时，如果你还把你自己切了一半的菜扔到那边，可能会被扔掉，可能会被用掉，当然也可能没事。</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">为了解决程序并发执行的问题，进程的概念被抽象出来，其实就相当于&ldquo;一个厨房使用规章&rdquo;被制定出来</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">所以说进程和线程就是操作系统用来管理维护一个程序的运行于切换而设计出来的一个概念，然后通过各种数据结构以及值等实现描绘出来</span></div>
+<h4><span style="font-family: 'Microsoft YaHei';">进程实体</span></h4>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>一个程序的运行主要下面几个部分的数据</strong></span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程本身的信息（现在谁在用厨房？现在盆盆罐罐都被你放了什么？）</span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">可执行的代码是哪些？（菜谱步骤是什么？）</span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">程序运行所需要的数据是什么？（食材是什么？佐料又是什么？）</span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>程序段、数据段、PCB（Process Control Block）三部分构成了进程实体</strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125848727-607533876.png"><img style="display: inline; background-image: none;" title="image_5c567510_705" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125849136-1507469912.png" alt="image_5c567510_705" width="533" height="340" border="0" /></a></span></div>
+<h4><span style="font-size: 18px; font-family: 'Microsoft YaHei';">进程特征 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">程序的并发运行与之前的串行顺序运行有了很大的变化，主要有下面几个特征 </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">动态性 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">并发性 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">独立性 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">异步性 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125849712-1622855433.png"><img style="display: inline; background-image: none;" title="image_5c567510_5e4b" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125851198-1914655961.png" alt="image_5c567510_5e4b" width="693" height="426" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3><span style="font-size: 18px; font-family: 'Microsoft YaHei';">进程状态 </span></h3>
+<h4><span style="font-size: 16px; font-family: 'Microsoft YaHei';">基本状态 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">多人轮流使用厨房时，某一时刻的你到底是做完饭了？还是还在排队？还是正在做？你会有一个状态用来表述你现在的这种情况 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">对于进程也有状态的概念 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">最基本的状态包括： </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">创建 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">就绪 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">执行 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">阻塞 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">终止 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>其中核心是：就绪、执行、阻塞</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125852535-1590961683.png"><img style="display: inline; background-image: none;" title="image_5c567510_26b3" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125854495-1032746872.png" alt="image_5c567510_26b3" width="876" height="517" border="0" /></a> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">基本的状态切换如下 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125855520-1315833933.png"><img style="display: inline; background-image: none;" title="image_5c567510_5a7d" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125857162-1974986263.png" alt="image_5c567510_5a7d" width="634" height="366" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>状态转变简介：</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程创建后，会创建PCB，以及相关的必须信息，然后就进入就绪状态，等待CPU的调度 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">一旦CPU对该进程调度执行，也就是该进程获得了时间片，那么就会进行执行 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">当时间片用完之后，如果任务还没有结束，那么就需要继续等待（比如你做饭需要5小时，然而每个人只允许2小时，如果2小时你做不完，你必须让别人先做，你重新排队来） </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">如果一个正在执行的程序遇到了IO请求，这通常是比较耗时的，进程会进入阻塞状态 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进入阻塞状态的进程一旦获得了想要的结果，比如IO完成，那么就再次进入就绪状态，等待CPU的临幸</span></div>
+<h4><span style="font-size: 16px; font-family: 'Microsoft YaHei';">挂起状态 </span></h4>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>有些系统中，还会有挂起状态，可能系统需要让正在执行的程序暂停下来，也可能是资源不足了，将某些不重要的进程暂停。</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>挂起是更彻底的暂停，可以认为挂起是&ldquo;暂时被淘汰出内存的进程&rdquo;</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">阻塞状态获得资源后会进入就绪状态，而一旦挂起，除非解除这个状态，否则他将一直暂停，被抛出运行之外 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">阻塞是因为某些原因暂时不能被执行，挂起是直接将你暂停 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">当你做饭时等待水烧开，这就是阻塞，而如果是老大说我们几个人先来，于是他们几个轮流使用，然后你站门口看着，这就是挂起 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125859618-1318349754.png"><img style="display: inline; background-image: none;" title="image_5c567510_710c" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125904983-1891994769.png" alt="image_5c567510_710c" width="660" height="536" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">包含挂起状态的系统基本情况如上图所示 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">就绪状态挂起后称之为静态就绪，阻塞状态挂起后称之为静态阻塞，挂起后的状态不能够直接转换到执行状态 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">活动状态经过挂起转换为静止状态，静止状态经过激活转换为活动状态 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">活动就绪与静止就绪通过挂起和激活转换；活动阻塞与静止阻塞通过挂起和激活转换； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">活动就绪的状态经过进程调度获得CPU时间片，进入执行状态，执行状态遇到请求IO等阻塞操作进入活动阻塞状态，活动阻塞状态IO完成将会进入活动就绪状态，继续等待被CPU临幸，如上图蓝色三角区域 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">看起来复杂其实也很好理解，前提是要理解挂起的含义 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>比如资源不充足时，将一些不重要的进程暂时挂起，挂起是真正的暂停执行，是一种主动式的管理，阻塞则是被动的，挂起也意味着置换到外存中，而不是内存中</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">不管是活动阻塞还是活动就绪，他们都在内存中，具备了相关条件，IO完成或者获得CPU时间片，就可以进行执行 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">挂起（静止）状态，静止阻塞还是静止就绪，他们都是外存中，并不能够执行，他们还需要一个载入到内存的过程 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>一个静止阻塞的状态就相当于在外存中等待一个事件的完成，事件完成后，进入静止就绪状态，他此时还是不会得到CPU的调度，激活后才有机会得到CPU临幸</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">存在挂起状态的系统，经过创建后，可能进入活动就绪，也可能进入静止就绪，并不是一定进入活动就绪，然后再被挂起 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">在当前系统的性能和内存的容量均允许的情况下，完成对进程创建的必要操作后，相应的系统进程将进程的状态转换为活动就绪状态 </span></div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">考虑到系统当前资源状况和性能要求，并不分配给新建进程所需资源，主要是主存资源，相应的系统进程将进程状态转为静止就绪状态 </span></div>
+</div>
+<h4><span style="font-size: 16px; font-family: 'Microsoft YaHei';">终止状态的转换 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">终止状态通常是从执行状态进行转换，一般情况下不管一个什么状态的线程，他只有被执行时，才会可能进入终止状态 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">但是，在某些系统中，父进程有权利终止一个子进程，所以说这种情况下，就可能从阻塞或者就绪直接转换为终止状态 </span></div>
+<h3><span style="font-size: 18px; font-family: 'Microsoft YaHei';">进程控制块 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程是对于程序执行的抽象描述，那么进程控制块，这个对进程的描述，就相当于进程的元数据，用于描述进程本身</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">尽管实现很复杂，但是我们应该想象得到，操作系统内核都是C/C++，毕竟也只是一种编程语言，编程语言对于抽象概念的描述也只能是通过语言本身 </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以说，他就是一个数据结构，记录了用于控制管理进程的各个数据项。</strong> </span></div>
+<div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>&ldquo;PCB 中记录了操作系统所需的、用于描述进程的当前情况以及控制进程运行的全部信息。</strong> </span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程控制块的作用是使一个在多道程序环境下不能独立运行的程序(含数据)，成为一个能独立运行的基本单位，一个能与其它进程并发执行的进程。</strong> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">或者说</span>，<span style="color: #000000; font-size: 13.5pt;"><strong>OS是根据 PCB来对并发执行的进程进行控制和管理的</strong></span> </span></div>
+</div>
+<div>
+<div style="line-height: 24px;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">例如，当OS要调度某进程执行时，要从该进程的 PCB<span style="line-height: 32px;">中查出其现行状态及优先级；</span> </span></div>
+<div style="line-height: 24px;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';"><span style="line-height: 32px;">在调度到某进程后，要根据其 PCB 中所保存的处理机状态信</span><span style="line-height: 32px;">息，设置该进程恢复运行的现场，并根据其 PCB 中的程序和数据的内存始址，找到其程序</span><span style="line-height: 32px;">和数据；</span> </span></div>
+<div style="line-height: 24px;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';"><span style="line-height: 32px;">进程在执行过程中，当需要和与之合作的进程实现同步、通信或访问文件时，也</span><span style="line-height: 32px;">都需要访问 PCB；</span> </span></div>
+<div style="line-height: 24px;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';"><span style="line-height: 32px;">当进程由于某种原因而暂停执行时，又须将其断点的处理机环境保存在</span><span style="line-height: 32px;">PCB中。</span> </span></div>
+<div style="line-height: 24px;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong><span style="line-height: 32px;">可见，在进程的整个生命期中，系统总是通过 PCB对进程进行控制的，亦即，系</span><span style="line-height: 32px;">统是根据进程的PCB而不是任何别的什么而感知到该进程的存在的。</span></strong> </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="line-height: 24px;"><span style="line-height: 32px;"><span style="font-size: 16px;">所以说，</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>PCB是进程</strong></span></span><span style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>存在的惟一标志</strong></span><span style="font-size: 16px;">。 </span></span></span><span style="font-size: 16px;">&rdquo;《计算机操作系统 第三版》 </span></span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125906994-547184057.png"><img style="display: inline; background-image: none;" title="image_5c567510_4ccc" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125907476-643470710.png" alt="image_5c567510_4ccc" width="948" height="932" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程控制块主要包括: </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程标识符 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">计算机状态 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程调度信息 </span></li>
+<li><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程控制信息 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程用来管理程序运行，对于一个运行中的程序总归要有个名字，这就是进程标识符； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">计算机运行时各个硬件设备寄存器保存的值就是计算机的状态（如同做饭时厨房盆盆罐罐里面的东西）； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程有状态，这些状态信息主要用来进行调度，也就是安排任务需要的信息（可能你长得好看，就能多一次机会使用厨房）； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">另外还有一些对进程的控制，比如进程（线程）同步数据、程序地址等 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div><span style="font-size: 16px; font-family: 'Microsoft YaHei';">在一个系统中，通常可拥有数十个、 数百个乃至数千个 PCB。 </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>为了能对它们加以有效的管理，应该用适当的方式将这些PCB组织起来。目前常用的组织方式有以下两种。 </strong> </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125909595-588618957.png"><img style="display: inline; background-image: none;" title="image_5c567510_7bb2" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125910905-1765764387.png" alt="image_5c567510_7bb2" width="623" height="302" border="0" /></a></span></div>
+<h3><span style="font-size: 18px; font-family: 'Microsoft YaHei';">三座大山 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程作为操作系统对程序一次运行的抽象描述 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程的基本信息相当于元数据，就好像表结构一样以及一些必备的数据结构 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">对于进程的掌控主要有三座大山： </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程控制、进程同步、进程通信</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程控制：</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>一个进程从无到有，需要创建，创建之后因为调度而运行，因为撤销而消亡，需要有人管理他们，进程基本信息比如PCB从哪里来？都需要有人去做，这部分工作被称为进程控制</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程同步：</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>多进程并发执行，必然可能会出现竟态，比如同时访问某个共享资源，一个打印机不能同时打印语文和数学，所以必须做好顺序的调度，这部分的工作被称之为进程同步</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程通信：</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>多进程并发运行，如何进行进程间的联系，如何传递数据？不同计算机中的两个进程又是如何进行数据交互？这部分工作被称之为进程通信</strong> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">如果一个员工是一个进程，进程控制相当于人事、财务部门，负责招聘薪资考勤等。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程同步相当于项目经理，负责项目中各人员的任务分配调度。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程通信就相当于一种工作方式、沟通形式，比如你给我一个SVN标签号并且告知我意图，我去库中检索指定标签修改的指定内容，就完成了一个任务的协作。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">比喻或许不足够恰当，仅供个人理解。</span></div>
+<h3><span style="font-size: 18px; font-family: 'Microsoft YaHei';">总结 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程作为操作系统对程序执行的抽象，那么就使用了足够多的数据项对进程进行描述，所有的信息都是为了进程的管理、维护、调度、切换等 </strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">就比如你用一个数组以及一个栈顶标记来描述一个堆栈，如下图所示 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125911461-133691195.png"><img style="display: inline; background-image: none;" title="image_5c567510_739" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190203125911988-836058426.png" alt="image_5c567510_739" width="493" height="403" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">数组a[]以及变量top就是使用数组对栈这种数据结构进行抽象描述的数据项，对于数据元素操作访问（入栈、出栈）限制就是规则 </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>进程看似复杂，原理也是如此，操作系统使用多个数据项（数据结构）对程序的执行进行描述，然后定义了一整套的操作逻辑与规则</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">这就是我们现在学习的进程的运行原理 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">通过编码将设计思路以及运行规则从抽象到具体数据结构以及编码的实现就完成了进程的实现。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">操作系统想要管理程序的运行，需要指定一个唯一的标识符，既然放一群羊，还想对羊进行合理的管理识别，最简单的办法就是每只羊挂个项圈写上序号。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程有状态信息，操作系统负责管理状态的切换，那么必然需要记录进程的状态信息 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">既然是轮流分配时间片，就好像去办理业务，排队等待一样，但是无数个场景下都有VIP的存在，进程也是，也有优先级的概念 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">计算机的程序最终会转换为一条条的指令，每一条指令的执行都需要借助于程序计数器，程序计数器是用于存放下一条指令所在单元的地址的地方，所以想要知道并且记住程序执行的进度位置，还需要掌握程序计数器的值 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">我们熟悉的x86和arm指令大多都是基于寄存器的（虚拟机VM是基于栈）基于寄存器的架构最明显的特征就在于指令的执行要依赖寄存器，如同厨房的盆盆罐罐，里面装着运行时的状态数据、值（好比计算1+2+3+4，1放到a寄存器，2放到b寄存器，add a，b 计算中间结果，这句纯属为了说明，具体不要较真）&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">想要更好地管理进程，那么必然还会有一些统计信息，比如某进程运行了多久等记录统计信息 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">这些重要的信息都保存在进程的PCB中，所以说PCB是进程概念的核心，有了PCB程序才有并发执行的能力，通常，通常情况下，创建进程指的就是创建PCB </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>简言之，操作系统对进程的抽象就是对于一组数据结构以及操作这些数据结构的规则逻辑的实现。</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程的核心状态有执行、就绪、阻塞。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">就绪就是一切准备妥当，可以被执行，就差CPU时间片了，在执行过程中如果时间片用完，那么仍旧是转换为就绪状态，他什么都不差，只是被剥夺了时间片 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">执行状态下，如果执行不下去了，比如需要等待IO，就会进入阻塞，阻塞必须要等到要等的事情发生才会解除阻塞，因为他差一个事件的发生和时间片，事件到达就解除阻塞，所以就差时间片了，所以转换为就绪状态 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">比如你去银行办业务，人家手续都带好了在那边排队就是就绪，你身份证没复印好，就得先复印好身份证再过来排队，否则即使到你了，你也办不成 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">就绪涉及到很多事情要处理，所以为了更加安全合理，有了创建的状态，创建就是为了保障就绪是真的就绪了，也就是检查你的确各种资料都带齐全了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">终止状态也是类似为了更合理安排管理，结束后也有一些事情需要做，比如你把你的资料状态或者还可能要排队领取个什么别的东西，这些都不需要在柜台了，在大厅自助或者找大堂经理就好了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">进程涉及到各种数据结构，各种规则处理，所以进程很复杂，但是进程又很简单，就好比单例模式的实现有多种方式有些比较复杂，但是逻辑上却又很清晰，保证唯一</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px; font-family: 'Microsoft YaHei';">原文地址:<a href="https://www.cnblogs.com/noteless/p/10350186.html" target="_blank">进行概念详解 多线程上篇（二）</a></span></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-04 08:58</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10350186" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10350186);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10350186, cb_entryCreatedDate = '2019-02-04 08:58', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

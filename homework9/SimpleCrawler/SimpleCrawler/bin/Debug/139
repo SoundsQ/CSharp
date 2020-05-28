@@ -1,0 +1,694 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="java continue break 关键字 详解 区别  用法 标记  标签 使用 示例 联系 跳出循环 带标签的continue和break 嵌套循环  深入continue break 跳出双" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>java continue break 关键字 详解 区别  用法 标记  标签 使用 示例 联系 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9261810.html">java continue break 关键字 详解 区别  用法 标记  标签 使用 示例 联系</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        java continue break 关键字 详解 区别  用法 标记  标签 使用 示例 联系 跳出循环 带标签的continue和break 嵌套循环  深入continue break 跳出双层循环 goto替代
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">本文关键词:</span></p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">java continue break 关键字 详解 区别&nbsp; 用法 标记&nbsp; 标签 使用 示例 联系&nbsp; &nbsp;跳出循环 带标签的continue和break 嵌套循环&nbsp; 深入continue break 跳出双层循环 goto替代</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">continue和break都用来中断循环,但是中断内容不同</span></p>
+<p><span style="font-size: 16px;"><strong><span style="font-family: 'Microsoft YaHei';">break是跳出循环, continue是跳出当次循环</span></strong></span></p>
+<div class="cnblogs_code">
+<pre>                <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        System.out.println(i);
+                        </span><span style="color: #0000ff;">if</span> (3 ==<span style="color: #000000;"> i) {
+                                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                        }
+                }
+
+                System.out.println(</span>"++++++++++++++++"<span style="color: #000000;">);
+
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        System.out.println(i);
+                        </span><span style="color: #0000ff;">if</span> (3 ==<span style="color: #000000;"> i) {
+                                </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+                        }
+                }</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-family: 'Microsoft YaHei';"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJkAAADICAIAAAB07NS/AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA/+AAAP/gGy1pUqAAAFvElEQVR4nO3doY7bSBzH8fHpyKHiI4figtU+gfME65Ki0GUJjEnZwrAjNlyzpUEhGz9B/ASrgNqkpHhLSn3ASdq7W2Umm8r7z0/fjwqqSCuN9JXtxOMZR1++fnd7f/35x7dv3xwu0+8vfrparQYeB84XvXhcvnv37u2GhFf67a0HgF+GljpoqYOWOvwtq1m0My7aAUaE1/K0rGZR+pQ3Xdd1Te6yeFYNMyy8wvGW1apM8of5yDnnRvOHPCkXHJtmHW1ZrUp3/X7knHOuLcZxVrt62wwyLpzOd71MruK2GEdRFC8nTZMngwwKr+JrWWdxvJw0Xddt+lMtzHr5fuxOfJU4d73eV2wfl3UyiQcZF07nuR+7+x67mY/6/7t1d3/zNiOFj+cce3Pf5C6LoyiKCGkd8yQ6uIeng5Y6aKmDljpoqYOWOmipI6Rlf3OdqUvrfC2rWRTdusl0kMHgLMdbtsXCrbvN/P1Ao8E5js6TuNF8cz/QQHA2vvvooKUOWuqgpQ7/87FRFEVp6VyZRvzKNI25aB2cY3XQUgctddBSBy110FIHLXV4W7Is+mJ47/ukbt3tl0XfUtMy73qS/RKS0YdJUi8fiWlX+PWy2daHRdKw6PhzBT9Us7RM8oZlXoYFtWyLcVomecPKaNP859i2GMeZ262nhWH+ZyoJeSk8+/vM0tK5ercwmrlo25iL1sE9PB201EFLHbTUQUsdtNRBSx1hz60zF30J/POXe+trtui2Lfwce/Nx6p4+c2jaFTp/6dpiUU7vOm6x2xX8Tos4c/knpqIt87c8XDLvtjHTJJad8JuEC6Zx4S3bYlHy8JZlvv19xoefl/Fy0rBHt2XMRevgHp4OWuqgpQ5a6qClDlrqoKUOWuqgpY6gltXs5QdE+HyYzwNxXOqgpZAvX78f/nVd9/z8/Pz8vH9c64VXWUzXfD7U5yc62vLwCN7UJXnz/z/m82E+D8Q5VgctdTAXrYPjUgctddBSBy110FIHLXXQUkfwOi8WRpvnX+OePvW3CJvcsTDaNM/ehqsyyR/6PSpH84c8KRccm2YdbVmtfqzsaotxnNWu3jaDjAun810vk6u4X+wVLydNkyeDDAqv4mtZZ3G8nDRd17EdsHVH956IrxLnrtf7iu3jsk4m8SDjwuk8c16777Gb+aj/v1uznNYs715NTe52W3QT0jjmonVwD08HLXXQUgctddBSBy110FJHSMv+5jpTl9b537MXRbdu8sJCJFjj29tw4dbdZv5+oNHgHMf36B7NN/cDDQRn47uPDlrqoKUOWuoIewdUWjpXprwv2jbmonVwjtVBSx201EFLHbTUQUsdtNThbcmy6Ivhve+Tun7zyyZ32S01LfO/+3u3hGT0YZLUy0di2hV+vWy2Na+/NC303d/VLC2TvGGZl2FBLdtinJZJ3rAy2jT/ObYtxnHmdutpYZj/mUpCXgrP/j6ztHSu3i2MZi7aNuaidXAPTwctddBSBy110FIHLXXQUkfYc+vMRV8C//zl4YV+12zRbVv4Ofbm49Q9febQtCt0/tK1xaKc3nXcYrcr+J0WcebyT0xFW+Zvebhk3m1jpkksO+E3CRdM48JbtsWi5OEty3z7+4wPPy/j5aRhj27LmIvWwT08HbTUQUsdtNRBSx201EFLHWEt+3sGTEbbFrbf+m12PWWbbutC1nndZi7/9HGAweAsvpZ9yQeWeV0Az3MF1d+Z69fQ8spv8462rGbpU97cc0xehmPzJNUsSsv//sGUl9Nadex6+dMDlV23nrokbzpC2sW9Ah3MRevguNRBSx201EFLHbTUQUsdtNThafnzg+vMRhvnX3+ZsLPhheAcq4OWOvwtf+w4ytXSNk/L0Xzzr41EyGnYieui6y3PipgVvI9Ivy56umYq2izWRetgLloHv0l00FIHLXXQUgctddBSBy110FIHLXXQUgctddBSBy11/APsumGea/iwyAAAAABJRU5ErkJggg==" alt="" /></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">从结果也可以看得出来:break跳出当前循环,continue跳出当次循环</span></p>
+<hr />
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong><span style="font-family: 'Microsoft YaHei';">详细说明:</span></strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">break在循环块中的作用是跳出当前正在循环的循环体</span></p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">continue用于结束循环体中当次循环其后语句的执行，并跳回循环程序块的开头执行下一次循环</span></p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如果是多层循环,原理仍旧相通,break跳出内层正在循环的循环体,continue跳回内层循环的开头</span></p>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">也就是说多层循环下,break和continue仍旧是控制当前循环,并不是所有</span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre>                 <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; 6; j++<span style="color: #000000;">) {
+                                </span><span style="color: #0000ff;">if</span> (2 ==<span style="color: #000000;"> j) {
+                                        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                                }
+                                System.out.print(i </span>+ "-----&gt;" + j+"    "<span style="color: #000000;">);
+                        }
+                        System.out.println();
+                }</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">&nbsp;内层循环直接跳出中断掉,外层循环依旧按顺序执行</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAABuCAIAAAAbNk6iAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA/+AAAP/gGy1pUqAAAFbElEQVR4nO2dsW7bSBCGhwHyJmKKQLgHoJ9ATJPKrTuyFJt0Lt2loUqpc5sqRUA+gVT5igCCi6MaN8YB17vlFaKoFa2VJ+GSO4P8X2cR4A5+/eRS3N+zwdPzCxH99/z497/viSj59BcB8Ip3vgsAOoBRAAsYBbCAUQCLS0Yp06DharEbraJfx1edWvQh2i2ugiBIyx6nsBqlTIN4m1d1XddVTlnYaxQXlOnZ78NXnVr0oTINghu6Tvqe/+n55en55eHhYfnj5/LHz7qhSCjay7CXIjL/9ESREFFSdD/zUqcWfao8SormWOfQr2G5o5TfVzT9MCEiot3iKsw2tHms+pqyJ7NlXeXb2LxwfNWpRR+azNfLmYuT259Roo/hfmoLv11XVR65GK03k/m6LqZZaMy3vurUoo8j7EbZZGH47bqq63o9nxif79VpMOoZ+vOW8GNEtLo7XDa2OodGiz6uOP+MUuWROafJmIObQroPBz7q1KJPS+9nFNvDbF0kxxF7j+KGcw9r3urUoo9xbBijNO7cI0CFzu8MA1916tCn6P4u/s1aA6weAw54hQ9YwCiABYwCWMAogAWMAljAKIAFjAJYXDaKg8DLCPgLEOnQZ9jgkrPAiyuEBZe06OOqTptRdos7Kur1/EPP87tjtjy3fl5+X0X5/X75djK/zyP3y6Zn0aKPszptRnEWeHGIoOCSFn3GCC6JRFBwSSQ+gks2pAVzfAWXbEjTxxX2mEG7Si1hEb1BSnCpRbg+LUOFq0VSpkGYTQvzzjGZ3ybHq6f8mm2SWxH3FR+c0cchlxJuJ/i+boQFl7Tog+ASGBVNUw/wCIwCWMAogAWMAljAKIAFjAJYwCiAxQWjqGko5KlQNfoM3XEppv07vCqn7Ma/FMKCS1r0GbrjkomU/9WX1HHJRLI+Q3dcOqF63LTpIJ9ICi6ZCNZnzOBSmcarKP8iI84lMLgkXR9HvGGU3eIqPoZSDx+JCuZ4DS4p0McVF55RrCkYf4gKLinQp2XARjpmSyEZiOq4pEUf49ggRnmVd5EazPEUXFKjD4JLYFTwCh+wgFEACxgFsIBRAAsYBbCAUQALGAWwuLQDWIvwYI6XBJEifYYNLs2Wx5d7UwE7oUkLLmnRZ+iOSyazzwlt//F90cjquHRSmWB93HWGejvhVuWR94WMA93VUXOt67DmM3atkvVpGTTh1kzDYUZScjmygks69HHEJaO00/DtozGytGCOv+CSDn1cwQhXX1jiHxtRwaUjYvVpGSVcvVvcrSSkh6V2XBKsj0Msd5STyV7E1SIruKRGHwSXwKjgFT5gAaMAFjAKYAGjABYwCmABowAWMApg8ZZR9isLspM5PlsfadBn4K3i9gPcZNNExm5owoJLRKRCnzGCS7vFTUb5l889h3CEvOCSBn0G3yruIMO9oE1NZHVcUqHPCB2Xyq/CZCAiScElNfo4wmKUMo23FhmkBXO8BJcU6eOKszGD190/yH8DkLoWE1xSo0/LgB2XzDFEBC6EdVwyKxCsj3HsD9lTsEzjbV7V3Uez2bLKKQuDIAiCmIpXx/8YLPo0L5niFdEqts1WDBBcAiz03FGAV2AUwAJGASxgFMACRgEsYBTAAkYBLKxGOVlSkB3N8RJcUqTP4MEl88W0hy1OOsgLLqnQZ8yOSzKQF1yShbfgkjxkBZfk4W2ruE2z1iZoBpYTXCIt+jjCapTJfH1co55mYauFtGCOp45LavRxBbfjkohcjpTgUhex+rSMEVzqfhveEBpckq2PcWwQo6jpKISOSw3ouAQkoOnnMfAIjAJYwCiAxXmjBEEwch1AOLijABYwCmABowAWMApgAaMAFjAKYPE/k1zxG1X7nWMAAAAASUVORK5CYII=" alt="" /></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre>                 <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; 6; j++<span style="color: #000000;">) {
+                                </span><span style="color: #0000ff;">if</span> (2 ==<span style="color: #000000;"> j) {
+                                        </span><span style="color: #0000ff;">continue</span><span style="color: #000000;">;
+                                }
+                                System.out.print(i </span>+ "-----&gt;" + j+"    "<span style="color: #000000;">);
+                        }
+                        System.out.println();
+                }</span></pre>
+</div>
+<pre><span style="font-size: 16px; font-family: 'Microsoft YaHei';"><br />外层循环依旧,内层循环仅仅跳过了j=2的值,其他的值依旧正常循环</span></pre>
+<p><span style="font-family: 'Microsoft YaHei';"><img src="data:image/png;base64,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" alt="" /></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong><span style="font-family: 'Microsoft YaHei';">如果带标签,那么break 和continue生效的循环就不再是当前了,而是标签指定的</span></strong></span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">                label:
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; 6; j++<span style="color: #000000;">) {
+                                </span><span style="color: #0000ff;">if</span> (2 ==<span style="color: #000000;"> j) {
+                                        </span><span style="color: #0000ff;">break</span><span style="color: #000000;"> label;
+                                }
+                                System.out.print(i </span>+ "-----&gt;" + j+"    "<span style="color: #000000;">);
+                        }
+                        System.out.println();
+                }</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><span style="font-size: 16px; font-family: 'Microsoft YaHei';">直接break 标签的循环,执行了两次就再也没有输出了</span></pre>
+<p><span style="font-family: 'Microsoft YaHei';"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALgAAAAlCAIAAAB+qbQNAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA/+AAAP/gGy1pUqAAACDElEQVR4nO3asU7CQBgH8O+MxhehDoQ4OZUnAJ2ZTNjawQEewcEHKCPMTkwOpH0BYaoxJMTleAAH3+EcWqEprfmgV69n/r9J2oT75/OPdyWKOI7fPi8I/oPX57sHelzf3zCvH0GgKMBxvvvp8uvdYA5ouH1RhsOhwRzQcGemAzSUEMJ0hGZBUYAFRQEWFAVYiosS+SLVnWz/ONExTOW0ZT5E20lXCOFHld+ooCiRL/qbQCqllAxo7GhYpZrIL/x9mMppy3wo8oUY0sDTs0ocx9PFerpYq1TokZuMIRmFm31pSOgRkRfmr9WYk4jKs1gxHxm4Xpjey906xcFflOhlRp2rFhERbSddZ7yi1YfUU8qT9aZKBpt+9oNjKqct86HWaDnt6Vui6Izitp1ka3PmAykDV99qFbRGSxV2xk5mvzWV05b5aFVUlNXYceYDqZRajlqZ68l0Upk8dV/fcdou0ezp52NTlrNutsxHr/wZRQZudk9rxh6cBskfDmrMSWVnFFvms6PpjHJ4mFWht19R0ypVFR3W6s1ZWhR75pO5V09R0nYmGjCF3HNGRo05fymKLfMJ88/FlbLu/x/Fu72uY2uzlBBCKWU6RYPgK3xgQVGABUUBFhSlGA4oOSgKsKAowIKiAAuKAiwoCrCgKMCCogALigIsKAqwoCjAgqIAC4oCLCgKsKAowIKiAMs3sn2rHin1NEYAAAAASUVORK5CYII=" alt="" /></span></p>
+<pre></pre>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">                label:
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = 0; i &lt; 6; i++<span style="color: #000000;">) {
+
+                        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = 0; j &lt; 6; j++<span style="color: #000000;">) {
+                                </span><span style="color: #0000ff;">if</span> (2 ==<span style="color: #000000;"> j) {
+                                        </span><span style="color: #0000ff;">continue</span><span style="color: #000000;"> label;
+                                }
+                                System.out.print(i </span>+ "-----&gt;" + j+"    "<span style="color: #000000;">);
+                        }
+                        System.out.println();
+                }</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><br /><span style="font-size: 16px; font-family: 'Microsoft YaHei';">continue跳出当次循环,继续标签处代表的循环进行继续执行,所以下面的System.out.println();根本都执行不到的</span></pre>
+<p><span style="font-family: 'Microsoft YaHei';"><img src="data:image/png;base64,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" alt="" /></span></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-07-04 09:49</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9261810" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9261810);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9261810, cb_entryCreatedDate = '2018-07-04 09:49', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

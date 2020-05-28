@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_tr1ple</title>
+  <subtitle type="text">To make each day count. Make small but daily progress.</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=1211</id>
+  <updated>2020-04-28T15:27:33Z</updated>
+  <author>
+    <name>tr1ple</name>
+    <uri>http://www.cnblogs.com/tr1ple/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12790121.html</id>
+    <title type="text">Java ASM学习(2) - tr1ple</title>
+    <summary type="text">1.编译后的方法区，其中存储的代码都是一些字节码指令 2.Java虚拟机执行模型： java代码是在一个线程内部执行，每个线程都有自己的执行栈，栈由帧组成，每个帧表示一个方法的调用，每调用一个方法，都将将新的帧压入执行栈，方法返回时(不管是整成return还是异常返回)，该方法对应的帧都将出栈，即按</summary>
+    <published>2020-04-28T15:14:00Z</published>
+    <updated>2020-04-28T15:14:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12790121.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12790121.html" />
+    <content type="html">【摘要】1.编译后的方法区，其中存储的代码都是一些字节码指令 2.Java虚拟机执行模型： java代码是在一个线程内部执行，每个线程都有自己的执行栈，栈由帧组成，每个帧表示一个方法的调用，每调用一个方法，都将将新的帧压入执行栈，方法返回时(不管是整成return还是异常返回)，该方法对应的帧都将出栈，即按 &lt;a href="http://www.cnblogs.com/tr1ple/p/12790121.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12709402.html</id>
+    <title type="text">Java Instrumentation插桩技术学习 - tr1ple</title>
+    <summary type="text">Instrumentation基础 openrasp中用到了Instrumentation技术，它的最大作用，就是类的动态改变和操作。 使用Instrumentation实际上也可以可以开发一个代理来监视jvm的上运行的程序，可以动态的替换类的定义，就可以达到虚拟机级别的AOP实现，随时可以为应用增</summary>
+    <published>2020-04-28T02:22:00Z</published>
+    <updated>2020-04-28T02:22:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12709402.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12709402.html" />
+    <content type="html">【摘要】Instrumentation基础 openrasp中用到了Instrumentation技术，它的最大作用，就是类的动态改变和操作。 使用Instrumentation实际上也可以可以开发一个代理来监视jvm的上运行的程序，可以动态的替换类的定义，就可以达到虚拟机级别的AOP实现，随时可以为应用增 &lt;a href="http://www.cnblogs.com/tr1ple/p/12709402.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12721677.html</id>
+    <title type="text">Java ASM学习(1) - tr1ple</title>
+    <summary type="text">ASM也是字节码编辑库，如果我们的目的仅仅是为目标类添加某些功能，也可以考虑动态代理，但是动态代理是面向接口的，因为proxy.newinstance实际上是对某个接口定义一个invocaionHandler，那么这样限制就比较大，并且对代理的每一次函数调用都将被invocationHandler处</summary>
+    <published>2020-04-23T10:16:00Z</published>
+    <updated>2020-04-23T10:16:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12721677.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12721677.html" />
+    <content type="html">【摘要】ASM也是字节码编辑库，如果我们的目的仅仅是为目标类添加某些功能，也可以考虑动态代理，但是动态代理是面向接口的，因为proxy.newinstance实际上是对某个接口定义一个invocaionHandler，那么这样限制就比较大，并且对代理的每一次函数调用都将被invocationHandler处 &lt;a href="http://www.cnblogs.com/tr1ple/p/12721677.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12701149.html</id>
+    <title type="text">从JDK源码学习HashSet和HashTable - tr1ple</title>
+    <summary type="text">HashSet Java中的集合（Collection）有三类，一类是List，一类是Queue，再有一类就是Set。 前两个集合内的元素是有序的，元素可以重复；最后一个集合内的元素无序，但元素不可重复。 Set: 1.用于存储无序(存入和取出的顺序不一定相同)元素，值不能重复 2.对象的相等性本质</summary>
+    <published>2020-04-14T16:34:00Z</published>
+    <updated>2020-04-14T16:34:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12701149.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12701149.html" />
+    <content type="html">【摘要】HashSet Java中的集合（Collection）有三类，一类是List，一类是Queue，再有一类就是Set。 前两个集合内的元素是有序的，元素可以重复；最后一个集合内的元素无序，但元素不可重复。 Set: 1.用于存储无序(存入和取出的顺序不一定相同)元素，值不能重复 2.对象的相等性本质 &lt;a href="http://www.cnblogs.com/tr1ple/p/12701149.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12678413.html</id>
+    <title type="text">从JDK源码学习HashMap - tr1ple</title>
+    <summary type="text">这篇文章记录一下hashmap的学习过程，文章并没有涉及hashmap整个源码，只学习一些重要部分,如有表述错误还请在评论区指出~ 基本概念 Hashmap采用key算hash映射到具体的value，因此查找效率为o(1)，为防止hash冲突，在数组的基础上加入链表、红黑树，为无序非线程安全的存储结</summary>
+    <published>2020-04-11T12:53:00Z</published>
+    <updated>2020-04-11T12:53:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12678413.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12678413.html" />
+    <content type="html">【摘要】这篇文章记录一下hashmap的学习过程，文章并没有涉及hashmap整个源码，只学习一些重要部分,如有表述错误还请在评论区指出~ 基本概念 Hashmap采用key算hash映射到具体的value，因此查找效率为o(1)，为防止hash冲突，在数组的基础上加入链表、红黑树，为无序非线程安全的存储结 &lt;a href="http://www.cnblogs.com/tr1ple/p/12678413.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12662603.html</id>
+    <title type="text">从JDK源码学习ArrayList - tr1ple</title>
+    <summary type="text">从今天开始从源码去学习一些Java的常用数据结构，打好基础:) Arraylist源码阅读： jdk版本：1.8.0 首先看其构造方法： 构造方法一： 第一种支持初始化容量大小，其中声明一个对象数组，赋值给this.elementdata 构造方法二： 第二种无参构造函数，即不指定初始容量大小，则默</summary>
+    <published>2020-04-09T15:28:00Z</published>
+    <updated>2020-04-09T15:28:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12662603.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12662603.html" />
+    <content type="html">【摘要】从今天开始从源码去学习一些Java的常用数据结构，打好基础:) Arraylist源码阅读： jdk版本：1.8.0 首先看其构造方法： 构造方法一： 第一种支持初始化容量大小，其中声明一个对象数组，赋值给this.elementdata 构造方法二： 第二种无参构造函数，即不指定初始容量大小，则默 &lt;a href="http://www.cnblogs.com/tr1ple/p/12662603.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12522623.html</id>
+    <title type="text">Java XXE漏洞典型场景分析 - tr1ple</title>
+    <summary type="text">本文首发于oppo安全应急响应中心： https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;mid=2247485488&amp;idx=1&amp;sn=65098eb75e035ff2f90d1ea552c4100a&amp;chksm=fa7b097ccd0c806a40</summary>
+    <published>2020-04-07T12:46:00Z</published>
+    <updated>2020-04-07T12:46:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12522623.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12522623.html" />
+    <content type="html">【摘要】本文首发于oppo安全应急响应中心： https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;mid=2247485488&amp;idx=1&amp;sn=65098eb75e035ff2f90d1ea552c4100a&amp;chksm=fa7b097ccd0c806a40 &lt;a href="http://www.cnblogs.com/tr1ple/p/12522623.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12608731.html</id>
+    <title type="text">CVE-2020-7961 Liferay Portal 复现分析 - tr1ple</title>
+    <summary type="text">漏洞说明： Liferay是一个开源的Portal(认证)产品,提供对多个独立系统的内容集成,为企业信息、流程等的整合提供了一套完整的解决方案,和其他商业产品相比,Liferay有着很多优良的特性,而且免费,在全球都有较多用户. 该洞是个反序列化导致的rce，通过未授权访问其api传递json数据进</summary>
+    <published>2020-04-05T11:09:00Z</published>
+    <updated>2020-04-05T11:09:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12608731.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12608731.html" />
+    <content type="html">【摘要】漏洞说明： Liferay是一个开源的Portal(认证)产品,提供对多个独立系统的内容集成,为企业信息、流程等的整合提供了一套完整的解决方案,和其他商业产品相比,Liferay有着很多优良的特性,而且免费,在全球都有较多用户. 该洞是个反序列化导致的rce，通过未授权访问其api传递json数据进 &lt;a href="http://www.cnblogs.com/tr1ple/p/12608731.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12608764.html</id>
+    <title type="text">ysoserial-C3P0 分析 - tr1ple</title>
+    <summary type="text">环境准备： pom: &lt;!-- https://mvnrepository.com/artifact/com.mchange/c3p0 --&gt; &lt;dependency&gt; &lt;groupId&gt;com.mchange&lt;/groupId&gt; &lt;artifactId&gt;c3p0&lt;/artifactId&gt; &lt;ver</summary>
+    <published>2020-04-01T16:01:00Z</published>
+    <updated>2020-04-01T16:01:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12608764.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12608764.html" />
+    <content type="html">【摘要】环境准备： pom: &lt;!-- https://mvnrepository.com/artifact/com.mchange/c3p0 --&gt; &lt;dependency&gt; &lt;groupId&gt;com.mchange&lt;/groupId&gt; &lt;artifactId&gt;c3p0&lt;/artifactId&gt; &lt;ver &lt;a href="http://www.cnblogs.com/tr1ple/p/12608764.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/tr1ple/p/12483235.html</id>
+    <title type="text">weblogic-CVE-2020-2551-IIOP反序列化学习记录 - tr1ple</title>
+    <summary type="text">CORBA： 具体的对CORBA的介绍安全客这篇文章https://www.anquanke.com/post/id/199227说的很详细，但是完全记住是不可能的，我觉得读完它要弄清以下几个点： 1.什么是CORBA？ CORBA全称（Common ObjectRequest Broker Arc</summary>
+    <published>2020-03-25T06:51:00Z</published>
+    <updated>2020-03-25T06:51:00Z</updated>
+    <author>
+      <name>tr1ple</name>
+      <uri>http://www.cnblogs.com/tr1ple/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/tr1ple/p/12483235.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/tr1ple/p/12483235.html" />
+    <content type="html">【摘要】CORBA： 具体的对CORBA的介绍安全客这篇文章https://www.anquanke.com/post/id/199227说的很详细，但是完全记住是不可能的，我觉得读完它要弄清以下几个点： 1.什么是CORBA？ CORBA全称（Common ObjectRequest Broker Arc &lt;a href="http://www.cnblogs.com/tr1ple/p/12483235.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

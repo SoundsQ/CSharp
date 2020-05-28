@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_宇的季节</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=1232</id>
+  <updated>2020-04-28T15:50:27Z</updated>
+  <author>
+    <name>宇的季节</name>
+    <uri>http://www.cnblogs.com/chenkeyu/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12799207.html</id>
+    <title type="text">MySQL如何创建一个好索引？创建索引的5条建议【宇哥带你玩转MySQL 索引篇(三)】 - 宇的季节</title>
+    <summary type="text">MySQL如何创建一个好索引？创建索引的5条建议 过滤效率高的放前面 对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列...这样。查询时，如果第一列能够排除的越多，那么后面列需要判断的行数就越少，效率越高。 关于如何判断哪个列的过滤效率更高，可以通过选择性计算来决定。例如我们</summary>
+    <published>2020-04-28T15:49:00Z</published>
+    <updated>2020-04-28T15:49:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12799207.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12799207.html" />
+    <content type="html">【摘要】MySQL如何创建一个好索引？创建索引的5条建议 过滤效率高的放前面 对于一个多列索引，它的存储顺序是先按第一列进行比较，然后是第二列，第三列...这样。查询时，如果第一列能够排除的越多，那么后面列需要判断的行数就越少，效率越高。 关于如何判断哪个列的过滤效率更高，可以通过选择性计算来决定。例如我们 &lt;a href="http://www.cnblogs.com/chenkeyu/p/12799207.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12686940.html</id>
+    <title type="text">为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生【宇哥带你玩转MySQL 索引篇(二)】 - 宇的季节</title>
+    <summary type="text">为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生 在上一节，我们聊到数据库为了让我们的查询加速，通过索引方式对数据进行冗余并排序，这样我们在使用时就可以在排好序的数据里进行快速的二分查找，使得查询效率指数提升。但是我在结尾同样提到一个问题，就是内存大小一般是很有限的，不可能把一个表所有的数据都</summary>
+    <published>2020-04-12T11:13:00Z</published>
+    <updated>2020-04-12T11:13:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12686940.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12686940.html" />
+    <content type="html">【摘要】为什么MySQL要用B+树？聊聊B+树与硬盘的前世今生 在上一节，我们聊到数据库为了让我们的查询加速，通过索引方式对数据进行冗余并排序，这样我们在使用时就可以在排好序的数据里进行快速的二分查找，使得查询效率指数提升。但是我在结尾同样提到一个问题，就是内存大小一般是很有限的，不可能把一个表所有的数据都 &lt;a href="http://www.cnblogs.com/chenkeyu/p/12686940.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12639023.html</id>
+    <title type="text">索引揭秘，看他是如何让你的查询性能指数提升的【宇哥带你玩转MySQL 索引篇(一)】 - 宇的季节</title>
+    <summary type="text">场景复现，一个索引提高600倍查询速度？ 首先准备一张books表 create table books( id int not null primary key auto_increment, name varchar(255) not null, author varchar(255) not </summary>
+    <published>2020-04-05T13:09:00Z</published>
+    <updated>2020-04-05T13:09:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12639023.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12639023.html" />
+    <content type="html">【摘要】场景复现，一个索引提高600倍查询速度？ 首先准备一张books表 create table books( id int not null primary key auto_increment, name varchar(255) not null, author varchar(255) not  &lt;a href="http://www.cnblogs.com/chenkeyu/p/12639023.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12368598.html</id>
+    <title type="text">mysql连接报错 Lost connection to MySQL server at 'sending authentication information', system error: 32 - 宇的季节</title>
+    <summary type="text">如果mysql连接报错Lost connection to MySQL server at 'sending authentication information', system error: 32 一种可能的原因是系统打开文件数过多 mac系统默认是256个，如果数据库打开文件过多，会因为系统限</summary>
+    <published>2020-02-26T11:29:00Z</published>
+    <updated>2020-02-26T11:29:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12368598.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12368598.html" />
+    <content type="html">【摘要】如果mysql连接报错Lost connection to MySQL server at 'sending authentication information', system error: 32 一种可能的原因是系统打开文件数过多 mac系统默认是256个，如果数据库打开文件过多，会因为系统限 &lt;a href="http://www.cnblogs.com/chenkeyu/p/12368598.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12268165.html</id>
+    <title type="text">mac item2自定义光标移动快捷键，移动行首行尾，按单词跳转 - 宇的季节</title>
+    <summary type="text">To jump between words and start/end of lines in iTerm2 follow these steps: iTerm2 -&gt; Preferences (⌘ + ,) Open the “Keys” tab Add the following Global </summary>
+    <published>2020-02-06T04:06:00Z</published>
+    <updated>2020-02-06T04:06:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12268165.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12268165.html" />
+    <content type="html">【摘要】To jump between words and start/end of lines in iTerm2 follow these steps: iTerm2 -&gt; Preferences (⌘ + ,) Open the “Keys” tab Add the following Global  &lt;a href="http://www.cnblogs.com/chenkeyu/p/12268165.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/12141811.html</id>
+    <title type="text">Deepin系统安装之后找不到windows启动项 - 宇的季节</title>
+    <summary type="text">deepin terminal 输入如下命令</summary>
+    <published>2020-01-02T12:14:00Z</published>
+    <updated>2020-01-02T12:14:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/12141811.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/12141811.html" />
+    <content type="html">【摘要】deepin terminal 输入如下命令 &lt;a href="http://www.cnblogs.com/chenkeyu/p/12141811.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/11820270.html</id>
+    <title type="text">deepin 删除文件后目录不刷新解决方案 - 宇的季节</title>
+    <summary type="text">调整最大文件监控数量 添加参数 运行使配置生效 https://unix.stackexchange.com/questions/444998/how-to-set-and-understand-fs-notify-max-user-watches</summary>
+    <published>2019-11-08T06:54:00Z</published>
+    <updated>2019-11-08T06:54:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/11820270.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/11820270.html" />
+    <content type="html">【摘要】调整最大文件监控数量 添加参数 运行使配置生效 https://unix.stackexchange.com/questions/444998/how-to-set-and-understand-fs-notify-max-user-watches &lt;a href="http://www.cnblogs.com/chenkeyu/p/11820270.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/11571811.html</id>
+    <title type="text">google访问助手 - 宇的季节</title>
+    <summary type="text">google访问助手下载链接 1.插件安装失败？ 在安装chrome离线扩展程序时，报错信息如下： 2.解决方案 第一步：新建一个标签页，在地址栏输入：chrome://flags/#extensions-on-chrome-urls并按回车键 将值改为enabled 将值改为enabled 重启c</summary>
+    <published>2019-09-23T05:24:00Z</published>
+    <updated>2019-09-23T05:24:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/11571811.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/11571811.html" />
+    <content type="html">【摘要】google访问助手下载链接 1.插件安装失败？ 在安装chrome离线扩展程序时，报错信息如下： 2.解决方案 第一步：新建一个标签页，在地址栏输入：chrome://flags/#extensions-on-chrome-urls并按回车键 将值改为enabled 将值改为enabled 重启c &lt;a href="http://www.cnblogs.com/chenkeyu/p/11571811.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/11408095.html</id>
+    <title type="text">Main property in package.json defines package entry point - 宇的季节</title>
+    <summary type="text">I know my project's dependencies are installed under node_modules directory. But when I do require('lodash'), how does Node know which file to load? "</summary>
+    <published>2019-08-25T07:35:00Z</published>
+    <updated>2019-08-25T07:35:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/11408095.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/11408095.html" />
+    <content type="html">【摘要】I know my project's dependencies are installed under node_modules directory. But when I do require('lodash'), how does Node know which file to load? " &lt;a href="http://www.cnblogs.com/chenkeyu/p/11408095.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/chenkeyu/p/10897208.html</id>
+    <title type="text">mysql使用慢查询日志分析数据执行情况 - 宇的季节</title>
+    <summary type="text">#查询慢查询日志文件路径show variables like '%slow_query%';#开启慢查询日志 set global slow_query_log=1; #设置慢查询阀值为0,将所有的语句都记入慢查询日志 set global long_query_time=0;#未使用索引的查询也...</summary>
+    <published>2019-05-20T15:12:00Z</published>
+    <updated>2019-05-20T15:12:00Z</updated>
+    <author>
+      <name>宇的季节</name>
+      <uri>http://www.cnblogs.com/chenkeyu/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/chenkeyu/p/10897208.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/chenkeyu/p/10897208.html" />
+    <content type="html">【摘要】#查询慢查询日志文件路径show variables like '%slow_query%';#开启慢查询日志 set global slow_query_log=1; #设置慢查询阀值为0,将所有的语句都记入慢查询日志 set global long_query_time=0;#未使用索引的查询也... &lt;a href="http://www.cnblogs.com/chenkeyu/p/10897208.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,497 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="继《职业化之可以固化的六个工作模式》之后，再放出职业化的7个细节。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>（研发系）职业化7个细节 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/7details.html">（研发系）职业化7个细节</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<p>（研发系）职业化7个细节&nbsp;</p>
+<p><br /><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">@郑昀</a> 北京报道 2013-03</p>
+<ul>
+<li><span style="font-family: 微软雅黑, sans-serif; font-weight: bold;">警报自动、少、精、准</span>
+<ul>
+<li>目的
+<ul>
+<li>主管要第一时间知道系统隐患</li>
+<li><span style="color: #ff0000;">不要在发现和查询蛛丝马迹上浪费宝贵时间</span>
+<ul>
+<li><span style="color: #ff0000;">自动化是王道</span></li>
+
+</ul>
+
+</li>
+<li>别让泛滥的、无关痛痒的、信息不足的警报折磨你</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>工具
+<ul>
+<li>Nagios</li>
+<li>Python</li>
+
+</ul>
+
+</li>
+<li>方式
+<ul>
+<li>报警邮件
+<ul>
+<li>N分钟扫描一次</li>
+<li>每天汇总一次</li>
+
+</ul>
+
+</li>
+<li>报警短信</li>
+
+</ul>
+
+</li>
+<li>内容
+<ul>
+<li>WHO/WHEN/WHAT</li>
+<li>何时（或哪个时间段）环比出问题，何时（或时间段）恢复，都要报警</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li>注意事项
+<ul>
+<li>主管还有很多事情要关注，所以警报一定要（数量）少、（种类）精、（内容）准</li>
+<li>不断地优化报警程序，避免陷入报警邮件和短信的汪洋大海，最终麻木</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li><span style="font-family: 微软雅黑, sans-serif; font-weight: bold;">事件优先级排序稳定</span>
+<ul>
+<li>目的
+<ul>
+<li><span style="color: #ff0000;">一定要避免&ldquo;最后来的事情优先&rdquo;</span></li>
+<li>不要让团队做&ldquo;布朗运动&rdquo;</li>
+<li>不要让团队被其他人牵着鼻子走，自己掌握自己的命运</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>敲定优先级判断原则
+<ul>
+<li>有助于提升销售额的事情优先级加分</li>
+<li>衡量投入产出比，投入产出比小的事情优先级减分</li>
+<li>有助于系统安全的事情优先级加分</li>
+<li>有助于内部开发效率提升的事情优先级加分</li>
+
+</ul>
+
+</li>
+<li>拿最后来的事情与手头任务列表做比较</li>
+
+</ul>
+
+</li>
+<li>实例<br />
+<ul>
+<li>NotifyServer开发&gt;开放平台开发</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li><span style="font-family: 微软雅黑, sans-serif; font-weight: bold;">对外输出（或汇报）的数据可推演可展开</span>
+<ul>
+<li>目的
+<ul>
+<li>主管对外输出的数据，必须了解概念和计算公式</li>
+<li>汇报时所引用的数据，必须保留原始数据，面对挑战时随时可拿出来</li>
+<li>避免&ldquo;这个数字是其他人或其他部门提供的，需要某某代我解释&rdquo;的回答，留下不专业的印象</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li><span style="font-family: 微软雅黑, sans-serif; font-weight: bold;">代入式思考</span>
+<ul>
+<li>目的
+<ul>
+<li>做好沙盘推演
+<ul>
+<li>加强推演和及时复盘是提高执行力的两大关键。<span class="Apple-converted-space">&nbsp;</span><br /><span style="color: #ff0000;">在沙盘上都做不到的在实战中必然做不到，<span class="Apple-converted-space">&nbsp;</span></span><br /><span style="color: #ff0000;">自己不知怎样做到的甩给下属结果必然是做不到</span>。</li>
+
+</ul>
+
+</li>
+<li>向下关注
+<ul>
+<li>所谓&ldquo;向下关注&rdquo;是要象自己亲自去做一样关注下属的工作，<span class="Apple-converted-space">&nbsp;</span><br /><span style="color: #ff0000;">不是给下属设定一个目标就去当甩手掌柜了，&nbsp;<span class="Apple-converted-space">&nbsp;</span></span><br /><span style="color: #ff0000;">而是要进一步去关注下属的打法、关键动作以及里程碑</span>，<span class="Apple-converted-space">&nbsp;</span><br />以确保整体目标能够达成。</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>1.横向分解</li>
+<li>2.纵向分步</li>
+<li>3.定性定量定指标</li>
+<li>4.调配资源</li>
+
+</ul>
+
+</li>
+<li>实例
+<ul>
+<li>大项目上线时如何迁移数据如何做回退方案，主管必须亲自参与推演</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li><span style="font-family: 微软雅黑, sans-serif; font-weight: bold;">三观要稳定</span>
+<ul>
+<li>目的
+<ul>
+<li>先列出你作为判断依据的几条规则</li>
+<li>避免&ldquo;朝令夕改&rdquo;</li>
+<li>避免输出给员工的&ldquo;结论&rdquo;前后不一致</li>
+<li>避免被不同人不断影响</li>
+<li>保持冷静客观</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>了解清楚过去现在和未来，不了解历史，何以输出价值观？</li>
+<li>分清楚什么是你的好恶，什么是工作需要的</li>
+
+</ul>
+
+</li>
+<li>实例
+<ul>
+<li>招聘把关的三观要稳定，不要时松时紧起伏不定</li>
+<li>解决团队内部分歧时，不要左右摇摆不定</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li><strong>If it hurts, do it more and often.</strong>
+<ul>
+<li>目的
+<ul>
+<li>&ldquo;长痛不如短痛&rdquo;是为了减少做事前的纠结和抵触</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>分散做，经常做</li>
+
+</ul>
+
+</li>
+<li>实例
+<ul>
+<li>代码合并</li>
+<li>写周总结对季度总结和年度总结的好处</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li></li>
+<li><strong>拿出结果</strong>
+<ul>
+<li>目的
+<ul>
+<li>
+<p>『我们唯一不能忍受的是原地踏步式的工作，没有结果就没有意义，不管任何原因。所以我们的干部必须清楚，我们唯一的任务就是把自己负责的事儿拿出结果来，每一周每一天我们的工作都应该有进展，这才是我们存在的价值所在。』<span class="Apple-converted-space">&nbsp;</span><br />&mdash;&mdash;孙陶然</p>
+
+</li>
+
+</ul>
+
+</li>
+<li>手段
+<ul>
+<li>不管是项目还是预研课题，必须制定多个里程碑和检查点
+<ul>
+<li>检查点是保证进度与计划一致</li>
+<li>里程碑要以可&ldquo;当众&rdquo;&ldquo;现场&rdquo;演示为目的
+<ul>
+<li>&ldquo;可演示&rdquo;不意味着跑通全流程</li>
+<li>模块、子系统、框架也可当众演示！</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+<li>因外力导致资源调离、项目暂停或延迟， 请在计划上注明延迟时间或重新启动时间
+<ul>
+<li>不要让一个交代给你的任务或项目不明不白无声无息地结束</li>
+<li>公司聘请大家做事，事没做成，要给公司一个交代 &nbsp;</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">补充阅读：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2013/03/28/sixpattern.html" target="_blank">职业化之可以固化的六个工作模式</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">赠图一枚：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><img src="http://ww3.sinaimg.cn/bmiddle/61b889f5jw1e5zm4b9kfzg20c80gsnpe.gif" alt="" width="440" /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;-over-</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2013-07-10 18:45</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3182647" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3182647);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3182647, cb_entryCreatedDate = '2013-07-10 18:45', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

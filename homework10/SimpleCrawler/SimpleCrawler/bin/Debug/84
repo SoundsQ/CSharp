@@ -1,0 +1,1495 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="关键词有：历史记录不得直接篡改原则，&#xD;&#xA;交易关闭通知处理，退款处理结束通知，&#xD;&#xA;掉单被动处理，掉单主动处理，&#xD;&#xA;多个渠道的重复支付处理，&#xD;&#xA;支付成功时商品不可售卖的处理，&#xD;&#xA;订单金额变化交易流水号变化" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题VII：支付交易一般性准则 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/12/14/topic7.html">电商课题VII：支付交易一般性准则</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><a href="http://weibo.com/yunzheng" target="_blank">@郑昀</a>汇总 创建于2012/11<br /></span></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">发布版本号：v1.3</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>概念：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">退款期限，交易，交易关闭，交易结束，掉单，幂等性，数据一致性</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>关键词：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">历史记录不得直接篡改原则，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">交易关闭通知处理，退款处理结束通知，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">掉单被动处理，掉单主动处理，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">多个渠道的重复支付处理，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">支付成功时商品不可售卖的处理，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">订单金额变化交易流水号变化规则，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">推送订单不得包含违禁词，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">支付通知并发到达的处理，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">支付子系统的独立性和可靠性，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">补录数据的时间准则</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #800000; font-size: large;">一. 通用规则</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #a52a2a; font-size: medium;">1.1. 历史记录不得直接篡改</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">电商核心服务基本都是分布式应用，分布式事务如处理不妥善，容易产生数据不一致。一旦出现数据不一致，一定要有旁证来修正。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">所以数据库中以下关键资源的记录，<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>提醒您注意，<strong>原则上不允许<span style="color: #ff0000;">直接修改</span>历史数据</strong>：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>下单；</li>
+<li>支付购买；</li>
+<li>生码/验码/物流信息记录；</li>
+<li>退款（含部分退款）；</li>
+<li>结算；</li>
+<li>用户注册；</li>
+<li>与第三方数据同步；</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">这里的&ldquo;直接修改&rdquo;特指，没有把变更行为记录到日志表里，而是直接在原始记录上 update 甚至 delete ，这种&ldquo;篡改&rdquo;和&ldquo;毁尸灭迹&rdquo;是明文禁止的，即使留下了文件类型日志也是不允许的。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">第一，要修改这些记录的关键字段时，<strong>必须在相关日志表里保留变更日志</strong>，并记录操作人和发起人，<strong><span style="color: #ff0000;">一定要确保历史可回溯</span></strong>。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">第二，严禁对记录做物理删除，只能是软删除。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">实例：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">对于&times;&times;团收到第三方支付的通知，我们有第三方交易流水记录表；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">对于&times;&times;团发起的到第三方支付的交易请求。我们有 jxxxe_pay_log 记录；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">订单操作变更记录，我们有 jxxxe_order_action日志表记录。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #0000ff;">Q：什么叫历史可回溯？</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">A：系统可能对关键记录做了一系列修改，甚至有程序在某个时间段内误写引入了脏数据，但<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>提示您，我们依然要能从各种操作日志表中随时倒推回历史某一个时刻的快照，一是确保随时能安全地把数据还原回去，二是管理平台可以清晰地展示出由谁引发、怎么变化的历史，三是便于排查问题。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">譬如，对于记录了订单信息的 order_info 表，会员如果点击使用账户余额支付了订单的应付金额，那么该订单操作日志表就会做如下记录，原订单记录的重要字段（what）在什么时候（when）从什么变为了什么（how），都会详细记录。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a; font-size: medium;">1.2. 对关键资源的操作，当接口保证不了幂等性时，必须能防并发</span></strong></div>
+<div>如果你的接口不具备<a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html">幂等性</a>，那么请保证<strong>整个（分布式）系统内</strong>对一个重要事物（订单，账户的资金变动等）的<strong>有效操作线程</strong>，<strong>同一时间内有且只有一个</strong>。</div>
+<div>比如交易中心有N台服务器负载均衡，订单中心则有M台服务器，如何保证一个订单的同一笔支付处理，一个账户的同一笔资金变动操作是原子性的。</div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">原因也很简单：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>第三方支付平台可能同一时刻给你的 pay.5xxxxn.com 交易中心集群服务推送过来两个一模一样的支付成功通知。</li>
+<li>用户浏览器可能安装了某种插件（如早期的迅雷插件），插件本身为了探测 一个URL 是否是BT资源，会同时模拟发起一个 HTTP GET 请求。</li>
+<li>上游服务不可控，不可预知地向发起下游服务发起并发请求。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">此时可以基于 memcache 实现一个分布式锁，更多详情请阅读<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>撰写的《<a style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题：分布式锁</a>》。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a; font-size: medium;">1.3. 支付子系统的独立性</span></strong></div>
+<div>电商业务容易出现以下问题：</div>
+<div>
+<ul>
+<li>受到DDoS攻击，带宽被打满；</li>
+<li>某一个业务突然响应变慢，如从20ms激增为1s，业务请求被大量阻塞；</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div>所以不同业务之间必须严格隔离，防止一个业务超负荷或宕机连累其他业务。</div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">因此，我们至少要做到：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>支付子系统是一个独立工程，独立部署，有单独的二级域名。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">最好能做到：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>独立带宽，</li>
+<li>独立的存储介质。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a; font-size: medium;">1.4. 支付子系统接收第三方支付通知的可靠性</span></strong></div>
+<div>电商的支付子系统提供一个 Web Service，来接收各家第三方支付的各种异步通知。</div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">接收对方通知之后，你可能会遭遇各种异常，如：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>解析时发生异常；</li>
+<li>调用支付中心时发生异常，如网络故障，如支付中心宕机，如调用超时；</li>
+<li>写日志时发生异常；</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即使如此，你也不应该丢弃该通知，并且没有返回&ldquo;success&rdquo;字符给第三方支付，</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">因为这样的话，相当于你的业务完全依赖于第三方支付下一次重试了。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">所以，<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>提醒您，你应该主动地、积极地先把对方的（支付成功、退款处理等）通知存入一个存储介质，如消息队列；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">一旦同步处理失败，那么能以某种策略重播这个消息，直到业务系统恢复正常、处理完毕为止。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a; font-size: medium;">1.5. 补录数据的时间准则</span></strong></div>
+<div>电商结算和对账，由于帐期定义（如日清日结，如T+2结算，如销售佣金计算，如CPS联盟结算），非常依赖于数据记录的时间。</div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">所以，当由于以下原因补录或同步数据时，<strong>请慎重考虑数据的时间字段到底如何采信</strong>：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>掉单后主动处理（注：主动查询第三方支付网关，获得订单支付状态）；</li>
+<li>不同系统之间同步失败后手动触发重新同步；</li>
+<li>不同公司的平台之间交换退款等数据。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">下面举两个小例子：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">例一：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&times;&times;商城对供应商的结算标准是，<strong>仅仅以订单进入他们的ERP系统的时间为准</strong>，而不是以该订单的下单时间、支付时间等数据自身时间记录为准。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即，一个12月1日23:58支付成功的订单，数据一层一层传递到ERP时，同步时间是12月2日00:01，那么此订单就被判定在12月2日的应结算明细中，而不是12月1日的。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">咋听上去好像不合理，仔细想想，供应商有很多，IT系统也就很多，彼此之间的服务器时间肯定不同步，更别提会有很多种类型的脏数据，所以&times;&times;商城只有选择<strong>用ERP系统自身的时间作为唯一结算凭据</strong>，而不采信第三方系统的 add_time、update_time、pay_time 五花八门的时间，这样才不会重复结算或漏结算。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">例二：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">支付系统宕机，一段时间后才恢复，此时客服主动处理顾客投诉掉单的订单，从第三方支付查到已支付后，将订单置为已付款。那么，该订单的支付时间怎么记呢？</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">一是，采信第三方支付系统传递的真实支付时间。二是，记录为手动重置的当前时间。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>的答案是，后者更安全。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">因为，有可能补录数据已跨日或跨月，前一日的结算清单可能已计算完毕，如果按前者的逻辑，突然又补录一条记录，结果前一日（上一个月）也不结算它，后一日（下一个月）也不结算，那这个订单就漏结算了。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">当然，真实支付时间也还是要记录到日志表的。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #800000; font-size: large;">二. 易被忽略的逻辑处理</span></strong></div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">2.1. 交易关闭通知的处理</span></strong></div>
+<div>支付宝是这么定义&ldquo;<strong><span style="text-decoration: underline;">交易关闭</span></strong>&rdquo;的：</div>
+<div>
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">枚举名称</span></strong></span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">枚举说明</span></strong></span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">TRADE_CLOSED</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div>
+<ul>
+<li><span style="font-size: 14px;"><span style="font-family: Verdana;">在<span style="color: #ff0000;">指定时间段内未支付时关闭</span>的交易；</span></span></li>
+<li><span style="font-size: 14px;"><span style="font-family: Verdana;">在交易完成全额退款成功时关闭的交易。</span></span></li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">交易关闭通知默认是不发送的，如下表格所示：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">触发条件名</span></strong></span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">触发条件描述</span></strong></span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">触发条件默认值</span></strong></span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">TRADE_CLOSED</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">交易关闭</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">false（不触发通知）</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">但<strong>如果商户（也就是你的网站）向支付宝申请打开了该配置，那么请注意接收 TRADE_CLOSED 通知</strong>，它会对你的核心购买逻辑产生影响。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="color: #0000ff;">如何主动指定交易关闭时间呢？</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">即时到帐交易接口中有这么一个参数：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数名称</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">类型</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数说明</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">是否可为空</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">样例</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">it_b_pay</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">超时时间</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">String(3)</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div><span style="font-family: Verdana; font-size: 12px;">设置未付款交易的超时时间，一旦超时，该笔交易就会自动被关闭。</span></div>
+<div><span style="font-family: Verdana; font-size: 12px;">取值范围：1m～15d。</span></div>
+<div><span style="font-family: Verdana; font-size: 12px;">m：分钟、h：小时、d：天、1c：当天（无论交易何时创建，都在0点关闭）。</span></div>
+<div><span style="font-family: Verdana; font-size: 12px;">该功能需要联系技术支持来配置关闭时间。</span></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">可空</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">1h</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">支付宝收到这个参数后，界面会有如下展示：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank"><span style="font-size: 10.5pt; font-family: Calibri, sans-serif; color: #1f497d;" lang="EN-US"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clip_image001%20-%20001%E5%89%AF%E6%9C%AC.jpg" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clip_image001%20-%20001%E5%89%AF%E6%9C%AC.jpg" /></span></a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 10.5pt; font-family: Calibri, sans-serif; color: #1f497d;" lang="EN-US">&nbsp;</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>此时提示几点：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）如果交易已经关闭，但商户的网站上仍保留了订单的&ldquo;付款&rdquo;按钮，那么点击跳转到支付宝后，会看到如下警告信息：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 10.5pt; font-family: 宋体;" lang="EN-US"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20002%e5%89%af%e6%9c%ac.jpg" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20002%e5%89%af%e6%9c%ac.jpg" />　　</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 10.5pt; font-family: 宋体;" lang="EN-US">或</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 10.5pt; font-family: 宋体;" lang="EN-US"><span style="font-size: 10.5pt; font-family: Calibri, sans-serif; color: #1f497d;" lang="EN-US"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20003%e5%89%af%e6%9c%ac.jpg" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20003%e5%89%af%e6%9c%ac.jpg" /></span></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）当交易状态为交易关闭时，就算用户能通过第三方网银对支付宝账单进行付款（用户可能已经跳转至银行交易页面，并且未关闭页面），第三方网银能将支付成功信息通知支付宝，支付宝也不会通知商户，而是会自动退还至支付宝余额中。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<strong>网银直连的订单是关闭不了的</strong>，因为它没有跟支付宝账户绑定。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）商户如发现交易已关闭的订单被用户支付后，那么必须进入<strong>异常支付流程</strong>（能原路退返就退，如无法退返则返还至账户余额）。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div><strong><span style="color: #a52a2a; font-size: medium;">2.2. 退款通知的处理</span></strong></div>
+<div>支付宝对此的定义是：</div>
+
+
+
+
+
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div><span style="color: #008000;">(1)<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">交易成功</span></strong>之后，商户（高级即时到账或机票平台商）可调用批量退款接口，系统会发送退款通知给商户。</span></div>
+
+
+
+
+
+</div>
+<div>
+<div><span style="color: #008000;">(2) 当商户使用站内退款时，系统会发送包含 refund_status（退款状态）和 gmt_refund（退款时间）字段的通知给商户。</span></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">其中退款状态有两种：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">枚举名称</span></strong></span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">枚举说明</span></strong></span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">REFUND_SUCCESS</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div><span style="font-family: Verdana; font-size: 12px;">退款成功：</span></div>
+<div>
+<ul>
+<li><span style="font-size: 14px;"><span style="font-family: Verdana;">全额退款情况：trade_status=<span class="Apple-converted-space">&nbsp;</span><span style="color: #ff0000;">TRADE_CLOSED</span>，而refund_status=REFUND_SUCCESS</span></span></li>
+<li><span style="font-size: 14px;"><span style="font-family: Verdana;">非全额退款情况：trade_status=<span class="Apple-converted-space">&nbsp;</span><span style="color: #ff0000;">TRADE_SUCCESS</span>，而refund_status=REFUND_SUCCESS</span></span></li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 12px;">REFUND_CLOSED</span></td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 12px;">退款关闭</span></td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">第三方支付在退款处理完毕后，会发送异步通知给商户，如下表格所示：</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">触发条件名</span></strong></span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 12px;"><strong><span style="font-family: Verdana;">触发条件默认值</span></strong></span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">退款处理结束</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">true（触发通知）</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+<p><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">这个所谓退款处理结束通知，实际上仍是一个&ldquo;trade_status_sync（</span><strong style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="text-decoration: underline;">交易状态同步</span></strong><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">）&rdquo;通知，特殊性在于携带的 refund_stauts =REFUND_SUCCESS 参数，实际例子如下所示：</span></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 10pt; font-family: Verdana, sans-serif; color: navy;" lang="EN-US"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clipboard%20-%20004%e5%89%af%e6%9c%ac.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clipboard%20-%20004%e5%89%af%e6%9c%ac.png" />　　</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>注意几个要点：</div>
+<div><ol>
+<li>当交易状态为 TRADE_FINISHED（<strong><span style="text-decoration: underline;">交易完成</span></strong>） ，那么<strong>不可退款</strong>！</li>
+<ul>
+<li>此处有一个&ldquo;<strong><span style="text-decoration: underline;">退款期限</span></strong>&rdquo;概念，<span style="color: #ff0000;">交易关闭（TRADE_CLOSED）后3个月（或6个月）内可以退款</span>，超过此期限后，<strong>该笔交易成功且结束，从此不可退款</strong>！对于业务逻辑，意味着此时只能退还金额到账户余额，无法原路退返。支付宝、快钱、财付通等均有此设定。</li>
+<ul>
+<li><strong><span style="text-decoration: underline;">手机支付</span></strong>退款如返回 D23190 错误码，含义是退款日期超过最大有效期（有效期是半年）。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</ul>
+<li>退款处理结束的通知到达时，支付宝会先发送一个<strong><span style="text-decoration: underline;">支付成功通知</span></strong>，防止你的系统不知道有此交易。请正确处理这个支付成功通知，不要误认为这是&ldquo;重复支付&rdquo;（因为对应的订单可能已确认+已支付），以至于误判给原路退返了。</li>
+
+
+
+
+
+</ol>
+<div>&nbsp;</div>
+
+
+
+
+
+</div>
+<div><hr /></div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #800000; font-size: large;">三. 异常处理类</span></strong></div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">3.1. 掉单的被动处理</span></strong></div>
+<div>支付宝的文档说的很清楚：</div>
+
+
+
+
+
+</div>
+<blockquote style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div><span style="color: #008000;">服务器异步通知页面（由参数 notify_url 指定页面文件）获取支付宝返回的结果数据</span></div>
+
+
+
+
+
+<span style="color: #008000;">，（商户的）程序执行完后必须打印输出&ldquo;success&rdquo;（不包含引号）。</span></div>
+<div>
+<div><span style="color: #008000;"><strong>如果商户反馈给支付宝的字符不是 success 这7个字符，支付宝服务器会不断重发通知，直到超过24小时22分钟。</strong></span></div>
+
+
+
+
+
+</div>
+<div>
+<div><span style="color: #008000;">一般情况下，<strong>25小时以内完成8次通知</strong>（通知的间隔频率一般是：2m,10m,10m,1h,2h,6h,15h）；</span></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</blockquote>
+<div>
+<div>所以，如果你用来接收支付宝异步通知的服务阻塞了（hang/stuck）或挂了（shutdown/crash），就无法给支付宝返回 success 响应，所以它会不断地发起重试，直到25小时内你恢复服务返回 success 。</div>
+
+
+
+
+
+</div>
+<div>所以如果<strong><span style="text-decoration: underline;">掉单</span></strong>（用户已付款/已扣款，但你的数据库里这个订单还是未付款状态），你还有机会补救。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">3.2. 掉单的主动处理</span></strong></div>
+<div>掉单后，等待支付宝补发通知给你，商户可能来不及应对汹涌而来的顾客投诉。</div>
+
+
+
+
+
+</div>
+<div>此时，服务器端应该主动提交此订单对应的（一个或多个）<strong><span style="text-decoration: underline;">唯一订单号</span></strong>（out_trade_no，支付宝合作商户网站唯一订单号），调用支付宝的单笔交易查询接口&nbsp;single_trade_query，从而获得交易状态、支付宝交易号、付款时间、交易总金额等明细。</div>
+<div>（具体细节请看支付宝的《单笔交易查询接口(single_trade_query).pdf》）</div>
+<div>一旦查询到了支付成功的细节，而且付款金额也等于商户记录的应付金额，那么就可以给操作人员展示一个画面，使得他能手工置这个订单为已确认+已付款。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">3.3. 来自于多个支付渠道的重复支付</span></strong></div>
+<div>什么情况下会产生重复支付呢？</div>
+
+
+
+
+
+</div>
+<div>看一个真实的顾客投诉案例：</div>
+<div>『<span style="font-family: 'Microsoft Yahei';">顾客购买&times;&times;团的商品后，第一次付款时，由于付款故障（如系统掉单），使得顾客认为付款未成功，所以，顾客换用了其他支付渠道（如选择支付宝的网银直连，或者选择网银在线）进行了第二次付款，于是&times;&times;团帐号收到两笔付款，且两笔付款均付款成功。</span>』</div>
+<div>这不是偶然现象。</div>
+<div>处理办法还是：按时间顺序，稍晚一些的付款被认为是重复支付，进入<strong>异常支付流程</strong>（能原路退返就退，如无法退返则返还至账户余额）。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">3.4. 支付成功时系统发现商品已不可售卖</span></strong></div>
+<div>商品不可售卖有两个原因：1）库存不足；2）商品已下线。</div>
+
+
+
+
+
+</div>
+<div>&nbsp;</div>
+<div><strong>如果是库存不足：</strong></div>
+<div>团购商户为了<strong>避免<span style="text-decoration: underline;">超卖</span></strong>，应该</div>
+<div>
+<ul>
+<li>将订单关闭，</li>
+<li>将交易关闭，</li>
+<li>将实付金额原路退返（如无法退返，退至账户余额），</li>
+<li>记录支付失败日志，</li>
+<li>记录资金变动日志，标记退返原因是&ldquo;库存不足&rdquo;，</li>
+<li>顾客可以在前台账户余额变更历史中看到有过付款以及被退款的明细。</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div>如果是实物类电商商户，因为可以事后干预，补足库存，所以可以接受这次付款行为。</div>
+<div>&nbsp;</div>
+<div>如果是商品已下线，处理方式同上，只不过要标记退返原因是&ldquo;商品已下线&rdquo;。</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">3.5. 订单名称中不能包含敏感词</span></strong></div>
+<div>支付宝对商品标题核查得非常严格，所以<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>郑重提醒您，为了避免顾客发起支付时看到支付宝如下警告：</div>
+
+
+
+
+
+</div>
+<div><span style="font-size: 10.5pt; font-family: Calibri, sans-serif; color: #1f497d;" lang="EN-US"><img class="decoded" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20005%e5%89%af%e6%9c%ac.jpg" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/r_clip_image002%20-%20005%e5%89%af%e6%9c%ac.jpg" />　　</span></div>
+<div>请提前调用<span class="Apple-converted-space">&nbsp;</span><strong><span style="text-decoration: underline;">支付宝交易信息敏感词分析接口（fast_text_trade）</span></strong><span class="Apple-converted-space">&nbsp;</span>，在录入信息时就阻止保存。</div>
+<div>注意，此敏感词分析接口需要联系支付宝开通权限。</div>
+<div>&nbsp;</div>
+<div><hr /></div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #800000; font-size: large;">四. 正常支付流程的两个要点</span></strong></div>
+<div><span style="color: #a52a2a; font-size: medium;"><strong>4.1.正常支付的处理流程</strong></span></div>
+<div><span style="color: #1f497d; font-family: 'Microsoft Yahei';">对于一个团购商品来说，顾客的</span><strong style="color: #1f497d; font-family: 'Microsoft Yahei';"><span style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: yellow; background-position: initial initial; background-repeat: initial initial;">正常支付成功通知</span></strong><span style="color: #1f497d; font-family: 'Microsoft Yahei';">到达服务器端时，业务规则简述为：</span></div>
+
+
+
+
+
+</div>
+<div><ol>
+<li><strong style="font-family: 'Microsoft Yahei';"><span style="font-size: 11pt; color: red;">商品活动结束后，所有未付款订单，一律不允许支付。</span></strong></li>
+<li><strong style="font-family: 'Microsoft Yahei';"><span style="color: #17365d;">必须符合库存管理规则。</span></strong></li>
+<li><strong style="font-family: 'Microsoft Yahei';"><span style="font-size: 11pt; color: red;">本次支付金额应该小于等于该订单的待支付金额。</span></strong></li>
+<li><strong style="font-family: 'Microsoft Yahei';"><span style="color: #17365d;">订单状态正常（不能处于&ldquo;已取消&rdquo;、&ldquo;已付款&rdquo;等状态）。</span></strong></li>
+
+
+
+
+
+</ol>
+<p><span style="font-family: 'Microsoft Yahei';"><span style="color: #1f497d;">一旦发现违背业务规则的支付成功通知到达，则：</span></span></p>
+<ol>
+<li><span style="color: #1f497d; font-family: 'Microsoft Yahei';">并不修改订单状态；</span></li>
+<li><span style="font-family: 'Microsoft Yahei'; color: red;">将此笔支付款项<strong>自动返还到该会员的账户余额里</strong></span><span style="font-family: 'Microsoft Yahei'; color: #1f497d;">；</span></li>
+<li><span style="color: #1f497d; font-family: 'Microsoft Yahei';">支付中心记录支付失败日志；并记录资金变动日志；</span></li>
+<li><span style="font-family: 'Microsoft Yahei'; color: #1f497d;">会员在前台&ldquo;个人中心&rdquo;</span><span style="font-family: 'Microsoft Yahei';">下的</span><span style="font-family: 'Microsoft Yahei'; color: #1f497d;">&ldquo;账户余额&rdquo;里能看到这个余额变更历史以及对应的说明。</span></li>
+
+
+
+
+
+</ol>
+<p><span style="font-family: 'Microsoft Yahei'; color: #1f497d;">支付流程图如下图4.1</span><span style="font-family: 'Microsoft Yahei'; color: #1f497d;">所示：</span></p>
+<h2>&nbsp;</h2>
+<p align="center"><span style="font-family: 'Microsoft Yahei';">图4.1<span lang="EN-US">&nbsp;团购</span>支付中心判断的简单流程</span></p>
+
+
+
+
+
+</div>
+<div><span style="font-family: 'Microsoft Yahei';">&nbsp;</span></div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">4.2. 交易流水号变化规则</span></strong></div>
+<div>商户发给第三方支付的<span class="Apple-converted-space">&nbsp;</span><strong>out-trade-no</strong><span class="Apple-converted-space">&nbsp;</span>标识了一次交易的<strong><span style="text-decoration: underline;">商户唯一订单号</span></strong>。</div>
+
+
+
+
+
+</div>
+<div>该参数的定义为：</div>
+<div>
+<div>
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数名称</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">类型</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">参数说明</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">是否可为空</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">样例</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">out_trade_no</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">商户网站唯一订单号</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">String(64)</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div><span style="font-family: Verdana; font-size: 12px;">支付宝合作商户网站唯一订单号，并非支付宝交易流水号</span></div>
+<div><span style="font-family: Verdana; font-size: 12px;">（确保在合作伙伴系统中唯一）。</span></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">不可空</span></div>
+
+
+
+
+
+</td>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-family: Verdana; font-size: 12px;">58942120-tuan-001</span></div>
+
+
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+<span style="color: #ff0000;">商户完全可以<strong>自定义这个 out_trade_no 的字符串组成规则</strong>。</span></div>
+<div>即使对应同一个订单，也可以构造出不同的 out_trade_no 。</div>
+<div>只要当支付宝的交易通知把这个参数原样返回时，你的程序能知道这是哪一个订单的哪一笔交易，它的应付金额是多少，这个应付金额被支付后订单产生什么变化，这样就行。</div>
+<div>下面举几个例子。</div>
+<div>&nbsp;</div>
+<div><span style="color: #0000ff;">例一：<strong>修改订单，订单应付金额或支付方式发生变化</strong></span></div>
+<div>背景：订单在没有支付成功之前，顾客都是可以修改的。做了以下修改后，可能会引起订单应付金额或支付方式发生变化：</div>
+<div>
+<ul>
+<li>余额支付的金额变化</li>
+<li>购买份数的调整</li>
+<li>优惠券/代金券的使用</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div>而支付宝等第三方支付，对于一个用<strong><span style="text-decoration: underline;">商户唯一订单号</span></strong>标识的交易，禁止变更 total_fee（交易总金额）字段！</div>
+<div>所以，我们的同一个订单，发起不同应付金额的支付请求时，必须更换 out_trade_no ，流程如下图4.2所示：</div>
+<div>　　　　<img class="decoded" style="display: block; margin-left: auto; margin-right: auto;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20006%E5%89%AF%E6%9C%AC.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-%20006%E5%89%AF%E6%9C%AC.png" /></div>
+<div style="text-align: center;">图4.2 订单应付金额变化，out_trade_no 必须变化</div>
+<div>&nbsp;</div>
+<div>
+<div><span style="color: #0000ff;">例二：<strong>修改订单，订单支付方式发生变化</strong></span></div>
+<div>背景：订单未成功支付前，用户也是可以调整支付方式的：</div>
+
+
+
+
+
+</div>
+<div>
+<ul>
+<li>支付方式的调整（不仅仅指从支付宝变为快钱这种第三方支付之间的变更，而且包括从支付宝之网银直连变为支付宝这种第三方支付内部变更）</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+</div>
+<div>此时，建议更换 out_trade_no 。</div>
+<div>&nbsp;</div>
+<div>
+<div><span style="color: #0000ff;">例三：<strong>订单已付款，但追加一部分商品，需要补支付</strong></span></div>
+<div>背景：选择了菜品1、2、3、4的订单已支付成功，顾客追加菜品5，不需要创建新订单，可以在原订单基础上补充支付。</div>
+
+
+
+
+
+</div>
+<div>做法：如下图4.3所示</div>
+<div>　　<img class="decoded" style="display: block; margin-left: auto; margin-right: auto;" src="https://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-007%20%E5%89%AF%E6%9C%AC.png" alt="http://images.cnblogs.com/cnblogs_com/zhengyun_ustc/255879/o_clipboard%20-007%20%E5%89%AF%E6%9C%AC.png" /></div>
+<div style="text-align: center;">图4.3 订单补支付</div>
+<div>&nbsp;</div>
+<div>
+<div><strong><span style="color: #a52a2a; font-size: medium;">4.3. 对账拉单</span></strong></div>
+<div>无论系统是否可靠，商户终归还是要对账的。</div>
+
+
+
+
+
+</div>
+<div>对的就是数据库里记录的当天应收帐款，与第三方支付商户帐号里收到的钱是否吻合。</div>
+<div>如果你数据库记录的顾客用支付宝支付的款项是10001元，而你的支付宝帐号里只收到了10000元，那一定有问题，必须要深究下去。</div>
+<div>&nbsp;</div>
+<div>核对的办法就是，</div>
+<div>每天零点，从数据库里查询出前一日用支付宝支付的所有交易，得到支付宝交易流水号和支付金额的集合；</div>
+<div>遍历这个集合，拿交易流水号去支付宝的单笔交易查询接口(single_trade_query)，这样查出交易金额，对比一下，看你数据库里记的支付金额和实际收到的交易金额是否一致。</div>
+<div>&nbsp;</div>
+<div>@<a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a>汇总于2012/11</div>
+<div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr />1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：Throttle Limits for calls/requests in a clustered environment</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:14)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题V：分布式锁</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:16)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:24)</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html">电商课题VI：分布式Session</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:30)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">5）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html">电商课题：RBAC权限控制</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:47)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">6）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html">电商课题：幂等性</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-22 23:52)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">7）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-09-19 01:17)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">8）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">电商课题：对付秒杀器等恶意访问行为的简单梳理</a><span class="Apple-converted-space">&nbsp;</span>(2012-09-18 03:51)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">9）<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/14/topic7.html" target="_blank">电商课题VII：支付交易一般性准则</a></span></div>
+<div>&nbsp;</div>
+<div><hr /></div>
+<div><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">赠图几枚：</span></div>
+<div>
+<div class="artwork"><a href="http://www.aqee.net/how-to-be-an-excellent-programmer-for-many-years/" target="_blank"><img id="pic" src="http://ww1.sinaimg.cn/large/62a92ba0jw1dz6dmyndsej.jpg" alt="" /></a></div>
+<div class="artwork">
+<div class="artwork"><a href="http://weibo.com/1704117253/z3VC5uTRi" target="_blank"><img id="pic" class="M_cur_zoom_out" src="http://ww3.sinaimg.cn/large/62a92ba0jw1dzsm7rz42pj.jpg" alt="" /></a></div>
+
+
+
+
+
+</div>
+<div class="artwork">
+<div class="artwork"><a href="http://t.cn/zjI3Icb" target="_blank"><img id="pic" src="http://ww4.sinaimg.cn/large/62a92ba0jw1dwxmj9tcx5j.jpg" alt="" /></a></div>
+<div class="artwork">
+<div class="artwork"><a href="http://weibo.com/1749073777/z5SMheH8x" target="_blank"><img id="pic" src="http://ww4.sinaimg.cn/large/6840bf71jw1dz04z2ic3aj.jpg" alt="" /></a></div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-12-14 01:38</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2817388" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2817388);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2817388, cb_entryCreatedDate = '2012-12-14 01:38', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

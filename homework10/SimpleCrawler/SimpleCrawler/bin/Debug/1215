@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第9页 - 经典鸡翅 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/jichi/custom.css?v=6wtfTBGNfhWFL7iH6gCJo&#x2B;5x&#x2B;js=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/jichi/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/jichi/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/jichi/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 474324;
+        var currentBlogApp = 'jichi';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/jichi/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/jichi/">经典鸡翅</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/jichi/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%BB%8F%E5%85%B8%E9%B8%A1%E7%BF%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/jichi/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+175&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+54</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/jichi/default.html?page=8">上一页</a>
+    <a href="https://www.cnblogs.com/jichi/default.html?page=1">1</a>
+    ···
+        <a href="https://www.cnblogs.com/jichi/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=8">8</a>
+    9
+    
+    
+    
+</div>
+</div>
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/01/10.html">2019年1月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10252816.html">
+    css属性总结
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 有些属性不是很常用，但是工作中遇到了，记录一下，方便学习。 1、text-indent text-indent 属性规定文本块中首行文本的缩进。主要实现就像word那种首行缩进的效果。 详解http://www.w3school.com.cn/cssref/pr_text_text-inden            <a href="https://www.cnblogs.com/jichi/p/10252816.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-10 22:43 经典鸡翅 阅读 (56) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10252816" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/01/06.html">2019年1月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10229812.html">
+    spring入门详细教程（五）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇紧接着spring入门详细教程（三），建议阅读本篇前，先阅读第一篇，第二篇以及第三篇。链接如下： Spring入门详细教程（一）&#160;https://www.cnblogs.com/jichi/p/10165538.html Spring入门详细教程（二）&#160;https://www.cnblog            <a href="https://www.cnblogs.com/jichi/p/10229812.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-06 22:22 经典鸡翅 阅读 (405) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10229812" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2019/01/02.html">2019年1月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10211475.html">
+    Spring入门详细教程（四）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇紧接着spring入门详细教程（三），建议阅读本篇前，先阅读第一篇，第二篇以及第三篇。链接如下： Spring入门详细教程（一）&#160;https://www.cnblogs.com/jichi/p/10165538.html Spring入门详细教程（二）&#160;https://www.cnblog            <a href="https://www.cnblogs.com/jichi/p/10211475.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-01-02 21:40 经典鸡翅 阅读 (230) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10211475" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/12/31.html">2018年12月31日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10201934.html">
+    2018年终总结（一只刚毕业的程序猿）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 今天是2018年的最后一天，总结一下自己的2018年，找到需要努力的地方，2019继续努力。 2018年1月 1月份过的比较普通，主要是在公司进行实习，准备学校的期末考试。在公司学习到了很多东西，一月份的工作经历对个人的进步很大帮助。实践是检验真理的唯一标准，这话说的简直太对不过了。在学校大量            <a href="https://www.cnblogs.com/jichi/p/10201934.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-31 13:43 经典鸡翅 阅读 (514) 评论 (4)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10201934" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/12/26.html">2018年12月26日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10177004.html">
+    Spring入门详细教程（三）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇紧接着spring入门详细教程（二），建议阅读本篇前，先阅读第一篇和第二篇。链接如下： Spring入门详细教程（一）&#160;https://www.cnblogs.com/jichi/p/10165538.html Spring入门详细教程（二） https://www.cnblogs.com            <a href="https://www.cnblogs.com/jichi/p/10177004.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-26 22:38 经典鸡翅 阅读 (1154) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10177004" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/12/25.html">2018年12月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10176601.html">
+    Spring入门详细教程（二）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇紧接着spring入门详细教程（一），建议阅读本篇前，先阅读第一篇。链接如下： Spring入门详细教程（一）&#160;https://www.cnblogs.com/jichi/p/10165538.html 一、spring注入方式 1、set方法注入 2、构造方法注入 3、p名称空间注入 4            <a href="https://www.cnblogs.com/jichi/p/10176601.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-25 21:31 经典鸡翅 阅读 (1537) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10176601" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/12/23.html">2018年12月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10165538.html">
+    Spring入门详细教程（一）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、spring概述 Spring是一个开放源代码的设计层面框架，他解决的是业务逻辑层和其他各层的松耦合问题，因此它将面向接口的编程思想贯穿整个系统应用。Spring是于2003 年兴起的一个轻量级的Java 开发框架，由Rod Johnson创建。简单来说，Spring是一个分层的JavaSE/E            <a href="https://www.cnblogs.com/jichi/p/10165538.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-23 20:43 经典鸡翅 阅读 (1598) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10165538" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/12/05.html">2018年12月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10073404.html">
+    @Autowired注解与@resource注解的区别(十分详细)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：背景： 今天下班路上看到一个大货车，于是想到了装配，然后脑海里跳出了一个注解@Autowired（自动装配），于是又想到最近工作项目用的都是@Resource注解来进行装配。于是本着学什么东西都要一钻到底才能从菜鸟变大神的精神！！我就认真研究了一下，在此总结一波。以下内容先分别解释一下两个注解，再进            <a href="https://www.cnblogs.com/jichi/p/10073404.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-12-05 21:03 经典鸡翅 阅读 (13031) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10073404" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/28.html">2018年11月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10034587.html">
+    spring  applicationContext.xml最全约束
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：            <a href="https://www.cnblogs.com/jichi/p/10034587.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-28 20:58 经典鸡翅 阅读 (131) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10034587" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/10034571.html">
+    Eclipse引入spring约束详细教程
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1、打开eclipse的window-preferences，搜索catalog。 2、点击add，点击File System，弹出页面选择spring-beans-4.2.xsd。 3、key type 选择schema location。 在key的后方加上斜杠/及约束的名字。 4、点击ok。下            <a href="https://www.cnblogs.com/jichi/p/10034571.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-28 20:54 经典鸡翅 阅读 (1099) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10034571" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/19.html">2018年11月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/9985988.html">
+    Linux下安装JDK，Tomcat，Mysql详细教程
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1. 概述 今天教大家在linux下安装jdk，mysql以及tomcat。在javaweb开发中，最后完成的项目代码，一般都是布在linux服务器下的。因为linux服务器可以说是安全性稳定性都比windows高。所以说学会并能够布置一套环境是十分重要的，大多数开发中多选用tomcat作为服务器，            <a href="https://www.cnblogs.com/jichi/p/9985988.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-19 21:49 经典鸡翅 阅读 (557) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9985988" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/17.html">2018年11月17日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/9973140.html">
+    Linux常用命令（三）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文继续向大家介绍linux常用命令，之前写的前两篇的命令，一篇是主要关于目录操作，一篇主要是关于文件操作的，这篇主要来讲解linux的其他的一些常用命令以及linux文件权限机制和权限方面的命令。比如管道命令，杀进程命令等。接下来一起来看。 一、其他命令 1、显示当前所在的位置 命令：pwd 例子            <a href="https://www.cnblogs.com/jichi/p/9973140.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-17 10:53 经典鸡翅 阅读 (161) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9973140" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/14.html">2018年11月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/9960594.html">
+    Linux常用命令（二）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本篇为linux常用命令的第二篇，第一篇主要是目录相关的命令操作，本篇主要是讲解关于文件的常用命令操作。 关于文件的命令按照增删改查为主线进行讲解。 一、创建文件 命令： touch + 文件名 创建一个空文件 以在usr文件夹下建立test.txt文件为例。 这里需要注意，在linux中是不分后缀            <a href="https://www.cnblogs.com/jichi/p/9960594.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-14 21:42 经典鸡翅 阅读 (166) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9960594" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/13.html">2018年11月13日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/9954370.html">
+    Linux常用命令（一）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：今天来说以下linux 的常见命令，欢迎大家交流。每个命令都会给大家截一个图，方便大家查看。 常用命令打算分好几篇来进行更新。今天是第一篇： 首先我们需要知道linux的根目录为/。 用ls可以看到根目录下所有的目录，常用目录有bin,boot,dev,etc,usr,home,root等。 这里主            <a href="https://www.cnblogs.com/jichi/p/9954370.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-13 20:03 经典鸡翅 阅读 (163) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9954370" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/jichi/archive/2018/11/11.html">2018年11月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/jichi/p/9944040.html">
+    linux安装教程
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、安装准备工作 虚拟机VMWARE10 镜像文件CentOs6.5 二、安装过程 1、启动VMWARE10，点击创建新的虚拟机。 2、选择典型安装即可 3、这里我们选择稍后再进行安装操作系统，因为这样我们可以先对虚拟机进行一定的配置。 4、本次安装linux操作系统，版本为Centos。（该教程以            <a href="https://www.cnblogs.com/jichi/p/9944040.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-11-11 22:44 经典鸡翅 阅读 (388) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9944040" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/jichi/default.html?page=8">上一页</a>
+    <a href="https://www.cnblogs.com/jichi/default.html?page=1">1</a>
+    ···
+        <a href="https://www.cnblogs.com/jichi/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/jichi/default.html?page=8">8</a>
+    9
+    
+    
+    
+</div>
+</div>
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 经典鸡翅
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,1518 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="函数式接口详细定义 package java.lang; import java.lang.annotation.*; /** * An informative annotation type use" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[二] java8 函数式接口详解 函数接口详解 lambda表达式 匿名函数 方法引用使用含义 函数式接口实例  如何定义函数式接口 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9501253.html">[二] java8 函数式接口详解 函数接口详解 lambda表达式 匿名函数 方法引用使用含义 函数式接口实例  如何定义函数式接口</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3 style="line-height: 200%;"><span style="font-weight: bold; font-size: medium; font-family: 微软雅黑;">函数式接口详细定义</span></h3>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> java.lang;
+</span><span style="color: #0000ff;">import</span> java.lang.annotation.*<span style="color: #000000;">;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* An informative annotation type used to indicate that an interface
+* type declaration is intended to be a &lt;i&gt;functional interface&lt;/i&gt; as
+* defined by the Java Language Specification.
+*
+* Conceptually, a functional interface has exactly one abstract
+* method. Since {</span><span style="color: #808080;">@linkplain</span><span style="color: #008000;"> java.lang.reflect.Method#isDefault()
+* default methods} have an implementation, they are not abstract. If
+* an interface declares an abstract method overriding one of the
+* public methods of {</span><span style="color: #808080;">@code</span><span style="color: #008000;"> java.lang.Object}, that also does
+* &lt;em&gt;not&lt;/em&gt; count toward the interface's abstract method count
+* since any implementation of the interface will have an
+* implementation from {</span><span style="color: #808080;">@code</span><span style="color: #008000;"> java.lang.Object} or elsewhere.
+*
+* &lt;p&gt;Note that instances of functional interfaces can be created with
+* lambda expressions, method references, or constructor references.
+*
+* &lt;p&gt;If a type is annotated with this annotation type, compilers are
+* required to generate an error message unless:
+*
+* &lt;ul&gt;
+* &lt;li&gt; The type is an interface type and not an annotation type, enum, or class.
+* &lt;li&gt; The annotated type satisfies the requirements of a functional interface.
+* &lt;/ul&gt;
+* &lt;p&gt;However, the compiler will treat any interface meeting the
+* definition of a functional interface as a functional interface
+* regardless of whether or not a {</span><span style="color: #808080;">@code</span><span style="color: #008000;"> FunctionalInterface}
+* annotation is present on the interface declaration.
+*
+* @jls 4.3.2. The Class Object
+* @jls 9.8 Functional Interfaces
+* @jls 9.4.3 Interface Method Body
+* </span><span style="color: #808080;">@since</span><span style="color: #008000;"> 1.8
+</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+</span><span style="color: #0000ff;">public</span> @<span style="color: #0000ff;">interface</span> FunctionalInterface {}</pre>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">一种用于表示一个接口是Java语言规范定义的函数式接口的注解类型. </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">关键概念</span> </span></span></h4>
+<div style="line-height: 200%;"><span style="font-weight: bold;">从文件注释中我们可以看到函数式接口的关键概念</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 65%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">函数式接口只有一个抽象方法</span><br />
+						</span></span>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">由于default方法有一个实现,所以他们不是抽象的.
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">如果一个接口定义了一个抽象方法,而他恰好覆盖了Object的public方法,仍旧不算做接口的抽象方法, 因为它终将会在某处得到一个实现.(如果不是public的那么计数)&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">也即是只有一个抽象方法默认不算,Object的public也不算
+						</span></div>
+
+
+
+</td>
+
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数式接口的实例可以通过 <span style="font-weight: bold;">lambda表达式</span>&nbsp;<span style="font-weight: bold;"> 方法引用 </span>或者<span style="font-weight: bold;">构造方法引用</span>进行表示
+					</span></td>
+
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">类型<span style="font-weight: bold;">必须是接口</span>,而不能是其他的比如class 而且需要<span style="font-weight: bold;">符合函数式接口的定义要求</span> 否则使用注解时编译器报错
+					</span></td>
+
+
+
+</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">不管他们是否有使用注解FunctionalInterface 进行注解, 编译器将会把任何满足函数式接口定义的接口当做一个函数式接口 也就是说不加也行,但是显然不加的话,就没有限制约束,后续可能增加了其他方法导致出错
+					</span></td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">常用函数式接口</span></span></span></h3>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">四大基础接口&nbsp;&nbsp; java.util.function 包</span>
+</span></span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp; 接口&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 抽象方法</span>
+					</span></span></div>
+<div style="line-height: 200%;">
+<ul style="line-height: 200%;">
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Predicate&lt;T&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; boolean test(T t);
+							</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Consumer&lt;T&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; void accept(T t);
+							</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Function&lt;T, R&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; R apply(T t);
+							</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Supplier&lt;T&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T get();
+							</span></li>
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-weight: bold;">&nbsp;</span></div>
+<div style="line-height: 200%;"><span style="font-weight: bold;">&nbsp;</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">java.util.function.Predicate&lt;T&gt;
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: normal;">断言 也就是条件测试器 接收条件,进行测试</span>
+						</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: normal;">接口定义了一个名叫test的抽象方法，它接受泛型T对象，并返回一个boolean。</span>
+						</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: normal;">test (条件测试) , and-or- negate(与或非) 方法</span>
+						</span></span></div>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145437484-2053900527.png"><img style="display: inline; background-image: none;" title="image_5b791351_3059" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145437680-340693575.png" alt="image_5b791351_3059" width="671" height="454" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">java.util.function.Consumer&lt;T&gt;</span>
+						</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">消费者 消费数据 接收参数,返回void&nbsp; 数据被消费了
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">定义了一个名叫accept的抽象方法，它接受泛型T的对象，没有返回（void）
+						</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">你如果需要访问类型T的对象，并对其执行某些操作，就可以使用这个接口
+						</span></div>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145438107-1884372062.png"><img style="display: inline; background-image: none;" title="image_5b791352_2446" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145438275-1199415400.png" alt="image_5b791352_2446" width="674" height="362" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">java.util.function.Function&lt;T, R&gt;</span>
+					</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数 有输入有输出 数据转换功能
+					</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">接口定义了一个叫作apply的方法，它接受一个泛型T的对象，并返回一个泛型R的对象。
+					</span></div>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145438686-166595849.png"><img style="display: inline; background-image: none;" title="image_5b791352_59d1" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145438846-1086405101.png" alt="image_5b791352_59d1" width="673" height="410" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">java.util.function.Supplier&lt;T&gt;</span><br />提供者 不需要输入,产出T 提供数据<br />无参构造方法 提供T类型对象
+				</span></span></td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145439368-1761741701.png"><img style="display: inline; background-image: none;" title="image_5b791352_112b" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145439535-1583106110.png" alt="image_5b791352_112b" width="680" height="295" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><br />
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 70%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #ff0000;">接口中的compose, andThen, and, or, negate 用来组合函数接口而得到更强大的函数接口</span>
+					</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #ff0000;">四大接口为基础接口,其他的函数接口都是通过这四个扩展而来的 </span>
+					</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">此处的扩展是指概念的展开&nbsp; 不是平常说的继承或者实现,当然实现上可能是通过继承比如UnaryOperator</span>
+					</span></span></div>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">扩展方式:</span>
+</span></span></h4>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">参数个数上扩展</span>
+	</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如接收双参数的，有 Bi 前缀， 比如 BiConsumer&lt;T,U&gt;, BiFunction&lt;T,U,R&gt; ;
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">特殊常用的变形</span>
+	</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如 BinaryOperator ， 是同类型的双参数 BiFunction&lt;T,T,T&gt; ，二元操作符 ； UnaryOperator 是 Function&lt;T,T&gt; 一元操作符。
+	</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">类型上扩展</span>
+		</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如接收原子类型参数的，比如 [Int|Double|Long]&nbsp; [Function|Consumer|Supplier|Predicate]
+		</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145440584-1579057439.png"><img style="display: inline; background-image: none;" title="image_5b791352_7f5f" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145441222-1556309411.png" alt="image_5b791352_7f5f" width="1102" height="863" border="0" /></a></span></div>
+
+
+
+</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><strong>为什么要有基本类型扩展</strong>
+</span></span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">只有对象类型才能作为泛型参数,对于基本类型就涉及到装箱拆箱的操作,虽然是自动的
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">但是这不可避免给内存带来了额外的开销,装箱和拆箱都会带来开销
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">所以为了减小这些性能开销&nbsp;&nbsp; 对基本类型进行类型扩展
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Stream 类的某些方法对基本类型和装箱类型做了区分
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Java 8中，仅对 <strong>整型</strong>、<strong>长整型</strong>和<strong>双浮点型</strong>做了特殊处理&nbsp; 因为它们在数值计算中用得最多
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">对基本类型做特殊处理的方法在命名上有明确的规范
+	</span></div>
+<div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-family: 微软雅黑; font-size: medium;">如果参数是基本类型，则不加前缀只需类型名即可
+				</span></li>
+<li><span style="font-family: 微软雅黑; font-size: medium;">如果方法返回类型为基本类型，则在基本类型前再加上一个 To
+				</span></li>
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">总结一句话:
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 70%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-family: 微软雅黑; font-size: medium;">加了<strong>类型前缀[Int|Double|Long]</strong> 表示参数是基本类型, 如果在此基础上又加上了To&nbsp; 表示返回类型是基本类型&nbsp; </span></td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><strong>如有可能，应尽可能多地使用对基本类型做过特殊处理的方法，进而改善性能</strong>
+</span></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">函数式接口的实例</span>
+</span></span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数式接口的实例可以通过 <span style="font-weight: bold;">lambda表达式</span>&nbsp;<span style="font-weight: bold;"> 方法引用 </span>或者<span style="font-weight: bold;">构造方法引用</span>进行表示
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">Lambda表达式</span>
+</span></span></h4>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">可以把Lambda表达式理解为简洁地表示可传递的匿名函数的一种方式,也就是用来表示匿名函数
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">它没有名称，但它有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">特点</span>
+	</span></span></div>
+
+
+
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<ul style="line-height: 200%;">
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">匿名&mdash;&mdash;我们说匿名，是因为它不像普通的方法那样有一个明确的名称：写得少而想得多！
+			</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数&mdash;&mdash;我们说它是函数，是因为Lambda函数不像方法那样属于某个特定的类。但和方法一样，Lambda有参数列表、函数主体、返回类型，还可能有可以抛出的异常列表。
+			</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">传递&mdash;&mdash;Lambda表达式可以作为参数传递给方法或存储在变量中。
+			</span></li>
+<li style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">简洁&mdash;&mdash;无需像匿名类那样写很多模板代码。&nbsp; </span></li>
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">基本语法</span>
+</span></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">Lambda的基本语法是
+	</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 30%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-family: 微软雅黑; font-size: medium;">(parameters) -&gt; expression
+					</span></td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">或（请注意语句的花括号） 
+	</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 30%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-family: 微软雅黑; font-size: medium;">(parameters) -&gt; { statements; }&nbsp; </span></td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">Lambda表达式三个部分</span>
+</span></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><ol>
+<li><span style="font-family: 微软雅黑; font-size: medium;">参数列表
+			</span></li>
+<li><span style="font-family: 微软雅黑; font-size: medium;">箭头&nbsp;&nbsp; ( -&gt; 把参数列表与Lambda主体分隔开)
+			</span></li>
+<li><span style="font-family: 微软雅黑; font-size: medium;">Lambda主体 (表达式或者语句)
+			</span></li>
+
+
+
+</ol></div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">一些变形</span>
+</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;1.&nbsp; 表达式不包含参数，使用<span style="font-weight: bold;">空括号 ()</span> 表示没有参数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; () -&gt; System.out.println("Hello World");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;2.&nbsp; <span style="font-weight: bold;">包含且只包含一个参数</span>，可省略参数的括号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s&nbsp; -&gt; System.out.println("Hello World");&nbsp; </span></div>
+<div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;3.&nbsp; Lambda 表达式的主体不仅可以是一个表达式，而且也<span style="font-weight: bold;">可以是一段代码块</span>，使用大括号（{}）将代码块括起来
+	</span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 该代码块和普通方法遵循的规则别无二致，可以用返回或抛出异常来退出。
+	</span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 只有一行代码的 Lambda表达式也可使用大括号，用以明确 Lambda表达式从何处开始、到哪里结束。
+	</span></div>
+
+
+
+</div>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">() -&gt; {
+		</span></div>
+
+
+
+</blockquote>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">&nbsp;&nbsp;&nbsp; System.out.print("Hello"); 
+			</span></div>
+
+
+
+</div>
+
+
+
+</blockquote>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">&nbsp;&nbsp;&nbsp; System.out.println(" World"); 
+			</span></div>
+
+
+
+</div>
+
+
+
+</blockquote>
+<blockquote class="webkit-indent-blockquote" style="margin: 0px 0px 0px 40px; padding: 0px; border: currentcolor; border-image: none;">
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">};
+			</span></div>
+
+
+
+</div>
+
+
+
+</blockquote>
+
+
+
+</blockquote>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">&nbsp; 4.&nbsp;&nbsp; Lambda 表达式也可以表示包含多个参数的方法&nbsp;&nbsp; (Long x, Long y) -&gt; x + y;&nbsp; </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;5.&emsp;&emsp;&emsp;&emsp;可以把&nbsp; 4&nbsp; 中的表达式进行简化,(x, y) -&gt; x + y;&nbsp;&nbsp;&nbsp; 这借助于类型推断 下面会说到&nbsp; </span></div>
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">Lambda只能引用值，而不是变量(要求事实上的final)</span>
+</span></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">匿名内部类，需要引用它所在方法里的变量时，需要将变量声明为 final&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Lambda表达式不要求必须是final 变量&nbsp; 但是，该变量在既成事实上必须是final&nbsp; </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">事实上的 final 是指只能给该变量赋值一次。换句话说，Lambda 表达式引用的是值，而不是变量 跟匿名内部类类似,使用的是变量值的拷贝 所以需要是不改变的
+		</span></div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">如果你试图给该变量多次赋值，然后在 Lambda 表达式中引用它，编译器就会报错
+	</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">比如:
+	</span></div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145441586-898950478.png"><img style="display: inline; background-image: none;" title="image_5b791352_6367" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145441725-1373805661.png" alt="image_5b791352_6367" width="644" height="60" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">无需设置final 一切运行正常
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145442136-31843908.png"><img style="display: inline; background-image: none;" title="image_5b791352_2916" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145442292-1591710567.png" alt="image_5b791352_2916" width="428" height="88" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">一旦给hello变量重新赋值 ,编译器将会报错
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145442665-1106075289.png"><img style="display: inline; background-image: none;" title="image_5b791352_49aa" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145442833-507047113.png" alt="image_5b791352_49aa" width="718" height="91" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">方法引用</span>
+</span></span></h4>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">方法引用让你可以重复使用现有的方法定义&nbsp; 并像Lambda一样传递它们
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">方法引用使用&nbsp; <span style="font-weight: bold;">:: </span> 来表示
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">方法引用主要有三类</span>
+</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">(1) 指向静态方法的方法引用</span>（例如Integer的parseInt方法， 写作Integer::parseInt）&nbsp; </span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;也就是静态方法作用于对象上
+</span></div>
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145443259-422335355.png"><img style="display: inline; background-image: none;" title="image_5b791352_7e3a" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145443447-1350367380.png" alt="image_5b791352_7e3a" width="657" height="172" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">示例:字符串转换为数值
+</span></div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145443871-1916271212.png"><img style="display: inline; background-image: none;" title="image_5b791352_549f" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145444177-810281369.png" alt="image_5b791352_549f" width="932" height="85" border="0" /></a></span></div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145445155-1194547445.png"><img style="display: inline; background-image: none;" title="image_5b791352_66ad" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145445318-1100160046.png" alt="image_5b791352_66ad" width="451" height="60" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;">
+<div style="line-height: 24px;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">(2)指向 任意类型实例方法 的方法引用</span>（例如 String 的 length 方法，写作String::length）
+		</span></span></div>
+<div style="line-height: 24px;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">&emsp;&emsp;你在引用一个对象的方法，而这个对象本身是Lambda的一个参数。例如，Lambda表达式(String s) -&gt; s.toUppeCase()&nbsp;&nbsp; 可以写作String::toUpperCase&emsp;&emsp;
+			</span></div>
+<div>&nbsp;</div>
+
+
+
+</div>
+
+
+
+</div>
+<div style="line-height: 32px;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145445785-1597385075.png"><img style="display: inline; background-image: none;" title="image_5b791352_6794" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145446291-287625696.png" alt="image_5b791352_6794" width="581" height="156" border="0" /></a></span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">示例:打印字符串的长度 1个 3个&nbsp; 2个&nbsp;&nbsp; (没有空格和换行所以挤在一起了)
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145447196-1498051908.png"><img style="display: inline; background-image: none;" title="image_5b791352_4119" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145447376-1690361568.png" alt="image_5b791352_4119" width="699" height="76" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145448366-968395324.png"><img style="display: inline; background-image: none;" title="image_5b791352_5b8a" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145448506-1682621567.png" alt="image_5b791352_5b8a" width="440" height="63" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">(3) 指向现有对象的实例方法的方法引用</span>
+</span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">比如lambda表达式中调用字符串helloString的charAt()方法&nbsp; helloString就是一个现有对象
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145449479-232624085.png"><img style="display: inline; background-image: none;" title="image_5b791352_242a" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145450201-1543248973.png" alt="image_5b791352_242a" width="606" height="149" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">示例:获取字符串位于给定序列的charAt值
+</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145450563-1959355392.png"><img style="display: inline; background-image: none;" title="image_5b791352_1b9c" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145450703-1575504722.png" alt="image_5b791352_1b9c" width="704" height="94" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145451222-905192782.png"><img style="display: inline; background-image: none;" title="image_5b791352_35bf" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145451462-11528307.png" alt="image_5b791352_35bf" width="413" height="85" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">构造函数引用</span>
+</span></span></h4>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">对于一个现有构造函数，你可以利用它的名称和关键字new来创建它的一个引用： </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">ClassName::new </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">它的功能与指向静态方法的引用类似 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">定义Class A&nbsp;&nbsp; 三个属性 设置了默认值 以观察构造方法的调用情况
+	</span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> A {
+</span><span style="color: #0000ff;">private</span> String s1="a"<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> String s2="b"<span style="color: #000000;">;
+</span><span style="color: #0000ff;">private</span> String s3="c"<span style="color: #000000;">;
+A(){
+}
+A(String s1){
+</span><span style="color: #0000ff;">this</span>.s1=<span style="color: #000000;">s1;
+}
+
+A(String s1,String s2){
+</span><span style="color: #0000ff;">this</span>.s1=<span style="color: #000000;">s1;
+</span><span style="color: #0000ff;">this</span>.s2=<span style="color: #000000;">s2;
+}
+A(String s1,String s2,String s3){
+</span><span style="color: #0000ff;">this</span>.s1=<span style="color: #000000;">s1;
+</span><span style="color: #0000ff;">this</span>.s2=<span style="color: #000000;">s2;
+</span><span style="color: #0000ff;">this</span>.s3=<span style="color: #000000;">s3;
+}
+
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String toString() {
+</span><span style="color: #0000ff;">final</span> StringBuilder sb = <span style="color: #0000ff;">new</span> StringBuilder("A{"<span style="color: #000000;">);
+sb.append(</span>"s1='").append(s1).append('\''<span style="color: #000000;">);
+sb.append(</span>", s2='").append(s2).append('\''<span style="color: #000000;">);
+sb.append(</span>", s3='").append(s3).append('\''<span style="color: #000000;">);
+sb.append(</span>'}'<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> sb.toString();
+}
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145451970-1589883061.png"><img style="display: inline; background-image: none;" title="image_5b791352_489c" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145452239-419582583.png" alt="image_5b791352_489c" width="526" height="262" border="0" /></a></span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145452678-1452958155.png"><img style="display: inline; background-image: none;" title="image_5b791352_425" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145452835-396520561.png" alt="image_5b791352_425" width="422" height="87" border="0" /></a></span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">可以看到分别调用了,无参构造方法 一个参数构造方法以及两个参数构造方法 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">如果三个构造方法如何设置呢? </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">我们只需要定义函数接口即可 </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145453219-1493372513.png"><img style="display: inline; background-image: none;" title="image_5b791352_6d59" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145453370-298417056.png" alt="image_5b791352_6d59" width="402" height="181" border="0" /></a></span></div>
+<div>&nbsp;</div>
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145453801-1423901766.png"><img style="display: inline; background-image: none;" title="image_5b791352_35c0" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145454010-1367472722.png" alt="image_5b791352_35c0" width="576" height="379" border="0" /></a></span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;">再次运行 </span></div>
+<div><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145454419-557184521.png"><img style="display: inline; background-image: none;" title="image_5b791352_a33" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145454581-575198310.png" alt="image_5b791352_a33" width="379" height="144" border="0" /></a></span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">类型检查与类型推断</span> </span></span></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">类型检查</span> </span></span></h4>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">我们知道当我们操作赋值运算时会有类型检查 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">比如: </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145455080-486300003.png"><img style="display: inline; background-image: none;" title="image_5b791352_16d2" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145455256-1022258257.png" alt="image_5b791352_16d2" width="179" height="126" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">那么对于函数式接口与函数值呢&nbsp; </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数式接口 变量名 = Lambda-匿名函数/方法引用/构造方法引用; </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">那么函数作为值是如何进行类型检查的? </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">Lambda的类型是从使用Lambda的上下文推断出来的</span> </span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">上下文中Lambda表达式需要的类型称为<span style="font-weight: bold;">目标类型</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">上下文是比如接受它传递的方法的形式参数，或接受它的值的局部变量 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">形式参数或者局部变量都会有类型的定义与声明 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">比如筛选 1~9之中小于5的数值 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"> List&lt;Integer&gt; listNum = Arrays<span style="color: #4682b4; font-weight: 600;">.</span>asList(<span style="color: #4682b4; font-weight: 600;">1</span>, <span style="color: #4682b4; font-weight: 600;">2</span>, <span style="color: #4682b4; font-weight: 600;">3</span>, <span style="color: #4682b4; font-weight: 600;">4</span>, <span style="color: #4682b4; font-weight: 600;">5</span>, <span style="color: #4682b4; font-weight: 600;">6</span>, <span style="color: #4682b4; font-weight: 600;">7</span>, <span style="color: #4682b4; font-weight: 600;">8</span>, <span style="color: #4682b4; font-weight: 600;">9</span>); </span></p>
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"> List filteredNum = listNum<span style="color: #4682b4; font-weight: 600;">.</span>stream().filter(i -&gt; i<span style="color: #4682b4; font-weight: 600;">.</span>compareTo(<span style="color: #4682b4; font-weight: 600;">5</span>) &lt; <span style="color: #4682b4; font-weight: 600;">0</span>).collect(Collectors<span style="color: #4682b4; font-weight: 600;">.</span>toList()); </span></p>
+<p style="margin: 0px; line-height: 200%;"><code style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"> System<span style="color: #4682b4; font-weight: 600;">.</span>out<span style="color: #4682b4; font-weight: 600;">.</span>println(filteredNum);</span></code></p>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145455649-1679860530.png"><img style="display: inline; background-image: none;" title="image_5b791352_5a3e" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145455851-1685429015.png" alt="image_5b791352_5a3e" width="422" height="45" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">这个示例中接收&nbsp; Lambda表达式&nbsp; 作为参数的形式参数为&nbsp; Predicate&lt;? super T&gt; predicate </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">也就是目标类型&nbsp;&nbsp;&nbsp; 函数接口为Predicate&lt;T&gt;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">找到了目标类型 我们的T为Integer </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">也就是Predicate&lt;Integer&gt;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">他的抽象方法为 boolean test(T t);&nbsp;&nbsp; 也就是&nbsp; boolean test(Integer t);&nbsp; 接收一个Integer返回一个boolean </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">我们的Lambda匿名函数 i -&gt; i.compareTo(5) &lt; 0 就是接收一个Integer&nbsp; 返回一个boolean 所以类型检查通过 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">简单说就是: </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">1. 通过形参类型或者变量类型 找到函数接口进而找到抽象方法的声明 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">2. 然后在与参数值进行比对查看是否匹配 </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">可以看得出来,Lambda表达式最终匹配的是 函数接口中的抽象方法的方法签名 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">如果不同的函数接口,具有相互兼容的抽象方法签名&nbsp; 那么一个Lambda表达式显然可以匹配多个函数接口</span> </span></span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">特殊的void兼容规则 </span> </span></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">如果一个Lambda的主体是一个语句表达式， 它就和一个返回void的函数描述符兼容（当然需要参数列表也兼容）。 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">就是说 如果主体是一个语句,不管做什么或者调用方法返回其他的类型,他都可以兼容void </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">例如 </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">List的add方法&nbsp;&nbsp; boolean add(E e); </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">List&lt;String&gt; list= <span style="color: #8b008b; font-weight: 600;">new</span> ArrayList&lt;&gt;(); </span></p>
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #778899; font-style: italic;">// Predicate返回了一个boolean</span> </span></span></p>
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Predicate&lt;String&gt; p = s -&gt; list<span style="color: #4682b4; font-weight: 600;">.</span>add(s); </span></p>
+<p style="margin: 0px; line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #778899; font-style: italic;">// Consumer返回了一个void</span> </span></span></p>
+<p style="margin: 0px; line-height: 200%;"><code style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Consumer&lt;String&gt; b = s -&gt; list<span style="color: #4682b4; font-weight: 600;">.</span>add(s);</span></code></p>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">上面的代码都可以通过编译,并且运行 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">类型推断</span> </span></span></h4>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">类型推断的概念,在Java中不是第一次出现 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Java SE 7之前，声明泛型对象的代码如下 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 30%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">List&lt;String&gt; list = new ArrayList&lt;String&gt;(); </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Java 7中，可以使用如下代码： </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 30%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">List&lt;String&gt; list = new ArrayList&lt;&gt;(); </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">这就是类型推断&nbsp; ,一个最直接直观的好处就是可以简化代码的书写,这不就是语法糖么 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">针对 Lambda表达式也有类型推断 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">Java编译器可以根据&nbsp; <span style="line-height: 24px;"><span style="font-weight: bold;">上下文（目标类型）</span>推断出用什么函数式接</span><span style="line-height: 24px;">口来配合Lambda表达式</span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="line-height: 24px;">然后就可以获取到函数接口<span style="font-weight: bold;">对应的函数描述符</span>也就是那个抽象方法的方法签名</span> </span></span></div>
+<div style="line-height: 200%;">
+<div><span style="font-family: 微软雅黑; font-size: medium;">编译器可以了解Lambda表达式的参数类型，这样就可以在Lambda语法中省去标注参数类型 </span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="line-height: 24px;">&nbsp;</span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="line-height: 24px;">比如刚才的筛选 1~9之中小于5的数值的例子中,就可以有如下几种写法</span> </span></span></div>
+<div>
+<p style="margin: 0px;"><span style="font-family: 微软雅黑; font-size: medium;">.filter((Integer i) -&gt; { <span style="color: #8b008b; font-weight: 600;">return</span> i<span style="color: #4682b4; font-weight: 600;">.</span>compareTo(<span style="color: #4682b4; font-weight: 600;">5</span>) &lt; <span style="color: #4682b4; font-weight: 600;">0</span>;}).collect(Collectors<span style="color: #4682b4; font-weight: 600;">.</span>toList()); </span></p>
+<p style="margin: 0px;"><span style="font-family: 微软雅黑; font-size: medium;">.filter((Integer i) -&gt;i<span style="color: #4682b4; font-weight: 600;">.</span>compareTo(<span style="color: #4682b4; font-weight: 600;">5</span>) &lt; <span style="color: #4682b4; font-weight: 600;">0</span>).collect(Collectors<span style="color: #4682b4; font-weight: 600;">.</span>toList()); </span></p>
+<p style="margin: 0px;"><code><span style="font-family: 微软雅黑; font-size: medium;">.filter(i -&gt;i<span style="color: #4682b4; font-weight: 600;">.</span>compareTo(<span style="color: #4682b4; font-weight: 600;">5</span>) &lt; <span style="color: #4682b4; font-weight: 600;">0</span>).collect(Collectors<span style="color: #4682b4; font-weight: 600;">.</span>toList());</span></code></p>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="font-weight: bold;">如何使用函数式接口</span> </span></span></h3>
+<div style="line-height: 200%;"><span style="font-weight: bold;">&nbsp;</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数式接口定义了函数的类型&nbsp;&nbsp; 有了类型就如同其他类型 比如 int 一样&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">你可以定义变量 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">你可以传递参数 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">你可以返回 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">一个函数方法有方法签名和方法体两部分内容组成 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">函数接口只是有了方法签名 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">方法体由函数式接口的实例传递(也就是Lambda表达式-匿名函数&nbsp;&nbsp; 方法引用 构造方法引用 ) </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">具体的调用则是调用抽象方法&nbsp; 抽象方法的方法体就是函数式接口的实例 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">比如: </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">定义一个函数式接口,也可以使用预置的 比如 Predicate等 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145456300-1774017782.png"><img style="display: inline; background-image: none;" title="image_5b791352_7e92" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145456451-2071048785.png" alt="image_5b791352_7e92" width="329" height="87" border="0" /></a></span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">然后就是定义变量 使用Lambda实例化 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;">再接着就是方法调用 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145456904-73326147.png"><img style="display: inline; background-image: none;" title="image_5b791352_67c" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145457058-1309324865.png" alt="image_5b791352_67c" width="564" height="55" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="font-family: 微软雅黑; font-size: medium;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145457454-1596144970.png"><img style="display: inline; background-image: none;" title="image_5b791352_dfa" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180819145457604-982255068.png" alt="image_5b791352_dfa" width="412" height="88" border="0" /></a></span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-08-19 14:55</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9501253" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9501253);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9501253, cb_entryCreatedDate = '2018-08-19 14:55', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

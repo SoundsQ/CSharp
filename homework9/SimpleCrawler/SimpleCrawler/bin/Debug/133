@@ -1,0 +1,1651 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="装饰器模式简化继承关系的一种良好的替代方案,可以解决继承的很多问题,所以在动态增加功能时可以考虑,本文对装饰器模式进行了详尽的介绍,主要包括 Decorator 包装模式 wrapper 装饰器模式概" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>装饰器模式 Decorator  结构型 设计模式 (十) - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9603041.html">装饰器模式 Decorator  结构型 设计模式 (十)</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        装饰器模式简化继承关系的一种良好的替代方案,可以解决继承的很多问题,所以在动态增加功能时可以考虑,本文对装饰器模式进行了详尽的介绍,主要包括 Decorator 包装模式 wrapper 装饰器模式概念示例UML图 装饰器模式 优点 缺点 使用场景 以及简化方法
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h3 style="line-height: 200%;"><strong><span style="font-size: 18pt;">引子</span></strong></h3>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103036763-329191965.png"><img style="display: inline; background-image: none;" title="image_5b91e046_4d0a" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103044095-357389162.png" alt="image_5b91e046_4d0a" width="791" height="769" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103052023-1561712827.png"><img style="display: inline; background-image: none;" title="image_5b91e046_bbf" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103052232-819046799.png" alt="image_5b91e046_bbf" width="872" height="445" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><hr style="height: 0px;" noshade="noshade" /></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 18pt;">现实世界的装饰器模式</span></strong></h3>
+<div style="line-height: 200%;"><span style="font-size: 15px;">大家应该都吃过手抓饼,本文装饰器模式以手抓饼为模型展开简介 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">"老板,来一个手抓饼,&nbsp; 加个培根,&nbsp; 加个鸡蛋,多少钱?" </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这句话会不会很耳熟,或者自己可能都说过呢? </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们看看这句话到底表达了哪些含义呢? </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">你应该可以看得到这两个基本角色 </span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">1.手抓饼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 核心角色 </span></td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">2.配菜(鸡蛋/培根/香肠...)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 装饰器角色 </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; border-spacing: 2px; font-size: 15px;"><br />
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">你既然想要吃手抓饼,自然你是奔着手抓饼去的,对吧
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以,你肯定会要一个手抓饼,至少是原味的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">然后可能根据你的口味或者喜好添加更多的配菜
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这个行为很自然,也很正常.
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果是在代码的世界里面,你怎么描述:&nbsp; 顾客 购买 手抓饼&nbsp;&nbsp;&nbsp;&nbsp; 这一行为呢?&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">顾客Customer&nbsp;&nbsp; 顾客有方法buy&nbsp; 然后有一个手抓饼HandPancake,看起来是这样子的
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">那么问题来了
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如何表示 加了鸡蛋的手抓饼,或者加了鸡蛋和培根的手抓饼呢?
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一种很可能方式是把他们都当成手抓饼的不同种类,也就是使用继承或者说实现类的形式
+</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">那么我们有多少种手抓饼呢?
+					</span></div>
+<div><span style="font-size: 15px;">原味手抓饼/加鸡蛋手抓饼/加鸡蛋加培根手抓饼/加鸡蛋加烤肠手抓饼/加鸡蛋加培根加烤肠手抓饼手抓饼/.......
+					</span></div>
+<div><span style="font-size: 15px;">很显然,这就是数学中的组合,最终的个数跟我们到底有多少种配菜有关系
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果按照这种思维方式,我们将会有无数个手抓饼类,而且如果以后多了一种配菜,类的个数将会呈现爆炸式的增长
+</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这是你想要的结果么?
+</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">在现实世界里面,你会很自然的说 "老板,来一个手抓饼,&nbsp; 加个培根,&nbsp; 加个鸡蛋,多少钱?""
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">那么为什么在程序世界里面,你却很可能说"老板,给我来一个加了鸡蛋加了培根的那种手抓饼" 呢?
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>手抓饼代码示例</strong></span></h3>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>手抓饼接口和具体的一家店铺提供的手抓饼</strong></span>
+</h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:手抓饼接口 描述抽象的手抓饼
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> HandPancake {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 提供手抓饼
+</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+String offerHandPancake();
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">计算手抓饼的价格
+* </span><span style="color: #808080;">@return</span>
+<span style="color: #008000;">*/</span><span style="color: #000000;">
+Integer calcCost();
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description: Noteless 家的手抓饼
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> NotelessHandPancake <span style="color: #0000ff;">implements</span><span style="color: #000000;"> HandPancake {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* 提供noteless 家的手抓饼一份
+</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+</span><span style="color: #0000ff;">return</span> " noteless 家的手抓饼"<span style="color: #000000;">;
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">计算 noteless 家 一份手抓饼的价格
+* </span><span style="color: #808080;">@return</span>
+<span style="color: #008000;">*/</span><span style="color: #000000;">
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+</span><span style="color: #0000ff;">return</span> 3<span style="color: #000000;">;
+}
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>配菜抽象类(装饰器)</strong></span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:装饰器类实现了手抓饼接口,具有了手抓饼的类型
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">abstract</span> <span style="color: #0000ff;">class</span> Decorator <span style="color: #0000ff;">implements</span><span style="color: #000000;"> HandPancake{
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> HandPancake handPancake;
+Decorator(HandPancake handPancake){
+</span><span style="color: #0000ff;">this</span>.handPancake =<span style="color: #000000;"> handPancake;
+}
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">提供手抓饼
+* </span><span style="color: #808080;">@return</span>
+<span style="color: #008000;">*/</span><span style="color: #000000;">
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> handPancake.offerHandPancake();
+}
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">提供手抓饼的价格
+* </span><span style="color: #808080;">@return</span>
+<span style="color: #008000;">*/</span><span style="color: #000000;">
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> handPancake.calcCost();
+}
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>具体的配菜(具体的装饰)</strong></span></h4>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:培根
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Bacon <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Decorator {
+    Bacon(HandPancake handPancake){
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(handPancake);
+    }
+
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.offerHandPancake()+" 加培根"<span style="color: #000000;">;
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.calcCost()+4<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:鸡蛋
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Egg <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Decorator {
+    Egg(HandPancake handPancake){
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(handPancake);
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.offerHandPancake()+"加鸡蛋"<span style="color: #000000;">;
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.calcCost()+2<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:烤肠
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Sausage <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Decorator {
+    Sausage(HandPancake handPancake){
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(handPancake);
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.offerHandPancake()+" 加香肠"<span style="color: #000000;">;
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.calcCost()+3<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:青菜
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Vegetable <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Decorator {
+    Vegetable(HandPancake handPancake){
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">(handPancake);
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String offerHandPancake() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.offerHandPancake()+" 加青菜"<span style="color: #000000;">;
+    }
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Integer calcCost() {
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">super</span>.calcCost()+1<span style="color: #000000;">;
+    }
+
+}</span></pre>
+</div>
+</div>
+<h4 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>顾客</strong></span></h4>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:顾客具有名字,然后购买手抓饼
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Customer {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;
+Customer(String name){
+</span><span style="color: #0000ff;">this</span>.name =<span style="color: #000000;"> name;
+}
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> buy(HandPancake handPancake){
+　　System.out.println(name</span>+"购买了 : "+handPancake.offerHandPancake()+
+　　" 一份, 花了 : "+handPancake.calcCost()+"块钱~"<span style="color: #000000;">);
+　　System.out.println();
+}
+}</span></pre>
+</div>
+</div>
+<h4><span style="font-size: 13.5pt;"><strong>测试类</strong></span></h4>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> decorator;
+
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">
+* Created by noteless on 2018/9/6.
+* Description:
+* 手抓饼3块
+* Sausage 烤肠 3块
+* Bacon 培根 4块
+* Egg 鸡蛋2块
+* Vegetable 青菜 1块
+</span><span style="color: #008000;">*/</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String ...strings){
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客张三,他想吃手抓饼了,来了一个原味的</span><span style="color: #000000;">
+Customer customerA </span>= <span style="color: #0000ff;">new</span> Customer("张三"<span style="color: #000000;">);
+customerA.buy(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake());
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客李四,他想吃手抓饼了,他加了一根烤肠</span><span style="color: #000000;">
+Customer customerB </span>= <span style="color: #0000ff;">new</span> Customer("李四"<span style="color: #000000;">);
+customerB.buy(</span><span style="color: #0000ff;">new</span> Sausage(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake()));
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客王五,他想吃手抓饼了,他加了一根烤肠 又加了培根</span><span style="color: #000000;">
+Customer customerC </span>= <span style="color: #0000ff;">new</span> Customer("王五"<span style="color: #000000;">);
+customerC.buy(</span><span style="color: #0000ff;">new</span> Bacon(<span style="color: #0000ff;">new</span> Sausage(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake())));
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客王五的兄弟,他想吃手抓饼了,他加了培根 又加了烤肠</span><span style="color: #000000;">
+Customer customerC1 </span>= <span style="color: #0000ff;">new</span> Customer("王五的兄弟"<span style="color: #000000;">);
+customerC1.buy(</span><span style="color: #0000ff;">new</span> Sausage(<span style="color: #0000ff;">new</span> Bacon(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake())));
+
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客赵六,他想吃手抓饼了,他加了一根烤肠 又加了2份培根</span><span style="color: #000000;">
+Customer customerD </span>= <span style="color: #0000ff;">new</span> Customer("赵六"<span style="color: #000000;">);
+customerD.buy(</span><span style="color: #0000ff;">new</span> Bacon(<span style="color: #0000ff;">new</span> Bacon(<span style="color: #0000ff;">new</span> Sausage(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake()))));<br />
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客 王二麻子,他想吃手抓饼了,特别喜欢吃青菜 来了三分青菜</span><span style="color: #000000;">
+Customer customerE </span>= <span style="color: #0000ff;">new</span> Customer("王二麻子"<span style="color: #000000;">);
+customerE.buy(</span><span style="color: #0000ff;">new</span> Vegetable(<span style="color: #0000ff;">new</span> Vegetable(<span style="color: #0000ff;">new</span> Vegetable(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake()))));<br />
+</span><span style="color: #008000;">//</span><span style="color: #008000;">有一个顾客 有钱人 王大富 来了一个全套的手抓饼</span><span style="color: #000000;">
+Customer customerF </span>= <span style="color: #0000ff;">new</span> Customer("王大富"<span style="color: #000000;">);
+customerF.buy(</span><span style="color: #0000ff;">new</span> Egg(<span style="color: #0000ff;">new</span> Vegetable(<span style="color: #0000ff;">new</span> Bacon(<span style="color: #0000ff;">new</span> Sausage(<span style="color: #0000ff;">new</span><span style="color: #000000;"> NotelessHandPancake())))));
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">我们有一个顾客Customer类,他拥有buy方法,可以购买手抓饼 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">手抓饼接口为 HandPancake&nbsp; 具体的手抓饼为NotelessHandPancake </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">然后提供了一个配菜类,这个配菜类的行为和手抓饼是一致的,在提供手抓饼的同时还能够增加一些额外的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">然后还有四个具体的配菜 培根 香肠 鸡蛋 青菜 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">运行测试类,会算账的亲们,看看单价是否还对的上? </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103052556-892940993.png"><img style="display: inline; background-image: none;" title="image_5b91e046_7b49" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103053040-2027843693.png" alt="image_5b91e046_7b49" width="711" height="354" border="0" /></a></div>
+<h4 style="line-height: 200%;"><strong><span style="font-size: 18pt;">UML图</span></strong></h4>
+<div style="line-height: 200%;"><span style="font-size: 15px;">懒得画了,IDEA自动生成的 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103054064-1241703558.png"><img style="display: inline; background-image: none;" title="image_5b91e046_739c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103055033-1278054473.png" alt="image_5b91e046_739c" width="1022" height="409" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h4 style="line-height: 200%;">&nbsp;手抓饼装饰器模式中的根本</h4>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">上面的代码还是比较清晰的,如果你没办法仔细看进去的话,我们换一种思维方式来思考手抓饼的装饰器模式 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">你可以这么理解: </span></div>
+<div><span style="font-size: 15px;">你过去手抓饼的摊位那边,你说老板来一个手抓饼,加培根,加鸡蛋 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">摊主那边是这样子的: </span></div>
+<div><span style="font-size: 15px;">老板负责直接做手抓饼 </span></div>
+<div><span style="font-size: 15px;">旁边站着漂亮的老板娘,手里拿着手抓饼的袋子,负责帮你装袋,你总不能直接用手拿饼,对吧 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">接下来我们说下过程: </span></div>
+<div><span style="font-size: 15px;">老板马上就开始做手抓饼了,做好了之后,老板把手抓饼交给了旁边站着的老板娘 </span></div>
+<div><span style="font-size: 15px;">老板娘在给装袋并且交给你之前 </span></div>
+<div><span style="font-size: 15px;">把鸡蛋和培根放到了你的手抓饼里面 </span></div>
+<div><span style="font-size: 15px;">然后又放到了包装袋子里面 </span></div>
+<div><span style="font-size: 15px;">接着递给了你 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">你说到底是老板娘手里包装好的手抓饼是手抓饼&nbsp; 还是老板做好的热气腾腾的是手抓饼呢? </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">其实,老板做好的热气腾腾的手抓饼,正是我们上面提供出来的具体的手抓饼 </span></div>
+<div><span style="font-size: 15px;">老板娘手里拿着的手抓饼包装袋来包装手抓饼,也是手抓饼,只不过是包装了下,这个就是装饰器的概念 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">所以装饰器模式还有一个名字&nbsp; <strong>包装器模式（Wrapper）</strong> </span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">解决问题的根本思路是使用组合替代了继承 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">上面我们也进行了分析,继承会出现类的个数的爆炸式增长 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">组合,不仅仅动态扩展了类的功能,而且还很大程度上减少了类的个数 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不过显然,如果你的装饰类过多,虽说比继承好很多,但是问题还是一样的,都会类过多 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 24pt;">根本:&nbsp; 是你还有你</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">我们上面的类的结构中,装饰器包含一个手抓饼对象作为属性,他也实现了手抓饼接口</div>
+<div style="line-height: 200%;">所以我们说,是你还有你</div>
+<div style="line-height: 200%;">每次自己返回结果之前,都还会调用自己含有的对象的方法</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">看下调用流程, 你说它的形式跟<span style="font-size: 18pt;"><strong>递归</strong></span>调用有什么区别?</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103056103-1267054979.png"><img style="display: inline; background-image: none;" title="image_5b91e047_17fb" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103057075-55359600.png" alt="image_5b91e047_17fb" width="1036" height="668" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 18pt;">面向对象中的适配器模式详解</span></strong></h3>
+<div style="line-height: 200%;">
+<h4><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="font-size: 13.5pt;"><strong>意图</strong></span></span></h4>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">动态的给一个对象添加额外的职责,简单说,动态的扩展职责</span><br /><span style="font-size: 15px;">就增加功能来说,装饰器模式比生成子类要更加灵活</span><br /><span style="font-size: 15px;">所以装饰器模式主要解决继承子类爆炸增长的问题</span><br />
+<div>&nbsp;</div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+</div>
+<h3 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>装饰器模式中的角色</strong></span>
+</h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">Component
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">抽象构建
+				</span></td>
+<td><span style="font-size: 15px;">装饰器模式中必然有一个最基本最原始的-&gt;</span><br /><span style="font-size: 15px;">接口/抽象类</span><br /><span style="font-size: 15px;">来充当抽象构建
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">抽象的手抓饼&nbsp;&nbsp;&nbsp; HandPancake
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">ConcreteComponent
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">具体构建&nbsp; </span></td>
+<td>
+<div><span style="font-size: 15px;">是抽象构建的一个具体实现
+					</span></div>
+<div><span style="font-size: 15px;">你要装饰的就是它
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">具体某家店铺生产的手抓饼&nbsp;&nbsp; NotelessHandPancake
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">Decorator
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">装饰抽象类
+				</span></td>
+<td><span style="font-size: 15px;">一般是一个抽象类</span><br /><span style="font-size: 15px;">实现抽象构建</span><br /><span style="font-size: 15px;">并且必然有一个private变量指向Component 抽象构建
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">配菜抽象类(装饰器)&nbsp;&nbsp; Decorator
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">ConcreteDecorator
+				</span></td>
+<td><span style="font-size: 15px;">具体的装饰类
+				</span></td>
+<td><span style="font-size: 15px;">必须要有具体的装饰角色</span><br /><span style="font-size: 15px;">否则装饰模式就毫无意义了
+				</span></td>
+<td><span style="font-size: 15px;">具体的配菜(具体的装饰)&nbsp;&nbsp;&nbsp; Bacon Egg&nbsp; Vegetable Sausage
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103058034-1155774626.png"><img style="display: inline; background-image: none;" title="image_5b91e047_1c47" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103058231-589172398.png" alt="image_5b91e047_1c47" width="642" height="497" border="0" /></a>
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">仔细体味下&lt;是你 还有你&gt; 
+					</span></div>
+<div><span style="font-size: 15px;">Decorator 是Component 还有Component
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">OOP中的一个重要设计原则
+</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">类应该对扩展开放,对修改关闭
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">所谓修改就是指继承,一旦继承,那么将会对部分源代码具有修改的能力,比如覆盖方法,所以你尽量不要做这件事情</span><br /><span style="font-size: 15px;">扩展就是指的组合,组合不会改变任何已有代码,动态得扩展功能
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">装饰器模式优点</span></strong>
+</h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">装饰类和被装饰类可以独立发展，而不会相互耦合
+					</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 15px;">Component类无须知道Decorator类，Decorator类是从外部来扩展Component类的功能，
+					</span></div>
+<div><span style="font-size: 15px;">而Decorator也不用知道具体的构件
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td>
+<div><span style="font-size: 15px;">装饰模式是继承关系的一个替代方案
+					</span></div>
+<div><span style="font-size: 15px;">我们看装饰类Decorator，不管装饰多少层，他始终是一个Component，实现的还是is-a的关系,所以他是继承的一种良好替代方案
+					</span></div>
+
+
+
+
+
+
+
+				</td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">如果设计得当,装饰器类的嵌套顺序可以任意,比如</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103059001-1737695658.png"><img style="display: inline; background-image: none;" title="image_5b91e047_2ed8" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103059931-922513638.png" alt="image_5b91e047_2ed8" width="598" height="77" border="0" /></a><br /><span style="font-size: 15px;">一定要注意前提,那就是你的装饰不依赖顺序
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">装饰器模式缺点</span></strong>
+</h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: 15px;">装饰器模式虽然从数量级上减少了类的数量,但是为了要装饰,仍旧会增加很多的小类</span><br /><span style="font-size: 15px;">这些具体的装饰类的逻辑将不会非常的清晰,不够直观,容易令人迷惑
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td><span style="font-size: 15px;">装饰器模式虽然减少了类的爆炸,但是在使用的时候,你就可能需要更多的对象来表示继承关系中的一个对象
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">多层的装饰是比较复杂,比如查找问题时,被层层嵌套,不容易发现问题所在</span><br />
+				</td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>装饰器模式使用场景</strong></span>
+</h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">当你想要给一个类增加功能,然而,却并不想修改原来类的代码时,可以考虑装饰器模式</span><br /><span style="font-size: 15px;">如果你想要动态的给一个类增加功能,并且这个功能你还希望可以动态的撤销,就好像直接拿掉了一层装饰物
+				</span></td>
+
+
+
+
+
+
+
+			</tr>
+
+
+
+
+
+
+
+		</tbody>
+
+
+
+
+
+
+
+	</table>
+
+
+
+
+
+
+</div>
+<h3 style="line-height: 200%;"><strong><span style="font-size: 13.5pt;">装饰器模式的简化变形</span></strong></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-size: 15px;">装饰器模式是对继承的一种强有力的补充与替代方案,装饰器模式具有良好的扩展性
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">再次强调,设计模式是一种思维模式,没有固定公式
+	</span></div>
+<div style="line-height: 32px;"><span style="font-size: 15px;">如果需要的话,可以进行简化
+	</span></div>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">如果省略抽象构建,装饰器直接装饰一个类的话,</span><br /><span style="font-size: 15px;">那么可以装饰器直接继承这个类</span><br /><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103100125-1032409791.png"><img style="display: inline; background-image: none;" title="image_5b91e047_7db9" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103100305-1742037509.png" alt="image_5b91e047_7db9" width="410" height="366" border="0" /></a>
+					</td>
+
+
+
+
+
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">如果只有一个具体的装饰器类,那么可以省略掉 Decorator</span><br /><span style="font-size: 15px;">ConcreteDecorator 充当了ConcreteDecorator 和 Decorator的角色</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103100606-755619532.png"><img style="display: inline; background-image: none;" title="image_5b91e047_e8e" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180907103101001-1023170168.png" alt="image_5b91e047_e8e" width="452" height="249" border="0" /></a>&nbsp; </td>
+
+
+
+
+
+
+
+				</tr>
+
+
+
+
+
+
+
+			</tbody>
+
+
+
+
+
+
+
+		</table>
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div>&nbsp;</div>
+
+
+
+
+
+
+
+	</div>
+<div style="line-height: 200%;">
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">设计模式是作为解决问题或者设计类层级结构时的一种思维的存在,而不是公式一样的存在!
+							</span></div>
+
+
+
+
+
+
+
+						</td>
+
+
+
+
+
+
+
+					</tr>
+
+
+
+
+
+
+
+				</tbody>
+
+
+
+
+
+
+
+			</table>
+
+
+
+
+
+
+
+		</div>
+<div>&nbsp;</div>
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-07 10:31</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9603041" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9603041);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9603041, cb_entryCreatedDate = '2018-09-07 10:31', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

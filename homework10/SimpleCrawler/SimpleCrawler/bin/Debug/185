@@ -1,0 +1,726 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="Web开发工程师请阅读下面的前端开发准则，这是第一部分，强调了过去几年里我们注意到的Web工程师务须处理的Web访问安全基础点。尤其是一些从传统软件开发转入互联网开发的工程师，请仔细阅读，不要因为忽视" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Web开发基本准则-55实录-Web访问安全 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/p/rule1.html">Web开发基本准则-55实录-Web访问安全</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp; Web开发工程师请阅读下面的前端开发准则，这是第一部分，强调了过去几年里我们注意到的Web工程师务须处理的Web访问安全基础点。尤其是一些从传统软件开发转入互联网开发的工程师，请仔细阅读，不要因为忽视这些基础点而制造一个又一个的漏洞或突发事件。</p>
+<p><span style="background-color: #ffff99;"><strong><span style="font-size: 18px;">Web开发基本准则-55实录-Web访问安全</span></strong></span></p>
+<p align="left"><a href="http://www.cnblogs.com/zhengyun_ustc/" target="_blank">郑昀</a> 创建于2013年2月</p>
+<p align="left"><a href="http://weibo.com/yunzheng" target="_blank">郑昀</a> 最后更新于2013年10月14日</p>
+<div align="center"><hr align="center" size="2" width="100%" /></div>
+<p align="left"><strong>提纲：</strong></p>
+<ol start="1">
+<li>Web访问安全</li>
+<li><a href="http://www.cnblogs.com/zhengyun_ustc/p/rule2.html" target="_blank">缓存策略</a></li>
+<li>存储介质连接池</li>
+<li>业务降级</li>
+<li>并发请求的处理</li>
+</ol>
+<div align="center"><hr align="center" size="2" width="100%" /></div>
+<p align="left"><strong>关键词：</strong></p>
+<p align="left">Session Hijacking，XSS（Cross Site Scripting），SQLi（SQL Injection），CSRF（Cross-Site Request Forgery），FormHash，Rate Limits，平行权限</p>
+<div align="center"><hr align="center" size="2" width="100%" /></div>
+<h2><span style="background-color: #ffff99;">一，Web访问安全</span></h2>
+<h3><span style="background-color: #ccffff;">1.1.利用 FormHash 防 CSRF 和表单自动提交</span></h3>
+<p align="left">&nbsp; FormHash 指的是，<strong>通过在 Form 表单中构造一个隐藏的 input 元素，如：</strong></p>
+<p align="left"><strong>&nbsp;</strong>&nbsp;<span style="color: #0000ff;">&lt;input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" /&gt;</span></p>
+<p align="left"><strong>&nbsp; </strong><strong>让第三方难以伪造这个 input 的 value，借此阻止网站外部随意构造表单提交，即防CSRF</strong>。适合的业务场景有注册、登录、下单、秒杀、抽奖、积分换代金券等等。</p>
+<p align="left">&nbsp;&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.1.1.康盛的做法</span></h4>
+<p align="left">&nbsp; 康盛的产品如 Discuz 为了防止灌水机发帖，FormHash 值是这么计算的：</p>
+<p align="left">&nbsp; 它的计算函数为&nbsp;formhash()&nbsp;：</p>
+<p align="left"><span style="color: #0000ff;">function formhash($specialadd = '') {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+<p align="left"><span style="color: #0000ff;">global $_G;&nbsp;&nbsp;</span></p>
+<p align="left"><span style="color: #0000ff;">$hashadd = defined('IN_ADMINCP') ? 'Only For Discuz! Admin Control Panel' : '';&nbsp;&nbsp;&nbsp;</span></p>
+<p align="left"><span style="color: #0000ff;">return substr(md5(substr($_G['timestamp'], 0, -7)</span></p>
+<p align="left"><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &nbsp; .$_G['username'].$_G['uid'].$_G['authkey']</span></p>
+<p align="left"><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &nbsp; .$hashadd.$specialadd), 8, 8);</span></p>
+<p align="left"><span style="color: #0000ff;">}</span></p>
+<p align="left">&nbsp;&nbsp;首先，<span style="color: #0000ff;">substr($_SGLOBAL['timestamp'], 0, -7)</span>，截取时间戳前3位（注意，康盛的这种做法允许 formhash 在一定的时间里生效且不变，由于截取了时间戳的前3位，那么有效期<strong>范围是115天</strong>）。</p>
+<p align="left">&nbsp; 然后与用户名、用户UID、authke​y、自定义的key等字符串连接。这里的 authkey 是根据服务器端配置文件里的 authkey 与<strong>客户端 cookies 里的 saltkey 键值</strong>连接后，md5 一下得到的，所以并不一定是固定值，<strong>取决于你怎么向客户端里种 saltkey cookie 了</strong>（康盛选择的是种一个 random(8) 的随机值）。</p>
+<p align="left">&nbsp; 最后再做一次 md5，截取字符串的8位。</p>
+<p align="left">&nbsp; 服务器端用 submitcheck 函数进行验证时，会再算一遍 formhash 来与客户端提交的进行比对：<span style="color: #0000ff;">$_POST['formhash'] == formhash()</span>。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 康盛的 formhash 仿造几率很小，但也不见得是&ldquo;不同表单不同随机值&rdquo;，所以<strong>可以在登录后从康盛产品的网页中得到一个 formhash 字符串，以及 cookies 里的 saltkey 键值，然后构造表单并构造 HTTPRequest，提交即可，115天内有效</strong>。</p>
+<p align="left">&nbsp; 只能说康盛的做法简单且有一定效果，适合作为你起步的 Plan A 抵挡一阵子。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.2.通过全局 Filter 检测或过滤 XSS/SQLi/shell注入</span></h3>
+<p align="left">&nbsp; 通过<a href="http://www.wooyun.org/bugs/">乌云网的漏洞列表</a>，我们可以发现 XSS注入[<em>注1</em>]/SQL 注入无处不在，各大厂商前赴后继地犯错。如果框架本身不能有效拦截或检测，仅凭借铁打营盘流水兵的工程师自己的觉悟，恐怕朝不保夕。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 常见的误区是，（因为XSS漏洞很常见所以认为）XSS没什么了不起的，不会起多大风浪。</p>
+<p align="left">&nbsp; 一个弱漏洞可能没事儿，但是攻击者往往很有恒心毅力，如果被他们找到一连串的弱漏洞，再加上社会工程学的手段（请参考<a href="http://www.wooyun.org/bugs/wooyun-2010-035527">2013年，利用社工攻陷知乎后台的安全案例</a>），千里之堤就会毁于蚁穴。譬如，一个前台的存储型XSS漏洞，配合管理后台的登录帐号 Session Hijacking，就能轻易突入管理后台。</p>
+<p align="left">&nbsp; <a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>推荐你阅读以下安全案例以增进认识（有图有真相）：</p>
+<ul>
+<li>2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-035520">豆瓣网存储型XSS漏洞拿到用户cookies</a>，以及，<a href="http://www.wooyun.org/bugs/wooyun-2010-035209">豆瓣网发起同城活动插入XSS代码等待管理员审核时获取管理员cookies</a>；</li>
+<li>2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-035424">天涯CSRF系列四：利用储存XSS+伪CSRF进行蠕虫攻击</a>，&ldquo;既然我们无法通过外部的链接来触发CSRF，那么我们可以利用存储型XSS来触发这个CSRF。在本域下发包，来源域是天涯的，自然不会拦截。正好在天涯博客日志页面发现一个储存XSS的实例，那我们就来结合这个实例进行一次蠕虫攻击。&rdquo;；</li>
+<li>2010年，<a href="http://www.wooyun.org/bugs/wooyun-2010-0733">优酷网分站SQL注射漏洞</a>；2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-032916">优酷网分站之用sqlmap攻陷实录</a>；</li>
+<li>2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-035186">Discuz! 后台第三方插件上传任意后缀文件拿shell</a>。</li>
+</ul>
+<p align="left">&nbsp;&nbsp;</p>
+<p align="left">&nbsp; 所以，首先，最好是在框架层面增加全局 Filter，对 HTTP Request 中的&nbsp;$_GET/$_POST/$_COOKIE&nbsp;进行字符串过滤，这种 Filter 将是强制性的。（出于防范CSRF（Cross-Site Request Forgery，跨站请求伪造）的考虑[<em>注4</em>]，工程师尽量不要使用&nbsp;$_REQUEST。）</p>
+<p align="left">&nbsp; 对于 PHP 来说，还可以在开发环境引入 laruence 的检测 xss/sql/shell 注入的 PHP 扩展模块：<a href="http://www.laruence.com/2012/02/14/2544.html">PHPTaint</a>[<em>注2</em>]。</p>
+<p align="left">&nbsp; 其次，杜绝裸写SQL。</p>
+<p align="left">&nbsp; 确保所有拼装SQL参数的地方都有对参数进行校验的预编译环节，如使用&nbsp;<a href="http://doc.java.sun.com/DocWeb/api/all/java.sql.PreparedStatement">java.sql.PreparedStatement</a>。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffff;">1.2.1.大的原则是：不要相信客户端提交的数据</span></h4>
+<p align="left">&nbsp; 要深刻理解XSS的原理，<strong>攻击代码不一定（非要）在 &lt;script&gt;&lt;/script&gt; 中</strong>。</p>
+<p align="left">&nbsp; 所以，处理XSS注入的时候，<strong>不仅仅要转义或删除特殊的 HTML 标记和符号</strong>，如尖括号&lt;&gt;，如script，如iframe等，<strong>还需要过滤 JavaScript 事件所涉及的大量属性</strong>，如下表所示：</p>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td>
+<p align="center"><span style="font-size: 12px;"><strong>属性</strong></span></p>
+</td>
+<td>
+<p align="center"><span style="font-size: 12px;"><strong>当以下情况发生时，出现此事件</strong></span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onabort</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">图像加载被中断</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onblur</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">元素失去焦点</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onchange</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">用户改变域的内容</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onclick</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">鼠标点击某个对象</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">ondblclick</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">鼠标双击某个对象</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onerror</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">当加载文档或图像时发生某个错误</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onfocus</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">元素获得焦点</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onkeydown</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个键盘的键被按下</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onkeypress</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个键盘的键被按下或按住</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onkeyup</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个键盘的键被松开</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onload</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个页面或图像被完成加载</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onmousedown</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个鼠标按键被按下</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onmousemove</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">鼠标被移动</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onmouseout</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">鼠标从某元素移开</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onmouseover</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">鼠标被移到某元素之上</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onmouseup</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">某个鼠标按键被松开</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onreset</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">重置按钮被点击</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onresize</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">窗口或框架被调整尺寸</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onselect</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">文本被选定</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onsubmit</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">提交按钮被点击</span></p>
+</td>
+</tr>
+<tr>
+<td>
+<p align="left"><span style="font-size: 12px;">onunload</span></p>
+</td>
+<td>
+<p align="left"><span style="font-size: 12px;">用户退出页面</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p align="left">&nbsp;表1 JavaScript事件属性表</p>
+<p align="left">&nbsp; 否则，就可能出现下面这两种的XSS漏洞实例：</p>
+<p align="left">例1：</p>
+<p align="left">&nbsp; http://YourDomain.com/index?num=1%22+<span style="color: #0000ff;">onmousemove%3Dalert%284%29</span>+wb%3D%22</p>
+<p align="left">&nbsp; %22就是单引号的转义，%3D是等号，%28是左括号，%29是右括号。鼠标移动可触发。</p>
+<p align="left">例2：</p>
+<p align="left">&nbsp; 访问 http://YourDomain.com/；</p>
+<p align="left">&nbsp; 在页眉的搜索输入框中输入关键词：<span style="color: #0000ff; background-color: #ffff00;">" onmousemove=alert(4) wb="</span>&nbsp;（注：包含双引号）；</p>
+<p align="left">&nbsp; 在搜索结果页面上，当鼠标移动时，就会弹出XSS种下的JS弹出框。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.3.验证码服务不简单</span></h3>
+<p align="left">&nbsp; 图片验证码或者答题验证码是为了尽可能狙击注册机、秒杀器等非人类行为，自然就成了攻防第一线的重要技术。</p>
+<p align="left">&nbsp;&nbsp;</p>
+<p align="left">攻：<strong>提前收集验证码</strong>。适用场景：秒杀。在秒杀开始前就收集好验证码，从而提前准备好表单。</p>
+<p align="left">防：1）<strong>不同业务的验证码不得混用</strong>，登录、注册、抽奖、秒杀、下发短信验证等各是各的。2）<strong>像秒杀这种与时间有关的业务场景，验证码就不允许提前生成</strong>。即使刻意构造出某个秒杀活动的图片验证码URL访问，也必须先判断秒杀活动开始时间，阻止提前访问。</p>
+<p align="left">&nbsp;</p>
+<p align="left">攻：<strong>构造表单时使用过期 cookie</strong>。</p>
+<p align="left">验证码一般是浏览器提交 cookie 里的 verifysession（一个标识本次验证会话的 Hash 串）和手工输入的验证码字符串 verifycode，服务器端按 F(verifysession)==verifycode 进行校验。那么秒杀器突破时，别用服务器之前响应的 Hash 串，一直用自己手中掌握的 verifysession 和 verifycode 提交，就可以突破了。即使这一组 verifysession 和 verifycode 在服务器端验证后立即失效，也无所谓，多准备几组数据，就拼谁的秒杀器并发提交快即可。</p>
+<p align="left">防：1）结合 FormHash 方法联防。2）针对不同业务生成的验证码的过期时间可以单独设定。可以让某个业务的验证码图片过期时间很短。</p>
+<p align="left">&nbsp;</p>
+<p align="left">攻：<strong>OCR识别图片验证码</strong>。</p>
+<p align="left">防：如果业务场景确实非常需要狙击机器提交，那么上答题验证码，但也因此有了&ldquo;题库有限&rdquo;这个弱点。</p>
+<p align="left">&nbsp;</p>
+<p align="left">攻：（既然题库有限那么）通过刷秒杀页面来<strong>收集题目</strong>。然后人工快速回答，或者 OCR 识别问题内容，自动匹配答案。</p>
+<p align="left">防：FormHash 有一定作用，但对于&ldquo;按键精灵&rdquo;软件录制脚本（而不是机器构造表单），确实难以防范，第三方只要比真正的用户响应快、提交快即可。</p>
+<p align="left">&nbsp;</p>
+<p align="left">攻：答题时，<strong>构造表单使用过期题目</strong>。</p>
+<p align="left">原理类似于使用过期 cookie。如果本次秒杀商品对应的答题不是一对一锁定的（即换其他题提交也可以），那么也可以强制使用过期题目。</p>
+<p align="left">防：加Token。让 Token 的生成与业务的具体场景有关。如一个 Token 由登录用户（以user id标识）和当前秒杀商品（以goods id标识）等关键信息生成。也是 FormHash 思路的延续。或者当前秒杀绑定题目，禁止使用其他题目答题。</p>
+<p align="left">&nbsp;</p>
+<p align="left">攻：上面的措施都挡不住我。</p>
+<p align="left">防：拦人。对于黑名单用户（手动加或自动识别），他能参与秒杀，但总是得到如下提示&ldquo;系统繁忙：人太多了，休息一下，等等吧&rdquo;。</p>
+<p align="left">&nbsp;</p>
+<p align="left">其他电商的做法参考<a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>的《<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">对付秒杀器等恶意访问行为的简单梳理</a>》 [<em>注6</em>]&nbsp;。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.4.敏感信息存入 cookies 须防篡改</span></h3>
+<p align="left">&nbsp;&nbsp;电商应用有时候不可避免地存储了一些敏感数据到客户端，当然不希望被客户端篡改。</p>
+<p align="left">&nbsp; 所以可以在&nbsp;set-cookie 时加上防篡改验证码，或者不暴露原值直接对称加密存储。</p>
+<p align="left">&nbsp; 如：user_name=alex|bj95ef23cc6daecc475de</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 防篡改验证码的生成规则可以很简单：<span style="color: #0000ff;">md5(cookieValue+key)或sha1(cookieValue+key)</span>，key可以是服务器端掌握的一个固定字符串，也可以很复杂（如<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">LTPA示例</a>[<em>注7</em>]）。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.5.IP地址防伪造</span></h3>
+<p align="left">&nbsp; 有人会说可以通过&nbsp;<span style="color: #0000ff;">request.getHeader("X-FORWARDED-FOR")</span>&nbsp;获得ip字符串，这个头域简称&nbsp;<strong>XFF </strong><strong>头</strong>，只有在通过了 HTTP 代理或者负载均衡服务器时才会添加该项。</p>
+<p align="left">&nbsp; 但一定要知道 XFF 头仅仅是 HTTP Headers 中的一分子，那自然是可以随意增删改的。很多投票系统都有此漏洞，它们简单地取 XFF 头中的ip地址，设置为客户端来源地址，因此第三方可以伪造任何ip投票。</p>
+<p align="left">&nbsp; 所以规则一：<strong>不要轻信 HTTP Headers 里的IP字段</strong>。</p>
+<p align="left">&nbsp;&nbsp;</p>
+<p align="left">&nbsp; 还与客户端到服务器端之间的路径有关，所以工程师要关注生产环境里你的 WebServer 前面到底挂的是什么，Nginx 的 proxy_set_header 是怎么配置的。</p>
+<p align="left">&nbsp; 几种场景：1）F5-&gt;Nginx-&gt;WebServer；2）F5-&gt;WebServer；3）Client-&gt;CDN-&gt;Nginx。搞清楚场景和配置，拿到真正的 Remote Address，请参考<a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>的《<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a>[<em>注8</em>]》。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.6.防 Session Hijacking</span></h3>
+<p align="left">&nbsp; 当第三方以如下手法获得了你的浏览器标识会话的字符串，那么他也许能以你的身份冒名操作：</p>
+<ol start="1">
+<li>从访问记录里获得 URL 上携带的 Session Token；</li>
+<li>利用 XSS 漏洞窃取 Cookie 里存储的 Session Token。</li>
+</ol>
+<p align="left">&nbsp; 所以，首先绝不在 URL 中传递 Session Token，除非走 HTTPS 通道。</p>
+<p align="left">&nbsp; 其次，需要多管齐下，1）cookie 里的 Session Token，<strong>必须设定为 httponly</strong>，<strong>禁止 JavaScript 读取</strong>，以绝后患；2）如果服务器端还需要 cookie 里存储的用户ID等信息，那么 cookie 键值需要加签名防篡改；3）根据客户端的IP地址、User-Agent、Session和其他信息生成一个 UA Token，存储在 cookie 里；<strong>服务器端每次都会核对这个 UA Token 是否正确，如果不正确则退出登录</strong>。这样，即使第三方拿到了你的 Session Token，也无法处于登录状态。</p>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.7.用 Robots.txt 限制住搜索引擎</span></h3>
+<p align="left">&nbsp; 每一个对公网暴露的 Web 工程，上线之初理应配有 Robots.txt ，不仅仅是为了SEO，而且要限制站点的某些目录不允许抓取和收录。</p>
+<p align="left">&nbsp;&nbsp;<strong>内部站点的robots.txt 内容必须（MUST）是</strong>：</p>
+<p align="left">&nbsp;&nbsp;User-agent: *</p>
+<p align="left">&nbsp; Disallow: /</p>
+<p align="left">&nbsp;&nbsp;<strong>不少浏览器都会向搜索引擎传送访问历史</strong>，<strong>你以为的内部隐秘访问地址，可能早已被搜索引擎收录了</strong>，所以对此绝不要掉以轻心。不要给入侵者借搜索&ldquo;site:YourDomain.com&rdquo;或&ldquo;site:YourDomain.com URL:/YourPath&rdquo; 遍历内部站点的机会。</p>
+<p align="left">&nbsp; <a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>推荐你阅读以下安全案例增进认识：</p>
+<ul>
+<li>2012年，<a href="http://www.wooyun.org/bugs/wooyun-2010-07585">支付宝转账或交易结束后的结果页面被 Google 收录</a>。</li>
+</ul>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.8.敏感信息的存储和展示</span></h3>
+<p align="left">&nbsp;&nbsp;牢记一点，<strong>你的数据库很有可能被拖库，我们要未雨绸缪，降低拖库后的危害</strong>！</p>
+<p align="left">&nbsp; 所以，<strong>敏感信息请加密存储</strong>。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.8.1.密码的存储</span></h4>
+<p align="left">&nbsp; 首先，绝不能仅仅 MD5(password) 存储，这样等同于明文存储。其次铁律是，禁止明文存储（登录）密码。</p>
+<p align="left">&nbsp;&nbsp;最简单的办法是，随机生成 SaltKey 并存储，按&nbsp;MD5(salt+MD5(password))&nbsp;存储密码。</p>
+<p align="left">&nbsp;&nbsp;如果密码需要二次分发（而不是重置密码），请对称加密存储（应用程序掌管公钥私钥）。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.8.2.敏感信息的展示</span></h4>
+<p align="left">&nbsp;&nbsp;牢记一点，<strong>第三方很有可能拿到你的平台登录权限</strong>（通过 session hijacking，或通过内部人），<strong>所以要未雨绸缪，敏感字段不要轻易示人</strong>！</p>
+<p align="left">&nbsp; 所以，<strong>敏感信息尽量不要明文展示，即使是合法用户登录状态下</strong>。</p>
+<p align="left">&nbsp;&nbsp;</p>
+<p align="left">&nbsp;&nbsp;以下信息需&ldquo;中间若干位星号显示&rdquo;，如果没有特别理由，那么默认不能直接显示（包括导表）：</p>
+<ul>
+<li>（商户的）银行帐号，</li>
+<li>（商户的或用户的）手机号码和邮箱地址。</li>
+</ul>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; <a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>推荐你阅读以下安全案例增进认识：</p>
+<ul>
+<li>2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-028490">百度云网盘用户信息泄露</a>：页面上虽然星号显示，但百度爬虫抓取到了明文；</li>
+<li>2013年，<a href="http://www.cnblogs.com/zhengyun_ustc/p/dns.html">新网互联找回密码流程中，页面上虽然显示了星号遮挡的邮箱名</a>，但HTML文档中表单参数里却使用邮箱明文，导致土豆网域名被劫持。</li>
+</ul>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.9.平行权限像XSS一样是每个新工程师都会跌入的大坑</span></h3>
+<p align="left">&nbsp;&nbsp;<strong>未判断资源使用者与资源拥有者权限是否相符</strong>，新工程师特别容易犯这种错误，尤其是当框架或业务中心没有做ACL限制的话。</p>
+<p align="left">&nbsp; <a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>推荐你阅读这几个典型安全案例，希望能警醒大家，<strong>犯这种错误真的覆水难收，能造成灾难性后果</strong>：</p>
+<ul>
+<li>2011年，知名案例，<a href="http://www.wooyun.org/bugs/wooyun-2011-03271">当当网收货地址Ajax接口未校验权限，导致用户资料泄露</a>；</li>
+<li>2012年，知名案例，<a href="http://www.wooyun.org/bugs/wooyun-2010-07585">支付宝转账或交易结束后的结果页面被 Google 收录</a>，搜索&ldquo;site:cashier.alipay.com depositId&rdquo;即可，导致交易信息泄漏；</li>
+<ul>
+<li>与此类似的是，2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-024626">搜狗输入法多媒体输入功能的结果页面被 Google 收录</a>，搜索&ldquo;site:pinyin.cn&rdquo;即可，导致用户信息泄露；以及，2013年，<a href="http://www.wooyun.org/bugs/wooyun-2010-024626">百度手机输入法增加贴心功能导致用户信息泄露</a>；</li>
+</ul>
+<li>2013年，<a href="http://www.wooyun.org/bugs/wooyun-2013-022425">拉手网发送其他人拉手券（含密码）到自己的手机上</a>；</li>
+<li>2013年，著名案例，<a href="http://www.cnblogs.com/zhengyun_ustc/p/dns.html">利用新网的 domainManage 平行权限漏洞</a>，注册并登录后，可修改任意域名DNS，导致大众点评网域名被劫持。</li>
+</ul>
+<p align="left">&nbsp; 提醒两点：</p>
+<p align="left">&nbsp; 第一，面向公众用户（C）的Web工程，URL上，或提交的表单里，尽量不要出现整数类型的id（如订单id，如商品id，如活动id，如地址id），否则容易被人猜出顺序，随意更改，从而遍历数据。请加密你的整数类型id后传递（注：<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">切勿直接MD5加密，因为它等同于明文加密）</span>。</p>
+<p align="left">&nbsp; 第二，面向C或商业用户（B）的Web工程，接到资源的浏览或操作请求后，先校验请求提交者的身份权限。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 公网上的权限校验大体有几种场景：</p>
+<ul>
+<li>对于平台运营商来说，肯定需要（高级）有权限对这些数据进行读写操作，如后台管理平台。</li>
+<li>对于在平台上开展业务的第三方来说，一旦与某一个用户产生了直接的交易，那么可能有权读写该用户的数据，如读取用户部分信息，对用户订单发起退款申请。</li>
+<li>登录会员有权对自己的数据进行操作。</li>
+</ul>
+<p align="left">&nbsp; 针对这些场景，我们可能需要对目标数据的访问进行不同逻辑的权限检查。</p>
+<p align="left">&nbsp; 权限校验规则：</p>
+<ul>
+<li>如果是平台运营系统请求数据，那么信任发起者身份，不再进行权限校验。</li>
+<li>如果是平台接入第三方请求数据，那么应该检查该数据的拥有者（即会员或系统管理员）是否授权该系统访问其信息。</li>
+<li>对于会员本身，需要检查目标数据的拥有者与请求方是否同一用户。</li>
+</ul>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.10.防表单重复提交</span></h3>
+<p align="left">&nbsp; 有两个含义：</p>
+<ol start="1">
+<li><strong>页面无刷新情况下</strong>，某些业务场景需要主动阻止表单重复提交：</li>
+<ul>
+<li>有的业务场景支持重复提交但会提示：如实物类电商，同一个 SKU 提示重复加入购物车、但仍能加入购物车，只是在相同 SKU 上加数量；</li>
+<li>有的场景会通过以下手法尽量提前避免表单（尤其是数据未变化的情况下）重复提交，而不用非要到服务器端在数据库层面做重复数据判断：</li>
+<ul>
+<li>按钮点击后变灰（按钮文字可以更改，如显示倒计时），收到 Ajax 响应后再恢复，典型场景是填写手机号码点击按钮下发短信验证码时；</li>
+</ul>
+</ul>
+<li><strong>页面刷新情况下</strong>，尽量阻止表单重复提交：</li>
+<ul>
+<li>用户行为有：</li>
+<ul>
+<li>用户按F5刷新（注意，不是Ctrl+F5强制刷新）；</li>
+<li>用户点击浏览器的后退或前进功能回到之前的网页；</li>
+</ul>
+<li>这时需要服务器端配合了：</li>
+<ul>
+<li><strong>POST </strong><strong>表单提交后，服务器端做302跳转，利用302跳转清空表单参数</strong>；</li>
+<li><strong>延续 FormHash 思路，服务器端收到 formhash 值后存入缓存，几分钟后过期</strong>，这样校验逻辑可以阻止几分钟内的含相同 formhash 值的表单重复提交。</li>
+</ul>
+</ul>
+</ol>
+<p align="left">&nbsp;</p>
+<h3><span style="background-color: #ccffff;">1.11.访问速率限制Rate Limits</span></h3>
+<p align="left">&nbsp; 有一些业务场景需要针对用户短时间内过多的访问频次，制定不同的防范措施，如：</p>
+<ul>
+<li>停止当前服务，提示访问过于频繁请稍后再试；</li>
+<li>302跳转到 ServerBusy 之类的页面；</li>
+<li>短时间内拒绝对方IP地址的请求，如三分钟；</li>
+<li>连续触发报警阈值，则将对方IP加入黑名单，封杀较长时间，如一天。</li>
+</ul>
+<p align="left">&nbsp; 简而言之，我们希望限制住的是，在用M度量的任何时间周期内，某一个动作（action）的发生次数N。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.11.1.我们所希望的业务限流</span></h4>
+<p align="left">&nbsp; 业务限流的目的是：</p>
+<ul>
+<li><strong>防扫号防暴力破解场景</strong>：防止对手高速扫描（或调用）我们的系统某个URI。这种场景经常发生在凌晨，对于异常访问，我们系统必须第一时间拦截，在这种情况下，可能不允许太高的突发。</li>
+<li><strong>保证系统平稳运行</strong>：系统承载能力有限，数据库支撑能力有限，所以不希望系统由于突发陡增请求而引发下游系统性能出现凸起，当然适量的波动是允许的。</li>
+</ul>
+<p align="left">&nbsp; 工程上有几种做法：</p>
+<h4><span style="background-color: #ccffcc;">1.11.2.简单的memcache以秒为单位的度量</span></h4>
+<p align="left">&nbsp;memcache 里的 key 可以为：业务编号_IP地址_时间戳_Limiter种类。时间戳精确到秒或分钟。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.11.3.漏桶(Leaky Bucket)算法</span></h4>
+<p align="left">&nbsp;&nbsp;Nginx 的&nbsp;<a href="http://wiki.nginx.org/HttpLimitReqModule">limitReq</a>&nbsp;模块采用的就是<a href="http://en.wikipedia.org/wiki/Leaky_bucket">漏桶算法</a>，分 delay 和 nodelay 两种处理模式。</p>
+<p align="left">&nbsp; 我们用实际例子来演示一下[<em>注11</em>]：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #800000;">01     #以用户二进制IP地址，定义三个漏桶，滴落速率1-3req/sec，桶空间1m，1M能保持大约16000个(IP)状态
+02     limit_req_zone  $binary_remote_addr  zone=qps1:1m   rate=1r/s;
+03     limit_req_zone  $binary_remote_addr  zone=qps2:1m   rate=2r/s;
+04     limit_req_zone  $binary_remote_addr  zone=qps3:1m   rate=3r/s;
+05      
+06     server </span>{<span style="color: #ff0000;">
+07      
+08     #速率qps=1，峰值burst=5，延迟请求
+09     #严格按照漏桶速率qps=1处理每秒请求
+10     #在峰值burst=5以内的并发请求，会被挂起，延迟处理
+11     #超出请求数限制则直接返回503
+12     #客户端只要控制并发在峰值[burst]内，就不会触发limit_req_error_log
+13     # 例1：发起一个并发请求=6，拒绝1个，处理1个，进入延迟队列4个：
+14     #time    request    refuse    sucess    delay
+15     #00</span>:<span style="color: #0000ff;">01        6        1        1            4
+16     #00:02        0        0        1            3
+17     #00:03        0        0        1            2
+18     #00:04        0        0        1            1
+19     #00:05        0        0        1            0
+20     location /delay {
+21         limit_req   zone=qps1  burst=5</span>;<span style="color: #ff0000;">
+22     </span>}<span style="color: #800000;">
+23      
+24     #速率qps=1，峰值burst=5，不延迟请求
+25     #加了nodelay之后，漏桶控制一段时长内的平均qps = 漏桶速率，允许瞬时的峰值qps &gt; 漏桶qps
+26     #所以峰值时的最高qps=(brust+qps-1)=5
+27     #请求不会被delay，要么处理，要么直接返回503
+28     #客户端需要控制qps每秒请求数，才不会触发limit_req_error_log
+29     # 例2：每隔5秒发起一次达到峰值的并发请求，由于时间段内平均qps=1 所以仍然符合漏桶速率：
+30     #time    request     refuse    sucess
+31     #00:01         5         0          5
+32     #00:05         5         0          5
+33     #00:10         5         0          5
+34     # 例3：连续每秒发起并发请求=5，由于时间段内平均qps&gt;&gt;1，超出的请求被拒绝：
+35     #time    request     refuse     sucess
+36     #00:01         5         0           5
+37     #00:02         5         4           1
+38     #00:03         5         4           1
+39      
+40     location /nodelay </span>{<span style="color: #ff0000;">
+41         limit_req   zone=qps1  burst=5 nodelay;
+42     </span>}<span style="color: #800000;">
+43      
+44     }</span></pre>
+</div>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.11.4.令牌桶(Token Bucket)算法</span></h4>
+<p align="left"><strong>&nbsp; </strong><strong>令牌桶具体实现：</strong></p>
+<p align="left">&nbsp; 在数据结构上，没有必要真的实现一个令牌桶。</p>
+<p align="left">&nbsp; 基于时间的流逝生成受控制数量的令牌即可&mdash;&mdash;以时间的流逝来洗涤旧迹，也就是将两次发包或者收包的间隔和令牌数量联系起来。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 令牌桶和漏桶算法最主要的差别在于：漏桶算法能够强行限制数据的传输速率，而令牌桶算法能够在限制数据的平均传输速率的同时还允许某种程度的突发传输。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 相对于漏桶算法，令牌桶的波动幅度可能是我们系统无法承受的。</p>
+<p align="left">&nbsp; 令牌是基于 Request 触发投放到令牌桶的，<strong>如果是按照下面的投放策略</strong>：</p>
+<p align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0000ff;">delta = self.fill_rate * (now - self.timestamp)#fill_rate is the rate in tokens/second that the bucket will be refilled.</span></p>
+<p align="left"><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; self._tokens =&nbsp;min(<strong><span style="text-decoration: underline;">self.capacity</span></strong>, self._tokens + delta)</span></p>
+<p align="left">&nbsp; 那么代入演算一下，令牌桶令牌总数 capacity=80，还剩余0张令牌，令牌桶填充速率fill_rate=0.5t/s，流逝的时间是10秒，即过去的10秒没有任何请求，第11秒突然拿来了一个请求，于是令牌桶里就会放入min(80,5)=5张令牌，意味着第11秒可以消耗5个令牌。</p>
+<p align="left">&nbsp; 这也就是我们为什么说令牌桶算法是&ldquo;只要令牌桶中存在令牌，那么就<strong><span style="text-decoration: underline;">允许突发地传输数据直到达到用户配置的上限</span></strong>，因此它适合于具有突发特性的流量&rdquo;的缘故。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 了解更多漏桶和令牌桶算法信息，请参考<a href="http://weibo.com/yunzheng" target="_blank">郑昀</a>的《<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">集群环境下业务限流</a>[<em>注10</em>]》。</p>
+<p align="left">&nbsp;</p>
+<h4><span style="background-color: #ccffcc;">1.11.5.滑窗(Sliding&nbsp;Window)算法</span></h4>
+<p align="left">&nbsp; 淘宝中间件博客上曾提及，『流量预警和限流方案中，滑窗模式通过统计多个单元时间的访问次数来进行控制，当单位时间的访问次数达到某个峰值时进行限流。</p>
+<p align="left">&nbsp; 在每次有访问进来时，我们判断前N个单位时间里总访问量是否超过了设置的阈值，若超过则不允许执行。</p>
+<p align="left">缺点一：</p>
+<p align="left">由于访问量的不可预见性，会出现单位时间的前半段有大量请求涌入，而后半段则拒绝所有请求的情况发生。</p>
+<p align="left">缺点二：</p>
+<p align="left">其次，我们很难确定这个阈值设置在多少比较合适，只能通过经验或者模拟（如压测）来估算。不过即使是压测也很难估计准确。</p>
+<p align="left">&nbsp; 所以滑窗模式往往用来对某一资源的保护上（或者说是承诺比较合适：我对某一接口的提供者承诺过，最高调用量不超过XX），如对 DB 的保护，对某一服务的调用的控制上。</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp; 代码实现思路如下：</p>
+<p align="left">&nbsp; 每一个窗（单位时间）就是一个独立的计数器（原子计数器），用以数组保存。将当前时间以某种方式（比如取模）映射到数组的一项中。每次访问先对当前窗内计数器+1，再计算前N个单元格的访问量综合，超过阈值则限流。</p>
+<p align="left">&nbsp; 这里有个问题，时间永远是递增的，单纯的取模，会导致数组过长，使用内存过多，我们可以用环形队列来解决这个问题。』</p>
+<p align="left">&nbsp;</p>
+<p align="left">-未完待续-</p>
+<div align="center"><hr align="center" size="2" width="100%" /></div>
+<p align="left"><strong>备注参考资源：</strong></p>
+<p align="left">1，2012，TankXiao，<a href="http://www.cnblogs.com/TankXiao/archive/2012/03/21/2337194.html">Web安全测试之XSS</a>；</p>
+<p align="left">2，2012，laruence，<a href="http://www.laruence.com/2012/02/14/2544.html">PHP Taint-一个用来检测XSS/SQL/shell注入的扩展</a>；</p>
+<p align="left">3，<a href="http://www.w3school.com.cn/js/jsref_events.asp">JavaScript事件参考手册</a>；</p>
+<p align="left">4，2009，hyddd，<a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html">浅谈CSRF攻击方式</a>；</p>
+<p align="left">5，2011，zgynhqf，<a href="http://www.cnblogs.com/zgynhqf/archive/2011/01/07/1930410.html">&ldquo;秒杀&rdquo;心得</a>；</p>
+<p align="left">6，2012，郑昀，&nbsp;<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">电商课题：对付秒杀器等恶意访问行为的简单梳理</a>；</p>
+<p align="left">7，2012，郑昀，<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a>；</p>
+<p align="left">8，2012，郑昀，<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a>；</p>
+<p align="left">9，2013，郑昀，<a href="http://www.cnblogs.com/zhengyun_ustc/p/dns.html">5&middot;12和6&middot;17两知名网站域名被劫持事件实施过程回放</a>；</p>
+<p align="left">10，2012，郑昀，<a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：集群环境下业务限流</a>；</p>
+<p align="left">11，2012，jxy918，<a href="http://www.cnblogs.com/php5/archive/2012/12/10/2811732.html">nginx limit_req限速设置</a>；</p>
+<p>&nbsp;</p>
+<p>赠图几枚：</p>
+<p><img class="decoded" src="http://ww1.sinaimg.cn/bmiddle/b0b1926bjw1e9emqkd7h9g206t06te3r.gif" alt="http://ww1.sinaimg.cn/bmiddle/b0b1926bjw1e9emqkd7h9g206t06te3r.gif" /></p>
+<p><a href="http://v.youku.com/v_show/id_XNjE5NjI4Mjk2.html" target="_blank">罗辑思维-2013-中国窄门 44</a></p>
+<p><img class="decoded" src="http://ww2.sinaimg.cn/bmiddle/b0b1926bjw1e827o6adb0j20dw0iuac7.jpg" alt="http://ww2.sinaimg.cn/bmiddle/b0b1926bjw1e827o6adb0j20dw0iuac7.jpg" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2013-10-15 12:15</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3369977" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3369977);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3369977, cb_entryCreatedDate = '2013-10-15 12:15', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

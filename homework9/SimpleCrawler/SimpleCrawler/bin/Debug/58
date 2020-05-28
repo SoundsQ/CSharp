@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; volatile是Java提供的" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【并发编程】Volatile原理和使用场景解析 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/11806836.html">【并发编程】Volatile原理和使用场景解析</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<hr>
+<p>volatile是Java提供的一种轻量级的同步机制，在并发编程中，它也扮演着比较重要的角色。一个硬币具有两面，volatile不会造成上下文切换的开销，但是它也并能像synchronized那样保证所有场景下的线程安全。因此我们需要在合适的场景下使用volatile机制。</p>
+<p>我们先使用一个列子来引出volatile的使用场景。</p>
+<hr>
+<h2 id="一个简单列子">一个简单列子</h2>
+<pre><code class="language-java">public class VolatileDemo {
+
+    boolean started = false;
+
+    public void startSystem(){
+        System.out.println(Thread.currentThread().getName()+&quot; begin to start system, time:&quot;+System.currentTimeMillis());
+        started = true;
+        System.out.println(Thread.currentThread().getName()+&quot; success to start system, time:&quot;+System.currentTimeMillis());
+    }
+
+    public void checkStartes(){
+        if (started){
+            System.out.println(&quot;system is running, time:&quot;+System.currentTimeMillis());
+        }else {
+            System.out.println(&quot;system is not running, time:&quot;+System.currentTimeMillis());
+        }
+    }
+
+    public static void main(String[] args) {
+        VolatileDemo demo = new VolatileDemo();
+        Thread startThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                demo.startSystem();
+            }
+        });
+        startThread.setName(&quot;start-Thread&quot;);
+
+        Thread checkThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    demo.checkStartes();
+                }
+            }
+        });
+        checkThread.setName(&quot;check-Thread&quot;);
+        startThread.start();
+        checkThread.start();
+    }
+
+}
+</code></pre>
+<p>上面的列子中，一个线程来改变<code>started</code>的状态，另外一个线程不停地来检测<code>started</code>的状态，如果是true就输出系统启动，如果是false就输出系统未启动。那么当<code>start-Thread</code>线程将状态改成true后，<code>check-Thread</code>线程在执行时是否能立即“看到”这个变化呢？<strong>答案是不一定能立即看到</strong>。这边我做了很多测试，大多数情况下是能“感知”到started这个变量的变化的。但是偶尔会存在感知不到的情况。请看下下面日志记录：</p>
+<pre><code>
+start-Thread begin to start system, time:1577079553515
+start-Thread success to start system, time:1577079553516  
+system is not running, time:1577079553516   ==&gt;此处start-Thread线程已经将状态设置成true,但是check-Thread线程还是没检测到
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+
+</code></pre>
+<p>上面的现象可能会让人比较困惑，为什么有时候<code>check-Thread</code>线程能感知到状态的变化，有时候又感知不到变化呢？这个要从Java的内存模型说起。</p>
+<h2 id="java内存模型">Java内存模型</h2>
+<p>我们知道，计算机在执行程序时，每条指令都是在CPU中执行的。而执行指令过程中，势必涉及到数据的读取和写入。程序运行过程中的临时数据是存放在主存（物理内存）当中的，这时就存在一个问题，由于CPU执行速度很快，而从内存读取数据和向内存写入数据的过程跟CPU执行指令的速度比起来要慢的多，因此如果任何时候对数据的操作都要通过和内存的交互来进行，会大大降低指令执行的速度。为了解决这个问题，“巨人们”就设计了CPU高速缓存。</p>
+<p>下面举个列子来说明下CPU高速缓存的工作原理：</p>
+<pre><code class="language-java">i = i+1;
+</code></pre>
+<p>当线程执行这个语句时，会先从主存当中读取i的值，然后复制一份到高速缓存当中，然后CPU执行指令对i进行加1操作，然后将数据写入高速缓存，最后将高速缓存中i最新的值刷新到主存当中。</p>
+<p>这个代码在单线程中运行是没有任何问题的，但是在多线程中运行就会有问题了。在多核CPU中，每条线程可能运行于不同的CPU中，因此每个线程运行时有自己的高速缓存（对单核CPU来说，其实也会出现这种问题，只不过是以线程调度的形式来分别执行的）。本文我们以多核CPU为例,下面举个列子：</p>
+<blockquote>
+<p>同时有2个线程执行上面这段代码，假如初始时i的值为0，那么从直观上看最后i的结果应该是2。但是事实可能不是这样。<br>
+可能存在下面一种情况：初始时，两个线程分别读取i的值存入各自所在的CPU的高速缓存当中，然后线程1进行加1操作，然后把i的最新值1写入到内存。此时线程2的高速缓存当中i的值还是0，进行加1操作之后，i的值为1，然后线程2把i的值写入内存。最终结果i的值是1，而不是2。这就是著名的缓存一致性问题。通常称这种被多个线程访问的变量为共享变量。</p>
+</blockquote>
+<h3 id="缓存不一致问题">缓存不一致问题</h3>
+<p>上面的列子说明了共享变量在CPU中可能会出现缓存不一致问题。为了解决缓存不一致性问题，通常来说有以下2种解决方法：</p>
+<ul>
+<li>通过在总线加LOCK#锁的方式；</li>
+<li>通过缓存一致性协议；</li>
+</ul>
+<p>这2种方式都是硬件层面上提供的方式。</p>
+<p>在早期的CPU当中，是通过在总线上加LOCK#锁的形式来解决缓存不一致的问题的。因为CPU和其他部件进行通信都是通过总线来进行的，如果对总线加LOCK#锁的话，也就是说阻塞了其他CPU对其他部件访问（如内存），从而使得只能有一个CPU能使用这个变量的内存。比如上面例子中 如果一个线程在执行 i = i +1，如果在执行这段代码的过程中，在总线上发出了LCOK#锁的信号，那么只有等待这段代码完全执行完毕之后，其他CPU才能从变量i所在的内存读取变量，然后进行相应的操作。这样就解决了缓存不一致的问题。但是<strong>上面的方式会有一个问题，由于在锁住总线期间，其他CPU无法访问内存，导致效率低下</strong>。</p>
+<p>所以就出现了缓存一致性协议。最出名的就是Intel 的MESI协议，MESI协议保证了每个缓存中使用的共享变量的副本是一致的。它核心的思想是：当CPU写数据时，如果发现操作的变量是共享变量，即在其他CPU中也存在该变量的副本，会发出信号通知其他CPU将该变量的缓存行置为无效状态，因此当其他CPU需要读取这个变量时，发现自己缓存中缓存该变量的缓存行是无效的，那么它就会从内存重新读取。</p>
+<p>通过上面对Java内存模型的讲解，我们发现每个线程都有各自对共享变量的副本拷贝，代码执行是对共享变量的修改，其实首先修改的是CPU中高速缓存中副本的值。而这个修改对其他线程是不可见的，只有当这个修改刷新回主存中（刷新的时机不一定）并且其他线程重新读取这个主存中的值时，这个修改才对其他线程可见。这个也就解释了上面列子中的现象。<code>check-Thread</code>线程缓存了started的值是false，<code>start-Thread</code>线程将started副本的值改变成true后并没有立马刷新到主存中去，所以当<code>check-Thread</code>线程再次执行时拿到的started值还是false。</p>
+<h3 id="并发编程中的三性">并发编程中的“三性”</h3>
+<p>在正式讲volatile之前，我们先来解释下并发编程中经常遇到的“三性”。</p>
+<ol>
+<li>
+<p>可见性<br>
+可见性是指当多个线程访问同一个共享变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</p>
+</li>
+<li>
+<p>原子性<br>
+原子性是指一个操作或者多个操作要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</p>
+</li>
+<li>
+<p>有序性<br>
+有序性是指程序执行的顺序按照代码的先后顺序执行。</p>
+</li>
+</ol>
+<h2 id="使用volatile来解决共享变量可见性">使用volatile来解决共享变量可见性</h2>
+<p>上面的列子中存在的问题是：<code>start-Thread</code>线程将started状态改变之后，<code>check-Thread</code>线程不能立马感知这个变化。也就是说这个共享变量的变化在线程之间是不可见的。那怎么来解决共享变量的可见性问题呢？Java中提供了volatile关键字这种轻量级的方式来解决这个问题的。volatile的使用非常简单，只需要用这个关键字修饰你的共享变量就行了：</p>
+<pre><code class="language-java">private volatile boolean started = false;
+</code></pre>
+<p>volatile能达到下面两个效果：</p>
+<ul>
+<li>当一个线程写一个volatile变量时，JMM会把该线程对应的本地内存中的变量值强制刷新到主内存中去；</li>
+<li>这个写会操作会导致其他线程中的这个共享变量的缓存失效，从新去主内存中取值。</li>
+</ul>
+<h2 id="volatile和指令重排（有序性）">volatile和指令重排（有序性）</h2>
+<p>volatile还有一个特性：禁止指令重排序优化。<br>
+<strong>重排序</strong>是指编译器和处理器为了优化程序性能而对指令序列进行排序的一种手段。但是重排序也需要遵守一定规则：</p>
+<ol>
+<li>
+<p>重排序操作不会对存在数据依赖关系的操作进行重排序<br>
+比如：a=1;b=a; 这个指令序列，由于第二个操作依赖于第一个操作，所以在编译时和处理器运行时这两个操作不会被重排序。</p>
+</li>
+<li>
+<p>重排序是为了优化性能，但是不管怎么重排序，单线程下程序的执行结果不能被改变<br>
+比如：a=1;b=2;c=a+b这三个操作，第一步（a=1)和第二步(b=2)由于不存在数据依赖关系，所以可能会发生重排序，但是c=a+b这个操作是不会被重排序的，因为需要保证最终的结果一定是c=a+b=3。</p>
+</li>
+</ol>
+<p>重排序在单线程模式下是一定会保证最终结果的正确性，但是在多线程环境下，可能就会出问题。还是用上面类似的列子：</p>
+<pre><code class="language-java">public class VolatileDemo {
+
+    int value = 1;
+    private boolean started = false;
+
+    public void startSystem(){
+        System.out.println(Thread.currentThread().getName()+&quot; begin to start system, time:&quot;+System.currentTimeMillis());
+        value = 2;
+        started = true;
+        System.out.println(Thread.currentThread().getName()+&quot; success to start system, time:&quot;+System.currentTimeMillis());
+    }
+
+    public void checkStartes(){
+        if (started){
+            //关注点
+            int var = value+1;  
+            System.out.println(&quot;system is running, time:&quot;+System.currentTimeMillis());
+        }else {
+            System.out.println(&quot;system is not running, time:&quot;+System.currentTimeMillis());
+        }
+    }
+}
+</code></pre>
+<p>上面的代码我们并不能保证代码执行到“关注点”处，var变量的值一定是3。因为在startSystem方法中的两个复制语句并不存在依赖关系，所以在编译器进行代码编译时可能进行指令重排。也就是先执行<br>
+started = true;执行完这个语句后，线程立马执行checkStartes方法，此时value值还是1，那么最后在关注点处的var值就是2，而不是我们想象中的3。</p>
+<p>使用volatile关键字修饰共享变量便可以禁止这种重排序。若用volatile修饰共享变量，在编译时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。volatile禁止指令重排序也有一些规则：</p>
+<ul>
+<li>
+<p>当第二个操作是voaltile写时，无论第一个操作是什么，都不能进行重排序</p>
+</li>
+<li>
+<p>当地一个操作是volatile读时，不管第二个操作是什么，都不能进行重排序</p>
+</li>
+<li>
+<p>当第一个操作是volatile写时，第二个操作是volatile读时，不能进行重排序</p>
+</li>
+</ul>
+<h2 id="volatile和原子性">volatile和原子性</h2>
+<p>volatile并不是在所有场景下都能保证线程安全的。下面举个列子：</p>
+<pre><code class="language-java">public class Counter {
+    public static volatile int num = 0;
+    //使用CountDownLatch来等待计算线程执行完
+    static CountDownLatch countDownLatch = new CountDownLatch(30);
+    public static void main(String []args) throws InterruptedException {
+        //开启30个线程进行累加操作
+        for(int i=0;i&lt;30;i++){
+            new Thread(){
+                public void run(){
+                    for(int j=0;j&lt;10000;j++){
+                        num++;//自加操作
+                    }
+                    countDownLatch.countDown();
+                }
+            }.start();
+        }
+        //等待计算线程执行完
+        countDownLatch.await();
+        System.out.println(num);
+    }
+}
+</code></pre>
+<p>上面的代码中，每个线程都对共享变量num加了10000次，一共有30个线程，那么感觉上num的最后应该是300000。但是执行下来，大概率最后的结果不是300000（大家可以自己执行下这个代码）。这是因为什么原因呢？</p>
+<p>问题就出在num++这个操作上，因为num++不是个原子性的操作，而是个复合操作。我们可以简单讲这个操作理解为由这三步组成:</p>
+<ul>
+<li>step1：从主存中读取最新的num值，并在CPU中存一份副本；</li>
+<li>step2：对CPU中的num的副本值加1；</li>
+<li>step3：赋值。</li>
+</ul>
+<p>加入现在有两个线程在执行，线程1在执行到step2的时候被阻断了，CPU切换给线程2执行，线程2成功地将num值加1并刷新到内存。CPU又切会线程1继续执行step2，但是此时不会再去拿最新的num值,step2中的num值是已经过期的num值。</p>
+<p>上面代码的执行结果和我们预期不符的原因就是类似num++这种操作并不是原子操作，而是分几步完成的。这些执行步骤可能会被打断。在中情况下volatile就不能保证线程安全了，需要使用锁等同步机制来保证线程安全。</p>
+<h2 id="volatile使用场景">volatile使用场景</h2>
+<p>　synchronized关键字是防止多个线程同时执行一段代码，那么就会很影响程序执行效率，而volatile关键字在某些情况下性能要优于synchronized，但是要注意volatile关键字是无法替代synchronized关键字的，因为volatile关键字无法保证操作的原子性。通常来说，使用volatile必须具备以下2个条件：</p>
+<ul>
+<li>对变量的写操作不依赖于当前值；</li>
+<li>该变量没有包含在具有其他变量的不变式中。</li>
+</ul>
+<p>下面列举两个使用场景</p>
+<ul>
+<li>状态标记量（本文中代码的列子）</li>
+<li>双重检查（单例模式）</li>
+</ul>
+<pre><code class="language-java">class Singleton{
+    private volatile static Singleton instance = null;
+     
+    private Singleton() {
+         
+    }
+     
+    public static Singleton getInstance() {
+        if(instance==null) {
+            synchronized (Singleton.class) {
+                if(instance==null)
+                    instance = new Singleton();
+            }
+        }
+        return instance;
+    }
+}
+</code></pre>
+<h2 id="volatile使用总结">volatile使用总结</h2>
+<ul>
+<li>volati是Java提供的一种轻量级同步机制，可以保证共享变量的可见性和有序性（禁止指令重排），volatile的实现原理是基于处理器的Lock指令的，这个指令会使得对变量的修改立马刷新回主内存，同时使得其他CPU中这个变量的副本失效；</li>
+<li>volatile对于单个的共享变量的读/写（比如a=1；这种操作）具有原子性，但是像<code>num++</code>或者<code>a=b;</code>这种复合操作，volatile无法保证其原子性；</li>
+<li>volatile的使用场景不是很多，使用时需要深入考虑下当前场景是否适用volatile（记住“对变量的写操作不依赖于当前值”、“该变量没有包含在具有其他变量的不变式中”这两个使用条件）。常见的使用场景有多线程下的状态标记量和双重检查等。</li>
+</ul>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/dolphin0520/p/3920373.html">https://www.cnblogs.com/dolphin0520/p/3920373.html</a></li>
+<li><a href="https://www.cnblogs.com/chengxiao/p/6528109.html">https://www.cnblogs.com/chengxiao/p/6528109.html</a></li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-11-06 17:47</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11806836" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11806836);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 11806836, cb_entryCreatedDate = '2019-11-06 17:47', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

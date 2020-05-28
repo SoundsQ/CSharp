@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第3页 - Java架构师追风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001.min.css?v=vmUk-3Bh8LDsKXwjNHs2GDiFna-ZMTUgOJzjUaXTlPA" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/anothereon001/bundle-anothereon001-mobile.min.css?v=cJiDsI1JAuHHd-OAUWJeyE5JMXXsG4mmuUi2rVmEK1c" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhuifeng523/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhuifeng523/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhuifeng523/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 533772;
+        var currentBlogApp = 'zhuifeng523';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'AnotherEon001';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhuifeng523/">Java架构师追风</a>
+</h1>
+<div id="subtitle">
+
+</div>
+</div>
+<div id="sub"><div class="BlogStats">随笔 - 
+125, 文章 - 
+0, 评论 - 
+2, 引用 - 
+0</div>
+
+</div>
+
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=13">13</a>
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">下一页</a>
+</div>
+</div>
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/27.html">2019年12月27日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12109386.html">
+    2019年常见的Linux面试题及答案解析，哪些你还不会？
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：45道Linux面试题答案详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12109386.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-27 19:58 Java架构师追风 阅读 (148) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12109386" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/26.html">2019年12月26日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12103350.html">
+    2019年常见Elasticsearch 高频面试题答案详细解析
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：24道Elasticsearch 高频面试题答案详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12103350.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-26 17:28 Java架构师追风 阅读 (2281) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12103350" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/22.html">2019年12月22日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12081204.html">
+    18道kafka高频面试题哪些你还不会？（含答案和思维导图）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：18道kafka高频面试题答案详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/12081204.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-22 21:40 Java架构师追风 阅读 (370) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12081204" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/20.html">2019年12月20日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12074658.html">
+    2019年12道RabbitMQ高频面试题你都会了吗？（含答案解析）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：12道RabbitMQ高频面试题，你会的有哪些？            <a href="https://www.cnblogs.com/zhuifeng523/p/12074658.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-20 18:50 Java架构师追风 阅读 (123) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12074658" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/18.html">2019年12月18日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12063398.html">
+    2019年Dubbo你掌握的如何？快看看这30道高频面试题！
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：30道高频Dubbo面试题，哪些你还不会？            <a href="https://www.cnblogs.com/zhuifeng523/p/12063398.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-18 20:23 Java架构师追风 阅读 (65) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12063398" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/13.html">2019年12月13日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/12036869.html">
+    带你快速了解Java锁中的公平锁与非公平锁
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：一篇文章搞清楚Java锁中的公平锁与非公平锁            <a href="https://www.cnblogs.com/zhuifeng523/p/12036869.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-13 19:02 Java架构师追风 阅读 (26) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12036869" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/04.html">2019年12月4日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/11985842.html">
+    一篇文章让你明白CPU缓存一致性协议MESI
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：CPU缓存一致性协议图文详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/11985842.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-04 21:42 Java架构师追风 阅读 (49) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11985842" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/12/03.html">2019年12月3日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/11979833.html">
+    2019年JVM面试都问了什么？快看看这22道面试题！（附答案解析）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：2019年22道高频JVM面试题详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/11979833.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-03 22:01 Java架构师追风 阅读 (42) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11979833" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/11976004.html">
+    2019百度阿里Java面试题（基础+框架+数据库+分布式+JVM+多线程）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：2019年百度阿里Java面试题总结            <a href="https://www.cnblogs.com/zhuifeng523/p/11976004.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-12-03 12:03 Java架构师追风 阅读 (158) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11976004" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+		
+<p class="date">
+	<span>		  
+	<a href="https://www.cnblogs.com/zhuifeng523/archive/2019/11/29.html">2019年11月29日</a>
+	</span>
+</p>
+
+		<div class="post">
+			<h2>
+
+<a class="postTitle2" href="https://www.cnblogs.com/zhuifeng523/p/11959972.html">
+    2019年Java并发精选面试题，哪些你还不会？（含答案和思维导图）
+</a>
+</h2>
+			<div class="postbody">
+			
+
+    <div class="c_b_p_desc">
+摘要：48道Java并发精选面试题答案详细解析            <a href="https://www.cnblogs.com/zhuifeng523/p/11959972.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>
+			<p class="postfoot">		
+			
+
+posted @ 2019-11-29 19:56 Java架构师追风 阅读 (80) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11959972" rel="nofollow">
+    编辑
+</a>
+
+			</p>
+		</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=2">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=2">2</a>
+    3
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=7">7</a>
+    ···
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=13">13</a>
+    <a href="https://www.cnblogs.com/zhuifeng523/default.html?page=4">下一页</a>
+</div>
+</div>
+
+
+
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+    <li>
+        <a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zhuifeng523/">
+首页</a>
+
+    </li>
+    <li>
+        
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+
+    </li>
+    <li>
+        
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Java%E6%9E%B6%E6%9E%84%E5%B8%88%E8%BF%BD%E9%A3%8E">
+联系</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhuifeng523/rss/">
+订阅</a>
+        
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/zhuifeng523/rss/">
+    <img src="/skins/anothereon001/images/xml.gif" alt="订阅" />
+</a>
+    </li>
+    <li>
+        
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+
+    </li>
+</ul>
+
+
+<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 Java架构师追风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+</div>
+
+
+    
+</body>
+</html>

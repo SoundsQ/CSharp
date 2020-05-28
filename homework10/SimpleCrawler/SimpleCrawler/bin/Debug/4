@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>喜欢兰花山丘 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear.min.css?v=VK2UnJ8cJRhid2HBuGo4mQJdQ6E3Xlp7fD_jRXm5PUU" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear-mobile.min.css?v=DidnFOvv24-VeVpMoJxhxZWs9iNA_ZwNuLjfe3iZZR8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/life2refuel/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/life2refuel/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/life2refuel/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 248606;
+        var currentBlogApp = 'life2refuel';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'SimpleClear';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="main">
+    <div id="header">
+        
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/life2refuel/">喜欢兰花山丘</a>
+</h1>
+<p id="tagline">
+飘云簇簇, 山道绵绵
+</p>
+
+
+    </div>
+    
+
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2020/04/28.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/12732873.html">
+    浮点数精度上误差
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：IEEE754 浮点数精度问题            <a href="https://www.cnblogs.com/life2refuel/p/12732873.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2020-04-28 23:34 喜欢兰花山丘 阅读 (12) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12732873" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2020/03/23.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/12554417.html">
+    狂人日記
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：作者：魯迅 1918年4月 某君昆仲，今隱其名，皆余昔日在中學校時良友；分隔多年，消息漸闕。日前偶聞其一大病；適歸故鄉，迂道往訪，則僅晤一人，言病者其弟也。勞君遠道來視，然已早愈，赴某地候補矣。因大笑，出示日記二冊，謂可見當日病狀，不妨獻諸舊友。持歸閱一過，知所患蓋「迫害狂」之類。語頗錯雜無倫次，又            <a href="https://www.cnblogs.com/life2refuel/p/12554417.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2020-03-23 19:56 喜欢兰花山丘 阅读 (59) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12554417" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2020/02/19.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/12330462.html">
+    C 基础 _Generic 泛型应用
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：C _Generic 泛型            <a href="https://www.cnblogs.com/life2refuel/p/12330462.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2020-02-19 12:25 喜欢兰花山丘 阅读 (88) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12330462" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2020/01/08.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/12167989.html">
+    C基础 带你手写 redis ae 事件驱动模型
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：redis ae select epoll            <a href="https://www.cnblogs.com/life2refuel/p/12167989.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2020-01-08 22:15 喜欢兰花山丘 阅读 (124) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12167989" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/12/01.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11966521.html">
+    C基础 带你手写 redis sds
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：antirez redis sds            <a href="https://www.cnblogs.com/life2refuel/p/11966521.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-12-01 18:41 喜欢兰花山丘 阅读 (132) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11966521" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/11/22.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11911839.html">
+    C基础 带你手写 redis adlist 双向链表
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：redis adlist            <a href="https://www.cnblogs.com/life2refuel/p/11911839.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-11-22 21:13 喜欢兰花山丘 阅读 (123) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11911839" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/10/23.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11729063.html">
+    Go 零基础 30 min 入门
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：Go 零基础 30 min 入门            <a href="https://www.cnblogs.com/life2refuel/p/11729063.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-10-23 21:52 喜欢兰花山丘 阅读 (204) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11729063" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/09/07.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11482948.html">
+    C 编程环境搭建 Window 篇
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：带大家搭建 Window C 环境            <a href="https://www.cnblogs.com/life2refuel/p/11482948.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-09-07 23:11 喜欢兰花山丘 阅读 (384) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11482948" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/08/25.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11409363.html">
+    C基础 stack 设计
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：C stack 设计            <a href="https://www.cnblogs.com/life2refuel/p/11409363.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-08-25 22:02 喜欢兰花山丘 阅读 (104) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11409363" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+		
+
+<!--
+<p class="date">
+	<a href="https://www.cnblogs.com/life2refuel/archive/2019/07/21.html" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+	<partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+		<div class="post">
+			<h2 class="postTitle">
+
+<a class="postTitle2" href="https://www.cnblogs.com/life2refuel/p/11222126.html">
+    C 猜猜猜&#128512;文字小游戏
+</a>
+</h2>
+			<div class="postText">
+			
+
+    <div class="c_b_p_desc">
+摘要：C 构造的猜猜猜文字小游戏, 纯属为随机数库写的捎带操作            <a href="https://www.cnblogs.com/life2refuel/p/11222126.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+			</div>				
+			<div class="postFoot">		
+				
+
+posted @ 2019-07-21 19:19 喜欢兰花山丘 阅读 (131) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11222126" rel="nofollow">
+    编辑
+</a>
+
+			</div>
+		</div>
+
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/life2refuel/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+</div>
+<div id="rightmenu">
+    
+<div id="my_links">
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/life2refuel/">
+首页</a>
+</li>
+
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%96%9C%E6%AC%A2%E5%85%B0%E8%8A%B1%E5%B1%B1%E4%B8%98">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/life2refuel/rss/">
+订阅</a></li><!--<partial name="./Shared/_XmlLink.cshtml" model="Model" />-->
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+</div>
+
+
+    <div id="calendar">
+        <div id="blog-calendar" style="display: none"></div>
+    </div>
+    <script>loadBlogDefaultCalendar();</script>
+    
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+    <div id="blog_stats">
+<h3>统计</h3>
+<ul>
+<li>随笔 - 
+112</li>
+<li>文章 - 
+0</li>
+<li>评论 - 
+124
+<!--<li>引用 - <partial name="./Shared/_PingTrackCount.cshtml" model="BlogServer.Web.Models.HomeBlogPage" />-->
+</li>
+</ul>
+</div>
+
+
+    <div id="blog-sidecolumn"></div>
+    <script>loadBlogSideColumn();</script>
+    <div id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 喜欢兰花山丘
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</div>
+
+
+</div>
+    
+</body>
+</html>

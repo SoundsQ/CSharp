@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="使用springboot&#x2B;dubbo搭建RPC入门案例 本文背景简述: 最近在学习公司的一套RPC框架，初步接触的时候感觉挺复杂的。但是知道其原理肯定是和dubbo很相似的，毕竟都是RPC框架嘛，只是" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>springboot+dubbo简单分布式RPC调用demo - 一头小菜鸡 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/bj2008/bundle-bj2008.min.css?v=USoHH8tjeQTCnR6dTIfNTrNZrzcYJLkibibKhhTXIp8" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bj2008/bundle-bj2008-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kuangdw/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kuangdw/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kuangdw/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 599052;
+        var currentBlogApp = 'kuangdw';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BJ2008';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <!--done-->
+<div id="outer_body">
+<div align="center">
+	<div id="banner">
+		
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kuangdw/">一头小菜鸡</a>
+<br>
+	</div>
+	<div class="headerDis">
+
+</div>
+</div>
+
+
+		<div id="left_top">
+				<div id="mylinks">
+					
+<!--done-->
+
+&nbsp;&nbsp;
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kuangdw/">
+首页</a>
+&nbsp;&nbsp;
+
+
+&nbsp;&nbsp;
+
+<a id="MyLinks1_NewArticleLink" class="menu" href="https://i.cnblogs.com/EditArticles.aspx?opt=1">新文章</a>
+&nbsp;&nbsp;
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E4%B8%80%E5%A4%B4%E5%B0%8F%E8%8F%9C%E9%B8%A1">
+联系</a>&nbsp;&nbsp;
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+&nbsp;&nbsp;
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/kuangdw/rss/">
+订阅</a>&nbsp;
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/kuangdw/rss/">
+    <img src="/skins/bj2008/images/xml.gif" alt="订阅" />
+</a>
+
+
+				</div>
+				<div id="mystats">
+					
+						<!--done-->
+<div class="blogStats">
+随笔- 
+1&nbsp;
+文章- 
+0&nbsp;
+评论- 
+0&nbsp;
+</div>
+
+
+					
+			    </div>
+		</div>
+	</div>
+	<div id="main">
+		
+		<!-- left starts -->
+		<div id="left">
+			
+			<div id="topics">
+				<!--done-->
+<div id="post_detail">
+    <div class="post">
+        <div class="postTitle">
+            <img src="/skins/bj2008/images/fire.gif" border=0 align=absmiddle>
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/kuangdw/p/12783281.html">springboot+dubbo简单分布式RPC调用demo</a>
+
+        </div>
+        
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="使用springbootdubbo搭建rpc入门案例">使用springboot+dubbo搭建RPC入门案例</h1>
+<hr>
+<blockquote>
+<p>本文背景简述:<br>
+最近在学习公司的一套RPC框架，初步接触的时候感觉挺复杂的。但是知道其原理肯定是和dubbo很相似的，毕竟都是RPC框架嘛，只是各自使用的范围和使<br>
+用者群体有些不同罢了。于是就去dubbo官网熟悉了其相关文档和案例教程，然后结合网上大佬的一些资料，自己搭了个简单的分布式远程调用案例。这里<br>
+强调一个东西--记住官方文档第一！！！下面分享一下我的案例代码吧，也希望本案例能对在读的读者启动一点帮助......</p>
+</blockquote>
+<hr>
+<p>先来一张简单的架构图吧，这个图是自己使用processOn画的（这里推荐一波processOn线上作图神器）：<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428224147435-1098297240.png" alt=""></p>
+<hr>
+<h2 id="1、创建一个比较原生的maven项目dubbo-common">1、创建一个比较原生的Maven项目dubbo-common</h2>
+<p>这个项目中只定义公共接口和实体，以供后面的provider工程项目和consumer工程项目使用（如下图所示）：<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428210208039-604528261.png" alt=""></p>
+<p>TeamService中的代码也很简单，如下：</p>
+<pre><code>package com.chandler.dubbo.service;
+
+import com.chandler.dubbo.entity.Team;
+
+public interface TeamService {
+    Team getTeamInfo(String city);
+}
+</code></pre>
+<hr>
+<h2 id="2、下载与配置zookeeper">2、下载与配置zookeeper</h2>
+<p>下载地址：<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a> ，至于怎么配置和使用，可以自己移驾度娘，上面很多，其实也比较简单。</p>
+<hr>
+<h2 id="3、创建dubbo-provider项目">3、创建dubbo-provider项目</h2>
+<p>首先从下图所示这里创建一个springboot项目：<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428211809484-96893464.png" alt=""></p>
+<p>创建后的工程大概如下图所示,这个provider项目很简单，就是一个实现了dubbo-common项目中的那个接口的service方法。<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428212251144-521894592.png" alt=""></p>
+<p>项目创建完了后我们首先要把dubbo-common中的那个划红线的jar包手动添加到lib库中，以备后面使用（正常来说我们肯定是将类似于dubbo-common这样一个公共工程上传到Maven公共镜像仓库或者是公司内部的是有个Maven镜像仓库中去，以备提服务的项目和消费服务的项目通过pom文件直接添加依赖就可以使用。这里我们为了简单演示就直接手动添加算了）。手动添加步骤如下：<br>
+File--&gt;Project Structure--&gt;Modules--&gt;Dependencies--&gt;右侧+号找到那个jar包--&gt;点击底部apply--&gt;点击ok<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428214224351-1259051885.png" alt=""></p>
+<p>pom文件内容：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.2.6.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.chandler.dubbo&lt;/groupId&gt;
+    &lt;artifactId&gt;dubbo-provider&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;dubbo-provider&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--boot依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 引入dubbo的依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 引入zookeeper的依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.101tec&lt;/groupId&gt;
+            &lt;artifactId&gt;zkclient&lt;/artifactId&gt;
+            &lt;version&gt;0.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- slf4j依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+</code></pre>
+<p>application.yml中的内容：</p>
+<pre><code>server.port=8081
+spring.application.name=dubbo-provider
+#本地zookeeper注册中心地址
+spring.dubbo.registry=zookeeper://localhost:2181
+</code></pre>
+<p>MyServiceImpl代码：(由于这里只是为了简单演示，所以就没有使用数据库什么的了，直接在static代码块中使用集合存储几个对象以备后面查询)</p>
+<pre><code>package com.chandler.dubbo.dubboprovider.service;
+
+import com.alibaba.dubbo.config.annotation.Service;
+import com.chandler.dubbo.entity.Team;
+import com.chandler.dubbo.service.TeamService;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+
+@Component
+//这个service注解是dubbo中的，目的就是将这个服务暴露出去。
+//里面可以指定代理版本，代理名称还有很多的其他可选配置项，dubbo官网的文档中都有说明
+@Service(version = &quot;1.0.0&quot;,proxy = &quot;TeamServer&quot;)  
+public class MyserviceImpl implements TeamService {
+
+    private static HashMap&lt;String,Team&gt; teamHashMap = new HashMap&lt;&gt;(16);
+    static {
+        Team team1 = new Team();
+        team1.setCity(&quot;chicago&quot;);
+        team1.setName(&quot;bulls&quot;);
+        team1.setTopPlayer(&quot;jordan&amp;rose&quot;);
+        Team team2 = new Team();
+        team2.setTopPlayer(&quot;james&amp;kobe&quot;);
+        team2.setName(&quot;lakers&quot;);
+        team2.setCity(&quot;loss angeles&quot;);
+        teamHashMap.put(&quot;chicago&quot;,team1);
+        teamHashMap.put(&quot;lal&quot;,team2);
+    }
+    @Override
+    public Team getTeamInfo(String s) {
+        return teamHashMap.get(s);
+    }
+}
+</code></pre>
+<p>最后是DubboProviderApplication启动类：</p>
+<pre><code>package com.chandler.dubbo.dubboprovider;
+
+import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@EnableDubboConfiguration
+public class DubboProviderApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DubboProviderApplication.class, args);
+    }
+
+}
+</code></pre>
+<blockquote>
+<p>到这一步就可以启动项目了，启动项目后可以使用dubbo的管理控制台查看和管理服务，具体怎么弄可以参考官网文档：<br>
+<a href="http://dubbo.apache.org/zh-cn/docs/admin/introduction.html%EF%BC%8C%E6%88%91%E4%BB%AC%E6%8E%A5%E7%9D%80%E5%9C%A8%E5%88%9B%E5%BB%BA%E6%B6%88%E8%B4%B9%E8%80%85%E9%A1%B9%E7%9B%AE%E3%80%82">http://dubbo.apache.org/zh-cn/docs/admin/introduction.html，我们接着在创建消费者项目。</a></p>
+</blockquote>
+<hr>
+<h2 id="4、创建dubbo-consumer项目">4、创建dubbo-consumer项目</h2>
+<p>同创建dubbo-provider一样的步骤创建consumer项目，项目结构如下图：<br>
+<img src="https://img2020.cnblogs.com/blog/2018818/202004/2018818-20200428215951635-928164195.png" alt=""></p>
+<p>然后呢，也同dubbo-provider项目中一样手动添加dubbo-common项目的jar包到lib库中。<br>
+接下来就是pom文件内容，和provider项目中的pom文件几乎一样：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.2.6.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.chandler.dubbo&lt;/groupId&gt;
+    &lt;artifactId&gt;dubbo-consumer&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;dubbo-consumer&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 引入dubbo的依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 引入zookeeper的依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.101tec&lt;/groupId&gt;
+            &lt;artifactId&gt;zkclient&lt;/artifactId&gt;
+            &lt;version&gt;0.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- slf4j依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version&gt;1.2.60&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+</code></pre>
+<p>TeamService类代码：</p>
+<pre><code>package com.chandler.dubbo.dubboconsumer.service;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.chandler.dubbo.entity.Team;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TeamService {
+    @Reference(proxy = &quot;TeamServer&quot;,version = &quot;1.0.0&quot;)
+    com.chandler.dubbo.service.TeamService teamService;
+
+    public Team getTeam(String cityName){
+        return teamService.getTeamInfo(cityName);
+    }
+}
+</code></pre>
+<p>TeamController类代码：</p>
+<pre><code>package com.chandler.dubbo.dubboconsumer.controller;
+
+import com.chandler.dubbo.dubboconsumer.service.TeamService;
+import com.chandler.dubbo.entity.Team;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class TeamController {
+
+    @Resource
+    private TeamService teamService;
+    @GetMapping(&quot;/getTeam&quot;)
+    public Team getTeam(@RequestParam(&quot;cityName&quot;) String cityName){
+        return teamService.getTeam(cityName);
+    }
+}
+</code></pre>
+<p>DubboConsumerApplication启动类代码：</p>
+<pre><code>package com.chandler.dubbo.dubboconsumer;
+
+import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@EnableDubboConfiguration
+public class DubboConsumerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DubboConsumerApplication.class, args);
+    }
+
+}
+</code></pre>
+<p>最后就可以依次启动zookeeper、dubbo-provider和dubbo-consumer项目了，然后可以使用浏览器或者postman测试dubbo-consumer项目中的controller方法了。</p>
+<blockquote>
+<p>我是一头实习中的小菜鸡，第一次写博客，有很多不到位的地方，还请各位大佬直接评论！无论是赞赏还是喷，本人都是可以接受的。。。</p>
+</blockquote>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        <div class="postDesc">posted on 
+<span id="post-date">2020-04-28 22:31</span>&nbsp;
+<a href="https://www.cnblogs.com/kuangdw/">一头小菜鸡</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12783281" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12783281);return false;">收藏</a></div>
+    </div>
+</div>
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 599052, cb_blogApp = 'kuangdw', cb_blogUserGuid = 'abe64d80-8c75-47d1-6dd9-08d7e5fad088';
+    var cb_entryId = 12783281, cb_entryCreatedDate = '2020-04-28 22:31', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+			</div>
+			<br /><br /><br />
+		</div>
+		<!-- left ends -->
+	<!-- right starts -->
+		<div id="right">
+			<!-- 右侧工具部分 -->
+			<div id="right_content">
+				
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+				<div id="calendar">
+					<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+				</div>
+				 
+				<DIV id="leftcontentcontainer">
+						<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+				</DIV>
+				
+			 </div>
+			<!-- //右侧工具部分 -->
+		</div>
+	<!-- right ends -->
+	  
+	
+	</div>
+	<div class="clear"></div>
+	<div id="footer">
+		Copyright &copy; 2020 一头小菜鸡
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+  
+	</div>
+	</div>
+</div>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,1018 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="代理模式是一种很常用的模式，JDK也内置了对于代理的支持，动态代理，本文对代理模式进行了介绍，意图，结构，java实现，对静态代理和动态代理进行了分析，并且给出了代码示例，并且介绍了CGLIB的使用。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>代理模式 PROXY Surrogate 结构型 设计模式（十四） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10070057.html">代理模式 PROXY Surrogate 结构型 设计模式（十四）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        代理模式是一种很常用的模式，JDK也内置了对于代理的支持，动态代理，本文对代理模式进行了介绍，意图，结构，java实现，对静态代理和动态代理进行了分析，并且给出了代码示例，并且介绍了CGLIB的使用。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;">代理模式 PROXY 别名Surrogate</div>
+<h3><span style="font-size: 18px;">意图</span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>为其他的对象提供一种代理以控制对这个对象的访问。</strong></span></div>
+<div style="line-height: 200%;">代理模式含义比较清晰，就是中间人，中介公司，经纪人...</div>
+<div style="line-height: 200%;">在计算机程序中，代理就表示一个客户端不想或者不能够直接引用一个对象</div>
+<div style="line-height: 200%;">而代理对象可以在客户端和目标对象之间起到中介的作用</div>
+<h3><span style="font-size: 18px;">结构</span></h3>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>代理模式的根本在于隔离</strong></span>，如下图所示，间接访问</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114618826-397191527.png"><img style="display: inline; background-image: none;" title="image_5c074938_56cd" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114629778-710651557.png" alt="image_5c074938_56cd" width="271" height="287" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>代理对象如何能够真的代理真实对象？</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>在Java语言中，看起来像的一个方式就是实现同一接口</strong></span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114642805-1897891496.png"><img style="display: inline; background-image: none;" title="image_5c074938_5f89" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114653804-1283361894.png" alt="image_5c074938_5f89" width="656" height="411" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">代理角色和真实对象角色拥有共同的抽象类型，他们拥有相同的对外接口request（）方法</div>
+<div style="line-height: 200%;">ProxySubject内部拥有一个RealSubject</div>
+<div style="line-height: 200%;">你应该能感觉到组合模式的思想-----他们都是Subject，属于同一个Component</div>
+<div style="line-height: 200%;">对外有一致的接口</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>抽象主题角色Subject</strong></span></div>
+<div style="line-height: 200%;">声明了真实主题和代理主题的共同接口，任何使用真实主题的地方，都可以使用代理主题</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>代理主题角色ProxySubject</strong></span></div>
+<div style="line-height: 200%;">代理主题角色内部含有对真实对象的引用，从而可以在任何时候操作真实主题</div>
+<div style="line-height: 200%;">代理主题提供与真实主题的相同的接口，以便任何时刻，都可以替代真实主题</div>
+<div style="line-height: 200%;">而且，代理主题还可以在真实主题执行前后增加额外的处理，比如：经纪人要先收下费~</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>真实主题角色RealSubject</strong></span></div>
+<div style="line-height: 200%;">被代理的真实主题对象，真正工作的是他，比如经纪人总不会站在舞台上去~</div>
+</div>
+</div>
+<h3><span style="font-size: 18px;">示例代码 </span></h3>
+<div style="line-height: 200%;">Subject 抽象角色 定义了真正的处理请求 的request()方法&nbsp;</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Subject {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> request();
+}</span></pre>
+</div>
+</div>
+<div>RealSubject真实主题角色，实现了处理请求的方法</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> RealSubject <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Subject {
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> request() {
+    System.out.println(</span>"realSubject process request...."<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+</div>
+<div>Proxy代理角色</div>
+<div>实现了request（）方法，用于替代真实主题，内部调用真实主题完成请求</div>
+<div>并且额外的提供了pre和after操作</div>
+</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> Proxy <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Subject{
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Subject realSubject;
+    @Override
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> request() {
+        preRequest();
+    realSubject.request();
+        afterRequest();
+    }
+     
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Proxy(Subject realSubject){
+        </span><span style="color: #0000ff;">this</span>.realSubject =<span style="color: #000000;"> realSubject;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> preRequest(){
+        System.out.println(</span>"pre request do sth...."<span style="color: #000000;">);
+    }
+     
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> afterRequest(){
+        System.out.println(</span>"after request do sth...."<span style="color: #000000;">);
+    }
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">测试类</div>
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #008000;">/**</span><span style="color: #008000;">请求subject执行请求
+* </span><span style="color: #808080;">@param</span><span style="color: #008000;"> subject
+</span><span style="color: #008000;">*/</span>
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> askForSth(Subject subject){
+    subject.request();
+    System.out.println(</span>"################"<span style="color: #000000;">);
+ }
+   
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+     Subject real </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> RealSubject();
+     Subject proxy </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Proxy(real);
+     askForSth(proxy);
+     askForSth(real);
+    }
+}</span></pre>
+</div>
+</div>
+<div style="line-height: 200%;">定义了真实对象，也定义了一个代理对象</div>
+<div style="line-height: 200%;">查看他们分别处理请求的结果</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114659798-1407641251.png"><img style="display: inline; background-image: none;" title="image_5c074938_777b" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114705791-1738374320.png" alt="image_5c074938_777b" width="480" height="198" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">从下面的时序图中，能更好的感受到&ldquo;间接&rdquo;的感觉</div>
+<div style="line-height: 200%;">在真正调用真实对象方法前，需要先执行preRequest方法</div>
+<div style="line-height: 200%;">真实对象方法调用后，在执行afterRequest方法</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114711784-1690614054.png"><img style="display: inline; background-image: none;" title="image_5c074939_77de" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114718841-2036908372.png" alt="image_5c074939_77de" width="838" height="531" border="0" /></a></div>
+<h3><span style="font-size: 18px;">代理实现 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>代理的实现分类有两种，静态代理和动态代理</strong></span></div>
+<div style="line-height: 200%;">前面形式描述的代理，就是静态代理</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>在编译时期，就已经编写生成好了代理类的源代码，程序运行之前class文件就已经生成了</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>这种按照我们上面模式编写了代理类和真实类的形式就是 静态代理</strong></span></div>
+<div style="line-height: 200%;">静态代理经常被用来对原有逻辑代码进行扩展，原有的逻辑不需要变更，但是可以增加更多的处理逻辑</div>
+<div style="line-height: 200%;">但是，但是如果有很多的对象需要被代理怎么办？</div>
+<div style="line-height: 200%;">如果按照静态代理的形式，那么将会出现很多的代理类，势必导致代码的臃肿。</div>
+<div style="line-height: 200%;">所以后来出现了动态代理</div>
+<h4><span style="font-size: 16px;">JDK代理机制</span></h4>
+<div style="line-height: 200%;">所谓动态代理，按照字面意思就是动态的进行代理，<span style="color: #ff0000; font-size: 13.5pt;"><strong>动态相对于静态的含义是不需要事先主动的创建代理类，</strong></span><span style="color: #ff0000; font-size: 13.5pt;"><strong>可以在运行时需要的时候，动态的创建一个代理类。</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>动态代理的动态关键在于代理类的动态生成，不需要我们实现创建，从class文件的角度来看的话，是与静态代理一样的，仍旧有一个代理类的Class文件 </strong></span></div>
+<div style="line-height: 200%;">在Java中提供了内置的动态代理的支持。</div>
+<div style="line-height: 200%;">Java在<span style="color: #000000; font-size: 13.5pt;"><strong>java.lang.reflect</strong></span>包中提供了三个核心 <span style="color: #000000; font-size: 13.5pt;"><strong>Proxy</strong></span>，<span style="color: #000000; font-size: 13.5pt;"><strong>InvocationHandler</strong></span>， <span style="color: #000000; font-size: 13.5pt;"><strong>Method</strong></span>&nbsp; 可以用于动态代理的使用</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">Java动态代理简单示例</div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.MyDynamicProxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> Subject {
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> doSth();
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.MyDynamicProxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> RealSubject <span style="color: #0000ff;">implements</span><span style="color: #000000;"> Subject {
+@Override
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> doSth() {
+System.out.println(</span>"real Object do something..."<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.MyDynamicProxy;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.InvocationHandler;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Method;
+
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> DynamicProxyHandler <span style="color: #0000ff;">implements</span><span style="color: #000000;"> InvocationHandler {
+</span><span style="color: #0000ff;">private</span><span style="color: #000000;"> Object realSubject;
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> DynamicProxyHandler(Object realSubject) {
+</span><span style="color: #0000ff;">this</span>.realSubject =<span style="color: #000000;"> realSubject;
+}
+@Override
+</span><span style="color: #0000ff;">public</span> Object invoke(Object proxy, Method method, Object[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Throwable {
+System.out.println(</span>"proxy do something...."<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> method.invoke(realSubject, args);
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.MyDynamicProxy;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Proxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+RealSubject realSubject </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> RealSubject();
+Subject proxy </span>=<span style="color: #000000;"> (Subject) Proxy
+.newProxyInstance(Test.</span><span style="color: #0000ff;">class</span>.getClassLoader(), <span style="color: #0000ff;">new</span> Class[]{Subject.<span style="color: #0000ff;">class</span>}, <span style="color: #0000ff;">new</span><span style="color: #000000;"> DynamicProxyHandler(realSubject));
+proxy.doSth();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div>测试结果为：</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114727764-1079386982.png"><img style="display: inline; background-image: none;" title="image_5c074939_41fd" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114732837-1180306137.png" alt="image_5c074939_41fd" width="521" height="140" border="0" /></a></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>动态代理到底都做了什么？</strong></span></div>
+<div style="line-height: 200%;">对于静态代理，我们有一个RealSubject，以及他的超接口Subject</div>
+<div style="line-height: 200%;">Subject定义了方法，RealSubject实现了方法。</div>
+<div style="line-height: 200%;">然后我们创建了代理类，这个代理类实现了Subject接口，并且将新增的逻辑添加进来，然后通过代理类进行方法调用。&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">在上面的例子中，<span style="color: #0000ff; font-size: 13.5pt;"><strong>RealSubject，以及他的超接口Subject含义不变，与静态代理中的逻辑一样。</strong></span></div>
+<div style="line-height: 200%;">然后我们<span style="color: #0000ff; font-size: 13.5pt;"><strong>创建了一个调用处理器DynamicProxyHandler 实现了 InvocationHandler接口</strong></span></div>
+<div style="line-height: 200%;">该接口只有一个方法<span style="color: #000000; font-size: 13.5pt;"><strong>invoke</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;<span style="color: #000000; font-size: 13.5pt;"><strong> public Object invoke(Object proxy, Method method, Object[] args) throws Throwable </strong></span></div>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>他有三个参数</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>proxy</strong></span> - 在其上调用方法的代理实例</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>method</strong></span> - 对应于在代理实例上调用的接口方法的 Method 实例。Method 对象的声明类将是在其中声明方法的接口，该接口可以是代理类赖以继承方法的代理接口的超接口。</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>args</strong></span> - 包含传入代理实例上方法调用的参数值的对象数组，如果接口方法不使用参数，则为 null。基本类型的参数被包装在适当基本包装器类（如 java.lang.Integer 或 java.lang.Boolean）的实例中。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>最后通过Java提供的代理机制创建了一个代理</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;&nbsp;&nbsp; Subject proxy = (Subject) Proxy</div>
+<div style="line-height: 200%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .newProxyInstance(Test.class.getClassLoader(), new Class[]{Subject.class}, new DynamicProxyHandler(realSubject));</div>
+</div>
+<div style="line-height: 200%;">核心就是<span style="color: #ff0000; font-size: 13.5pt;"><strong>newProxyInstance</strong></span>方法，他创建了一个实现了Subject接口的代理类</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>public static Object newProxyInstance(ClassLoader loader,</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class&lt;?&gt;[] interfaces,</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InvocationHandler h)</strong></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throws IllegalArgumentException</strong></span></div>
+</div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>这个方法也有三个参数</strong></span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>loader</strong></span> - 定义代理类的类加载器</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>interfaces</strong></span> - 代理类要实现的接口列表</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>h</strong></span> - 指派方法调用的调用处理程序</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>为什么需要这三个参数呢？</strong></span></div>
+<div style="line-height: 200%;">首先，Proxy.newProxyInstance帮你动态的创建方法，肯定要有一个类加载器，上面的示例中我们直接使用的测试类的类加载，这个一般是应用程序&nbsp; 类加载器</div>
+<div style="line-height: 200%;">再者，动态代理与静态代理一样，需要实现同样的接口，那你实现了哪些接口呢？所以你得把接口列表告诉我</div>
+<div style="line-height: 200%;">最后，你希望有哪些处理呢？你要把处理器给我</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">proxy.doSth();执行时，会将当前代理实例，以及当前方法，以及当前方法的参数传递给invoke方法，所以就完成代理的功能。</div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+<div style="line-height: 200%;">再来重头理一下：</div>
+<div style="line-height: 200%;"><ol>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>如同静态代理，需要被代理的对象RealSubject，以及他的超接口Subject</strong></span></li>
+<li><span style="color: #0000ff; font-size: 13.5pt;"><strong>需要实现InvocationHandler接口创建一个处理器，新增加的方法逻辑封装在invoke方法中</strong></span></li>
+<li><span style="line-height: 24px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>Proxy.newProxyInstance创建代理实例</strong></span></span></li>
+<li><span style="line-height: 24px;"><span style="color: #0000ff; font-size: 13.5pt;"><strong>使用创建的代理实例执行方法</strong></span></span></li>
+</ol></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>简言之，动态代理与静态代理一模一样，差别就在于不用你事先去自己主动地创建一个代理类</strong></span></div>
+<div style="line-height: 200%;">静态的时候编写了代理类，然后编译为class然后需要时被加载到JVM，然后调用</div>
+<div style="line-height: 200%;">动态是运行时在需要的时候，直接生成class文件</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">依照上面的步骤流程，你就可以借助于Java的机制实现动态代理</div>
+<div style="line-height: 200%;">但是你会发现，Proxy.newProxyInstance方法的参数需要一个 Class&lt;?&gt;[] interfaces，这意味着什么？这意味着被代理的对象必须实现一个接口</div>
+<div style="line-height: 200%;">如果被代理的对象不曾实现任何接口怎么办？</div>
+<div style="line-height: 200%;">给每个被代理的对象增加一个标记接口（形式接口）？如果只是为了使用JDK的动态代理实现，而添加了无意义的接口这是否妥当？</div>
+<h4><span style="font-size: 16px;">CGLIB </span></h4>
+<div style="line-height: 200%;">还有另外一种形式的动态代理CGLIB</div>
+<div style="line-height: 200%;">需要两个Jar&nbsp;&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114747791-2074355285.png"><img style="display: inline; background-image: none;" title="image_5c074939_55fa" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114801793-1043883665.png" alt="image_5c074939_55fa" width="147" height="68" border="0" /></a></div>
+<div style="line-height: 200%;">
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.cglib;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> RealSubject{
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> doSth() {
+System.out.println(</span>"realSubject process request...."<span style="color: #000000;">);
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.cglib;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> java.lang.reflect.Method;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> net.sf.cglib.proxy.MethodInterceptor;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> net.sf.cglib.proxy.MethodProxy;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> MyHandler <span style="color: #0000ff;">implements</span><span style="color: #000000;"> MethodInterceptor {
+@Override
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy)
+</span><span style="color: #0000ff;">throws</span><span style="color: #000000;"> Throwable {
+System.out.println(</span>"before do something..."<span style="color: #000000;">);
+Object object </span>=<span style="color: #000000;"> methodProxy.invokeSuper(o,objects);
+System.out.println(</span>"after do something..."<span style="color: #000000;">);
+</span><span style="color: #0000ff;">return</span><span style="color: #000000;"> object;
+}
+}</span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">package</span><span style="color: #000000;"> proxy.cglib;
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> net.sf.cglib.proxy.Enhancer;
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Test {
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args){
+Enhancer enhancer </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Enhancer();
+enhancer.setSuperclass(RealSubject.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">);
+enhancer.setCallback(</span><span style="color: #0000ff;">new</span><span style="color: #000000;"> MyHandler());
+RealSubject subject </span>=<span style="color: #000000;"> (RealSubject)enhancer.create();
+subject.doSth();
+}
+}</span></pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div>
+<div>在这个示例中，不再需要接口，仅仅只有一个真是对象RealSubject</div>
+</div>
+<div style="line-height: 200%;">实现了一个处理器 MyHandler 继承自 MethodInterceptor，实现了intercept方法</div>
+<div style="line-height: 200%;">在测试客户端中，通过四个步骤创建了代理对象，然后借助于代理对象执行</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114811832-980168284.png"><img style="display: inline; background-image: none;" title="image_5c074939_666" src="https://img2018.cnblogs.com/blog/897393/201812/897393-20181205114821772-1966141882.png" alt="image_5c074939_666" width="453" height="124" border="0" /></a></div>
+<div>&nbsp;</div>
+<div>从&nbsp;&nbsp;&nbsp; enhancer.setSuperclass(RealSubject.class);这一句或许猜得到，CGLIB不依赖于接口，而是代理类继承了真实主题类</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt;"><strong>流程</strong></span></div>
+<div style="line-height: 200%;">真实主题对象RealSubject是必不可少的，否则代理模式就没有意义了</div>
+<div style="line-height: 200%;">类似JDK的代理模式，处理器也是解耦的，在CGLIB中借助于MethodInterceptor接口约定，这一步要做的事情的本质与InvocationHandler并没有什么太多不同---封装附加的处理逻辑</div>
+<div style="line-height: 200%;">借助于Enhancer用来组装处理创建逻辑，并且创建代理类</div>
+<div style="line-height: 200%;">setSuperclass设置需要继承的类（也就是被代理的类）</div>
+<div style="line-height: 200%;">setCallback设置回调函数</div>
+<div>create创建真正的代理对象。</div>
+<div>&nbsp;</div>
+<div>CGLIB采用继承的机制，如果一个类是final的怎么办？那就歇菜了</div>
+<h4><span style="font-size: 16px;">JDK代理机制与CGLIB对比 </span></h4>
+<div style="line-height: 200%;">目前到JDK8 据说性能已经优于CGLIB了</div>
+<div style="line-height: 200%;">JDK机制不需要第三方Jar，JDK默认集成，CGLIB需要引入第三方Jar包</div>
+<div style="line-height: 200%;">JDK需要依赖真实主题对象实现接口，CGLIB则不需要，CGLIB继承了真实主题</div>
+<div style="line-height: 200%;">CGLIB虽然不依赖真实主题实现接口，但是被代理的类不能为final，那样的类是无法继承的</div>
+<div style="line-height: 200%;">通常的做法是如果实现了接口，那么使用JDK机制，如果没有实现接口，使用CGLIB</div>
+</div>
+<h3><span style="font-size: 18px;">代理用途分类 </span></h3>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>代理模式的根本在于隔离，&ldquo;间接&rdquo;，只要隔离，间接，那么就可以隐藏真实对象，并且增加额外的服务，优化，管理等 </strong></span></div>
+<div style="line-height: 200%;">比如</div>
+<div style="line-height: 200%;">
+<div><span style="color: #ff0000; font-size: 13.5pt;"><strong>隐藏了真实的对象</strong></span>，比如你通过中介租房子，可能到期也没见过房东</div>
+<div>&nbsp;</div>
+</div>
+<div style="line-height: 200%;">
+<div>提供了代理层，可以<span style="color: #ff0000; font-size: 13.5pt;"><strong>提供更多服务</strong></span></div>
+<div>比如买卖房屋通过中介可以节省你合同的审校工作，很多人不懂合同中暗藏的猫腻</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div>隐藏真实对象，自然能够起到一定的<span style="color: #ff0000; font-size: 13.5pt;"><strong>保护</strong></span>作用，避免了直接接触</div>
+<div>比如去学校见孩子，需要先经过老师同意</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div>通过代理，也相当于有一个管家，可以<span style="color: #ff0000; font-size: 13.5pt;"><strong>管理</strong></span>外界对真实对象的接触访问</div>
+<div>比如，真实对象是电脑，管家类软件相当于代理，可以限制小孩子对电脑的使用时长</div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">围绕着代理带来的特点&ldquo;隐藏真实对象，并且增加额外的服务，优化，限制&rdquo;</div>
+<div style="line-height: 200%;">在多种场景下，延伸出来一些分类</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff;"><strong>远程代理 Remote</strong></span><br />为一个位于不同的地址空间的对象提供一个局域代表对象，这个不同的地址空间可以是本机器的，也可以是另一台机器的 </span>
+</div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff;"><strong>虚拟代理 Virtual</strong></span>
+	</div>
+<div>根据需要创建一个资源消耗较大的对象，使得此对象只在需要时才会被真正创建
+	</div>
+
+
+
+
+</div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff;"><strong>保护代理 Protect or Access</strong></span>
+	</div>
+<div>控制对一个对象的访问，如果需要，可以给不同的用户提供不同级别的使用权限
+	</div>
+
+
+
+
+</div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff;"><strong>Cache代理</strong></span>
+	</div>
+<div>为一个目标操作的结果提供临时的存储空间，以便多个客户端可以共享这些结果&nbsp; </div>
+
+
+
+
+</div>
+<div style="line-height: 200%;">
+<div><span style="color: #0000ff;"><strong>防火墙代理 Firewall</strong></span>
+	</div>
+<div>保护目标，防止恶意行为
+	</div>
+
+
+
+
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><span style="color: #0000ff;"><strong>同步代理 Synchronization</strong></span><br />使几个用户能够同时使用一个对象而没有冲突</span>
+</div>
+<div style="line-height: 200%;"><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+</div>
+<div style="line-height: 200%;">
+<div>智能引用 Smart Reference
+	</div>
+<div>当一个对象被引用时，提供一些额外的操作，比如将对象调用次数记录下来
+	</div>
+
+
+
+
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">很显然，这些分类其实只是代理的不同应用场景，以后可能还会有更多的分类出来
+</div>
+<div style="line-height: 200%;">但是永远也脱离不了代理的&ldquo;隔离&rdquo;&ldquo;间接&rdquo;的根本核心。</div>
+<h3><span style="font-size: 18px;">总结
+</span></h3>
+<div style="line-height: 200%;">代理角色虽然是真实角色的&ldquo;代理人&rdquo;，虽然代理角色内部依赖真实角色
+</div>
+<div style="line-height: 200%;">但是真实角色可以完全脱离代理人，单独出现
+</div>
+<div style="line-height: 200%;">比如上面示例中的
+</div>
+<div style="line-height: 200%;">
+<p style="margin: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; askForSth(proxy);
+	</p>
+<p style="margin: 0px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; askForSth(real);&nbsp; </p>
+
+
+
+
+</div>
+<div style="line-height: 200%;">只不过，通过代理角色会有不同的效果
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">代理人只是会&ldquo;帮助&rdquo;解决他能解决的问题，它能提供的服务，他做不了的事情
+</div>
+<div style="line-height: 200%;">比如经纪人不会出唱片，对于出唱片的任务还是会委托给真实角色
+</div>
+<div style="line-height: 200%;">现实世界中，我们通常说真实角色委托代理角色，比如，房东找中介
+</div>
+<div style="line-height: 200%;">在程序世界中，通常却说代理角色将任务委托给真实角色，委托与被委托都是相对的
+</div>
+<div style="line-height: 200%;">要看你到底是站在什么视角看待问题，无所谓~
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">再次强调，代理模式的重点在于增加对真实受访对象的控制，也可以增加额外的服务。</div>
+<div style="line-height: 200%;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10070057.html" target="_blank">代理模式 PROXY Surrogate 结构型 设计模式（十四）</a></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-12-05 12:23</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10070057" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10070057);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10070057, cb_entryCreatedDate = '2018-12-05 12:23', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

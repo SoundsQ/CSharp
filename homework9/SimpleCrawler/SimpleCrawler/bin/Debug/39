@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="历史回顾:Java NIO 概览Java NIO 之 Buffer(缓冲区)Java NIO 之 Channel（通道）其他高赞文章：面试中关于Redis的问题看这篇就够了一文轻松搞懂redis集群原" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java NIO之Selector（选择器） - SnailClimb - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey.min.css?v=Fx4xdLkGuHnlaG7xntG_wAnZrnorJWp5u_TWKqbvMF0" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/blacklowkey/bundle-blacklowkey-mobile.min.css?v=cYvlxMu_nd6MVfg-vi7YqOC6FaZ7VHFsDM166vO_ekA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/snailclimb/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/snailclimb/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/snailclimb/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 432499;
+        var currentBlogApp = 'snailclimb';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'BlackLowKey';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/snailclimb/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/snailclimb/">骑一头小毛驴啊</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/snailclimb/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/SnailClimb">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/snailclimb/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+222&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+4</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/snailclimb/p/9086334.html">Java NIO之Selector（选择器）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    
+                <p><strong>历史回顾:</strong></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483956&amp;idx=1&amp;sn=57692bc5b7c2c6dfb812489baadc29c9&amp;chksm=fd985455caefdd4331d828d8e89b22f19b304aa87d6da73c5d8c66fcef16e4c0b448b1a6f791#rd">Java NIO 概览</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483961&amp;idx=1&amp;sn=f67bef4c279e78043ff649b6b03fdcbc&amp;chksm=fd985458caefdd4e3317ccbdb2d0a5a70a5024d3255eebf38183919ed9c25ade536017c0a6ba#rd">Java NIO 之 Buffer(缓冲区)</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483966&amp;idx=1&amp;sn=d5cf18c69f5f9ec2aff149270422731f&amp;chksm=fd98545fcaefdd49296e2c78000ce5da277435b90ba3c03b92b7cf54c6ccc71d61d13efbce63#rd">Java NIO 之 Channel（通道）</a></p>
+
+<p><strong>其他高赞文章：</strong></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483867&amp;idx=1&amp;sn=39a06fa3d6d8f09eefaaf3d2b15b40e4&amp;chksm=fd9857bacaefdeaccd7cacf9dba5b702bf6f639377ded5a29fc1e56ae4f1d0a121ad0829c9dc#rd">面试中关于Redis的问题看这篇就够了</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483863&amp;idx=1&amp;sn=8a7d08783f45d3af7947b8a2e7cc981e&amp;chksm=fd9857b6caefdea072a7cec992fa1d32316ffdca8eea24e7f5a7871ce189bdd4e5b144619ae8#rd">一文轻松搞懂redis集群原理及搭建与使用</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&amp;mid=2247483661&amp;idx=1&amp;sn=4836dfcf4c2a952ec9287bd9bfc380bd&amp;chksm=fd98576ccaefde7ad1f2feb10e652e896d24884a4a1fb804490bd192ff099c039dbf85eb8dbc#rd">超详细的Java面试题总结（三）之Java集合篇常见问题</a></p>
+
+
+
+<h2 id="一-selector选择器介绍">一 Selector（选择器）介绍</h2>
+
+<p><strong>Selector</strong> 一般称 为<strong>选择器</strong> ，当然你也可以翻译为 <strong>多路复用器</strong> 。它是Java NIO核心组件中的一个，用于检查一个或多个NIO Channel（通道）的状态是否处于可读、可写。如此可以实现单线程管理多个channels,也就是可以管理多个网络链接。</p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/15/16363f5338f36c54?w=636&amp;h=260&amp;f=png&amp;s=23373" alt="Selector（选择器）" title=""></p>
+
+<p><strong>使用Selector的好处在于：</strong> 使用更少的线程来就可以来处理通道了， 相比使用多个线程，避免了线程上下文切换带来的开销。</p>
+
+
+
+<h2 id="二-selector选择器的使用方法介绍">二 Selector（选择器）的使用方法介绍</h2>
+
+
+
+<h3 id="1-selector的创建">1. Selector的创建</h3>
+
+<p>通过调用Selector.open()方法创建一个Selector对象，如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">Selector selector = Selector.open();</code></pre>
+
+<p>这里需要说明一下</p>
+
+
+
+<h3 id="2-注册channel到selector">2. 注册Channel到Selector</h3>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">channel.configureBlocking(<span class="hljs-keyword">false</span>);
+SelectionKey key = channel.register(selector, Selectionkey.OP_READ);</code></pre>
+
+<p><strong>Channel必须是非阻塞的</strong>。 <br>
+所以FileChannel不适用Selector，因为FileChannel不能切换为非阻塞模式，更准确的来说是因为FileChannel没有继承SelectableChannel。Socket channel可以正常使用。</p>
+
+<p><strong>SelectableChannel抽象类</strong> 有一个 <strong>configureBlocking（）</strong> 方法用于使通道处于阻塞模式或非阻塞模式。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">abstract</span> SelectableChannel configureBlocking(<span class="hljs-keyword">boolean</span> block)  </code></pre>
+
+
+
+<h3 id="注意"><strong>注意：</strong></h3>
+
+<p><strong>SelectableChannel抽象类</strong>的<strong>configureBlocking（）</strong> 方法是由 <strong>AbstractSelectableChannel抽象类</strong>实现的，<strong>SocketChannel、ServerSocketChannel、DatagramChannel</strong>都是直接继承了 <strong>AbstractSelectableChannel抽象类</strong> 。 <br>
+大家有兴趣可以看看NIO的源码，各种抽象类和抽象类上层的抽象类。我本人暂时不准备研究NIO源码，因为还有很多事情要做，需要研究的同学可以自行看看。</p>
+
+<p><strong>register()</strong> 方法的第二个参数。这是一个“ <strong>interest集合</strong> ”，意思是在<strong>通过Selector监听Channel时对什么事件感兴趣</strong>。可以监听四种不同类型的事件：</p>
+
+<ul>
+<li><strong>Connect</strong></li>
+<li><strong>Accept</strong></li>
+<li><strong>Read</strong></li>
+<li><strong>Write</strong></li>
+</ul>
+
+<p>通道触发了一个事件意思是该事件已经就绪。比如某个Channel成功连接到另一个服务器称为“ <strong>连接就绪</strong> ”。一个Server Socket Channel准备好接收新进入的连接称为“ <strong>接收就绪</strong> ”。一个有数据可读的通道可以说是“ <strong>读就绪</strong> ”。等待写数据的通道可以说是“ <strong>写就绪</strong> ”。</p>
+
+<p>这四种事件用SelectionKey的四个常量来表示：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">SelectionKey.OP_CONNECT
+SelectionKey.OP_ACCEPT
+SelectionKey.OP_READ
+SelectionKey.OP_WRITE
+</code></pre>
+
+<p>如果你对不止一种事件感兴趣，使用或运算符即可，如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">int</span> interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;</code></pre>
+
+
+
+<h3 id="3-selectionkey介绍">3. SelectionKey介绍</h3>
+
+<p>一个SelectionKey键表示了一个特定的通道对象和一个特定的选择器对象之间的注册关系。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">key.attachment(); <span class="hljs-comment">//返回SelectionKey的attachment，attachment可以在注册channel的时候指定。</span>
+key.channel(); <span class="hljs-comment">// 返回该SelectionKey对应的channel。</span>
+key.selector(); <span class="hljs-comment">// 返回该SelectionKey对应的Selector。</span>
+key.interestOps(); <span class="hljs-comment">//返回代表需要Selector监控的IO操作的bit mask</span>
+key.readyOps(); <span class="hljs-comment">// 返回一个bit mask，代表在相应channel上可以进行的IO操作。</span>
+</code></pre>
+
+<blockquote>
+  <p><strong>key.interestOps():</strong></p>
+</blockquote>
+
+<p>我们可以通过以下方法来判断Selector是否对Channel的某种事件感兴趣</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">int</span> interestSet = selectionKey.interestOps(); 
+<span class="hljs-keyword">boolean</span> isInterestedInAccept = (interestSet &amp; SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT；
+<span class="hljs-keyword">boolean</span> isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT;
+<span class="hljs-keyword">boolean</span> isInterestedInRead = interestSet &amp; SelectionKey.OP_READ;
+<span class="hljs-keyword">boolean</span> isInterestedInWrite = interestSet &amp; SelectionKey.OP_WRITE;</code></pre>
+
+<blockquote>
+  <p><strong>key.readyOps()</strong></p>
+</blockquote>
+
+<p>ready 集合是通道已经准备就绪的操作的集合。JAVA中定义以下几个方法用来检查这些操作是否就绪.</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-comment">//创建ready集合的方法</span>
+<span class="hljs-keyword">int</span> readySet = selectionKey.readyOps();
+<span class="hljs-comment">//检查这些操作是否就绪的方法</span>
+key.isAcceptable();<span class="hljs-comment">//是否可读，是返回 true</span>
+<span class="hljs-keyword">boolean</span> isWritable()：<span class="hljs-comment">//是否可写，是返回 true</span>
+<span class="hljs-keyword">boolean</span> isConnectable()：<span class="hljs-comment">//是否可连接，是返回 true</span>
+<span class="hljs-keyword">boolean</span> isAcceptable()：<span class="hljs-comment">//是否可接收，是返回 true</span></code></pre>
+
+<p><strong>从SelectionKey访问Channel和Selector很简单。如下：</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">Channel channel = key.channel();
+Selector selector = key.selector();
+key.attachment();</code></pre>
+
+<p>可以将一个对象或者更多信息附着到SelectionKey上，这样就能方便的识别某个给定的通道。例如，可以附加 与通道一起使用的Buffer，或是包含聚集数据的某个对象。使用方法如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">key.attach(theObject);
+Object attachedObj = key.attachment();</code></pre>
+
+<p>还可以在用register()方法向Selector注册Channel的时候附加对象。如：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">SelectionKey key = channel.register(selector, SelectionKey.OP_READ, theObject);</code></pre>
+
+
+
+<h3 id="4-从selector中选择channelselecting-channels-via-a-selector">4. 从Selector中选择channel(Selecting Channels via a Selector)</h3>
+
+<p>选择器维护注册过的通道的集合，并且这种注册关系都被封装在SelectionKey当中.</p>
+
+<blockquote>
+  <p><strong>Selector维护的三种类型SelectionKey集合：</strong></p>
+</blockquote>
+
+<ul>
+<li><p><strong>已注册的键的集合(Registered key set)</strong></p>
+
+<p>所有与选择器关联的通道所生成的键的集合称为已经注册的键的集合。并不是所有注册过的键都仍然有效。这个集合通过 <strong>keys()</strong> 方法返回，并且可能是空的。这个已注册的键的集合不是可以直接修改的；试图这么做的话将引发java.lang.UnsupportedOperationException。</p></li>
+<li><p><strong>已选择的键的集合(Selected key set)</strong></p>
+
+<p>所有与选择器关联的通道所生成的键的集合称为已经注册的键的集合。并不是所有注册过的键都仍然有效。这个集合通过 <strong>keys()</strong> 方法返回，并且可能是空的。这个已注册的键的集合不是可以直接修改的；试图这么做的话将引发java.lang.UnsupportedOperationException。    </p></li>
+<li><p><strong>已取消的键的集合(Cancelled key set)</strong></p>
+
+<p>已注册的键的集合的子集，这个集合包含了 <strong>cancel()</strong> 方法被调用过的键(这个键已经被无效化)，但它们还没有被注销。这个集合是选择器对象的私有成员，因而无法直接访问。</p>
+
+<p><strong>注意：</strong> <br>
+当键被取消（ 可以通过<strong>isValid( )</strong> 方法来判断）时，它将被放在相关的选择器的已取消的键的集合里。注册不会立即被取消，但键会立即失效。当再次调用 <strong>select( )</strong> 方法时（或者一个正在进行的select()调用结束时），已取消的键的集合中的被取消的键将被清理掉，并且相应的注销也将完成。通道会被注销，而新的SelectionKey将被返回。当通道关闭时，所有相关的键会自动取消（记住，一个通道可以被注册到多个选择器上）。当选择器关闭时，所有被注册到该选择器的通道都将被注销，并且相关的键将立即被无效化（取消）。一旦键被无效化，调用它的与选择相关的方法就将抛出CancelledKeyException。</p></li>
+</ul>
+
+<blockquote>
+  <p><strong>select()方法介绍：</strong></p>
+</blockquote>
+
+<p>在刚初始化的Selector对象中，这三个集合都是空的。 <strong>通过Selector的select（）方法可以选择已经准备就绪的通道</strong> （这些通道包含你感兴趣的的事件）。比如你对读就绪的通道感兴趣，那么select（）方法就会返回读事件已经就绪的那些通道。下面是Selector几个重载的select()方法：</p>
+
+<ul>
+<li>int select()：阻塞到至少有一个通道在你注册的事件上就绪了。 </li>
+<li>int select(long timeout)：和select()一样，但最长阻塞时间为timeout毫秒。 </li>
+<li>int selectNow()：非阻塞，只要有通道就绪就立刻返回。</li>
+</ul>
+
+<p><strong>select()方法返回的int值表示有多少通道已经就绪,是自上次调用select()方法后有多少通道变成就绪状态。之前在select（）调用时进入就绪的通道不会在本次调用中被记入，而在前一次select（）调用进入就绪但现在已经不在处于就绪的通道也不会被记入</strong>。例如：首次调用select()方法，如果有一个通道变成就绪状态，返回了1，若再次调用select()方法，如果另一个通道就绪了，它会再次返回1。如果对第一个就绪的channel没有做任何操作，现在就有两个就绪的通道，但在每次select()方法调用之间，只有一个通道就绪了。</p>
+
+<p><strong>一旦调用select()方法，并且返回值不为0时，则 可以通过调用Selector的selectedKeys()方法来访问已选择键集合</strong> 。如下：  <br>
+Set selectedKeys=selector.selectedKeys();  <br>
+进而可以放到和某SelectionKey关联的Selector和Channel。如下所示：</p>
+
+<pre class="prettyprint"><code class="language-java hljs ">Set selectedKeys = selector.selectedKeys();
+Iterator keyIterator = selectedKeys.iterator();
+<span class="hljs-keyword">while</span>(keyIterator.hasNext()) {
+    SelectionKey key = keyIterator.next();
+    <span class="hljs-keyword">if</span>(key.isAcceptable()) {
+        <span class="hljs-comment">// a connection was accepted by a ServerSocketChannel.</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isConnectable()) {
+        <span class="hljs-comment">// a connection was established with a remote server.</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isReadable()) {
+        <span class="hljs-comment">// a channel is ready for reading</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isWritable()) {
+        <span class="hljs-comment">// a channel is ready for writing</span>
+    }
+    keyIterator.remove();
+}</code></pre>
+
+
+
+<h3 id="5-停止选择的方法">5. 停止选择的方法</h3>
+
+<p>选择器执行选择的过程，系统底层会依次询问每个通道是否已经就绪，这个过程可能会造成调用线程进入阻塞状态,那么我们有以下三种方式可以唤醒在select（）方法中阻塞的线程。</p>
+
+<ul>
+<li><strong>wakeup()方法</strong> ：通过调用Selector对象的wakeup（）方法让处在阻塞状态的select()方法立刻返回  <br>
+该方法使得选择器上的第一个还没有返回的选择操作立即返回。如果当前没有进行中的选择操作，那么下一次对select()方法的一次调用将立即返回。</li>
+<li><strong>close()方法</strong> ：通过close（）方法关闭Selector，  <br>
+该方法使得任何一个在选择操作中阻塞的线程都被唤醒（类似wakeup（）），同时使得注册到该Selector的所有Channel被注销，所有的键将被取消，但是Channel本身并不会关闭。</li>
+</ul>
+
+<h2 id="三-模板代码">三  模板代码</h2>
+
+<p><strong>一个服务端的模板代码：</strong></p>
+
+<p>有了模板代码我们在编写程序时，大多数时间都是在模板代码中添加相应的业务代码</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ServerSocketChannel ssc = ServerSocketChannel.open();
+ssc.socket().bind(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"localhost"</span>, <span class="hljs-number">8080</span>));
+ssc.configureBlocking(<span class="hljs-keyword">false</span>);
+
+Selector selector = Selector.open();
+ssc.register(selector, SelectionKey.OP_ACCEPT);
+
+<span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>) {
+    <span class="hljs-keyword">int</span> readyNum = selector.select();
+    <span class="hljs-keyword">if</span> (readyNum == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">continue</span>;
+    }
+
+    Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();
+    Iterator&lt;SelectionKey&gt; it = selectedKeys.iterator();
+
+    <span class="hljs-keyword">while</span>(it.hasNext()) {
+        SelectionKey key = it.next();
+
+        <span class="hljs-keyword">if</span>(key.isAcceptable()) {
+            <span class="hljs-comment">// 接受连接</span>
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isReadable()) {
+            <span class="hljs-comment">// 通道可读</span>
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isWritable()) {
+            <span class="hljs-comment">// 通道可写</span>
+        }
+
+        it.remove();
+    }
+}</code></pre>
+
+
+
+<h2 id="四-客户端与服务端简单交互实例">四 客户端与服务端简单交互实例</h2>
+
+<p><strong>服务端：</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> selector;
+
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.net.InetSocketAddress;
+<span class="hljs-keyword">import</span> java.nio.ByteBuffer;
+<span class="hljs-keyword">import</span> java.nio.channels.SelectionKey;
+<span class="hljs-keyword">import</span> java.nio.channels.Selector;
+<span class="hljs-keyword">import</span> java.nio.channels.ServerSocketChannel;
+<span class="hljs-keyword">import</span> java.nio.channels.SocketChannel;
+<span class="hljs-keyword">import</span> java.util.Iterator;
+<span class="hljs-keyword">import</span> java.util.Set;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebServer</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        <span class="hljs-keyword">try</span> {
+            ServerSocketChannel ssc = ServerSocketChannel.open();
+            ssc.socket().bind(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-number">8000</span>));
+            ssc.configureBlocking(<span class="hljs-keyword">false</span>);
+
+            Selector selector = Selector.open();
+            <span class="hljs-comment">// 注册 channel，并且指定感兴趣的事件是 Accept</span>
+            ssc.register(selector, SelectionKey.OP_ACCEPT);
+
+            ByteBuffer readBuff = ByteBuffer.allocate(<span class="hljs-number">1024</span>);
+            ByteBuffer writeBuff = ByteBuffer.allocate(<span class="hljs-number">128</span>);
+            writeBuff.put(<span class="hljs-string">"received"</span>.getBytes());
+            writeBuff.flip();
+
+            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
+                <span class="hljs-keyword">int</span> nReady = selector.select();
+                Set&lt;SelectionKey&gt; keys = selector.selectedKeys();
+                Iterator&lt;SelectionKey&gt; it = keys.iterator();
+
+                <span class="hljs-keyword">while</span> (it.hasNext()) {
+                    SelectionKey key = it.next();
+                    it.remove();
+
+                    <span class="hljs-keyword">if</span> (key.isAcceptable()) {
+                        <span class="hljs-comment">// 创建新的连接，并且把连接注册到selector上，而且，</span>
+                        <span class="hljs-comment">// 声明这个channel只对读操作感兴趣。</span>
+                        SocketChannel socketChannel = ssc.accept();
+                        socketChannel.configureBlocking(<span class="hljs-keyword">false</span>);
+                        socketChannel.register(selector, SelectionKey.OP_READ);
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isReadable()) {
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        readBuff.clear();
+                        socketChannel.read(readBuff);
+
+                        readBuff.flip();
+                        System.out.println(<span class="hljs-string">"received : "</span> + <span class="hljs-keyword">new</span> String(readBuff.array()));
+                        key.interestOps(SelectionKey.OP_WRITE);
+                    }
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.isWritable()) {
+                        writeBuff.rewind();
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+                        socketChannel.write(writeBuff);
+                        key.interestOps(SelectionKey.OP_READ);
+                    }
+                }
+            }
+        } <span class="hljs-keyword">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+<p><strong>客户端：</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> selector;
+
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.net.InetSocketAddress;
+<span class="hljs-keyword">import</span> java.nio.ByteBuffer;
+<span class="hljs-keyword">import</span> java.nio.channels.SocketChannel;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebClient</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) <span class="hljs-keyword">throws</span> IOException {
+        <span class="hljs-keyword">try</span> {
+            SocketChannel socketChannel = SocketChannel.open();
+            socketChannel.connect(<span class="hljs-keyword">new</span> InetSocketAddress(<span class="hljs-string">"127.0.0.1"</span>, <span class="hljs-number">8000</span>));
+
+            ByteBuffer writeBuffer = ByteBuffer.allocate(<span class="hljs-number">32</span>);
+            ByteBuffer readBuffer = ByteBuffer.allocate(<span class="hljs-number">32</span>);
+
+            writeBuffer.put(<span class="hljs-string">"hello"</span>.getBytes());
+            writeBuffer.flip();
+
+            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) {
+                writeBuffer.rewind();
+                socketChannel.write(writeBuffer);
+                readBuffer.clear();
+                socketChannel.read(readBuffer);
+            }
+        } <span class="hljs-keyword">catch</span> (IOException e) {
+        }
+    }
+}</code></pre>
+
+<p><strong>运行结果：</strong></p>
+
+<p>先运行服务端，再运行客户端，服务端会不断收到客户端发送过来的消息。 <br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/16/1636720b53ff3a72?w=1090&amp;h=217&amp;f=png&amp;s=15376" alt="运行结果" title=""></p>
+
+<p><strong>其他实例：</strong></p>
+
+<p><a href="http://www.coolblog.xyz/2018/04/04/%E5%9F%BA%E4%BA%8E-Java-NIO-%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84-HTTP-%E6%9C%8D%E5%8A%A1%E5%99%A8/">《基于 Java NIO 实现简单的 HTTP 服务器》</a></p>
+
+
+
+<h2 id="参考">参考：</h2>
+
+<p><a href="https://docs.oracle.com/javase/8/docs/api/">官方JDK相关文档</a></p>
+
+<p><a href="http://tutorials.jenkov.com/java-nio/channels.html">谷歌搜索排名第一的Java NIO教程</a></p>
+
+<p><a href="https://book.douban.com/subject/1433583/">《Java NIO》</a></p>
+
+<p><a href="https://book.douban.com/subject/26320992/">《Java 8编程官方参考教程（第9版）》</a></p>
+
+<p><a href="https://blog.csdn.net/jeffleo/article/details/54695959">Java NIO Selector详解（含多人聊天室实例）</a></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/27434028">Java NIO(6): Selector</a></p>
+
+<p><strong>欢迎关注我的微信公众号:”Java面试通关手册”（一个有温度的微信公众号，期待与你共同进步~~~坚持原创，分享美文，分享各种Java学习资源）：</strong> <br>
+<img src="https://user-gold-cdn.xitu.io/2018/5/13/163587eed3857758?w=300&amp;h=390&amp;f=png&amp;s=13332" alt="" title=""></p>            
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-05-16 17:58</span>&nbsp;
+<a href="https://www.cnblogs.com/snailclimb/">SnailClimb</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9086334" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9086334);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 432499, cb_blogApp = 'snailclimb', cb_blogUserGuid = 'bd6e360c-cc79-4b68-2c44-08d4a8d9e085';
+    var cb_entryId = 9086334, cb_entryCreatedDate = '2018-05-16 17:58', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 SnailClimb
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

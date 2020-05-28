@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一、前言 刚开始学习Java时，作为只会C语言的小白，就为其中的字符串操作而感到震撼。相比之下，C语言在字节数组中保存一个结尾的\0去表示字符串，想实现字符串拼接，还需要调用strcpy库函数或者自己" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java中的字符串操作（比较String，StringBuiler和StringBuffer） - 黄钰朝 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/misterchaos/custom.css?v=GQh2mQzT3d2FEnisfgYtaVe&#x2B;EAE=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/misterchaos/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/misterchaos/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/misterchaos/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 584199;
+        var currentBlogApp = 'misterchaos';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/misterchaos/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/misterchaos/">YC的博客</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/misterchaos/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+</li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+7&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+73</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/misterchaos/p/12782986.html">Java中的字符串操作（比较String，StringBuiler和StringBuffer）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h2 id="一、前言">一、前言</h2>
+<p>刚开始学习Java时，作为只会C语言的小白，就为其中的字符串操作而感到震撼。相比之下，C语言在字节数组中保存一个结尾的\0去表示字符串，想实现字符串拼接，还需要调用strcpy库函数或者自己手动去复制数组，非常麻烦，更别提其他复杂操作，而Java通过String类让字符串操作变得十分简单和方便。除此之外，还有stringbuilder等这些类的辅助，那么本文就<strong>从String，StringBuiler和StringBuffer的区别开始，去探讨Java中的字符串操作。</strong></p>
+<h2 id="二、string，stringbuiler和stringbuffer">二、String，StringBuiler和StringBuffer</h2>
+<h3 id="21-string类">2.1 String类</h3>
+<p>Java 提供了 String 类来创建和操作字符串。在源码中可以看到<strong>，String类内部的实现也是一个字节数组</strong>，这个数组是final类型的，因此<strong>String是不可变的对象，每次在对String类进行改变的时候都会生成一个新的string对象，</strong>然后将指针指向新的string对象。</p>
+<h3 id="22-stringbuiler-类">2.2 StringBuiler 类</h3>
+<p>和 String 类不同的是，StringBuilder 类的对象<strong>能够被多次的修改，并且不产生新的对象</strong>。这个特性的意义在于，如果我们进行大量的字符串操作，使用String类就会产生很大的性能消耗，而StringBuilder就可以避免这个问题。</p>
+<h3 id="23-stringbuffer-类">2.3 StringBuffer 类</h3>
+<p>StringBuffer 和StringBuiler之间的最大不同在于 <strong>StringBuilder 的方法不是线程安全的</strong>。</p>
+<p>由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
+<h3 id="24-string，stringbuiler和stringbuffer的比较（对比cc）">2.4 String，StringBuiler和StringBuffer的比较（对比C/C++）</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作类型</th>
+<th>说明</th>
+<th><strong>是否可变</strong></th>
+<th style="text-align:center"><strong>线程安全性</strong></th>
+<th style="text-align:left"><strong>性能</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Java中的String</td>
+<td>String 类中使用 final<br> 关键字修饰字符数组来保存字符串</td>
+<td>不可变</td>
+<td style="text-align:center">线程安全</td>
+<td style="text-align:left">低</td>
+</tr>
+<tr>
+<td style="text-align:center">Java中的StringBuffer</td>
+<td>字符串变量</td>
+<td>可变</td>
+<td style="text-align:center">线程安全</td>
+<td style="text-align:left">一般</td>
+</tr>
+<tr>
+<td style="text-align:center">Java中的StringBuilder</td>
+<td>字符串变量</td>
+<td>可变</td>
+<td style="text-align:center">线程不安全</td>
+<td style="text-align:left">一般</td>
+</tr>
+<tr>
+<td style="text-align:center">C/C++ 中的char* 操作</td>
+<td>char *是一个指针，可以<br>指向一个字符串数组</td>
+<td>可变</td>
+<td style="text-align:center">不可知</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:center">C/C++中的char数组</td>
+<td>用一个字符数组来保存字符串</td>
+<td>不可变</td>
+<td style="text-align:center">不可知</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:center">C/C++中的String封装类</td>
+<td>string可以被看成是以字符<br>为元素的一种容器。</td>
+<td>可变</td>
+<td style="text-align:center">并发读操作<br>是线程安全的</td>
+<td style="text-align:left">较高</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三、各种字符串操作的效率测试">三、各种字符串操作的效率测试</h2>
+<h3 id="31-测试代码">3.1 测试代码</h3>
+<pre><code class="language-java">    @Test
+    public void test() {
+        int count = 100000;
+
+        long startTime = System.currentTimeMillis();
+        String str = &quot;&quot;;
+        for(int i = 0; i&lt; count; i++){
+            str += i;
+        }
+        System.out.println(&quot;执行&quot;+count+&quot;次  String 耗时:&quot;+ getRunTime(startTime));
+
+        startTime = System.currentTimeMillis();
+        StringBuilder stringBuilder = new StringBuilder(&quot;&quot;);
+        for (int i = 0; i &lt; count; i++) {
+            stringBuilder.append(i);
+        }
+        System.out.println(&quot;执行&quot;+count+&quot;次  StringBuilder 耗时:&quot;+ getRunTime(startTime));
+
+        startTime = System.currentTimeMillis();
+        StringBuffer stringBuffer = new StringBuffer(&quot;&quot;);
+        for (int i = 0; i &lt; count; i++) {
+            stringBuffer.append(i);
+        }
+        System.out.println(&quot;执行&quot;+count+&quot;次  StringBuffer 耗时:&quot;+ getRunTime(startTime));
+
+    }
+</code></pre>
+<h3 id="32-测试结果">3.2 测试结果</h3>
+<pre><code>执行100000次  String 耗时:32s
+执行100000次  StringBuilder 耗时:2ms
+执行100000次  StringBuffer 耗时:4ms
+</code></pre>
+<h3 id="33-小结">3.3 小结</h3>
+<p>可以看到String类的性能远低于StringBuiler和StringBuffer，而StringBuiler在本次测试中比Stringbuffer提高了50%的性能</p>
+<h2 id="四、java字符串和正则表达式">四、Java字符串和正则表达式</h2>
+<h3 id="41-测试代码">4.1 测试代码</h3>
+<pre><code class="language-java">    @Test
+    public void test0(){
+        //邮政编码
+        String postCode = &quot;[1-9]\\d{5}&quot;;
+        //区号-座机号码
+        String areaCode = &quot;\\d{3}-\\d{8}|\\d{4}-\\d{7}&quot;;
+        //手机号码
+        String phone = &quot;(?:13\\d|15\\d|18\\d)\\d{5}(\\d{3}|\\*{3})&quot;;
+
+        String text = &quot;邮政编码：440834&quot;+
+                      &quot;区号-座机号码: 020-12345678&quot;+
+                      &quot;手机号：13536373839&quot;+
+                      &quot;邮政编码：440833&quot;+
+                      &quot;区号-座机号码: 010-12345678&quot;+
+                      &quot;手机号：13536373739&quot;;
+
+        Pattern p = Pattern.compile(postCode);
+        Matcher m = p.matcher(text);
+        System.out.println(&quot;文本中包含邮政编码：&quot;);
+        while (m.find()){
+            System.out.println(m.group());
+        }
+
+        p = Pattern.compile(areaCode);
+        m= p.matcher(text);
+        System.out.println(&quot;文本中包含区号-座机号码：&quot;);
+        while (m.find()){
+            System.out.println(m.group());
+        }
+
+        p = Pattern.compile(phone);
+        m= p.matcher(text);
+        System.out.println(&quot;文本中包含手机号：&quot;);
+        while (m.find()){
+            System.out.println(m.group());
+        }
+    }
+
+</code></pre>
+<h3 id="42-测试结果">4.2 测试结果</h3>
+<pre><code>文本中包含邮政编码：
+440834
+123456
+135363
+440833
+123456
+135363
+文本中包含区号-座机号码：
+020-12345678
+010-12345678
+文本中包含手机号：
+13536373839
+13536373739
+</code></pre>
+<h2 id="五、总结">五、总结</h2>
+<p>经过测试和比较，可以看到Java中同为字符串操作，但由于背后实现的原理不同，形成的性能差异也是十分巨大，相比之下，C/C++中的字符串操作性能更高。String类的性能远低于StringBuiler和StringBuffer，而StringBuiler比Stringbuffer的性能稍微高一点。对性能的探究，最终还是要回到使用场景，<strong>可以总结得出，如果不涉及字符串操作，那么String类是首选，如果涉及的字符串操作没有线程安全问题，那么使用StringBuilder，如果涉及的字符串操作存在线程安全问题，那么使用StringBuffer</strong></p>
+<h2 id="六、参考资料">六、参考资料</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/dolphin0520/p/3778589%E6%8E%A2%E7%A7%98Java%E4%B8%AD%E7%9A%84String%E3%80%81StringBuilder%E4%BB%A5%E5%8F%8AStringBuffer.html">探秘Java中的String、StringBuilder以及StringBuffer</a></li>
+<li><a href="https://www.cnblogs.com/xzlf/p/12681547.html">java中String StringBuilder StringBuffer比较和效率（性能）测试 - 行者老夫 - 博客园</a></li>
+<li><a href="https://www.runoob.com/java/java-regular-expressions.html">Java 正则表达式</a></li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-26 22:46</span>&nbsp;
+<a href="https://www.cnblogs.com/misterchaos/">黄钰朝</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12782986" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12782986);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 584199, cb_blogApp = 'misterchaos', cb_blogUserGuid = '90d75b02-9db8-4a79-eb03-08d6b9cefa37';
+    var cb_entryId = 12782986, cb_entryCreatedDate = '2020-04-26 22:46', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 黄钰朝
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

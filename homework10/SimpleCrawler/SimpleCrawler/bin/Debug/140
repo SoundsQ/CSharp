@@ -1,0 +1,712 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="操作系统 其实 操作系统并不是与计算机硬件一起诞生的 它是在人们使用计算机的过程中，为了管理硬件资源,提高性能提高资源利用率，而逐步地形成和完善起来的。 操作系统也是一种程序,负责管理系统资源 上电自" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>3.操作系统简单介绍 操作系统发展历史 批处理分时系统 操作系统是什么 操作系统对文件的抽象 进程 虚拟内存是什么 操作系统作用 操作系统功能 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9243349.html">3.操作系统简单介绍 操作系统发展历史 批处理分时系统 操作系统是什么 操作系统对文件的抽象 进程 虚拟内存是什么 操作系统作用 操作系统功能</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <p>&nbsp;</p>
+<h3>操作系统</h3>
+<p><span style="font-size: medium;">其实 操作系统并不是与计算机硬件一起诞生的</span></p>
+<p><span style="font-size: medium;">它是在人们使用计算机的过程中，为了管理硬件资源,提高性能提高资源利用率，而逐步地形成和完善起来的。</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">操作系统也是一种程序,负责管理系统资源</span></p>
+<p><span style="font-size: medium;">上电自检(经过BIOS)之后,处理器第一个要处理的程序</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">之所以叫做操作系统,其实就相当于它提供了一个工作台</span></p>
+<p><span style="font-size: medium;">让你可以更加方便的操作计算机的软硬件资源</span></p>
+<p><span style="font-size: medium;">是机器的一种封装,对于人机交互提供了统一的操作方式</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<h3><span style="font-size: medium;">批处理</span></h3>
+<p><span style="font-size: medium;">自从第二代晶体管计算机之后,计算机的性能有了很大的提升</span></p>
+<p><span style="font-size: medium;">与之矛盾的自然是计算机手动输入速度慢</span></p>
+<p><span style="font-size: medium;">为了提供系统利用率,出现了<strong>批处理系统</strong></span></p>
+<p><span style="font-size: medium;">用户将一批作业提交给操作系统后就不再干预，由操作系统控制它们自动运行。</span></p>
+<p><span style="font-size: medium;">显然不具备任何交互性,只是提高了系统的利用率</span></p>
+<p><span style="font-size: medium;">其中有</span></p>
+<p><span style="font-size: medium;"><strong>联机批处理系统,</strong>联机就是主机自己来控制输入输出</span></p>
+<p><span style="font-size: medium;">输入输出时,计算机的CPU是空闲的,需要等待数据传输完成</span></p>
+<p><strong>&nbsp;</strong></p>
+<p><span style="font-size: medium;"><strong>脱机批处理系统</strong>就是输入输出不在交由主机处理,托管到另一个台机器</span></p>
+<p><span style="font-size: medium;">显然,处理机和主机可以并行工作,他们通过高速磁带进行对接</span></p>
+<p><span style="font-size: medium;">但是仅仅只能执行一个程序</span></p>
+<p><span style="font-size: medium;">人们当然希望计算机可以同时执行多个任务</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<h3><span style="font-size: medium;">多道程序系统</span></h3>
+<p><span style="font-size: medium;">然后很自然的出现了<strong>多道程序系统</strong></span></p>
+<p><span style="font-size: medium;">允许多个程序同时进入内存并运行</span></p>
+<p><span style="font-size: medium;">交替在CPU中运行，它们共享系统中的各种硬、软件资源。</span></p>
+<p><strong><span style="font-size: medium;">多道批处理系统</span></strong></p>
+<p><span style="font-size: medium;">顾名思义就是批处理与多道程序的结合,兼顾了多道与批处理的优点</span></p>
+<p><span style="font-size: medium;">不过没有交互性</span></p>
+<h3>分时系统</h3>
+<p><span style="font-size: medium;">把CPU时间分成时间片,各个任务按照时间片轮流执行,分时就是分配时间片</span></p>
+<p><span style="font-size: medium;">分时系统的实时性交互性比多道程序有更大的提高</span></p>
+<h3>实时系统</h3>
+<p><span style="font-size: medium;">还有一些特定的场景,对于实时性要求更高,比如军事设备等</span></p>
+<p><span style="font-size: medium;">分为实时控制系统/实时信息处理系统</span></p>
+<p><span style="font-size: medium;">响应更加及时,更加可靠,平时场景一般是用不到的</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">可以看得出来,操作系统的发展中有<strong>几个主要矛盾</strong></span></p>
+<p><span style="font-size: medium;">CPU性能与手工操作的矛盾</span></p>
+<p><span style="font-size: medium;">CPU性能与输入输出的矛盾</span></p>
+<p><span style="font-size: medium;">运行单一任务与希望可以执行多程序之间的矛盾</span></p>
+<p><span style="font-size: medium;">交互性差和希望可以提供更强交互性之间的矛盾</span></p>
+<p><span style="font-size: medium;">实时性差与希望可以提供更加实时可靠系统之间的矛盾</span></p>
+<p><span style="font-size: medium;">功能单一与希望可以提供通用功能系统之间的矛盾</span></p>
+<p><span style="font-size: medium;">整个发展过程就是为了解决这些矛盾</span></p>
+<p><span style="font-size: medium;">发展的结果也就是CPU的利用率大幅度上升,功能更加完备</span></p>
+<p><span style="font-size: medium;">可以同时执行多个任务</span></p>
+<p><span style="font-size: medium;">实时性交互性更高更可靠</span></p>
+<p><span style="font-size: medium;">也出现了更为通用的计算机</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">操作系统的类型更多的可以理解为逻辑上的意义,他们可以相互结合,比如上面的多道批处理</span></p>
+<p><span style="font-size: medium;">还有分时批处理&nbsp; 实时批处理 等</span></p>
+<p><span style="font-size: medium;">Unix是最早的通用操作系统</span></p>
+<p><span style="font-size: medium;">此后又出现了linux/windows/苹果</span></p>
+<h3><span style="font-size: medium;">&nbsp;操作系统概括总结</span></h3>
+<p><span style="font-size: medium;"><strong>计算机由硬件和软件构成</strong></span></p>
+<p><span style="font-size: medium;"><strong>我们可以认为操作系统是计算机软件程序和硬件之间的一个薄层</strong></span></p>
+<p><span style="font-size: medium;"><strong>这个薄层封装了底层的硬件实现</strong></span></p>
+<p><span style="font-size: medium;">基本功能是:</span></p>
+<p><strong><span style="font-size: medium;">防止硬件被应用程序随意滥用,并且向应用程序提供了简单一致的机制来控制各种不同的硬件设备</span></strong></p>
+<p><span style="font-size: medium;">操作系统通过几个基本的抽象概念来达到这个目的</span></p>
+<p><span style="font-size: medium;">/虚拟内存/进程/文件/</span></p>
+<p><span style="font-size: medium;">既然是抽象,那自然是像译码器一样,转换了一种描述呈现表达操作方式</span></p>
+<h3>文件</h3>
+<p><span style="font-size: medium;">文件是对IO设备的抽象</span></p>
+<p><span style="font-size: medium;">就是字节序列而已,所以每个IO设备,哪怕是键盘显示器都可以看成是文件</span></p>
+<p><span style="font-size: medium;">向应用程序提供了一个统一的操作视图</span></p>
+<p><span style="font-size: medium;">也可以理解为格式,也就是对于所有程序来说 所有的文件都是这样子的</span></p>
+<p><span style="font-size: medium;">不管你到底是什么样子的IO设备,应用程序完全不用关注他具体的样子</span></p>
+<p><span style="font-size: medium;">操作系统会提供一致性的解决方案</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<h3>虚拟内存</h3>
+<p><span style="font-size: medium;">虚拟内存是对主存和磁盘I/O的设备的抽象</span></p>
+<p><span style="font-size: medium;">是计算机系统内存管理的一种技术。</span></p>
+<p><span style="font-size: medium;">它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间）</span></p>
+<p><span style="font-size: medium;">好像自己都独占使用主存</span></p>
+<p><span style="font-size: medium;">通过提供连续的内存空间,每个进程看到的虚拟地址空间由大量的固定的区块构成</span></p>
+<p><span style="font-size: medium;">其实可以理解为户型图,每个进程的户型都一样</span></p>
+<p><span style="font-size: medium;">包括程序代码和数据区/堆/栈 等</span></p>
+<p><span style="font-size: medium;">他们看到的地址空间是一致的</span></p>
+<p><span style="font-size: medium;">而不用你自己费心的去管理地址</span></p>
+<p><span style="font-size: medium;">现在的计算机都可以多任务同时执行,之前提到的中断正是这种功能的硬件基础</span></p>
+<p><span style="font-size: medium;">没有哪个程序会一直独占处理器</span></p>
+<p><span style="font-size: medium;">每个程序都需要内存,想要多任务运行自然需要更多的内存</span></p>
+<p><span style="font-size: medium;">怎么才能在有限的内存空间服务于越来越多的程序呢?</span></p>
+<p><span style="font-size: medium;">注意到,虽然内存中有许多个程序同时运行,但是同一时间点,只有一个处理器在执行</span></p>
+<p><span style="font-size: medium;">如果内存不够的话,可以让暂时不用的数据和代码 存放到磁盘</span></p>
+<p><span style="font-size: medium;">腾出来空间加载将要使用的部分</span></p>
+<p><span style="font-size: medium;">如果需要的话,再将它们用同样的方式加载回来</span></p>
+<p><span style="font-size: medium;">这样编写程序的时候,不用关注到底是否有内存可用,</span></p>
+<p><strong><span style="font-size: medium;">对于当前程序,他会假定他肯定有足够的内存使用</span></strong></p>
+<p><span style="font-size: medium;">因为这部分内存并不存在,而是位于磁盘上,所以叫做虚拟内存</span></p>
+<p><span style="font-size: medium;">硬盘的速度是很慢的,如果需要访问的内容不在内存中,而是从磁盘载入,代价是巨大的</span></p>
+<p><span style="font-size: medium;">所以计算机自然会很慢</span></p>
+<p><span style="font-size: medium;">也就是说,虚拟内存牺牲执行效率换执行空间(同时运行更多的程序)</span></p>
+<p><span style="font-size: medium;">对于程序员来说,<strong>操作系统提供的虚拟内存,可以说是给程序的运行提供了统一的内存空间</strong></span></p>
+<p><strong><span style="font-size: medium;">&nbsp;</span></strong></p>
+<h3>进程</h3>
+<p><span style="font-size: medium;">进程是对处理器 主存 I/O设备的抽象</span></p>
+<p><span style="font-size: medium;">每个程序在计算机上运行,看上去可以独占的使用处理器,主存和I/O设备</span></p>
+<p><span style="font-size: medium;">处理器好像在不间断的一条接一条的执行程序中的指令</span></p>
+<p><span style="font-size: medium;">对于程序来说好像只有他自己的程序的代码和数据在内存中</span></p>
+<p><span style="font-size: medium;">好像跟其他的正在运行的应用程序并没有关系</span></p>
+<p><span style="font-size: medium;">这是操作系统提供的一种假象,这就是进程的概念</span></p>
+<p><strong><span style="font-size: medium;">进程是对处理器 主存 I/O设备的抽象,也即是一个正在运行的程序的一种抽象</span></strong></p>
+<p><span style="font-size: medium;">进程也是硬件中断以及系统cpu时间片调度的产物</span></p>
+<p><span style="font-size: medium;">一个正在运行的程序,这是一件抽象的事情,</span></p>
+<p><span style="font-size: medium;">想要把它具体的映射到系统中,而且还能有中断,还能够重新返回现场继续执行</span></p>
+<p><span style="font-size: medium;">你必须用具体的信息去描述记录跟踪它的运行</span></p>
+<p><span style="font-size: medium;">操作系统保持跟踪进程运行时所需要的所有信息,这种信息也叫作<strong>上下文</strong></span></p>
+<p><span style="font-size: medium;">它包括很多信息,自然取决于操作系统的底层实现</span></p>
+<p><span style="font-size: medium;">可能包括PC和寄存器的值,主存的内容等</span></p>
+<p><span style="font-size: medium;">操作系统想要把控制权从当前进程转移到某个新的进程,就会进行上下文切换</span></p>
+<p><span style="font-size: medium;">也就是保存当前的上下文,恢复进程的上下文</span></p>
+<p><span style="font-size: medium;">当然现代操作系统一个进程又实际的被分为多个称之为<strong>线程</strong>的执行单元组成</span></p>
+<p><span style="font-size: medium;">每个线程都运行在进程上下文,共享同样的代码和全局数据</span></p>
+<p><span style="font-size: medium;">操作系统也是计算机发展中的一个伟大创举</span></p>
+<p><span style="font-size: medium;">他隐藏了大量的底层细节,提供了大量方便的抽象</span></p>
+<p><span style="font-size: medium;">&nbsp;</span></p>
+<p><span style="font-size: medium;">总结:</span></p>
+<p><span style="font-size: medium;"><strong>操作系统就是对硬件的封装,提供简单统一的访问形式.</strong></span></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-06-29 14:41</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9243349" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9243349);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9243349, cb_entryCreatedDate = '2018-06-29 14:41', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

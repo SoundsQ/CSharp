@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="前言 一道残阳铺水中，半江瑟瑟半江红。随着城市建设的迅速发展，每年都有大量新建管网水管通水运行。城市中有大量的排水设备，形成相应的城市排水系统，排水系统由检查井、排水泵站、污水处理厂、雨水口、排放口等" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>基于 HTML5 WebGL 的污水处理厂泵站自控系统 - xhload3d - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/cogitation/bundle-cogitation.min.css?v=PJ48NAY_dmbjZZ0ZTev3Avl3BcTMJe39d3Pc83CPcig" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/cogitation/bundle-cogitation-mobile.min.css?v=jLHKTG0H_smj72y-Z2j0JGYUmhBVGTu4_QpAGb1B_sA" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xhload3d/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xhload3d/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xhload3d/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 171723;
+        var currentBlogApp = 'xhload3d';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Cogitation';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="top">
+	
+<div>
+	<table>
+		<tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xhload3d/">xhload3d</a>
+</h1>
+				<p id="tagline">
+www.hightopo.com
+</p>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="HeaderBarTab" nowrap>
+&nbsp;
+<a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+ ::
+
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xhload3d/">
+首页</a>
+ ::
+<a href="http://q.cnblogs.com" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+ ::
+
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/xhload3d">
+联系</a> ::
+
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xhload3d/rss/">
+订阅</a>
+
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/xhload3d/rss/">
+    <img src="/skins/cogitation/images/xml.gif" alt="订阅" />
+</a> ::
+
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+ ::
+
+
+</td>
+			<td><img id="Header1_BlueTab" src="/skins/cogitation/images/BlueTabRight.gif" align="absmiddle" alt=""/></td>
+			<td class="HeaderBarTabBack" nowrap width="100%">
+				<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap>
+				&nbsp;
+				
+236 
+				随笔&nbsp;::
+				
+1 文章
+				::
+				
+429 评论
+				::
+				
+0 引用
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+		
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+		<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xhload3d/p/12786772.html">基于 HTML5 WebGL 的污水处理厂泵站自控系统</a>
+
+	</div>
+	
+	<div class="postText">
+		
+    <div id="cnblogs_post_description" style="display: none">
+        <img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305112954109-366453482.png" class="desc_img"> 随着城市建设的迅速发展，污水处理设施也在不断增加。更稳定、科学和高效的管理及运行污水处理泵站，建设自动化智能控制系统为核心的污水泵站是实现泵站科学化管理的重要基础，也是整个污水处理系统建设调度、决策系统的重要组成部分。今天让我们就用 HT for Web  来打造一个污水处理厂泵站自控系统。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>前言</h1>
+<p>一道残阳铺水中，半江瑟瑟半江红。随着城市建设的迅速发展，每年都有大量新建管网水管通水运行。城市中有大量的排水设备，形成相应的城市排水系统，排水系统由检查井、排水泵站、污水处理厂、雨水口、排放口等等组成，排水设备中的检查井、雨水口、排放口等通过排水管网进行连接，日常的雨污水进入排水管网进行运输排放。目前，城市排水管网具有结构庞大，结构错综复杂等特点，现有技术中，对城市排水管网的监测、监控仍停留在大量依靠人工的模式，智能化水平，准确率都不能符合现有技术的需求。</p>
+<p><img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305112954109-366453482.png" alt="" width="909" height="511"></p>
+<p>（<a href="http://www.hightopo.com/demo/drainage-pump-station/" target="_blank">http://www.hightopo.com/demo/drainage-pump-station/</a>）</p>
+<h1>传统城市水务行业发展现状及需求</h1>
+<p>近年来，物联网、云计算技术不断创新完善，为创建智慧城市提供了有利条件。同时，为了确保水安全，节约有限的资源，传统的水务行业正不断地探索智慧水务建设。以实现智慧生产、智慧经营、智慧服务和智慧管控，智慧水务应运而生。<br />1、在城市供水、排水体系中，基本依靠人工管理和巡检，确保各环节供水、排水正常，效率较低，反馈周期较长;<br />2、人工抄表存在扰民、&ldquo;抄不准&rdquo;、&ldquo;估值&rdquo;等多种情况，客户服务体验较差;<br />3、水质、水压、及关联环境数据等不能清晰掌握，不利于水务的精细化管理;<br />4、对于水泵、水闸、取水栓、污水处理器等水务设备状态不能实现统一管理，设备管理难度较大;<br />5、排水管网、污水处理设施、再生水回用等排水体系不健全。</p>
+<p>针对水务行业市场需求，我们用&nbsp;<a href="http://www.hightopo.com/index.html" target="_blank">HT for Web</a>&nbsp; 来打造一个污水处理厂泵站自控系统。<br />该系统基于物联网理念，采用信息化手段，实现对管网运行指标的实时监测，包括管网液位、流量、水质、气体、泵站运行状态等信息，保证管网安全高效地发挥作用，通过构建安全预警平台，提高应急指挥及快速处置能力，保障城市排水管线的安全运行，使得整个城市排水管线的安全运行可把握、可控制、可预测，提供科学、先进的城市级水力分析能力，更全面评估城市排水管网能力。以城市排水设施数据为基础，结合管网监控数据，气象雨情状况，实现为城市汇水区智能划分、排水规划、防涝预测提供决策依据。通过智能水表、压力传感器、开关控制阀、水质传感器、流量传感器采集数据，然后对供、排水系统中所有管线、设备 (水泵、阀门、取水栓、消防栓等) 与构筑物 (水厂、水池、水塔等) 的智能控制管理，全面掌握水务系统的运行情况如管网水位、流量、水质、水压、泵站运行状态等，保证水务系统安全高效运行。</p>
+<h1>代码实现</h1>
+<p>首先，是对一些基础参数进行设置来获得更好的体验效果：</p>
+<div class="cnblogs_code">
+<pre><span data-mce-="">//<span data-mce-=""> 禁止拖动
+gv.setMovableFunc(() =&gt; { <span data-mce-="">return <span data-mce-="">false<span data-mce-=""> }) 
+<span data-mce-="">//<span data-mce-=""> 隐藏选中边框
+gv.getWireframe = (d) =&gt; { d.s('wf.visible', <span data-mce-="">false<span data-mce-="">) }  
+<span data-mce-="">//<span data-mce-=""> 设置眼睛
+gv.setEye([583, -212, -789<span data-mce-="">]) 
+<span data-mce-="">//<span data-mce-=""> 设置中心点
+gv.setCenter([-76, -654, -133<span data-mce-="">]) 
+<span data-mce-="">//<span data-mce-=""> 设置远端位置
+gv.setFar(100000<span data-mce-="">) 
+<span data-mce-="">//<span data-mce-=""> 设置近端位置
+gv.setNear(10<span data-mce-="">) 
+<span data-mce-="">//<span data-mce-=""> 设置交互限制
+gv.setInteractors([ <span data-mce-="">new<span data-mce-=""> ht.graph3d.MapInteractor(gv) ]) 
+<span data-mce-="">//<span data-mce-=""> 设置天空球
+gv.setSkyBox(dm.getDataByTag('skyBox'<span data-mce-="">)) 
+<span data-mce-="">//<span data-mce-=""> 全局设置右键菜单禁用
+window.document.oncontextmenu = () =&gt; { <span data-mce-="">return <span data-mce-="">false<span data-mce-=""> }
+<span data-mce-="">//<span data-mce-=""> 复制初始位置 
+gv.scene =<span data-mce-=""> { 
+    eye: ht.Default.clone(gv.getEye()),
+    center: ht.Default.clone(gv.getCenter()),
+    far: ht.Default.clone(gv.getFar()),
+    near: ht.Default.clone(gv.getNear()),
+}</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</div>
+<p>复制一下整个场景的初始视角情况方便做稍后的处理。通过监听部分鼠标事件来形成自己的操作风格（比如双击背景还原视角以及双击模型拉近视角）：</p>
+<div class="cnblogs_code">
+<pre>gv.mi(e =&gt;<span data-mce-=""> {
+    let data =<span data-mce-=""> e.data
+    let kind =<span data-mce-=""> e.kind
+    <span data-mce-="">//<span data-mce-=""> 双击背景
+    <span data-mce-="">if (kind === 'doubleClickBackground'<span data-mce-="">) { 
+        <span data-mce-="">//<span data-mce-=""> 恢复视角
+        gv.moveCamera(<span data-mce-="">this.gv.scene.eye, <span data-mce-="">this.gv.scene.center, {duration : 1000<span data-mce-="">}) 
+    }
+    <span data-mce-="">//<span data-mce-=""> 双击模型
+    <span data-mce-="">else <span data-mce-="">if (kind === 'doubleClickData'<span data-mce-="">) { 
+        <span data-mce-="">//<span data-mce-=""> 拉近视角
+        gv.flyTo(data, {animation : {duration : 500}, distance : 800<span data-mce-="">}) 
+    }
+})</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</div>
+<p><img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305121859797-147190225.gif" alt="" width="894" height="616"></p>
+<p>场景中有一些面板，它们是之前封装好的 2D 图标，在 3D 场景中是一个&nbsp;billboard 类型，我们通过对 data.s('shape3d.autorotate') 这个属性进行设置即可实现面板是否可以随视角自动旋转，值类型为布尔值。</p>
+<p>同时，这些面板中数值等参数我们都可以绑定好自定义的属性方便我们后期来实现数据的驱动：</p>
+<div class="cnblogs_code">
+<pre>data.a('name'<span data-mce-="">, value)
+data.a('state'<span data-mce-="">, value)
+data.a('num'<span data-mce-="">, value)
+...</span></span></span></pre>
+</div>
+<p><img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305123648268-1269062370.gif" alt="" width="890" height="517"></p>
+<p>细心的小伙伴还发现墙上还有部分&nbsp;billboard，可以通过点击拉近来浏览，这个小交互也增强了用户体验感：</p>
+<div class="cnblogs_code">
+<pre>gv.mi(e =&gt;<span data-mce-=""> {
+    let data =<span data-mce-=""> e.data,
+        kind =<span data-mce-=""> e.kind
+    <span data-mce-="">//<span data-mce-=""> 单击模型
+    <span data-mce-="">if (kind === 'clickData'<span data-mce-="">) { 
+        <span data-mce-="">//<span data-mce-=""> 拉近视角
+        gv.flyTo(data, {animation : {duration : 1000}, distance : 5000<span data-mce-="">}) 
+    }
+})</span></span></span></span></span></span></span></span></span></span></pre>
+</div>
+<p>flyTo 方法即相机看向具体的节点或者节点列表，其 options 参数我们可以设置动画效果，direction 为眼睛处于目标的方向，是相对于目标的，受目标自身旋转的影响，distance 表示眼睛跟中心的固定距离。</p>
+<p>最后一部分也是这个 demo 中最特别的交互效果，不难发现我们在通过滚轮缩放整个场景时，会有层次的显隐部分建筑，如房盖地板等，以此来使我们能观看到建筑内部的细节构造及设备。</p>
+<p><img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305131225733-454636272.gif" alt="" width="900" height="479"></p>
+<p>我们通过判断镜头垂直视角距离来进行模型的显示或隐藏，改变 data.s('3d.visible') 属性的布尔值来实现。</p>
+<p><img src="https://img2020.cnblogs.com/i-beta/1496396/202003/1496396-20200305132138503-1783554544.gif" alt="" width="902" height="480"></p>
+<div class="cnblogs_code">
+<pre><span data-mce-="">this.gv.mp(e =&gt;<span data-mce-=""> {
+    const { property } =<span data-mce-=""> e
+    <span data-mce-="">if (property === 'eye'<span data-mce-="">) {
+        <span data-mce-="">//<span data-mce-=""> 当 Y 轴视角小于等于一定数值，进行隐藏逻辑
+        const [cameraX, cameraY, cameraZ] =<span data-mce-=""> e.newValue
+        <span data-mce-="">if (cameraY &lt;= 500<span data-mce-="">) {
+            <span data-mce-="">//<span data-mce-=""> hide（）
+            console.log('应该隐藏房顶'<span data-mce-="">)
+        }
+    }
+})</span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</div>
+<h1>方案价值</h1>
+<p>1、无线自动抄表<br />大大提高抄表准确率和抄表效率，人力成本明显降低;<br />2、快速定位管网漏损<br />通过水表的网格化、实时监控、快速定位管网问题等实现漏损分析，从而降低漏损。<br />3、水环境数据精细化管理<br />通过水质、水压、温度等数据的实时回传，实现精细化、可视化管理，提升管理能力。<br />4、无人值守，远程统一管控<br />通过物联网传感设备，对于水泵、水闸、取水栓、污水处理器等水务设备状态实现统一远程管理。可实现无人现场值守，管理员和技术员可随时随地远程监控水务系统的实时状态;<br />5、故障主动上报，降低意外故障带来的损失<br />设备异常提前知晓、故障主动上报，及时发现和尽快维护，避免该设备故障导致上下游设备和工况环境的连锁故障，最大化降低设备非计划性停机频率和故障损失。</p>
+<h1>总结</h1>
+<p>污水处理厂泵站自控系统，以 3D 画面人机交互的形式展现数据，实时数据以控制面板的形式体现。同时可设定各监测数据的预警值，当数据达到预警值时具有提醒的功能。其核心模块包括：数据处理服务、管网监测点管理、监测实时数据、监测历史管理、监测数据对比、管网数据分析、监测数据接入等设计和开发。通过 HT for Web 平台，使得交互界面的设计变得更加的简单与便捷。本文为针对水务处理一块做出的一些场景分析及数据可视化的设计，若有见解及填充还望指出，为水务事业及国家的发展略尽绵薄之力。欢迎大家评论区下留言互相探讨，共勉进步！</p>
+<p>2019 我们也更新了数百个工业互联网 2D/3D 可视化案例集，在这里你能发现许多新奇的实例，也能发掘出不一样的工业互联网：<a href="https://mp.weixin.qq.com/s/ZbhB6LO2kBRPrRIfHlKGQA" target="_blank">《分享数百个 HT 工业互联网 2D 3D 可视化应用案例之 2019 篇》</a>。</p>
+<p>更多好玩有趣的 demo 尽在其中，欢迎来访~~</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+	</div>
+	
+	<div class="postfoot">
+		posted on 
+<span id="post-date">2020-04-29 00:01</span>&nbsp;
+<a href="https://www.cnblogs.com/xhload3d/">xhload3d</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12786772" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12786772);return false;">收藏</a>
+	</div>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 171723, cb_blogApp = 'xhload3d', cb_blogUserGuid = '99a30dc7-3165-e311-8d02-90b11c0b17d6';
+    var cb_entryId = 12786772, cb_entryCreatedDate = '2020-04-29 00:01', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div class="footer">
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	
+<a href="https://www.cnblogs.com/" id="Footer1_Hyperlink3" style="font-size: 12px; font-family: Verdana">博客园</a>
+	<br />
+	Copyright &copy; 2020 xhload3d
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</p>
+
+
+</div>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一拍即合 上一篇《.Net微服务实战之技术选型篇》，从技术选型角度讲解了微服务实施的中间件的选择与协作，工欲善其事，必先利其器，中间件的选择是作为微服务的基础与开始，也希望给一直想在.Net入门微服务" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>.Net微服务实战之技术架构分层篇 - 陈珙 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/skychen1218/custom.css?v=tJ3WDojS8VDnASSOKCki1PFtrJM=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/moonlightink/bundle-moonlightink-mobile.min.css?v=DtT6aFEL2E0nUaFINFlRXOfBp0MkOV1AK7GFtAkKKbo" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/skychen1218/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/skychen1218/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/skychen1218/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 167340;
+        var currentBlogApp = 'skychen1218';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'MoonlightInk';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link  type="text/css" rel="stylesheet" href="https://files.cnblogs.com/files/hafiz/feedback.css">
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/skychen1218/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/skychen1218/">陈珙</a>
+</h1>
+<h2>
+不积跬步,无以至千里
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/skychen1218/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E9%99%88%E7%8F%99">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/skychen1218/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+50&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+745</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/skychen1218/p/12653155.html">.Net微服务实战之技术架构分层篇</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>一拍即合</h1>
+<p>　　上一篇《<a href="https://www.cnblogs.com/skychen1218/p/12531412.html" target="_blank">.Net微服务实战之技术选型篇</a>》，从技术选型角度讲解了微服务实施的中间件的选择与协作，工欲善其事，必先利其器，中间件的选择是作为微服务的基础与开始，也希望给一直想在.Net入门微服务的同行有一个很好的方向。在此篇重新整理了一下整个微服务项目的demo，希望对有需要的朋友起到一定的帮助：https://github.com/SkyChenSky/Sikiro&nbsp;</p>
+<p>　　那么我在公司实施微服务的时候，也不是一拍脑袋想上就上的。刚入职公司的时候才3、4个人，产品给到我的规划只有一个很简单的系统，包含权限、客服IM、内容管理三个模块，我当时想着优先证明我们的开发能力和效率，于是使用简单的单体架构不到三个星期项目就完成了。产品在我们开发的期间把整个项目的规划和平台系统的划分给梳理了一遍，终于让我有一个很明确的技术实施方向，同时公司的人力成本预算也批了下来开始进行团队扩招。</p>
+<p>　　于是我与老领导商量了一下，在现在这个情况，无论<strong>业务</strong>还是<strong>团队</strong>都具有使用微服务架构的可操作性，再采用部分DevOps的思想给与微服务实施的支持，能顺利的实施落地微服务问题不大。我们俩讨论了一番，我有良好的微服务技术储备，他有很好的运维支撑，就这样咱两达成了共识。于是我着手翻出了<strong>收藏已久</strong>的微服务中间件、架构分层、服务拆分的资料，从此开始了我的微服务实施之路。</p>
+<p><span style="color: #ff0000;">PS:我们讨论实施微服务的时候除了以上冠冕堂皇的理由之外，其实还存有一点私心，就是现在企业招聘很多需要有实施微服务经验的人才，但是80%的项目和同行又是没有这样的实施必要与经验，这就是鸡生蛋和蛋生鸡的问题。我毫无隐瞒的说出我们的私心并不是怂恿大家冒着风险去实施，而是希望大家通过分析现在团队的组织架构、技术储备、业务架构，在条件允许的情况下满足您的小小要求，微服务虽不是银弹，但我们也需要成长。</span></p>
+<h1>架构思维</h1>
+<p>　　<strong>抽象</strong>是作为架构思维的核心，使我们站在大局观察，<strong>屏蔽细节</strong>；这系统<strong>划分</strong>哪几个模块？模块之间的如何<strong>协作</strong>的？抽象又可以衍生出两种思想<strong>划分与协作。</strong></p>
+<p><strong>　　划分</strong>的目的是为了定责与拆分，定责不是交通事故的定责而是<strong>划定职责，</strong>明确模块的使用场景，应该被什么依赖？应该依赖什么？<strong>拆分</strong>其实就是<strong>分而治之</strong>的思想，把一个复杂的大问题拆分成一个个简单而小的问题，<strong>化繁为简</strong>逐个击破自然就迎刃而解。</p>
+<p>　　<strong>协作</strong>的目的是整合划分好的模块，被拆分的模块如果无法整合到一起，拆分则失去了他原有的意义。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202004/488722-20200408160108024-929000659.png" alt="" width="1195" height="683" /></p>
+<h1>不谋而合</h1>
+<p>&nbsp;　　<strong>技术服务于架构，架构服务于业务，业务服务于商务</strong>。所以有明确的业务蓝图才可以很好的规划架构方向；选择好合适的技术才能很好的支撑架构。此时我们开始着手实施微服务，然而在实施时我们还会考虑一个比较核心点，究竟如何微？粒度究竟到什么程度？怎么明确依赖关系？大家或多或少都会听说身边同行有实施微服务的失败案例：拆分粒度过细导致系统复杂度过高；拆分粒度太粗又没达到微服务该有的效果等。那么是否在业界有一套科学的指导方法论？我认为是有的，<strong>DDD战略设计</strong>与<strong>分层架构。</strong></p>
+<p><strong>　　</strong>埃里克、埃文斯在2004年发表了《领域驱动设计》一书的，此后一直是雷声大雨点小，在2014年软件教父马丁花给微服务一个全面描述，让它走向一个高潮后，DDD终于赢来了他的春天。为什么说DDD适合微服务呢？DDD是一种通过划分业务边界，将复杂的业务领域简单化的设计思想，也就是<strong>化繁为简</strong>。为什么在上文重点强调<strong>DDD战略设计</strong>？DDD分为<strong>战略设计</strong>与<strong>战术设计。</strong></p>
+<h2>战略设计</h2>
+<p>　　主要从<strong>业务视角</strong>出发，建立业务领域模型，划分领域边界，建立通用语言的界限上下文，界限上下文可以作为微服务设计的参考边界。</p>
+<h2>战术设计</h2>
+<p>　　主要从<strong>技术视角</strong>出发，侧重于领域模型的技术实现，完成软件开发和落地，例如我们常讨论的聚合根、实体、值对象、领域服务等代码逻辑的设计与实现。</p>
+<p>　　从以上两点的描述可以看出，战略设计从业务视角出发，而架构服务于业务，两者都需要从业务出发，<strong>DDD战略设计</strong>与<strong>微服务</strong>都有同样的设计思想：<strong>分而治之、化繁为简</strong>，那么战略设计的思想完全可以作为微服务架构设计的指导思想，此时此刻此场景不谋而合。</p>
+<h2>分层架构</h2>
+<p>　　也可以叫N层架构（N&gt;=2），其实本质在于<strong>划分职责、隔离关注点</strong>，保证各层之间的差异足够清晰，边界足够明显，其特点自顶向下依赖，逐层传递。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202004/488722-20200416081235851-31381688.jpg" alt="" width="1184" height="1112" /></p>
+<h1><strong>纵向拆分</strong></h1>
+<p>　　首先我按照分层架构的思想以<strong>纵向维度拆分</strong>，主要共分5层，<strong>UI层、聚合API服务层、基础业务API服务层、基础设施层、数据库层</strong>。</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;调用链路自顶往下，用户--&gt;UI--&gt;API网关--&gt;聚合API服务--&gt;Consul+Consul Template+Nginx--&gt;业务API服务--&gt;数据库</p>
+<h2>　　UI层</h2>
+<p>　　依赖于<strong>聚合API服务层</strong>，操作与接口11对应，主要负责可见即可得的工作：数据展示、交互动画等。</p>
+<h2>　　入站API网关</h2>
+<p>　　主要负责<strong>聚合API服务层</strong>内外网隔离、入站规则控制，防止外部大流量冲垮内部服务。</p>
+<h2>　　聚合API服务层</h2>
+<p>　　被<strong>UI层</strong>依赖，依赖于<strong>基础业务API服务层</strong>，主要负责<strong>基础业务API服务层</strong>的接口的逻辑组合，不直连数据库，可通过<strong>API网关</strong>暴露给UI层调用。</p>
+<h2>　　注册服务中心</h2>
+<p>　　记录<strong>基础业务API服务层</strong>的服务IP列表，内网使用，衔接<strong>聚合API服务层</strong>与<strong>基础业务API服务层</strong>。</p>
+<h2>　　基础业务API服务层，</h2>
+<p>　　被<strong>聚合API服务层依赖</strong>，依赖于<strong>数据库层</strong>，可做具体的数据库读写处理，内网使用，同层服务之间不互相依赖引用。</p>
+<h2>　　数据库层</h2>
+<p>　　包括非关系型数据库与关系型数据库。</p>
+<h2>　　基础设施服务层</h2>
+<p>　　可被所有层都依赖，如果被<strong>UI层</strong>依赖则通过<strong>API网关</strong>暴露，如果被内网服务依赖则通过注册发现，可直连数据库。</p>
+<h2>　　出站API网关</h2>
+<p>　　主要负责基础设施服务层内外网隔离，转发第三方开放API请求，出站规则控制，防止被无法把控的第三方服务而拖垮内部服务。</p>
+<h1>&nbsp;<strong>横向拆分</strong></h1>
+<p>　　接下来，我们可以通过DDD划分领域的方式进行服务的<strong>横向维度</strong>的拆分。举个例子：</p>
+<p>&nbsp;　&nbsp; 我们平台拥有三种不同业务领域的系统：<strong>客户中心、企业管理系统、内部管理系统</strong>。</p>
+<p>　　那么，聚合API服务层则拥有<strong>客户系统API服务、企业管理系统API服务，内部管理系统API服务。</strong></p>
+<p><strong>　　</strong>客户中心的拥有客户信息管理、支付、订单管理等业务模块。</p>
+<p>　　企业管理系统拥有订单管理、权限管理、支付、仓储等业务模块。</p>
+<p>　　内部管理系统拥有权限管理、报表、账户管理等业务模块。</p>
+<p>　　所有系统涉及到自定义订单号、消息推送等业务。</p>
+<p>　　从以上得知，核心域包括仓储、订单业务、客户信息。通用域包括权限管理、账户认证、支付模块、消息推送等。支撑域包括自定义订单号。</p>
+<p>　　因此基础业务API层可以划分：仓储API服务、订单API服务、客户API服务、权限API服务、认证API服务，支付API服务。</p>
+<p>　　基础设施API层可以划分：ID发号API服务，消息推送API服务。</p>
+<p>　　如果随着业务继续扩大，团队人数增多，则可以更加的细分，例如仓储拆分成快运、集运等。支付拆分成微信支付、支付宝等。</p>
+<h1>&nbsp;项目示例</h1>
+<p>　　上一篇《<a href="https://www.cnblogs.com/skychen1218/p/12531412.html" target="_blank">.Net微服务实战之技术选型篇</a>》我整理了我们公司使用的框架开源到了github，这次我拿了部分业务项目作为示例并上传了。</p>
+<p>　　https://github.com/SkyChenSky/Sikiro&nbsp;</p>
+<p>　　首先想说明几点：</p>
+<p>　　1.这个不是标准，只是针对我们公司情况取舍后的结果，每个公司的业务有复杂有简单大家视情况完善自己的项目。</p>
+<p>　　2.为了保护公司原有的业务隐私，我做了部分逻辑的删除，所以大家如果看到不完整的逻辑是正常现象。</p>
+<p>　　3.希望大家把思维放高，不要死抠细节，<strong>求同存异。</strong></p>
+<p><strong>　　</strong>4.代码在原有的基础上修改了名称和引用路径会有变化，如果有问题随时在评论和github反馈给我。</p>
+<p><img src="https://img2020.cnblogs.com/blog/488722/202004/488722-20200416101032194-267783926.png" alt="" width="324" height="393" /></p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-16 09:52</span>&nbsp;
+<a href="https://www.cnblogs.com/skychen1218/">陈珙</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12653155" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12653155);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 167340, cb_blogApp = 'skychen1218', cb_blogUserGuid = 'b13ccbd6-e95b-e211-aa8f-842b2b196315';
+    var cb_entryId = 12653155, cb_entryCreatedDate = '2020-04-16 09:52', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 陈珙
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script type="text/javascript">
+
+$(function () {
+    $('#blogTitle h1').addClass('bounceInLeft animated');
+    $('#blogTitle h2').addClass('bounceInRight animated');
+    $("#blogTitle").prepend("<a class='git-link' href='https://github.com/SkyChenSky' target='blank'><img src='https://images.cnblogs.com/cnblogs_com/jackson0714/779808/o_github.png'></a>");
+
+    // 删除反对按钮
+    $('.buryit').remove();
+    initCommentData();
+    $('#div_digg').prepend('<div style="padding-bottom: 5px"><a onclick="cnblogs.UserManager.FollowBlogger(\'b13ccbd6-e95b-e211-aa8f-842b2b196315\');" href="javascript:void(0);" style="font-weight: bold; padding-left:5px;">关注我</a> </div>');
+});
+function initCommentData() {
+    $('.feedbackItem').each(function () {
+        var text = $(this).find('.feedbackListSubtitle .layer').text();
+        // 将楼层信息放到data里面
+        // $(this).find('.blog_comment_body').attr('data-louceng', text.replace(/^#/g, ''));
+        if ($(this).find('.feedbackListSubtitle .louzhu').length > 0) $(this).addClass('myself');
+        var avatar = $(this).find('> .feedbackCon > span').html() || 'http://pic.cnitblog.com/face/sample_face.gif';
+        $(this).find('> .feedbackCon > .blog_comment_body').append('<img class="user-avatar" src="' + avatar + '"/>')
+    });
+}
+
+$(document).ajaxComplete(function (event, xhr, settings) {
+    // 监听获取评论ajax事件
+    if (settings.url.indexOf('/mvc/blog/GetComments.aspx') >= 0) {
+        initCommentData();
+    }
+});
+
+</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://files.cnblogs.com/files/skychen1218/marvin.nav.my1502.css" rel="stylesheet">
+<script type="text/javascript" src="https://files.cnblogs.com/files/skychen1218/marvin.cnblogs.js"></script>
+<script type="text/javascript" src="https://files.cnblogs.com/files/skychen1218/marvin.nav.my1502.js"></script>
+    </div>
+</body>
+</html>

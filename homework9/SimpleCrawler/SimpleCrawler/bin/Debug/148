@@ -1,0 +1,1226 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="ByteArrayInputStream与ByteArrayOutputStream  类的详细介绍,以及读写方法的介绍" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[六]JavaIO之 ByteArrayInputStream与ByteArrayOutputStream - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9627822.html">[六]JavaIO之 ByteArrayInputStream与ByteArrayOutputStream</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        ByteArrayInputStream与ByteArrayOutputStream  类的详细介绍,以及读写方法的介绍
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div>&nbsp;</div>
+<h3>功能简介</h3>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">ByteArrayInputStream 和 ByteArrayOutputStream </span></div>
+<div><span style="font-size: medium;">提供了针对于字符数组 byte [] 的标准的IO操作方式</span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151222973-480014176.png"><img style="display: inline; background-image: none;" title="image_5b976984_59d4" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151223241-1777462782.png" alt="image_5b976984_59d4" width="610" height="190" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">ByteArrayInputStream将会给一个byte buf[]&nbsp;&nbsp; 提供标准的IO操作方式 </span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">ByteArrayOutputStream则是将数据写入到内部的字节数组中</span></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h3>ByteArrayInputStream 详解</h3>
+<div><span style="font-size: x-large; font-weight: bold;"><br /></span>
+</div>
+<div><span style="font-weight: bold;"><span style="font-size: 13.5pt;">功能: 从提供的字节数组中,以IO的行为方式工作,进行读取数据</span></span>
+</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: large; font-weight: bold;">ByteArrayInputStream字段</span>
+</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected byte[] buf
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">用于保存由该流的创建者提供的 byte 数组<br />也就是构造方法传入
+				</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected int count
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">个数
+				</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected int mark
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">流中当前的标记位置<br />构造时默认将 ByteArrayInputStream 对象标记在位置零处<br />通过 mark() 方法可将其标记在缓冲区内的另一个位置处<br />通过 reset() 方法将当前缓冲区位置设置为此点<br />protected int mark = 0;定义时设置了默认值,如果不设置将为0
+				</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected int pos
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">要从输入流缓冲区中读取的下一个字符的索引</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<h4><span style="font-size: large; font-weight: bold;">ByteArrayInputStream构造方法</span>
+</h4>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 1194px; color: #424242; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray;"><span style="font-size: medium;">public ByteArrayInputStream(byte[] buf)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray;"><span style="font-size: medium;">需要传入byte buf[] 字节数组作为他的缓冲区<br />当前起始下标 pos&nbsp; 为0<br />count为数组长度<br />mark位置为0<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151223405-98118470.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_3cbf" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151223923-1718813868.png" alt="image_5b976984_3cbf" width="403" height="110" border="0" /></span></a><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151224127-1041840496.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_6c8c" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151224513-1599393644.png" alt="image_5b976984_6c8c" width="568" height="181" border="0" /></span></a></td>
+
+</tr>
+<tr style="background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray;">
+<div style="line-height: 24px;"><span style="font-size: medium;">public ByteArrayInputStream(byte[] buf,
+						</span></div>
+<div style="line-height: 24px;"><span style="font-size: medium;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int offset,
+						</span></div>
+<div style="line-height: 24px;"><span style="font-size: medium;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int length)
+						</span></div>
+
+</td>
+<td style="padding: 4px; border: 1px solid gray;"><br /><span style="font-size: medium;">传入字节数组以及偏移量和长度<br />当前起始下标 pos&nbsp; 为 指定的偏移量<br />个数为offset+length 和 buf.length中小的那个<br />mark为偏移量起始地址<br />可以理解为,这个字节数组偏移量的部分才是数据源,前面都没关系<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151224869-1537911688.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_73ec" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151225023-186759121.png" alt="image_5b976984_73ec" width="617" height="121" border="0" /></span></a><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151225247-769008609.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_7824" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151225430-863187572.png" alt="image_5b976984_7824" width="744" height="203" border="0" /></span></a>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div style="line-height: 24px;">&nbsp;</div>
+
+
+</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: large; font-weight: bold;">read方法</span>
+</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">读取下一个位置的字节<br />如果下一个位置 pos小于总个数<br />返回pos下标的字节数组数据<br />并且pos自增<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151225682-469167479.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_4062" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151225992-1319852814.png" alt="image_5b976984_4062" width="508" height="70" border="0" /></span></a></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">&amp; 0xff&nbsp; :<br />Java中只有&nbsp; <span style="font-weight: bold;">有符号数</span>,</span><span style="font-size: medium;"><span style="font-weight: bold;">类型提升时是按照符号位扩展的<br /></span>对于正数,没有什么影响<br />对于负数,按照符号位扩展和按照0位扩展区别很大<br /><br />按符号位扩展,也就是补符号位,值不变<br />按零位扩展,也就是补零时,相当于有符号数转变为无符号数<br /><br />所以在数值计算中,直接使用类型提升,数值不变<br />而对于编解码时,需要进行转换<br /><br />&amp;0xff这种方式就是来确保是按补零扩展<br />0xff默认为int型，是十六进制，十进制中表示为255，二进制为32位，后八位为'1111 1111'，其他24位均为0<br />a &amp; 0xff 操作时，因为a为byte型，所以会将a自动转化为int型(高位补1)<br />byte &amp; 0xff操作一般将byte数据转换成int型，最终的数据只有低8位有数据，其他位为0
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">简单说就是读取pos下标的元素,返回值为int</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&emsp;&emsp;
+</div>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><br /><span style="font-size: medium;">带参数的read()方法 <br />将数据读取到b的off位置处</span><br />
+<p style="margin: 0px; -qt-paragraph-type: empty;">&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;">从流中读取数据到b[] 中,从off开始写,写len长度</span>
+
+<span style="color: #0000ff;">public</span> <span style="color: #0000ff;">synchronized</span> <span style="color: #0000ff;">int</span> read(<span style="color: #0000ff;">byte</span> b[], <span style="color: #0000ff;">int</span> off, <span style="color: #0000ff;">int</span><span style="color: #000000;"> len) {
+
+</span><span style="color: #0000ff;">if</span> (b == <span style="color: #0000ff;">null</span>) {<span style="color: #008000;">//</span><span style="color: #008000;">如果b为null 空指针</span>
+
+<span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> NullPointerException();
+
+} </span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span> (off &lt; 0 || len &lt; 0 || len &gt; b.length - off) {<span style="color: #008000;">//</span><span style="color: #008000;">如果偏移量小于0 或者写入长度小于0 或者想要读取的长度小于实际的长度了</span>
+
+<span style="color: #0000ff;">throw</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> IndexOutOfBoundsException();
+
+}
+
+
+
+</span><span style="color: #0000ff;">if</span> (pos &gt;= count) {<span style="color: #008000;">//</span><span style="color: #008000;">如果位置光标已经到了最后了,没有数据可读,返回-1</span>
+
+<span style="color: #0000ff;">return</span> -1<span style="color: #000000;">;
+
+}
+
+
+
+</span><span style="color: #0000ff;">int</span> avail = count - pos;<span style="color: #008000;">//</span><span style="color: #008000;">可用个数为总个数count - 当前位置pos</span>
+
+<span style="color: #0000ff;">if</span> (len &gt; avail) {<span style="color: #008000;">//</span><span style="color: #008000;">如果想要读取的len比实际拥有的数据要长,那么只读取实际的个数</span>
+<span style="color: #000000;">
+len </span>=<span style="color: #000000;"> avail;
+
+}
+
+</span><span style="color: #0000ff;">if</span> (len &lt;= 0<span style="color: #000000;">) {
+
+</span><span style="color: #0000ff;">return</span> 0<span style="color: #000000;">;
+
+}
+
+System.arraycopy(buf, pos, b, off, len);</span><span style="color: #008000;">//</span><span style="color: #008000;">使用本地方法拷贝数据 buf 的pos位置开始拷贝,拷贝len个,到b的off位置</span>
+<span style="color: #000000;">
+pos </span>+= len;<span style="color: #008000;">//</span><span style="color: #008000;">位置光标后移</span>
+
+<span style="color: #0000ff;">return</span><span style="color: #000000;"> len;
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<br />
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">read方法本质很简单
+</span></div>
+<div><span style="font-size: medium;">就是一个数组,读取一个,就光标移动下一个,pos就是记住位置的变量
+</span></div>
+<div><span style="font-size: medium;">读取的就是指定下标的元素</span>
+</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151226389-477891760.png"><img style="display: inline; background-image: none;" title="image_5b976984_3d24" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151226572-1179622900.png" alt="image_5b976984_3d24" width="453" height="128" border="0" /></a>
+</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: large; font-weight: bold;">skip</span>
+</h4>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151226896-2142286696.png"><img style="display: inline; background-image: none;" title="image_5b976984_9e0" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151227099-798926807.png" alt="image_5b976984_9e0" width="419" height="201" border="0" /></a>
+			</td>
+
+
+		</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151227447-2099884993.png"><img style="display: inline; background-image: none;" title="image_5b976984_5055" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151227895-1320186433.png" alt="image_5b976984_5055" width="404" height="497" border="0" /></a>
+			</td>
+
+
+		</tr>
+
+
+	</tbody>
+
+
+</table>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h4>available</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">本质就是个数组,所以可用个数就是总个数减去下一个字符的索引<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151228089-1936476159.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_55e7" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151228268-790264062.png" alt="image_5b976984_55e7" width="560" height="77" border="0" /></span></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: large; font-weight: bold;">mark /markSupported /reset</span>
+</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: medium; font-weight: normal;">ByteArrayInputStream支持mark和reset<br />而且 很显然,mark方法的输入参数是无效的<br />何处调用,何处就是标记点<br />调用reset就是pos设置到标记点</span>
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151228595-831926820.png"><img style="display: inline; background-image: none;" title="image_5b976984_5d94" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151228750-1979984291.png" alt="image_5b976984_5d94" width="445" height="229" border="0" /></a>
+				</td>
+
+
+			</tr>
+<tr>
+<td>为什么mark 的参数无效?<br /><span style="font-size: medium; font-weight: normal;">很显然,ByteArrayInputStream是操作字符数组的,而且,这个数组不是复制而来的<br />是直接通过引用指向的<br />也就是说整个的字节数组都在随时可访问的范围内,要这个参数有什么用呢<br />mark /markSupported /reset 三连的本质在于提供可重复读的功能,所以对于不可逆的流需要缓存<br />此处天然自带可以随时读取某个下标的能力</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<h4>close</h4>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">ByteArrayInputStream的根本在于针对给定的某个字节数组,提供IO操作方式的统一形式<br />就好像你写了个方法操作字节数组一样,完全不涉及资源<br />所以无需关闭任何实质内容
+				</span></td>
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">通过close关闭ByteArrayInputStream之后,如果再次使用这个流<br />并不会抛出异常<br />当然,流结束了,就不能再继续使用了</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 13.5pt;"><strong>所有方法列表</strong></span>
+</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151228943-470171142.png"><img style="display: inline; background-image: none;" title="image_5b976984_53d2" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151229121-1578131306.png" alt="image_5b976984_53d2" width="348" height="339" border="0" /></a>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h3><span style="font-size: 18pt;"><strong>ByteArrayOutputStream详解</strong></span>
+</h3>
+<div>&nbsp;</div>
+<div><span style="font-size: 13.5pt;"><strong>以IO的行为方式工作,将数据写入到内部的字节数组中</strong></span>
+</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>ByteArrayOutputStream字段</strong></span>
+</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected byte buf[]; <br />
+				</span></td>
+<td><span style="font-size: medium;">存储数据的缓冲区
+				</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">protected int count;<br />
+				</span></td>
+<td><span style="font-size: medium;">缓冲区中的有效字节数,每次写入将会写入到buf[count]处</span>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>ByteArrayOutputStream构造方法</strong></span>
+</h4>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">构造方法只是设置内部字节数组这个缓冲区数据的大小
+</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>&nbsp;&nbsp;&nbsp; <span style="font-size: medium;">public ByteArrayOutputStream() ;
+					</span></div>
+
+</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">默认长度为32位<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151229334-1003522048.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_5f3" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151229515-337094185.png" alt="image_5b976984_5f3" width="637" height="156" border="0" /></span></a></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">public ByteArrayOutputStream(int size)
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">只要参数值合法,创建指定个数的字节数组缓冲区<br /></span><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151229694-10915644.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_3af3" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151230079-2028891218.png" alt="image_5b976984_3af3" width="672" height="296" border="0" /></span></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>write</strong></span>
+</h4>
+<div><span style="font-size: medium;">write是输出,参数都是他的输出内容,只是不同的流输出的目的不一样,此处我们的输出流的目的地是内部的字节数组
+</span></div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">write(int)
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">将指定的字节写入此 byte 数组输出流<br />也就是写入到内部的字节数组中
+				</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">write(byte[], int, int)
+				</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此 byte 数组输出流<br />也就是写入到内部的字节数组中
+				</span></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">可以看得出来,他们都有使用 ensureCapacity在必要的时候进行扩展
+	</span></div>
+<div><span style="font-size: medium;">扩展的行为是新建一个更大的,然后将原有数组元素全部拷贝过去
+	</span></div>
+<div><span style="font-size: medium;">保证空间足够的情况下
+	</span></div>
+<div><span style="font-size: medium;">write(int)&nbsp; 就是buf[count] = (byte)b;
+	</span></div>
+<div><span style="font-size: medium;">对于write(byte[], int, int)&nbsp; 则是使用System.arraycopy</span>
+	</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151230527-174697439.png"><img style="display: inline; background-image: none;" title="image_5b976984_5bfb" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151230939-1077952845.png" alt="image_5b976984_5bfb" width="677" height="573" border="0" /></a>
+	</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>writeTo(OutputStream)</strong></span>
+	</h4>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">因为ByteArrayOutputStream内部维护的是一个字节数组,所以可以直接作为OutputStream中write()方法的参数<br />代码很简单,就是讲内部的字节数组,转存到入参指定的输出流中<br />相当于把流中的数据重写了一份到另外的输出流</span>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151231131-8679920.png"><img style="display: inline; background-image: none;" title="image_5b976984_123b" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151231333-1989413005.png" alt="image_5b976984_123b" width="674" height="77" border="0" /></a>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>toString()</strong></span>
+	</h4>
+<div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: medium;">计算机所有的数据都是二进制存储,最小的单位是字节,字符的编码形式也正是字节<br />所以,toString其实就是把字节序列进行解码<br /><br />
+						</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151231543-1570194550.png"><span style="font-size: medium;"><img style="display: inline; background-image: none;" title="image_5b976984_571f" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151231738-2044854428.png" alt="image_5b976984_571f" width="221" height="74" border="0" /></span></a><span style="font-size: medium;">&nbsp;&nbsp; <br />int类型入参的方法,在JDK1.8&nbsp; 已经弃用
+						</span></td>
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">toString()使用平台默认的字符集，通过解码字节将缓冲区内容转换为字符串<br />
+							</span>
+<div><span style="font-size: medium;">toString(String charsetName)&nbsp;&nbsp; 使用指定的 charsetName，通过解码字节将缓冲区内容转换为字符串</span>
+							</div>
+<div>&nbsp;</div>
+
+
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 24px;">&nbsp;</div>
+
+
+	</div>
+<div style="line-height: 24px;">&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>reset()</strong></span>
+	</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">reset是重置的意思,ByteArrayOutputStream 使用buf[] 存储数据,使用count指示位置<br />所以想要重新使用现在的缓冲区,抛弃原来所有的,只需要将count清零,每次的数据重新从0开始写入字节数组即可</span>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151231911-469168205.png"><img style="display: inline; background-image: none;" title="image_5b976984_7677" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151232092-986057778.png" alt="image_5b976984_7677" width="369" height="72" border="0" /></a>
+					</td>
+
+
+				</tr>
+<tr>
+<td><span style="font-size: medium;">反正我们知道现在总共有多少有效字节,原来写入到buf中的可能多于count的那些字节就放着好了,我们也不去使用</span>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>size()</strong></span>
+	</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">count就是一直用来记录有效个数的,所以直接返回count就是实际的size</span>
+					</td>
+
+
+				</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151232271-980354512.png"><img style="display: inline; background-image: none;" title="image_5b976984_1f98" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151232454-911569382.png" alt="image_5b976984_1f98" width="370" height="68" border="0" /></a>
+					</td>
+
+
+				</tr>
+
+
+			</tbody>
+
+
+		</table>
+
+
+	</div>
+<div>&nbsp;</div>
+
+
+</div>
+<div>&nbsp;</div>
+<h4>toByteArray()</h4>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">转换为字节数组,它本身就是一个字节数组<br />所以转换比较简单,只需要创建一个大小相同的字节数组,并且将数据拷贝过去即可</span>
+			</td>
+
+
+		</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151232697-836133302.png"><img style="display: inline; background-image: none;" title="image_5b976984_5b2a" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151232963-1054608394.png" alt="image_5b976984_5b2a" width="665" height="360" border="0" /></a>
+			</td>
+
+
+		</tr>
+
+
+	</tbody>
+
+
+</table>
+<div>&nbsp;</div>
+<h4><span style="font-size: 13.5pt;"><strong>close()</strong></span>
+</h4>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">ByteArrayOutputStream 写入的是自己内部的字节数组<br />属于内存数据,不涉及任何资源,所以close不需要做什么</span>
+				</td>
+
+
+			</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151233161-1748992195.png"><img style="display: inline; background-image: none;" title="image_5b976985_5e3f" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180911151233323-1337096408.png" alt="image_5b976985_5e3f" width="685" height="154" border="0" /></a>
+				</td>
+
+
+			</tr>
+
+
+		</tbody>
+
+
+	</table>
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-11 15:13</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9627822" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9627822);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9627822, cb_entryCreatedDate = '2018-09-11 15:13', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

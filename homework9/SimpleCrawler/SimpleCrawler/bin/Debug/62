@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 在Java中有多种方式可以实现多" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【并发编程】实现多线程的几种方式 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/11970827.html">【并发编程】实现多线程的几种方式</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<p>在Java中有多种方式可以实现多线程编程（记得这是一道常问的面试题，特别是在应届生找工作的时候被问的频率就更高了）。</p>
+<ul>
+<li>继承Thread类并重写run方法；</li>
+<li>实现Runnable接口，并将这个类的实例当做一个target构造Thread类</li>
+<li>实现Callable接口；</li>
+</ul>
+<h2 id="继承thread类">继承Thread类</h2>
+<p>通过继承Thread类来实现多线程编程很容易。下面代码中<code>MyThread</code>类继承了<code>Thread</code>类，并重写了run方法。</p>
+<p>但是这种方式不是很建议使用，其中最主要的一个原因就是Java是单继承模式，<code>MyThread</code>类继承了<code>Thread</code>类之后就不能再继承其他类了。另外任务与代码没有分离，当多个线程执行一样的任务时需要多份任务代码。所以使用implement的形式比继承的方式更好。后面会讲到使用Runnable接口实现多线程。</p>
+<pre><code class="language-java">
+public class MyThread extends Thread {
+
+    public static final int THREAD_COUNT = 5;
+
+    public static void main(String[] args) {
+
+        List&lt;Thread&gt; threadList = new ArrayList&lt;&gt;();
+
+        for (int i = 0; i &lt; THREAD_COUNT; i++) {
+            Thread thread = new MyThread();
+            thread.setName(&quot;myThread--&quot;+i);
+            threadList.add(thread);
+        }
+        threadList.forEach(var-&gt;{var.start();});
+    }
+
+    @Override
+    public void run() {
+        super.run();
+        System.out.println(&quot;my thread name is:&quot;+Thread.currentThread().getName());
+        Random random = new Random();
+        int sleepTime = random.nextInt(5);
+        try {
+            TimeUnit.SECONDS.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println(Thread.currentThread().getName()+&quot; end after &quot;+sleepTime+&quot; seconds&quot;);
+        }
+    }
+}
+
+</code></pre>
+<h2 id="实现runnable接口实现多线程">实现Runnable接口实现多线程</h2>
+<p>下面我们就通过实现Runnable接口的形式来改造下上面的代码。</p>
+<p>可以发现，通过实现Runnable接口实现多线程编程也非常方便。但是不需要再继承Thread类，减少了耦合。同时new了一个Runner对象后，这个对象可以比较方便地在各个线程之间共享。<strong>因此相对于继承Thread的方式，更加推荐使用Runnable接口的方式实现多线程编程</strong>。</p>
+<pre><code class="language-java">
+public class MyThread {
+
+    public static final int THREAD_COUNT = 5;
+
+    public static void main(String[] args) {
+
+        List&lt;Thread&gt; threadList = new ArrayList&lt;&gt;();
+        Runner runner = new Runner();
+
+        for (int i = 0; i &lt; THREAD_COUNT; i++) {
+            Thread thread = new Thread(runner);
+            thread.setName(&quot;myThread--&quot;+i);
+            threadList.add(thread);
+        }
+        threadList.forEach(var-&gt;{var.start();});
+    }
+
+
+    public static class Runner implements Runnable{
+        @Override
+        public void run() {
+            System.out.println(&quot;my thread name is:&quot;+Thread.currentThread().getName());
+            Random random = new Random();
+            int sleepTime = random.nextInt(5);
+            try {
+                TimeUnit.SECONDS.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
+                System.out.println(Thread.currentThread().getName()+&quot; end after &quot;+sleepTime+&quot; seconds&quot;);
+            }
+        }
+    }
+
+}
+
+</code></pre>
+<h2 id="实现callable接口">实现Callable接口</h2>
+<p>上面介绍了两种方式都可以很方便地实现多线程编程。但是这两种方式也有几个很明显的缺陷：</p>
+<ul>
+<li><strong>没有返回值：</strong>如果想要获取某个执行结果，需要通过共享变量等方式，需要做更多的处理。</li>
+<li><strong>无法抛出异常：</strong>不能声明式的抛出异常，增加了某些情况下的程序开发复杂度。</li>
+<li><strong>无法手动取消线程：</strong>只能等待线程执行完毕或达到某种结束条件，无法直接取消线程任务。</li>
+</ul>
+<p>为了解决以上的问题，在JDK5版本的<code>java.util.concurretn</code>包中，引入了新的线程实现机制：Callable接口。</p>
+<pre><code class="language-java">
+@FunctionalInterface
+public interface Callable&lt;V&gt; {
+    /**
+     * Computes a result, or throws an exception if unable to do so.
+     *
+     * @return computed result
+     * @throws Exception if unable to compute a result
+     */
+    V call() throws Exception;
+}
+
+</code></pre>
+<p>看了Callable接口的介绍，其实这个接口的功能是和Runnable一样的，和Runnable接口最主要区别就是:</p>
+<ul>
+<li>Callable接口可以有返回值；</li>
+<li>Callable接口可以抛出异常；</li>
+</ul>
+<p>下面通过使用Callable接口的方式来改造下上面的代码：</p>
+<pre><code class="language-java">public class MyThread {
+
+    public static final int THREAD_COUNT = 5;
+
+    public static void main(String[] args) throws Exception {
+
+        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
+        Runner runner = new Runner();
+
+        for (int i = 0; i &lt; THREAD_COUNT; i++) {
+            Future&lt;Integer&gt; submit = executorService.submit(runner);
+            //get方法会一直阻塞等到线程执行结束
+            System.out.println(submit.get());
+        }
+        executorService.shutdown();
+
+    }
+
+
+    public static class Runner implements Callable&lt;Integer&gt; {
+
+        @Override
+        public Integer call() throws Exception {
+            System.out.println(&quot;my thread name is:&quot;+Thread.currentThread().getName());
+            Random random = new Random();
+            int sleepTime = random.nextInt(500);
+            try {
+                TimeUnit.SECONDS.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }finally {
+                System.out.println(Thread.currentThread().getName()+&quot; end after &quot;+sleepTime+&quot; seconds&quot;);
+            }
+            return sleepTime;
+        }
+    }
+
+}
+</code></pre>
+<p>上面代码中，我们使用<code>Future</code>类来获取返回结果。Future接口的主要方法如下：</p>
+<ul>
+<li>isDone()：判断任务是否完成。</li>
+<li>isCancelled()：判断任务是否取消。</li>
+<li>get()：获取计算结果（一致等待，直至得到结果）。</li>
+<li>cancel(true)：取消任务。</li>
+<li>get(long,TimeUnit)：规定时间内获取计算结果（在long时间内等待结果，如果得到则返回；如果未得到，则结束，并抛出TimeoutException异常）。</li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-12-04 14:36</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11970827" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11970827);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 11970827, cb_entryCreatedDate = '2019-12-04 14:36', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

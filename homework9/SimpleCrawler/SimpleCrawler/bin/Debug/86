@@ -1,0 +1,444 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="spymemcached 中，一个 mc client 与某一个 mc node 之间已建立的 connection 上，&#xD;&#xA;如果执行操作屡屡超时（net.spy.memcached.Operatio" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>spymemcached ：某个mc节点操作连续超时超过998次就 Auto-Reconnect 的特性 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2013/01/05/spy_reconnect.html">spymemcached ：某个mc节点操作连续超时超过998次就 Auto-Reconnect 的特性</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">spymemcached 中，一个 mc client 与某一个 mc node 之间已建立的 connection 上，</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">如果执行操作屡屡超时（net.spy.memcached.OperationTimeoutException），</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">那么，有一个计数器专门记录超时次数（connected或reconnecting就清零）。</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;"><strong>当某一个 mc node 的连续超时次数达到一定阈值（如 998 次），</strong></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;"><strong>就会&hellip;&hellip;</strong></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><ol>
+<li><span style="font-size: 14px;"><strong><span style="color: #ff0000;">关闭原来的 socket channel，并将该 mc node 放入重连队列&nbsp;reconnectQueue&nbsp;</span>：lostConnection(mn)，</strong></span></li>
+<li><span style="font-size: 14px;"><strong><span style="color: #ff0000;">遍历&nbsp;reconnectQueue ，逐一尝试重新建立 socket 连接</span>：attemptReconnects()，</strong></span></li>
+<li><span style="font-size: 14px;"><strong>然后不管连没连上，rehash 队列中的操作：redistributeOperations(retryOps)</strong>。（rehash 指重新计算hash值，看是否要连接其他的节点）。</span></li>
+</ol></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">&nbsp;</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">这个超时次数阈值，既可以在<span class="Apple-converted-space">&nbsp;</span><a style="cursor: pointer;" href="http://code.google.com/p/spymemcached/wiki/SpringIntegration">spring</a><span class="Apple-converted-space">&nbsp;</span>里如下这样设置，也可以采用默认值 998 次：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 14px;"><a style="cursor: pointer;" href="http://code.google.com/p/spymemcached/wiki/SpringIntegration">SpringIntegration</a></span></div>
+</td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<pre class="prettyprint"><span style="font-size: 14px;"><span class="pln">&nbsp; </span><span class="tag">&lt;bean</span><span class="atn">id</span><span class="pun">=</span><span class="atv">"memcachedClient"</span><span class="atn">class</span><span class="pun">=</span><span class="atv">"net.spy.memcached.spring.MemcachedClientFactoryBean"</span><span class="tag">&gt;</span><span class="pln"><br /></span><span class="pln">&hellip;&hellip;<br />&nbsp; &nbsp; </span><span class="tag">&lt;property</span><span class="atn">name</span><span class="pun">=</span><span class="atv">"opTimeout"</span><span class="atn">value</span><span class="pun">=</span><span class="atv">"1000"</span><span class="tag">/&gt;<span style="color: #008000;">操作超时时间是1秒，如果不设置的话，默认是 DEFAULT_OPERATION_TIMEOUT，即2.5秒</span></span><span class="pln"><br />&nbsp; &nbsp; </span><span class="tag">&lt;property</span><span class="atn">name</span><span class="pun">=</span><span class="atv">"timeoutExceptionThreshold"</span><span class="atn">value</span><span class="pun">=</span><span class="atv">"1998"</span><span class="tag">/&gt;<span style="color: #008000;">设置超时次数上限是1998次，默认是DEFAULT_MAX_TIMEOUTEXCEPTION_THRESHOLD，即998次</span></span><span class="pln"><br /></span><span class="pln">&hellip;&hellip;<br />&nbsp; </span><span class="tag">&lt;/bean&gt;</span></span></pre>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">&nbsp;</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;"><strong>相关代码：</strong></span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">每一次 handle io over the connections 时，都会检测一下这个 connection 对应的节点上登记的&ldquo;连续超时次数&rdquo;是否已经达到阈值：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 14px;">MemcachedConnection.java</span></div>
+</td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div><span style="font-size: 14px;">&nbsp; private final int timeoutExceptionThreshold;</span></div>
+<div><span style="font-size: 14px;">&hellip;&hellip;</span></div>
+<div><span style="font-size: 14px;">&nbsp; timeoutExceptionThreshold = f.getTimeoutExceptionThreshold();</span></div>
+<div><span style="font-size: 14px;">&hellip;&hellip;</span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div>
+<div><span style="font-size: 14px;">&nbsp; /**</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp;* MemcachedClient calls this method to handle IO over the connections.</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp;*/</span></div>
+<div><span style="font-size: 14px;">&nbsp; public void handleIO() throws IOException {</span></div>
+</div>
+<div><span style="font-size: 14px;">&hellip;&hellip;</span></div>
+<div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; // see if any connections blew up with large number of timeouts</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; for (SelectionKey sk : selector.keys()) {</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; MemcachedNode mn = (MemcachedNode) sk.attachment();</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #ff0000;">if (<strong>mn.getContinuousTimeout() &gt; timeoutExceptionThreshold</strong>)</span>&nbsp;{<span style="color: #008000;">//检查一下</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; getLogger().warn("%s exceeded continuous timeout threshold", sk);</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #ff0000;">lostConnection(mn);</span><span style="color: #008000;">//断开连接，放入重连队列</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp; }</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; }</span></div>
+<div><span style="font-size: 14px;">&nbsp;</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; if (!shutDown &amp;&amp; !reconnectQueue.isEmpty()) {</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: #ff0000;">attemptReconnects();</span><span style="color: #008000;">//重新连接</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; }</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; // rehash any operations that are in retry state</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp;&nbsp;<span style="color: #ff0000;">redistributeOperations(retryOps);//</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; retryOps.clear();</span></div>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 14px;">&nbsp;</span></td>
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 14px;">如果配置文件也没配&nbsp;timeoutExceptionThreshold ，初始化时也没传这个参数，</span><br /><span style="font-size: 14px;">那么 DefaultConnectionFactory 就取默认值&nbsp;<strong>DEFAULT_MAX_TIMEOUTEXCEPTION_THRESHOLD</strong>，即<span style="color: #ff0000;"><strong>998次（anyway，也许是1000次）</strong></span>！</span></td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 14px;">DefaultConnectionFactory.java</span></td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; /**</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;* Maximum number + 2 of timeout exception for shutdown connection.</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;*/</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; public<span class="Apple-converted-space">&nbsp;</span><span style="color: #ff0000;">static final int DEFAULT_MAX_TIMEOUTEXCEPTION_THRESHOLD = 998</span>;</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 14px;">DefaultConnectionFactory.java</span></td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; public int getTimeoutExceptionThreshold() {</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp; return DEFAULT_MAX_TIMEOUTEXCEPTION_THRESHOLD;</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; }</span></div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div>&nbsp;</div>
+
+</div>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="font-size: 14px;">针对每一个 memcache node 设置一个&ldquo;连续超时次数&rdquo;计数器：</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<table class="ynote_table" style="border-width: 1px; border-style: solid; border-color: #999999; border-collapse: collapse; margin: 6px auto; width: 100%;" border="1" cellspacing="0" cellpadding="2">
+<tbody>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div><span style="font-size: 14px;">TCPMemcachedNodeImpl.java</span></div>
+
+</td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div>
+<div>
+<div><span style="font-size: 14px;">&nbsp; // operation Future.get timeout counter</span></div>
+<div><span style="font-size: 14px;">&nbsp; private final AtomicInteger continuousTimeout = new AtomicInteger(0);</span></div>
+
+</div>
+<div><span style="font-size: 14px;">&hellip;&hellip;</span></div>
+<div><span style="font-size: 14px;">&nbsp; public void setContinuousTimeout(boolean timedOut) {</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; if (timedOut &amp;&amp; isActive()) {</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span style="color: #0000ff;">continuousTimeout.incrementAndGet();</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; } else {</span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span style="color: #0000ff;">continuousTimeout.set(0);</span></span></div>
+<div><span style="font-size: 14px;">&nbsp; &nbsp; }</span></div>
+<div><span style="font-size: 14px;">&nbsp; }</span></div>
+
+</div>
+
+</td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top"><span style="font-size: 14px;">MemcachedConnection.java</span></td>
+
+</tr>
+<tr>
+<td style="word-break: break-all; border-image: initial; border-width: 1px; border-color: #999999; border-style: solid;" valign="top">
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; /**</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;* helper method: increase timeout count on node attached to this op.</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;*</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;* @param op</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp;*/</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; public static void opTimedOut(Operation op) {</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; &nbsp; MemcachedConnection.setTimeout(op, true);</span></div>
+<div style="font-size: 14px;"><span style="font-size: 14px;">&nbsp; }</span></div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>&nbsp;</div>
+<div>参考资源：</div>
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）智深，2012，<a style="cursor: pointer;" href="http://m.oschina.net/blog/93492">spymemcached源码深入分析</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">2）2011，<a style="cursor: pointer;" href="http://code.google.com/p/spymemcached/issues/detail?id=173">Issue 173</a>: &nbsp;Spymemcached fail reconnect to local memcahed under high load ..；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）我的相关文章：<a class="titlelink" href="http://www.cnblogs.com/zhengyun_ustc/archive/2013/01/04/nagle.html">spymemcached 的 useNagle 问题与 TCP/IP延迟发送数据</a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/mongodb_bp.html">55最佳实践系列：MongoDB最佳实践</a><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 15:48)<br /><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/15/logging_bp.html">55最佳实践系列：Logging最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-15 16:43)</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/19/frontend_bp.html">最佳实践系列：前端代码标准和最佳实践</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-19 23:33)</span> </div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr />1）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic1.html">电商课题I：Throttle Limits for calls/requests in a clustered environment</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:14)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">2）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题V：分布式锁</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:16)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic3.html">电商课题：cookie防篡改</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:24)</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic4.html">电商课题VI：分布式Session</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:30)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">5）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic5.html">电商课题：RBAC权限控制</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-11-17 22:47)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">6）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/22/topic6.html">电商课题：幂等性</a><span class="Apple-converted-space">&nbsp;</span>(2012-11-22 23:52)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">7）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/19/getremoteaddr.html">电商课题：客户端的IP地址伪造、CDN、反向代理、获取的那些事儿</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-09-19 01:17)</span>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">8）<a class="titlelink" style="cursor: pointer;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/09/18/seckill.html">电商课题：对付秒杀器等恶意访问行为的简单梳理</a><span class="Apple-converted-space">&nbsp;</span>(2012-09-18 03:51)</div>
+
+
+
+
+
+<span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;">9）</span><a class="titlelink" style="cursor: pointer; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/12/14/topic7.html">电商课题VII：支付交易一般性准则</a><span style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>(2012-12-14 01:38)</span></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><hr /></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">赠图一枚</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><a href="http://www.cnblogs.com/hustcat/archive/2009/12/24/1631674.html" target="_blank"><img class="decoded" src="http://ww3.sinaimg.cn/bmiddle/61b889f5jw1e0fm79k5fxj.jpg" alt="http://ww3.sinaimg.cn/bmiddle/61b889f5jw1e0fm79k5fxj.jpg" /></a></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2013-01-05 12:09</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2845559" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2845559);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2845559, cb_entryCreatedDate = '2013-01-05 12:09', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

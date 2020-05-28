@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="一些规定 搜索引擎不区分大小写； Google限制最多搜索32个单词，包含搜索项和高级运算符。不过也有一些其他方法绕过这种限制，比如使用通配符来代替某些搜索项。 同样的搜索语法，百度有时也会得到惊喜。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>过滤搜索引擎的抓取数据 - Mysticbinary - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/mysticbinary/custom.css?v=P2sh9pCCfTyiEWGg704yg4/Ccoo=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/mysticbinary/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/mysticbinary/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/mysticbinary/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 479490;
+        var currentBlogApp = 'mysticbinary';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/mysticbinary/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/mysticbinary/">Mysticbinary</a>
+</h1>
+<h2>
+不断验证与修复我所构建的模型。
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/mysticbinary/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Mysticbinary">
+联系</a></li>
+<li>
+
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+60&nbsp; </span>
+<span id="stats_article_count">文章 - 
+24&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+9</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/mysticbinary/p/12703036.html">过滤搜索引擎的抓取数据</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h1 id="一些规定">一些规定</h1>
+<ul>
+<li>搜索引擎不区分大小写；</li>
+<li>Google限制最多搜索32个单词，包含搜索项和高级运算符。不过也有一些其他方法绕过这种限制，比如使用通配符来代替某些搜索项。</li>
+<li>同样的搜索语法，百度有时也会得到惊喜。</li>
+</ul>
+<h1 id="基础型查询">基础型查询</h1>
+<ul>
+<li>
+<p>inurl<br>
+搜索包含有特定字符的URL。例如输入<code>inurl:/admin_login</code>，则可以找到带有admin_login字符的URL,通常这类网址是管理员后台的登录网址。</p>
+</li>
+<li>
+<p>intext<br>
+搜索网页正文内容中的指定字符，例如输入<code>intext:后台登陆</code>。<br>
+这个语法类似我们平时在某些网站中使用的“文章内容搜索”功能，把网页中的正文内容中的某个字符做为搜索条件，</p>
+</li>
+<li>
+<p>intitle<br>
+搜索网页标题中包含有特定字符的网页。例如输入<code>intitle:后台登陆</code>，这样网页标题中带有上科互联的网页会被搜索出来。和上面那个intext差不多，搜索网页标题中是否有我们所要找的字符，例如搜索：intitle：安全天使，将返回所有网页标题中包含“安全天使”的网页。同理allintitle也同intitle类似。<br>
+<code>allintext:家庭住址</code></p>
+</li>
+<li>
+<p>filetype<br>
+搜索指定类型的文件。例如输入<code>filetype:PDF</code>，将返回PDF文档。这个我要重点推荐一下，无论是撒网式攻击还是我们后面要说的搜索指定类型的文件。<br>
+<code>doc  .bak  .db .mdb  .inc</code></p>
+</li>
+<li>
+<p>site<br>
+指定域名搜索，这个过滤比较精确，后面会在复合型查询时 作为一个前提条件。例如输入<code>site:www.sunghost.cn</code>。所有和这个网站有关的URL都会被显示。</p>
+</li>
+<li>
+<p>cache<br>
+有些页面已经访问不了，或者想看他的网页历史快照，可以用cashe，<code>cache:www.juwan888.com</code><br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416181020531-1506741510.png" alt=""></p>
+</li>
+<li>
+<p>define<br>
+搜索某个词语的定义。搜索：<code>define:微积分</code>，将返回关于微积分的一些定义。</p>
+</li>
+<li>
+<p>info<br>
+查找指定站点的一些基本信息。<code>info:www.douban.com</code>，返回一些关于豆瓣公司的一些介绍，动态，公告。</p>
+</li>
+<li>
+<p>link<br>
+例如搜索：<code>link:www.cnblogs.com/mysticbinary</code>，返回所有网页包含www.cnblogs.com/mysticbinary链接的URL。</p>
+</li>
+</ul>
+<br>
+<br>
+<h1 id="符号使用">符号使用</h1>
+<p>Google 不区分大小写，除了 or 被用作布尔运算符时，所以必须写做OR。 符号的使用和正则匹配很像，很多规则可以通用。</p>
+<ul>
+<li>
+<p>“特定搜索”<br>
+加上“ ”英文引号，指定搜索结果必须一样。<br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416182717193-678363640.png" alt=""></p>
+</li>
+<li>
+<p>通配符 *<br>
+必须在 “ ”中使用*，<code>&quot;kali * web渗透测试&quot;</code><br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416183100717-1519643827.png" alt=""></p>
+</li>
+<li>
+<p>点号 .<br>
+与通配符星号<code>*</code>一样也必须在“” 内使用， 不一样的是点号<code>.</code>匹配的是字符，不是字、短语等内容，而是符号。保留的符号有<code>,</code>、<code>.</code>、<code>[</code>、<code>(</code>、<code>-</code>等。<br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416185502230-1040475659.png" alt=""></p>
+</li>
+</ul>
+<br>
+<h1 id="布尔逻辑">布尔逻辑</h1>
+<ul>
+<li>
+<p>逻辑与 就是空格、AND</p>
+</li>
+<li>
+<p>或 （java|php）</p>
+</li>
+<li>
+<p>非 -java<br>
+不包含</p>
+</li>
+<li>
+<p>约束条件 +<br>
+“mysticbinar” + “不可能发送的事”<br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416190107279-1207303479.png" alt=""><br>
+<img src="https://img2020.cnblogs.com/blog/1552062/202004/1552062-20200416190144168-704186430.png" alt=""></p>
+</li>
+<li>
+<p>括号分组 ()<br>
+和正则一样</p>
+</li>
+<li>
+<p>时间范围 2020..2020<br>
+<code>&quot;美团*术&quot; 2020..2020</code></p>
+</li>
+</ul>
+<br>
+<br>
+<h1 id="复合型查询">复合型查询</h1>
+<p>下面从安全的角度来过滤出想要的数据，我感觉使用谷歌语法搜索这也是一种数据分析，只不过分析的流量来自搜索引擎，1.是你得先知道你想要搜索什么，定出特征，才好分析出来。2.是搜索引擎必须收录（爬取）有数据才能过滤出来，一些小站本来就没收录几个url，任你过滤语法在精确，也没啥用。</p>
+<h2 id="站点的信息收集">站点的信息收集</h2>
+<ul>
+<li>子域名查询</li>
+</ul>
+<pre><code># 使用site限定范围并使用*来进行泛查询，最后用-排除掉主域名，得到的就是子域名：
+site:*.jd.com -www.jd.com
+</code></pre>
+<ul>
+<li>C段查询</li>
+</ul>
+<pre><code># 如果你知道这个网站的IP，你也可以使用site结合通配符来查询在C段上存在的网站
+site:18.18.18.*
+</code></pre>
+<h2 id="过滤出功能">过滤出功能</h2>
+<ul>
+<li>登陆接口查找</li>
+</ul>
+<pre><code>allback=|api=|interface=|function=|functions=|count=
+passlogin|ftppwd|password|secret|credentials|token
+conf|config|security|jdbc|auth|system|db|ini|init
+security_credentials|connetionstring
+ssh2_auth_password|send_keys
+doc|docx|xls|xlsx|pdf
+oa|rem|ehr|cms|main|wp|test|ceshiboos|bossbook
+word|master|count|log|login|reg|register|phpMyAdmin
+
+site:jd.com intext:管理|后台|登陆|用户名|密码|帐号|注册|admin|login|manage
+site:jd.com intext:管理|后台|登录|用户名|密码|验证码|系统|账号|服务端|后端|phpMyAdmin
+site:jd.com intitle:管理|后台|登录|用户名|密码|验证码|系统|账号|服务端|后端|phpMyAdmin
+site:jd.com intext:(password|passcode|pass|密码) intext:(username|userid|user|用户|账户)
+site:jd.com intext:oa|rem|ehr|system|test|guanli|denglu|manager|register|houtai|guanli|forgotten
+site:ly.com intext:rem|ehr|guanli|denglu
+site:jd.com intext:&quot;Powered by&quot;
+</code></pre>
+<ul>
+<li>搜特定功能</li>
+</ul>
+<pre><code>site:jd.com inurl:ewebeditor|editor|uploadfile|eweb|edit|php?id=|asp?id=
+site:jd.com inurl:upload|upfile|saveup intext:提交|确定|上传
+site:jd.com inurl:&quot;path=&quot;|&quot;readfile=&quot;|&quot;file=&quot;|&quot;url=&quot;
+site:jd.com intext:提交|确定|评论
+site:jd.com intext:个人信息管理|会员|个人空间 OR inurl:member|zone
+
+site:jd.com inurl:&quot;/uddiexplorer/SetupUDDIExplorer.jsp&quot;
+site:jd.com inurl:admin|login|manage|manager|register|prelogin|logincheck
+site:jd.com inurl:admin|administration|administrator|manage|login|sys|managetem|password|username
+site:jd.com inurl:login|admin|manage|admin_login|login_admin|system|boos|master|main|cms|wp
+site:jd.com inurl:oa|rem|ehr|system|test|guanli|denglu
+site:jd.com inurl:*&quot;gk&quot;*|*&quot;publick&quot;*|*&quot;pub&quot;*
+
+site:jd.com intext:&quot;sql syntax near&quot;|&quot;syntax error has occurred&quot;| &quot;incorrect syntax near&quot;|&quot;unexpected end of SQL command&quot;|&quot;mysql_connect()&quot;|&quot;mysql_query()&quot;|&quot;Warning: pg_connect()&quot;
+site:jd.com intext:&quot;/var/lib/&quot;|&quot;/var/www/&quot;|&quot;D:\&quot;|&quot;C:\&quot;
+</code></pre>
+<pre><code># 查看是否还遗留木马页面
+site:example.com intext:剑眉大侠|不灭之魂|仗剑孤行|通杀版|法客论坛|上传的口令|&quot;导出DLL文件出错”|&quot;token虚拟机管理&quot;|老子的绝对路径|免杀版
+site:example.com intext:法克|后门|木马|小马|大马|脱库|黑客|一句话后门|挂马|清马|&quot;扫描IP”|开放端口|提权|执行命令|设置密码|提升权限
+site:example.com intext:一句话木马|过狗|安全狗|&quot;K8飞刀&quot;|&quot;K8拉登哥哥&quot;|&quot;K8搞基大队&quot;|反弹端口|&quot;hacked by&quot;
+site:example.com inurl:phpspy|udf|JFolder|JspSpyJDK5|AspxSpy2014Final
+site:example.com intext:&quot;Georg says&quot; intext:&quot;All seems fine&quot;
+site:example.com intext:&quot;Struts2 Exploit Test&quot;
+</code></pre>
+<pre><code># 一些容器特征
+site:example.com intext:&quot;Dumping data for table&quot;
+site:example.com intitle:&quot;apache tomcat/&quot; &quot;Apache Tomcat examples&quot;
+site:example.com inurl:examples|jsp|snp|snoop.jsp
+site:example.com (inurl:&quot;robot.txt” | inurl:&quot;robots.txt&quot;) intext:disallow filetype:txt
+site:example.com filetype: reg HKEY_CURRENT_USER username
+site:example.com inurl:tmp|temp|cache…
+</code></pre>
+<h2 id="过滤出敏感文件">过滤出敏感文件</h2>
+<ul>
+<li>邮箱/QQ/群</li>
+</ul>
+<pre><code>site:example.com intext:qq|qq群|企鹅|腾讯|email|邮件
+site:example.com intitle:qq|qq群|企鹅|腾讯|email|邮件
+site:example.com intext:邮箱|邮件|email|e-mail
+site:example.com intext:&quot;@qq.com&quot;|&quot;@163.com&quot;
+site:example.com intext:电话|手机号|联系方式|请拨打
+
+</code></pre>
+<ul>
+<li>index of/*</li>
+</ul>
+<pre><code>site:jd.com index of/*
+site:xxx.xxx intitle:index of
+Index of /password
+Index of / passwd 
+&quot;index?of/&quot; config
+&quot;Index of /&quot; password.txt
+site:example.com intitle:index .of &quot;parent directory&quot;
+site:example.com intitle:index .of name size
+site:example.com intitle:index .of inurl:admin
+site:example.com intitle:index .of &quot;Application Data/Microsoft/Credentials&quot;
+site:example.com intitle:index .of etc|.sh_history|.bash_history|passwd|people.lst|htpasswd
+</code></pre>
+<ul>
+<li>phpmyadmin</li>
+</ul>
+<pre><code>site:ulnetworks.co.kr ?inurl:.php ?intext:CHARACTER_SETS,COLLATIONS, ?intitle:phpmyadmin
+</code></pre>
+<ul>
+<li>文件查找</li>
+</ul>
+<pre><code>这个语法不能使用 ｜，为什么不用布尔逻辑汇总在一条查询里呢？
+因为在实际测试中，发现 filetype 和 ext 运算符与布尔逻辑的合作性并不是很好，
+经常有查不到任何数据的情况出现，因此宁愿多进行几次查询，来增加我们查询的命中率。
+
+site:jd.com filetype:doc
+mdb
+ini
+php
+asp
+aspx
+jsp
+json
+xml
+pdf
+doc
+xlsx
+xls
+csv
+git
+txt
+text
+log
+sql
+cnf
+conf
+zip
+rar
+tar
+tar.gz
+7z
+cab
+gz
+iso
+bz2
+jar
+bkf
+bkp
+bak
+old
+backup
+dll
+ctl
+inf
+cfg
+
+sql
+db
+dbf
+mdb
+wdb
+backupdb
+
+
+site:example.com filetype:doc &quot;密码&quot;
+site:example.com filetype:xls|xlxs &quot;密码&quot;
+site:example.com filetype:doc intitle:&quot;管理&quot;
+</code></pre>
+<br>
+<br>
+<h1 id="参考">参考</h1>
+<p><a href="http://absec.cn/?p=751">http://absec.cn/?p=751</a><br>
+<a href="https://www.cnblogs.com/xuanhun/p/3910134.html">https://www.cnblogs.com/xuanhun/p/3910134.html</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 16:16</span>&nbsp;
+<a href="https://www.cnblogs.com/mysticbinary/">Mysticbinary</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12703036" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12703036);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 479490, cb_blogApp = 'mysticbinary', cb_blogUserGuid = 'cde1b5bf-5c17-425a-6a4a-08d655a123de';
+    var cb_entryId = 12703036, cb_entryCreatedDate = '2020-04-17 16:16', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 Mysticbinary
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

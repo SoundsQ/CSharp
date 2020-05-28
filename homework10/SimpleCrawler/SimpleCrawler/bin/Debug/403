@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>2016 年 12月 28 日 随笔档案 - phpWeChat开发教程 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/phpwechat/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/phpwechat/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/phpwechat/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 325015;
+        var currentBlogApp = 'phpwechat';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/phpwechat/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/phpwechat/">phpWeChat教程</a>
+</h1>
+<h2>
+教你10天学会phpWechat，快速开发PC网站+微信公共号
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/phpwechat/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/phpWeChat%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/phpwechat/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+61&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+4</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+        <!--done-->
+
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a>2016年12月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6229845.html">
+    10天学会phpWeChat——第五天：实现新闻投稿功能
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在前几讲里，我们逐渐实现了自己小模块的新闻列表展示、新闻详情展示功能，现在您已经初步有能力开发一个phpWeChat小模块了，本文将在已开发的hello world模块基础上，增加一个新的功能——新闻投稿。            <a href="https://www.cnblogs.com/phpwechat/p/6229845.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2016-12-28 16:06 phpWeChat开发教程 阅读 (2700) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6229845" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6229143.html">
+    10天学会phpWeChat——第四天：大U函数U()的使用
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在第三天，我们创建了一个“增强版”的文章模块，实现了数据从数据库到视图端展示的流程。但是我们仅仅是实现了数据列表的展示，对于文章详情等页面跳转并未涉及。本文重点讲解phpWeChat一个十分重要的前端函数U()。            <a href="https://www.cnblogs.com/phpwechat/p/6229143.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2016-12-28 13:33 phpWeChat开发教程 阅读 (2317) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6229143" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6228058.html">
+    10天学会phpWeChat——第三天：从数据库读取数据到视图
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在第二天，我们创建了我们的第一个phpWeChat功能模块，但是比较简单。实际生产环境中，我们不可能有如此简单的需求。更多的情况是数据存储在MySql数据库中，我们开发功能模块的作用就是将这些数据从MySql读取并通过视图多样化的呈现给用户。            <a href="https://www.cnblogs.com/phpwechat/p/6228058.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2016-12-28 02:14 phpWeChat开发教程 阅读 (3239) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6228058" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/phpwechat/p/6228007.html">
+    10天学会phpWeChat——第二天：hello world！我的第一个功能模块
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：今天我们开始进入《10天学会phpWeChat》系列教程的第二天：创建我的第一个hello world! 功能模块。            <a href="https://www.cnblogs.com/phpwechat/p/6228007.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2016-12-28 00:30 phpWeChat开发教程 阅读 (5438) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=6228007" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 phpWeChat开发教程
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div style="width: 1000px; margin: 8px auto">
+<a href="https://www.apipost.cn/" target="_blank">可直接生成文档的API调试、管理工具</a>
+</div>
+    </div>
+</body>
+</html>

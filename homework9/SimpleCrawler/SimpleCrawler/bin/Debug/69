@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 本文参考了 &amp;quot;[Jav" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>并发编程的基石——AQS类 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/11970870.html">并发编程的基石——AQS类</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<p>本文参考了[<a href="https://segmentfault.com/a/1190000015562787">Java多线程进阶（六）—— J.U.C之locks框架：AQS综述(1)</a>]和<a href="https://www.jianshu.com/p/da9d051dcc3d">Java技术之AQS详解</a>两篇文章。</p>
+<h2 id="aqs-简介">AQS 简介</h2>
+<p><code>AbstractQueuedSynchronizer</code> （简称AQS）类是整个 JUC包的核心类。JUC 中的<code>ReentrantLock</code>、<code>ReentrantReadWriteLock</code>、<code> CountDownLatch</code>、<code>Semaphore</code>和<code>LimitLatch</code>等同步工具都是基于AQS实现的。</p>
+<p>AQS 分离出了构建同步器时的通用关注点，这些关注点主要包括如下：</p>
+<ul>
+<li>资源是可以被同时访问？还是在同一时间只能被一个线程访问？（共享/独占功能）</li>
+<li>访问资源的线程如何进行并发管理？（等待队列）</li>
+<li>如果线程等不及资源了，如何从等待队列退出？（超时/中断）</li>
+</ul>
+<p>这些关注点都是围绕着资源——同步状态（synchronization state）来展开的，AQS将这些通用的关注点封装成了一个个模板方法，让子类可以直接使用。</p>
+<p><strong>AQS 留给用户的只有两个问题</strong>：</p>
+<ul>
+<li>什么是资源</li>
+<li>什么情况下资源是可以被访问的</li>
+</ul>
+<p>这样一来，定义同步器的难度就大大降低了。用户只要解决好上面两个问题，就能构建出一个性能优秀的同步器。</p>
+<p>下面是几个常见的同步器对资源的定义：</p>
+<table>
+<thead>
+<tr>
+<th>同步器</th>
+<th>资源的定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReentrantLock</td>
+<td>资源表示独占锁。State为0表示锁可用；为1表示被占用；为N表示重入的次数</td>
+</tr>
+<tr>
+<td>ReentrantReadWriteLock</td>
+<td>资源表示共享的读锁和独占的写锁。state逻辑上被分成两个16位的unsigned short，分别记录读锁被多少线程使用和写锁被重入的次数。</td>
+</tr>
+<tr>
+<td>CountDownLatch</td>
+<td>资源表示倒数计数器。State为0表示计数器归零，所有线程都可以访问资源；为N表示计数器未归零，所有线程都需要阻塞。</td>
+</tr>
+<tr>
+<td>Semaphore</td>
+<td>资源表示信号量或者令牌。State≤0表示没有令牌可用，所有线程都需要阻塞；大于0表示由令牌可用，线程每获取一个令牌，State减1，线程没释放一个令牌，State加1。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="aqs-原理">AQS 原理</h2>
+<p>上面一节中介绍到 AQS 抽象出了三个关注点，下面就具体看下 AQS 是如果解决这三个问题的。</p>
+<h3 id="同步状态的管理">同步状态的管理</h3>
+<p>同步状态，其实就是资源。AQS使用单个int（32位）来保存同步状态，并暴露出getState、setState以及compareAndSetState操作来读取和更新这个状态。</p>
+<pre><code class="language-java">private volatile int state;
+  
+protected final int getState() {
+    return state;
+}
+
+protected final void setState(int newState) {
+    state = newState;
+}
+
+protected final boolean compareAndSetState(int expect, int update) {
+    // See below for intrinsics setup to support this
+    return unsafe.compareAndSwapInt(this, stateOffset, expect, update);
+}
+</code></pre>
+<h3 id="线程的阻塞和唤醒">线程的阻塞和唤醒</h3>
+<p>在JDK1.5之前，除了内置的监视器机制外，没有其它方法可以安全且便捷得阻塞和唤醒当前线程。</p>
+<p>JDK1.5以后，java.util.concurrent.locks包提供了<a href="https://segmentfault.com/a/1190000015562456">LockSupport</a>类来作为线程阻塞和唤醒的工具。</p>
+<h3 id="等待队列">等待队列</h3>
+<p>等待队列，是AQS框架的核心，整个框架的关键其实就是如何在并发状态下管理被阻塞的线程。</p>
+<p>等待队列是严格的FIFO队列，是Craig，Landin和Hagersten锁（CLH锁）的一种变种，采用双向循环链表实现，因此也叫CLH队列。</p>
+<p><strong>1. 节点定义</strong></p>
+<p>CLH队列中的结点是对线程的包装，结点一共有两种类型：独占（EXCLUSIVE）和共享（SHARED）。</p>
+<p>每种类型的结点都有一些状态，其中独占结点使用其中的CANCELLED(1)、SIGNAL(-1)、CONDITION(-2)，共享结点使用其中的CANCELLED(1)、SIGNAL(-1)、PROPAGATE(-3)。</p>
+<table>
+<thead>
+<tr>
+<th>结点状态</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CANCELLED</td>
+<td>1</td>
+<td>取消。表示后驱结点被中断或超时，需要移出队列</td>
+</tr>
+<tr>
+<td>SIGNAL</td>
+<td>-1</td>
+<td>发信号。表示后驱结点被阻塞了（当前结点在入队后、阻塞前，应确保将其prev结点类型改为SIGNAL，以便prev结点取消或释放时将当前结点唤醒。）</td>
+</tr>
+<tr>
+<td>CONDITION</td>
+<td>-2</td>
+<td>Condition专用。表示当前结点在Condition队列中，因为等待某个条件而被阻塞了</td>
+</tr>
+<tr>
+<td>PROPAGATE</td>
+<td>-3</td>
+<td>传播。适用于共享模式（比如连续的读操作结点可以依次进入临界区，设为PROPAGATE有助于实现这种迭代操作。）</td>
+</tr>
+<tr>
+<td>INITIAL</td>
+<td>0</td>
+<td>默认。新结点会处于这种状态</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>AQS使用CLH队列实现线程的结构管理，而CLH结构正是用前一结点某一属性表示当前结点的状态，之所以这种做是因为在双向链表的结构下，这样更容易实现取消和超时功能。</p>
+<p>next指针：用于维护队列顺序，当临界区的资源被释放时，头结点通过next指针找到队首结点。</p>
+<p>prev指针：用于在结点（线程）被取消时，让当前结点的前驱直接指向当前结点的后驱完成出队动作。</p>
+</blockquote>
+<pre><code class="language-java">static final class Node {
+    
+    // 共享模式结点
+    static final Node SHARED = new Node();
+    
+    // 独占模式结点
+    static final Node EXCLUSIVE = null;
+
+    static final int CANCELLED =  1;
+
+    static final int SIGNAL    = -1;
+
+    static final int CONDITION = -2;
+
+    static final int PROPAGATE = -3;
+
+    /**
+    * INITAL：      0 - 默认，新结点会处于这种状态。
+    * CANCELLED：   1 - 取消，表示后续结点被中断或超时，需要移出队列；
+    * SIGNAL：      -1- 发信号，表示后续结点被阻塞了；（当前结点在入队后、阻塞前，应确保将其prev结点类型改为SIGNAL，以便prev结点取消或释放时将当前结点唤醒。）
+    * CONDITION：   -2- Condition专用，表示当前结点在Condition队列中，因为等待某个条件而被阻塞了；
+    * PROPAGATE：   -3- 传播，适用于共享模式。（比如连续的读操作结点可以依次进入临界区，设为PROPAGATE有助于实现这种迭代操作。）
+    * 
+    * waitStatus表示的是后续结点状态，这是因为AQS中使用CLH队列实现线程的结构管理，而CLH结构正是用前一结点某一属性表示当前结点的状态，这样更容易实现取消和超时功能。
+    */
+    volatile int waitStatus;
+
+    // 前驱指针
+    volatile Node prev;
+
+    // 后驱指针
+    volatile Node next;
+
+    // 结点所包装的线程
+    volatile Thread thread;
+
+    // Condition队列使用，存储condition队列中的后继节点
+    Node nextWaiter;
+
+    Node() {
+    }
+
+    Node(Thread thread, Node mode) { 
+        this.nextWaiter = mode;
+        this.thread = thread;
+    }
+}
+</code></pre>
+<p><strong>2. 队列定义</strong></p>
+<p>对于CLH队列，当线程请求资源时，如果请求不到，会将线程包装成结点，将其挂载在队列尾部。</p>
+<p>下面结合代码一起看下节点进入队列的过程。</p>
+<pre><code class="language-java">   private Node enq(final Node node) {
+        for (;;) {
+            Node t = tail;   // 1
+            if (t == null) { // Must initialize
+                if (compareAndSetHead(new Node()))  // 2 
+                    tail = head;
+            } else {
+                node.prev = t; // 3
+                if (compareAndSetTail(t, node)) { // 4
+                    t.next = node;
+                    return t;
+                }
+            }
+        }
+    }
+
+</code></pre>
+<p>如上代码在第一次循环中，当要在AQS队列尾部插入元素时，AQS队列状态如下图中（default）所示。也就是队列头、尾节点都指向null；当执行代码（1）后节点t指向了尾部节点，这时候队列状态如图中（I）所示。</p>
+<p>这时候t为null，故执行代码（2），使用CAS算法设置一个哨兵节点为头节点，如果CAS设置成功，则让尾部节点也指向哨兵节点，这时候队列状态如图中（II）所示。</p>
+<p>到现在为止只插入了一个哨兵节点，还需要插入node节点，所以在第二次循环后执行到代码（1），这时候队列状态如图中（III）所示；然后执行代码（3）设置node的前驱节点为尾部节点，这时候队列状态如图中（IV）所示；</p>
+<p>然后通过CAS算法设置node节点为尾部节点，CAS成功后队列状态如图中（V）所示；</p>
+<p>CAS成功后再设置原来的尾部节点的后驱节点为node，这时候就完成了双向链表的插入，此时队列状态如图中（VI）所示。</p>
+<p><img src="https://img2018.cnblogs.com/blog/1775037/202002/1775037-20200228143916512-2114683301.jpg" alt=""></p>
+<h2 id="aqs-的方法介绍">AQS 的方法介绍</h2>
+<h3 id="用户需要自己重写的方法">用户需要自己重写的方法</h3>
+<p>上面介绍到 AQS 已经帮用户解决了同步器定义过程中的大部分问题，只将下面两个问题丢给用户解决：</p>
+<ul>
+<li>什么是资源</li>
+<li>什么情况下资源是可以被访问的</li>
+</ul>
+<p>具体的，AQS 是通过暴露以下 API 来让用户解决上面的问题的。</p>
+<table>
+<thead>
+<tr>
+<th>钩子方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tryAcquire</td>
+<td>独占方式。尝试获取资源，成功则返回true，失败则返回false。</td>
+</tr>
+<tr>
+<td>tryRelease</td>
+<td>独占方式。尝试释放资源，成功则返回true，失败则返回false。</td>
+</tr>
+<tr>
+<td>tryAcquireShared</td>
+<td>共享方式。尝试获取资源。负数表示失败；0表示成功，但没有剩余可用资源；正数表示成功，且有剩余资源。</td>
+</tr>
+<tr>
+<td>tryReleaseShared</td>
+<td>共享方式。尝试释放资源，如果释放后允许唤醒后续等待结点返回true，否则返回false。</td>
+</tr>
+<tr>
+<td>isHeldExclusively</td>
+<td>该线程是否正在独占资源。只有用到condition才需要去实现它。</td>
+</tr>
+</tbody>
+</table>
+<p>如果你需要实现一个自己的同步器，一般情况下只要继承 AQS ，并重写 AQS 中的这个几个方法就行了。至于具体线程等待队列的维护（如获取资源失败入队/唤醒出队等），AQS已经在顶层实现好了。要不怎么说<a href="http://gee.cs.oswego.edu/dl/papers/aqs.pdf">Doug Lea</a>贴心呢。</p>
+<p>需要注意的是：如果你没在子类中重写这几个方法就直接调用了，会直接抛出异常。所以，在你调用这些方法之前必须重写他们。不使用的话可以不重写。</p>
+<h3 id="aqs-提供的一系列模板方法">AQS 提供的一系列模板方法</h3>
+<p>查看 AQS 的源码我们就可以发现这个类提供了很多方法，看起来让人“眼花缭乱”的。但是最主要的两类方法就是获取资源的方法和释放资源的方法。因此我们抓住主要矛盾就行了：</p>
+<ul>
+<li>public final void acquire(int arg)                       // 独占模式的获取资源</li>
+<li>public final boolean release(int arg)                // 独占模式的释放资源</li>
+<li>public final void acquireShared(int arg)          // 共享模式的获取资源</li>
+<li>public final boolean releaseShared(int arg)   // 共享模式的释放资源</li>
+</ul>
+<h4 id="acquireint方法">acquire(int)方法</h4>
+<p>该方法以独占方式获取资源，如果获取到资源，线程继续往下执行，否则进入等待队列，直到获取到资源为止，且整个过程忽略中断的影响。该方法是独占模式下线程获取共享资源的顶层入口。</p>
+<pre><code>public final void acquire(int arg) {
+    if (!tryAcquire(arg) &amp;&amp;
+        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+        selfInterrupt();
+}
+</code></pre>
+<p>下面分析下这个<code>acquire</code>方法的具体执行流程：</p>
+<blockquote>
+<p>step1：首先这个方法调用了用户自己实现的方法<code>tryAcquire</code>方法尝试获取资源，如果这个方法返回true，也就是表示获取资源成功，那么整个<code>acquire</code>方法就执行结束了，线程继续往下执行；</p>
+<p>step2：如果<code>tryAcquir</code>方法返回false，也就表示尝试获取资源失败。这时<code>acquire</code>方法会先调用<code>addWaiter</code>方法将当前线程封装成Node类并加入一个FIFO的双向队列的尾部。</p>
+<p>step3：再看<code>acquireQueued</code>这个<strong>关键方法</strong>。首先要注意的是这个方法中哪个无条件的for循环，这个for循环说明<code>acquireQueued</code>方法一直在自旋尝试获取资源。进入for循环后，首先判断了当前节点的前继节点是不是头节点，如果是的话就再次尝试获取资源，获取资源成功的话就直接返回false（表示未被中断过）</p>
+<p>假如还是没有获取资源成功，判断是否需要让当前节点进入<code>waiting</code>状态，经过	<code>shouldParkAfterFailedAcquire</code>这个方法判断，如果需要让线程进入<code>waiting</code>状态的话，就调用LockSupport的park方法让线程进入<code>waiting</code>状态。进入<code>waiting</code>状态后，这线程等待被<code>interupt</code>或者<code>unpark</code>（在release操作中会进行这样的操作，可以参见后面的代码）。这个线程被唤醒后继续执行for循环来尝试获取资源。</p>
+</blockquote>
+<pre><code class="language-java">final boolean acquireQueued(final Node node, int arg) {
+        boolean failed = true;
+        try {
+            boolean interrupted = false;
+            for (;;) {
+                final Node p = node.predecessor();
+                //首先判断了当前节点的前继节点是不是头节点，如果是的话就再次尝试获取资源，
+                //获取资源成功的话就直接返回false（表示未被中断过）
+                if (p == head &amp;&amp; tryAcquire(arg)) {
+                    setHead(node);
+                    p.next = null; // help GC
+                    failed = false;
+                    return interrupted;
+                }
+                //判断是否需要让当前节点进入waiting状态
+                if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+                    parkAndCheckInterrupt())
+                    // 如果在整个等待过程中被中断过，则返回true，否则返回false。
+                    // 如果线程在等待过程中被中断过，它是不响应的。只是获取资源后才再进行自我中断selfInterrupt()，将中断补上。
+                    interrupted = true;
+            }
+        } finally {
+            if (failed)
+                cancelAcquire(node);
+        }
+    }
+</code></pre>
+<p>以上就是<code>acquire</code>方法的简单分析。</p>
+<p>单独看这个方法的话可能会不太清晰，结合<code>ReentrantLock</code>、<code>ReentrantReadWriteLock</code>、<code> CountDownLatch</code>、<code>Semaphore</code>和<code>LimitLatch</code>等同步工具看这个代码的话就会好理解很多。</p>
+<h4 id="releaseint方法">release(int)方法</h4>
+<p><code>release(int)</code>方法是独占模式下线程释放共享资源的顶层入口。它会释放指定量的资源，如果彻底释放了（即state=0）,它会唤醒等待队列里的其他线程来获取资源。</p>
+<pre><code class="language-java">public final boolean release(int arg) {
+    if (tryRelease(arg)) {
+        Node h = head;
+        if (h != null &amp;&amp; h.waitStatus != 0)
+            unparkSuccessor(h);
+        return true;
+    }
+    return false;
+}
+
+//上面已经讲过了，需要用户自定义实现
+protected boolean tryRelease(int arg) {
+    throw new UnsupportedOperationException();
+}
+
+private void unparkSuccessor(Node node) {
+    /*
+         * If status is negative (i.e., possibly needing signal) try
+         * to clear in anticipation of signalling.  It is OK if this
+         * fails or if status is changed by waiting thread.
+         */
+    int ws = node.waitStatus;
+    if (ws &lt; 0)
+        compareAndSetWaitStatus(node, ws, 0);
+
+    /*
+         * Thread to unpark is held in successor, which is normally
+         * just the next node.  But if cancelled or apparently null,
+         * traverse backwards from tail to find the actual
+         * non-cancelled successor.
+         */
+    Node s = node.next;
+    if (s == null || s.waitStatus &gt; 0) {
+        s = null;
+        for (Node t = tail; t != null &amp;&amp; t != node; t = t.prev)
+            if (t.waitStatus &lt;= 0)
+                s = t;
+    }
+    if (s != null)
+        LockSupport.unpark(s.thread);
+}
+</code></pre>
+<p>与acquire()方法中的tryAcquire()类似，tryRelease()方法也是需要独占模式的自定义同步器去实现的。正常来说，tryRelease()都会成功的，因为这是独占模式，该线程来释放资源，那么它肯定已经拿到独占资源了，直接减掉相应量的资源即可(state-=arg)，也不需要考虑线程安全的问题。</p>
+<p>但要注意它的返回值，上面已经提到了，release()是根据tryRelease()的返回值来判断该线程是否已经完成释放掉资源了！所以自义定同步器在实现时，如果已经彻底释放资源(state=0)，要返回true，否则返回false。</p>
+<p><code>unparkSuccessor(Node)</code>方法用于唤醒等待队列中下一个线程。<strong>这里要注意的是，下一个线程并不一定是当前节点的next节点，而是下一个可以用来唤醒的线程，如果这个节点存在，调用<code>unpark()</code>方法唤醒</strong>。</p>
+<p>总之，release()是独占模式下线程释放共享资源的顶层入口。它会释放指定量的资源，如果彻底释放了（即state=0）,它会唤醒等待队列里的其他线程来获取资源。（<strong>需要注意的是队列中被唤醒的线程不一定能立马获取资源，因为资源在释放后可能立马被其他线程（不是在队列中等待的线程）抢掉了</strong>）</p>
+<h4 id="acquiresharedint方法">acquireShared(int)方法</h4>
+<p><code>acquireShared(int)</code>方法是共享模式下线程获取共享资源的顶层入口。它会获取指定量的资源，获取成功则直接返回，获取失败则进入等待队列，直到获取到资源为止，整个过程忽略中断。</p>
+<pre><code class="language-java">public final void acquireShared(int arg) {
+    //tryAcquireShared需要用户自定义实现
+    if (tryAcquireShared(arg) &lt; 0)
+        doAcquireShared(arg);
+}
+</code></pre>
+<p>可以发现，这个方法的关键实现其实是获取资源失败后，怎么管理线程。也就是<code>doAcquireShared</code>的逻辑。</p>
+<pre><code class="language-java">//不响应中断
+private void doAcquireShared(int arg) {
+    final Node node = addWaiter(Node.SHARED);
+    boolean failed = true;
+    try {
+        boolean interrupted = false;
+        for (;;) {
+            final Node p = node.predecessor();
+            if (p == head) {
+                int r = tryAcquireShared(arg);
+                if (r &gt;= 0) {
+                    setHeadAndPropagate(node, r);
+                    p.next = null; // help GC
+                    if (interrupted)
+                        selfInterrupt();
+                    failed = false;
+                    return;
+                }
+            }
+            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;
+                parkAndCheckInterrupt())
+                interrupted = true;
+        }
+    } finally {
+        if (failed)
+            cancelAcquire(node);
+    }
+}
+</code></pre>
+<p>可以看出，<code>doAcquireShared</code>的逻辑和<code>acquireQueued</code>的逻辑差不多。将当前线程加入等待队列尾部休息，直到其他线程释放资源唤醒自己，自己成功拿到相应量的资源后才返回。</p>
+<p>简单总结下<code>acquireShared</code>的流程：</p>
+<blockquote>
+<p>step1：tryAcquireShared()尝试获取资源，成功则直接返回；</p>
+<p>step2：失败则通过doAcquireShared()进入等待队列park()，直到被unpark()/interrupt()并成功获取到资源才返回。整个等待过程也是忽略中断的。</p>
+</blockquote>
+<h4 id="releasesharedint方法">releaseShared(int)方法</h4>
+<p><code>releaseShared(int)</code>方法是共享模式下线程释放共享资源的顶层入口。它会释放指定量的资源，如果成功释放且允许唤醒等待线程，它会唤醒等待队列里的其他线程来获取资源。</p>
+<pre><code>public final boolean releaseShared(int arg) {
+    if (tryReleaseShared(arg)) {
+        doReleaseShared();
+        return true;
+    }
+    return false;
+}
+</code></pre>
+<p>释放掉资源后，唤醒后继。跟独占模式下的release()相似，但有一点稍微需要注意：独占模式下的tryRelease()在完全释放掉资源（state=0）后，才会返回true去唤醒其他线程，这主要是基于独占下可重入的考量；而共享模式下的releaseShared()则没有这种要求，共享模式实质就是控制一定量的线程并发执行，那么拥有资源的线程在释放掉部分资源时就可以唤醒后继等待结点。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000015562787">https://segmentfault.com/a/1190000015562787</a></li>
+<li><a href="https://www.jianshu.com/p/da9d051dcc3d">https://www.jianshu.com/p/da9d051dcc3d</a></li>
+<li>《Java并发编程之美》</li>
+</ul>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-02-21 16:59</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11970870" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11970870);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 11970870, cb_entryCreatedDate = '2020-02-21 16:59', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

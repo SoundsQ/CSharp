@@ -1,0 +1,985 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="google hack 之 查询语法文/玄魂前言谷歌网页搜索技术，大部分在百度等搜索引擎中也适用。同样，这些搜索技术是来源于传统数据库检索技术，因而，对这部分的学习，能为后续章节的数据库检索奠定基础，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>google hack 之 查询语法 - 玄魂 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/bluefresh/bundle-bluefresh.min.css?v=Jq_6QgWhhDfWNeDs7G0f_1vTjy8Ao6iPfy1EVyQejGw" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanhun/custom.css?v=8swWJ55&#x2B;ai5f8b6nfqrKMLsMzCs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bluefresh/bundle-bluefresh-mobile.min.css?v=1kLJchllcVEJlcH4HOtIUkiVRLCKB-C8RWJFxdVwH_8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanhun/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanhun/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanhun/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 46115;
+        var currentBlogApp = 'xuanhun';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BlueFresh';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanhun/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanhun/">玄魂工作室</a>
+</h1>
+<h2>
+探讨实践与真理的距离
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanhun/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%8E%84%E9%AD%82">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanhun/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+304&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+749</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xuanhun/p/3910134.html">google hack 之 查询语法</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <style><!--
+/* Font Definitions */
+ @font-face
+	{font-family:Helvetica;
+	panose-1:2 11 6 4 2 2 2 2 2 4;}
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:宋体;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:微软雅黑;
+	panose-1:2 11 5 3 2 2 4 2 2 4;}
+@font-face
+	{font-family:华文隶书;
+	panose-1:2 1 8 0 4 1 1 1 1 1;}
+@font-face
+	{font-family:华文楷体;
+	panose-1:2 1 6 0 4 1 1 1 1 1;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:"Trebuchet MS";
+	panose-1:2 11 6 3 2 2 2 2 2 4;}
+@font-face
+	{font-family:"\@微软雅黑";
+	panose-1:2 11 5 3 2 2 4 2 2 4;}
+@font-face
+	{font-family:"\@华文楷体";
+	panose-1:2 1 6 0 4 1 1 1 1 1;}
+@font-face
+	{font-family:"\@宋体";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"\@华文隶书";
+	panose-1:2 1 8 0 4 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+
+h2
+	{mso-style-link:"标题 2 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	text-indent:10.0pt;
+	line-height:115%;
+	background:#DBE5F1;
+	border:none;
+	padding:0cm;
+	font-size:14.0pt;
+	font-family:"Calibri","sans-serif";
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	font-weight:normal;}
+h3
+	{mso-style-link:"标题 3 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	border:none;
+	padding:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#243F60;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	font-weight:normal;}
+h4
+	{mso-style-name:"标题 4\,代码";
+	mso-style-link:"标题 4 Char\,代码 Char";
+	margin-top:3.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	background:#DAEEF3;
+	border:none;
+	padding:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#1F497D;
+	letter-spacing:.5pt;
+	font-weight:normal;}
+h5
+	{mso-style-link:"标题 5 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	border:none;
+	padding:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;
+	font-weight:normal;}
+h6
+	{mso-style-link:"标题 6 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	border:none;
+	padding:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;
+	font-weight:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-link:"标题 7 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-link:"标题 8 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-link:"标题 9 Char";
+	margin-top:15.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";
+	text-transform:uppercase;
+	letter-spacing:.5pt;
+	font-style:italic;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:21.0pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:42.0pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{mso-style-link:"页眉 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-align:center;
+	text-indent:10.0pt;
+	line-height:115%;
+	layout-grid-mode:char;
+	border:none;
+	padding:0cm;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{mso-style-link:"页脚 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	layout-grid-mode:char;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:8.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#365F91;
+	font-weight:bold;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{mso-style-link:"标题 Char";
+	margin-top:36.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:26.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#4F81BD;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+p.MsoSubtitle, li.MsoSubtitle, div.MsoSubtitle
+	{mso-style-link:"副标题 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:50.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#595959;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+em
+	{color:#243F60;
+	text-transform:uppercase;
+	letter-spacing:.25pt;
+	font-style:normal;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{mso-style-link:"文档结构图 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:9.0pt;
+	font-family:宋体;}
+p
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:宋体;}
+pre
+	{mso-style-link:"HTML 预设格式 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	font-size:12.0pt;
+	font-family:宋体;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"批注框文本 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	font-size:9.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoNoSpacing, li.MsoNoSpacing, div.MsoNoSpacing
+	{mso-style-link:"无间隔 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:36.0pt;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoQuote, li.MsoQuote, div.MsoQuote
+	{mso-style-link:"引用 Char";
+	margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	text-indent:10.0pt;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";
+	font-style:italic;}
+p.MsoIntenseQuote, li.MsoIntenseQuote, div.MsoIntenseQuote
+	{mso-style-link:"明显引用 Char";
+	margin-top:10.0pt;
+	margin-right:57.6pt;
+	margin-bottom:0cm;
+	margin-left:64.8pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:10.0pt;
+	line-height:115%;
+	border:none;
+	padding:0cm;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";
+	color:#4F81BD;
+	font-style:italic;}
+span.MsoSubtleEmphasis
+	{color:#243F60;
+	font-style:italic;}
+span.MsoIntenseEmphasis
+	{color:#243F60;
+	text-transform:uppercase;
+	letter-spacing:.5pt;
+	font-weight:bold;}
+span.MsoSubtleReference
+	{color:#4F81BD;
+	font-weight:bold;}
+span.MsoIntenseReference
+	{color:#4F81BD;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-style:italic;}
+span.MsoBookTitle
+	{letter-spacing:.45pt;
+	font-weight:bold;
+	font-style:italic;}
+p.MsoTocHeading, li.MsoTocHeading, div.MsoTocHeading
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	text-indent:10.0pt;
+	line-height:115%;
+	background:#4F81BD;
+	border:none;
+	padding:0cm;
+	font-size:24.0pt;
+	font-family:"Calibri","sans-serif";
+	color:white;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	font-weight:bold;}
+span.Char
+	{mso-style-name:"页眉 Char";
+	mso-style-link:页眉;}
+span.Char0
+	{mso-style-name:"页脚 Char";
+	mso-style-link:页脚;}
+span.1Char
+	{mso-style-name:"标题 1 Char";
+	mso-style-link:"标题 1";
+	font-family:"微软雅黑","sans-serif";
+	color:white;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	background:#4F81BD;
+	font-weight:bold;}
+span.Char1
+	{mso-style-name:"文档结构图 Char";
+	mso-style-link:文档结构图;
+	font-family:宋体;}
+span.2Char
+	{mso-style-name:"标题 2 Char";
+	mso-style-link:"标题 2";
+	font-family:华文隶书;
+	text-transform:uppercase;
+	letter-spacing:.75pt;
+	background:#DBE5F1;}
+span.3Char
+	{mso-style-name:"标题 3 Char";
+	mso-style-link:"标题 3";
+	color:#243F60;
+	text-transform:uppercase;
+	letter-spacing:.75pt;}
+span.4Char
+	{mso-style-name:"标题 4 Char\,代码 Char";
+	mso-style-link:"标题 4\,代码";
+	color:#1F497D;
+	letter-spacing:.5pt;
+	background:#DAEEF3;}
+span.5Char
+	{mso-style-name:"标题 5 Char";
+	mso-style-link:"标题 5";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.6Char
+	{mso-style-name:"标题 6 Char";
+	mso-style-link:"标题 6";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.7Char
+	{mso-style-name:"标题 7 Char";
+	mso-style-link:"标题 7";
+	color:#365F91;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.8Char
+	{mso-style-name:"标题 8 Char";
+	mso-style-link:"标题 8";
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.9Char
+	{mso-style-name:"标题 9 Char";
+	mso-style-link:"标题 9";
+	text-transform:uppercase;
+	letter-spacing:.5pt;
+	font-style:italic;}
+span.Char2
+	{mso-style-name:"标题 Char";
+	mso-style-link:标题;
+	color:#4F81BD;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.Char3
+	{mso-style-name:"副标题 Char";
+	mso-style-link:副标题;
+	color:#595959;
+	text-transform:uppercase;
+	letter-spacing:.5pt;}
+span.Char4
+	{mso-style-name:"无间隔 Char";
+	mso-style-link:无间隔;}
+span.Char5
+	{mso-style-name:"引用 Char";
+	mso-style-link:引用;
+	font-style:italic;}
+span.Char6
+	{mso-style-name:"明显引用 Char";
+	mso-style-link:明显引用;
+	color:#4F81BD;
+	font-style:italic;}
+span.Char7
+	{mso-style-name:"批注框文本 Char";
+	mso-style-link:批注框文本;}
+span.HTMLChar
+	{mso-style-name:"HTML 预设格式 Char";
+	mso-style-link:"HTML 预设格式";
+	font-family:宋体;}
+span.Char8
+	{mso-style-name:"编号 Char";
+	mso-style-link:编号;
+	font-family:"Times New Roman","serif";}
+p.a, li.a, div.a
+	{mso-style-name:编号;
+	mso-style-link:"编号 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-indent:0cm;
+	line-height:150%;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";}
+span.sentence
+	{mso-style-name:sentence;}
+p.a0, li.a0, div.a0
+	{mso-style-name:图;
+	mso-style-link:"图 Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	text-indent:24.0pt;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+span.Char9
+	{mso-style-name:"图 Char";
+	mso-style-link:图;}
+span.apple-converted-space
+	{mso-style-name:apple-converted-space;}
+.MsoChpDefault
+	{font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+.MsoPapDefault
+	{margin-top:10.0pt;
+	margin-right:0cm;
+	margin-bottom:10.0pt;
+	margin-left:0cm;
+	line-height:115%;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+--></style>
+<div class="WordSection1" style="layout-grid: 15.6pt;">
+<div style="border: solid #4F81BD 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #4F81BD;">
+<h1 style="text-indent: 51pt; text-align: center; background: #4f81bd;" align="left"><a name="OLE_LINK4"></a><a name="OLE_LINK3"></a><a title="google-hack-之-查询语法" href="http://www.xuanhun521.com/Blog/2014/8/13/google-hack-%E4%B9%8B-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95"><span style="color: #ffffff;"><span lang="EN-US">google hack </span><span style="font-family: '微软雅黑','sans-serif';">之</span> <span style="font-family: '微软雅黑','sans-serif';">查询语法</span></span></a></h1>
+</div>
+<p class="MsoNormal" style="text-align: center; text-indent: 32.05pt;" align="center"><strong><span style="font-size: 16.0pt; line-height: 115%; font-family: 华文楷体;">文<span lang="EN-US">/</span>玄魂</span></strong></p>
+<p class="MsoNormal" style="text-indent: 24.1pt;"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="text-indent: 32.05pt;"><strong><span style="font-size: 16.0pt; line-height: 115%; font-family: 华文楷体;" lang="EN-US">&nbsp;</span></strong></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><a name="_Toc383006588"></a><a name="_Toc382992404"></a><span style="font-family: 华文隶书;">前言</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">谷歌网页搜索技术，大部分在百度等搜索引擎中也适用。同样，这些搜索技术是来源于传统数据库检索技术，因而，对这部分的学习，能为后续章节的数据库检索奠定基础，并能获得直观的认识。本部分结合应用实例的讲解也能让我们加深信息检索对解决实际问题、提高搜索效率的认知。</span></p>
+<div style="border: solid #4F81BD 1.0pt; padding: 2.0pt 4.0pt 1.0pt 2.0pt; background: #DAEEF3;">
+<h4 style="text-indent: 20.0pt; background: #DAEEF3; border: none; padding: 0cm;"><span style="font-size: 9.0pt; font-family: 宋体;">欢迎访问</span><span lang="EN-US"><a href="http://www.xuanhun521.com/"><span style="font-size: 9.0pt; font-family: 宋体;" lang="EN-US"><span lang="EN-US">玄魂的博客</span></span></a></span></h4>
+</div>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><a name="_Toc383006589"></a><span lang="EN-US">1.1&nbsp; </span><span style="font-family: 华文隶书;">默认模糊搜索、自动拆分短语</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">同许多搜索引擎一样，当直接在搜索框中输入搜索词时，谷歌默认进行模糊搜索，并能对长短语或语句进行自动拆分成小的词进行搜索。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span></p>
+<div style="border: solid #4F81BD 1.0pt; padding: 2.0pt 4.0pt 1.0pt 2.0pt; background: #DAEEF3;">
+<h4 style="text-indent: 24.0pt; background: #DAEEF3; border: none; padding: 0cm;"><span lang="EN-US">kali linux </span><span style="font-family: 宋体;">渗透测试</span></h4>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441135618968.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.2 </span><span style="font-family: 华文隶书;">短语精确搜索</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">给关键词加上半角引号实现精确搜索，不进行分词。</span></p>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">示例：</span><span class="4Char"><span lang="EN-US">"kali linux web</span></span><span class="4Char"><span style="font-family: 宋体;">渗透测试</span></span><span class="4Char"><span lang="EN-US">"</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441218427132.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.3</span><span style="font-family: 华文隶书;">通配符</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">谷歌的通配符是星号&ldquo;</span><span lang="EN-US">*</span><span style="font-family: 宋体;">&rdquo;，必须在精确搜索符双引号内部使用。用通配符代替关键词或短语中无法确定的字词。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">"kali * web</span></span><span class="4Char"><span style="font-family: 宋体;">渗透测试</span></span><span class="4Char"><span lang="EN-US">"</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441282803765.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.4 </span><span style="font-family: 华文隶书;" lang="EN-US">点号匹配任意字符</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">与通配符星号&ldquo;</span><span lang="EN-US">*</span><span style="font-family: 宋体;">&rdquo;不一样的是，点号&ldquo;</span><span lang="EN-US">.</span><span style="font-family: 宋体;">&rdquo;匹配的是字符，不是字、短语等内容。</span><span style="font-family: 宋体;" lang="EN-US">保留的字符有</span><span lang="EN-US">[</span><span style="font-family: 宋体;" lang="EN-US">、</span><span lang="EN-US">(</span><span style="font-family: 宋体;" lang="EN-US">、</span><span lang="EN-US">-</span><span style="font-family: 宋体;" lang="EN-US">等</span><span style="font-family: 宋体;">。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;" lang="EN-US">示例</span><span style="font-family: 宋体;">：</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441341702999.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.5 </span><span style="font-family: 华文隶书;">布尔逻辑</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">布尔逻辑是许多检索系统的基本检索技术，在搜索引擎中也一样适用，在谷歌网页搜索中需要注意的是：谷歌和许多搜索引擎一样，多个词间的逻辑关系默认的是逻辑与（空格）。当用逻辑算符的时候，词与逻辑算符之间用需要空格分隔，包括后面讲的各种语法，均要有空格。逻辑非是特例，即减号必须与对应的词连在一起。对于复杂的逻辑关系，可用括号分组。</span></p>
+<div style="border-top: solid #4F81BD 1.0pt; border-left: solid #4F81BD 1.0pt; border-bottom: none; border-right: none; padding: 2.0pt 0cm 0cm 2.0pt;">
+<h3 style="text-indent: 25.0pt;"><span style="font-family: 宋体; background: white;">逻辑与</span></h3>
+</div>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">示例：</span><span class="4Char"><span style="font-family: 宋体;">渗透测试</span></span><span class="4Char"><span style="font-family: 宋体;">玄魂的博客</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441410147689.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">示例：</span><span class="4Char"><span style="font-family: 宋体;">渗透测试</span></span><span class="4Char"><span lang="EN-US"> AND </span></span><span class="4Char"><span style="font-family: 宋体;">玄魂的博客</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441469526236.jpg" alt="" /></p>
+<div style="border-top: solid #4F81BD 1.0pt; border-left: solid #4F81BD 1.0pt; border-bottom: none; border-right: none; padding: 2.0pt 0cm 0cm 2.0pt;">
+<h3 style="text-indent: 25.0pt;"><span class="3Char"><span style="font-family: 宋体; text-transform: none;">逻辑或</span></span></h3>
+</div>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">示例：</span><span class="4Char"><span lang="EN-US">"</span></span><span class="4Char"><span style="font-family: 宋体;">玄魂的博客</span></span><span class="4Char"><span lang="EN-US">" (kali | node)</span></span></p>
+<p class="MsoNormal" style="text-indent: 9.95pt;"><span style="font-size: 10.5pt; line-height: 115%; color: #333333;" lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441535927099.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">上图显示的结果为搜索结果中必须包含&ldquo;玄魂的博客&rdquo;</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">同时包含</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">&ldquo;</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">kali</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">&rdquo;或者&ldquo;</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">node</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">&rdquo;的网页。</span></p>
+<div style="border-top: solid #4F81BD 1.0pt; border-left: solid #4F81BD 1.0pt; border-bottom: none; border-right: none; padding: 2.0pt 0cm 0cm 2.0pt;">
+<h3 style="text-indent: 25.0pt;"><span class="3Char"><span style="font-family: 宋体; text-transform: none;">逻辑非</span></span></h3>
+</div>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">示例：</span><span class="4Char"><span lang="EN-US">"</span></span><span class="4Char"><span style="font-family: 宋体;">玄魂的博客</span></span><span class="4Char"><span lang="EN-US">" -kali</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131441592802103.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">上图中显示结果为包含&ldquo;玄魂的博客&rdquo;同时不包含&ldquo;</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">kali</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">&rdquo;的网页内容。</span></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.6</span><span style="font-family: 华文隶书;">约束条件</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">加号&ldquo;</span><span lang="EN-US">+</span><span style="font-family: 宋体;">&rdquo;用于强制搜索，即必须包含加号后的内容。一般与精确搜索符一起应用。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">"</span></span><span class="4Char"><span style="font-family: 宋体;">玄魂的博客</span></span><span class="4Char"><span lang="EN-US">" +"</span></span><span class="4Char"><span style="font-family: 宋体;">愚蠢的人类</span></span><span class="4Char"><span lang="EN-US">"</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442078279579.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.7 </span><span style="font-family: 华文隶书;">数字范围</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">用两个点号&ldquo;</span><span lang="EN-US">..</span><span style="font-family: 宋体;">&rdquo;表示一个数字范围。一般应用于日期、货币、尺寸、重量、高度等范围的搜索。用作范围时最好给一定的含义。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">kali linux 2010</span></span><span class="4Char"><span style="font-family: 宋体;">年</span></span><span class="4Char"><span lang="EN-US">..2014</span></span><span class="4Char"><span style="font-family: 宋体;">年</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442160613730.jpg" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">1.8 </span><span style="font-family: 华文隶书;">括号分组</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">逻辑组配时分组，避免逻辑混乱。括号&ldquo;</span><span lang="EN-US">()</span><span style="font-family: 宋体;">&rdquo;是分组符号。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：见上文</span><span lang="EN-US"> 1.5</span><span style="font-family: 宋体;">节。</span></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">2.1 </span><span style="font-family: 华文隶书;">标题中搜索</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">通常标题是内容的高度概括，在标题中搜索的结果准确率会更高。谷歌搜索中限定搜索网页或文档标题的语法是：</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">或</span><span lang="EN-US">allintitle</span><span style="font-family: 宋体;">。</span><span lang="EN-US">allintitle</span><span style="font-family: 宋体;">是</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">的变体，相当于在各个搜索词前加上</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">。二者差别不明显，我们一般直接用</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">intitle:"WSO 2.4" [ Sec. Info ], [ Files ], [ Console ], [ Sql ], [ Php ], [ Safe mode ], [ String tools ], [ Bruteforce ], [ Network ], [ Self remove ]</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442248428979.jpg" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">上图</span> <span style="font-family: 宋体;">为使用</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">属性查找网站上被黑客上传的</span><span lang="EN-US">WSO</span><span style="font-family: 宋体;">后门网页。打开个别网页可以发现</span><span lang="EN-US">webshell</span><span style="font-family: 宋体;">。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442336866014.jpg" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">2.2 </span><span style="font-family: 华文隶书;">正文中搜索</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">仅仅在网页或文档的正文部分搜索。谷歌</span><span style="font-family: 宋体;" lang="EN-US">搜索中限定搜索网页或文档正文的语法是：</span><span lang="EN-US">intext</span><span style="font-family: 宋体;" lang="EN-US">或</span><span lang="EN-US">allintext</span><span style="font-family: 宋体;" lang="EN-US">。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;" lang="EN-US">示例</span><span style="font-family: 宋体;">：</span><span class="4Char"><span lang="EN-US">intitle:"index" intext:"Login to the Administrative Interface"</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">此示例结合</span><span lang="EN-US">intitle</span><span style="font-family: 宋体;">和</span><span lang="EN-US">intext</span><span style="font-family: 宋体;">寻找</span><span lang="EN-US">Web2Py</span><span style="font-family: 宋体;">的管理后台。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442413893834.jpg" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;" lang="EN-US">打开一个链接</span><span style="font-family: 宋体;">。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442484059810.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">2.3</span><span style="font-family: 华文隶书;">网址中搜索</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">谷歌搜索中限定搜索网址的语法是：</span><span lang="EN-US">inurl</span><span style="font-family: 宋体;">。是</span><span lang="EN-US">In-</span><span style="font-family: 宋体;">系指令中最强大的一个，换句话说，这个高级指令能够直接从网站的</span><span lang="EN-US">URL</span><span style="font-family: 宋体;">入手挖掘信息，只要略微了解普通网站的</span><span lang="EN-US">URL</span><span style="font-family: 宋体;">格式，就可以极具针对性地找到你所需要的资源－－甚至隐藏内容。网站构建者通常将某一类信息集中在一个网站的目录中，所以搜索</span><span lang="EN-US">URL</span><span style="font-family: 宋体;">中的词本身就是对某一方面内容的一个限定。如果在加上一定的词进行组配，搜索结果将更贴近需求。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">inurl:phpmyadmin/index.php &amp; (intext:username &amp; password &amp; "Welcome to")</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">该示例通过</span><span lang="EN-US">url</span><span style="font-family: 宋体;">中的特征路径和页面的中的特殊文本，寻找安装有</span><span lang="EN-US">phpmyadmin</span><span style="font-family: 宋体;">的站点的对应管理入口。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131442559366345.jpg" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">打开其中的一个链接，如下：</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443031861094.jpg" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">2.4 </span><span style="font-family: 华文隶书;">锚链链接搜索</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">在做网站中有时候用锚点来链接一个页面中的其它部分内容，这样方便浏览和定位。也就是说锚点链接的内容通常是网页内容中重要的章节或内容的开始部分，因而对它们的搜索也更能反映网页的主题内容，提高搜索结果的准确度。对于熟悉网页制作的人来说，可以从网页源代码中查看有锚点的</span><span lang="EN-US">HTML</span><span style="font-family: 宋体;">代码</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">谷歌网页搜索在锚链链接中语法是：</span><span lang="EN-US">inanchor</span><span style="font-family: 宋体;">或</span><span lang="EN-US">allinanchor</span><span style="font-family: 宋体;">。搜索范围限制在页面的链接锚点描述文本进行搜索。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例</span><span lang="EN-US">:</span><span class="4Char"><span lang="EN-US">inanchor:</span></span><span class="4Char"><span style="font-family: 宋体;">修改密码</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443106551141.jpg" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">2.5 </span><span style="font-family: 华文隶书;">文档类型限定</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">谷歌网页搜索不仅仅能搜索网页，还能搜索各种文档，通过文档类型限定只对文档进行搜索，从而不显示页面的内容。语法是：</span><span lang="EN-US">filetype</span><span style="font-family: 宋体;">。这个语法非常有用，我们在网上常常要找一些范文或参考资料的时候常用这个语法。</span><span lang="EN-US">filetype</span><span style="font-family: 宋体;">是根据文件后缀搜索特定文件类型，比如支持的文档有：</span><span lang="EN-US">pdf</span><span style="font-family: 宋体;">、</span><span lang="EN-US">ppt</span><span style="font-family: 宋体;">、</span><span lang="EN-US">doc</span><span style="font-family: 宋体;">、</span><span lang="EN-US">xls</span><span style="font-family: 宋体;">等；网页文件：</span><span lang="EN-US">htm</span><span style="font-family: 宋体;">、</span><span lang="EN-US">asp</span><span style="font-family: 宋体;">、</span><span lang="EN-US">php</span><span style="font-family: 宋体;">等。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">filetype:sql site:com and "insert into" admin "2014"</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">本示例通过</span><span lang="EN-US">filetype </span><span style="font-family: 宋体;">查找</span><span lang="EN-US">sql</span><span style="font-family: 宋体;">文件，并且希望得到的结果为插入</span><span lang="EN-US">admin</span><span style="font-family: 宋体;">用户的脚本。搜索结果如下：</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443209677892.jpg" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">打开其中的一个链接，我们可以看到</span><span lang="EN-US">sql</span><span style="font-family: 宋体;">的内容。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443301234957.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">3.1</span><span style="font-family: 华文隶书;">搜索谷歌缓存的页面（快照信息）</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">用</span><span lang="EN-US">cache</span><span style="font-family: 宋体;">语法的一般情况是：当一个链接无法访问时（或信息被屏蔽时）；当信息已经被修改，想看以前的信息时。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">cache:www.xuanhun521.com</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443393114563.jpg" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">3.2 </span><span style="font-family: 华文隶书;">相关网址</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">related</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;" lang="EN-US">语法对于发现某一类信息非常有用，比如当你用</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">related</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;" lang="EN-US">搜索一个图书馆网址的时候会出来大量图书馆的网站，如【</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">related:lib.nit.net.cn</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;" lang="EN-US">】；当搜索某期刊网址的时候，能搜索出大量给学科领域的相关期刊，如【</span><span style="font-size: 10.5pt; line-height: 115%; color: #333333; background: white;" lang="EN-US">related:www.lis.ac.cn</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;" lang="EN-US">】</span><span class="apple-converted-space"><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333; background: white;">。</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例</span><span lang="EN-US">:</span><span class="4Char"><span lang="EN-US">related:www.kali.org</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443471398654.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">3.3 link</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">搜索所有链接到某个特定</span><span lang="EN-US">URL</span><span style="font-family: 宋体;">上的页面</span><span lang="EN-US">.</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">例如，想搜索所有链接</span><span lang="EN-US"><a href="http://www.xuanhun521.com">www.xuanhun521.com</a></span><span style="font-family: 宋体;">的页面，但要排除本站网页。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">link:www.xuanhun521.com -site:www.xuanhun521.com</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131443572486877.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">3.4&nbsp; site</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">搜索范围限制在某网站或顶级域名中。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">示例：</span><span class="4Char"><span lang="EN-US">site:www.xuanhun521.com</span></span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131444055774353.png" alt="" /></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #DBE5F1;">
+<h2 style="text-indent: 31.0pt; background: #DBE5F1;"><span lang="EN-US">4.1&nbsp; </span><span style="font-family: 华文隶书;">混合搜索范例</span></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">第一个示例，我们通过下面的查询语句，查找可以未经授权就可以访问的</span><span lang="EN-US">phpMyAdmin</span><span style="font-family: 宋体;">的后台页面。</span></p>
+<div style="border: solid #4F81BD 1.0pt; padding: 2.0pt 4.0pt 1.0pt 2.0pt; background: #DAEEF3;">
+<h4 style="text-indent: 24.0pt; background: #DAEEF3; border: none; padding: 0cm;"><span lang="EN-US">inurl:.php? intext:CHARACTER_SETS,COLLATIONS, ?intitle:phpmyadmin</span></h4>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131444151082232.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">寻找一个页面，点开看看：</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131444232951368.jpg" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span lang="EN-US">&nbsp;</span><span style="font-family: 宋体;">第二个示例，我们搜索可能存在</span><span lang="EN-US">openssl</span><span style="font-family: 宋体;">心脏出血漏洞的站点。</span></p>
+<div style="border: solid #DBE5F1 3.0pt; padding: 0cm 0cm 0cm 0cm; background: #0F0F0F;">
+<h2 style="margin-top: 7.5pt; margin-right: 0cm; margin-bottom: 7.5pt; margin-left: 0cm; text-indent: 24.0pt; background: #0F0F0F;"><strong><span style="font-size: 12.0pt; line-height: 115%; font-family: 'Trebuchet MS','sans-serif'; color: white;" lang="EN-US"><a href="http://www.google.com/search?q=%22OpenSSL%22%20AND%20%221.0.1%20Server%20at%22%20OR%20%221.0.1a%20Server%20at%22%20OR%20%221.0.1b%20Server%20at%22%20OR%20%221.0.1c%20Server%20at%22%20OR%20%221.0.1d%20Server%20at%22%20OR%20%221.0.1e%20Server%20at%22%20OR%20%221.0.1f%20Server%20at%22"><span style="color: #ff6600;">"OpenSSL" AND "1.0.1 Server at" OR "1.0.1a Server at" OR "1.0.1b Server at" OR "1.0.1c Server at" OR "1.0.1d Server at" OR "1.0.1e Server at" OR "1.0.1f Server at"</span></a></span></strong></h2>
+</div>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131444319524644.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><span style="font-family: 宋体;">这个搜索可谓一举多得，因为</span><span lang="EN-US">apache</span><span style="font-family: 宋体;">暴露</span><span lang="EN-US">ssl</span><span style="font-family: 宋体;">版本的页面一般是可枚举的目录页面，在这样的页面中我们可以探究网站的组织目录。</span></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;"><img src="https://images0.cnblogs.com/i/42533/201408/131444412337980.png" alt="" /></p>
+<p class="MsoNormal" style="text-indent: 24.0pt;">原文链接：<a title="google-hack-之-查询语法" href="http://www.xuanhun521.com/Blog/2014/8/13/google-hack-%E4%B9%8B-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95">http://www.xuanhun521.com/Blog/2014/8/13/google-hack-%E4%B9%8B-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95</a></p>
+<p class="MsoNormal" style="text-indent: 21.0pt;"><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US">ps</span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">：对此文章感兴趣的读者，可以加</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">qq</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">群：</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">Hacking:303242737;Hacking-2</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">群：</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">147098303</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">；</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">Hacking-3</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">群：</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">31371755</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">；</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">hacking-4</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">群</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">:201891680;Hacking-5</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 宋体; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">群：</span></span><span style="font-size: 10.5pt; line-height: 115%; font-family: 'Helvetica','sans-serif'; color: #333333;" lang="EN-US"><span style="box-sizing: border-box; orphans: auto; text-align: start; widows: auto; -webkit-text-stroke-width: 0px; word-spacing: 0px;">316885176</span></span></p>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2014-08-13 14:41</span>&nbsp;
+<a href="https://www.cnblogs.com/xuanhun/">玄魂</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=3910134" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(3910134);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 46115, cb_blogApp = 'xuanhun', cb_blogUserGuid = 'f0fa460b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 3910134, cb_entryCreatedDate = '2014-08-13 14:41', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 玄魂
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

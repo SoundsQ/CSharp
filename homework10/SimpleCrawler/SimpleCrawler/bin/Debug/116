@@ -1,0 +1,627 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="前言 前情提要: &amp;quot;Git应用详解第二讲：Git删除、修改、撤销操作&amp;quot; 分支是 最核心的操作之一，了解分支的基本操作能够大大提高项目开发的效率。这一讲就来介绍一些分支的常见操作及其" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Git应用详解第三讲：本地分支的重要操作 - AhuntSun - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/AhuntSun-blog/custom.css?v=aQxv9ugmgmxj9aI02HToOmJXaLs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/AhuntSun-blog/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/AhuntSun-blog/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/AhuntSun-blog/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 555013;
+        var currentBlogApp = 'AhuntSun-blog';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+         
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/AhuntSun-blog/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/AhuntSun-blog/">AhuntSun</a>
+</h1>
+<h2>
+Talk is cheap, Show me the code.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/AhuntSun-blog/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/AhuntSun">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/AhuntSun-blog/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+127&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+70</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/AhuntSun-blog/p/12694197.html">Git应用详解第三讲：本地分支的重要操作</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <h3 id="前言">前言</h3>
+<blockquote>
+<p>前情提要:<a href="https://www.cnblogs.com/AhuntSun-blog/p/12685415.html">Git应用详解第二讲：Git删除、修改、撤销操作</a></p>
+</blockquote>
+<p>分支是<code>git</code>最核心的操作之一，了解分支的基本操作能够大大提高项目开发的效率。这一讲就来介绍一些分支的常见操作及其基本原理。</p>
+<h3 id="一、分支概述">一、分支概述</h3>
+<p>在开发当中，往往需要分工合作。比如：小红开发<code>A</code>功能，小明开发<code>B</code>功能，小刚开发<code>C</code>功能。如何才能做到三者并行开发呢？<code>git</code>为我们提供的分支功能就能实现这一需求，如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/1.png" alt="image-20200413193720239"></p>
+<p>在实际的开发过程中，<code>master</code>分支是用来发布项目稳定版本的。新的功能往往是在一个新建的分支上进行开发，等到新功能开发完毕并经过测试，表现稳定后，才会合并到<code>master</code>分支上进行版本更新。这样就可以在保持一款软件发行的同时，同步进行新功能的开发。</p>
+<p>通常来说，远程仓库的<code>Git</code>分支会有如下几种：<code>master</code>分支、<code>test</code>分支、<code>develop</code>分支，除此之外可能还有紧急修复<code>bug</code>的<code>hotfix</code>分支；但是，本地的分支可以有很多；本文主要介绍<code>Git</code>本地分支的内容。</p>
+<h3 id="二、查看本地分支">二、查看本地分支</h3>
+<h4 id="1git-branch">1.<code>git branch</code></h4>
+<p>查看当前版本库中的所有分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/2.png" alt="image-20200310151203938"></p>
+<p>其中的 <code>*</code> 表示当前处于的分支，可见当前处于<code>master</code>分支；</p>
+<p>使用<code>git init</code>初始化<code>git</code>仓库时，<code>git</code>会自动创建一个<code>master</code>分支。但是，如果没有在<code>master</code>分支上进行任何提交就切换到其他分支，那么在切换分支的时候<code>master</code>分支会被销毁。并且，无法查看没有提交记录的分支，如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/3.png" alt="image-20200413115148907"></p>
+<h4 id="2git-branch--a">2.<code>git branch -a</code></h4>
+<p>查看所有本地分支，包括本地分支和本地远程分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/4.png" alt="image-20200328164045256"></p>
+<h4 id="3git-branch--v">3.<code>git branch -v</code></h4>
+<p>查看所有本地分支上最近一次的提交记录：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/5.png" alt="image-20200413122049091"></p>
+<p>但是，该指令无法查看本地远程分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/6.png" alt="image-20200413123220561"></p>
+<h4 id="4git-branch--r">4.<code>git branch -r</code></h4>
+<p><code>-r</code>参数用于单独查看本地远程分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/6.1.png" alt="image-20200413174143173"></p>
+<h4 id="5git-branch--av">5.<code>git branch -av</code></h4>
+<p>该指令不仅可以显示所有的本地分支，包括本地远程分支，以及对应分支上的最新提交信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/7.png" alt="image-20200409115958334"></p>
+<h4 id="6git-branch--vv">6.<code>git branch -vv</code></h4>
+<p><code>-vv</code>参数表示查看所有本地分支与远程分支的关联情况。如图所示，本地<code>master</code>分支有本地远程分支<code>origin/master</code>与之关联，说明它已与远程<code>master</code>分支建立了关联；</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/8.png" alt="image-20200410121145929"></p>
+<blockquote>
+<p>至于上面提到的<strong>本地远程分支</strong>，将在下一讲中详细介绍。</p>
+</blockquote>
+<h3 id="三、创建本地分支">三、创建本地分支</h3>
+<h4 id="1git-branch-branch_name">1.<code>git branch &lt;branch_name&gt;</code></h4>
+<p>可通过上述命令创建新分支<code>new_branch</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/9.png" alt="image-20200310151357642"></p>
+<p>由于是在<code>master</code>分支上创建的<code>new_branch</code>分支，所以<strong><code>new_branch</code>分支</strong>与<strong><code>master</code>分支</strong>有着部分<strong>共同的提交历史</strong>；所以，<code>master</code>分支上的文件，<code>new_branch</code>分支上都有。但是，在<code>new_branch</code>分支上添加的<code>new_branch</code>文件，不会存在于<code>master</code>分支上：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/10.png" alt="image-20200413120006856"></p>
+<p>此时两分支的状态为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/11.png" alt="image-20200413120509219"></p>
+<h4 id="2git-branch--b-branch_name">2.<code>git branch -b &lt;branch_name&gt;</code></h4>
+<p>通过上述命令可创建并切换到<code>new_branch</code>分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/12.png" alt="image-20200413120945856"></p>
+<p>如图所示，本来所在分支为<code>master</code>，并且没有<code>new_branch</code>分支。执行上述命令后，创建并切换到了<code>new_branch</code>分支上。</p>
+<h3 id="四、切换本地分支">四、切换本地分支</h3>
+<h4 id="1git-checkout-branch_name">1.<code>git checkout &lt;branch_name&gt;</code></h4>
+<p>比如切换到<code>new_branch</code>分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/13.png" alt="image-20200310151539203"></p>
+<h4 id="2git-checkout--">2.<code>git checkout -  </code></h4>
+<p>切换回上次操作的分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/14.png" alt="image-20200310152313013"></p>
+<h3 id="五、重命名本地分支">五、重命名本地分支</h3>
+<h4 id="1git-branch--m-oldname-newname">1.<code>git branch -m &lt;oldName&gt; &lt;newName&gt;</code></h4>
+<p>如下图所示，将本地分支<code>master</code>重命名为<code>master2</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/15.png" alt="image-20200311115657966"></p>
+<h3 id="六、删除本地分支">六、删除本地分支</h3>
+<h4 id="1git-branch--d-new_branch">1.<code>git branch -d new_branch</code></h4>
+<p>删除<code>new_branch</code>分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/16.png" alt="image-20200310163652841"></p>
+<p><strong>注意点：</strong></p>
+<ul>
+<li>
+<p>不能删除当前所处的分支；</p>
+</li>
+<li>
+<p>当需要删除的分支上有<code>master</code>分支没有的内容，并且删除前没有进行合并（<code>merge</code>）时，会报错：</p>
+</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/17.png" alt="image-20200310163934006"></p>
+<p>此时可以通过<strong><code>git branch -D new_branch</code></strong> 使用参数<code>D</code>，在不合并的情况下强制<strong>删除分支</strong>；</p>
+<h3 id="七、合并分支">七、合并分支</h3>
+<p>注意：这里所讲的分支指的是有公共提交节点的分支，如下图中的<code>dev</code>与<code>master</code>分支所示，提交节点<code>A</code>为它们的公共提交节点：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/18.png" alt="image-20200411210604441"></p>
+<p>当两分支没有公共提交节点，如下图所示，应采用<code>rebase</code>进行合并，后面会详细介绍：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/19.png" alt="image-20200411210330211"></p>
+<h4 id="1git-merge-branch_name">1.<code>git merge &lt;branch_name&gt;</code></h4>
+<ul>
+<li>
+<p>首先，创建并切换到新分支<code>dev</code>中，并为<code>test.txt</code>文件添加内容<code>dev1</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/20.png" alt="image-20200413213753822"></p>
+<p><strong>注意：</strong>要将<code>dev</code>分支上的这一修改提交到版本库，才能进行后续合并。因为合并的是提交对象链，详情见后面讲解的合并原理：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/21.png" alt="image-20200413124513814"></p>
+</li>
+<li>
+<p>然后，<strong>切换回<code>master</code>分支</strong>，通过<code>git merge dev</code>指令，将<code>dev</code>分支中的内容合并到<strong>当前所处</strong>的<code>master</code>分支中；合并后<code>master</code>分支与<code>dev</code>分支上<code>test.txt</code>文件的内容达到了同步：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/22.png" alt="image-20200413213934629"></p>
+</li>
+</ul>
+<h4 id="2分支合并的原则">2.分支合并的原则</h4>
+<p><code>git</code>分支的合并采用的是<strong>三方合并</strong>的原则：找到两分支最新提交<code>A</code>和<code>B</code>的公共父节点<code>C</code>，在这三个节点的基础上合并为节点<code>D</code>。这个节点<code>D</code>就包含了两个分支上的所有内容：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/23.png" alt="image-20200407160615973"></p>
+<h3 id="八、分支的本质">八、分支的本质</h3>
+<p><strong>分支：指向一条<code>commit</code>对象链或一条工作记录线的指针；</strong></p>
+<p>快照<code>A~D</code>分别表示四次提交（<code>commit</code>），注意提交的顺序为：<code>A -&gt; B -&gt; C -&gt; D</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/24.png" alt="image-20200408150401090"></p>
+<p>从图中可以看到每一次提交的对象内都会保存上一次提交的<code>commit id</code>，由此可以从后往前把所有的提交（<code>commit</code>）串起来形成一条<strong>链</strong>（类似单向链表），<strong>这条链就组成了一条完整的分支信息</strong>：</p>
+<ul>
+<li>
+<p><strong>当版本库中只有一条分支：</strong>该分支的最新提交就包含了整条分支的所有内容，代表版本库的<strong>当前状态</strong>。如上图的快照<code>D</code>，里面包含了快照<code>A~C</code>中的所有内容，此时快照<code>D</code>中的内容就是整个版本库中的内容：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/25.png" alt="image-20200413132342942"></p>
+</li>
+<li>
+<p><strong>当版本库中有多条分支：</strong>每条分支上的最新提交包含了所处分支的<strong>全部内容</strong>，将各个分支的最新提交进行合并。合并的节点就包含了所有分支的内容，也就是<strong>现阶段的版本库本身</strong>；如下图中的<code>d1</code>、<code>m2</code>、<code>t3</code>分别包含了<code>dev</code>、<code>master</code>、<code>test</code>分支上的所有内容：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/26.png" alt="image-20200413132409178"></p>
+</li>
+</ul>
+<h4 id="1分支--指针">1.分支 <code>==</code> 指针</h4>
+<p>情景一：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/27.png" alt="image-20200406131416304"></p>
+<p>从图中可以看到：</p>
+<ul>
+<li>
+<p><strong><code>HEAD</code>为一个指针：指向当前分支；</strong></p>
+</li>
+<li>
+<p><strong><code>master</code>也为一指针：指向提交；</strong></p>
+</li>
+</ul>
+<p>情景二：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/28.png" alt="image-20200406131503784"></p>
+<p>上图中，<code>dev</code>为<code>master</code>分支上创建的新分支，可知：</p>
+<ul>
+<li><code>git</code>在创建新分支时，文件本身不变化，只需要创建一个<strong>代表新分支，并指向当前分支的指针</strong>；如图中的<code>dev</code>与<code>master</code>指向同一个提交，文件没有发生任何变化；</li>
+<li><code>HEAD</code>指向<code>dev</code>分支，表示当前所处分支为<code>dev</code>，相当于执行了：<code>git checkout -b dev</code> 后的状态；</li>
+</ul>
+<blockquote>
+<p>相信你已经发现：<code>HEAD</code>是一个始终<strong>指向当前分支</strong>的<strong>指针</strong>；</p>
+</blockquote>
+<h4 id="2head标识符">2.<code>HEAD</code>标识符</h4>
+<p><code>HEAD</code>文件是一个指向当前所在分支的<strong>引用标识符</strong>，也可以理解为一个<strong>指针</strong>，它与分支之间的关系是这样的：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/29.png" alt="image-20200408000947960"></p>
+<h5 id="查看head">查看<code>HEAD</code></h5>
+<p><code>HEAD</code>文件中并不包含<code>SHA1</code>值（每次提交的<code>commit ID</code>），而是包含一个指向另外一个引用的指针。我们可以查看<code>.git</code>目录下的<code>HEAD</code>文件：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/30.png" alt="image-20200310172919110"></p>
+<p>可见<code>HEAD</code>指向的是当前所在的<code>master</code>分支；</p>
+<p>当我们通过<code>git checkout -b dev</code>  创建并切换到<code>dev</code>分支后，再次进入<code>.git</code>文件夹查看<code>HEAD</code>，会发现此时<code>HEAD</code>指向了<code>dev</code>：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/31.png" alt="image-20200310173205214"></p>
+<p>由此证明了<code>HEAD</code>始终指向当前分支；</p>
+<p>当执行<code>git commit</code>命令时，<code>git</code>会创建一个<code>commit</code>对象（比如下图<code>D</code>）。并且将这个<code>commit</code>对象的<code>parent</code>指针指向<code>HEAD</code> 所指向的引用（<code>master</code>）指向的提交（也就是<code>C</code>），这样就能形成一条提交链：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/32.png" alt="image-20200408001856063"></p>
+<p>我们对于<code>HEAD</code>修改的任何操作，都会被<code>git reflog</code>完整记录下来：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/33.png" alt="image-20200329145707276"></p>
+<p>但是手动地修改<code>HEAD</code>文件，这些信息就不会被记录下来，所以十分不建议手动修改<code>git</code>相关的配置文件，而是应该尽量采用命令行的方式来修改。</p>
+<h5 id="修改head">修改<code>HEAD</code></h5>
+<p>实际上，我们可以通过<code>git</code>的底层命令<code>symbolic-ref</code>来实现对<code>HEAD</code>文件内容的修改；</p>
+<blockquote>
+<p><code>git </code>中的命令可分为两类：<strong>高级命令</strong>和<strong>底层命令</strong>；之前介绍的<code>git add</code> 等都是高级命令；</p>
+</blockquote>
+<p>读取：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/34.png" alt="image-20200329150120113"></p>
+<p>写入：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/35.png" alt="image-20200329150239094"></p>
+<p>要注意格式：<code>refs/heads/develop</code>；</p>
+<p>查看<code>ORIG_HEAD</code>文件：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/36.png" alt="image-20200329150514036"></p>
+<p>里面是一个<code>SHA1</code>值，查看当前的提交信息：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/37.png" alt="image-20200329150643422"></p>
+<p>可以发现，<code>ORIG_HEAD</code>里面的<code>SHA1</code>值就是最新一次提交的<code>SHA1</code>值。</p>
+<p>查看<code>FETCH_HEAD</code>文件：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/38.png" alt="image-20200329150904196"></p>
+<p>里面有两个信息，一个是最新提交的<code>commit ID</code>，另一个是提交信息。</p>
+<p>所以，对于<code>git</code>而言<code>commit ID</code>是十分重要的信息，通过这个<code>SHA1</code>值可以回溯或查找需要的提交。</p>
+<h4 id="3git-merge原理">3.<code>git merge</code>原理</h4>
+<h5 id="过程图解">过程图解</h5>
+<ul>
+<li>
+<p><strong>在新分支上进行提交操作</strong></p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/39.png" alt="image-20200406131605850"></p>
+<p>上图表示在<code>dev</code>分支上进行了一次提交，此时：</p>
+<ul>
+<li>分支<code>master</code>的提交记录由：<code>A</code>、<code>B</code>和<code>C</code>组成；</li>
+<li>而分支<code>dev</code>的提交历史则由：<code>A</code>、<code>B</code>、<code>C</code>和<code>D</code>组成；</li>
+</ul>
+</li>
+<li>
+<p><strong>对两分支进行合并操作</strong></p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/40.png" alt="image-20200406131708763"></p>
+<p>在<code>master</code>分支上执行：<code>git merge dev</code>将<code>dev</code>分支的内容<strong>合并</strong>到了<code>master</code>分支上；这种合并方式叫做：<code>Fast-forward</code>，<strong>没有冲突</strong>，改变的只是<code>master</code>指针的指向；</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/41.png" alt="image-20200310180632403"></p>
+</li>
+</ul>
+<h5 id="详细过程">详细过程</h5>
+<p><strong>在执行合并操作前：</strong></p>
+<ul>
+<li>在<code>master</code>分支上查看该分支的提交记录：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/42.png" alt="image-20200413135649151"></p>
+<ul>
+<li>在<code>dev</code>分支上查看该分支的提交记录：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/43.png" alt="image-20200413135632944"></p>
+<p>可以看到<code>dev</code>分支只是比<code>master</code>分支多进行了一次提交（<code>dev1</code>），两分支状态如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/44.png" alt="image-20200413140621228"></p>
+<p><strong>执行合并操作：</strong></p>
+<p>先切换到<code>master</code>分支，然后执行<code>git merge dev</code>合并<code>dev</code>分支：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/45.png" alt="image-20200413135914872"></p>
+<p>可以看到使用了<code>Fast-forward</code>方式进行合并，合并后两分支状态如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/46.png" alt="image-20200413140634456"></p>
+<p>合并后，<code>HEAD</code>同时指向了<code>master</code>和<code>dev</code>分支；并且<code>master</code>和<code>dev</code>分支的提交历史完全一致；这就说明了：使用<strong><code>Fast-forward</code>（快进合并）</strong>方式进行分支合并，只会改变<code>master</code>分支指针的指向；</p>
+<h4 id="4fast-forward">4.<code>Fast-forward</code></h4>
+<ul>
+<li>默认情况下，合并分支时<code>git</code>会使用<code>Fast-forward</code>模式；</li>
+<li>在这种模式下，删除分支会<strong>丢弃</strong>分支信息；</li>
+<li>进行分支合并操作时加上<code>--no-ff</code> 参数会禁止使用<code>Fast-forward</code>方式，这样会多出一次提交记录；</li>
+</ul>
+<blockquote>
+<p><code>ff</code>表示<code>Fast-forward</code>。</p>
+</blockquote>
+<p>具体演示如下：</p>
+<h5 id="使用fast-forward">使用<code>Fast-forward</code></h5>
+<p>首先，查看<code>master</code>分支上最新的<code>3</code>次提交：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/47.png" alt="image-20200413140911195"></p>
+<p>此时两分支的状态为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/48.png" alt="image-20200413141208043"></p>
+<p>随后在<code>dev</code>分支上新增一次提交：<code>dev2</code>。查看<code>dev</code>分支上最新的<code>3</code>次提交：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/49.png" alt="image-20200413141111031"></p>
+<p>此时两个分支的状态为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/50.png" alt="image-20200413141246153"></p>
+<p>切换回<code>master</code>分支，通过<code>git merge dev</code>合并<code>dev</code>分支，此时默认采用<code>Fast-forward</code>方式：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/51.png" alt="image-20200413141412571"></p>
+<p>可以看到合并后，<code>master</code>直接指向了<code>dev</code>的最新提交，并没有产生新的提交。合并后两分支的状态如下所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/52.png" alt="image-20200413141554807"></p>
+<p>由此验证了<code>Fast-forward</code>方式只会改变分支指针的指向。</p>
+<h5 id="禁用fast-forward">禁用<code>Fast-forward</code></h5>
+<p>合并时可以通过：</p>
+<pre><code>git merge --no-ff dev
+</code></pre>
+<p>禁用<code>Fast-forward</code>模式。</p>
+<ul>
+<li>
+<p>继续在<code>dev</code>分支新增一次提交：<code>dev3</code>。然后查看<code>dev</code>分支上最新的<code>3</code>次提交：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/53.png" alt="image-20200413142011002"></p>
+</li>
+<li>
+<p>不修改<code>master</code>分支，查看其最新的<code>3</code>次提交：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/54.png" alt="image-20200413142116641"></p>
+<p>此时两个分支的状态为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/55.png" alt="image-20200413142145430"></p>
+</li>
+<li>
+<p>然后，在<code>master</code>分支上不使用<code>Fast-forward</code>方式合并<code>dev</code>分支。合并命令采用：</p>
+<pre><code>git merge --no-ff dev
+</code></pre>
+<p>执行后进入如下的<code>vim</code>编辑器界面，要求我们填写提交注释：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/56.png" alt="image-20200413142507135"></p>
+</li>
+</ul>
+<p>这说明不使用<code>Fast-forward</code>方式合并分支，会触发了一次<strong>提交</strong>。填写提交注释后完成提交操作，合并完成后，查看<code>master</code>分支的提交记录：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/57.png" alt="image-20200413142907282"></p>
+<p>可以发现禁用了<code>Fast-forward</code>模式的合并会比<code>dev</code>分支多产生一次提交：<code>Merge branch 'dev'</code>，即使合并后的内容是一样的。此时两分支的状态为：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/58.png" alt="image-20200413144533217"></p>
+<p>由此验证了，禁用<code>Fast-forward</code>方式合并，会多出一个表示合并的提交记录。</p>
+<h4 id="5合并冲突">5.合并冲突</h4>
+<p>合并的两分支只有一条分支发生了改变，并且其中一分支是基于另一分支创建的。比如上述的<code>master</code>与<code>dev</code>分支，两分支没有分岔，此时不会出现合并冲突；<code>git</code>会通过<code>Fast-forward</code>方式自动完成合并操作；</p>
+<p>但是，当合并的两分支<strong>都发生改变时</strong>，即分支出现分岔，如下图所示。此时就需要解决冲突后手动合并分支了：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/59.png" alt="image-20200413145058222"></p>
+<p>具体演示如下：</p>
+<h5 id="合并前">合并前</h5>
+<p>首先，分别对两分支上的<code>test.txt</code>文件进行修改，并分别将修改<strong>提交</strong>到各自的分支；</p>
+<ul>
+<li>在<code>master</code>分支上进行新的提交：<code>mas3</code>，然后查看文件<code>test.txt</code>内容和分支提交记录：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/60.png" alt="image-20200413150045837"></p>
+<ul>
+<li>在<code>dev</code>分支上进行新的提交：<code>dev1</code>，然后查看文件<code>test.txt</code>内容和分支提交记录：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/61.png" alt="image-20200413150139932"></p>
+<p>可见两分支的提交记录只有最新一次提交不一样：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/62.png" alt="image-20200413153145295"></p>
+<h5 id="合并后">合并后</h5>
+<p>在<code>master</code>分支上，通过<code>git merge dev</code>合并<code>dev</code>分支时，会在共同修改的<code>test.txt</code>文件中出现合并冲突，如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/63.png" alt="image-20200413150334009"></p>
+<p>出现冲突的原因为：两个分支都对同一个文件<code>test.txt</code>进行了修改，<code>git</code>合并时并不知道以哪个分支的修改为标准。所以不能采用<code>Fast-forward</code>方式自动合并，需要解决冲突，手动合并。</p>
+<h5 id="手动合并过程">手动合并过程</h5>
+<p>手动合并操作需要分如下三步进行：</p>
+<ul>
+<li><strong>第一步：选择需要保留的内容，手动解决合并冲突；</strong></li>
+</ul>
+<p>此时进入发生合并冲突的<code>test.txt</code>文件：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/64.png" alt="image-20200413150400943"></p>
+<p>会出现典型的冲突呈现方式（此时<code>HEAD</code>指向的是<code>master</code>分支），其中：</p>
+<ul>
+<li>
+<p><code>&lt;&lt;&lt;HEAD</code>与<code>&gt;&gt;&gt;dev</code>之间的内容表示：两分支上<code>test.txt</code>文件的不同之处；</p>
+</li>
+<li>
+<p><code>&lt;&lt;&lt;HEAD</code>与<code>===</code>之间的内容表示：当前分支<code>master</code>对<code>test.txt</code>文件的修改；</p>
+</li>
+<li>
+<p><code>===</code>与<code>&gt;&gt;&gt;dev</code>之间的内容表示：<code>dev</code>分支对<code>test.txt</code>文件的修改；</p>
+</li>
+</ul>
+<p>此时只需要在<code>test.txt</code>中保留想要的内容即可，例如：将两分支对<code>test.txt</code>的修改都进行保存，删除<code>3、5、7</code>行多余的内容：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/65.png" alt="image-20200413150810935"></p>
+<p>除此之外，还可以通过<code>git mergetool</code>指令，调用<code>vimdiff</code>工具进入<code>vim</code>编辑器，来解决<code>test.txt</code>文件的冲突：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/65.1.png" alt="image-20200413212456463"></p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/65.2.png" alt="image-20200413212331710"></p>
+<p>在实际开发中，我们很少手动进行合并，而是借助于一些工具来实现。</p>
+<ul>
+<li><strong>第二步：使用<code>git add test.txt</code>将手动解决冲突时对<code>test.txt</code>的修改提交到暂存区；</strong></li>
+</ul>
+<p>编辑完毕后，可以看到此时仍然处于合并过程中（<code>MERGING</code>）。通过<code>git status</code> 查看状态，发现手动解决冲突时对<code>test.txt</code>文件的修改操作还在工作区中，需要通过<code>git add test.txt</code>将这一修改纳入暂存区，继续进行合并：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/66.png" alt="image-20200413151548133"></p>
+<ul>
+<li><strong>第三步：通过<code>git commit -m '合并注释'</code>将手动解决冲突时对<code>test.txt</code>的修改进行提交，完成合并操作；</strong></li>
+</ul>
+<p>如果需要填写较多的合并注释，可以通过<code>git commit</code>进入<code>vim</code>编辑器编辑。提交后，完成整个手动合并过程。</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/67.png" alt="image-20200310185125770"></p>
+<p>完成手动合并分支后，查看两分支的提交历史：</p>
+<ul>
+<li><code>master</code>分支上的提交历史：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/68.png" alt="image-20200413152813941"></p>
+<ul>
+<li><code>dev</code>分支上的提交历史：</li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/69.png" alt="image-20200413152928725"></p>
+<p>可以发现此时两分支转变为了可以通过<code>Fast forward</code>方式合并的形式了，如图所示：</p>
+<ul>
+<li><strong>手动解决冲突前：</strong></li>
+</ul>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/70.png" alt="image-20200413153154756"></p>
+<ul>
+<li>
+<p><strong>手动解决冲突后：</strong></p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/71.png" alt="image-20200413153427160"></p>
+</li>
+</ul>
+<h5 id="同步两分支">同步两分支</h5>
+<p>若想将<code>dev</code>和<code>master</code>分支上的内容进行同步，只需要在<code>dev</code>分支中通过<code>git merge master</code> 合并<code>master</code>分支即可。此时就可以使用<code>Fast-forward</code>方式进行合并了，合并结果如下图所示：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/72.png" alt="image-20200413153555178"></p>
+<p><strong>验证：</strong></p>
+<p>合并后，查看<code>dev</code>分支的提交历史：</p>
+<p><img src="http://ahuntsun.gitee.io/blogimagebed/img/git/lesson3/73.png" alt="image-20200413154132053"></p>
+<p>可以看到<code>HEAD</code>同时指向<code>dev</code>与<code>master</code>，即三个指针都指向了最新的一次提交，符合上述分析得出的结论；</p>
+<p>经过上面的讨论，不难看出：合并分支的实质就是不同提交的合并，以及<code>HEAD</code>和分支指针的移动；</p>
+<blockquote>
+<p>以上就是今天介绍的本地分支重要操作，相信看到这里的你已经对<code>git</code>本地分支的操作了如指掌了。在下一讲中将介绍<code>git</code>最神奇的功能：<strong>版本回退</strong>。俗话说得好：世上没有后悔药。但是在<code>git</code>中，就存在所谓的&quot;<strong>后悔药</strong>&quot;！那么我们下一节再见。</p>
+</blockquote>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-13 21:49</span>&nbsp;
+<a href="https://www.cnblogs.com/AhuntSun-blog/">AhuntSun</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12694197" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12694197);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 555013, cb_blogApp = 'AhuntSun-blog', cb_blogUserGuid = 'bad5555f-0923-4a98-9bae-08d753a8c051';
+    var cb_entryId = 12694197, cb_entryCreatedDate = '2020-04-13 21:49', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 AhuntSun
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!--代码复制-->
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<!--主题-->
+<script src="https://blog-static.cnblogs.com/files/AhuntSun-blog/bilibili2.js" ></script>
+<!--scrollTo-->
+<script src="https://cdn.bootcss.com/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<!--owo表情-->
+<script src="https://blog-static.cnblogs.com/files/gshang/gshang.owo.2020.01.05.1.js"></script>
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/elkyo/OwO.min.css" />
+
+<!-- import Vue.js -->
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<!-- 额外小特效 -->
+ <!--鼠标特效-->
+ <script src="https://blog-static.cnblogs.com/files/zouwangblog/mouse-click.js"></script>
+ <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 2147483647; pointer-events: none;"></canvas>
+ <!--鼠标特效 end-->
+
+<!--图片放大器-->
+<script type="text/javascript" src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css">
+<script>
+
+<!--指定fancybox作用的区域-->
+$(".forFlow img").each(function () {
+    var element = document.createElement("a");
+    $(element).attr("data-fancybox", "gallery");
+    $(element).attr("href", $(this).attr("src"));
+    $(this).wrap(element);
+});
+</script>
+
+    </div>
+</body>
+</html>

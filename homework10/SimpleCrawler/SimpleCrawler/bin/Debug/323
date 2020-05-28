@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第2页 - HueiFeng - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=aar1eIg4zz9tL2uCrzOGDur190sJi2DazF273FikoL4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=FJjyQba01xzuYKRyPpSwE1bMq69pRjxrz5wp2oZZGLY" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yyfh/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yyfh/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yyfh/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 329108;
+        var currentBlogApp = 'yyfh';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'LessIsMoreRight';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yyfh/">冯辉</a>
+</div>
+<div class="subtitle">
+
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yyfh/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/HueiFeng">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/yyfh/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+62&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+281</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=3">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/03/09.html">2020年3月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12447263.html">
+     SuperBenchmarker一个用.NET编写的压测工具
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：0x01 前言 在这之前想必大家对ab(http)与abs(https)也有一些了解,我们今天不去看ab和abs, SuperBenchmarker (sb.exe)是一个压测工具,他是一个受Apache Benchmark的启发,他会在终端窗口为我们显示最终的结果,同时也会在web界面生成一个动态            <a href="https://www.cnblogs.com/yyfh/p/12447263.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-03-09 10:49 HueiFeng 阅读 (628) 评论 (1)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12447263" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/03/08.html">2020年3月8日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12441537.html">
+    ASP.NET Core在MacOS上建立HTTPS开发证书
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：安装 安装 移除 安装前 安装后            <a href="https://www.cnblogs.com/yyfh/p/12441537.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-03-08 11:33 HueiFeng 阅读 (128) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12441537" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/02/27.html">2020年2月27日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12373249.html">
+    ASP.NET Core Razor 视图预编译、动态编译
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：0x01 前言 ASP.NET Core在默认发布情况下，会启动预编译将试图编译成 xx.Views.dll ,也许在视图中打算修改一处很细小的地方我们需要再重新编译视图进行发布。下面我将从 ASP.NET Core 3 之前版本到 ASP.NET Core 3X 之后版本的一个配置列下下方供大家参            <a href="https://www.cnblogs.com/yyfh/p/12373249.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-27 17:34 HueiFeng 阅读 (720) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12373249" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/02/25.html">2020年2月25日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12361255.html">
+    ASP.NET Core ResponseCache进行缓存操作
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 本章将介绍客户端缓存将介绍浏览器缓存和服务端缓存，使用浏览器缓存将减少对web服务器的请求次数，同时可以提升性能，避免重复的运算浪费。 ASP.NET Core对于HTTP缓存分为两种： 客户端(浏览器缓存) 服务端缓存 客户端缓存 通过设置HTTP的响应头 Cache Control 来完成            <a href="https://www.cnblogs.com/yyfh/p/12361255.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-25 13:20 HueiFeng 阅读 (549) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12361255" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/02/21.html">2020年2月21日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12339961.html">
+    ASP.NET Core 配置和使用环境变量
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 通常在应用程序开发到正式上线，在这个过程中我们会分为多个阶段，通常会有 开发、测试、以及正式环境等。每个环境的参数配置我们会使用不同的参数，因此呢，在ASP.NET Core中就提供了相关的环境API，方便我们更好的去做这些事情。 环境 ASP.NET Core使用ASPNETCORE_ENV            <a href="https://www.cnblogs.com/yyfh/p/12339961.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-21 01:02 HueiFeng 阅读 (716) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12339961" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/02/15.html">2020年2月15日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12310628.html">
+    ASP.NET 开源导入导出库Magicodes.IE Docker中使用
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Magicodes.IE在Docker中使用 更新历史 2019.02.13 【Nuget】版本更新到2.0.2 【导入】修复单列导入的Bug，单元测试“OneColumnImporter_Test”。问题见（https://github.com/dotnetcore/Magicodes.IE/is            <a href="https://www.cnblogs.com/yyfh/p/12310628.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-02-15 08:43 HueiFeng 阅读 (270) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12310628" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/01/31.html">2020年1月31日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12245916.html">
+    C#中Equals和GetHashCode
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：Equals和GetHashCode Equals每个实现都必须遵循以下约定: 自反性(Reflexive): x.equals(x)必须返回true. 对称性(Symmetric): x.equals(y)为true时,y.equals(x)也为true. 传递性(Transitive): 对于任            <a href="https://www.cnblogs.com/yyfh/p/12245916.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-31 17:06 HueiFeng 阅读 (367) 评论 (6)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12245916" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/01/21.html">2020年1月21日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12222388.html">
+    ASP.NET 开源导入导出库Magicodes.IE 导出Pdf教程
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：基础教程之导出Pdf收据 说明 本教程主要说明如何使用Magicodes.IE.Pdf完成Pdf收据导出 要点 导出PDF数据 自定义PDF模板 导出单据 如何批量导出单据 导出特性 PdfExporterAttribute + Orientation ： 方向(横向或纵向) + PaperKind            <a href="https://www.cnblogs.com/yyfh/p/12222388.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-21 16:59 HueiFeng 阅读 (772) 评论 (5)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12222388" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/01/20.html">2020年1月20日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12218673.html">
+    ASP.NET 开源导入导出库Magicodes.IE 导出Excel教程
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：要点 导出特性 如何导出Excel表头 如何导出数据、如何进行数据的切割、如何使用筛选器 导出特性 ExporterAttribute + Name ： 名称(当前Sheet 名称) + HeaderFontSize ：头部字体大小 + FontSize ：正文字体大小 + MaxRowNumber            <a href="https://www.cnblogs.com/yyfh/p/12218673.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-20 17:07 HueiFeng 阅读 (487) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12218673" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yyfh/archive/2020/01/13.html">2020年1月13日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/yyfh/p/12189541.html">
+    .NET Core使用命令行参数库构建控制台应用程序 
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 在我们开发中可能需要设计一次性应用程序，这些实用程序可以利用接近原始源代码的优势，但可以在与主Web应用程序完全独立的安全性上下文中启动。具体在 [管理过程] (https://12factor.net/admin processes)中也已经列出了原因。 创建控制台应用 打开命令提示符，创建            <a href="https://www.cnblogs.com/yyfh/p/12189541.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            
+
+posted @ 2020-01-13 21:51 HueiFeng 阅读 (547) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12189541" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=1">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=1">1</a>
+    2
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=5">5</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=6">6</a>
+        <a href="https://www.cnblogs.com/yyfh/default.html?page=7">7</a>
+    
+    
+    <a href="https://www.cnblogs.com/yyfh/default.html?page=3">下一页</a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 HueiFeng
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <script>
+  $("#page_end_html,#ad_t2,#cnblogs_c1,#under_post_news,#under_post_kb,#cnblogs_c2").css('display','none')
+
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278154726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278154726' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252267-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-155252267-2');
+</script>
+    </div>
+</body>
+</html>

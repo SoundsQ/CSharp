@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="首先声明，这只是我的播客随感，其中无法避免有一些个人色彩的见解，请不要在意，我尊敬任何的互联网公司，尊敬研究生期间的老师同学，我只希望给在求学路上的CS同学一些启发。 先介绍一下背景，我是ACM铜牌退" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>从谷歌面试翻车到offer收割的心路历程 - basasuya - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Basasuya/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Basasuya/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Basasuya/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 411583;
+        var currentBlogApp = 'Basasuya';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/Basasuya/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Basasuya/">basasuya</a>
+</h1>
+<h2>
+一只想做数据科学家的汪汪
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/Basasuya/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/basasuya">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/Basasuya/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+155&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+0</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/Basasuya/p/12720623.html">从谷歌面试翻车到offer收割的心路历程</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <p>首先声明，这只是我的播客随感，其中无法避免有一些个人色彩的见解，请不要在意，我尊敬任何的互联网公司，尊敬研究生期间的老师同学，我只希望给在求学路上的CS同学一些启发。</p>
+<p>先介绍一下背景，我是ACM铜牌退役狗，在某985读研，今年找暑期实习。过去两年一直准备去谷歌或者其他好的IT外企实习，坚持刷了两年CF，kickstart, codejam，今年CF升到紫名了(这个月没练，实力又下降了hhh)和leetcode全球排名前300。但是今年遇到了谷歌翻车以及面试碰壁等各种情况。<br>
+<img src="https://img2020.cnblogs.com/blog/1324872/202004/1324872-20200417160818477-1948665249.png" alt=""></p>
+<p>从2月初到4月中旬，已经两个月，终于实习面试即将来到尾声。今天微信HR面结束，而我暑期实习的面试除了一个外企金融公司已经全部面完，有些offer已经发了下来，有些还在路上。虽然从结果上看暂时只有谷歌翻车了，但是整个3月和4月初的煎熬，伴随今年疫情的蝴蝶效用，2020必将是一个无比魔幻的一年，让我一生难忘。</p>
+<h4 id="21---35-准备谷歌面试到谷歌翻车">2.1 - 3.5 准备谷歌面试到谷歌翻车</h4>
+<p>2月份大多数时间在干两件事，一个是组里的大项目，另一个就是准备谷歌的一面。由于之前参加过a day with google的活动，并且1月份我还去google上海参加了谷歌机器学习冬令营，凭着这些经历还有hs学长去年成功转正的经验，我也希望能够顺利进入谷歌实习，刷了大约一个月的CF+leetcode，在3.5迎来了我人生第一次谷歌面试。面试官上来给了这么一道题。</p>
+<pre><code>给你一个数组errors, 和一个时间点 time(0 &lt;=time &lt; errors.siz()), 和interval，以及threshold。
+问errors数组中是否存在一个连续的区间，这个区间的长度为interval，且包含time位置，且这个区间的最小值大于等于threshold
+</code></pre>
+<p>对此我提出了滑动窗口的做法，用multiset动态维护窗口的最小值，复杂度o(nlogn)。谁知面试官表示不知道set，multiset，更不懂滑动窗口。之后我想到了可以直接维护窗口大于threhold的数的解法，复杂度O(n)。让人崩溃是我解释20分钟自己的想法，面试官才勉强弄懂。之后的follow up题，面试官一开始讲漏了一个重要条件，让我的解法偏向了复杂的线段树数据结构，之后发现的时候我的心态已经崩了，这也导致自己的解法不是最优解(我提出的是nlognlogn,正解估计是n)。</p>
+<p>在复盘的时候，我发现这题有一个更简单的做法，直接从time位置往左往右统计大于threshold的个数，复杂度也是O(n)。如果我当时一开始想的就是这个解法，或者面试官提示我他的想法，估计结果也不是现在这个样子。但是这不是面试官低能的理由吧，我有理由相信，大多数竞赛出身的人都知道set，multiset，滑动窗口，刷过100道以上leetcode的人，应该也知道这些。至少说明面试官不怎么刷题，也不会STL(甚至C++也不会？)，这种人怎么进谷歌的？面试官出题的时候是否只准备了一种解法？面试结束之后面试官对于一开始不理解我的算法表达了歉意，但也表示这会影响我的面试评级。</p>
+<p>大约两周后HR跟我反馈一面结果不够理想(估计learning hire)，考虑今年的严峻形势可能没有二面。这件事对我打击的太大了，虽然我ACM退役之后坚持刷题不完全是为了进谷歌，但是这两年坚持CF，kickstart, codejam，我认为我是有这份实力的。当然之后非常戏剧的一件事是谷歌因为疫情直接取消了中国区的实习招聘，无人生还 = =。这世界是真的魔幻，我怎能想到我是这样挂掉了谷歌，而且不仅我挂了，所有人都去不了。</p>
+<h4 id="36-331-海投简历，遭遇打击">3.6-3.31 海投简历，遭遇打击</h4>
+<p>之前说谷歌一面翻车，我本来准备谷歌如果能过，其他公司就不投或者只投几家了。但是自己还是太菜，没有做到未雨绸缪，这个未雨绸缪在于两点，一是没算到我的谷歌会翻车，二是没算到今年外企基本翻车了。我之前的策略是抓刷题，只要会做题，就算谷歌挂了，还能去微软，hulu，intel这些。谁知道最后只有微软，hotstar还招实习生。paypal,google,hulu,intel,airbnb因为各种原因通通阵亡，有些是本身今年就干脆不招实习生了，比如谷歌hulu，还有就是hc大幅减少，还没轮到我面就已经招满了，比如paypal。外企本来hc就少的可怜，这么一搞，有些公司可能只有个位数。我终于认识到，外企面试真的很看运气，甚至能安排到面试都是一种幸运。所以我只能把重心放回国内企业，还有少数几个外企，开启海投模式。我投的还是挺杂的，国内的BAT，字节，ponyai, 国外的微软,hotstar,morgan,optiver。而且岗位上来看我C++开发，算法，大数据都有尝试，这不得不说到研究生坑爹的选了数据可视化方向，结果进来发现大家都在写前端。我在组里做的和大数据有些相关，主要是数据可视化所需要用的一些算法的编写和研究，比如交互式数据查询，图布局，降维等等。但是这些经历去投算法，你没有什么ML，DL的经验，去投后台开发，你没有分布式，网络编程的经验，面大数据相关，勉强还算match，但你也没接触过那些大数据框架。所以就非常僵硬，基本去哪面都是靠着自己四作paper，冬令营经历，ACM经历来硬面，这也得看面试官的面子了。在阿里提前批面了后台开发，阿里云API开发，搜索推荐中台开发等部门，我才意识到自己不适合面纯业务的开发，更适合和大数据相关的岗位或者算法的岗位。</p>
+<p>这段时间有两件事对我打击还是蛮大的，首先是阿里的搜索推荐三面挂掉，还是莫名其妙挂掉的，面试官让我写不拷贝内存的链表快排(巨难写，读者可以自己尝试，不能用swap)，之后又问了些跟我的方向八杆子打不着的问题，更让人气愤的是面完之后不告诉结果，在阿里的系统开放之前把我当备胎，还是系统开放之后第二天我连发两次邮件才告诉我面试挂了。第二个事是微信一面就挂了，微信这边简直是奇葩中的奇葩，3月初我刚填完简历，我准备让xj学长内推，结果简历直接被微信后台的一个面试官拿走了，我跟他说我想去xj学长那个部门，结果他也没有直接放我走，坚持面我还面的巨难无比。挂掉我之后我犹豫了下，准备想先去微信的ML岗位试试水(因为字节当时面算法面的还行)，结果被数据分析的捞走了，我拒了数据分析的人之后，又被PCG的算法岗位捞走，而且PCG那边锁了我三周没有给我面试，气的排到我之后，我直接拒了面试。这件事说明腾讯那边一定要好好利用HR的资源，让她帮你解锁简历，提醒面试官面试。</p>
+<p>总体来说这段时间的压力是越来越大，我本来觉得就算谷歌挂了，好好努力看基础知识，3月结束前拿个offer应该是问题不大的。谁知道阿里搜索三面挂掉，腾讯那边因为各种奇葩的原因基本就没面，微软面完之后迟迟没有结果，就算是面的比较好的字节，也在面完之后收到了结果清明节之后才会出的通知。看到同学都至少拿了一个offer，我心里非常没底。</p>
+<h4 id="41-现在-经历考验，offer收割">4.1-现在 经历考验，offer收割</h4>
+<p>我之前认为3月份至少会有一个offer，从结果来看当时已经面完了字节，hotstar，微软，但是结果完全不知道，清明节后的那个星期，我压力巨大，这几家公司很有可能是把我当备胎，翻看了下牛客网，也有各种全部面完流程最后被拒的帖子。我想如果这周还没有一个offer，我真得去投一个小公司保底了。幸运的是这周，字节在周四发了offer，hotstar和微软那边也问到了我面试通过的消息。</p>
+<p>这里一直没有提阿里，阿里那边搜索推荐挂了之后，蚂蚁数据技术部的lead又找到了我，这位lead之前就通过github认识了我，我因为想去搜索推荐部的原因婉拒了，之后他看我系统开放之后没有投递就又来找了我。真的非常感谢这位lead，我在蚂蚁那边的面试非常顺利，再加上笔试也是满分，听说是我是他们大部门第一个拿到offer的人。所以清明后那个星期突然就获得了四个offer，我的压力也终于缓解了下来。</p>
+<p>腾讯那边的情况依然一波三折，PCG把我放了之后，我终于被内推到xj学长那里，谁知道一面就面了30分钟，就把我挂了，理由似乎是我不太懂数据库相关知识。我寻思我面哪个部门不是硬面的，不都不懂那些框架吗 = =。而且更讽刺的是3月初bgg学弟还邀请我去企业微信，说帮我跟lead说下肯定能过，我因为想面xj学长那里就拒绝了，结果折腾一个月终于去面了结果被秒挂，真的是够讽刺的hhhh。之后我找HR yy帮忙又推回了微信，很幸运的找到了一个比较match的部门，现在终于面完HR面了，非常感谢yy。</p>
+<p>拿到几个offer之后，我找hs，yc，gucci等同学以及一些职场的老人都谈了下，字节那边是算法岗，蚂蚁和微软都是大数据相关。考虑到过去一年自学ML无果，冬令营被虐，跟Z博搞科研直接被抛弃的惨痛经历，我知道我过算法岗纯粹靠刷题，所以决定先拒了字节的算法岗，这个决定其实挺起来挺蠢的哈哈。大部分人应该会接字节的吧，最核心的广告部门的算法岗，应该是搞算法的人最想去的地方之一(身边很多人都去了)。考虑到今年外企的形势，杭州比较方便，蚂蚁lead对我还挺好，最后决定accept蚂蚁的offer。</p>
+<p>从结果上来看，我除了谷歌之后投了9家公司，截止今天有3个已发offer(阿里，字节，微软)，有2个比较稳的口头offer(微信，hotstar)，还有2个不知道结果的(morgan, optiver)，还有2个因为时间关系组里项目繁忙不准备再面了(百度，ponyai)。</p>
+<pre><code class="language-bash">国内公司:  
+字节/广告组/推荐：已发offer，已拒  蚂蚁CTO线/大数据：已发offer，accept  微信读书/OLAP：等offer
+百度/C++：笔试过了，不准备再面
+ponyai/SWE: 面到四面，最后一轮是team match, 就拒了
+国外公司：
+微软/azure storage：已发offer，已拒   hotstar/推荐引擎：口头offer 
+optiver/SWE：HR面已经面完  摩根/SWE：面完等待最终结果 谷歌/SWE：一面结束，已挂
+</code></pre>
+<h4 id="对研究生期间的反思">对研究生期间的反思</h4>
+<p>回望这两个月，感觉自己不容易，也太菜。首先在家办公，自己的效率估计连学校的一半也没有，自从去年投稿结束之后的一系列破事，我的身心状态也没有刚上研究生那么好了，对于组里的科研和工作一直是非常低的效率。其次，这两个月不仅要准备实习面试，还有3月组里的项目以及4月的投稿，有时候确实无法同时兼顾，这也是我初期挂了几次面试的原因，因为我项目比较忙，所以就没有报一些小公司练练手，本科时候考研也没有实习面试过，所以一开始还是个小白。</p>
+<p>如果你是一个准备读研的CS本科生，我认为在选导师的时候应当更注重这个方向在工业界的match程度和这个方向是否适合你的发展，导师的名气有时候是次要的。回想我当时选导师的时候，也投了3，4个老板，当时觉得现在的老板要我已经足够幸运。说白了当时还是太嫩，或者说是运气不够好(当然运气也不算差了hhh，能考研录取不算运气嘛)。</p>
+<p>我的结论是如果你不想读博，最好找一个不管你的老板或者是软工那种可以直接出去实习的，课上完后直接去大厂实习，远比天天在实验室待有前途，你读研最大的收获就是一张文凭，其他经历并不值钱，很多和工业界做的相差太大，还不如大厂实习经历来的香。</p>
+<p>如果你想尝试学术，像我这种在有名气的学术老板那里读研的，也能得到一些锻炼，但是其实不如一些年轻老师的机会大。反观我们实验室一作顶会论文的研究生，基本都是年轻老师那里的，老师需要论文，也有空天天辅导学生，这样学生才能最大程度的发展。</p>
+<h4 id="顶级大厂看中什么">顶级大厂看中什么</h4>
+<p>有几项是如果马上要面试无法改变的，你的性别，学历，过往的竞赛和论文经历，这些每个公司看重点不一样。还有些是可以在短时间提高，比如计算机基础知识，刷题，面试技巧。不过最硬通货的还是学历，985CS出身，基本不会被刷简历，就算你大厂因为自身能力不足过进不去，小厂也是横着走。对于顶级大厂，竞赛和论文如果要非常有说服力的话，竞赛一般是ACM金银牌，kaggle金牌这种，论文一般是CCFA类一作or二作，有说服力，再次一点就不太行了。计算机基础和面试技巧，大家反正到时候多面面就上来了，刷题如果你不是竞赛党建议还是提早准备，今年阿里都要求必须笔试了，刷题必须得过一定的bar才行。其次的话建议大家尽早投递，早挂早积累经验，早过早拿offer。你面晚了就有可能进备胎池，进备胎池就是养蛊。</p>
+<p>下面我会比较具体的谈一下对于几个公司招实习生的不同风格的看法：</p>
+<h5 id="阿里">阿里</h5>
+<p>阿里的部门非常多，而且每个部门是自己招聘，堪称百团大战。面试流程一般是3-5面，看评级和具体部门而定，整体流程较慢，基本只能面1-2个部门(一个部门挂了才能转去另一个部门面嘛)。坊间一直流传阿里的面试喜欢谈人生，问些HR喜欢问的问题。我确实遇到过一些这样的面试官，但是阿里的面试官风格还是各不同的，水平也参差不齐。阿里不太喜欢面试的时候手撕代码，对于基础知识比较看重，对学历和经历也比较看重，总体是比较熬人的面试经历。</p>
+<h5 id="字节">字节</h5>
+<p>字节算是最近几年炙手可热的独角兽，字节的面试风格偏外企，一般是先问一些基础问题，然后写一道题，大约leetcode medium-hard难度。面试风格大多类似，面试官水平也较高，面试安排也很快，而且是疫情下唯一招这么多岗位的大厂了。如果想做推荐算法，字节的广告组是非常好并且不是很难进的选择。不过字节一般挂了就无法再面了。</p>
+<h5 id="腾讯">腾讯</h5>
+<p>腾讯这边理论上是可以面很多部门的，只要没有坑爹部门捞了你然后忘了面试，提前批面个3，4个部门都问题不大。我主要面的是微信事业部，其他事业部不是很了解，而且前文也说了，我被腾讯的坑爹招聘系统坑惨了。微信这边面试普遍不是非常尊重人，喜欢丢几道leetcode medium-hard题，然后挂电话让我们自己写，问题是有时候那题意也不清楚，我能问谁去= =。有些部门不仅题目难，问计算机基础也难的要死。这种部门说白就看运气，碰到好的面试官就能过，我也遇到过比较nice的人。当然你就是大佬除外，遇到谁都能过。</p>
+<h5 id="谷歌，微软，hotstar">谷歌，微软，hotstar</h5>
+<p>这几家放一起说吧，谷歌相比其他外企更重视交流能力和代码细节，对于一个问题也希望能探索更完美的解法，这也是它bar最高的原因。但是谷歌今年直接取消实习，看这个趋势，以后大厂一哥的位置迟早不保了，国内本身hc就少，未来几年也不要报太大希望。微软在中国的hc一直挺多，也有很多重要的业务，面试也就是算法题，懂的都懂，算是一个比较中肯的选择。hotstar是北京一家面的印象挺不错的外企，做的跟hulu差不多，也是视频推荐网站，据说给的很高。这些公司面试基本就是做题，但是跟竞赛题还是稍微有些区别，建议竞赛爷还是应该熟悉下leetcode hard题的套路。只要多加练习是竞赛党理想的去处。</p>
+<h5 id="morgan-optiver">morgan, optiver</h5>
+<p>大摩和optiver都是金融公司，外企金融公司都是英文面试，面的我头皮发麻，而且这两家的最终结果还没出。大摩的面试过程上看，还是体验很好的，面试官一般会问一些你的项目，延伸问一些计算机基础相关的知识。主要是你得用英文作答，就比较僵硬。大摩有一轮笔试，很简单的那种，leetcode easy。后面有四轮面试，其中一轮也会让你写道题，也不是很难。其他轮就需要你用英语和面试官吹牛逼(太难了)。说白了外企金融公司比较看重英语交流能力和计算机方面的综合素质吧。这种公司大家就面面碰运气吧。</p>
+<p>总结就是国内企业尽量能找内推找内推，还有能认识HR，部门lead能帮你省去不少事，说白了国内企业嘛，都有些人情世故。当然能不能过还是得靠实力与运气。IT外企一般就是拼刷题，水平到了基本没问题，说是没问题，但是现在好多外企都不招了hhhhh，所以能不能进也只能看命吧。外企金融我就不太了解了，如果你不是特别想去这个领域，那就面着玩呗。</p>
+<p>如果是刷题很强，又觉得今年外企机会不多的，可以尝试去字节，ponyai进行投递。今年的大环境太差了，希望大家在这种情况下还能保住饭碗，保证狗头吧。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-04-17 16:09</span>&nbsp;
+<a href="https://www.cnblogs.com/Basasuya/">basasuya</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12720623" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12720623);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 411583, cb_blogApp = 'Basasuya', cb_blogUserGuid = 'b3eb18dc-407d-4974-3278-08d54dbac325';
+    var cb_entryId = 12720623, cb_entryCreatedDate = '2020-04-17 16:09', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 basasuya
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

@@ -1,0 +1,883 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>tr1ple - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/tr1ple/custom.css?v=ytmQtB1oUcves9yhWLSGzmDcOKw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/tr1ple/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/tr1ple/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/tr1ple/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 316934;
+        var currentBlogApp = 'tr1ple';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/tr1ple/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/tr1ple/">tr1ple</a>
+</h1>
+<h2>
+To make each day count. Make small but daily progress.
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/tr1ple/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/tr1ple">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/tr1ple/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+131&nbsp; </span>
+<span id="stats_article_count">文章 - 
+2&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+18</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/01/29.html">2020年1月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12230614.html">
+[置顶]    TODO list
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+该文被密码保护。    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-01-29 15:39 tr1ple 阅读 (12) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12230614" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2019/09/22.html">2019年9月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/11569857.html">
+[置顶]    备忘录-更新
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+该文被密码保护。    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-09-22 23:03 tr1ple 阅读 (22) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11569857" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12790121.html">
+    Java ASM学习(2)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.编译后的方法区，其中存储的代码都是一些字节码指令 2.Java虚拟机执行模型： java代码是在一个线程内部执行，每个线程都有自己的执行栈，栈由帧组成，每个帧表示一个方法的调用，每调用一个方法，都将将新的帧压入执行栈，方法返回时(不管是整成return还是异常返回)，该方法对应的帧都将出栈，即按            <a href="https://www.cnblogs.com/tr1ple/p/12790121.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 23:14 tr1ple 阅读 (30) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12790121" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12709402.html">
+    Java Instrumentation插桩技术学习
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Instrumentation基础 openrasp中用到了Instrumentation技术，它的最大作用，就是类的动态改变和操作。 使用Instrumentation实际上也可以可以开发一个代理来监视jvm的上运行的程序，可以动态的替换类的定义，就可以达到虚拟机级别的AOP实现，随时可以为应用增            <a href="https://www.cnblogs.com/tr1ple/p/12709402.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 10:22 tr1ple 阅读 (125) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12709402" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/23.html">2020年4月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12721677.html">
+    Java ASM学习(1)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：ASM也是字节码编辑库，如果我们的目的仅仅是为目标类添加某些功能，也可以考虑动态代理，但是动态代理是面向接口的，因为proxy.newinstance实际上是对某个接口定义一个invocaionHandler，那么这样限制就比较大，并且对代理的每一次函数调用都将被invocationHandler处            <a href="https://www.cnblogs.com/tr1ple/p/12721677.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-23 18:16 tr1ple 阅读 (29) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12721677" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/15.html">2020年4月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12701149.html">
+    从JDK源码学习HashSet和HashTable
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：HashSet Java中的集合（Collection）有三类，一类是List，一类是Queue，再有一类就是Set。 前两个集合内的元素是有序的，元素可以重复；最后一个集合内的元素无序，但元素不可重复。 Set: 1.用于存储无序(存入和取出的顺序不一定相同)元素，值不能重复 2.对象的相等性本质            <a href="https://www.cnblogs.com/tr1ple/p/12701149.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-15 00:34 tr1ple 阅读 (210) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12701149" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/11.html">2020年4月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12678413.html">
+    从JDK源码学习HashMap
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：这篇文章记录一下hashmap的学习过程，文章并没有涉及hashmap整个源码，只学习一些重要部分,如有表述错误还请在评论区指出~ 基本概念 Hashmap采用key算hash映射到具体的value，因此查找效率为o(1)，为防止hash冲突，在数组的基础上加入链表、红黑树，为无序非线程安全的存储结            <a href="https://www.cnblogs.com/tr1ple/p/12678413.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-11 20:53 tr1ple 阅读 (151) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12678413" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/09.html">2020年4月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12662603.html">
+    从JDK源码学习ArrayList
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：从今天开始从源码去学习一些Java的常用数据结构，打好基础:) Arraylist源码阅读： jdk版本：1.8.0 首先看其构造方法： 构造方法一： 第一种支持初始化容量大小，其中声明一个对象数组，赋值给this.elementdata 构造方法二： 第二种无参构造函数，即不指定初始容量大小，则默            <a href="https://www.cnblogs.com/tr1ple/p/12662603.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-09 23:28 tr1ple 阅读 (65) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12662603" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/07.html">2020年4月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12522623.html">
+    Java XXE漏洞典型场景分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文首发于oppo安全应急响应中心： https://mp.weixin.qq.com/s?__biz=MzUyNzc4Mzk3MQ==&amp;mid=2247485488&amp;idx=1&amp;sn=65098eb75e035ff2f90d1ea552c4100a&amp;chksm=fa7b097ccd0c806a40            <a href="https://www.cnblogs.com/tr1ple/p/12522623.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-07 20:46 tr1ple 阅读 (96) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12522623" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/05.html">2020年4月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12608731.html">
+    CVE-2020-7961 Liferay Portal 复现分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：漏洞说明： Liferay是一个开源的Portal(认证)产品,提供对多个独立系统的内容集成,为企业信息、流程等的整合提供了一套完整的解决方案,和其他商业产品相比,Liferay有着很多优良的特性,而且免费,在全球都有较多用户. 该洞是个反序列化导致的rce，通过未授权访问其api传递json数据进            <a href="https://www.cnblogs.com/tr1ple/p/12608731.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-05 19:09 tr1ple 阅读 (513) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12608731" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/04/02.html">2020年4月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12608764.html">
+    ysoserial-C3P0 分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：环境准备： pom: &lt;!-- https://mvnrepository.com/artifact/com.mchange/c3p0 --&gt; &lt;dependency&gt; &lt;groupId&gt;com.mchange&lt;/groupId&gt; &lt;artifactId&gt;c3p0&lt;/artifactId&gt; &lt;ver            <a href="https://www.cnblogs.com/tr1ple/p/12608764.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-02 00:01 tr1ple 阅读 (96) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12608764" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/25.html">2020年3月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12483235.html">
+    weblogic-CVE-2020-2551-IIOP反序列化学习记录
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：CORBA： 具体的对CORBA的介绍安全客这篇文章https://www.anquanke.com/post/id/199227说的很详细，但是完全记住是不可能的，我觉得读完它要弄清以下几个点： 1.什么是CORBA？ CORBA全称（Common ObjectRequest Broker Arc            <a href="https://www.cnblogs.com/tr1ple/p/12483235.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-25 14:51 tr1ple 阅读 (385) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12483235" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12564669.html">
+    ysoserial-CommonsCollections系列总结篇
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文首发于安全客：https://www.anquanke.com/post/id/200637 前言： 网上分析CommonsCollections调用链的文章也有不少，但是看完分析文章直接手动构造利用链仍有难度，因此这篇文章主要总结本人调试ysoserial的CommonsCollections            <a href="https://www.cnblogs.com/tr1ple/p/12564669.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-25 11:04 tr1ple 阅读 (83) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12564669" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12564457.html">
+    CVE-2020-2555调用链复现分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文首发于先知社区：https://xz.aliyun.com/t/7417 0x01前言 该洞主要针对weblogic的coherence.jar中存在能够实现反序列化gadget构造的类，并且经过T3协议接收的数据经过反序列化处理后将导致漏洞的产生，这篇文章主要详细记录调试学习CVE 2020             <a href="https://www.cnblogs.com/tr1ple/p/12564457.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-25 10:38 tr1ple 阅读 (201) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12564457" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/09.html">2020年3月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12437310.html">
+    ysoserial源码结构分析
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.前言 之前也花了几天晚上熟悉了一下commonscollections系列的构造，那么学习一下这个项目是如何设计的也挺重要，多学习大佬如何写代码应该也能对自己的代码能力有提升吧~2333 2.项目结构： 首先代码结构如上图所示 exploit文件夹下主要是放一些主要的利用模块，比如如下两个例子             <a href="https://www.cnblogs.com/tr1ple/p/12437310.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-09 22:10 tr1ple 阅读 (188) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12437310" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/06.html">2020年3月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12427015.html">
+    java反序列化-ysoserial-调试分析总结篇(7)  
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： CommonsCollections7外层也是一条新的构造链，外层由hashtable的readObject进入，这条构造链挺有意思，因为用到了hash碰撞 yso构造分析： 首先构造进行rce所需要的转换链，这里也用的是chianed里面套Constantrans+invoketrans的            <a href="https://www.cnblogs.com/tr1ple/p/12427015.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-06 22:38 tr1ple 阅读 (158) 评论 (3)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12427015" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/05.html">2020年3月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12421157.html">
+    java反序列化-ysoserial-调试分析总结篇(6)  
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： 这篇记录CommonsCollections6的调试，外层也是新的类，换成了hashset，即从hashset触发其readObject()，yso给的调用链如下图所示 利用链分析： 首先在hashset内部首先获取器容量与负载因子等操作，然后创建hashmap，将ObjectinputSt            <a href="https://www.cnblogs.com/tr1ple/p/12421157.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-05 22:31 tr1ple 阅读 (153) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12421157" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/04.html">2020年3月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12411357.html">
+    java反序列化-ysoserial-调试分析总结篇(5)  
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： 这篇文章继续分析commonscollections5，由如下调用链可以看到此时最外层的类不是annotationinvoke，也不是priorityqueue了，变成了badattribute 该类要求没有配置security manager 利用链分析： 首先在badAttribute的            <a href="https://www.cnblogs.com/tr1ple/p/12411357.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-04 23:10 tr1ple 阅读 (93) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12411357" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/03.html">2020年3月3日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12404108.html">
+    java反序列化-ysoserial-调试分析总结篇(4) 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.前言 这篇文章继续分析commoncollections4利用链，这篇文章是对cc2的改造，和cc3一样，cc3是对cc1的改造，cc4则是对cc2的改造，里面chained的invoke变成了instantiateTransformer，所以不用invoke反射调用方法，所以外层queue里面            <a href="https://www.cnblogs.com/tr1ple/p/12404108.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-03 22:29 tr1ple 阅读 (87) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12404108" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/03/01.html">2020年3月1日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12390094.html">
+    java反序列化-ysoserial-调试分析总结篇(3) 
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： 这篇文章主要分析commoncollections3，这条利用链如yso描述，这个与cc1类似，只是反射调用方法是用的不是invokeTransformer而用的是InstantiateTransformer，整个调用过程如下图 利用链分析： 如上图所示，入口点还是Annotationinv            <a href="https://www.cnblogs.com/tr1ple/p/12390094.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-03-01 21:45 tr1ple 阅读 (148) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12390094" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/02/29.html">2020年2月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12382559.html">
+    java反序列化-ysoserial-调试分析总结篇(2)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： 这篇主要分析commonCollections2，调用链如下图所示： 调用链分析： 分析环境：jdk1.8.0 反序列化的入口点为src.zip!/java/util/PriorityQueue.java 此时将会对队列调用siftdown函数，其中队列中包含了两个元素，其中一个即为temp            <a href="https://www.cnblogs.com/tr1ple/p/12382559.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-29 20:14 tr1ple 阅读 (152) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12382559" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/tr1ple/archive/2020/02/28.html">2020年2月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/tr1ple/p/12378269.html">
+    java反序列化-ysoserial-调试分析总结篇(1)
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言： ysoserial很强大，花时间好好研究研究其中的利用链对于了解java语言的一些特性很有帮助，也方便打好学习java安全的基础，刚学反序列化时就分析过commoncollections，但是是跟着网上教程，自己理解也不够充分，现在重新根据自己的调试进行理解，这篇文章先分析URLDNS和co            <a href="https://www.cnblogs.com/tr1ple/p/12378269.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-02-28 21:59 tr1ple 阅读 (317) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12378269" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/tr1ple/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 tr1ple
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div id="cnzzProtocol"  style="display: none;">
+    <span class="id_cnzz_stat_icon" id='cnzz_stat_icon_1278632453'></span>
+    <script src='https://s19.cnzz.com/z_stat.php?id=1278632453&online=1&show=line' type='text/javascript'></script>
+</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,682 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="异常处理器处理逻辑深入解析，本文对异常处理器进行了深入的剖析，本文能够让你对异常处理逻辑有一个清晰的认知" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>异常处理器详解 Java多线程异常处理机制  多线程中篇（四） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10354733.html">异常处理器详解 Java多线程异常处理机制  多线程中篇（四）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        异常处理器处理逻辑深入解析，本文对异常处理器进行了深入的剖析，本文能够让你对异常处理逻辑有一个清晰的认知
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 16px;">在Thread中有异常处理器相关的方法</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133856802-480879655.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_7657" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133857388-1139374366.png" alt="image_5c5bc46a_7657" width="500" height="101" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在ThreadGroup中也有相关的异常处理方法 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133857656-1029334772.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_717e" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133857841-1911208088.png" alt="image_5c5bc46a_717e" width="392" height="31" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">示例</span></h3>
+<h4><span style="font-size: 16px;">未检查异常 </span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133858058-1840272721.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_25c1" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133858305-895118773.png" alt="image_5c5bc46a_25c1" width="760" height="660" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于未检查异常，将会直接宕掉，主线程则继续运行，程序会继续运行 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在主线程中能不能捕获呢？ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">我们简单粗暴一点，直接全部包到try catch中 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133858565-1671252845.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_1f01" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133858785-199773903.png" alt="image_5c5bc46a_1f01" width="718" height="685" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">你会发现，然而并没有什么卵用，主线程中的try catch并不会得到什么信息，跟原来的结果还是一样的，线程直接宕掉 </span></div>
+<h4><span style="font-size: 16px;">已检查异常 </span></h4>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133858956-1076894362.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_1b9a" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133859152-1579513809.png" alt="image_5c5bc46a_1b9a" width="798" height="203" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于已检查的异常，run方法本身是不支持抛出的，上面代码中，想要throws，IDE提示异常，从run方法可以看得出来 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">run方法本身是不支持throws的（签名中没有throws） </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133859329-2019932699.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_2d74" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133859533-888199419.png" alt="image_5c5bc46a_2d74" width="304" height="133" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">所以怎么办？ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">既然是已检查异常，肯定是要处理的，既然不能丢出去，就只有一个办法了，那就是自己捕获，放置在try catch中 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133859758-438063777.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_5ee4" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133859974-1633798905.png" alt="image_5c5bc46a_5ee4" width="635" height="732" border="0" /></a></div>
+<h4><span style="font-size: 16px;">小结 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在run方法中是不能够抛出异常的，如果是已检查的异常，那么必须进行try catch </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于未检查的异常，如果没有进行处理，一旦抛出线程将会宕掉，而且在主线程中并不能捕获到这个异常 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">难道对于未检查的异常也都是try catch吗？（当然，这是一种方式） </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">还有没有其他解决方案？ </span></div>
+<h3><span style="font-size: 18px;">异常处理器 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在Java线程的run方法中，对于未检查异常，借助于异常处理器进行处理的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">字面意思，直接理解为处理异常的方法，那么如何配置这个处理异常的方法呢？如何设置，又是如何调用？ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">UncaughtExceptionHandler，是Thread的内部接口（1.8中已经设置为函数式接口） </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133900206-3582503.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_5bcf" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133900443-1820752311.png" alt="image_5c5bc46a_5bcf" width="685" height="261" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">Thread内部有两个变量，用于记录异常处理器 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133900599-337687502.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_1ec8" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133900761-625008061.png" alt="image_5c5bc46a_1ec8" width="777" height="127" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于两个set方法，没有什么特别的，主要就是设置这两个内部变量 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133900925-1096331608.png"><img style="display: inline; background-image: none;" title="image_5c5bc46a_205e" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133901112-1981068547.png" alt="image_5c5bc46a_205e" width="774" height="307" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于getUncaughtExceptionHandler方法，如果当前非空，那么返回当前，否则，将返回当前线程组，很显然，ThreadGroup实现了Thread.UncaughtExceptionHandler </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133901354-995832598.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_1509" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133901559-127125075.png" alt="image_5c5bc46b_1509" width="718" height="537" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于getDefaultUncaughtExceptionHandler，这是简单的返回内部变量 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133901795-1604801295.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_7ff5" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133901985-894762694.png" alt="image_5c5bc46b_7ff5" width="716" height="67" border="0" /></a> </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">此时我们大致了解到了这几个方法，内部有两个UncaughtExceptionHandler异常处理器，分别都有getter和setter方法 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">setter方法都是直接设置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">getDefaultUncaughtExceptionHandler是直接获取 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">getUncaughtExceptionHandler如果非空那么直接获取，否则将会返回当前线程组，当前线程组也实现了Thread.UncaughtExceptionHandler，内部实现了方法public void uncaughtException(Thread t, Throwable e) </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">换句话说，线程组内部实现了一个线程处理器 </span></div>
+<h4><span style="font-size: 16px;">两个处理器含义 </span></h4>
+<div style="line-height: 200%;"><span style="font-size: 16px;">我们看到了表面的样子，但是这两个内部变量到底干嘛的？ </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于defaultUncaughtExceptionHandler，表示的是应用程序默认的，应用程序默认的，也就是整个程序使用的，可以看得到，对于他的getter和setter以及自身，都是static修饰的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">对于uncaughtExceptionHandler，属于实例方法，也就是说每个线程可以拥有一个 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">简言之：每个线程都可以有一个uncaughtExceptionHandler，整个应用可以有一个defaultUncaughtExceptionHandler </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">全局和个体的关系，就如同我们平时见到的其他概念一样，如果单独设置了，那么就使用自己的，如果没有设置就走全局的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">既可以单独设置，又可以全局设置（没有设置的才会走全局），既可以保障灵活性，有能够对于那些没设置的提供统一配置，比如统一将异常信息写入文件等，也有诸多应用场景与好处 </span></div>
+<h3><span style="font-size: 18px;">异常处理器处理逻辑 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px;">当异常发生时，JVM会调用异常分发处理器，也就是借助于getUncaughtExceptionHandler方法，获取异常处理器，然后执行他的uncaughtException方法 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">第一个参数就是当前线程this，第二个参数就是异常对象 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">看注释：JVM调用 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133902197-1728072920.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_4da" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133902570-603428187.png" alt="image_5c5bc46b_4da" width="614" height="158" border="0" /></a></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">所以关键点在于getUncaughtExceptionHandler返回什么异常处理器，我们再回过头来看下源代码 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133902813-163225703.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_3e2" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133903191-1992198341.png" alt="image_5c5bc46b_3e2" width="591" height="427" border="0" /></a> </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果已经设置，那么将会直接返回； </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果没有设置，将会返回当前线程组（前面说了ThreadGroup实现了Thread.UncaughtExceptionHandler) </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">当调用ThreadGroup的uncaughtException方法时，如上图下半部分 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果他的父线程组重写了uncaughtException方法，那么将会调用他的父线程组的方法，如果父亲节点没有重写，爷爷节点重写了将会调用爷爷的，以此类推 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">但是如果所有的祖先线程组都没有重写呢？很显然，所有的方法代码都是上面这样子的（上图下半部分），将会递归到顶级线程组，然后不满足parent，然后走到else，这中间什么有意义的事情都没有做 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在else中，会首先获取应用默认的异常处理器，如果仍旧是没有设置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">不好意思，直接转到system.err了 </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133903458-601885807.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_6c61" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133903768-1402508758.png" alt="image_5c5bc46b_6c61" width="1028" height="836" border="0" /></a></div>
+<h3><span style="font-size: 18px;">代码示例 </span></h3>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133904065-1287367631.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_43cf" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133905042-1206703974.png" alt="image_5c5bc46b_43cf" width="731" height="836" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">从上面的示例可以看得出来，尽管仍就出现了异常，我们能够进行信息获取与感知，不会直接宕掉了 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果先start，然后在设置异常处理器会发生什么？ </span></div>
+<div style="line-height: 200%;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133905409-1193079285.png"><img style="display: inline; background-image: none;" title="image_5c5bc46b_6b91" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190207133905589-398971386.png" alt="image_5c5bc46b_6b91" width="623" height="393" border="0" /></a></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">可以看得到，线程仍旧是直接宕掉，异常处理器无效，所以setUncaughtExceptionHandler方法必须在start方法前调用！ </span></div>
+<h3><span style="font-size: 18px;">总结 </span></h3>
+<div style="line-height: 200%;"><span style="font-size: 16px;">在Thread中的run方法，不能够抛出异常，只能进行捕获 </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 16px;">对于已检查异常，必须捕获 </span></li>
+<li><span style="font-size: 16px;">对于未检查异常，你也可以进行try catch，但是代码始终包裹在try中，真的好吗？ </span></li>
+<li><span style="font-size: 16px;">还另外提供了异常处理器机制用于处理未检查异常 </span></li>
+</ul>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">有两种异常处理器： </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt;"><strong>线程自身的处理器和全局的异常处理器</strong></span></div>
+<div style="line-height: 32px;"><ol>
+<li><span style="font-size: 16px;">如果设置了异常处理器uncaughtExceptionHandler，那么将会使用这个 </span></li>
+<li><span style="font-size: 16px;">如果没设置，将会在祖先线程组中查找第一个重写了uncaughtException的线程组，然后调用他的uncaughtException方法 </span></li>
+<li><span style="font-size: 16px;">如果都没有重写，那么使用应用默认的全局异常处理器defaultUncaughtExceptionHandler </span></li>
+<li><span style="font-size: 16px;">如果还是没有设置，直接标准错误打印信息 </span></li>
+</ol></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">如果想要设置自己的异常处理器，可以通过对应的setter方法进行设置，如果想要设置全局的可以调用静态方法进行设置 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">异常处理器Thread.UncaughtExceptionHandler是一个函数式接口，所以后续，你可以使用Lambda表达式直接编写，大大减少了工作量</span></div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10354733.html" target="_blank">异常处理器详解 Java多线程异常处理机制 多线程中篇（四）</a> </span></div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-12 08:15</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10354733" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10354733);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10354733, cb_entryCreatedDate = '2019-02-12 08:15', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

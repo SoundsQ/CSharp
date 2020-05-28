@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_Hanstrovsky</title>
+  <subtitle type="text">种一棵树最好的时间是十年前，其次是现在。</subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=510</id>
+  <updated>2020-04-28T13:00:36Z</updated>
+  <author>
+    <name>Hanstrovsky</name>
+    <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12792253.html</id>
+    <title type="text">伤其十指，不如断其一指，谈谈我的学习计划 - Hanstrovsky</title>
+    <summary type="text">一个不能被有效执行的计划，做的再好，也是烂计划。 计划的三要素 我认为计划有三个要素，一是目标，二是时间，三是事务，计划就是在某个时间要达成某个目标所需要做的事务清单，同一个时间段，目标要简单明确，并且不宜过多，时间要清晰，事务要具体。像前段时间我做的计划就不合理，完全围绕着时间展开，把每天的时间排</summary>
+    <published>2020-04-28T13:01:00Z</published>
+    <updated>2020-04-28T13:01:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12792253.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12792253.html" />
+    <content type="html">【摘要】一个不能被有效执行的计划，做的再好，也是烂计划。 计划的三要素 我认为计划有三个要素，一是目标，二是时间，三是事务，计划就是在某个时间要达成某个目标所需要做的事务清单，同一个时间段，目标要简单明确，并且不宜过多，时间要清晰，事务要具体。像前段时间我做的计划就不合理，完全围绕着时间展开，把每天的时间排 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12792253.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12725112.html</id>
+    <title type="text">如何使用Swagger-UI在线生成漂亮的接口文档 - Hanstrovsky</title>
+    <summary type="text">一、简单介绍 Swagger是一个实现了OpenAPI(OpenAPI Specification)规范的工具集。OpenAPI是Linux基金会的一个项目，试图通过定义一种用来描述API格式或API定义的语言，来规范RESTful服务开发过程。 swagger大大方便了前后端开发人员，用过的人都说</summary>
+    <published>2020-04-18T04:29:00Z</published>
+    <updated>2020-04-18T04:29:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12725112.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12725112.html" />
+    <content type="html">【摘要】一、简单介绍 Swagger是一个实现了OpenAPI(OpenAPI Specification)规范的工具集。OpenAPI是Linux基金会的一个项目，试图通过定义一种用来描述API格式或API定义的语言，来规范RESTful服务开发过程。 swagger大大方便了前后端开发人员，用过的人都说 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12725112.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12600907.html</id>
+    <title type="text">如何在Linux服务器上部署jar包 - Hanstrovsky</title>
+    <summary type="text">启动程序方法 1、上传jar包到linux服务器下 2、启动jar包 ​ 前台模式 java –jar XXXX.jar（注意这个命令启动时，断开服务连接后，服务就关闭了） ​ 后台模式 nohup java jar XXXX.jar XX.log 2 &amp;1&amp;（xx.log代表日志输出文件） 终止程</summary>
+    <published>2020-03-30T12:25:00Z</published>
+    <updated>2020-03-30T12:25:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12600907.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12600907.html" />
+    <content type="html">【摘要】启动程序方法 1、上传jar包到linux服务器下 2、启动jar包 ​ 前台模式 java –jar XXXX.jar（注意这个命令启动时，断开服务连接后，服务就关闭了） ​ 后台模式 nohup java jar XXXX.jar XX.log 2 &amp;1&amp;（xx.log代表日志输出文件） 终止程 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12600907.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12527022.html</id>
+    <title type="text">使用PageHelper插件分页时，如何对对象进行转换以及添加属性 - Hanstrovsky</title>
+    <summary type="text">一、插件介绍 PageHelper是针对Mybaits的分页插件，支持任何复杂的单表、多表分页。 二、基本用法 以springboot为例，有两种方式配置，一种是传统的，引入依赖，编写配置类；一种是使用application.yml进行配置。 第一种 1.引入依赖 2.配置插件 第二种 1.引入依赖</summary>
+    <published>2020-03-19T14:22:00Z</published>
+    <updated>2020-03-19T14:22:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12527022.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12527022.html" />
+    <content type="html">【摘要】一、插件介绍 PageHelper是针对Mybaits的分页插件，支持任何复杂的单表、多表分页。 二、基本用法 以springboot为例，有两种方式配置，一种是传统的，引入依赖，编写配置类；一种是使用application.yml进行配置。 第一种 1.引入依赖 2.配置插件 第二种 1.引入依赖 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12527022.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12520142.html</id>
+    <title type="text">在Java中使用Collections.sort 依据多个字段排序 - Hanstrovsky</title>
+    <summary type="text">一、如何使用Collections工具类进行排序 使用Collections工具类进行排序主要有两种方式： 1.对象实现Comparable接口，重写compareTo方法 2.传入一个比较器对象Comparator。 还是用上面的student，不去实现Comparable接口。 二、依据多个字段</summary>
+    <published>2020-03-09T12:56:00Z</published>
+    <updated>2020-03-09T12:56:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12520142.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12520142.html" />
+    <content type="html">【摘要】一、如何使用Collections工具类进行排序 使用Collections工具类进行排序主要有两种方式： 1.对象实现Comparable接口，重写compareTo方法 2.传入一个比较器对象Comparator。 还是用上面的student，不去实现Comparable接口。 二、依据多个字段 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12520142.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12327460.html</id>
+    <title type="text">关于JAVA中源码级注解的编写及使用 - Hanstrovsky</title>
+    <summary type="text">一、注解简介： 1.1.什么是“注解”： ​ 在我们编写代码时，一定看到过这样的代码： ​ 其中的@Override，就是一个“注解”，@Override一般出现在重写equals()或者toString()方法的上边，意思是告诉编译器：下边的代码是重写父类方法的。这时编译器会按照“重写”的语法严格</summary>
+    <published>2020-02-18T10:47:00Z</published>
+    <updated>2020-02-18T10:47:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12327460.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12327460.html" />
+    <content type="html">【摘要】一、注解简介： 1.1.什么是“注解”： ​ 在我们编写代码时，一定看到过这样的代码： ​ 其中的@Override，就是一个“注解”，@Override一般出现在重写equals()或者toString()方法的上边，意思是告诉编译器：下边的代码是重写父类方法的。这时编译器会按照“重写”的语法严格 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12327460.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12197006.html</id>
+    <title type="text">关于数据库设计的三范式与反三范式 - Hanstrovsky</title>
+    <summary type="text">范式 （数据库设计范式，数据库的设计范式）是符合某一种级别的关系模式的集合。构造数据库必须遵循一定的规则。在关系数据库中，这种规则就是范式。关系数据库中的关系必须满足一定的要求，即满足不同的范式。 一、 第一范式 一个字段只记录一件事 在任何一个关系数据库中，第一范式（1NF）是对关系模式的基本要求</summary>
+    <published>2020-01-19T07:34:00Z</published>
+    <updated>2020-01-19T07:34:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12197006.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12197006.html" />
+    <content type="html">【摘要】范式 （数据库设计范式，数据库的设计范式）是符合某一种级别的关系模式的集合。构造数据库必须遵循一定的规则。在关系数据库中，这种规则就是范式。关系数据库中的关系必须满足一定的要求，即满足不同的范式。 一、 第一范式 一个字段只记录一件事 在任何一个关系数据库中，第一范式（1NF）是对关系模式的基本要求 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12197006.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/12083971.html</id>
+    <title type="text">如何使用Spring Securiry实现前后端分离项目的登录功能 - Hanstrovsky</title>
+    <summary type="text">如果不是前后端分离项目，使用SpringSecurity做登录功能会很省心，只要简单的几项配置，便可以轻松完成登录成功失败的处理，当访问需要认证的页面时，可以自动重定向到登录页面。但是前后端分离的项目就不一样了，不能直接由后台处理，而是要向前端返回相应的json提示。 在本例的介绍中，主要解决了以下</summary>
+    <published>2019-12-23T07:24:00Z</published>
+    <updated>2019-12-23T07:24:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/12083971.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/12083971.html" />
+    <content type="html">【摘要】如果不是前后端分离项目，使用SpringSecurity做登录功能会很省心，只要简单的几项配置，便可以轻松完成登录成功失败的处理，当访问需要认证的页面时，可以自动重定向到登录页面。但是前后端分离的项目就不一样了，不能直接由后台处理，而是要向前端返回相应的json提示。 在本例的介绍中，主要解决了以下 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/12083971.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/11918890.html</id>
+    <title type="text">关于配置Nginx反向代理后SpringSecurity认证失败的问题解决 - Hanstrovsky</title>
+    <summary type="text">问题背景 最近在写的一个项目，采用前后端分离的方式进行开发，登录认证使用的是SpringSecurity框架。 问题描述 在项目部署的时候出现了一个问题，在自己电脑上运行的时候一切顺畅，可是部署到服务器上就一直登录失败，分别测试了前端和后端的代码，独立运行没有问题，打开F12查看返回的提示是发生了重</summary>
+    <published>2019-11-23T09:30:00Z</published>
+    <updated>2019-11-23T09:30:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/11918890.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/11918890.html" />
+    <content type="html">【摘要】问题背景 最近在写的一个项目，采用前后端分离的方式进行开发，登录认证使用的是SpringSecurity框架。 问题描述 在项目部署的时候出现了一个问题，在自己电脑上运行的时候一切顺畅，可是部署到服务器上就一直登录失败，分别测试了前端和后端的代码，独立运行没有问题，打开F12查看返回的提示是发生了重 &lt;a href="http://www.cnblogs.com/hanstrovsky/p/11918890.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/hanstrovsky/p/11896290.html</id>
+    <title type="text">如何在后台封装el-tree所需要的数据格式 - Hanstrovsky</title>
+    <summary type="text">背景 最近遇到了一个分层级展示指标的需求，前端使用el tree树形组件，要求按官方文档的格式提供数据。 数据格式： 封装思路 1、首先我们需要获取到所有的节点，新建一个集合result来保存所有顶级节点，也就是parentId为空的或指定值。 2、然后我们需要找出二级节点存入到顶级节点的child</summary>
+    <published>2019-11-20T02:57:00Z</published>
+    <updated>2019-11-20T02:57:00Z</updated>
+    <author>
+      <name>Hanstrovsky</name>
+      <uri>http://www.cnblogs.com/hanstrovsky/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/hanstrovsky/p/11896290.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/hanstrovsky/p/11896290.html" />
+    <content type="html">【摘要】背景 最近遇到了一个分层级展示指标的需求，前端使用el tree树形组件，要求按官方文档的格式提供数据。 数据格式： 封装思路 1、首先我们需要获取到所有的节点，新建一个集合result来保存所有顶级节点，也就是parentId为空的或指定值。 2、然后我们需要找出二级节点存入到顶级节点的child &lt;a href="http://www.cnblogs.com/hanstrovsky/p/11896290.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="保证整个（分布式）系统内对一个重要事物（订单，账户等）的有效操作线程 ，同一时间内有且只有一个。比如交易中心有N台服务器，订单中心有M台服务器，如何保证一个订单的同一笔支付处理，一个账户的同一笔充值操" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>电商课题V：分布式锁 - 旁观者 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/webload/bundle-webload.min.css?v=ruvm6IrJzXJObi2uPQfuATPd1yK_KwQgdDOW0ibFF64" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/webload/bundle-webload-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zhengyun_ustc/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zhengyun_ustc/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zhengyun_ustc/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 10850;
+        var currentBlogApp = 'zhengyun_ustc';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'WebLoad';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zhengyun_ustc/">旁观者-郑昀</a>
+</div>
+<div class="subtitle">
+参与软件开发这些年来，不断地遇到新领域新知识点，屡屡感受到新进入者的迷惑和彷徨，所以对遇到的每一个问题都详细记录问题现象、解决思路以及解决方案，并在blog中留下印迹，以备他日有心人google之而知之。<br/>
+你们的新手之痛，你们的新业务发展之初的思路混沌，我都感同身受，所以欢迎和我一起探讨，知无不言言无不尽。
+</div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome">
+</li>
+    <li id="nav_myhome">
+
+</li>
+    <li id="nav_newpost">
+
+
+</li>
+    <li id="nav_contact">
+</li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zhengyun_ustc/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                
+<span id="stats_post_count">随笔 - 
+647&nbsp;</span>
+<span id="stats_article_count">文章 - 
+0&nbsp;</span>
+<!-- <span id="stats-comment_count"></span> -->
+<span id="stats_comment_count">评论 - 
+1149</span>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html">电商课题V：分布式锁</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        保证整个（分布式）系统内对一个重要事物（订单，账户等）的有效操作线程 ，同一时间内有且只有一个。比如交易中心有N台服务器，订单中心有M台服务器，如何保证一个订单的同一笔支付处理，一个账户的同一笔充值操作是原子性的。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><a style="cursor: pointer;" href="http://weibo.com/yunzheng/">@郑昀</a>汇总&nbsp;</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>关键词：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">并发控制</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">防止并发</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong>英文关键词：</strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">Distributed Lock</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">Distributed Lock Manager</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><strong><span style="font-size: medium;">电商目的：</span></strong></div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">保证整个（分布式）系统内对一个重要事物（订单，账户等）的有效操作线程 ，同一时间内有且只有一个。比如交易中心有N台服务器，订单中心有M台服务器，如何保证一个订单的同一笔支付处理，一个账户的同一笔充值操作是原子性的。</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">&nbsp;</div>
+<p><strong style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><span style="color: #0000ff; font-size: medium;">基于哪些服务实现分布式锁？</span></strong></p>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<ul>
+<li>memcache</li>
+<li>ZooKeeper</li>
+<li>Redis</li>
+<li><span id="mc1" class="ppp"><a style="cursor: pointer;" href="http://www.hazelcast.com/" rel="nofollow">Hazelcast</a></span></li>
+<li>google Chubby</li>
+</ul>
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>
+<div><strong><span style="color: #0000ff; font-size: medium;">基于memcache的分布式锁</span></strong></div>
+<div>memcache的所有命令都是原子性的（<a style="cursor: pointer;" href="http://code.google.com/p/memcached/wiki/NewProgrammingFAQ#Is_memcached_atomic?">internally atomic</a>），所以利用它的add命令即可。</div>
+</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html" target="_blank">郑昀</a>列出一段简单但埋下了问题的伪码：</div>
+</div>
+<blockquote style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 40px; border-width: initial; border-color: initial; border-image: initial; border-style: none; padding: 0px;">
+<div>
+<div>
+<div><span style="color: #0000ff;">if (cache.add("lock:{orderid}", currenttimestamp, expiredtime)) {</span></div>
+</div>
+</div>
+<div>
+<div>
+<div><span style="color: #008000;">&nbsp; // 已获得锁，继续</span></div>
+</div>
+</div>
+<div>
+<div>
+<div><span style="color: #0000ff;">&nbsp; try{do something}catch{...}</span></div>
+</div>
+</div>
+<div>
+<div>
+<div><span style="color: #0000ff;">&nbsp; cache.delete("lock.{orderid}")</span></div>
+</div>
+</div>
+<div>
+<div>
+<div><span style="color: #0000ff;">} else {</span><span style="color: #0000ff;">&nbsp;</span></div>
+</div>
+</div>
+<div><span style="color: #008000;">// 或等待锁超时，或重试，或返回</span></div>
+<div>
+<div>
+<div><span style="color: #0000ff;">}</span></div>
+</div>
+</div>
+</blockquote>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div>&nbsp;</div>
+<div><span style="color: #0000ff;"><strong>上面代码所暴露的常见性问题</strong></span></div>
+<div>1）如持有锁的线程异常退出或宕机，<strong>锁并没有释放</strong>；</div>
+<div>2）设置了key的expire，那么如果有新线程在key过期后拿到了新的锁，原来超时的线程回来时，如果不经判断会误认为那是它持有的锁，<strong>会误删锁</strong>。</div>
+<div>&nbsp;</div>
+<div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html" target="_blank"><span style="color: #0000ff;"><strong>解决思路</strong></span></a></div>
+<div><strong><span style="color: #ff0000;">1）强制释放</span></strong></div>
+</div>
+<div>在键值上做文章，存入的是<span class="Apple-converted-space">&nbsp;</span><strong>current UNIX time+lock timeout+1</strong><span class="Apple-converted-space">&nbsp;</span>，这样其他线程可以通过锁的键值对应的时间戳来判断这种情况是否发生了，如果当前的时间已经大于lock.{orderid}的键值，说明该锁已失效，可以被重新使用。</div>
+<div><strong><span style="color: #ff0000;">2）释放自己持有的锁时，先检查是否已超时</span></strong></div>
+<div>持有锁的线程在解锁之前应该再检查一次自己的锁是否已经超时，再去做DELETE操作，因为可能客户端因为某个耗时的操作而挂起，操作完的时候锁因为超时已经被别人获得，这时就不必解锁了。</div>
+<div>&nbsp;</div>
+<div><a href="http://www.cnblogs.com/zhengyun_ustc/archive/2012/11/17/topic2.html" target="_blank"><strong><span style="color: #0000ff;">继续解决</span></strong></a></div>
+<div>上面的办法会引入新问题：</div>
+<div>如果多个线程检测到锁超时，都尝试去释放锁，那么就会出现<a style="cursor: pointer;" href="http://zh.wikipedia.org/wiki/%E7%AB%B6%E7%88%AD%E5%8D%B1%E5%AE%B3">竞态条件</a>（<a style="cursor: pointer;" href="http://en.wikipedia.org/wiki/Race_condition">race condition</a>）。</div>
+<div>场景是，</div>
+<div><ol>
+<li>&nbsp;C0操作超时了，但它还持有着锁，C1和C2读取lock.{orderid}检查时间戳，先后发现超时了。</li>
+<li>&nbsp;C1 发送delete lock.{orderid}，</li>
+<li>&nbsp;C1 发送set lock.{orderid}&nbsp;且成功。</li>
+<li>&nbsp;C2 发送delete lock.{orderid}，</li>
+<li>&nbsp;C2 发送set lock.{orderid} 且成功。</li>
+</ol></div>
+<div>这样，C1和C2都认为自己拿到了锁。</div>
+<div>如果比较在意这种竞态条件，那么推荐使用基于zookeeper或redis的解决方案。</div>
+<div>&nbsp;</div>
+<div><strong><span style="color: #0000ff; font-size: medium;">基于ZooKeeper的分布式锁</span></strong></div>
+<div>这主要得益于ZooKeeper为我们保证了数据的强一致性，即用户只要完全相信每时每刻，zk集群中任意节点（一个zk server）上的相同znode的数据一定是相同的。锁服务可以分为两类，<strong>一个是保持独占，另一个是控制时序。</strong>
+<p>所谓保持独占，就是所有试图来获取这个锁的客户端，最终只有一个可以成功获得这把锁。通常的做法是把zk上的一个znode看作是一把锁，通过 create znode的方式来实现。所有客户端都去创建 /distributed_lock 节点，最终成功创建的那个客户端也就拥有了这把锁。</p>
+<p>控制时序，就是所有试图获取这个锁的客户端，最终都是会被安排执行，只是有个全局时序。做法和上面基本类似，只是这里 /distributed_lock 已经预先存在，客户端在它下面创建临时有序节点（这个可以通过节点的属性控制：CreateMode.EPHEMERAL_SEQUENTIAL来指 定）。zk的父节点（/distributed_lock）维持一份sequence，保证子节点创建的时序性，从而形成了每个客户端的全局时序。</p>
+<p style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" align="left">ZooKeeper 里实现分布式锁的基本逻辑：</p>
+<ol style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<li>客户端调用create()方法创建名为&ldquo;_locknode_/guid-lock-&rdquo;的节点，需要注意的是，这里节点的创建类型需要设置为EPHEMERAL_SEQUENTIAL。</li>
+<li>客户端调用getChildren(&ldquo;_locknode_&rdquo;)方法来获取所有已经创建的子节点，同时在这个节点上注册上子节点变更通知的Watcher。</li>
+<li>客户端获取到所有子节点path之后，如果发现自己在步骤1中创建的节点是所有节点中序号最小的，那么就认为这个客户端获得了锁。</li>
+<li>如果在步骤3中发现自己并非是所有子节点中最小的，说明自己还没有获取到锁，就开始等待，直到下次子节点变更通知的时候，再进行子节点的获取，判断是否获取锁。</li>
+</ol>
+<p style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" align="left"><strong>释放锁</strong>的过程相对比较简单，就是删除自己创建的那个子节点即可。</p>
+<div><strong>&nbsp;</strong></div>
+<div><strong><span style="color: #0000ff; font-size: medium;">基于Redis的分布式锁</span></strong></div>
+<div>接着前面的竞态条件说，同样的场景下，使用Redis的SETNX（即SET if Not eXists，类似于memcache的add）和<span style="color: #ff0000;"><strong><a style="cursor: pointer;" href="http://www.redis.cn/commands/getset.html">GETSET</a></strong></span>（先写新值，返回旧值，原子性操作，可以用于分辨是不是首次操作）命令便可迎刃而解：</div>
+<div><ol>
+<li>C3发送SETNX lock.{orderid} 想要获得锁，由于C0还持有锁，所以Redis返回给C3一个0，</li>
+<li>C3发送GET lock.{orderid}&nbsp;以检查锁是否超时了，如果没超时，则等待或重试。</li>
+<li>反之，如果已超时，C3通过下面的操作来尝试获得锁：<br /><strong>GETSET lock.{orderid} &lt;current Unix time + lock timeout + 1&gt;</strong></li>
+<li>通过GETSET，C3拿到的时间戳如果仍然是超时的，那就说明，C3如愿以偿拿到锁了。</li>
+<li>如果在C3之前，有个叫C4的客户端比C3快一步执行了上面的操作，那么C3拿到的时间戳是个未超时的值，这时，C3没有如期获得锁，需要再次等待或重试。留意一下，尽管C3没拿到锁，但它改写了C4设置的锁的超时值，不过这一点非常微小的误差带来的影响可以忽略不计。</li>
+
+
+
+</ol></div>
+<div>jeffkit的伪码参考：</div>
+<div>
+<div class="geshi no python"><ol>
+<li class="li1">
+<div class="de1"><span class="co1"># get lock</span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">lock =<span class="Apple-converted-space">&nbsp;</span><span class="nu0"><span style="color: #ff00ff;">0</span></span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1"><span class="kw1"><span style="color: #a52a2a;">while</span></span><span class="Apple-converted-space">&nbsp;</span>lock<span class="Apple-converted-space">&nbsp;</span><span class="sy0">!</span>=<span class="Apple-converted-space">&nbsp;</span><span class="nu0"><span style="color: #ff00ff;">1</span></span>:</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp; timestamp =&nbsp;current Unix<span class="Apple-converted-space">&nbsp;</span><span class="kw3">time</span><span class="Apple-converted-space">&nbsp;</span>+ lock timeout +<span class="Apple-converted-space">&nbsp;</span><span class="nu0"><span style="color: #ff00ff;">1</span></span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp; lock =&nbsp;<span style="color: #0000ff;">SETNX</span><span class="Apple-converted-space">&nbsp;</span>lock.<span class="me1">orderid</span><span class="Apple-converted-space">&nbsp;</span>timestamp</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span class="kw1"><span style="color: #a52a2a;">if</span></span><span class="Apple-converted-space">&nbsp;</span>lock ==<span class="Apple-converted-space">&nbsp;</span><span class="nu0"><span style="color: #ff00ff;">1</span></span><span class="Apple-converted-space">&nbsp;</span><span class="kw1"><span style="color: #a52a2a;">or</span></span><span class="Apple-converted-space">&nbsp;</span><span class="br0">(</span>now<span class="br0">(</span><span class="br0">)</span><span class="Apple-converted-space">&nbsp;</span><span class="sy0">&gt;</span><span class="Apple-converted-space">&nbsp;</span><span class="br0">(</span><span style="color: #0000ff;">GET</span><span class="Apple-converted-space">&nbsp;</span>lock.<span class="me1">orderid</span><span class="br0">)</span><span class="Apple-converted-space">&nbsp;</span><span class="kw1"><span style="color: #a52a2a;">and</span></span>&nbsp;now<span class="br0">(</span><span class="br0">)</span><span class="Apple-converted-space">&nbsp;</span><span class="sy0">&gt;</span>&nbsp;<span class="br0">(</span><span style="color: #0000ff;">GETSET</span><span class="Apple-converted-space">&nbsp;</span>lock.<span class="me1">orderid</span><span class="Apple-converted-space">&nbsp;</span>timestamp<span class="br0">)</span><span class="br0">)</span>:</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp; &nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span class="kw1"><span style="color: #a52a2a;">break</span></span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span class="kw1"><span style="color: #a52a2a;">else</span></span>:</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; sleep<span class="br0">(</span>10ms<span class="br0">)</span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp;</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">do_your_job<span class="br0">(</span><span class="br0">)</span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp;</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1"><span class="co1"># release lock</span></div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1"><span class="kw1"><span style="color: #a52a2a;">if</span></span><span class="Apple-converted-space">&nbsp;</span>now<span class="br0">(</span><span class="br0">)</span><span class="Apple-converted-space">&nbsp;</span><span class="sy0">&lt;</span><span class="Apple-converted-space">&nbsp;</span>GET lock.<span class="me1">orderid</span>:</div>
+
+
+
+</li>
+<li class="li1">
+<div class="de1">&nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><span style="color: #0000ff;">DEL</span><span class="Apple-converted-space">&nbsp;</span>lock.<span class="me1">orderid</span></div>
+
+
+
+</li>
+
+
+
+</ol></div>
+
+
+
+</div>
+<div><strong>&nbsp;</strong></div>
+<div><strong>参考资源：</strong></div>
+
+
+
+</div>
+<div>1，jeffkit，<a style="cursor: pointer;" href="http://www.jeffkit.info/2011/07/1000/">用Redis实现分布式锁</a>，基于redis；</div>
+<div>2，rdc.taobao，<a style="cursor: pointer;" href="http://rdc.taobao.com/team/jm/archives/1232">ZooKeeper典型使用场景一览</a>；</div>
+
+
+
+</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">3，Ilya Sterin，<a style="cursor: pointer;" title="Permanent Link to Distributed locking made easy" href="http://ilyasterin.com/blog/2011/10/distributed-locking-made-easy.html" rel="bookmark">Distributed locking made easy</a>，基于zookeeper；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">4，迟炯，<a style="cursor: pointer;" href="http://www.searchtb.com/2010/12/distributed-lock-service-in-google.html">解读Google分布式锁服务</a>；</div>
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">
+<div style="color: #000000; font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;">5，淘宝RDC，2012，<a style="cursor: pointer;" href="http://rdc.taobao.com/team/jm/archives/2554">zookeeper分布式锁避免羊群效应（Herd Effect）</a>；</div>
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-11-17 22:16</span>&nbsp;
+<a href="https://www.cnblogs.com/zhengyun_ustc/">旁观者</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2775403" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2775403);return false;">收藏</a></div>
+        </div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 10850, cb_blogApp = 'zhengyun_ustc', cb_blogUserGuid = 'd899310b-63cf-dd11-9e4d-001cf0cd104b';
+    var cb_entryId = 2775403, cb_entryCreatedDate = '2012-11-17 22:16', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2020 旁观者
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+</body>
+</html>

@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。 &amp;quot;并发编程系列博客传送门&amp;quot; 前言 之前的文章中讲到，JMM是" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java内存模型之可见性问题 - 程序员自由之路 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/custom/bundle-custom.min.css?v=1ssrnY3Il79Ok472qeVrpxlSprSXcHhYPgZC5S3wtVM" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/54chensongxia/custom.css?v=ibeowT7uSHbjH6bol7w7smOb4S4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/custom/bundle-custom-mobile.min.css?v=-Yh290MhQyDeXLmvKTSses9H6-49lqbpXFh55zvS0w8" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/54chensongxia/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/54chensongxia/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/54chensongxia/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 535435;
+        var currentBlogApp = '54chensongxia';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'Custom';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/54chensongxia/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/54chensongxia/">
+首页</a>
+</li>
+<li>
+
+
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%87%AA%E7%94%B1%E4%B9%8B%E8%B7%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/54chensongxia/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+135&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+31</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/54chensongxia/p/12084425.html">Java内存模型之可见性问题</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <hr>
+<p>本博客系列是学习并发编程过程中的记录总结。由于文章比较多，写的时间也比较散，所以我整理了个目录贴（传送门），方便查阅。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/11935423.html">并发编程系列博客传送门</a></p>
+<hr>
+<h2 id="前言">前言</h2>
+<p>之前的文章中讲到，JMM是内存模型规范在Java语言中的体现。JMM保证了在多核CPU多线程编程环境下，对共享变量读写的原子性、可见性和有序性。</p>
+<p>本文就具体来讲讲JMM是如何保证共享变量访问的可见性的。</p>
+<h2 id="什么是可见性问题">什么是可见性问题</h2>
+<p>我们从一段简单的代码来看看到底什么是可见性问题。</p>
+<pre><code class="language-java">
+public class VolatileDemo {
+
+    boolean started = false;
+
+    public void startSystem(){
+        System.out.println(Thread.currentThread().getName()+&quot; begin to start system, time:&quot;+System.currentTimeMillis());
+        started = true;
+        System.out.println(Thread.currentThread().getName()+&quot; success to start system, time:&quot;+System.currentTimeMillis());
+    }
+
+    public void checkStartes(){
+        if (started){
+            System.out.println(&quot;system is running, time:&quot;+System.currentTimeMillis());
+        }else {
+            System.out.println(&quot;system is not running, time:&quot;+System.currentTimeMillis());
+        }
+    }
+
+    public static void main(String[] args) {
+        VolatileDemo demo = new VolatileDemo();
+        Thread startThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                demo.startSystem();
+            }
+        });
+        startThread.setName(&quot;start-Thread&quot;);
+
+        Thread checkThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    demo.checkStartes();
+                }
+            }
+        });
+        checkThread.setName(&quot;check-Thread&quot;);
+        startThread.start();
+        checkThread.start();
+    }
+
+}
+
+</code></pre>
+<p>上面的列子中，一个线程来改变<code>started</code>的状态，另外一个线程不停地来检测<code>started</code>的状态，如果是true就输出系统启动，如果是false就输出系统未启动。那么当<code>start-Thread</code>线程将状态改成true后，<code>check-Thread</code>线程在执行时是否能立即“看到”这个变化呢？<strong>答案是不一定能立即看到</strong>。这边我做了很多测试，大多数情况下是能“感知”到started这个变量的变化的。但是偶尔会存在感知不到的情况。请看下下面日志记录：</p>
+<pre><code>
+start-Thread begin to start system, time:1577079553515
+start-Thread success to start system, time:1577079553516  
+system is not running, time:1577079553516   ==&gt;此处start-Thread线程已经将状态设置成true,但是check-Thread线程还是没检测到
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553516
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553517
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+system is running, time:1577079553519
+
+</code></pre>
+<p>上面的现象可能会让人比较困惑，为什么有时候<code>check-Thread</code>线程能感知到状态的变化，有时候又感知不到变化呢？这个现象就是在多核CPU多线程编程环境下会出现的可见性问题。</p>
+<p><a href="https://www.cnblogs.com/54chensongxia/p/12022648.html">Java内存模型</a>规定了所有的变量都存储在主内存中，每条线程还有自己的工作内存，线程在工作内存中保存的值是主内存中值的副本，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存。等到线程对变量操作完毕之后会将变量的最新值刷新回到主内存。</p>
+<p>但是何时刷新这个最新值又是随机的。所以就有可能一个线程已经将一个共享变量更新了，但是还没刷新回主内存，那么这时其他对这个变量进行读写的线程就看不到这个最新值。（还有一种可能就是虽然修改线程已经将最新值刷新到主内存中去了，但是读线程的工作内存中副本的缓存值还没过期，那么读线程还是会使用这个副本值，而不是主内存中的最新值）这个就是多CPU多线程编程环境下的可见性问题。也是上面代码会出现问题的原因。</p>
+<h2 id="jmm对可见性问题的保证">JMM对可见性问题的保证</h2>
+<p>在多CPU多线程编程环境下，对共享变量的读写会出现可见性问题。但是幸好JMM提供了相应的技术手段来帮我们规避这些问题，可以让程序正确运行。JMM针对可见性问题，主要提供了如下手段：</p>
+<ul>
+<li>volatile关键字</li>
+<li>synchronized关键字</li>
+<li>Lock锁</li>
+<li>CAS操作（原子操作类）</li>
+</ul>
+<h3 id="volatile关键字">volatile关键字</h3>
+<p>使用volatile关键字修饰一个变量可以保证变量的可见性。所以对于上面的代码，我们只需要简单的修改下代码就可以让程序正确运行了。</p>
+<pre><code class="language-java">private volatile boolean started = false;
+</code></pre>
+<p>使用volatile修饰一个共享变量可以达到如下的效果：</p>
+<ul>
+<li>一旦线程对这个共享变量的副本做了修改，会立马刷新最新值到主内存中去；</li>
+<li>一旦线程对这个共享变量的副本做了修改，其他线程中对这个共享变量拷贝的副本值会失效，其他线程如果需要对这个共享变量进行读写，必须重新从主内存中加载。</li>
+</ul>
+<p>那么volatile具体是怎么达到上面两个效果的呢？其实volatile底层使用的是内存屏障来保证可见性的。</p>
+<blockquote>
+<p>内存屏障（英语：Memory barrier），也称内存栅栏，内存栅障，屏障指令等，是一类同步屏障指令，是CPU或编译器在对内存随机访问的操作中的一个同步点，使得此点之前的所有读写操作都执行后才可以开始执行此点之后的操作。大多数现代计算机为了提高性能而采取乱序执行，这使得内存屏障成为必须。</p>
+</blockquote>
+<blockquote>
+<p>语义上，内存屏障之前的所有写操作都要写入内存；内存屏障之后的读操作都可以获得同步屏障之前的写操作的结果。因此，对于敏感的程序块，写操作之后、读操作之前可以插入内存屏障。</p>
+</blockquote>
+<p>对内存屏障做下简单的总结：</p>
+<ul>
+<li>内存屏障是一个指令级别的同步点；</li>
+<li>内存屏障之前的写操作都必须立马刷新回主内存；</li>
+<li>内存屏障之后的读操作都必须从主内存中读取最新值；</li>
+<li>在有内存屏障的地方，会禁止指令重排序，即屏障下面的代码不能跟屏障上面的代码交换执行顺序，即在执行到内存屏障这句指令时，在它前面的操作已经全部完成。</li>
+</ul>
+<h3 id="synchronized关键字">synchronized关键字</h3>
+<p>使用synchronized代码块或者synchronized方法也可以保证共享变量的可见性。只要如下修改上面的代码，我们就能得到正确的执行结果。</p>
+<pre><code class="language-java">
+public synchronized void startSystem(){
+    System.out.println(Thread.currentThread().getName()+&quot; begin to start system, time:&quot;+System.currentTimeMillis());
+    value = 2;
+    started = true;
+    System.out.println(Thread.currentThread().getName()+&quot; success to start system, time:&quot;+System.currentTimeMillis());
+}
+
+public synchronized void checkStartes(){
+    if (started){
+        System.out.println(&quot;system is running, time:&quot;+System.currentTimeMillis());
+    }else {
+        System.out.println(&quot;system is not running, time:&quot;+System.currentTimeMillis());
+    }
+}
+
+</code></pre>
+<p>当线程释放锁时，JMM会把该线程对应的本地内存中的共享变量刷新到主内存中。当线程获取锁时，JMM会把该线程对应的本地内存置为无效。从而使得被监视器保护的临界区代码必须从主内存中读取共享变量。我们发现锁具有和volatile一致的内存语义，所以使用synchronized也可以实现共享变量的可见性。</p>
+<h3 id="lock接口">Lock接口</h3>
+<p>使用Lock相关的实现类也可以保证共享变量的可见性。其实现原理和synchronized的实现原理类似，这边也就不再赘述了。</p>
+<h3 id="cas机制atomic类">CAS机制(Atomic类)</h3>
+<p>使用原子操作类也可以保证共享变量操作的可见性。所以我们只要如下修稿上面的代码就行了。</p>
+<pre><code class="language-java">private AtomicBoolean started = new AtomicBoolean(false);
+</code></pre>
+<p>原子操作类底层使用的是CAS机制。Java中CAS机制每次都会从主内存中获取最新值进行compare,比较一致之后才会将新值set到主内存中去。而且这个整个操作是一个原子操作。所以CAS操作每次拿到的都是主内存中的最新值，每次set的值也会立即写到主内存中。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-12-23 16:22</span>&nbsp;
+<a href="https://www.cnblogs.com/54chensongxia/">程序员自由之路</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12084425" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12084425);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 535435, cb_blogApp = '54chensongxia', cb_blogUserGuid = 'df6ea073-e28e-41d9-1178-08d726047f40';
+    var cb_entryId = 12084425, cb_entryCreatedDate = '2019-12-23 16:22', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 程序员自由之路
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

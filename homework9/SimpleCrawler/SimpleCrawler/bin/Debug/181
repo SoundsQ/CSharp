@@ -1,0 +1,1767 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="Long 是常用的数据类型之一,本文介绍了Long内部的构造以及常用的方法,并对一些方法进行了简单的分析以及罗列了注意点" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[二]基础数据类型之Long详解 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9706490.html">[二]基础数据类型之Long详解</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        Long 是常用的数据类型之一,本文介绍了Long内部的构造以及常用的方法,并对一些方法进行了简单的分析以及罗列了注意点
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div>&nbsp;</div>
+<div>
+<div><span style="font-size: 18pt;"><strong>Long</strong></span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">Long 基本数据类型long&nbsp; 的包装类 </span></div>
+<div><span style="font-size: medium;">Long 类型的对象包含一个 long类型的字段</span></div>
+<div>&nbsp;</div>
+<div><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135410710-346211008.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_4380[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135410983-2042715029.png" alt="image_5bab1d94_4380[4]" width="661" height="238" border="0" /></a></div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><strong>属性简介</strong></span></div>
+<div>&nbsp;</div>
+<div>
+<div>
+<table style="border: 2px solid gray; width: 100%; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: medium;">值为&nbsp; 2<sup>63</sup>-1 的常量，它表示 long 类型能够表示的最大值 </span></td>
+<td><span style="font-size: medium;">@Native public static final long <strong>MAX_VALUE</strong> = 0x7fffffffffffffffL; </span></td>
+</tr>
+<tr>
+<td><span style="font-size: medium;">值为 －2<sup>63</sup> 的常量，它表示 long 类型能够表示的最小值 </span></td>
+<td><span style="font-size: medium;">@Native public static final long <strong>MIN_VALUE</strong> = 0x8000000000000000L; </span></td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">用来以二进制补码形式表示 long 值的比特位数 </span></td>
+<td><span style="font-size: medium;">@Native public static final int <strong>SIZE</strong> = 64; </span></td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">二进制补码形式表示 long 值的字节数 </span></td>
+<td><span style="font-size: medium;">public static final int <strong>BYTES</strong> = SIZE / Byte.SIZE; </span></td>
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">表示基本类型 long 的 Class 实例 </span></td>
+<td><span style="font-size: medium;">public static final Class&lt;Long&gt;&nbsp;&nbsp;&nbsp;&nbsp; <strong>TYPE</strong> = (Class&lt;Long&gt;) Class.getPrimitiveClass("long");</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>&nbsp;</div>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><strong>构造方法</strong></span></div>
+<div>&nbsp;</div>
+<div>
+<div><span style="font-size: medium;">构造方法都是新创建对象,分配新的空间 </span></div>
+<div><span style="font-size: medium;">字符串形式构造,默认以十进制的字符串形式解析<br />
+			</span>
+<table style="border: 2px solid gray; width: 100%; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<p><span style="font-size: 15px;">包装类</span><br /><span style="font-size: 15px;">使用对应的基本数据类型long 构造</span></p>
+<p><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135411363-248428645.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_3c2e[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135411522-1429273603.png" alt="image_5bab1d94_3c2e[4]" width="452" height="78" border="0" /></a></span></p>
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: 15px;">包装类</span></div>
+<div><span style="font-size: 15px;">使用对应的基本数据类型long 的字符串String形式构造</span></div>
+<p><span style="font-size: 15px;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135411874-50963778.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_7677[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135412032-1071977545.png" alt="image_5bab1d94_7677[4]" width="494" height="75" border="0" /></a></span></p>
+
+</td>
+
+
+
+
+
+					</tr>
+
+
+
+
+
+				</tbody>
+
+
+
+
+
+			</table>
+
+
+
+
+
+		</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+
+
+
+	</div>
+<div>&nbsp;</div>
+<div><strong><span style="font-size: 18pt;">常用方法</span></strong>
+	</div>
+<div>&nbsp;</div>
+<div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong>比较</strong></span>
+		</div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: medium;">static int compare(long x, long y)
+							</span></td>
+<td>
+<div><span style="font-size: medium;"><strong>静态方法 </strong>
+								</span></div>
+<div><span style="font-size: medium;">0&nbsp;&nbsp; x == y;
+								</span></div>
+<div><span style="font-size: medium;">-1&nbsp;&nbsp; x &lt; y;
+								</span></div>
+<div><span style="font-size: medium;">1&nbsp;&nbsp;&nbsp; x &gt; y
+								</span></div>
+<div><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135412410-46963912.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_44ce[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135412560-1050529864.png" alt="image_5bab1d94_44ce[4]" width="442" height="76" border="0" /></a></span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">int compareTo(Long anotherLong)
+								</span></div>
+
+
+
+
+</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><strong>实例方法</strong><br />两个对象进行比较&nbsp;&nbsp; ,实际比较两个对象的value值<br />根本还是通过调用 static int compare(long x, long y)<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135412953-1150418440.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_63a5[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135413113-691569377.png" alt="image_5bab1d94_63a5[4]" width="473" height="71" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static int compareUnsigned(long x, long y)
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><strong>静态方法</strong><br />两个基本类型int 当做无符号数进行比较&nbsp;&nbsp; 通过+MIN_VALUE进行转换<br />根本还是调用static int compare(long x, long y)</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135413318-2110241398.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_253d[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135413521-1279546329.png" alt="image_5bab1d94_253d[4]" width="494" height="77" border="0" /></a>
+							</td>
+
+
+
+
+
+						</tr>
+
+
+
+
+
+					</tbody>
+
+
+
+
+
+				</table>
+
+
+
+
+
+			</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong>parseXXX系列 </strong></span>
+			</div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: medium;">字符串解析 为 基本类型
+				</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;">不需要对象,所以都是静态方法
+				</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135413938-2057736950.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_130b[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135414085-2096528231.png" alt="image_5bab1d94_130b[4]" width="416" height="75" border="0" /></a></span></div>
+<div style="line-height: 32px;">
+<table style="border: 2px solid gray; width: 100%; margin-left: 0px; border-collapse: collapse; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<p><span style="font-size: medium;">static long parseLong(String s, int radix)</span></p>
+<p><span style="font-size: medium;">静态方法<br />使用第二个参数指定的基数(进制)，将字符串参数解析为有符号的整数<br />除了第一个字符可以是用来表示负值的 ASCII 减号 '-' ('\u002D&rsquo;)，加号'+' ('\u002B')&nbsp; 外<br />字符串中的字符必须都是指定基数的数字
+								</span></p>
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<p><span style="font-size: medium;">static long parseLong(String s)</span></p>
+<p><span style="font-size: medium;">静态方法<br />static long parseLong(String s, int radix) 的十进制简化形式<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135414416-1142812248.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_4b14[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135414559-1628923976.png" alt="image_5bab1d94_4b14[4]" width="661" height="78" border="0" /></a></span></p>
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">static long parseUnsignedLong(String s, int radix)</span></div>
+<div><span style="font-size: medium;">静态方法
+									</span></div>
+<div><span style="font-size: medium;">使用第二个参数指定的基数(进制)，将字符串参数解析为无符号的整数
+									</span></div>
+<div><span style="font-size: medium;">除了第一个字符可以是用来表示正值的 ASCII&nbsp; 加号'+' ('\u002B')&nbsp; 外
+									</span></div>
+<div><span style="font-size: medium;">字符串中的字符必须都是指定基数的数字
+									</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<p><span style="font-size: medium;">static long parseUnsignedLong(String s)</span></p>
+<p><span style="font-size: medium;">静态方法<br />static long parseUnsignedLong(String s, int radix)的十进制简化形式</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135414747-162003488.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_1311[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135414922-249431865.png" alt="image_5bab1d94_1311[4]" width="729" height="75" border="0" /></a>
+								</p>
+</td>
+
+
+
+
+
+							</tr>
+
+
+
+
+
+						</tbody>
+
+
+
+
+
+					</table>
+
+
+
+
+
+				</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+			</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong>valueOf系列 </strong></span>
+		</div>
+<div style="line-height: 32px;"><span style="font-size: medium;">把基本基本类型 包装为对象
+		</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;">用来创建获得对象,所以无需对象,全都是静态方法
+		</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135415306-868091183.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_7ef1[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135415451-232495305.png" alt="image_5bab1d94_7ef1[4]" width="374" height="79" border="0" /></a></span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: medium;">VaueOf系列都有对应的缓存区, 缓存区范围内对象为同一个&nbsp; </span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;">缓冲区为静态内部类中的数组
+		</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135415848-1308501002.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_408d[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135416005-411121356.png" alt="image_5bab1d94_408d[4]" width="466" height="152" border="0" /></a></span></div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: medium;">缓冲范围为&nbsp; -128~127
+		</span></div>
+<div style="line-height: 32px;">
+<div>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td>
+<p><span style="font-size: medium;">static Long valueOf(long l)</span></p>
+<p><span style="font-size: medium;">静态方法<br />读取缓存中的对象或者创建新的对象<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135416388-1270938744.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_515c[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135416526-831319102.png" alt="image_5bab1d94_515c[4]" width="521" height="152" border="0" /></a></span></p>
+</td>
+
+
+
+
+</tr>
+<tr>
+<td>
+<p><span style="font-size: medium;">static Integer valueOf(String s, int radix)</span></p>
+<p><span style="font-size: medium;">静态方法<br />根据指定的基数(进制)解析字符串<br />根本是调用static Long valueOf(long l)<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135416918-987687277.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_57b7[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135417068-326516921.png" alt="image_5bab1d94_57b7[4]" width="737" height="71" border="0" /></a></span></p>
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<p><span style="font-size: medium;">static Long valueOf(String s)</span></p>
+<p><span style="font-size: medium;">静态方法<br />十进制 解析字符串<br />static Long valueOf(String s, int radix) 的十进制简化形式<br />根本是调用static&nbsp;&nbsp; Long valueOf(long l)</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135417276-2044699913.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_2d40[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135417474-2034852621.png" alt="image_5bab1d94_2d40[4]" width="617" height="95" border="0" /></a>
+								</p>
+</td>
+
+
+
+
+
+							</tr>
+
+
+
+
+
+						</tbody>
+
+
+
+
+
+					</table>
+
+
+
+
+
+				</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+			</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">
+<div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>decode</strong></span>
+					</div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">接受通过以下语法给出的十进制、十六进制和八进制数字
+										</span></div>
+<div><span style="font-size: medium;">Sign是可选的 表示符号位
+										</span></div>
+<div><span style="font-size: medium;">再往后 DecimalNumeral&nbsp; 就是指定基数的字符序列的正值
+										</span></div>
+<div><span style="font-size: medium;">不能是负数,想要设置负数请仅仅使用符号位 也就是+-1&nbsp; --1这种肯定不行
+										</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">Sign DecimalNumeral
+										</span></div>
+<div><span style="font-size: medium;">Sign 0x HexDigits
+										</span></div>
+<div><span style="font-size: medium;">Sign 0X HexDigits
+										</span></div>
+<div><span style="font-size: medium;">Sign # HexDigits
+										</span></div>
+<div><span style="font-size: medium;">Sign 0 OctalDigits
+										</span></div>
+<div><span style="font-size: medium;">Sign:
+										</span></div>
+<div><span style="font-size: medium;">-
+										</span></div>
+<div><span style="font-size: medium;">+&nbsp; </span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">与Integer中的decode方法一样<br />代码也都一模一样,除了Integer换成了Long</span>
+									</td>
+
+
+
+
+
+								</tr>
+
+
+
+
+
+							</tbody>
+
+
+
+
+
+						</table>
+
+
+
+
+
+					</div>
+
+
+
+
+
+				</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+
+
+
+			</div>
+<div>&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong>XXXValue系列</strong></span>
+		</div>
+
+
+
+
+<span style="line-height: 32px;"><span style="font-size: medium;">获取对象的某种基本类型的值</span></span>
+<div style="line-height: 32px;">
+<div>
+<div style="line-height: 32px;"><span style="font-size: medium;">需要获取对象的所以必然全部都是实例方法
+				</span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135417910-54048090.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_7a0c[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135418057-1768609397.png" alt="image_5bab1d94_7a0c[4]" width="361" height="74" border="0" /></a></span></div>
+<div style="line-height: 32px;"><span style="font-size: medium;">强制类型转换的形式,将内部的long 值转换为指定的类型
+				</span></div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">byte byteValue()
+										</span></div>
+
+
+
+
+</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135418511-1996117114.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_55df[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135418671-1749512163.png" alt="image_5bab1d94_55df[4]" width="355" height="84" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">short shortValue()
+									</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135419070-1015244785.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_189f[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135419250-1618832210.png" alt="image_5bab1d94_189f[4]" width="361" height="83" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">int intValue()
+									</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135419656-1358836711.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_1aa5[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135419822-1997607463.png" alt="image_5bab1d94_1aa5[4]" width="357" height="84" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">long longValue()
+									</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135420183-2031130649.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_3e2f[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135420339-407077128.png" alt="image_5bab1d94_3e2f[4]" width="356" height="82" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">float floatValue()
+									</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135420729-1460247171.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_4e72[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135420878-1200843480.png" alt="image_5bab1d94_4e72[4]" width="357" height="82" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">double doubleValue()
+									</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135421250-815127767.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_5f3[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135421392-1271676877.png" alt="image_5bab1d94_5f3[4]" width="359" height="71" border="0" /></a></span>
+									</td>
+
+
+
+
+
+								</tr>
+
+
+
+
+
+							</tbody>
+
+
+
+
+
+						</table>
+
+
+
+
+
+					</div>
+<div style="line-height: 32px;">&nbsp;</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+				</div>
+
+
+
+
+
+			</div>
+<div>&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt;"><strong>toUnsignedString 系列&nbsp;&nbsp; toString&nbsp; toXXXString&nbsp; 系列</strong></span>
+		</div>
+<div style="line-height: 32px;">
+<div style="line-height: 24px;">&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">
+<div style="line-height: 32px;"><span style="font-size: medium;">无符号&nbsp; 字符串相关的转换
+			</span></div>
+<div style="line-height: 32px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td><span style="font-size: medium;">static String toString(long i, int radix)
+							</span></td>
+<td>
+<div><span style="font-size: medium;">静态方法
+								</span></div>
+<div><span style="font-size: medium;">根据指定基数,int&nbsp;&nbsp;&nbsp; 返回一个String&nbsp; </span></div>
+<div><span style="font-size: medium;">如果基数小于 Character.MIN_RADIX 或者大于 Character.MAX_RADIX，默认设置为基数 10
+								</span></div>
+<div><span style="font-size: medium;">如果是负数 第一个符号位负号 '-' ('\u002D'),如果不是负数,将不会有符号
+								</span></div>
+<div><span style="font-size: medium;">剩下的字符表示第一个参数的大小
+								</span></div>
+<div><span style="font-size: medium;">如果大小是0&nbsp; 由字符&nbsp; '0' ('\u0030') 表示,否则用来表示数值的第一个字符不会是0
+								</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">用以下 ASCII 字符作为数字：
+								</span></div>
+<div><span style="font-size: medium;">0123456789abcdefghijklmnopqrstuvwxyz
+								</span></div>
+<div><span style="font-size: medium;">其范围是从 '\u0030' 到 '\u0039' 和从 '\u0061' 到 '\u007A'
+								</span></div>
+<div><span style="font-size: medium;">如果 radix 为 N, 则按照所示顺序，使用这些字符中的前 N 个作为其数字
+								</span></div>
+<div><span style="font-size: medium;">因此，十六进制（基数为 16）的数字是 0123456789abcdef
+								</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">static String toString(long i)
+							</span></td>
+<td>
+<div><span style="font-size: medium;">静态方法
+								</span></div>
+<div><span style="font-size: medium;">toString(long i, int radix)的十进制简化形式
+								</span></div>
+<div><span style="font-size: medium;">同toString(long i, 10)
+								</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">String toString()
+							</span></td>
+<td>
+<div><span style="font-size: medium;"><strong>实例方法</strong>
+								</span></div>
+<div><span style="font-size: medium;">等同于把对象的value直接调用&nbsp; toString(long i) 
+								</span></div>
+<div><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135421804-1185002399.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_5bbf[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135421954-1999515755.png" alt="image_5bab1d94_5bbf[4]" width="276" height="71" border="0" /></a></span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">static String toBinaryString(long i)
+							</span></td>
+<td>
+<div><span style="font-size: medium;">静态方法
+								</span></div>
+<div><span style="font-size: medium;">以二进制（基数 2）无符号整数形式返回一个整数参数的字符串表示形式
+								</span></div>
+<div><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135422350-1984655798.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_5e4[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135422501-2104088297.png" alt="image_5bab1d94_5e4[4]" width="484" height="79" border="0" /></a></span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">static String toOctalString(long i)
+							</span></td>
+<td>
+<div><span style="font-size: medium;">静态方法
+								</span></div>
+<div><span style="font-size: medium;">以八进制（基数 8）无符号整数形式返回一个整数参数的字符串表示形式
+								</span></div>
+<div><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135422850-1145571709.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_638c[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135422996-63025318.png" alt="image_5bab1d94_638c[4]" width="528" height="70" border="0" /></a></span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">static String toHexString(long i)
+							</span></td>
+<td>
+<div><span style="font-size: medium;">静态方法
+								</span></div>
+<div><span style="font-size: medium;">以十六进制（基数 16）无符号整数形式返回一个整数参数的字符串表示形式
+								</span></div>
+<div><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135423365-867958709.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_5a3b[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135423503-1735347360.png" alt="image_5bab1d94_5a3b[4]" width="498" height="73" border="0" /></a></span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static String toUnsignedString(long i, int radix)<br />
+							</span></td>
+<td><span style="font-size: medium;">静态方法<br />
+								</span>
+<div><span style="font-size: medium;">在第二个参数指定的基数中，返回第一个参数的字符串表示的无符号整数值
+								</span></div>
+<div><span style="font-size: medium;">如果基数不在Character.MIN_RADIX 和 Character.MAX_RADIX的范围内, 默认基数为10
+								</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">如果大小是0,由字符零表示&nbsp;&nbsp; '0' ('\u0030')
+								</span></div>
+<div><span style="font-size: medium;">否则第一个字符不会是 0&nbsp; </span></div>
+<div><span style="font-size: medium;">基数和表示数字的字符的用法和表现和toString中一样
+								</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static String toUnsignedString(long i)
+							</span></td>
+<td><span style="font-size: medium;">静态方法<br />toUnsignedString(long i, int radix) 十进制的简化形式&nbsp; 同toUnsignedString(int, 10) <br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135423871-940297722.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_1b69[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135424000-1017550979.png" alt="image_5bab1d94_1b69[4]" width="496" height="71" border="0" /></a></span>
+							</td>
+
+
+
+
+
+						</tr>
+
+
+
+
+
+					</tbody>
+
+
+
+
+
+				</table>
+
+
+
+
+
+			</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+		</div>
+<div style="line-height: 32px;">&nbsp;</div>
+
+
+
+
+
+	</div>
+<div>
+<div style="line-height: 32px;">equals
+		</div>
+
+
+
+
+
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">Long重写了equals方法<br />比较的是两个Long对象中内部的 long value值
+						</span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135424383-681431355.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_2b9f[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135424554-1711579890.png" alt="image_5bab1d94_2b9f[4]" width="496" height="136" border="0" /></a></span>
+						</td>
+
+
+
+
+
+					</tr>
+
+
+
+
+
+				</tbody>
+
+
+
+
+
+			</table>
+
+
+
+
+
+		</div>
+
+
+
+
+
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div>
+<div style="line-height: 24px;"><span style="font-size: 13.5pt;"><strong>hashCode</strong></span>
+		</div>
+
+
+
+
+
+	</div>
+<div>
+<div style="line-height: 24px;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static int hashCode(long value)<br />
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">静态方法<br />返回某个long 数值的hashcode<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135424944-151839797.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_756a[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135425086-1023485254.png" alt="image_5bab1d94_756a[4]" width="405" height="69" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">int hashCode()
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">实例方法<br />获取某个Long对象的hashcode<br />等同于static int hashCode(long value) 调用 内部value值</span><br /><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135425269-990969491.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_7b7[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135425436-521473459.png" alt="image_5bab1d94_7b7[4]" width="415" height="78" border="0" /></a>
+						</td>
+
+
+
+
+
+					</tr>
+
+
+
+
+
+				</tbody>
+
+
+
+
+
+			</table>
+
+
+
+
+
+		</div>
+
+
+
+
+
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div><span style="font-size: 13.5pt;"><strong>getXXX系列</strong></span>&nbsp; </div>
+<div><span style="font-size: medium;">获取系统属性的数值
+	</span></div>
+<div>&nbsp;</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static Long getLong(String nm, Long val)&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">确定具有指定名称的系统属性的整数值
+						</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">第一个参数被视为系统属性的名称
+						</span></div>
+<div><span style="font-size: medium;">通过 System.getProperty(java.lang.String) 方法可以访问系统属性
+						</span></div>
+<div>&nbsp;</div>
+<div><span style="font-size: medium;">第二个参数是默认值
+						</span></div>
+<div><span style="font-size: medium;">如果未具有指定名称的属性，或者属性的数字格式不正确，或者指定名称为空或 null
+						</span></div>
+<div><span style="font-size: medium;">则返回一个表示第二个参数的值的 Integer 对象
+						</span></div>
+
+
+
+
+<span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135425799-1675909991.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_24f2[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135425953-1935897540.png" alt="image_5bab1d94_24f2[4]" width="603" height="291" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static Long getLong(String nm, long val)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static Long getLong(String nm, Long val)&nbsp; 的基本类型形式<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135426351-703048384.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_274b[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135426492-713123241.png" alt="image_5bab1d94_274b[4]" width="585" height="96" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static Long getLong(String nm)
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><br /><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135426823-2129998664.png"><img style="display: inline; background-image: none;" title="image_5bab1d94_4ed9[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135426970-1377629853.png" alt="image_5bab1d94_4ed9[4]" width="580" height="74" border="0" /></a></span>
+					</td>
+
+
+
+
+
+				</tr>
+
+
+
+
+
+			</tbody>
+
+
+
+
+
+		</table>
+
+
+
+
+
+	</div>
+<div><span style="border-collapse: collapse; -webkit-border-horizontal-spacing: 2px; -webkit-border-vertical-spacing: 2px;"><br /></span>
+	</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><strong>其他方法</strong></span>
+	</div>
+<div><span style="font-size: 18pt;"><strong><br /></strong></span>
+	</div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">最高1&nbsp; 位&nbsp; 最低1&nbsp;&nbsp; 位<br />前置零个数 和 后置0个数
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div><span style="font-size: medium;">highestOneBit(long) / lowestOneBit(long)
+						</span></div>
+<div><span style="font-size: medium;">numberOfLeadingZeros(long) / numberOfTrailingZeros(long)
+						</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">位数<br />循环左移/循环右移<br />按位翻转 按照字节翻转
+					</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;">
+<div>
+<div><span style="font-size: medium;">bitCount(long)&nbsp; 二进制补码表示形式中的 1 位的数量
+							</span></div>
+<div><span style="font-size: medium;">rotateLeft(long, int)&nbsp; / rotateRight(long, int)
+							</span></div>
+<div><span style="font-size: medium;">reverse(long)&nbsp;&nbsp; /&nbsp; reverseBytes(long)
+							</span></div>
+
+
+
+
+</div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td><span style="font-size: medium;">取整<br />求余
+					</span></td>
+<td>
+<div><span style="font-size: medium;">divideUnsigned(long, long)
+						</span></div>
+<div><span style="font-size: medium;">remainderUnsigned(long, long)
+						</span></div>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+
+
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+
+
+</div>
+<div><span style="font-size: medium;">与Integer 一样, Long也有提供上述几个方法
+	</span></div>
+<div><span style="font-size: medium;">语义一致</span>	</div>
+<div>&nbsp;</div>
+<div>
+<div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+<div>
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static int signum(long i)
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">静态方法<br />返回指定 int 值的符号函数<br />（如果指定值为负，则返回 －1；如果指定值为零，则返回 0；如果指定的值为正，则返回 1 ） <br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135427297-893792615.png"><img style="display: inline; background-image: none;" title="image_5bab1d95_5650[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135427427-854023065.png" alt="image_5bab1d95_5650[4]" width="417" height="94" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static long sum(long a, long b)
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">静态方法<br />求和<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135427844-1699548267.png"><img style="display: inline; background-image: none;" title="image_5bab1d95_67b3[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135428013-1164408532.png" alt="image_5bab1d95_67b3[4]" width="409" height="76" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static long max(long a, long b)
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">静态方法<br />最大值<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135428421-496622306.png"><img style="display: inline; background-image: none;" title="image_5bab1d95_15a2[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135428604-724974055.png" alt="image_5bab1d95_15a2[4]" width="407" height="77" border="0" /></a></span></td>
+
+
+
+
+</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">static long min(long a, long b)
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: medium;">静态方法<br />最小值<br /></span><span style="font-size: medium;"><a href="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135428957-880484301.png"><img style="display: inline; background-image: none;" title="image_5bab1d95_193b[4]" src="https://img2018.cnblogs.com/blog/897393/201809/897393-20180926135429101-615923219.png" alt="image_5bab1d95_193b[4]" width="415" height="74" border="0" /></a></span></td>
+
+
+
+
+</tr>
+
+
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+
+
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+<div><span style="font-size: medium;">Long 与Integer 是数值类型中使用频率最高的两个,也是提供支持方法最多的两个
+	</span></div>
+<div><span style="font-size: medium;">他们提供出来的方法功能也是高度的相似</span></div>
+
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-09-26 13:54</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9706490" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9706490);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9706490, cb_entryCreatedDate = '2018-09-26 13:54', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

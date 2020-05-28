@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>橘子果汁 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=OL4qeo1LNGlN1rKIhv5UctANvt0M6Nx6kLzr_ffx3Xk" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lvmengtian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lvmengtian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lvmengtian/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 429825;
+        var currentBlogApp = 'lvmengtian';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'SimpleMemory';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/lvmengtian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lvmengtian/">橘子果汁</a>
+</h1>
+<h2>
+专注、坚持、自律
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lvmengtian/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%A9%98%E5%AD%90%E6%9E%9C%E6%B1%81">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/lvmengtian/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+10&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+2</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<!--done-->
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2020/04/28.html">2020年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/12796820.html">
+    各大公司面试题分类整理
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本人小白一枚，从18年入职工作到现在，工资不高，所在业务受重视程度更低。所以想趁着在家办公的时间，看看外面的世界。下面对面试过程中的问题进行分类汇总，这些问题的答案有个人认知、有参考他人的观点，也有一些直接引用别人的文章。本文给出的答案只是一个引子，如果想要深入探究还需要各位通过其他渠道进行详            <a href="https://www.cnblogs.com/lvmengtian/p/12796820.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2020-04-28 19:54 橘子果汁 阅读 (117) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12796820" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2019/07/28.html">2019年7月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/11259158.html">
+    数据库中的悲观锁和乐观锁
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：现在我们简单聊一下数据库中的悲观锁和乐观锁。 悲观锁 悲观锁正如其名称，比较悲观。总会认为：每当修改数据时，会有其他线程也会同时修改该数据。所以针对这种情况悲观锁的做法是：读取数据之后就加锁 ，这样别的线程读取该数据的时候就需要等待当前线程释放锁，获得到锁的线程才能获得该数据的读写权限。从而保证了并            <a href="https://www.cnblogs.com/lvmengtian/p/11259158.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-07-28 15:28 橘子果汁 阅读 (302) 评论 (2)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11259158" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2019/03/12.html">2019年3月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/10516942.html">
+    Junit借助Groboutils Core进行并发测试
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文参考：http://www.voidcn.com/article/p-ybnvuffh-ke.html；转载请注明出处 junit是无法进行并发测试，但是又有需要并发测试的场景怎么办呢？此时可以借助一个插件（Groboutils Core）来完成这种功能。 maven仓库地址：https://m            <a href="https://www.cnblogs.com/lvmengtian/p/10516942.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-03-12 15:23 橘子果汁 阅读 (271) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10516942" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2019/03/06.html">2019年3月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/10485652.html">
+    模拟HTTP请求调用controller
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：原文参考本人的简书：https://www.jianshu.com/p/0221edbe1598 MockMvc实现了对Http请求的模拟，能够直接使用网络的形式，转换到Controller调用，这样使得测试速度更快，不依赖网络环境。而且提供了一套验证的工具。代码如下： 1 @RunWith(Spr            <a href="https://www.cnblogs.com/lvmengtian/p/10485652.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2019-03-06 20:09 橘子果汁 阅读 (741) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10485652" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2018/08/24.html">2018年8月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/9531318.html">
+    HashMap源码解读
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Q&amp;A： 1. 为什么变成红黑树是8，而转化成链表是6？ 有人从源码分析，有人从查找时间复杂度分析。部分源码如下： 2. 容量为什么是2的乘方呢？https://blog.csdn.net/sd_csdn_scy/article/details/57083619            <a href="https://www.cnblogs.com/lvmengtian/p/9531318.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-08-24 18:26 橘子果汁 阅读 (91) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9531318" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/9531280.html">
+    知识点（杂）
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Mapstruct 实体映射 forkjoinpool 工作相关使用到的JDK类及其相关源码、机制 设计模式，设计模式在工作中用到了哪些，具体使用场景 并发类的相关知识，线程安全、锁机制、信号量、闭锁、栅栏、线程池等 框架相关，Spring相关机制、Spring MVC相关机制、MyBatis相关机            <a href="https://www.cnblogs.com/lvmengtian/p/9531280.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-08-24 18:01 橘子果汁 阅读 (38) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9531280" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2018/07/10.html">2018年7月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/9289012.html">
+    Mac安装多版本JDK
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：0. 配置JDK环境 安装完成之后，配置.bash_profile文件 使用source ./bash_profile激活 2. 如何切换默认的jdk？ 使用java -version就可以看默认版本； 使用jdk7或者jdk8进行版本切换。            <a href="https://www.cnblogs.com/lvmengtian/p/9289012.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-07-10 14:50 橘子果汁 阅读 (26) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9289012" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2018/06/29.html">2018年6月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/9243821.html">
+    SpringBoot【新手学习记录篇】
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1. 启动方式： 2. 配置文件 可以使用properties文件，也可以使用yml文件【推荐.】 3. Controller的使用 Spring4之后加上的注解，原来返回JSON需要 @ResponseBody配合@Controller使用            <a href="https://www.cnblogs.com/lvmengtian/p/9243821.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-06-29 15:49 橘子果汁 阅读 (47) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9243821" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2018/06/18.html">2018年6月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/9194472.html">
+    mysql5.7免安装版配置
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：[mysql] # 设置mysql客户端默认字符集 default-character-set = utf8 [mysqld] #安装目录 basedir = E:\mysql #数据存放目录 data目录是要单独创建的，记得是个空文件夹 datadir = E:\mysql\data #端口 po            <a href="https://www.cnblogs.com/lvmengtian/p/9194472.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-06-18 09:23 橘子果汁 阅读 (44) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9194472" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/lvmengtian/archive/2018/05/02.html">2018年5月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2" href="https://www.cnblogs.com/lvmengtian/p/8979266.html">
+    java传参问题
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：参考链接：https://www.cnblogs.com/linkstar/p/5951141.html good wbc 解释原因： 在不同地方可以看到java有两种传递方式：值传递和引用传递。其实引用传递也是一种值传递，只不过此时的值是一个内存地址。 第一步：代码中的 1 和 2 执行完毕之后，            <a href="https://www.cnblogs.com/lvmengtian/p/8979266.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">
+
+posted @ 2018-05-02 11:06 橘子果汁 阅读 (67) 评论 (0)
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8979266" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    
+
+    </div>    
+</div>
+
+
+
+
+
+
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 橘子果汁
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <div>
+转载请注明出处
+</div>
+    </div>
+</body>
+</html>

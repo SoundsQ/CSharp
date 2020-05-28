@@ -1,0 +1,614 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta property="og:description" content="粉丝朋友们，不知道大家看故事看腻了没（要是没腻可一定留言告诉我^\_^），今天这篇文章换换口味，正经的来写写技术文。言归正传，咱们开始吧！ 本文结构： 需求背景 进击的 Python 随着人工智能的兴" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Python一键转Jar包，Java调用Python新姿势！ - 轩辕之风 - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=Z9Vw4btcgJmrpUEjY_SgebmTmDXJ_hPFoST7ad2aJp4" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=hlpQ1CJDwwJXDxv2HNauUmW3NjyWzoMaw1uER19SLT0" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xuanyuan/custom.css?v=1KFqgc8N4u9cFrFdaEZzuOblzkw=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=XjHfryC9ctsatIZz1dHn7TsRIqmwz9c3aj_6SCfHSDM" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xuanyuan/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xuanyuan/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xuanyuan/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=98Fvfd6UZH20B_MF08daNaODjSu879MVR9RHmyvWAlg"></script>
+    <script>
+        var currentBlogId = 193695;
+        var currentBlogApp = 'xuanyuan';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var skinName = 'CodingLife';
+    </script>
+    
+    
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/xuanyuan/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xuanyuan/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%BD%A9%E8%BE%95%E4%B9%8B%E9%A3%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/xuanyuan/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+42&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+220</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/xuanyuan/p/12453796.html">Python一键转Jar包，Java调用Python新姿势！</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+    <p>粉丝朋友们，不知道大家看故事看腻了没（要是没腻可一定留言告诉我<sup>_</sup>），今天这篇文章换换口味，正经的来写写技术文。言归正传，咱们开始吧！</p>
+<h2 id="本文结构：">本文结构：</h2>
+<pre><code>- 需求背景
+  - 进击的 Python
+  - Java 和 Python
+- 给 Python 加速
+  - 寻找方向
+  - Jython?
+- Python-&gt;Native 代码
+  - 整体思路
+  - 实际动手
+  - 自动化
+- 关键问题
+  - import 的问题
+  - Python GIL 问题
+- 测试效果
+- 总结
+</code></pre>
+<h1 id="需求背景">需求背景</h1>
+<h2 id="进击的-python">进击的 Python</h2>
+<p>随着人工智能的兴起，Python 这门曾经小众的编程语言可谓是焕发了第二春。<br>
+<img src="https://imgkr.cn-bj.ufileos.com/ffc42dca-7633-42ba-8416-e0e591d5b228.png" alt=""></p>
+<p>以 tensorflow、pytorch 等为主的机器学习／深度学习的开发框架大行其道，助推了 python 这门曾经以爬虫见长（python 粉别生气）的编程语言在 TIOBE 编程语言排行榜上一路披荆斩棘，坐上前三甲的宝座，仅次于 Java 和 C，将 C++、JavaScript、PHP、C#等一众劲敌斩落马下。<br>
+<img src="https://imgkr.cn-bj.ufileos.com/8cbdb113-3cb5-4c70-9b03-8b71e173bcd9.png" alt=""><br>
+<img src="https://imgkr.cn-bj.ufileos.com/25687a4a-a001-4a5c-abc0-92488adf0a3e.png" alt=""></p>
+<p>当然，轩辕君向来是不提倡编程语言之间的竞争对比，每一门语言都有自己的优势和劣势，有自己应用的领域。<br>
+另一方面，TIOBE 统计的数据也不能代表国内的实际情况，上面的例子只是侧面反映了 Python 这门语言如今的流行程度。</p>
+<h2 id="java-还是-python">Java 还是 Python</h2>
+<p>说回咱们的需求上来，如今在不少的企业中，同时存在 Python 研发团队和 Java 研发团队，Python 团队负责人工智能算法开发，而 Java 团队负责算法工程化，将算法能力通过工程化包装提供接口给更上层的应用使用。</p>
+<p>可能大家要问了，为什么不直接用 Java 做 AI 开发呢？要弄两个团队。其实，现在包括 TensorFlow 在内的框架都逐渐开始支持 Java 平台，用 Java 做 AI 开发也不是不行（其实已经有不少团队在这样做了），但限于历史原因，做 AI 开发的人本就不多，而这一些人绝大部分都是 Python 技术栈入坑，Python 的 AI 开发生态已经建设的相对完善，所以造成了在很多公司中算法团队和工程化团队不得不使用不同的语言。</p>
+<p>现在该抛出本文的重要问题：<strong>Java 工程化团队如何调用 Python 的算法能力？</strong></p>
+<p>答案基本上只有一个：<strong>Python 通过 Django/Flask 等框架启动一个 Web 服务，Java 中通过 Restful API 与之进行交互</strong></p>
+<p>上面的方式的确可以解决问题，但随之而来的就是性能问题。尤其是在用户量上升后，大量并发接口访问下，通过网络访问和 Python 的代码执行速度将成为拖累整个项目的瓶颈。</p>
+<p>当然，不差钱的公司可以用硬件堆出性能，一个不行，那就多部署几个 Python Web 服务。</p>
+<p>那除此之外，有没有更实惠的解决方案呢？这就是这篇文章要讨论的问题。</p>
+<h1 id="给-python-加速">给 Python 加速</h1>
+<h2 id="寻找方向">寻找方向</h2>
+<p>上面的性能瓶颈中，拖累执行速度的原因主要有两个：</p>
+<ul>
+<li><span style="color:orangered">通过网络访问，不如直接调用内部模块快</span></li>
+<li><span style="color:orangered">Python 是解释执行，快不起来</span></li>
+</ul>
+<p>众所周知，Python 是一门解释型脚本语言，一般来说，在执行速度上：</p>
+<p><strong>解释型语言 &lt; 中间字节码语言 &lt; 本地编译型语言</strong></p>
+<p>自然而然，我们要努力的方向也就有两个：</p>
+<ul>
+<li><span style="color:#35b378">能否不通过网络访问，直接本地调用</span></li>
+<li><span style="color:#35b378">Python 不要解释执行</span></li>
+</ul>
+<p>结合上面的两个点，我们的目标也清晰起来：</p>
+<p><strong>将 Python 代码转换成 Java 可以直接本地调用的模块</strong></p>
+<p>对于 Java 来说，能够本地调用的有两种：</p>
+<ul>
+<li><strong>Java 代码包</strong></li>
+<li><strong>Native 代码模块</strong></li>
+</ul>
+<p>其实我们通常所说的 Python 指的是 CPython，也就是由 C 语言开发的解释器来解释执行。而除此之外，除了 C 语言，不少其他编程语言也能够按照 Python 的语言规范开发出虚拟机来解释执行 Python 脚本：</p>
+<ul>
+<li><span style="color:#35b378">CPython: C 语言编写的解释器</span></li>
+<li><span style="color:#35b378">Jython: Java 编写的解释器</span></li>
+<li><span style="color:#35b378">IronPython: .NET 平台的解释器</span></li>
+<li><span style="color:#35b378">PyPy: Python 自己编写的解释器（鸡生蛋，蛋生鸡)</span></li>
+</ul>
+<h2 id="jython">Jython?</h2>
+<p>如果能够在 JVM 中直接执行 Python 脚本，与 Java 业务代码的交互自然是最简单不过。但随后的调研发现，这条路很快就被堵死了：</p>
+<ul>
+<li>不支持 Python3.0 以上的语法</li>
+<li>python 源码中若引用的第三方库包含 C 语言扩展，将无法提供支持，如 numpy 等</li>
+</ul>
+<p>这条路行不通，那还有一条：把 Python 代码转换成 Native 代码块，Java 通过 JNI 的接口形式调用。</p>
+<h1 id="python---native-代码">Python -&gt; Native 代码</h1>
+<h2 id="整体思路">整体思路</h2>
+<p>先将 Python 源代码转换成 C 代码，之后用 GCC 编译 C 代码为二进制模块 so/dll，接着进行一次 Java Native 接口封装，使用 Jar 打包命令转换成 Jar 包，然后 Java 便可以直接调用。<br>
+<img src="https://imgkr.cn-bj.ufileos.com/adcdf61d-ea4e-4e3e-8c6a-069cbbf55227.png" alt=""></p>
+<p>流程并不复杂，但要完整实现这个目标，有一个关键问题需要解决：</p>
+<p><strong>Python 代码如何转换成 C 代码？</strong></p>
+<p>终于要轮到本文的主角登场了，将要用到的一个核心工具叫：<strong>Cython</strong></p>
+<p>请注意，这里的<strong>Cython</strong>和前面提到的<strong>CPython</strong>不是一回事。CPython 狭义上是指 C 语言编写的 Python 解释器，是 Windows、Linux 下我们默认的 Python 脚本解释器。</p>
+<p>而 Cython 是 Python 的一个第三方库，你可以通过<code>pip install Cython</code>进行安装。</p>
+<p>官方介绍 Cython 是一个 Python 语言规范的超集，它可以将 Python+C 混合编码的.pyx 脚本转换为 C 代码，主要用于优化 Python 脚本性能或 Python 调用 C 函数库。</p>
+<p>听上去有点复杂，也有点绕，不过没关系，get 一个核心点即可：<strong>Cython 能够把 Python 脚本转换成 C 代码</strong></p>
+<p>来看一个实验：</p>
+<pre><code class="language-python"># FileName: test.py
+def TestFunction():
+  print(&quot;this is print from python script&quot;)
+</code></pre>
+<p>将上述代码通过 Cython 转化，生成 test.c，长这个样子：<br>
+<img src="https://imgkr.cn-bj.ufileos.com/814f0ca0-43bd-4721-980f-785b0f365a15.png" alt=""><br>
+代码非常长，而且不易读，这里仅截图示意。</p>
+<h2 id="实际动手">实际动手</h2>
+<h3 id="1准备-python-源代码">1.准备 Python 源代码</h3>
+<pre><code class="language-python"># FileName: Test.py
+# 示例代码：将输入的字符串转变为大写
+def logic(param):
+  print('this is a logic function')
+  print('param is [%s]' % param)
+  return param.upper()
+
+# 接口函数，导出给Java Native的接口
+def JNI_API_TestFunction(param):
+  print(&quot;enter JNI_API_test_function&quot;)
+  result = logic(param)
+  print(&quot;leave JNI_API_test_function&quot;)
+  return result
+</code></pre>
+<p><code>注意1：</code>这里在 python 源码中使用一种约定：<code>以JNI_API_为前缀开头的函数表示为Python代码模块要导出对外调用的接口函数</code>，这样做的目的是为了让我们的 Python 一键转 Jar 包系统能自动化识别提取哪些接口作为导出函数。</p>
+<p><code>注意2：</code>这一类接口函数的输入是一个 python 的 str 类型字符串，输出亦然，如此可便于移植以往通过<code>JSON</code>形式作为参数的 RESTful 接口。使用<code>JSON</code>的好处是可以对参数进行封装，支持多种复杂的参数形式，而不用重载出不同的接口函数对外调用。</p>
+<p><code>注意3：</code>还有一点需要说明的是，在接口函数前缀<code>JNI_API_</code>的后面，<strong>函数命名不能以 python 惯有的下划线命名法，而要使用驼峰命名法，注意这不是建议，而是要求，原因后续会提到。</strong></p>
+<h3 id="2准备一个-mainc-文件">2.准备一个 main.c 文件</h3>
+<p>这个文件的作用是对 Cython 转换生成的代码进行一次封装，封装成 Java JNI 接口形式的风格，以备下一步 Java 的使用。</p>
+<pre><code class="language-cpp">/* DO NOT EDIT THIS FILE - it is machine generated */
+#include &lt;jni.h&gt;
+#include &lt;Python.h&gt;
+#include &lt;stdio.h&gt;
+
+#ifndef _Included_main
+#define _Included_main
+#ifdef __cplusplus
+extern &quot;C&quot; {
+#endif
+
+#if PY_MAJOR_VERSION &lt; 3
+# define MODINIT(name)  init ## name
+#else
+# define MODINIT(name)  PyInit_ ## name
+#endif
+PyMODINIT_FUNC  MODINIT(Test)(void);
+
+JNIEXPORT void JNICALL Java_Test_initModule
+(JNIEnv *env, jobject obj) {
+  PyImport_AppendInittab(&quot;Test&quot;, MODINIT(Test));
+  Py_Initialize();
+
+  PyRun_SimpleString(&quot;import os&quot;);
+  PyRun_SimpleString(&quot;__name__ = \&quot;__main__\&quot;&quot;);
+  PyRun_SimpleString(&quot;import sys&quot;);
+  PyRun_SimpleString(&quot;sys.path.append('./')&quot;);
+
+  PyObject* m = PyInit_Test_Test();
+  if (!PyModule_Check(m)) {
+  	PyModuleDef *mdef = (PyModuleDef *) m;
+  	PyObject *modname = PyUnicode_FromString(&quot;__main__&quot;);
+  	m = NULL;
+  	if (modname) {
+  	  m = PyModule_NewObject(modname);
+  	  Py_DECREF(modname);
+  	  if (m) PyModule_ExecDef(m, mdef);
+  	}
+  }
+  PyEval_InitThreads();
+}
+
+
+JNIEXPORT void JNICALL Java_Test_uninitModule
+(JNIEnv *env, jobject obj) {
+  Py_Finalize();
+}
+
+JNIEXPORT jstring JNICALL Java_Test_testFunction
+(JNIEnv *env, jobject obj, jstring string)
+{
+  const char* param = (char*)(*env)-&gt;GetStringUTFChars(env, string, NULL);
+  static PyObject *s_pmodule = NULL;
+  static PyObject *s_pfunc = NULL;
+  if (!s_pmodule || !s_pfunc) {
+    s_pmodule = PyImport_ImportModule(&quot;Test&quot;);
+    s_pfunc = PyObject_GetAttrString(s_pmodule, &quot;JNI_API_testFunction&quot;);
+  }
+  PyObject *pyRet = PyObject_CallFunction(s_pfunc, &quot;s&quot;, param);
+  (*env)-&gt;ReleaseStringUTFChars(env, string, param);
+  if (pyRet) {
+    jstring retJstring = (*env)-&gt;NewStringUTF(env, PyUnicode_AsUTF8(pyRet));
+    Py_DECREF(pyRet);
+    return retJstring;
+  } else {
+    PyErr_Print();
+    return (*env)-&gt;NewStringUTF(env, &quot;error&quot;);
+  }
+}
+#ifdef __cplusplus
+}
+#endif
+#endif
+</code></pre>
+<p>这个文件中一共有3个函数：</p>
+<ul>
+<li>Java_Test_initModule: python初始化工作</li>
+<li>Java_Test_uninitModule: python反初始化工作</li>
+<li>Java_Test_testFunction: <strong>真正的业务接口，封装了对原来Python中定义对JNI_API_testFuncion函数的调用，同时要负责JNI层面的参数jstring类型的转换。</strong></li>
+</ul>
+<p>根据 JNI 接口规范，native 层面的 C 函数命名需要符合如下的形式：</p>
+<pre><code class="language-cpp">// QualifiedClassName: 全类名
+// MethodName: JNI接口函数名
+void
+JNICALL
+Java_QualifiedClassName_MethodName(JNIEnv*, jobject);
+</code></pre>
+<p>所以在main.c文件中对定义需要向上面这样命名,这也是为什么前面强调python接口函数命名不能用下划线，这会导致JNI接口找不到对应的native函数。</p>
+<h3 id="3使用-cython-工具编译生成动态库">3.使用 Cython 工具编译生成动态库</h3>
+<p>补充做一个小小的准备工作：把Python源码文件的后缀从<code>.py</code>改成<code>.pyx</code></p>
+<p>python源代码Test.pyx和main.c文件都准备就绪，接下来便是<code>Cython</code>登场的时候了，它将会将所有pyx的文件自动转换成.c文件，并结合我们自己的main.c文件，内部调用gcc生成一个动态二进制库文件。</p>
+<p>Cython 的工作需要准备一个 setup.py 文件，配置好转换的编译信息，包括输入文件、输出文件、编译参数、包含目录、链接目录，如下所示：</p>
+<pre><code class="language-python">from distutils.core import setup
+from Cython.Build import cythonize
+from distutils.extension import Extension
+
+sourcefiles = ['Test.pyx', 'main.c']
+
+extensions = [Extension(&quot;libTest&quot;, sourcefiles, 
+  include_dirs=['/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/include',
+    '/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/include/darwin/',
+    '/Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m'],
+  library_dirs=['/Library/Frameworks/Python.framework/Versions/3.6/lib/'],
+  libraries=['python3.6m'])]
+
+setup(ext_modules=cythonize(extensions, language_level = 3))
+</code></pre>
+<p><code>注意：</code>这里涉及Python二进制代码的编译，需要链接Python的库</p>
+<p><code>注意：</code>这里涉及JNI相关数据结构定义，需要包含Java JNI目录</p>
+<p>setup.py文件准备就绪后，便执行如下命令，启动转换＋编译工作：</p>
+<pre><code class="language-bash">python3.6 setup.py build_ext --inplace
+</code></pre>
+<p>生成我们需要的动态库文件：<code>libTest.so</code></p>
+<h3 id="4准备java-jni调用的接口文件">4.准备Java JNI调用的接口文件</h3>
+<p>Java业务代码使用需要定义一个接口，如下所示：</p>
+<pre><code class="language-java">// FileName: Test.java
+public class Test {
+  public native void initModule();
+  public native void uninitModule();
+  public native String testFunction(String param);
+｝
+</code></pre>
+<p>到这一步，其实已经实现了在Java中调用的目的了，注意调用业务接口之前，需要先调用initModule进行native层面的Python初始化工作。</p>
+<pre><code class="language-java">
+import Test;
+public class Demo {
+    public void main(String[] args) {
+        System.load(&quot;libTest.so&quot;);
+        Test tester = new Test();
+        tester.initModule();
+        String result = tester.testFunction(&quot;this is called from java&quot;);
+        tester.uninitModule();
+
+        System.out.println(result);
+    }
+}
+</code></pre>
+<p>输出：</p>
+<pre><code>enter JNI_API_test_function
+this is a logic function
+param is [this is called from java]
+leave JNI_API_test_function
+THIS IS CALLED FROM JAVA!
+</code></pre>
+<p>成功实现了在Java中调用Python代码！</p>
+<h3 id="5封装为-jar-包">5.封装为 Jar 包</h3>
+<p>做到上面这样还不能满足，为了更好的使用体验，我们再往前一步，封装成为Jar包。</p>
+<p>首先原来的JNI接口文件需要再扩充一下，加入一个静态方法loadLibrary，自动实现so文件的释放和加载。</p>
+<pre><code class="language-java">// FileName: Test.java
+public class Test {
+  public native void initModule();
+  public native void uninitModule();
+  public native String testFunction(String param);
+  public synchronized static void loadLibrary() throws IOException {
+    // 实现略...
+  ｝
+}
+</code></pre>
+<p>接着将上面的接口文件转换成java class文件:</p>
+<pre><code class="language-bash">javac Test.java
+</code></pre>
+<p>最后，准备将class文件和so文件放置于Test目录下，打包：</p>
+<pre><code>jar -cvf Test.jar ./Test
+</code></pre>
+<h2 id="自动化">自动化</h2>
+<p>上面5个步骤如果每次都要手动来做着实是麻烦！好在，我们可以编写Python脚本将这个过程完全的自动化，真正做到<code>Python一键转换Jar包</code></p>
+<p>限于篇幅原因，这里仅仅提一下自动化过程的关键：</p>
+<ul>
+<li>自动扫描提取python源代码中需要导出的接口函数</li>
+<li>main.c、setup.py和JNI接口java文件都需要自动化生成（可以定义模板＋参数形式快速构建），需要处理好各模块名、函数名对应关系</li>
+</ul>
+<h1 id="关键问题">关键问题</h1>
+<h2 id="1import-问题">1.import 问题</h2>
+<p>上面演示的案例只是一个单独的 py 文件，而实际工作中，我们的项目通常是具有多个 py 文件，并且这些文件通常是构成了复杂的目录层级，互相之间各种 import 关系，错综复杂。</p>
+<p>Cython 这个工具有一个最大的坑在于：<strong>经过其处理的文件代码中会丢失代码文件的目录层级信息，如下图所示，C.py 转换后的代码和 m/C.py 生成的代码没有任何区别。</strong><br>
+<img src="https://imgkr.cn-bj.ufileos.com/3cd337fa-e885-49f7-9b33-5c5cccddebe8.png" alt=""></p>
+<p>这就带来一个非常大的问题：A.py 或 B.py 代码中如果有引用 m 目录下的 C.py 模块，目录信息的丢失将导致二者在执行 import m.C 时报错，找不到对应的模块！</p>
+<p>幸运的是，经过实验表明，在上面的图中，如果 A、B、C 三个模块处于同一级目录下时，import 能够正确执行。</p>
+<p>轩辕君曾经尝试阅读 Cython 的源代码，并进行修改，将目录信息进行保留，使得生成后的 C 代码仍然能够正常 import，但限于时间仓促，对 Python 解释器机理了解不足，在一番尝试之后选择了放弃。</p>
+<p>在这个问题上卡了很久，最终选择了一个笨办法：<strong>将树形的代码层级目录展开成为平坦的目录结构</strong>，就上图中的例子而言，展开后的目录结构变成了</p>
+<pre><code>A.py
+B.py
+m_C.py
+</code></pre>
+<p>单是这样还不够，还需要对 A、B 中引用到 C 的地方全部进行修正为对 m_C 的引用。</p>
+<p>这看起来很简单，但实际情况远比这复杂，在 Python 中，import 可不只有 import 这么简单，有各种各样复杂的形式：</p>
+<pre><code class="language-python">import package
+import module
+import package.module
+import module.class / function
+import package.module.class / function
+import package.*
+import module.*
+from module import *
+from module import module
+from package import *
+from package import module
+from package.module import class / function
+...
+</code></pre>
+<p>除此之外，在代码中还可能存在直接通过模块进行引用的写法。</p>
+<p>展开成为平坦结构的代价就是要处理上面所有的情况！轩辕君无奈之下只有出此下策，如果各位大佬有更好的解决方案还望不吝赐教。</p>
+<h2 id="2python-gil-问题">2.Python GIL 问题</h2>
+<p>Python 转换后的 jar 包开始用于实际生产中了，但随后发现了一个问题：</p>
+<p><strong>每当 Java 并发数一上去之后，JVM 总是不定时出现 Crash</strong></p>
+<p>随后分析崩溃信息发现，崩溃的地方正是在 Native 代码中的 Python 转换后的代码中。</p>
+<ul>
+<li>难道是 Cython 的 bug？</li>
+<li>转换后的代码有坑？</li>
+<li>还是说上面的 import 修正工作有问题？</li>
+</ul>
+<p><img src="https://imgkr.cn-bj.ufileos.com/609d2a99-41f6-41eb-81b6-091088fe899c.png" alt=""></p>
+<p>崩溃的乌云笼罩在头上许久，冷静下来思考：<br>
+为什么测试的时候正常没有发现问题，上线之后才会崩溃？</p>
+<p>再次翻看崩溃日志，发现在 native 代码中，发生异常的地方总是在 malloc 分配内存的地方，难不成内存被破坏了？<br>
+又发现测试的时候只是完成了功能性测试，并没有进行并发压力测试，而发生崩溃的场景总是在多并发环境中。多线程访问 JNI 接口，那 Native 代码将在多个线程上下文中执行。</p>
+<p>猛地一个警觉：<strong>99%跟 Python 的 GIL 锁有关系！</strong></p>
+<p><img src="https://imgkr.cn-bj.ufileos.com/09c6a8e9-c96f-486a-b35b-d406e99a03ab.png" alt=""></p>
+<p>众所周知，限于历史原因，Python 诞生于上世纪九十年代，彼时多线程的概念还远远没有像今天这样深入人心过，Python 作为这个时代的产物一诞生就是一个单线程的产品。</p>
+<p>虽然 Python 也有多线程库，允许创建多个线程，但由于 C 语言版本的解释器在内存管理上并非线程安全，所以在解释器内部有一个非常重要的锁在制约着 Python 的多线程，所以所谓多线程实际上也只是大家轮流来占坑。</p>
+<p>原来 GIL 是由解释器在进行调度管理，如今被转成了 C 代码后，谁来负责管理多线程的安全呢？</p>
+<p>由于 Python 提供了一套供 C 语言调用的接口，允许在 C 程序中执行 Python 脚本，于是翻看这套 API 的文档，看看能否找到答案。</p>
+<p>幸运的是，还真被我找到了：</p>
+<p>获取 GIL 锁：<br>
+<img src="https://imgkr.cn-bj.ufileos.com/717c53e9-5c93-411b-8794-ed2e39db23d4.png" alt=""></p>
+<p>释放 GIL 锁：<br>
+<img src="https://imgkr.cn-bj.ufileos.com/81f95a5d-fd00-49fb-8c52-ffdf6e7d57e7.png" alt=""></p>
+<p>在 JNI 调用入口需要获得 GIL 锁，接口退出时需要释放 GIL 锁。</p>
+<p>加入 GIL 锁的控制后，烦人的 Crash 问题终于得以解决！</p>
+<h1 id="测试效果">测试效果</h1>
+<p>准备两份一模一样的 py 文件，同样的一个算法函数，一个通过 Flask Web 接口访问，（Web 服务部署于本地 127.0.0.1，尽可能减少网络延时），另一个通过上述过程转换成 Jar 包。</p>
+<p>在 Java 服务中，分别调用两个接口 100 次，整个测试工作进行 10 次，统计执行耗时：<br>
+<img src="https://imgkr.cn-bj.ufileos.com/ecb4fc05-541d-4be5-8365-26eb2c6d4b49.png" alt=""></p>
+<p>上述测试中，为进一步区分网络带来的延迟和代码执行本身的延迟，在算法函数的入口和出口做了计时，在 Java 执行接口调用前和获得结果的地方也做了计时，这样可以计算出算法执行本身的时间在整个接口调用过程中的占比。</p>
+<ul>
+<li>
+<p>从结果可以看出，通过 Web API 执行的接口访问，算法本身执行的时间只占到了 30%+，大部分的时间用在了网络开销（数据包的收发、Flask 框架的调度处理等等）。</p>
+</li>
+<li>
+<p>而通过 JNI 接口本地调用，算法的执行时间占到了整个接口执行时间的 80%以上，而 Java JNI 的接口转换过程只占用 10%+的时间，有效提升了效率，减少额外时间的浪费。</p>
+</li>
+<li>
+<p><strong>除此之外，单看算法本身的执行部分，同一份代码，转换成 Native 代码后的执行时间在 300~500μs，而 CPython 解释执行的时间则在 2000~4000μs，同样也是相差悬殊。</strong></p>
+</li>
+</ul>
+<h1 id="总结">总结</h1>
+<p>本文提供了一种 Java 调用 Python 代码的新思路，仅供参考，其成熟度和稳定性还有待商榷，通过 HTTP Restful 接口访问仍然是跨语言对接的首选。</p>
+<p>至于文中的方法，感兴趣的朋友欢迎留言交流。</p>
+<p><code>PS:</code>限于笔者水平有限，文中如有错误，欢迎各位不吝赐教，以免误导读者，多谢。</p>
+<h2 id="往期热门回顾">往期热门回顾</h2>
+<p><a href="https://mp.weixin.qq.com/s/BEYQF305cWAOIwK2DtvyfQ">Python一键转Jar包，Java调用Python新姿势！</a></p>
+<p><a href="https://mp.weixin.qq.com/s/xp2S4_3UQTZ0TOIlVqM8uw">一个Java对象的回忆录：垃圾回收</a></p>
+<p><a href="https://mp.weixin.qq.com/s/WkQ5mVZrF7V2GrU-rsPOdQ">内核地址空间大冒险3：权限管理</a></p>
+<p><a href="https://mp.weixin.qq.com/s/lxpHhHVIh6DktoHzrRLaKA">谁动了你的HTTPS流量？</a></p>
+<p><a href="https://mp.weixin.qq.com/s/7gM31s4-hTJTprJnxsHgEA">路由器里的广告秘密</a></p>
+<p><a href="https://mp.weixin.qq.com/s/0b5e1_vwyvw8WOOHbVcQyQ">内核地址空间大冒险2：中断与异常</a></p>
+<p><a href="https://mp.weixin.qq.com/s/JTr1-5nPtseAYXfvJdamVg">DDoS攻击：无限战争</a></p>
+<p><a href="https://mp.weixin.qq.com/s/lerhjpAEdp4RiwsmetyqPg">一条SQL注入引出的惊天大案</a></p>
+<p><a href="https://mp.weixin.qq.com/s/esc9gWg42vyPkT58HCKNgg">内核地址空间大冒险：系统调用</a></p>
+<p><a href="https://mp.weixin.qq.com/s/suzicCzb2g5b8NN71S5Ngw">一个HTTP数据包的奇幻之旅</a></p>
+<p><a href="https://mp.weixin.qq.com/s/_TOFIPGIeMHhVxIVToxmiQ">一个DNS数据包的惊险之旅</a></p>
+<p><a href="https://mp.weixin.qq.com/s/-ggUa3aWkjjHjr9VwQL9TQ">我是一个流氓软件线程</a></p>
+<h4 id="扫码关注，更多精彩"><center>扫码关注，更多精彩</center></h4>
+<hr>
+<p><img src="https://imgkr.cn-bj.ufileos.com/3dcbdef6-e56c-4004-b02d-667cae9234e2.png" alt=""></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-10 09:39</span>&nbsp;
+<a href="https://www.cnblogs.com/xuanyuan/">轩辕之风</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12453796" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12453796);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 193695, cb_blogApp = 'xuanyuan', cb_blogUserGuid = '8508cac9-f21a-e411-8d02-90b11c0b17d6';
+    var cb_entryId = 12453796, cb_entryCreatedDate = '2020-03-10 09:39', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 轩辕之风
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

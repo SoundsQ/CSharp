@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_轩辕之风</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:e7027806-4234-4772-b021-d27c5729dcf6;id=421</id>
+  <updated>2020-04-26T01:08:24Z</updated>
+  <author>
+    <name>轩辕之风</name>
+    <uri>http://www.cnblogs.com/xuanyuan/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12776866.html</id>
+    <title type="text">哈希表哪家强？几大编程语言吵起来了！ - 轩辕之风</title>
+    <summary type="text">哈希表华山论剑 比特宇宙编程语言联合委员会准备举办一次大会，主题为 哈希表 ，给各大编程语言帝国都发去了邀请函。 很快就到了大会这一天 联合委员会秘书长开场发言：“诸位，为促进技术交流与发展，增强各帝国友谊，联合委员会特设此盛会，感谢诸位的捧场” 会场传来一阵鼓掌声······ 秘书长继续发言：“本</summary>
+    <published>2020-04-26T01:08:00Z</published>
+    <updated>2020-04-26T01:08:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12776866.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12776866.html" />
+    <content type="html">【摘要】哈希表华山论剑 比特宇宙编程语言联合委员会准备举办一次大会，主题为 哈希表 ，给各大编程语言帝国都发去了邀请函。 很快就到了大会这一天 联合委员会秘书长开场发言：“诸位，为促进技术交流与发展，增强各帝国友谊，联合委员会特设此盛会，感谢诸位的捧场” 会场传来一阵鼓掌声······ 秘书长继续发言：“本 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12776866.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12758678.html</id>
+    <title type="text">调用sleep后，我做了一个噩梦 - 轩辕之风</title>
+    <summary type="text">sleep系统调用 我是一个线程，生活在Linux帝国。一直以来辛勤工作，日子过得平平淡淡，可今天早上发生了一件事让我回想起来都后怕。 早上，我还是如往常一样执行着人类编写的代码指令，不多时走到了一个冷门的分支，一个 函数调用摆在了我的面前。 终于可以去休息了！听老一辈的线程们说，执行了这个函数就可</summary>
+    <published>2020-04-23T01:42:00Z</published>
+    <updated>2020-04-23T01:42:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12758678.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12758678.html" />
+    <content type="html">【摘要】sleep系统调用 我是一个线程，生活在Linux帝国。一直以来辛勤工作，日子过得平平淡淡，可今天早上发生了一件事让我回想起来都后怕。 早上，我还是如往常一样执行着人类编写的代码指令，不多时走到了一个冷门的分支，一个 函数调用摆在了我的面前。 终于可以去休息了！听老一辈的线程们说，执行了这个函数就可 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12758678.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12710715.html</id>
+    <title type="text">震撼！全网第一张源码分析全景图揭秘Nginx - 轩辕之风</title>
+    <summary type="text">不管是C/C++技术栈，还是PHP，Java技术栈，从事后端开发的朋友对 nginx 一定不会陌生。 想要深入学习nginx，阅读源码一定是非常重要的一环，但nginx源码量毕竟还是不算少，一不小心就容易陷入某个细节，迷失在茫茫码海之中。 如果有一张地图，让我们开启上帝视角，总览全局，帮助我们快速学</summary>
+    <published>2020-04-16T01:56:00Z</published>
+    <updated>2020-04-16T01:56:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12710715.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12710715.html" />
+    <content type="html">【摘要】不管是C/C++技术栈，还是PHP，Java技术栈，从事后端开发的朋友对 nginx 一定不会陌生。 想要深入学习nginx，阅读源码一定是非常重要的一环，但nginx源码量毕竟还是不算少，一不小心就容易陷入某个细节，迷失在茫茫码海之中。 如果有一张地图，让我们开启上帝视角，总览全局，帮助我们快速学 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12710715.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12625042.html</id>
+    <title type="text">一个整数＋1引发的灾难 - 轩辕之风</title>
+    <summary type="text">帝国危机 夜幕降临，喧嚣褪去，繁忙的Linux帝国渐渐平静了下来，谁也没有想到，一场改变帝国命运的风暴正在悄然而至...... “咚咚！”，帝国安全部长办公室的敲门声，打破了夜晚的宁静。 “部长，刚刚发现有线程在修改 passwd 文件”，原来是文件系统部门的小黑到访。 “这有什么大惊小怪的？只要有</summary>
+    <published>2020-04-03T02:41:00Z</published>
+    <updated>2020-04-03T02:41:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12625042.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12625042.html" />
+    <content type="html">【摘要】帝国危机 夜幕降临，喧嚣褪去，繁忙的Linux帝国渐渐平静了下来，谁也没有想到，一场改变帝国命运的风暴正在悄然而至...... “咚咚！”，帝国安全部长办公室的敲门声，打破了夜晚的宁静。 “部长，刚刚发现有线程在修改 passwd 文件”，原来是文件系统部门的小黑到访。 “这有什么大惊小怪的？只要有 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12625042.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12529598.html</id>
+    <title type="text">一网打尽！每个程序猿都该了解的黑客技术大汇总 - 轩辕之风</title>
+    <summary type="text">上面这个段子估计很多朋友都看过，程序员被黑过无数次，在其他人眼中，仿佛我们需要写得了木马，翻得了围墙，修得了电脑，找得到资源，但凡是跟计算机沾点边的，咱都得会才行。 段子归段子，言归正传，对于咱们程序员来说，多多少少了解一些信息安全的技术知识还是大有裨益的，不仅能了解一些计算机和网络的底层原理，也能</summary>
+    <published>2020-03-20T01:15:00Z</published>
+    <updated>2020-03-20T01:15:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12529598.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12529598.html" />
+    <content type="html">【摘要】上面这个段子估计很多朋友都看过，程序员被黑过无数次，在其他人眼中，仿佛我们需要写得了木马，翻得了围墙，修得了电脑，找得到资源，但凡是跟计算机沾点边的，咱都得会才行。 段子归段子，言归正传，对于咱们程序员来说，多多少少了解一些信息安全的技术知识还是大有裨益的，不仅能了解一些计算机和网络的底层原理，也能 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12529598.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12467264.html</id>
+    <title type="text">看过无数Java GC文章，这5个问题你也未必知道！ - 轩辕之风</title>
+    <summary type="text">读者朋友们可能已经看过太多关于Java垃圾回收相关的文章，如果没有，墙裂安利大家看下面这篇： "看完这篇垃圾回收，和面试官扯皮没问题了" 本文不再重复谈GC算法以及垃圾回收器，而是谈谈在GC发生的时候，有几个可能被忽略的问题。搞懂这些问题，相信将对GC的理解能再加深几分。 本文主要内容 Q1: GC</summary>
+    <published>2020-03-12T01:51:00Z</published>
+    <updated>2020-03-12T01:51:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12467264.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12467264.html" />
+    <content type="html">【摘要】读者朋友们可能已经看过太多关于Java垃圾回收相关的文章，如果没有，墙裂安利大家看下面这篇： "看完这篇垃圾回收，和面试官扯皮没问题了" 本文不再重复谈GC算法以及垃圾回收器，而是谈谈在GC发生的时候，有几个可能被忽略的问题。搞懂这些问题，相信将对GC的理解能再加深几分。 本文主要内容 Q1: GC &lt;a href="http://www.cnblogs.com/xuanyuan/p/12467264.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12453796.html</id>
+    <title type="text">Python一键转Jar包，Java调用Python新姿势！ - 轩辕之风</title>
+    <summary type="text">粉丝朋友们，不知道大家看故事看腻了没（要是没腻可一定留言告诉我^\_^），今天这篇文章换换口味，正经的来写写技术文。言归正传，咱们开始吧！ 本文结构： 需求背景 进击的 Python 随着人工智能的兴起，Python 这门曾经小众的编程语言可谓是焕发了第二春。 以 tensorflow、pytorc</summary>
+    <published>2020-03-10T01:39:00Z</published>
+    <updated>2020-03-10T01:39:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12453796.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12453796.html" />
+    <content type="html">【摘要】粉丝朋友们，不知道大家看故事看腻了没（要是没腻可一定留言告诉我^\_^），今天这篇文章换换口味，正经的来写写技术文。言归正传，咱们开始吧！ 本文结构： 需求背景 进击的 Python 随着人工智能的兴起，Python 这门曾经小众的编程语言可谓是焕发了第二春。 以 tensorflow、pytorc &lt;a href="http://www.cnblogs.com/xuanyuan/p/12453796.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12419730.html</id>
+    <title type="text">一个故事看懂垃圾回收 - 轩辕之风</title>
+    <summary type="text">对象的诞生 “你醒啦！”，迷迷糊糊中听到一个声音，我睁开了眼睛，发现一个小伙伴正看着我。 “这里是哪里，你是谁啊？” “这里是堆区，我是一个Ajax对象，叫我小A吧” 我慢慢坐了起来，举目四望，这里有好多形形色色的对象居住在这里，远处还有好多的线程在各自忙碌着，好一副热闹的景象！ “你好，我才刚醒，</summary>
+    <published>2020-03-05T05:28:00Z</published>
+    <updated>2020-03-05T05:28:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12419730.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12419730.html" />
+    <content type="html">【摘要】对象的诞生 “你醒啦！”，迷迷糊糊中听到一个声音，我睁开了眼睛，发现一个小伙伴正看着我。 “这里是哪里，你是谁啊？” “这里是堆区，我是一个Ajax对象，叫我小A吧” 我慢慢坐了起来，举目四望，这里有好多形形色色的对象居住在这里，远处还有好多的线程在各自忙碌着，好一副热闹的景象！ “你好，我才刚醒， &lt;a href="http://www.cnblogs.com/xuanyuan/p/12419730.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12361461.html</id>
+    <title type="text">一个故事看懂Linux文件权限管理 - 轩辕之风</title>
+    <summary type="text">前情回顾： 我通过open这个系统调用虫洞来到了内核空间，又在老爷爷的指点下来到了sys_open的地盘，即将开始打开文件的工作。 详情参见：内核地址空间大冒险：系统调用 open系统调用链 我是一个线程，出生在这个Linux帝国。在老爷爷的指点下，通过系统调用表来到了这个叫sys_open的地方。</summary>
+    <published>2020-02-25T06:10:00Z</published>
+    <updated>2020-02-25T06:10:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12361461.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12361461.html" />
+    <content type="html">【摘要】前情回顾： 我通过open这个系统调用虫洞来到了内核空间，又在老爷爷的指点下来到了sys_open的地盘，即将开始打开文件的工作。 详情参见：内核地址空间大冒险：系统调用 open系统调用链 我是一个线程，出生在这个Linux帝国。在老爷爷的指点下，通过系统调用表来到了这个叫sys_open的地方。 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12361461.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/xuanyuan/p/12326610.html</id>
+    <title type="text">为什么用上了HTTPS，还是被流量劫持？ - 轩辕之风</title>
+    <summary type="text">广告再临 “老周，有人找你” 一大早，361杀毒公司的老周就被吵醒。 今天的阳光很明媚，老周伸了伸懒腰，这才踱步走向工作室。 “是谁一大早的就来吵吵，坏了我的瞌睡”，听得出来，老周有点不太高兴。 “咚咚～”，老周微微抬头一瞥，只见一甜美女子出现在工作室的门前。 老周一下从座椅上弹了起来，三步并作两步</summary>
+    <published>2020-02-18T08:05:00Z</published>
+    <updated>2020-02-18T08:05:00Z</updated>
+    <author>
+      <name>轩辕之风</name>
+      <uri>http://www.cnblogs.com/xuanyuan/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/xuanyuan/p/12326610.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/xuanyuan/p/12326610.html" />
+    <content type="html">【摘要】广告再临 “老周，有人找你” 一大早，361杀毒公司的老周就被吵醒。 今天的阳光很明媚，老周伸了伸懒腰，这才踱步走向工作室。 “是谁一大早的就来吵吵，坏了我的瞌睡”，听得出来，老周有点不太高兴。 “咚咚～”，老周微微抬头一瞥，只见一甜美女子出现在工作室的门前。 老周一下从座椅上弹了起来，三步并作两步 &lt;a href="http://www.cnblogs.com/xuanyuan/p/12326610.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>

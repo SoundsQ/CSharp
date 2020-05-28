@@ -1,0 +1,2875 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="字节码指令集是了解学习虚拟机运行的必须步骤,本文详细的介绍了绝大多数的字节码指令,从多个维度对字节码指令进行了解析说明,并且对字节码指令集助记符进行了更加详细的释义.&#xD;&#xA;本文主要涉及jvm的字节码指令" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>[三] java虚拟机 JVM字节码 指令集 bytecode 操作码 指令分类用法 助记符 - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/9556928.html">[三] java虚拟机 JVM字节码 指令集 bytecode 操作码 指令分类用法 助记符</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        字节码指令集是了解学习虚拟机运行的必须步骤,本文详细的介绍了绝大多数的字节码指令,从多个维度对字节码指令进行了解析说明,并且对字节码指令集助记符进行了更加详细的释义.
+本文主要涉及jvm的字节码指令集 助记符  字节码逻辑功能分类 以及用法
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-size: 15px;">说明,本文的目的在于从宏观逻辑上介绍清楚绝大多数的字节码指令的含义以及分类</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">只要认真阅读本文必然能够对字节码指令集有所了解 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果需要了解清楚每一个指令的具体详尽用法,请参阅虚拟机规范</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>指令简介</strong></span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">计算机指令就是指挥机器工作的指示和命令，程序就是一系列按一定顺序排列的指令，执行程序的过程就是计算机的工作过程。 </span></div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">通常一条指令包括两方面的内容： 操作码和操作数，操作码决定要完成的操作，操作数指参加运算的数据及其所在的单元地址。 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">虚拟机的字节码指令亦是如此含义 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">class文件相当于JVM的机器语言 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">class文件是源代码信息的完整表述 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">方法内的代码被保存到code属性中,字节码指令序列就是方法的调用过程 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">Java虚拟机的指令由一个字节长度的、代表着某种特定操作含义的操作码(opcode) </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">以及跟随其后的零至多个代表此操作所需参数的操作数(operand)所构成 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">虚拟机中许多指令并不包含操作数.只有一个操作码。 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">如果忽略异常处理,执行逻辑类似</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">do</span><span style="color: #000000;">{
+自动计算pc寄存器以及从pc寄存器的位置取出操作码;
+</span><span style="color: #0000ff;">if</span><span style="color: #000000;">(存在操作数){
+取出操作数;
+}
+执行操作码所定义的操作;
+}</span><span style="color: #0000ff;">while</span>(处理下一次循环);</pre>
+</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作数的数量以及长度取决于操作码，如果一个操作数的长度超过了一个字节，那么它将大端排序存储，即高位在前的字节序。</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">例如，如果要将一个16位长度的无符号整数使用两个无符号字节存储起来(将它们命名为byte]和byte2 )</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">那这个16位无符号整数的值就是:&nbsp; (bytel&lt;&lt;8) | byte2.</span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">字节码指令流应当都是单字节对齐的，只有，tableswitch和lookupswitch两个指令例外 这俩货是4字节为单位的</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+</div>
+</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">限制了操作码长度为一个字节 0~255,&nbsp;&nbsp; 但是也就导致操作码个数不能超过256 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">放弃编译后代码的操作数对齐 也就省略很多填充和间隔符号 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">限制长度和放弃对齐也尽可能的让编译后的代码短小精干 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是如果向上面那样如果操作码处理超过一个字节的数据时,就必须在运行时从字节流中重建出具体数据结构,将会有一定程度的性能损失</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>指令详解</strong></span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">说明: </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作码一个字节长度,也就是8位二进制数字,也就是两位十六进制数字 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">class文件只会出现数字形式的操作码 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是为了便于人识别,操作码有他对应的助记符形式 </span></div>
+</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">接下来所有的指令的说明,都是以助记符形式表达的 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">但是要明确,实际的执行运行并不存在助记符这些东西,都是根据操作码的值来执行 </span></div>
+</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令本身就是为了功能逻辑运算 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">运算自然要处理数据 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以说指令的设计是逻辑功能点与数据类型的结合 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">接下来先看下有哪些数据类型和逻辑功能点 </span></div>
+<div style="line-height: 200%;"><span style="font-size: 18pt;"><strong><br /></strong></span>
+		</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>数据类型</strong></span></h3>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211941830-390379465.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_c55" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211942081-1535416387.png" alt="image_5b869c5d_c55" width="826" height="432" border="0" /></a>
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">上一篇文章中已经说明JVM支持的数据类型
+				</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">共有9中基本类型
+				</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>对于基本类型&nbsp; 指令在设计的时候都用一个字母缩写来指代(boolean除外)</strong>
+				</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; width: 907px; color: #424242; line-height: 200%; font-family: 微软雅黑; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">byte&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">short&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">int&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">long&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">float&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">double&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">char&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">reference
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">boolean
+								</span></td>
+
+
+							</tr>
+<tr style="line-height: 200%; background-color: #f8f8f8;">
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">b
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">s
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">i
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">l
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">f
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">d
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">c
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">a
+								</span></td>
+<td style="padding: 4px; border: 1px solid gray; line-height: 200%;"><span style="font-size: 15px;">无
+								</span></td>
+
+
+							</tr>
+
+
+						</tbody>
+
+
+					</table>
+
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>逻辑功能</strong>
+			</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">加载存储指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">算数指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">类型转换指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">对象的创建于操作
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">操作数栈管理指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">控制转移指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">方法调用和返回指令
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">抛出异常
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">同步
+							</span></td>
+
+
+						</tr>
+
+
+					</tbody>
+
+
+				</table>
+
+
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+		</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令基本上就是围绕着上面的逻辑功能以及数据类型进行设计的
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">当然&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也有一些并没有明确用字母指代数据类型,比如arraylength 指令,并没有代表数据类型的特殊字符,操作数只能是一个数组类型的对象</span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外还有一些,比如无条件跳转指令goto 则是与数据类型无关的
+			</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">接下来将会从各个维度对绝大多数指令进行介绍
+			</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">注意: 在不同的分类中,有些指令是重复的,因为有很多操作是需要处理数据的
+			</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也就是说数据类型相关的指令里面可能跟很多逻辑功能点相关联,比如 加载存储指令,可以加载int 可以加载long等
+			</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他在我接下来的说明中,可能不仅仅会出现在数据类型相关的指令中
+			</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">也会出现在加载存储指令的介绍中,请不要疑惑
+			</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">就是要从多维度介绍这些指令,才能更好地理解他们</span></div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>指令-相关计算机英语词汇含义</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">push
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">push
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">按 推动 压入
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">load
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">load
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">加载 装载&nbsp; </span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">const
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">const
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">常数，不变的
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">store
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">store
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">存储 保存到
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">add
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">add
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">加法
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">sub
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">subduction
+							</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">减法
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">mul
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">multiplication
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">乘法
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">div
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">division
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">除法
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">inc
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">increase
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">增加
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">rem
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">remainder
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">取余 剩下的留下的
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">neg
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">negate
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">取反 否定
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">sh
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">shift
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">移位 移动变换
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">and
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">and
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">与
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">or
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">or
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">或
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">xor
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">exclusive OR
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">异或
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">2
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">to
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">转换 转变 变成
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">cmp
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">compare
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">比较
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">return
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">return&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">返回
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">eq
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">equal
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">相等
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">ne
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">not equal
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">不相等
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">lt
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">less than
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">小于
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">le
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">less than or equal
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">小于等于
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">gt
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">greater than
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">大于
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">ge
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">greater than or equal
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">大于等于
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">if
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">if
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">条件判断 如果
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">goto
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">goto
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">跳转
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">invoke
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">invoke
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">调用
+							</span></td>
+
+
+						</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">dup
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">dump
+							</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">复制 拷贝 卸下 丢下
+							</span></td>
+
+
+						</tr>
+
+
+					</tbody>
+
+
+				</table>
+
+
+			</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+		</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>指令-数据类型相关的指令</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 80%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">java中的操作码长度只有个字节,所以必然,并不会所有的类型都有对应的操作
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">Java虚拟机指令集对于特定的操作只提供了有限的类型相关指令
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">有一些单独的指令可以再必要的时候用来将一些不支持的类型转换为可支持的类型
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">下表中最左边一列的T表示模板,只需要用数据类型的缩写,替换掉T 就可以得到对应的具体的指令
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果下表中为空,说明对这种数据类型不支持这种类型的操作
+		</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 80%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">操作码/类型
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">byte
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">short
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">long
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">float
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">double
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">char
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">reference
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tipush
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">bipush
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">sipush
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tconst
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iconst
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lconst
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fconst
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dconst
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">aconst
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tload
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iload
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lload
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fload
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dload
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">aload
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tstore
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">istore
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lstore
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fstore
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dstore
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">astore
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tinc
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iinc
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Taload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">baload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">saload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iaload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">laload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">faload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">daload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">caload&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">aaload
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">bastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">sastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dastore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">castore&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">aastore
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tadd&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iadd&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ladd&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fadd&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dadd
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tsub&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">isub&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lsub&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fsub&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dsub
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tmul&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">imul
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lmul&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fmul&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dmul
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tdiv&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">idiv&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ldiv&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fdiv&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ddiv
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Trem&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">irem&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lrem&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">frem&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">drem
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tneg&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ineg&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lneg&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">fneg&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">dneg
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tshl
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ishl
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lshl
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tshr
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ishr
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lshr
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tushr&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iushr&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lushr
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tand&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">iand&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">land
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tor
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ior&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lor
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Txor&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">ixor&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lxor
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2T&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2b&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2s&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2l&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2f&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">i2d
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">l2T&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">l2i&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">l2f&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">l2d
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">f2T&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">f2i&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">f2l&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">f2d
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">d2T
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">d2i&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">d2l&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">d2f
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">Tcmp
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">lcmp
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">Tcmpl
+						</span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">fcmpl&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">dcmpl
+						</span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">Tcmpg&nbsp; </span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">fcmpg&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">dcmpg
+						</span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">if_TcmpOP
+						</span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">if_icmpOP&nbsp; </span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">if_acmpOP
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">Treturn
+						</span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">ireturn&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">lreturn&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">freturn&nbsp; </span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">dreturn&nbsp; </span></td>
+<td style="line-height: 200%;"><br />
+						</td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">areturn
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">从上表的空白处可以看得出来
+		</span></div>
+<div style="line-height: 200%;"><span style="font-family: 等线; font-size: 15px;"><strong>大部分数据类型相关联的指令,都没有支持整数类型 byte char short ,而且没有任何指令支持boolean类型</strong>
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">因为
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">编译器会在编译期或者运行期&nbsp; 将<strong>byte 和short </strong>类型的数据 <strong>带符号扩展</strong> 为相应的<strong>int</strong>类型数据
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">类似的,<strong>boolean 和char</strong>类型数据<strong>零位扩展</strong>为相应的<strong>int</strong>类型数据
+		</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">在处理boolean byte short char类型的数组时,也会转换为使用对应的int类型的字节码指令来处理
+		</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 60%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外需要格外注意的是,上表是为了呈现部分与数据类型相关联的操作码
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">并不是说所有的操作码都在上表中,仅仅是和数据类型相关联的才出现在了上表中
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">实际类型与运算类型的对应关系如下,分类后面会说到
+		</span></div>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 50%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">实际类型
+						</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">运算类型
+						</span></td>
+<td style="line-height: 200%;"><span style="font-size: 15px;">分类
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">boolean
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">byte
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">short
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">int
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">float
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">float
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">reference
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">reference
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">returnAddress
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">returnAddress
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">1
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">long&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">long&nbsp; </span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">2
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">double
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">double
+						</span></td>
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">2
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>按照逻辑功能进行划分</strong></span></h3>
+<h3><span style="font-size: 18pt;"><strong><strong>加载存储指令</strong></strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><strong><span style="font-size: 13.5pt;">加载存储指令用于局部变量与操作数栈交换数据<br />以及常量装载到操作数栈</span></strong>
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">1、将一个局部变量加载到操作栈：
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">iload、iload_＜n＞、lload、lload_＜n＞、fload、fload_＜n＞、dload、dload_＜n＞、aload、aload_＜n＞
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作数为局部变量的位置序号 序号从0开始 , 局部变量以slot为单位分配的
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">将序号为操作数的局部变量slot 的值 加载到操作数栈
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令可以读作:<strong>将第(操作数+1)个 X(i l f d a)类型局部变量,推送至栈顶</strong>
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ps: 操作数+1 是因为序号是从0开始的
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">2、将一个数值从操作数栈存储到局部变量表：
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">istore、istore_＜n＞、lstore、lstore_＜n＞、fstore、fstore_＜n＞、dstore、dstore_＜n＞、astore、astore_＜n＞
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作数为局部变量的位置序号 序号从0开始 , 局部变量以slot为单位分配的
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">将操作数栈的值保存到序号为操作数的局部变量slot中
+								</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令可以读作:<strong>将栈顶 X(i l f d a)类型的数值 保存到&nbsp; 第(操作数+1)个 局部变量中</strong>
+									</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+								</div>
+
+
+							</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">3、将一个常量加载到操作数栈：
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">bipush、sipush、ldc、ldc_w、ldc2_w、aconst_null、iconst_m1、iconst_＜i＞、lconst_＜l＞、fconst_＜f＞、dconst_＜d＞
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">操作数为将要操作的数值&nbsp; 或者常量池行号
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令可以读作:<strong>将类型X的值xxx 推送至栈顶&nbsp; 或者是 将 行号为xxx的常量推送至栈顶</strong>
+								</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+							</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">4、扩充局部变量表的访问索引的指令：wide
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">形如&nbsp; xxx_＜n＞以尖括号结尾的代表了一组指令 (例如 iload_&lt;n&gt;&nbsp;&nbsp; 代表了iload_0&nbsp; iload_1&nbsp; iload_2&nbsp; iload_3)
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这一组指令都是某个带有一个操作数的通用指令(例如 iload)的特殊形式
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于这些特殊形式来说,他们表面上没有操作数,但是操作数隐含在指令里面了,除此之外,语义与原指令并没有任何的不同
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">(例如 iload_0&nbsp; 的语义与操作数为0时的iload 语义完全相同)
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>&lt;&gt;尖括号中的字母表示了指令隐含操作数的数据类型</strong>
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">&lt;n&gt;表示非负整数&nbsp; &lt;i&gt;表示int&nbsp;&nbsp;&nbsp; &lt;l&gt; 表示long &lt;f&gt; float&nbsp; &lt;d&gt; double&nbsp; 而byte char short类型数据经常使用int来表示
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>下划线 _&nbsp;&nbsp; 的后面紧跟着的值就是操作数</strong>
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">需要注意的是<strong> _&lt;n&gt;</strong> 的形式不是无限的,对于load 和 store系列指令
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于超过4个,也就是第5个,也就是下标是4 往后
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">都是直接只用原始形式 iload 4&nbsp; 不再使用_&lt;n&gt;的形式 所以你不会看到 load_4 load_5....或者store_4&nbsp; store_5...
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211942361-978464128.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3bf8" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211942591-131672900.png" alt="image_5b869c5d_3bf8" width="514" height="279" border="0" /></a><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于虚拟机执行方法来说,操作数栈是工作区, 所以数据的流向是对于他&nbsp; 操作数栈&nbsp;&nbsp; 来说的&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">load就是局部变量数据加载到操作数栈&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">store就是从操作数栈存储到局部变量表
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于常量只有加载到操作数栈进行使用,没有存储的说法,他也比较特殊
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于上图中的数据交换模型中,操作数栈是可以确定的也是唯一的,栈就在那里,不管你见或不见
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于操作数栈与局部变量交换数据时,需要确定的是&nbsp; 从 哪个局部变量取数据 或者保存到哪个局部变量中&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以load 和 store的操作数都是局部变量的位置
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于操作数栈与常量交换数据,需要确定的是到底加载哪个值到操作数栈或者是从常量池哪行加载
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以加载常量到操作数栈的操作数 是 具体的数值 或者常量池行号
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 13.5pt;"><strong>常量加载到操作数栈比较特殊单独说明<br />他根据&lt;数据类型&gt;以及&lt;数据的取值范围&gt;使用了不同的方式</strong></span><br /><span style="font-size: 15px;"><strong>const指令</strong></span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">该系列命令主要负责把<strong>简单的数值类型送到栈顶</strong>。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">该系列命令不带参数。只把简单的数值类型送到栈顶时，才使用如下的命令。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">比如对应int型该方式只能把-1,0,1,2,3,4,5（分别采用iconst_m1,iconst_0, iconst_1, iconst_2, iconst_3, iconst_4, iconst_5）
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">送到栈顶。对于int型，其他的数值请使用push系列命令（比如bipush）
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令码&nbsp;&nbsp;&nbsp; 助记符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 说明
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aconst_null&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将null推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_m1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(-1)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(0)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(1)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(2)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(3)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x07&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(4)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x08&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iconst_5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int型(5)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x09&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lconst_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将long型(0)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lconst_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将long型(1)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fconst_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将float型(0)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fconst_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将float型(1)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fconst_2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将float型(2)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dconst_0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将double型(0)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x0f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dconst_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将double型(1)推送至栈顶
+							</span></div>
+
+<span style="font-size: 15px;">简言之 取值&nbsp;&nbsp;&nbsp; <strong><span style="font-size: 18px;">-1~5</span>&nbsp;</strong>时，JVM采用const指令将常量压入栈中 </span><br /><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>push指令</strong>
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">该系列命令负责把一个整型数字（长度比较小）送到到栈顶。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">该系列命令有一个参数，用于指定要送到栈顶的数字。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">注意该系列命令只能操作一定范围内的整形数值，超出该范围的使用将使用ldc命令系列。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 助记符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 说明
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bipush&nbsp;&nbsp;&nbsp; 将单字节的常量值(-128~127)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sipush&nbsp;&nbsp;&nbsp; 将一个短整型常量值(-32768~32767)推送至栈顶
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>ldc系列</strong>
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">该系列命令负责把数值常量或String常量值从常量池中推送至栈顶。
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">该命令后面需要给一个表示常量在常量池中位置(编号)的参数 也就是行号，
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">哪些常量是放在常量池呢？
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">比如：
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">final static int id=32768;&nbsp;&nbsp; //32767+1 就不在sipush范围内了
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">final static float double=8.8
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>对于const系列命令和push系列命令操作范围之外的数值类型常量，都放在常量池中.</strong>
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">另外，所有不是通过new创建的String都是放在常量池中的
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">指令码&nbsp;&nbsp;&nbsp; 助记符&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 说明
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ldc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int, float或String型常量值从常量池中推送至栈顶
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ldc_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将int, float或String型常量值从常量池中推送至栈顶（宽索引）
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">0x14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ldc2_w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将long或double型常量值从常量池中推送至栈顶（宽索引）
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ps:所谓宽索引是指常量池行号 索引的字段长度, ldc 的索引只有8位&nbsp; ldc_w的索引则有16位
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于宽索引,指令格式为 ldc_w ,indexbyte1,indexbyte2&nbsp; 会计算&nbsp; (indexbyte1&lt;&lt;8) | indexbyte2 来生成一个指向当前常量池的无符号16位索引
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">说白了就是寻址长度
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">简言之就是对于绝大多数的数值,都是存放在常量池中的 将需要使用ldc
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对于一小部分可能比较常用的数值,则是可以直接把值当做操作数的 使用const 或者push
+								</span></div>
+
+
+							</div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">wide的含义&nbsp;&nbsp; 宽索引</span><br /><span style="font-size: 15px;">字节码的指令是单字节的,对于局部变量来说,最多容纳256个局部变量</span><br /><span style="font-size: 15px;">wide指令就是用于扩展局部变量数的 ,将8位的索引在扩展8位 也就是16位 最多65536</span><br /><span style="font-size: 15px;">形式为&nbsp; </span><br /><span style="font-size: 15px;">wide 要被扩展的操作码比如iload&nbsp;&nbsp; 操作数&nbsp;&nbsp; (wide&nbsp; iload 257 也就是&nbsp; wide iload byte1&nbsp; byte2)</span><br /><span style="font-size: 15px;">iload操作码是作为wide 操作码的一个操作数来执行的</span><br /><span style="font-size: 15px;">wide可以修饰 load&nbsp; store&nbsp; ret</span><br /><span style="font-size: 15px;">如果wide修饰的是iinc 格式有些变化&nbsp; </span><br /><span style="font-size: 15px;">wide iinc&nbsp; byte1 byte2 constbyte1 constbyte2&nbsp; 本身 iinc为 iinc&nbsp; byte constbyte </span><br /><span style="font-size: 15px;">扩展后的前两个字节16位为局部变量索引</span><br /><span style="font-size: 15px;">后两个字节16位计算为 16位带符号的增量 </span><br /><span style="font-size: 15px;">计算的形式依旧是&nbsp; (constbyte1 &lt;&lt; 8) | constbyte2</span><br />
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;">算数指令</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 13.5pt; font-weight: bold;">运算后的结果自动入栈</span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">运算或算术指令用于对两个操作数栈上的值进行某种特定运算，并把结果重新存入到操作栈顶.
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">算术指令分为两种：整型运算的指令和浮点型运算的指令.
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">无论是哪种算术指令，都使用Java虚拟机的数据类型
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">由于没有直接支持byte、short、char和boolean类型的算术指令，使用操作int类型的指令代替.
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">加法指令：iadd、ladd、fadd、dadd
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">减法指令：isub、lsub、fsub、dsub
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">乘法指令：imul、lmul、fmul、dmul
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">除法指令：idiv、ldiv、fdiv、ddiv
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">求余指令：irem、lrem、frem、drem
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">取反指令：ineg、lneg、fneg、dneg
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">位移指令：ishl、ishr、iushr、lshl、lshr、lushr
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">按位或指令：ior、lor
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">按位与指令：iand、land
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">按位异或指令：ixor、lxor
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">局部变量自增指令：iinc
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">比较指令：dcmpg、dcmpl、fcmpg、fcmpl、lcmp
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">再次强调</span><br /><span style="font-size: 15px;">加add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 减sub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 乘mul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 除div&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 求余rem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 取反neg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 移位sh&nbsp;&nbsp;&nbsp;&nbsp; l r表示左右&nbsp;&nbsp; </span><br /><span style="font-size: 15px;"> 与and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 或or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 异或xor&nbsp;&nbsp;&nbsp;&nbsp; 自增inc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp比较
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">加 减 乘 除 求余 取反 支持 &lt;int&nbsp; i&nbsp; long l&nbsp;&nbsp; float&nbsp; f&nbsp;&nbsp; double d&gt;&nbsp;&nbsp; 四种类型</span><br /><span style="font-size: 15px;"> 理解点:常用操作支持四种常用类型&nbsp; byte short char boolean使用int</span><br /><br /><span style="font-size: 15px;">移位运算与按位与或异或运算 支持&lt; int&nbsp; i&nbsp; long l &gt; </span><br /><span style="font-size: 15px;">理解点: 移位与位运算支持整型,byte short char boolean使用int&nbsp; 另外还有long</span><br /><br /><span style="font-size: 15px;">自增支持&lt; int&nbsp; i &gt;</span><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">补充说明:</span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">关于移位运算,&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">左移只有一种：
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">规则：丢弃最高位，往左移位，右边空出来的位置补0
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">右移有两种：
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">1. 逻辑右移：丢弃最低位，向右移位，左边空出来的位置补0
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">2. 算术右移：丢弃最低位，向右移位，左边空出来的位置补原来的符号位（即补最高位）
+							</span></div>
+
+<span style="font-size: 15px;">移位运算的u表示的正是逻辑移位</span><br /><br /><span style="font-size: 15px;">d 和f开头 分别代表double 和float的比较</span><br /><span style="font-size: 15px;">cmpg 与cmpl 的唯一区别在于对NaN的处理,更多详细内容可以查看虚拟机规范的相关指令</span><br /><span style="font-size: 15px;">lcmp 比较long类型的值
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><br />
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>类型转换指令</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;"><br /></span>
+<div style="line-height: 200%;"><span style="font-size: 15px;">类型转换指令可以将两种不同的数值类型进行相互转换。
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这些转换操作一般用于实现<strong>用户代码中的显式类型转换操作</strong>
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">或者用来<strong>解决字节码指令集不完备的问题</strong>
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">因为数据类型相关指令无法与数据类型一一对应的问题,比如byte short char boolean使用int,&nbsp;&nbsp; 所以必须要转换&nbsp;&nbsp; </span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">分为宽化 和 窄化</span><br /><span style="font-size: 15px;">含义如字面含义,存储长度的变宽或者变窄</span><br /><span style="font-size: 15px;">宽化也就是常说的安全转换,不会因为超过目标类型最大值丢失信息</span><br /><span style="font-size: 15px;">窄化则意味着很可能会丢失信息</span><br /><span style="font-size: 15px;">宽化指令和窄化指令的形式为&nbsp; 操作类型 2 (to)&nbsp; 目标类型&nbsp; 比如 i2l int 转换为long</span><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">宽化指令
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">int类型到long、float或者double类型
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">long类型到float、double类型
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">float类型到double类型
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">i2l、i2f、i2d
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">l2f 、l2d
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">f2d
+								</span></div>
+
+
+							</div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">窄化指令</span><br /><span style="font-size: 15px;">int类型到byte short char类型</span><br /><span style="font-size: 15px;">long类型到int类型</span><br /><span style="font-size: 15px;">float类型到int或者long类型</span><br /><span style="font-size: 15px;">从double类型到int long 或者float类型</span><br /><span style="font-size: 15px;">i2b 、i2s 、i2c</span><br /><span style="font-size: 15px;">l2i</span><br /><span style="font-size: 15px;">f2i 、f2l</span><br /><span style="font-size: 15px;">d2i 、d2l 、d2f
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>对象的创建与访问</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">实例和数组都是对象</span><br /><span style="font-size: 15px;">但是Java虚拟机对类实例和数组的创建使用了不同的字节码指令</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 15px;">涉及到对象的创建与访问的相关操作有:</span><br /><span style="font-size: 15px;">1.创建实例对象/数组</span><br /><span style="font-size: 15px;">2.访问实例变量和类变量</span><br /><span style="font-size: 15px;">3.加载与存储,对于类实例属于引用类型存取使用加载存储指令,所以此处只有数组有相关操作了</span><br /><span style="font-size: 15px;">4.还有一些附属信息 数组长度以及检查类实例或者数组类型</span><br />
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">创建类实例 :&nbsp;&nbsp; new</span><br /><span style="font-size: 15px;">创建数组的指令 :</span><br /><span style="font-size: 15px;">newarray&nbsp; 分配数据成员类型为基本数据类型的新数组</span><br /><span style="font-size: 15px;">anewarray&nbsp; 分配数据成员类型为引用类型的新数组</span><br /><span style="font-size: 15px;">multianewarray&nbsp;&nbsp; 分配新的多维数组
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">类变量声明的时候使用static关键字</span><br /><span style="font-size: 15px;">访问与存储类中的静态字段也是使用static关键字</span><br /><span style="font-size: 15px;">getstatic 从类中获取静态字段</span><br /><span style="font-size: 15px;">putstatic 设置类中静态字段的值</span><br /><span style="font-size: 15px;">普通的成员实例变量使用field指代</span><br /><span style="font-size: 15px;">getfield 从对象中获取字段值</span><br /><span style="font-size: 15px;">putfield 设置对象中的字段的值
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">访问与存储之前介绍过&nbsp; 使用的load 和store</span><br /><span style="font-size: 15px;">数组也是对象 引用使用a来表示 </span><br /><span style="font-size: 15px;">所以对于数组的存取和访问指令&nbsp;&nbsp;&nbsp; 使用&nbsp;&nbsp; 类型+a+load 或者store 的形式</span><br /><span style="font-size: 15px;">把一个数组元素加载到操作数栈的指令:</span><br /><span style="font-size: 15px;">byte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char&nbsp;&nbsp;&nbsp;&nbsp; short&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; long&nbsp;&nbsp;&nbsp;&nbsp; float&nbsp;&nbsp;&nbsp; double&nbsp; reference&nbsp;&nbsp;&nbsp; </span><br /><span style="font-size: 15px;">对应的指令分别是</span><br /><span style="font-size: 15px;">baload&nbsp; caload&nbsp; saload&nbsp; iaload&nbsp; laload&nbsp; faload&nbsp; daload&nbsp; aaload</span><br /><br /><span style="font-size: 15px;">把一个操作数栈的值存储到数组元素中的指令:</span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">byte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; short&nbsp;&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; float&nbsp;&nbsp;&nbsp;&nbsp; double&nbsp;&nbsp; reference&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">对应的指令分别是:
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">bastore&nbsp; castore&nbsp; sastore&nbsp; iastore&nbsp; lastore&nbsp; fastore&nbsp; dastore&nbsp; aastore
+								</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+							</div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">获取数组长度的指令&nbsp; arraylength</span><br /><span style="font-size: 15px;">检查类实例或者数组类型的指令&nbsp;&nbsp; instanceof&nbsp; checkcast
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>操作数栈管理指令</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<p><span style="font-size: 15px;">操作数栈管理指令,顾名思义就是直接用于管理操作栈的</span><br /><span style="font-size: 15px;">对于操作数栈的直接操作主要有  出栈/复制栈顶元素 / 以及 交换栈顶元素</span></p>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">出栈,&nbsp;&nbsp; 分为将操作数栈栈顶的几个元素出栈,一个元素或者两个元素</span><br /><span style="font-size: 15px;">pop表示出栈, 数值代表个数</span><br /><span style="font-size: 15px;">pop pop2</span><br /><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">交换 将栈顶端的两个数值进行交换
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">swap&nbsp; </span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup比较复杂一点
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">根本含义为复制栈顶的元素然后压入栈
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">不过涉及到复制几个元素,以及操作数栈的数据类型,所以比较复杂
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">上面提到过虚拟机处理的数据类型,有分类,分为1 和2两种类型
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">虚拟机能处理的类型long和double为类型2 其余为类型1 也就是int returnAddress&nbsp; reference等
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 复制操作数栈栈顶一个元素&nbsp; 并且将这个值压入到栈顶&nbsp;&nbsp; value必须分类1
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式如下,右侧为栈顶
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">... , value
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">... , value , value
+								</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup_x1 复制操作数栈栈顶的一个元素.并插入到栈顶以下&nbsp; 两个值之后&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式如下,右侧为栈顶,value1 插入到了第二个元素value2 下面&nbsp; value1 和value2&nbsp; 必须分类1
+								</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">... , value2, value1
+									</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">... , value1, value2, value1
+									</span></div>
+
+
+								</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup_x2 复制操作数栈栈顶的一个元素. 并插入栈顶以下 2 个 或 3个值之后
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式一 如果 value3, value2, value1&nbsp; 全都是分类1&nbsp; 使用此形式&nbsp; 插入栈顶三个值 以下 也就是value3之下
+								</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value3, value2, value1 &rarr;
+									</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value1, value3, value2, value1
+									</span></div>
+
+
+								</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式二如果value1 是分类1&nbsp;&nbsp; value2 是分类2&nbsp; 那么使用此形式 插入栈顶两个值 以下,也就是value2 之下
+								</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1 &rarr;
+									</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value1, value2, value1
+									</span></div>
+
+
+								</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup2&nbsp; 复制操作数栈栈顶一个或者两个元素,并且按照原有顺序,入栈到操作数栈
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式一 如果&nbsp; value2, value1 全都是分类1&nbsp; 使用此形式 复制栈顶两个元素,按照原顺序,插入到栈顶
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式二 如果value 属于分类2 使用此形式 复制栈顶一个元素,插入到栈顶
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value, value
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup2_x1复制操作数栈栈顶一个或者两个元素,并且按照原有顺序&nbsp;&nbsp; 插入栈顶以下&nbsp; 两个或者三个 值&nbsp; 之后
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式一&nbsp;&nbsp; 如果&nbsp; value3, value2, value1 都是分类1 使用此形式 复制两个元素,插入栈顶下 三个值之后,也就是value3 之后
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value3, value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1, value3, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式二 如果value1 是分类2 value2 是分类1 使用此形式&nbsp;&nbsp; 复制一个元素,插入到栈顶以下 两个元素之后&nbsp; </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value1, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup_x2&nbsp; 复制操作数栈栈顶一个或者两个元素,并且按照原有顺序&nbsp;&nbsp; 插入栈顶以下&nbsp; 两个或者三个 或者四个&nbsp;&nbsp; 值&nbsp; 之后
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式一&nbsp;&nbsp; 全都是分类1&nbsp; 使用此形式&nbsp; 复制两个元素,插入到栈顶 第四个值后面
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value4, value3, value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1, value4, value3, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式二 如果 value1 是分类2&nbsp;&nbsp; value2 和 value3 是分类1 中的数据类型&nbsp; 使用此形式 复制一个元素 插入到栈顶 第三个值后面
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value3, value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value1, value3, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式三 如果value 1&nbsp; value2 是分类1&nbsp;&nbsp; value3 是分类2 使用此形式 复制两个元素 插入到栈顶 第三个值后面
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value3, value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1, value3, value2, value1
+								</span></div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">形式四 当value1 和value2 都是分类2 使用此形式&nbsp; 复制一个元素 插入到栈顶 第二个值后面
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value2, value1 &rarr;
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">..., value1, value2, value1
+								</span></div>
+
+
+							</div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">上面关于dup的描述摘自 虚拟机规范,很难理解</span><br /><span style="font-size: 15px;">看起来是非常难以理解的,不妨换一个角度</span><br /><span style="font-size: 15px;">我们知道局部变量的空间分配分为两种long 和 double 占用2个slot&nbsp; 其他占用一个</span><br /><span style="font-size: 15px;">操作数栈,每个单位可以表示虚拟机支持的任何的一个数据类型</span><br /><span style="font-size: 15px;">不过操作数栈其实同局部变量一样,他也是被组织一个数组, 每个元素的数据宽度和局部变量的宽度是一致的</span><br /><span style="font-size: 15px;">所以对于long 和double占用2个单位长度&nbsp; 对于其他类型占用一个单位长度</span><br /><span style="font-size: 15px;">虽然外部呈现上任何一个操作数栈可以表示任何一种数据类型,但是内部是有所区分的</span><br /><span style="font-size: 15px;">如同局部变量表使用两个单位存储时,访问元素使用两个中索引小的那个类似的道理</span><br /><span style="font-size: 15px;">所以可以把栈理解成线性的数组,</span><br /><span style="font-size: 15px;">来一个long或者double 就分配两个单位空间作为一个元素 </span><br /><span style="font-size: 15px;">其余类型就分配一个单位空间作为元素</span><br /><br /><span style="font-size: 15px;">既然栈本身的结构中,线性空间的最小单位的数据宽度同局部变量,</span><br /><span style="font-size: 15px;">long和double占用两个&nbsp; 也就是下面涉及说到的数据类型的分类1&nbsp; 和&nbsp; 分类2</span><br /><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">假设栈的示意结构如下图所示,(只是给出来一种可能每个元素的类型都可能是随机的)
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">左边表示呈现出来的栈元素 右边是内部的线性形式&nbsp; 我们当做数组好了
+							</span></div>
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211942888-1237297386.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3c9b" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211943149-1235406783.png" alt="image_5b869c5d_3c9b" width="397" height="292" border="0" /></a>
+							</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;"><strong>对栈元素的处理,显然指的是对于栈元素内部数组的处理</strong>
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所以自然要分为&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">到底是直接复制一个单位的数据&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">还是直接复制两个单位的数据&nbsp; </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+								</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+							</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一次复制占用一个单位空间&nbsp;&nbsp; 的指令 使用dup&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一次复制占用两个单位空间&nbsp;&nbsp; 的指令 使用dup2 
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">一次复制占用一个单位空间 时 假设复制的栈顶是array[0]&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup 可以理解为dup_x0&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">插入到他栈顶的内部线性结构的第(1+0)个元素下面 所以array[0] 对应的必然是一个完整的栈元素 ,必然是分类1 不可能是分类2的一半!
+							</span></div>
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211943402-1981415796.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_24b7" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211943632-1601051365.png" alt="image_5b869c5d_24b7" width="706" height="207" border="0" /></a>
+							</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup_x1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">插入到他栈顶的内部线性结构的第(1+1)个元素下面 也就是插到第二个下面&nbsp; 因为array[0] 对应value1为分类1&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">如果接下来的是分类2的数据,必然接下来的两个单元array[1] 和array[2]是不可分割的,也就是不可能插入到array[1] 后面,所以array[1] 对应value2 也必须是分类1 也就是两个都是分类1
+								</span></div>
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211943839-1022001567.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_5c27" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211944055-1729354563.png" alt="image_5b869c5d_5c27" width="680" height="214" border="0" /></a>
+								</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup_x2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">插入到他栈顶的内部线性结构的第(1+2)个元素下面 也就是插到第三个后面,array[0] 对应value1为分类1 为分类1&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">那么接下来的两个单位array[1] 和array[2],可以是一个分类2&nbsp; 也可以是两个分类1,都是可以的
+									</span></div>
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211944376-74738569.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3651" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211944603-601341154.png" alt="image_5b869c5d_3651" width="704" height="229" border="0" /></a>
+									</div>
+
+
+								</div>
+
+
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211944858-1946933618.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_7212" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211945119-1732214990.png" alt="image_5b869c5d_7212" width="692" height="298" border="0" /></a>
+							</div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+<span style="font-size: 15px;">一次复制占用两个单位的数据类型 时</span><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">dup2 可以理解为dup2_x0&nbsp;&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">插入到他栈顶的内部线性结构的第(2+0)个元素下面&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">这一次复制的两个单位array[0] 和 array[1],&nbsp; 到 array[1]下面&nbsp;&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">可能是对应value1 和value2 表示两个分类1&nbsp; 也可能是对应一个value1 表示类型为分类2&nbsp; </span></div>
+
+
+							</div>
+
+<a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211945360-1907355269.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3101" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211945603-1559108988.png" alt="image_5b869c5d_3101" width="713" height="291" border="0" /></a><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211945846-1560481165.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_6ad0" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211946098-131767083.png" alt="image_5b869c5d_6ad0" width="723" height="230" border="0" /></a><br />&nbsp;<br /><span style="font-size: 15px;">dup2_x1&nbsp;&nbsp; 插入到他栈顶的内部线性结构的第(2+1)个元素下面 也就是复制array[0] 和 array[1] 到第三个元素 array[2]的下面 </span><br /><span style="font-size: 15px;">array[0] 和 array[1] 可能分别对应value1 和value2 表示两个分类1 数据&nbsp; 也可能是对应着一个value1表示一个分类2数据</span><br /><span style="font-size: 15px;">但是array[2] 作为第三个单位,既然能被分割,自然他必须是分类1 </span><br /><span style="font-size: 15px;">所以要么三个都是分类1,要么value1 分类2&nbsp; value2 分类1</span><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211946399-2041558767.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3201" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211946631-146819796.png" alt="image_5b869c5d_3201" width="704" height="296" border="0" /></a><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211946892-373598599.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3543" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211947201-1357209470.png" alt="image_5b869c5d_3543" width="674" height="295" border="0" /></a><br /><br /><br /><span style="font-size: 15px;">dup2_x2&nbsp; 插入到他栈顶的内部线性结构的第(2+2)个元素下面 也就是复制array[0] 和 array[1] 到第四个内部元素 array[3]的下面 </span><br /><span style="font-size: 15px;">一次复制两个,放到第四个下面</span><br /><span style="font-size: 15px;">这种情形下的组合就非常多了</span><br /><span style="font-size: 15px;">全都是分类1的数据</span><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211947449-225431035.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_3cea" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211947693-947355492.png" alt="image_5b869c5d_3cea" width="683" height="293" border="0" /></a><br /><br /><span style="font-size: 15px;">全部都是分类2 </span><br /><span style="font-size: 15px;">array[0]&nbsp; 和 array[1]&nbsp; 对应value1 表示一个分类2数据</span><br /><span style="font-size: 15px;">array[2]&nbsp; 和 array[3]&nbsp;&nbsp;&nbsp;&nbsp; 对应value2 表示一个分类2数据</span><br /><a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211947941-1608308157.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_5ddd" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211948212-905939192.png" alt="image_5b869c5d_5ddd" width="717" height="262" border="0" /></a><br /><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">array[0]&nbsp; 和 array[1]&nbsp; 对应value1 表示一个分类2数据
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">array[2]&nbsp; 和 array[3]&nbsp;&nbsp;&nbsp;&nbsp; 对应value2 和 value3表示两个分类1数据
+							</span></div>
+
+<a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211948454-1600452043.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_4ebd" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211948702-633327856.png" alt="image_5b869c5d_4ebd" width="666" height="277" border="0" /></a><br /><br />
+<div style="line-height: 200%;"><span style="font-size: 15px;">array[0]&nbsp; 和 array[1]&nbsp; 对应value1 和value2 表示两个分类1 数据
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">array[2]&nbsp; 和 array[3]&nbsp;&nbsp;&nbsp; 对应value3表示一个分类2数据
+							</span></div>
+
+<a href="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211948972-1002664968.png"><img style="display: inline; background-image: none;" title="image_5b869c5d_4ea4" src="https://images2018.cnblogs.com/blog/897393/201808/897393-20180829211949249-557378569.png" alt="image_5b869c5d_4ea4" width="672" height="277" border="0" /></a><br /><br /><span style="font-size: 15px;">所以说只需要明确以下几点,就不难理解dup指令</span><br /><span style="font-size: 15px;"><strong>操作数栈指令操作的是栈内部的存储单元,而不是以一个栈元素为单位的<br />long和double在栈元素内部需要两个存储单元,其余一个存储单元<br />两个相邻的内部单位组合起来表示一个栈元素时,是不能拆分的</strong></span><br /><span style="font-size: 15px;"><strong>再回过头看,所有的dup指令,不过是根据栈元素的实际存放的类型的排列组合,梳理出来的一些复制一个或者两个栈顶元素的实际操作方式而已 <br />就是因为他是逆向推导的,所以看起来不好理解</strong>
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>控制转移指令</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 13.5pt;"><strong>控制转移指令可以让Java虚拟机有条件或者无条件的从指定的位置指令继续执行程序<br />而不是当前控制转移指令的下一条</strong></span>
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">控制转移指令包括
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">条件转移 复合条件转移以及无条件转移
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">boolean byte short char都是使用int类型的比较指令
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">long float&nbsp;&nbsp; double 类型的条件分支比较,会先执行相应的比较运算指令,运算指令会返回一个整型数值到操作数栈中
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">随后在执行int类型的条件分支比较操作来完成整个分支跳转
+							</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">显然,虚拟机会对int类型的支持最为丰富
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">所有的int类型的条件分支指令进行的都是有符号的比较
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">long float&nbsp;&nbsp; double 类型的比较指令</span><br /><span style="font-size: 15px;">lcmp </span><br /><span style="font-size: 15px;">fcmpl&nbsp;&nbsp; fcmpg</span><br /><span style="font-size: 15px;">dcmpl&nbsp;&nbsp; dcmpg</span><br /><span style="font-size: 15px;">这五个都比较栈顶上面两个 指定类型的元素,然后将结果 [-1&nbsp;&nbsp; 0&nbsp; 1] 压入栈顶</span><br /><span style="font-size: 15px;">cmpl与cmpg区别在于对NaN的处理,有兴趣的可以查看Java虚拟机规范
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">条件跳转指令
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">接下来这六个也就是上面说的配合long float 和double类型条件分支的比较
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">他们会对当前栈顶元素进行操作判断,只有栈顶的一个元素作为操作数
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ifeq&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 等于0时&nbsp;&nbsp;&nbsp; ,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ifne&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 不等于0&nbsp;&nbsp;&nbsp; 时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">iflt&nbsp;&nbsp;&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 小于0&nbsp;&nbsp;&nbsp; 时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ifle&nbsp;&nbsp;&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 小于等于0&nbsp;&nbsp;&nbsp; 时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ifgt&nbsp;&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 大于0&nbsp;&nbsp;&nbsp; 时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">ifge&nbsp; 当栈顶int类型元素&nbsp;&nbsp;&nbsp; 大于等于0&nbsp;&nbsp;&nbsp; 时,跳转
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;">
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">类似上面的long&nbsp; float double&nbsp; </span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">int类型 和 reference&nbsp; 当然也有对两个操作数的比较指令,而且还一步到位了
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmpeq&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 等于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmpne&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 不等于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmplt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 小于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmple&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 小于等于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmpge&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 大于等于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_icmpgt&nbsp;&nbsp;&nbsp; 比较栈顶两个int类型数值的大小 ,当前者&nbsp; 大于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_acmpeq&nbsp; 比较栈顶两个引用类型数值的大小 ,当前者&nbsp; 等于&nbsp; 后者时,跳转
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">if_acmpne&nbsp; 比较栈顶两个引用类型数值的大小 ,当前者&nbsp; 不等于&nbsp; 后者时,跳转
+							</span></div>
+
+
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">复合条件跳转指令</span><br /><span style="font-size: 15px;">tableswitch&nbsp;&nbsp;&nbsp; switch 条件跳转 case值连续</span><br /><span style="font-size: 15px;">lookupswitch&nbsp; switch 条件跳转 case值不连续
+						</span></td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="line-height: 200%;"><span style="font-size: 15px;">无条件转移指令</span><br /><span style="font-size: 15px;">goto 无条件跳转</span><br /><span style="font-size: 15px;">goto_w 无条件跳转&nbsp; 宽索引</span><br /><span style="font-size: 15px;">jsr&nbsp;&nbsp; SE6之前 finally字句使用 跳转到指定16位的offset,并将jsr下一条指令地址压入栈顶</span><br /><span style="font-size: 15px;">jsr_w SE6之前 同上&nbsp; 宽索引</span><br /><span style="font-size: 15px;">ret&nbsp; SE6之前返回由指定的局部变量所给出的指令地址(一般配合jsr&nbsp; jsr_w使用)</span><br /><span style="font-size: 15px;">w同局部变量的宽索引含义
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;"><strong>方法调用和方法返回指令</strong></span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; line-height: 200%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody style="line-height: 200%;">
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;"><span style="font-size: 13.5pt;"><strong>方法调用和方法返回指令</strong></span>
+						</td>
+
+
+					</tr>
+<tr style="line-height: 200%;">
+<td style="padding: 4px; border: 1px solid gray; border-image: none; line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">方法调用分为
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">实例方法接口方法 调用父类私有实力初始化等特殊方法,类静态方法等
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">以下5条指令用于方法调用:
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">invokevirtual指令用于调用对象的实例方法
+							</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">invokeinterface指令用于调用接口方法，它会在运行时搜索由特定对象所实现的这个接口方法，并找出适合的方法进行调用。
+							</span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 200%;"><span style="font-size: 15px;">invokespecial指令用于调用一些需要特殊处理的实例方法，包括实例初始化方法、私有方法和父类方法。
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">invokestatic指令用于调用类方法(static方法)
+								</span></div>
+<div style="line-height: 200%;"><span style="font-size: 15px;">invokedynamic 调用动态链接方法&nbsp; 比较复杂,稍后有时间会专门讲解
+								</span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+
+
+							</div>
+
+
+						</td>
+
+
+					</tr>
+<tr>
+<td><span style="font-size: 15px;">方法的调用与数据类型无关</span><br /><span style="font-size: 15px;">但是方法的返回指令根据返回值类型进行区分</span><br /><span style="font-size: 15px;">ireturn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; boolean byte char short int类型使用</span><br /><span style="font-size: 15px;">lreturn long</span><br /><span style="font-size: 15px;">freturn float</span><br /><span style="font-size: 15px;">dreturn double</span><br /><span style="font-size: 15px;">areturn reference</span><br /><span style="font-size: 15px;">return&nbsp; void方法 实例初始化方法(构造方法)&nbsp;&nbsp; 类和接口的类初始化方法
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;">异常指令</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;"><strong>异常处理指令</strong>
+						</span></td>
+
+
+					</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">Java程序中显式抛出异常的操作&nbsp; throw语句,都是由athrow 指令来实现的</span><br /><span style="font-size: 15px;">除了throw语句显式的抛出异常情况之外,Java虚拟机规范还规定了许多运行时异常</span><br /><span style="font-size: 15px;">会在其他Java虚拟机指令检测到异常情况时,自动抛出
+						</span></td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<h3 style="line-height: 200%;"><span style="font-size: 18pt;">同步指令</span></h3>
+<div style="line-height: 200%;">
+<table style="border-width: 2px 1px; border-style: solid; border-color: gray; border-image: none; width: 90%; margin-left: 0px; border-collapse: collapse; -ms-word-break: break-all; empty-cells: show; background-color: transparent;">
+<tbody>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;"><strong>同步指令</strong>
+						</span></td>
+
+
+					</tr>
+<tr>
+<td style="padding: 4px; border: 1px solid gray; border-image: none;"><span style="font-size: 15px;">同步一段指令集序列通常是由Java语言中的synchronized 语句块来表示的,</span><br /><span style="font-size: 15px;">Java虚拟机的指令集中有monitorenter&nbsp; monitorexit&nbsp; (monitor&nbsp; +enter/exit)</span><br /><br />
+						</td>
+
+
+					</tr>
+
+
+				</tbody>
+
+
+			</table>
+
+
+		</div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-size: 16px;">至此,虚拟机中的指令集的大致基本设计逻辑以及意图已经基本介绍清楚了,如需要更深一步的了解,请查看虚拟机规范&nbsp;&nbsp; </span></div>
+
+</div>
+
+
+</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2018-08-29 21:20</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9556928" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(9556928);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 9556928, cb_entryCreatedDate = '2018-08-29 21:20', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

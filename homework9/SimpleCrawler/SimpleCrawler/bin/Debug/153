@@ -1,0 +1,744 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta property="og:description" content="操作系统中线程是具有状态的，在JVM中线程也是具有状态的，尽管底层是依赖操作系统，内核映射的线程，但是JVM是一个完整的虚拟机，所以对于线程模型，也给出来了线程的状态，本文对线程状态的抽象定义进行了详" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java线程Thread的状态解析以及状态转换分析 多线程中篇（七） - noteless - 博客园</title>
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=BKtyzabbeYJEVOaELkxmRjHbp7LT-v37GzrU5S24bJk" />
+    <link id="MainCss" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin.min.css?v=lp23bZd4RUCf9TGsihJRLSq5M_182P4N8YRMn1A2CWo" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/noteless/custom.css?v=fnk17ixpiOajP7an/OE6hUwN1aI=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/buildtowin/bundle-buildtowin-mobile.min.css?v=ADiCwO2hOTdd5yYidcx7eob7ix2VJI4o_TXjEycTHjs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/noteless/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/noteless/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/noteless/wlwmanifest.xml" />
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=wKnarAbt-YO5waLYR80IqCLKpzPpF-s-32JKmKCtJxg"></script>
+    <script>
+        var currentBlogId = 268100;
+        var currentBlogApp = 'noteless';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var skinName = 'BuildtoWin';
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</head>
+<body>
+    <a name="top"></a>
+    <div id="page_begin_html">
+        <link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/cnblogs.css" type="text/css" />
+
+<!--
+<link rel="stylesheet" href="https://blog-static.cnblogs.com/files/noteless/monokai-sublime.css">
+-->
+
+<script src="https://blog-static.cnblogs.com/files/noteless/highlight.pack.js" defer></script>
+
+
+
+
+
+
+<div class="main-top">
+
+  <a class="avatar" href="https://www.cnblogs.com/noteless">
+    <img src="//files.cnblogs.com/files/noteless/cnblogspic2.gif" alt="noteless 头像">
+</a>
+<div class="title">
+    <a class="name" href="https://www.cnblogs.com/noteless/">noteless</a>
+  </div>
+<div class="info">
+
+  </div>
+</div>
+
+
+
+<a href="#"><div id="toTop" style="zoom:0;display:none"></div></a>
+    </div>
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/noteless/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/noteless/">noteless</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/noteless/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/noteless">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/noteless/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+212&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+89</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/noteless/p/10372674.html">Java线程Thread的状态解析以及状态转换分析 多线程中篇（七）</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+    <div id="cnblogs_post_description" style="display: none">
+        操作系统中线程是具有状态的，在JVM中线程也是具有状态的，尽管底层是依赖操作系统，内核映射的线程，但是JVM是一个完整的虚拟机，所以对于线程模型，也给出来了线程的状态，本文对线程状态的抽象定义进行了详细的介绍
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body ">
+    <div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">线程与操作系统中线程（进程）的概念同根同源，尽管千差万别。</span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">操作系统中有状态以及状态的切换，Java线程中照样也有。</span></div>
+<h3><span style="font-size: 18px;">State</span></h3>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>在Thread类中有内部类 枚举State，用于抽象描述Java线程的状态，共有6种不同的状态 </strong></span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084556272-1414663268.png"><img style="display: inline; background-image: none;" title="image_5c64ba3c_4746" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084556528-278298626.png" alt="image_5c64ba3c_4746" width="372" height="354" border="0" /></a></span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>详细定义如下：</strong></span></div>
+<div>
+<div style="line-height: 24px;">
+<div style="line-height: 32px;">
+<div style="line-height: 24px;">
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"><span style="color: #8b008b; font-weight: 600;">public</span> <span style="color: #8b008b; font-weight: 600;">enum</span> State { </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 至今尚未启动的线程的状态。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> NEW, </span></p>
+<p style="margin: 0px; line-height: 19px;">&nbsp;</p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 可运行线程的线程状态。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 处于可运行状态的某一线程正在 Java 虚拟机中运行，但它可能正在等待操作系统中的其他资源，比如处理器。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> RUNNABLE, </span></p>
+<p style="margin: 0px; line-height: 19px;">&nbsp;</p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 受阻塞并且正在等待监视器锁的某一线程的线程状态。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 处于受阻塞状态的某一线程正在等待进入一个同步的块/方法的监视器锁，或者在调用 Object.wait 之后再次进入同步的块/方法。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> BLOCKED, </span></p>
+<p style="margin: 0px; line-height: 19px;">&nbsp;</p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 某一等待线程的线程状态。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 某一线程因为调用下列方法之一而处于等待状态： </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 不带超时值的 Object.wait </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 不带超时值的 Thread.join </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * LockSupport.park </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 处于等待状态的线程正等待另一个线程，以执行特定操作。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 例如，已经在某一对象上调用了 Object.wait() 的线程正等待另一个线程，以便在该对象上调用 Object.notify() 或 Object.notifyAll()。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 已经调用了 Thread.join() 的线程正在等待指定线程终止。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> WAITING, </span></p>
+<p style="margin: 0px; line-height: 19px;">&nbsp;</p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 具有指定等待时间的某一等待线程的线程状态。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 某一线程因为调用以下带有指定正等待时间的方法之一而处于定时等待状态： </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * Thread.sleep </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 带有超时值的 Object.wait </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 带有超时值的 Thread.join </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * LockSupport.parkNanos </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * LockSupport.parkUntil </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> TIMED_WAITING, </span></p>
+<p style="margin: 0px; line-height: 19px;">&nbsp;</p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> /** </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> * 已终止线程的线程状态。线程已经结束执行。 </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="color: #778899; font-style: italic; font-family: 'Microsoft YaHei';"> */ </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> TERMINATED; </span></p>
+<p style="margin: 0px; line-height: 19px;"><span style="font-family: 'Microsoft YaHei';"> }</span></p>
+</div>
+</div>
+<div style="line-height: 32px;"><span style="color: #000000; font-size: 18pt; font-family: 'Microsoft YaHei';"><strong>状态详解</strong></span></div>
+</div>
+</div>
+<div>&nbsp;</div>
+<h3><span style="font-size: 18px;">NEW </span></h3>
+<div><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>当一个线程创建后，也就是new了一个Thread，那么这个Thread的state就是NEW</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><span style="color: #0000ff; font-size: 13.5pt;"><strong>有且只有这种情况下，才为NEW，</strong></span><span style="color: #0000ff; font-size: 13.5pt;"><strong>不会从任何状态转换而来</strong></span> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">也就是说如果一个线程状态已经不再是NEW，那么他永远不可能再重新回到NEW的状态，这是一个起点 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">下面的示例中创建了一个线程myThread，并没有调用start方法 </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084556732-905474983.png"><img style="display: inline; background-image: none;" title="image_5c64ba3c_3060" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084557126-337095306.png" alt="image_5c64ba3c_3060" width="881" height="565" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">TERMINATED </span></h3>
+<div><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>当一个线程终止后，就进入状态TERMINATED</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">TERMINATED作为线程的终点，一旦进入TERMINATED状态，将不再能够转换为其他状态 </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">下面的示例中，创建了一个线程myThread，并且调用start方法启动 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">然后主线程（当前线程）sleep 1秒（确保myThread肯定结束了），然后查看myThread的状态，很显然，此时已经进入终止状态 </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084557408-1352313626.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_13f0" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084557644-538241546.png" alt="image_5c64ba3d_13f0" width="883" height="581" border="0" /></a> </span></div>
+<div>&nbsp;</div>
+<div><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>NEW和TERMINATED分别对应线程生命周期的起点和终点</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于NEW来说，一旦离开，就永远回不来了；</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于TERMINATED来说，一旦到达， 就永远回不去了； </strong> </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084558105-956685965.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_1455" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084558548-1585422292.png" alt="image_5c64ba3d_1455" width="444" height="166" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">RUNNABLE </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">RUNNABLE用于表示可运行状态 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">下面的代码在主线程中运行，运行过程中是RUNNABLE状态 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084558889-1932873723.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_3ad8" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084559486-64139922.png" alt="image_5c64ba3d_3ad8" width="881" height="466" border="0" /></a> </span></div>
+<div style="line-height: 200%;">
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">API中有说到：</span>&ldquo;<span style="color: #000000; font-size: 13.5pt;"><strong>处于可运行状态的某一线程正在 Java 虚拟机中运行，但它可能正在等待操作系统中的其他资源，比如处理器</strong></span>。&rdquo; </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">也就是说</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>一个RUNNABLE并不是一定正在运行</strong></span> </span></div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong><span style="color: #000000;">如果我们将线程运行所有的资源与条件分为两种：</span><span style="color: #0000ff;">CPU时间片以及除了时间片以外的所有其他；</span></strong> </span></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>一旦进入RUNNABLE状态，那么他肯定已经拥有了&ldquo;除了时间片以外的所有其他资源&rdquo; </strong> </span></div>
+<div style="line-height: 32px;"><span style="font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong><span style="color: #000000;">&nbsp;</span><span style="color: #ff0000;">但是，是否正在被执行？这个不确定，还要看是否被分配了时间片 </span></strong> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">如果没有处理器资源（时间片）那么就是&ldquo;</span><span style="color: #000000; font-size: 13.5pt;"><strong>准备妥当</strong></span><span style="font-size: 16px;">&rdquo;状态，如果分配了处理器资源（时间片），那么就是&ldquo;</span><span style="color: #000000; font-size: 13.5pt;"><strong>正在运行</strong></span><span style="font-size: 16px;">&rdquo;状态。 </span></span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 16px;">所以RUNNABLE状态可以细分为两种状态：</span><span style="color: #ff0000; font-size: 13.5pt;"><strong>准备妥当（READY）</strong></span>与<span style="color: #ff0000; font-size: 13.5pt;"><strong>RUNNING（正在运行）</strong></span> </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084600969-2099254584.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_1570" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084601148-1524062107.png" alt="image_5c64ba3d_1570" width="435" height="182" border="0" /></a> </span></div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">但是，为什么没有将RUNNABLE细分？ </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">很显然，对于开发者来说能够做到的就是&ldquo;除了时间片以外的所有其他资源&rdquo;，而对于操作系统处理器CPU时间片的调度，是完全没有能力操控的（yield也只是提示） </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>所以，从应用的角度看，也就只有RUNNABLE状态，一个RUNNABLE的线程，他随时可能在运行，也可能在等待调度。</strong> </span></div>
+</div>
+<h3><span style="font-size: 18px;">等待状态 </span></h3>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">BLOCKED、WAITING、TIMED_WAITING三种状态相对前面的几种，相对稍微复杂一点，因为会涉及到各种切换 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">对照着汉字来说，这三者都有&ldquo;等&rdquo;的意思，但是却又不太相同 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">举几个例子感受一下 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当你发现前方信号灯转变为红灯时，你停车等待； </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当你经过斑马线时，正好有行人经过，你停车等待； </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">当售票窗口中午休息时，你原地等待； </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>这几种等待更多的是因为不可抗力，不得不等的一种场景，BLOCKED更接近这种等待；</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>对于临界资源的访问，需要互斥访问，Java中使用对象监视器作为锁，想要进入同步区域，就需要获得对应的监视器锁</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>如果获取不到，就需要等待，这就是BLOCKED状态；</strong> </span></div>
+<div style="line-height: 200%;">&nbsp;</div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">要出门时，你老婆说我化个妆，你等我下； </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">买水果时，售货员说刚卖完了，师傅去仓库去取了，您稍等一下； </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">此时的等，是在等一件事情的发生，WAITING更接近这种等待； </span></div>
+<div style="line-height: 200%;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>虽然都是在等待，卡住不能动，还是等一等，还是有区别的；</strong> </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>TIMED_WAITING与WAITING就比较相似了，他们的区别，从汉语的角度理解类似&ldquo;你等我两分钟和你等一会&rdquo;的区别</strong> </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">等两分钟有时间，等一会儿不确定到底等待多大一会儿 </span></div>
+<div style="line-height: 200%;"><span style="color: #000000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>再回到Java线程中，可以认为：</strong> </span></div>
+<div style="line-height: 200%;">
+<ul>
+<li><span style="font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong><span style="color: #0000ff;">如果一个线程在</span><span style="color: #ff0000;">等待</span><span style="color: #0000ff;">获取进入同步区域的</span><span style="color: #ff0000;">监视器锁</span><span style="color: #0000ff;">，那么是</span><span style="color: #ff0000;">BLOCKED</span><span style="color: #0000ff;">；</span></strong> </span></li>
+<li><span style="font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong><span style="color: #0000ff;">如果线程调用了</span><span style="color: #ff0000;">不带超时值的等待方法</span><span style="color: #0000ff;">，比如 Object.wait，</span><span style="color: #ff0000;">持续等待</span><span style="color: #0000ff;">某件事情的发生，直到收到通知，那么是</span><span style="color: #ff0000;">WAITING</span></strong> </span></li>
+<li><span style="font-family: 'Microsoft YaHei';"><span style="font-size: 13.5pt;"><strong><span style="color: #0000ff;">如果线程调用了比如</span><span style="color: #ff0000;">带有超时值的等待方法</span><span style="color: #0000ff;">，比如wait(long timeout)，进行</span><span style="color: #ff0000;">一定时间的等待</span><span style="color: #0000ff;">，到到时间后将不再等待，那么是</span><span style="color: #ff0000;">TIMED_WAITING</span></strong></span>&nbsp;&nbsp; </span></li>
+</ul>
+</div>
+<h3><span style="font-size: 18px;">状态转换图 </span></h3>
+<div>&nbsp;</div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084601391-1022493601.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_bb3" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084601659-347146999.png" alt="image_5c64ba3d_bb3" width="1089" height="648" border="0" /></a> </span></div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">换一个角度理解，线程状态的切换 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">下图从前驱和后继的角度分析了线程状态的变化 </span></div>
+<div style="line-height: 200%;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">以中间一列为中心 </span></div>
+<div><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084601931-1371041058.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_576" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084602241-729130526.png" alt="image_5c64ba3d_576" width="882" height="468" border="0" /></a> </span></div>
+<div>
+<h3><span style="font-size: 18px;">状态对比 </span></h3>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">既然操作系统中线程概念模型有状态切换，Java线程也有状态，他们有何异同？ </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084602745-331559808.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_7677" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084602938-2064892870.png" alt="image_5c64ba3d_7677" width="634" height="366" border="0" /></a> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">如上图所示，操作系统中的进程、线程模型的状态 </span></div>
+</div>
+<div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>核心为就绪（ready）阻塞（waiting）执行（run）</strong> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">而对于Java线程中 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei';"><span style="color: #ff0000; font-size: 13.5pt;"><strong>核心状态为RUNNABLE、BLOCKED、WAITING、TIMED_WAITING</strong></span>（项目中根本不会创建线程，会借助于线程池，所以NEW和TERMINATED非重点） </span></div>
+<div style="line-height: 32px;"><span style="color: #ff0000; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>Java线程为操作系统原生线程的映射，状态上也是有所映射的</strong> </span></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>Runnable状态，则对应了操作系统中的就绪（ready）和执行（run）</strong> </span></div>
+<div style="line-height: 32px;"><span style="color: #0000ff; font-size: 13.5pt; font-family: 'Microsoft YaHei';"><strong>TIMED_WAITING ，WAITING还是BLOCKED，对应的都是操作系统线程的阻塞（waiting）状态</strong> </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">需要注意的是：这些状态是虚拟机状态，它不反映任何操作系统的线程状态，可以查看State的注释 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;"><a href="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084603096-1609173797.png"><img style="display: inline; background-image: none;" title="image_5c64ba3d_6cc4" src="https://img2018.cnblogs.com/blog/897393/201902/897393-20190214084603314-1897871312.png" alt="image_5c64ba3d_6cc4" width="711" height="187" border="0" /></a> </span></div>
+<h3><span style="font-size: 18px;">为什么状态没有对应？ </span></h3>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">我们之前在提及线程的实现时，就有说到用户级和内核支持的对比，内核支持的是依靠操作系统来调度的，1.2之后就是对操作系统线程的映射 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以，既然调度依赖的是操作系统，那么，操作系统底层的状态对于开发者来说就不是那么必要了，因为你并不能对他进行事无巨细的控制 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">JVM中的线程是操作系统底层线程的映射，既然是映射，可以认为是一个薄层封装 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">封装的目的是为了更好的符合Java多线程编程的模型，而不是要原模原样的去照搬 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">从这一点也能更好地理解，为什么RUNNABLE相当于READY和RUNNING，因为JVM本来就只能做到这一步，READY还是RUNNING，搞不了，那还提供这两个状态干什么呢？ </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">所以记住： </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">JVM中的状态只是Java的多线程模型中的状态，并不反应任何操作系统的线程状态 </span></div>
+<div style="line-height: 32px;"><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">JVM中的状态与底层操作系统中线程的状态也没有必要去映射 </span></div>
+</div>
+<div><span style="font-family: 'Microsoft YaHei'; font-size: 16px;">原文地址:<a href="https://www.cnblogs.com/noteless/p/10372674.html" target="_blank">Java线程Thread的状态解析以及状态转换分析 多线程中篇（七）</a></span></div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-02-15 10:18</span>&nbsp;
+<a href="https://www.cnblogs.com/noteless/">noteless</a>&nbsp;
+阅读(<span id="post_view_count">...</span>)&nbsp;
+评论(<span id="post_comment_count">...</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10372674" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10372674);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 268100, cb_blogApp = 'noteless', cb_blogUserGuid = '2f3ff2be-bdda-e511-9fc1-ac853d9f53cc';
+    var cb_entryId = 10372674, cb_entryCreatedDate = '2019-02-15 10:18', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    <script>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+    </script>
+    <script>
+        googletag.cmd.push(function () {
+            googletag.defineSlot("/1090369/C1", [300, 250], "div-gpt-ad-1546353474406-0").addService(googletag.pubads());
+            googletag.defineSlot("/1090369/C2", [468, 60], "div-gpt-ad-1539008685004-0").addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;"></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;">
+            <script>
+                if (new Date() >= new Date(2018, 9, 13)) {
+                    googletag.cmd.push(function () { googletag.display("div-gpt-ad-1539008685004-0"); });
+                }
+            </script>
+        </div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverAdT2();
+        deliverAdC1();
+        deliverAdC2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 noteless
+<br /><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <script>
+/*
+$(document).ready(function() {
+  $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+});
+*/
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//初始化加载函数
+$(function(){
+    // hideIndexArticle();
+    appendNavigator();
+
+    addOriginURL();
+
+addSupport();
+hideToTop();
+
+
+})
+
+
+//隐藏首页除置顶外的其他所有文章列表
+function hideIndexArticle(){
+    var windowURL = window.location.href;
+    console.log(windowURL )
+    if(windowURL && windowURL.indexOf('www.cnblogs.com/noteless')>0 && windowURL.indexOf('html')<0){
+        //$('#mainContent .day:not(:first)').css('display','none');
+    }
+}
+
+//增导航条上增加 目录索引按钮
+function appendNavigator(){
+    var _html='<li>'
+        +'<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://www.cnblogs.com/noteless/p/9400742.html">'
+        +'目录索引'
+        +'</a>'
+        +'</li>';
+
+    $('#navList').append(_html);
+}
+
+function appendMenuItem(tagName,id,content){
+    console.log(tagName+" "+tagName.substring(1));
+    var paddingLeft = tagName.substring(1) * 30; //添加标题缩进
+    $('#menu_nav_ol').append('<li class="' + id +'" style="padding-left: '+ paddingLeft +'px;"><b>' + content + '</b></li>');
+}
+
+
+//添加支持一下，请求关注
+function addSupport(){
+
+var zhichiHml = '<p>'
++'<span>'
++'<img src="https://files-cdn.cnblogs.com/files/noteless/zhichiyixaa.bmp" alt="">'
++'</span>'
++'</p>';
+$('#cnblogs_post_body').append(zhichiHml );
+
+}
+
+//每篇文章增加原文地址
+function addOriginURL(){
+
+    //文章增加原文地址
+    var originURL='<div>'
+        +'原文地址:'
+        +'<a href="'
+        +window.location.href
+        +'" target="_blank">'
+        +$('.postTitle a').html()
+        +'</a>'
+        +'</div>';
+		
+	originURL+='<img src="https://blog-static.cnblogs.com/files/noteless/%E4%BA%8C%E7%BB%B4%E7%A0%812.gif"></img>';
+		
+		
+    if($("#cnblogs_post_body h3:first").length>0){
+        $("#cnblogs_post_body h3:first").before(originURL);
+    }else{
+        $('#cnblogs_post_body').prepend(originURL);
+    }
+
+
+}
+
+//如果是pc展示返回顶部
+function hideToTop(){
+
+	if(isPC()){
+		$('#toTop').show();
+	}
+}
+
+
+//判断手机还是pc
+function isPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
+
+
+//根据标题生成左侧边栏的目录树
+// 生成目录开始
+
+$(function () {
+
+	//如果是手机隐藏目录
+	if(isPC()){
+
+		//内容拼接
+		$('body').append(
+			'<div id="article-outline">'
+			+'<div style="height:15px;">'
+			+'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+			+'X'
+			+'</button>'
+			+'</div>'
+			+'</div>'
+			+'<style>'
+			+'#article-outline{'
+			+'display:none;'
+			+'min-width:140p;'
+			+'max-width: 230px;'
+			//+'max-height: 350px;'
+			+'position:absolute;'
+			+'float: left;'
+			+'top:150px;'
+			+'left:-999px;'
+			+'border:1px solid #ccc;'
+			+'box-shadow:5px 5px 2px #ccc;'
+			+'padding: 5px 10px;'
+			+'background-color: #fff;'
+			+'overflow-y: auto;'
+			+'scroll-x: auto;'
+			+'}'
+
+			+'#article-outline ul{'
+			+'margin:5px 0 5px 0;'
+			+'padding-left:30px;'
+			+'font-size:12px;'
+			+'border-left:1px dotted #ccc;'
+			+'}'
+
+			+'#article-outline ul:first-child{'
+			+'padding-left:15px;'
+			+'border:none;'
+			+'}'
+
+			+'#article-outline li{'
+			+'list-style-type:decimal;'
+			+'margin:3px 0;'
+			+'}'
+
+			+'#article-outline a{'
+			+'color:#00C1E4;'
+			+'}'
+			+'</style>'
+		)
+		
+		
+
+		
+		
+		//取得新添加的目录元素
+		var jOutline = $('#article-outline');
+
+		//获取文章内容
+		//var jContent = $('article .content');
+		var jContent = $('div#topics');
+
+		//计算高度
+		var jContentHeight = jContent.height();
+
+		//关闭按钮
+		jOutline.find('.close').on('click', function () {
+			jOutline.hide();
+		})
+
+		updateOutline();
+
+		var top = jOutline.offset().top;
+		scrollOutline();
+		$(window).on('scroll', scrollOutline);
+
+		function scrollOutline() {
+			var scrollTop = $(document).scrollTop();
+			var maxTop = jContent.offset().top + jContent.height() - jOutline.height();
+			//设置行内样式
+			if (scrollTop >= top && scrollTop <= maxTop) {
+				jOutline.css({'position': 'fixed', 'top': 0});
+			}
+			else if (scrollTop < top) {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': '150px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': '200px'});
+			}
+			else {
+				/*
+							jOutline.css({'position': 'absolute','float':'left', 'top': maxTop + 'px'});
+				*/
+				jOutline.css({'position': 'absolute', 'top': maxTop + 'px'});
+			}
+
+		}
+
+		function updateOutline() {
+			//设置哪些级别的目录
+			// var arrAllHeader = jContent.find("h1,h2,h3,h4,h5,h6");
+			var arrAllHeader = jContent.find("h2,h3,h4,h5,h6");
+			var arrOutline = ['<ul>'];
+			var header, headerText;
+			var id = 0;
+			var level = 0,
+				lastLevel = 1;
+			var levelCount = 0;
+			for (var i = 0, c = arrAllHeader.length; i < c; i++) {
+				header = arrAllHeader[i];
+				headerText = $(header).text();
+
+				header.setAttribute('id', id);
+
+				level = header.tagName.match(/^h(\d)$/i)[1];
+				levelCount = level - lastLevel;
+
+				if (levelCount > 0) {
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('<ul>');
+					}
+				} else if (levelCount < 0) {
+					levelCount *= -1;
+					for (var j = 0; j < levelCount; j++) {
+						arrOutline.push('</ul>');
+					}
+				}
+				;
+				arrOutline.push('<li>');
+				arrOutline.push('<a href="#' + id + '">' + headerText + '</a>');
+				arrOutline.push('</li>');
+				lastLevel = level;
+				id++;
+			}
+			arrOutline.push('</ul>')
+			if (arrOutline.length > 2) {
+				jOutline.append(arrOutline.join(''));
+				jOutline.find('ul').each(function (i, n) {
+					var jThis = $(this);
+					if (jThis.children('li').length === 0) {
+						jThis.replaceWith(jThis.children());
+					}
+				});
+				showOutline();
+			}
+			else {
+				hideOutline();
+			}
+		}
+
+		function showOutline() {
+			var offset = jContent.offset();
+
+			//目录左侧偏移量
+			/*        jOutline.css({
+						left: offset.left + jContent.width() + 10 + 'px',
+					}).show();*/
+			jOutline.css({
+				left:8 + 'px',
+			}).show();
+		}
+
+		function hideOutline() {
+			jOutline.hide();
+		}
+	
+	
+	}
+
+
+
+
+    
+});
+
+//生成目录结束
+
+
+
+
+</script>
+    </div>
+</body>
+</html>

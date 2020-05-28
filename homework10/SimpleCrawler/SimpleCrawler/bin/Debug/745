@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">博客园_meng5619</title>
+  <subtitle type="text"></subtitle>
+  <id>uuid:94848990-6bc9-4837-a55f-0033142bd3af;id=287</id>
+  <updated>2020-04-28T12:15:32Z</updated>
+  <author>
+    <name>老孟Flutter</name>
+    <uri>http://www.cnblogs.com/mengqd/</uri>
+  </author>
+  <generator>feed.cnblogs.com</generator>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12796957.html</id>
+    <title type="text">Flutter 分页功能表格控件 - 老孟Flutter</title>
+    <summary type="text">老孟导读：前2天有读者问到是否有带分页功能的表格控件，今天分页功能的表格控件详细解析来来。 PaginatedDataTable PaginatedDataTable是一个带分页功能的DataTable，生成一批数据，项目中此一般通过服务器获取，定义model类： 生成数据： PaginatedDa</summary>
+    <published>2020-04-28T12:16:00Z</published>
+    <updated>2020-04-28T12:16:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12796957.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12796957.html" />
+    <content type="html">【摘要】老孟导读：前2天有读者问到是否有带分页功能的表格控件，今天分页功能的表格控件详细解析来来。 PaginatedDataTable PaginatedDataTable是一个带分页功能的DataTable，生成一批数据，项目中此一般通过服务器获取，定义model类： 生成数据： PaginatedDa &lt;a href="http://www.cnblogs.com/mengqd/p/12796957.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12773218.html</id>
+    <title type="text">Flutter 步骤进度组件 - 老孟Flutter</title>
+    <summary type="text">​老孟导读：最近文章更新拖后腿了，一直忙着网站改版的事情，今天总算落地了，全新的Flutter网站即将上线，敬请期待。网站目前收集197个组件的详细用法，还有150多个组件待整理。 Stepper Stepper控件是一个展示一系列步骤进度的控件，用法如下： 效果如下： 还可以设置 属性，用法如下：</summary>
+    <published>2020-04-25T07:22:00Z</published>
+    <updated>2020-04-25T07:22:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12773218.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12773218.html" />
+    <content type="html">【摘要】​老孟导读：最近文章更新拖后腿了，一直忙着网站改版的事情，今天总算落地了，全新的Flutter网站即将上线，敬请期待。网站目前收集197个组件的详细用法，还有150多个组件待整理。 Stepper Stepper控件是一个展示一系列步骤进度的控件，用法如下： 效果如下： 还可以设置 属性，用法如下： &lt;a href="http://www.cnblogs.com/mengqd/p/12773218.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12755594.html</id>
+    <title type="text">程序员到底要不要学习框架、库和工具 - 老孟Flutter</title>
+    <summary type="text">老孟导读：昨天看了一篇文章，文章名称叫做《STOP LEARNING FRAMEWORKS》（停止学习框架），文章发布时间时间是2018年，感叹为什么没有早一点看到这一篇文章，看过我《对Flutter初学者的一些建议》这篇文章的都知道，里面建议少使用第三方库，但仅仅是从生态发展的角度考虑的，这篇文章</summary>
+    <published>2020-04-22T12:15:00Z</published>
+    <updated>2020-04-22T12:15:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12755594.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12755594.html" />
+    <content type="html">【摘要】老孟导读：昨天看了一篇文章，文章名称叫做《STOP LEARNING FRAMEWORKS》（停止学习框架），文章发布时间时间是2018年，感叹为什么没有早一点看到这一篇文章，看过我《对Flutter初学者的一些建议》这篇文章的都知道，里面建议少使用第三方库，但仅仅是从生态发展的角度考虑的，这篇文章 &lt;a href="http://www.cnblogs.com/mengqd/p/12755594.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12722593.html</id>
+    <title type="text">Flutter 吐血整理组件继承关系图 - 老孟Flutter</title>
+    <summary type="text">老孟导读：前几天一个读者和我说能不能整理一个各个控件之间的继承关系，这2天抽时间整理了一下，不整理不知道，一整理真的吓一跳啊，仅仅Widget的子类（包括间接子类）就高达353个，今天发群里给大家浏览的时候，有人说：“看见这个，会让初学者从入门到放弃的“，其实不必担心，虽然很多，但常用的就那几十个，</summary>
+    <published>2020-04-17T13:29:00Z</published>
+    <updated>2020-04-17T13:29:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12722593.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12722593.html" />
+    <content type="html">【摘要】老孟导读：前几天一个读者和我说能不能整理一个各个控件之间的继承关系，这2天抽时间整理了一下，不整理不知道，一整理真的吓一跳啊，仅仅Widget的子类（包括间接子类）就高达353个，今天发群里给大家浏览的时候，有人说：“看见这个，会让初学者从入门到放弃的“，其实不必担心，虽然很多，但常用的就那几十个， &lt;a href="http://www.cnblogs.com/mengqd/p/12722593.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12715429.html</id>
+    <title type="text">超过百万的StackOverflow Flutter 问题 - 老孟Flutter</title>
+    <summary type="text">老孟导读：今天分享StackOverflow上高访问量的20大问题，这些问题给我一种特别熟悉的感觉，我想你一定或多或少的遇到过，有的问题在stackoverflow上有几十万的阅读量，说明很多人都遇到了这些问题，把这些问题整理分享给大家，每期20个，每隔2周分享一次。 如何实现Android平台的w</summary>
+    <published>2020-04-16T12:27:00Z</published>
+    <updated>2020-04-16T12:27:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12715429.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12715429.html" />
+    <content type="html">【摘要】老孟导读：今天分享StackOverflow上高访问量的20大问题，这些问题给我一种特别熟悉的感觉，我想你一定或多或少的遇到过，有的问题在stackoverflow上有几十万的阅读量，说明很多人都遇到了这些问题，把这些问题整理分享给大家，每期20个，每隔2周分享一次。 如何实现Android平台的w &lt;a href="http://www.cnblogs.com/mengqd/p/12715429.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12701007.html</id>
+    <title type="text">Flutter 实现网易云音乐字幕 - 老孟Flutter</title>
+    <summary type="text">老孟导读：没有接触过音乐字幕方面知识的话，会对字幕的实现比较迷茫，什么时候转到下一句？看了这篇文章，你就会明白字幕so easy。 先来一张效果图： 字幕格式 目前市面上有很多种字幕格式，比如srt, ssa, ass（文本形式）和idx+sub（图形格式），但不管哪一种格式都会包含2个属性：时间戳</summary>
+    <published>2020-04-14T12:48:00Z</published>
+    <updated>2020-04-14T12:48:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12701007.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12701007.html" />
+    <content type="html">【摘要】老孟导读：没有接触过音乐字幕方面知识的话，会对字幕的实现比较迷茫，什么时候转到下一句？看了这篇文章，你就会明白字幕so easy。 先来一张效果图： 字幕格式 目前市面上有很多种字幕格式，比如srt, ssa, ass（文本形式）和idx+sub（图形格式），但不管哪一种格式都会包含2个属性：时间戳 &lt;a href="http://www.cnblogs.com/mengqd/p/12701007.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12694159.html</id>
+    <title type="text">Flutter 实现虎牙/斗鱼 弹幕效果 - 老孟Flutter</title>
+    <summary type="text">老孟导读：用Flutter实现弹幕功能，轻松实现虎牙、斗鱼的弹幕效果。 先来一张效果图： 实现原理 弹幕的实现原理非常简单，即将一条弹幕从左侧平移到右侧，当然我们要计算弹幕垂直方向上的偏移，不然所有的弹幕都会在一条直线上，相互覆盖。平移代码如下： 计算垂直方向的偏移： 这些准备好后，就是创建一条弹幕</summary>
+    <published>2020-04-13T13:44:00Z</published>
+    <updated>2020-04-13T13:44:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12694159.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12694159.html" />
+    <content type="html">【摘要】老孟导读：用Flutter实现弹幕功能，轻松实现虎牙、斗鱼的弹幕效果。 先来一张效果图： 实现原理 弹幕的实现原理非常简单，即将一条弹幕从左侧平移到右侧，当然我们要计算弹幕垂直方向上的偏移，不然所有的弹幕都会在一条直线上，相互覆盖。平移代码如下： 计算垂直方向的偏移： 这些准备好后，就是创建一条弹幕 &lt;a href="http://www.cnblogs.com/mengqd/p/12694159.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12675641.html</id>
+    <title type="text">Flutter AbsorbPointer 与 IgnorePointer的区别 - 老孟Flutter</title>
+    <summary type="text">AbsorbPointer AbsorbPointer是一种禁止用户输入的控件，比如按钮的点击、输入框的输入、ListView的滚动等，你可能说将按钮的 设置为null，一样也可以实现，是的，但AbsorbPointer可以提供多组件的统一控制，而不需要你单独为每一个组件设置。 用法如下： 默认情况</summary>
+    <published>2020-04-10T11:38:00Z</published>
+    <updated>2020-04-10T11:38:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12675641.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12675641.html" />
+    <content type="html">【摘要】AbsorbPointer AbsorbPointer是一种禁止用户输入的控件，比如按钮的点击、输入框的输入、ListView的滚动等，你可能说将按钮的 设置为null，一样也可以实现，是的，但AbsorbPointer可以提供多组件的统一控制，而不需要你单独为每一个组件设置。 用法如下： 默认情况 &lt;a href="http://www.cnblogs.com/mengqd/p/12675641.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12675477.html</id>
+    <title type="text">《Flutter 小技巧》一行禁用App，一行置灰App，致敬 - 老孟Flutter</title>
+    <summary type="text">为表达全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼，国务院发布公告， 决定2020年4月4日举行全国性哀悼活动。 在此期间，全国和驻外使领馆下半旗志哀，全国停止公共娱乐活动。4月4日10时起，全国人民默哀3分钟，汽车、火车、舰船鸣笛，防空警报鸣响。 这一天，我们看到几乎所有的网页、</summary>
+    <published>2020-04-10T10:58:00Z</published>
+    <updated>2020-04-10T10:58:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12675477.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12675477.html" />
+    <content type="html">【摘要】为表达全国各族人民对抗击新冠肺炎疫情斗争牺牲烈士和逝世同胞的深切哀悼，国务院发布公告， 决定2020年4月4日举行全国性哀悼活动。 在此期间，全国和驻外使领馆下半旗志哀，全国停止公共娱乐活动。4月4日10时起，全国人民默哀3分钟，汽车、火车、舰船鸣笛，防空警报鸣响。 这一天，我们看到几乎所有的网页、 &lt;a href="http://www.cnblogs.com/mengqd/p/12675477.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+  <entry>
+    <id>http://www.cnblogs.com/mengqd/p/12664503.html</id>
+    <title type="text">Flutter 完美的验证码输入框 - 老孟Flutter</title>
+    <summary type="text">老孟导读：刚开始看到这个功能的时候一定觉得so easy，开始的时候我也是这么觉得的，这还不简单，然而真正写的时候才发现并没有想象的那么简单。 先上图，不上图你们都不想看，我难啊，到Github： "https://github.com/781238222/flutter do" 上给个小星星可还行</summary>
+    <published>2020-04-09T00:57:00Z</published>
+    <updated>2020-04-09T00:57:00Z</updated>
+    <author>
+      <name>老孟Flutter</name>
+      <uri>http://www.cnblogs.com/mengqd/</uri>
+    </author>
+    <link rel="alternate" href="http://www.cnblogs.com/mengqd/p/12664503.html" />
+    <link rel="alternate" type="text/html" href="http://www.cnblogs.com/mengqd/p/12664503.html" />
+    <content type="html">【摘要】老孟导读：刚开始看到这个功能的时候一定觉得so easy，开始的时候我也是这么觉得的，这还不简单，然而真正写的时候才发现并没有想象的那么简单。 先上图，不上图你们都不想看，我难啊，到Github： "https://github.com/781238222/flutter do" 上给个小星星可还行 &lt;a href="http://www.cnblogs.com/mengqd/p/12664503.html" target="_blank"&gt;阅读全文&lt;/a&gt;</content>
+  </entry>
+</feed>
